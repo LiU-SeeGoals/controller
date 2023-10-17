@@ -25,13 +25,13 @@ type SSLReceiver struct {
 
 // Create a new SSL vision receiver.
 // Address should be <ip>:<port> - grSim default is 224.5.23.2:10020
-func NewSSLReceiver(addr string) SSLReceiver {
+func NewSSLReceiver(addr string) *SSLReceiver {
 	udpAddr, err := net.ResolveUDPAddr("udp", addr)
 	if err != nil {
 		panic(err)
 	}
 
-	return SSLReceiver{
+	return &SSLReceiver{
 		conn: nil,
 		addr: udpAddr,
 		buff: make([]byte, read_buff_sz),

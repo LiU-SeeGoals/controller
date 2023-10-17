@@ -1,10 +1,9 @@
 package client
 
 import (
-	"net"
 	"fmt"
+	"net"
 )
-
 
 // SSL Vision receiver
 type GrsimClient struct {
@@ -14,13 +13,13 @@ type GrsimClient struct {
 	addr *net.UDPAddr
 }
 
-func NewSSLGrsimClient(addr string) GrsimClient {
+func NewSSLGrsimClient(addr string) *GrsimClient {
 	udpAddr, err := net.ResolveUDPAddr("udp", addr)
 	if err != nil {
 		panic(err)
 	}
 
-	return GrsimClient{
+	return &GrsimClient{
 		conn: nil,
 		addr: udpAddr,
 	}
