@@ -8,7 +8,7 @@ import (
 const TEAM_SIZE = 6
 
 type GameState struct {
-	grsim_client *client.GrsimClient
+	Grsim_client *client.GrsimClient
 	ssl_receiver *receiver.SSLReceiver
 	ssl_receiver_channel chan ssl_vision.SSL_WrapperPacket
 
@@ -26,10 +26,6 @@ func (gs *GameState) Update() {
 
 	detect = packet.GetDetection()
 
-	// if(len(detect.RobotsBlue) != len(gs.blue_team)){
-	// 	fmt.Println("Not same amount of robots in simulation as in gamestate")
-	// }
-
 	for _, robot := range detect.GetRobotsBlue() {
 		x := float64(robot.GetX())
 		y := float64(robot.GetY())
@@ -38,12 +34,12 @@ func (gs *GameState) Update() {
 		gs.blue_team[robot.GetRobotId()].SetPosition(x, y, w)
 	}
 
-	for _, robot := range detect.GetRobotsBlue() {
+	for _, robot := range detect.GetRobotsYellow() {
 		x := float64(robot.GetX())
 		y := float64(robot.GetY())
 		w := float64(*robot.Orientation)
 
-		gs.blue_team[robot.GetRobotId()].SetPosition(x, y, w)
+		gs.yellow_team[robot.GetRobotId()].SetPosition(x, y, w)
 	}
 
 	for _, ball := range detect.GetBalls() {
@@ -77,8 +73,8 @@ func (gs *GameState) setupSSLVisionReceiver(addr string) {
 func NewGameState(sslClientAddress string, sslReceiverAddress string) *GameState {
 	gs := &GameState{}
 
-	gs.grsim_client = client.NewSSLGrsimClient(sslClientAddress)	
-	gs.grsim_client.Connect()
+	gs.Grsim_client = client.NewSSLGrsimClient(sslClientAddress)	
+	gs.Grsim_client.Connect()
 
 	gs.setupSSLVisionReceiver(sslReceiverAddress)
 
@@ -95,11 +91,11 @@ func NewGameState(sslClientAddress string, sslReceiverAddress string) *GameState
 func (gs *GameState) String() string {
 	gs_str := "{\n blue team: {\n"
 	for i := 0; i < TEAM_SIZE; i++ {
-		gs_str += "{" + gs_str + gs.blue_team[i].String() + " },\n"
+		gs_str += "{" + gs.blue_team[i].String() + " },\n"
 	}
 	gs_str += "},\n yellow team: {\n"	
 	for i := 0; i < TEAM_SIZE; i++ {
-		gs_str += "{" + gs_str + gs.yellow_team[i].String() + " },\n"
+		gs_str += "{" + gs.yellow_team[i].String() + " },\n"
 	}
 	gs_str += "}"
 	return gs_str	

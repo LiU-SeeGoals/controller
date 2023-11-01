@@ -3,16 +3,34 @@ package client
 import (
 	"fmt"
 	"net"
+
+	"github.com/LiU-SeeGoals/controller/internal/proto/grsim"
+	"github.com/golang/protobuf/proto"
 )
 
 // SSL Vision receiver
 type GrsimClient struct {
 	// Connection
 	conn *net.UDPConn
+
 	// UDP address
 	addr *net.UDPAddr
+
+	// Yellow team robot command buffer
+	buffYellow []*grsim.GrSim_Robot_Command
+
+	// Blue team robot command buffer
+	buffBlue []*grsim.GrSim_Robot_Command
+
+	// Local time
+	// Note: grsim requires us to send a "timestamp",
+	// but it's really unclear what this timestamp is.
+	// For now, it's implemented as a local counter.
+	time float64
 }
 
+// Create new Grsim client
+// Address should be <ip>:<port>
 func NewSSLGrsimClient(addr string) *GrsimClient {
 	udpAddr, err := net.ResolveUDPAddr("udp", addr)
 	if err != nil {
@@ -25,6 +43,8 @@ func NewSSLGrsimClient(addr string) *GrsimClient {
 	}
 }
 
+// Connect/subscribe receiver to UDP multicast.
+// Note, this will NOT block.
 func (client *GrsimClient) Connect() {
 	conn, err := net.DialUDP("udp", nil, client.addr)
 	if err != nil {
@@ -34,15 +54,106 @@ func (client *GrsimClient) Connect() {
 	client.conn = conn
 }
 
-func (client *GrsimClient) Send()  {
-	writtenBytes, err := client.conn.Write([]byte{123,123})
+// Add a new Robot command to client buffer
+func (client *GrsimClient) AddRobotCommand(
+	yellowTeam bool,
+	robotId uint32,
+	velTangent float32,
+	velNormal float32,
+	velAngular float32,
+	kickSpeedX float32,
+	kickSpeedZ float32,
+	spinner bool,
+	wheelsSpeed bool,
+) {
+	command := newRobotCommand(robotId, velTangent, velNormal, velAngular, kickSpeedX, kickSpeedZ, spinner, wheelsSpeed)
 
-	if err != nil {
-		fmt.Printf("It's a fucking error")
+	if yellowTeam {
+		client.buffYellow = append(client.buffYellow, command)
 		return
 	}
-
-	fmt.Println("It fucking worked")
-	fmt.Println(writtenBytes)
+	client.buffBlue = append(client.buffBlue, command)
 }
 
+// Helper function creates a new robot command
+func newRobotCommand(
+	robotId uint32,
+	velTangent float32,
+	velNormal float32,
+	velAngular float32,
+	kickSpeedX float32,
+	kickSpeedZ float32,
+	spinner bool,
+	wheelsSpeed bool,
+) *grsim.GrSim_Robot_Command {
+	return &grsim.GrSim_Robot_Command{
+		Id:         &robotId,
+		Kickspeedx: &kickSpeedX,
+		Kickspeedz: &kickSpeedZ,
+
+		Veltangent: &velTangent,
+		Velnormal:  &velNormal,
+		Velangular: &velAngular,
+
+		Spinner:     &spinner,
+		Wheelsspeed: &wheelsSpeed,
+	}
+}
+
+// Helper function clears command buffer
+func (client *GrsimClient) clearCommandBuffer() {
+	client.buffYellow = []*grsim.GrSim_Robot_Command{}
+	client.buffBlue = []*grsim.GrSim_Robot_Command{}
+}
+
+func (client *GrsimClient) Send() (int, error) {
+	// Incr time
+	client.time += 1.0
+
+	// Clear buffers
+	defer client.clearCommandBuffer()
+
+	packet := &grsim.GrSim_Packet{}
+
+	isteamyellow := true
+	packet.Commands = &grsim.GrSim_Commands{
+		Timestamp:     &client.time,
+		Isteamyellow:  &isteamyellow,
+		RobotCommands: client.buffYellow,
+	}
+
+	// Yellow team
+	data, err := proto.Marshal(packet)
+	if err != nil {
+		err = fmt.Errorf("unable to marshal yellow team data: %w", err)
+		return 0, err
+	}
+
+	writeYellow, err := client.conn.Write(data)
+	if err != nil {
+		err = fmt.Errorf("unable to send yellow team data over socket: %w", err)
+		return 0, err
+	}
+
+	isteamyellow = false
+	packet.Commands = &grsim.GrSim_Commands{
+		Timestamp:     &client.time,
+		Isteamyellow:  &isteamyellow,
+		RobotCommands: client.buffBlue,
+	}
+
+	// Blue team
+	data, err = proto.Marshal(packet)
+	if err != nil {
+		err = fmt.Errorf("unable to marshal blue team data: %w", err)
+		return 0, err
+	}
+
+	writeBlue, err := client.conn.Write(data)
+	if err != nil {
+		err = fmt.Errorf("unable to send blue team data over socket: %w", err)
+		return 0, err
+	}
+
+	return writeYellow + writeBlue, nil
+}

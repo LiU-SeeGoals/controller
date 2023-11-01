@@ -7,4 +7,4 @@ require (
 	gonum.org/v1/gonum v0.14.0
 )
 
-require google.golang.org/protobuf v1.26.0 // indirect
+require google.golang.org/protobuf v1.31.0 // indirect

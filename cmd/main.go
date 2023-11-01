@@ -21,12 +21,10 @@ func main() {
 
 	gs := gamestate.NewGameState(conf.GrSimAddress, conf.SSLClientAddress)
 
-	gs.Update()
-	fmt.Println(gs)
-	// for {
-	// 	gs.Update()
-	// 	fmt.Println(gs)
-	// }
+	for {
+		gs.Update()
+		fmt.Println(gs)
+	}
 }
 
 func LoadConfig() (*Config, error) {
