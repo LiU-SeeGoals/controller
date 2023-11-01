@@ -31,13 +31,13 @@ type GrsimClient struct {
 
 // Create new Grsim client
 // Address should be <ip>:<port>
-func NewSSLGrsimClient(addr string) GrsimClient {
+func NewSSLGrsimClient(addr string) *GrsimClient {
 	udpAddr, err := net.ResolveUDPAddr("udp", addr)
 	if err != nil {
 		panic(err)
 	}
 
-	return GrsimClient{
+	return &GrsimClient{
 		conn: nil,
 		addr: udpAddr,
 	}
