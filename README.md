@@ -1,3 +1,5 @@
+![Team logo](./images/logo.png)
+
 # See Goals Robot Controller
 
 ## Project Structure
@@ -8,3 +10,6 @@ If you ever wonder where to put new files, please refer to it.
 ## Compiling/Building
 
 The project can be compiled by running `/scripts/build.sh`. This generates the executable in `/build` folder.
+
+## Actions
+[link to information](internal/action/action.md)
