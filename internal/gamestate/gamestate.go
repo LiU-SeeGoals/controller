@@ -2,6 +2,7 @@ package gamestate
 
 import (
 	"github.com/LiU-SeeGoals/controller/internal/client"
+	"github.com/LiU-SeeGoals/controller/internal/gamestate"
 	"github.com/LiU-SeeGoals/controller/internal/proto/ssl_vision"
 	"github.com/LiU-SeeGoals/controller/internal/receiver"
 )
@@ -59,25 +60,7 @@ func (gs *GameState) Update() {
 		gs.ball.SetPosition(x, y, w)
 	}
 
-	if field != nil {
-		gs.field.FieldLengt = field.GetFieldLength()
-		gs.field.FieldWidth = field.GetFieldWidth()
-		//gs.field.FieldLines = field.GetFieldLines()
-		//gs.field.FieldArcs = field.GetFieldArcs()
-		gs.field.BallRadius = field.GetBallRadius()
-		gs.field.BoundaryWidth = field.GetBoundaryWidth()
-		gs.field.CenterRadius = field.GetCenterCircleRadius()
-		gs.field.GoalDepth = field.GetGoalDepth()
-		gs.field.GoalHeight = field.GetGoalHeight()
-		gs.field.GoalWidth = field.GetGoalWidth()
-		gs.field.GoalToPenalty = field.GetGoalCenterToPenaltyMark()
-		gs.field.LineThickness = field.GetLineThickness()
-		gs.field.MaxRobotRadius = field.GetMaxRobotRadius()
-		gs.field.PenaltyAreaDepth = field.GetPenaltyAreaDepth()
-		gs.field.PenaltyAreaWidth = field.GetPenaltyAreaWidth()
-
-	}
-
+	parseFieldData(&gs.field, field)
 }
 
 func (gs *GameState) GetRobot(id int, team Team) *Robot {
@@ -126,4 +109,58 @@ func (gs *GameState) String() string {
 	}
 	gs_str += "}"
 	return gs_str
+}
+
+// Parse geoemtry field data
+func parseFieldData(f *Field, data *ssl_vision.SSL_GeometryFieldSize) {
+	if data == nil {
+		return
+	}
+
+	// parse field data
+	f.FieldLengt = data.GetFieldLength()
+	f.FieldWidth = data.GetFieldWidth()
+	f.BallRadius = data.GetBallRadius()
+	f.BoundaryWidth = data.GetBoundaryWidth()
+	f.CenterRadius = data.GetCenterCircleRadius()
+	f.GoalDepth = data.GetGoalDepth()
+	f.GoalHeight = data.GetGoalHeight()
+	f.GoalWidth = data.GetGoalWidth()
+	f.GoalToPenalty = data.GetGoalCenterToPenaltyMark()
+	f.LineThickness = data.GetLineThickness()
+	f.MaxRobotRadius = data.GetMaxRobotRadius()
+	f.PenaltyAreaDepth = data.GetPenaltyAreaDepth()
+	f.PenaltyAreaWidth = data.GetPenaltyAreaWidth()
+
+	parseFieldLines(f, data.GetFieldLines())
+	parseFieldArcs(f, data.GetFieldArcs())
+}
+
+func parseFieldLines(f *Field, lines []*ssl_vision.SSL_FieldLineSegment) {
+	for _, line := range lines {
+		if f.hasLine(line.GetName()) {
+			continue
+		}
+		p1 := line.GetP1()
+		p2 := line.GetP2()
+		f.addLine(
+			line.GetName(),
+			p1.GetX(),
+			p1.GetY(),
+			p2.GetX(),
+			p2.GetY(),
+			line.GetThickness(),
+			convertShapeType(line.GetType()),
+		)
+	}
+}
+
+func parseFieldArcs(f *Field, lines []*ssl_vision.SSL_FieldCircularArc) {
+
+}
+
+// Glorified type cast
+// Converts ssl vision enum to our own enum
+func convertShapeType(typ ssl_vision.SSL_FieldShapeType) gamestate.FieldShape {
+	return typ
 }

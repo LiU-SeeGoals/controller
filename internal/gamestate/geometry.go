@@ -78,10 +78,10 @@ type LineSegment struct {
 	Name string
 
 	// Start point of line segment
-	P1 mat.VecDense
+	P1 *mat.VecDense
 
 	// End point of line segment
-	P2 mat.VecDense
+	P2 *mat.VecDense
 
 	// Thickness of line segment
 	Thickness float32
@@ -111,4 +111,49 @@ type CircularArc struct {
 
 	// Type of shape
 	ShapeType FieldShape
+}
+
+func (f *Field) addLine(
+	name string,
+	p1x float32,
+	p1y float32,
+	p2x float32,
+	p2y float32,
+	thickness float32,
+	shape FieldShape) {
+
+	p1 := []float64{float64(p1x), float64(p1y)}
+	p2 := []float64{float64(p2x), float64(p2y)}
+	line := LineSegment{
+		Name:      name,
+		P1:        mat.NewVecDense(2, p1),
+		P2:        mat.NewVecDense(2, p2),
+		Thickness: float32(thickness),
+	}
+
+	was := make([]int, 0)
+}
+
+// Check if Field contains some line
+// with given name.
+func (f *Field) hasLine(name string) bool {
+	for _, line := range f.FieldLines {
+		if line.Name == name {
+			return true
+		}
+	}
+
+	return false
+}
+
+// Check if Field contains some arc
+// with given name.
+func (f *Field) hasArc(name string) bool {
+	for _, arc := range f.FieldArcs {
+		if arc.Name == name {
+			return true
+		}
+	}
+
+	return false
 }
