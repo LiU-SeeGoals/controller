@@ -5,16 +5,17 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/proto/ssl_vision"
 	"github.com/LiU-SeeGoals/controller/internal/receiver"
 )
+
 const TEAM_SIZE = 6
 
 type GameState struct {
-	Grsim_client *client.GrsimClient
-	ssl_receiver *receiver.SSLReceiver
+	Grsim_client         *client.GrsimClient
+	ssl_receiver         *receiver.SSLReceiver
 	ssl_receiver_channel chan ssl_vision.SSL_WrapperPacket
 
-	blue_team [TEAM_SIZE]*Robot
+	blue_team   [TEAM_SIZE]*Robot
 	yellow_team [TEAM_SIZE]*Robot
-	ball *Ball
+	ball        *Ball
 }
 
 // Updates position of robots and balls to their actual position
@@ -49,11 +50,11 @@ func (gs *GameState) Update() {
 
 		gs.ball.SetPosition(x, y, w)
 	}
-	
+
 }
 
-func (gs *GameState) GetRobot(id int, team Team) *Robot{
-	if team == Blue{
+func (gs *GameState) GetRobot(id int, team Team) *Robot {
+	if team == Blue {
 		return gs.blue_team[id]
 	}
 	return gs.yellow_team[id]
@@ -69,11 +70,10 @@ func (gs *GameState) setupSSLVisionReceiver(addr string) {
 	go gs.ssl_receiver.Receive(gs.ssl_receiver_channel)
 }
 
-
 func NewGameState(sslClientAddress string, sslReceiverAddress string) *GameState {
 	gs := &GameState{}
 
-	gs.Grsim_client = client.NewSSLGrsimClient(sslClientAddress)	
+	gs.Grsim_client = client.NewSSLGrsimClient(sslClientAddress)
 	gs.Grsim_client.Connect()
 
 	gs.setupSSLVisionReceiver(sslReceiverAddress)
@@ -93,10 +93,10 @@ func (gs *GameState) String() string {
 	for i := 0; i < TEAM_SIZE; i++ {
 		gs_str += "{" + gs.blue_team[i].String() + " },\n"
 	}
-	gs_str += "},\n yellow team: {\n"	
+	gs_str += "},\n yellow team: {\n"
 	for i := 0; i < TEAM_SIZE; i++ {
 		gs_str += "{" + gs.yellow_team[i].String() + " },\n"
 	}
 	gs_str += "}"
-	return gs_str	
+	return gs_str
 }
