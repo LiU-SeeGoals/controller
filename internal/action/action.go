@@ -1,6 +1,7 @@
 package action
 
 import (
+	"fmt"
 	"math"
 
 	"github.com/LiU-SeeGoals/controller/internal/datatypes"
@@ -12,33 +13,60 @@ type Action interface {
 	TranslateGrsim(params *datatypes.Parameters)
 }
 
-type Stop struct{}
-
-type GoTo struct {
-	Pos  *mat.VecDense
-	Dest *mat.VecDense
+type Stop struct {
 }
 
-func (gt *GoTo) TranslateGrsim(params *datatypes.Parameters) {
+type Move struct {
+	Pos     *mat.VecDense
+	Dest    *mat.VecDense
+	Dribble bool
+}
+
+type Dribble struct {
+	Dribble bool
+}
+
+type Kick struct {
+	Kickspeed int
+}
+
+func (d *Dribble) TranslateGrsim(params *datatypes.Parameters) {
+
+	params.Spinner = d.Dribble
+}
+
+func (k *Kick) TranslateGrsim(params *datatypes.Parameters) {
+
+	params.KickSpeedX = float32(k.Kickspeed)
+}
+
+func (s *Stop) TranslateGrsim(params *datatypes.Parameters) {
+
+}
+
+func (mv *Move) TranslateGrsim(params *datatypes.Parameters) {
 	diff := mat.NewVecDense(3, nil)
-	diff.SubVec(gt.Dest, gt.Pos)
+	diff.SubVec(mv.Dest, mv.Pos)
+	params.Spinner = mv.Dribble
 
-	if diff.AtVec(0) < 1 && diff.AtVec(1) < 1 {
-	} else {
-		angle := math.Atan2(diff.AtVec(1), diff.AtVec(0))
-		if angle < 2 {
-			params.VelNormal = 50
+	angle := math.Atan2(diff.AtVec(1), diff.AtVec(0))
+	diffPosAngle := angle - mv.Pos.AtVec(2)
+	diffDestAngle := mv.Pos.AtVec(2) - mv.Dest.AtVec(2)
+
+	fmt.Println(diffPosAngle)
+	if math.Abs(diff.AtVec(0)) > 100 || math.Abs(diff.AtVec(1)) > 100 {
+
+		if diffPosAngle > 0.2 {
+			params.VelAngular = 4
+		} else if diffPosAngle < -0.2 {
+			params.VelAngular = -4
 		} else {
-
-			params.VelAngular = 5
+			params.VelTangent = 1
 		}
+	} else if diffDestAngle > 0.2 {
+		params.VelAngular = -4
+	} else if diffDestAngle < -0.2 {
+		params.VelAngular = 4
 	}
 
 }
-
-// type Pass struct {
-// }
-
-// func (s Stop) TranslateGrsim() int {
-
-// }

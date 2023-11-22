@@ -21,11 +21,19 @@ type GameState struct {
 }
 
 func (gs *GameState) Test() {
-	act := &action.GoTo{}
+	act := &action.Move{}
 	act.Pos = gs.yellow_team[0].pos
 	act.Dest = mat.NewVecDense(3, nil)
-	act.Dest.SetVec(0, 0)
-	act.Dest.SetVec(1, 0)
+	act.Dest.SetVec(0, 4)
+	act.Dest.SetVec(1, 4)
+	act.Dest.SetVec(2, 0)
+	act.Dribble = true
+
+	//act := &action.Kick{}
+	//act.Kickspeed = 10
+
+	//act := &action.Dribble{}
+	//act.Dribble = true
 
 	var action []action.Action
 	action = append(action, act)
@@ -56,6 +64,7 @@ func (gs *GameState) Update() {
 		w := float64(*robot.Orientation)
 
 		gs.yellow_team[robot.GetRobotId()].SetPosition(x, y, w)
+
 	}
 
 	for _, ball := range detect.GetBalls() {

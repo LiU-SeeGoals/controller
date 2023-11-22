@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
@@ -10,7 +9,7 @@ import (
 
 type Config struct {
 	SSLClientAddress string `json:"sslClientAddress"`
-	GrSimAddress string `json:"grSimAddress"`
+	GrSimAddress     string `json:"grSimAddress"`
 }
 
 func main() {
@@ -22,23 +21,23 @@ func main() {
 	gs := gamestate.NewGameState(conf.GrSimAddress, conf.SSLClientAddress)
 	for {
 		gs.Update()
-		fmt.Println(gs)
+		//fmt.Println(gs)
 		gs.Test()
 	}
 }
 
 func LoadConfig() (*Config, error) {
-    file, err := os.Open("../config.json")
-    if err != nil {
-        return nil, err
-    }
-    defer file.Close()
+	file, err := os.Open("../config.json")
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
 
-    config := &Config{}
-    decoder := json.NewDecoder(file)
-    if err := decoder.Decode(config); err != nil {
-        return nil, err
-    }
+	config := &Config{}
+	decoder := json.NewDecoder(file)
+	if err := decoder.Decode(config); err != nil {
+		return nil, err
+	}
 
-    return config, nil
+	return config, nil
 }
