@@ -28,6 +28,12 @@ const (
 	RightFieldRightPenaltyStretch
 )
 
+// Holds all field geometry data
+//
+// Definitions are similar to the ones in the SSL ptoto files,
+// but slight changes have been made for readability.
+// Please compare with the generated proto files if
+// anything is unclear.
 type Field struct {
 	// Field length (distance between goal lines) in mm
 	FieldLengt int32
@@ -77,6 +83,10 @@ type Field struct {
 	MaxRobotRadius float32
 }
 
+// Holds line segment data
+//
+// Shape enum maps one to one
+// with the SSL vision enum
 type LineSegment struct {
 	// Name of marking
 	Name string
@@ -94,6 +104,10 @@ type LineSegment struct {
 	ShapeType FieldShape
 }
 
+// Holds arc data
+//
+// Shape enum maps one to one
+// with the SSL vision enum
 type CircularArc struct {
 	// Name of marking
 	Name string
@@ -188,6 +202,7 @@ func (f *Field) hasArc(name string) bool {
 	return false
 }
 
+// String representation of LineSegment
 func (l *LineSegment) String() string {
 	x1 := l.P1.AtVec(0)
 	y1 := l.P1.AtVec(1)
@@ -197,6 +212,7 @@ func (l *LineSegment) String() string {
 	return fmt.Sprintf("name: %s, p1: {%f, %f}, p2: {%f, %f}", l.Name, x1, y1, x2, y2)
 }
 
+// String representation of CircularArc
 func (a *CircularArc) String() string {
 	x := a.Center.AtVec(0)
 	y := a.Center.AtVec(1)
