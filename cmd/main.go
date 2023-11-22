@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
@@ -22,7 +23,7 @@ func main() {
 
 	for {
 		gs.Update()
-		//fmt.Println(gs)
+		fmt.Println(gs)
 	}
 }
 

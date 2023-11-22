@@ -1,6 +1,10 @@
 package gamestate
 
-import "gonum.org/v1/gonum/mat"
+import (
+	"fmt"
+
+	"gonum.org/v1/gonum/mat"
+)
 
 // Enum type alias
 //
@@ -95,7 +99,7 @@ type CircularArc struct {
 	Name string
 
 	// Center point of circular arc
-	Center mat.VecDense
+	Center *mat.VecDense
 
 	// Radius of arc
 	Radius float32
@@ -113,6 +117,7 @@ type CircularArc struct {
 	ShapeType FieldShape
 }
 
+// Add a new line segment to Field object
 func (f *Field) addLine(
 	name string,
 	p1x float32,
@@ -131,7 +136,7 @@ func (f *Field) addLine(
 		Thickness: float32(thickness),
 	}
 
-	was := make([]int, 0)
+	f.FieldLines = append(f.FieldLines, line)
 }
 
 // Check if Field contains some line
@@ -146,6 +151,31 @@ func (f *Field) hasLine(name string) bool {
 	return false
 }
 
+// Adds a new arc to Field object
+func (f *Field) addArc(
+	name string,
+	centerX float32,
+	centerY float32,
+	radius float32,
+	angle1 float32,
+	angle2 float32,
+	thickness float32,
+	shape FieldShape) {
+
+	center := []float64{float64(centerX), float64(centerY)}
+
+	arc := CircularArc{
+		Name:      name,
+		Center:    mat.NewVecDense(2, center),
+		Radius:    radius,
+		A1:        angle1,
+		A2:        angle2,
+		Thickness: thickness,
+		ShapeType: shape,
+	}
+	f.FieldArcs = append(f.FieldArcs, arc)
+}
+
 // Check if Field contains some arc
 // with given name.
 func (f *Field) hasArc(name string) bool {
@@ -156,4 +186,20 @@ func (f *Field) hasArc(name string) bool {
 	}
 
 	return false
+}
+
+func (l *LineSegment) String() string {
+	x1 := l.P1.AtVec(0)
+	y1 := l.P1.AtVec(1)
+
+	x2 := l.P2.AtVec(0)
+	y2 := l.P2.AtVec(1)
+	return fmt.Sprintf("name: %s, p1: {%f, %f}, p2: {%f, %f}", l.Name, x1, y1, x2, y2)
+}
+
+func (a *CircularArc) String() string {
+	x := a.Center.AtVec(0)
+	y := a.Center.AtVec(1)
+
+	return fmt.Sprintf("name: %s, center: {%f, %f}, rad: %f, a1: %f, a2: %f", a.Name, x, y, a.Radius, a.A1, a.A2)
 }

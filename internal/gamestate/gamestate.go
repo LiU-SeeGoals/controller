@@ -1,8 +1,9 @@
 package gamestate
 
 import (
+	"fmt"
+
 	"github.com/LiU-SeeGoals/controller/internal/client"
-	"github.com/LiU-SeeGoals/controller/internal/gamestate"
 	"github.com/LiU-SeeGoals/controller/internal/proto/ssl_vision"
 	"github.com/LiU-SeeGoals/controller/internal/receiver"
 )
@@ -80,6 +81,10 @@ func (gs *GameState) setupSSLVisionReceiver(addr string) {
 	go gs.ssl_receiver.Receive(gs.ssl_receiver_channel)
 }
 
+// Create a new game state
+//
+// sslClientAddress should be given as <ip:port>
+// sslReceiverAddress should be given as <ip:port>
 func NewGameState(sslClientAddress string, sslReceiverAddress string) *GameState {
 	gs := &GameState{}
 
@@ -98,14 +103,21 @@ func NewGameState(sslClientAddress string, sslReceiverAddress string) *GameState
 	return gs
 }
 
+// String representation of game state
 func (gs *GameState) String() string {
 	gs_str := "{\n blue team: {\n"
 	for i := 0; i < TEAM_SIZE; i++ {
-		gs_str += "{" + gs.blue_team[i].String() + " },\n"
+		gs_str += "robot: {" + gs.blue_team[i].String() + " },\n"
 	}
 	gs_str += "},\n yellow team: {\n"
 	for i := 0; i < TEAM_SIZE; i++ {
-		gs_str += "{" + gs.yellow_team[i].String() + " },\n"
+		gs_str += "robot: {" + gs.yellow_team[i].String() + " },\n"
+	}
+	for _, line := range gs.field.FieldLines {
+		gs_str += fmt.Sprintf("line: {%s}\n", line.String())
+	}
+	for _, arc := range gs.field.FieldArcs {
+		gs_str += fmt.Sprintf("arc: {%s}\n", arc.String())
 	}
 	gs_str += "}"
 	return gs_str
@@ -136,6 +148,9 @@ func parseFieldData(f *Field, data *ssl_vision.SSL_GeometryFieldSize) {
 	parseFieldArcs(f, data.GetFieldArcs())
 }
 
+// Parse field lines from ssl packet
+//
+// Field object should be passed from game state object.
 func parseFieldLines(f *Field, lines []*ssl_vision.SSL_FieldLineSegment) {
 	for _, line := range lines {
 		if f.hasLine(line.GetName()) {
@@ -155,12 +170,31 @@ func parseFieldLines(f *Field, lines []*ssl_vision.SSL_FieldLineSegment) {
 	}
 }
 
-func parseFieldArcs(f *Field, lines []*ssl_vision.SSL_FieldCircularArc) {
+// Parse arcs from ssl packet
+//
+// Field object should be passed from game state object.
+func parseFieldArcs(f *Field, arcs []*ssl_vision.SSL_FieldCircularArc) {
+	for _, arc := range arcs {
+		if f.hasArc(arc.GetName()) {
+			continue
+		}
 
+		center := arc.GetCenter()
+		f.addArc(
+			arc.GetName(),
+			center.GetX(),
+			center.GetY(),
+			arc.GetRadius(),
+			arc.GetA1(),
+			arc.GetA2(),
+			arc.GetThickness(),
+			convertShapeType(arc.GetType()),
+		)
+	}
 }
 
 // Glorified type cast
 // Converts ssl vision enum to our own enum
-func convertShapeType(typ ssl_vision.SSL_FieldShapeType) gamestate.FieldShape {
-	return typ
+func convertShapeType(typ ssl_vision.SSL_FieldShapeType) FieldShape {
+	return FieldShape(typ)
 }
