@@ -36,6 +36,26 @@ type Kick struct {
 	Kickspeed int
 }
 
+// Negative value rotates robot clockwise
+type Rotate struct {
+	AngularVel int
+}
+
+// index 0: positive left
+// index 1: positive forward
+type SetNavigationDirection struct {
+	Direction *mat.VecDense
+}
+
+func (s *SetNavigationDirection) TranslateGrsim(params *datatypes.Parameters) {
+	params.VelNormal = float32(s.Direction.AtVec(0))
+	params.VelTangent = float32(s.Direction.AtVec(1))
+}
+
+func (r *Rotate) TranslateGrsim(params *datatypes.Parameters) {
+	params.VelAngular = float32(r.AngularVel)
+}
+
 func (d *Dribble) TranslateGrsim(params *datatypes.Parameters) {
 
 	params.Spinner = d.Dribble
