@@ -56,6 +56,9 @@ func (client *GrsimClient) Connect() {
 	client.conn = conn
 }
 
+// Send a slice of actions to GrSim
+// Actions need to be ordered by robot id.
+// One action per robot.
 func (client *GrsimClient) AddActions(actions []action.Action) {
 
 	for id, action := range actions {

@@ -23,6 +23,8 @@ type GameState struct {
 	ball        *Ball
 }
 
+// Method used for testing actions,
+// a proper test should be implemented
 func (gs *GameState) TestActions() {
 	act := &action.Move{}
 	act.Pos = gs.yellow_team[0].pos
