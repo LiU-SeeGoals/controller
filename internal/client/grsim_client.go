@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"net"
 
+	"github.com/LiU-SeeGoals/controller/internal/action"
+	"github.com/LiU-SeeGoals/controller/internal/datatypes"
 	"github.com/LiU-SeeGoals/controller/internal/proto/grsim"
 	"github.com/golang/protobuf/proto"
 )
@@ -54,21 +56,22 @@ func (client *GrsimClient) Connect() {
 	client.conn = conn
 }
 
-// Add a new Robot command to client buffer
-func (client *GrsimClient) AddRobotCommand(
-	yellowTeam bool,
-	robotId uint32,
-	velTangent float32,
-	velNormal float32,
-	velAngular float32,
-	kickSpeedX float32,
-	kickSpeedZ float32,
-	spinner bool,
-	wheelsSpeed bool,
-) {
-	command := newRobotCommand(robotId, velTangent, velNormal, velAngular, kickSpeedX, kickSpeedZ, spinner, wheelsSpeed)
+func (client *GrsimClient) AddActions(actions []action.Action) {
 
-	if yellowTeam {
+	for id, action := range actions {
+		params := datatypes.NewParameters()
+		params.RobotId = uint32(id)
+		action.TranslateGrsim(params)
+		client.addRobotCommand(params)
+	}
+	client.send()
+}
+
+// Add a new Robot command to client buffer
+func (client *GrsimClient) addRobotCommand(params *datatypes.Parameters) {
+	command := newRobotCommand(params.RobotId, params.VelTangent, params.VelNormal, params.VelAngular, params.KickSpeedX, params.KickSpeedZ, params.Spinner, params.WheelsSpeed)
+
+	if params.YellowTeam {
 		client.buffYellow = append(client.buffYellow, command)
 		return
 	}
@@ -106,7 +109,7 @@ func (client *GrsimClient) clearCommandBuffer() {
 	client.buffBlue = []*grsim.GrSim_Robot_Command{}
 }
 
-func (client *GrsimClient) Send() (int, error) {
+func (client *GrsimClient) send() (int, error) {
 	// Incr time
 	client.time += 1.0
 

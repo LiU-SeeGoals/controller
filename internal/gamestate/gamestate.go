@@ -3,9 +3,12 @@ package gamestate
 import (
 	"fmt"
 
+	"github.com/LiU-SeeGoals/controller/internal/action"
+
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/proto/ssl_vision"
 	"github.com/LiU-SeeGoals/controller/internal/receiver"
+	"gonum.org/v1/gonum/mat"
 )
 
 const TEAM_SIZE = 6
@@ -18,7 +21,27 @@ type GameState struct {
 	blue_team   [TEAM_SIZE]*Robot
 	yellow_team [TEAM_SIZE]*Robot
 	ball        *Ball
-	field       Field
+}
+
+func (gs *GameState) TestActions() {
+	act := &action.Move{}
+	act.Pos = gs.yellow_team[0].pos
+	act.Dest = mat.NewVecDense(3, nil)
+	act.Dest.SetVec(0, 4)
+	act.Dest.SetVec(1, 4)
+	act.Dest.SetVec(2, 0)
+	act.Dribble = true
+
+	//act := &action.Kick{}
+	//act.Kickspeed = 10
+
+	//act := &action.Dribble{}
+	//act.Dribble = true
+
+	var action []action.Action
+	action = append(action, act)
+
+	gs.Grsim_client.AddActions(action)
 }
 
 // Updates position of robots and balls to their actual position
@@ -51,6 +74,7 @@ func (gs *GameState) Update() {
 		w := float64(*robot.Orientation)
 
 		gs.yellow_team[robot.GetRobotId()].SetPosition(x, y, w)
+
 	}
 
 	for _, ball := range detect.GetBalls() {
@@ -81,10 +105,6 @@ func (gs *GameState) setupSSLVisionReceiver(addr string) {
 	go gs.ssl_receiver.Receive(gs.ssl_receiver_channel)
 }
 
-// Create a new game state
-//
-// sslClientAddress should be given as <ip:port>
-// sslReceiverAddress should be given as <ip:port>
 func NewGameState(sslClientAddress string, sslReceiverAddress string) *GameState {
 	gs := &GameState{}
 

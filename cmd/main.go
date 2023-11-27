@@ -20,7 +20,6 @@ func main() {
 	}
 
 	gs := gamestate.NewGameState(conf.GrSimAddress, conf.SSLClientAddress)
-
 	for {
 		gs.Update()
 		fmt.Println(gs)
