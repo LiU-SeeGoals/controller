@@ -20,7 +20,7 @@ type GameState struct {
 	ball        *Ball
 }
 
-func (gs *GameState) Test() {
+func (gs *GameState) TestActions() {
 	act := &action.Move{}
 	act.Pos = gs.yellow_team[0].pos
 	act.Dest = mat.NewVecDense(3, nil)
