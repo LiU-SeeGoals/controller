@@ -20,7 +20,11 @@ type GameState struct {
 
 	blue_team   [TEAM_SIZE]*Robot
 	yellow_team [TEAM_SIZE]*Robot
-	ball        *Ball
+
+	// Holds ball data
+	ball *Ball
+	// Holds field data
+	field Field
 }
 
 // Method used for testing actions,
