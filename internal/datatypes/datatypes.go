@@ -1,17 +1,28 @@
 package datatypes
 
+// Used for sending actions to grsim
 type Parameters struct {
-	YellowTeam  bool
-	RobotId     uint32
-	VelTangent  float32
-	VelNormal   float32
-	VelAngular  float32
-	KickSpeedX  float32
-	KickSpeedZ  float32
-	Spinner     bool
+	// Yellow team?
+	YellowTeam bool
+	// Which robot?
+	RobotId uint32
+	// Robot's forward speed
+	VelTangent float32
+	// Robot's side speed
+	VelNormal float32
+	// Robot's rotational speed
+	VelAngular float32
+	// Kick
+	KickSpeedX float32
+	// DONT USE
+	KickSpeedZ float32
+	// Dribbler
+	Spinner bool
+	//DONT USE
 	WheelsSpeed bool
 }
 
+// Creates and defaults parameters to 0
 func NewParameters() *Parameters {
 
 	return &Parameters{YellowTeam: true,

@@ -9,7 +9,8 @@ import (
 )
 
 type Action interface {
-	//TranslateReal() int
+	// TranslateReal() int
+	// Translates an action to parameters defined for grsim
 	TranslateGrsim(params *datatypes.Parameters)
 }
 
@@ -17,16 +18,21 @@ type Stop struct {
 }
 
 type Move struct {
-	Pos     *mat.VecDense
-	Dest    *mat.VecDense
+	// Current position of Robot, vector contains (x,y,w)
+	Pos *mat.VecDense
+	// Goal destination of Robot, vector contains (x,y,w)
+	Dest *mat.VecDense
+	// Decides if the robot should dribble while moving
 	Dribble bool
 }
 
 type Dribble struct {
+	// set Dribbling, useless right now
 	Dribble bool
 }
 
 type Kick struct {
+	// 1 is slow, 10 is faster, limits unknown
 	Kickspeed int
 }
 
