@@ -18,7 +18,7 @@ type Parameters struct {
 	KickSpeedZ float32
 	// Dribbler
 	Spinner bool
-	//DONT USE
+	// DONT USE
 	WheelsSpeed bool
 }
 

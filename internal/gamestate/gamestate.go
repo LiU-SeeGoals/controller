@@ -114,7 +114,7 @@ func (gs *GameState) setupSSLVisionReceiver(addr string) {
 func NewGameState(sslClientAddress string, sslReceiverAddress string) *GameState {
 	gs := &GameState{}
 
-	gs.Grsim_client = client.NewSSLGrsimClient(sslClientAddress)
+	gs.Grsim_client = client.NewGrsimClient(sslClientAddress)
 	gs.Grsim_client.Connect()
 
 	gs.setupSSLVisionReceiver(sslReceiverAddress)

@@ -33,7 +33,7 @@ type GrsimClient struct {
 
 // Create new Grsim client
 // Address should be <ip>:<port>
-func NewSSLGrsimClient(addr string) *GrsimClient {
+func NewGrsimClient(addr string) *GrsimClient {
 	udpAddr, err := net.ResolveUDPAddr("udp", addr)
 	if err != nil {
 		panic(err)
@@ -72,7 +72,16 @@ func (client *GrsimClient) AddActions(actions []action.Action) {
 
 // Add a new Robot command to client buffer
 func (client *GrsimClient) addRobotCommand(params *datatypes.Parameters) {
-	command := newRobotCommand(params.RobotId, params.VelTangent, params.VelNormal, params.VelAngular, params.KickSpeedX, params.KickSpeedZ, params.Spinner, params.WheelsSpeed)
+	command := newRobotCommand(
+		params.RobotId,
+		params.VelTangent,
+		params.VelNormal,
+		params.VelAngular,
+		params.KickSpeedX,
+		params.KickSpeedZ,
+		params.Spinner,
+		params.WheelsSpeed,
+	)
 
 	if params.YellowTeam {
 		client.buffYellow = append(client.buffYellow, command)
