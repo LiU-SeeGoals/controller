@@ -6,67 +6,60 @@ import (
 	"fmt"
 	"strconv"
 	"testing"
-    "math"
     "sync"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"google.golang.org/protobuf/proto"
-    "gonum.org/v1/gonum/mat"
-
-	"github.com/LiU-SeeGoals/controller/internal/proto/basestation" // This import path assumes 'controller' is the module name
-
+	"github.com/LiU-SeeGoals/controller/internal/proto/basestation"
 )
 
-type Response struct {
-	Message *basestation.Command
+var globalCommand *basestation.Command
+
+// This test starts a client and a sever and then sends a action to the server
+// and then checks if the response matches what was sent.
+// Only checks commandID and robotID in the message.
+func TestSocketCommunication(t *testing.T) {
+	testCases := []struct {
+		input         action.Action
+		expected      *basestation.Command
+	}{
+		{&action.Stop{Id: 2}, &basestation.Command{CommandId: basestation.ActionType_STOP_ACTION,RobotId: 2,}},
+		{&action.Kick{Id: 6, Speed: 5}, &basestation.Command{CommandId: basestation.ActionType_KICK_ACTION,RobotId: 6, Speed: 5,}},
+	}
+
+
+	for _, tc := range testCases {
+		command := testCommunication(tc.input)
+		time.Sleep(1000 * time.Millisecond)
+
+		if command.GetRobotId() != tc.expected.GetRobotId() {
+			t.Errorf("Expected: %v, got: %v", tc.expected, command)
+		}
+
+		if command.GetCommandId() != tc.expected.GetCommandId() {
+			t.Errorf("Expected: %v, got: %v", tc.expected, command)
+		}
+	}
 }
 
-func TestSendAction(t *testing.T) {
-    var wg sync.WaitGroup
+func testCommunication(newCommand action.Action) *basestation.Command{
+	var wg sync.WaitGroup
     wg.Add(1)
     var port int = 25565
-    responseChan := make(chan Response)
-	go startServer(port, &wg, responseChan)
-	sendPacket(port)
 
-    
-    
-    wg.Wait()
-    close(responseChan)
+	go startServer(port, &wg)
 
-    fmt.Println("checking response")
-    for response := range responseChan {
-		command := response.Message
-		fmt.Printf("Received command: %+v\n", command)
-	}
-    fmt.Println("checking response2")
-
-}
-
-
-func sendPacket(port int) {
 	BaseStationClient := NewBaseStationClient("127.0.0.1:"+strconv.Itoa(port))
 	BaseStationClient.Init()
+	BaseStationClient.Send([]action.Action{newCommand})
 
-	// Creates 2 random actions to send
-	actions := []action.Action{
-		&action.Stop{Id: 2},
-		&action.Move{
-			Id: 3,
-			Pos: mat.NewVecDense(3, []float64{100, 200, math.Pi}), // Example values for Pos
-			Goal: mat.NewVecDense(3, []float64{300, 400, -math.Pi}), // Example values for Goal
-		},
-	}
-
-	BaseStationClient.Send(actions)
-	// time.Sleep(2 * time.Second)
-
-	// BaseStationClient.Send(actions) // Send the messages again for fun
-	// time.Sleep(2 * time.Second)
-
+    wg.Wait()
+	return globalCommand
+	
+	
 }
 
-func startServer(port int, wg *sync.WaitGroup, actionChan chan<- Response) {
+func startServer(port int, wg *sync.WaitGroup) {
     defer wg.Done()
 	p := make([]byte, 32)
 	addr := net.UDPAddr{
@@ -78,17 +71,13 @@ func startServer(port int, wg *sync.WaitGroup, actionChan chan<- Response) {
 		fmt.Printf("Some error %v\n", err)
 		return
 	}
-    ser.SetReadDeadline(time.Now().Add(1 * time.Second))
+    ser.SetReadDeadline(time.Now().Add(1 * time.Second)) // one sec timeout
     ser.ReadFromUDP(p)
-    //fmt.Printf("Read a message from %v \n", remoteaddr)
-
     command := &basestation.Command{}
     proto.Unmarshal(p, command)
-    fmt.Printf("Unmarshalled command: %v\n", command)
 
-    response := Response{Message: command}
-    actionChan <- response
-    
+    globalCommand = command
+	ser.Close()
 		
 	
 }

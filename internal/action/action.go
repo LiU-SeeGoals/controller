@@ -84,6 +84,10 @@ func (k *Kick) TranslateReal() *basestation.Command {
 	return command_move
 }
 
+func (s *Kick) TranslateGrsim() int {
+	return 0
+}
+
 func (i *Init) TranslateReal() *basestation.Command {
 
 	command_move := &basestation.Command{

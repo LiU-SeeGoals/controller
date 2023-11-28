@@ -44,7 +44,6 @@ func NewBaseStationClient(address string) *BaseStationClient {
 }
 
 func (b *BaseStationClient) Init() {
-	fmt.Printf("running init\n")
 	go b.sendCommands()
 	b.hasBeenInited = true
 	b.threadMutex.Lock()
@@ -52,7 +51,6 @@ func (b *BaseStationClient) Init() {
 
 // Goroutine function for processing and sending commands
 func (b *BaseStationClient) sendCommands() {
-	fmt.Printf("starting up the send command\n")
     for {
 
         if len(b.queue) == 0 {
@@ -67,22 +65,19 @@ func (b *BaseStationClient) sendCommands() {
 		b.queue = b.queue[1:]
 		b.queueMutex.Unlock()
 		
-		fmt.Printf("Sending the shit\n")
-		
         // Send the command
         serializedCmd, _ := proto.Marshal(cmd) // Add error handling
         b.sendMessage(serializedCmd)           // Add error handling
     }
 }
 
-
+// send list of actions to the base station
 func (b *BaseStationClient) Send(actions []action.Action) {
 	if !b.hasBeenInited{
 		fmt.Println( "\033[0m Base station client has not been inited\033[33m")
 	}
 
 	for _, action := range actions {
-		fmt.Printf("Adding the shit to the queue.\n")
 		b.queueMutex.Lock()
 		b.queue = append(b.queue, action.TranslateReal())
 		b.queueMutex.Unlock()
