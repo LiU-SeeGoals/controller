@@ -1,57 +1,94 @@
 package client
 
 import (
-	"reflect"
+	"time"
+	"net"
+	"fmt"
+	"strconv"
 	"testing"
+    "math"
+    "sync"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
+	"google.golang.org/protobuf/proto"
+    "gonum.org/v1/gonum/mat"
+
+	"github.com/LiU-SeeGoals/controller/internal/proto/basestation" // This import path assumes 'controller' is the module name
+
 )
 
-type MockConnection struct {
-    SentMessages [][]byte
-}
-
-func (m *MockConnection) Write(b []byte) (n int, err error) {
-    m.SentMessages = append(m.SentMessages, b)
-    return len(b), nil
-}
-
-func (m *MockConnection) Close() error {
-    return nil
+type Response struct {
+	Message *basestation.Command
 }
 
 func TestSendAction(t *testing.T) {
-    testCases := []struct {
-        actions         []action.Action
-        expectedMessages [][]byte
-    }{
-        {
-            []action.Action{&action.Stop{Id: 1}},
-            [][]byte{{0x03, 0x00, 0x01}}, // Replace with the actual expected bytes for Stop{Id: 1}
-        },
-        {
-            []action.Action{&action.Stop{Id: 2}},
-            [][]byte{{0x03, 0x00, 0x02}}, // Replace with the actual expected bytes for Stop{Id: 2}
-        },
-        // Add more test cases with different actions and their expected byte representations
-    }
+    var wg sync.WaitGroup
+    wg.Add(1)
+    var port int = 25565
+    responseChan := make(chan Response)
+	go startServer(port, &wg, responseChan)
+	sendPacket(port)
 
-    for _, tc := range testCases {
-        mockConn := &MockConnection{}
-        client := NewBaseStationClient("localhost:8080")
-        client.connection = mockConn
+    
+    
+    wg.Wait()
+    close(responseChan)
 
-        client.SendActions(tc.actions)
+    fmt.Println("checking response")
+    for response := range responseChan {
+		command := response.Message
+		fmt.Printf("Received command: %+v\n", command)
+	}
+    fmt.Println("checking response2")
 
-        if len(mockConn.SentMessages) != len(tc.expectedMessages) {
-            t.Errorf("Expected %d messages to be sent, got %d", len(tc.expectedMessages), len(mockConn.SentMessages))
-            continue
-        }
+}
 
-        for i, msg := range mockConn.SentMessages {
-            if !reflect.DeepEqual(msg, tc.expectedMessages[i]) {
-                t.Errorf("Sent message #%d = %v, want %v", i+1, msg, tc.expectedMessages[i])
-            }
-        }
-    }
+
+func sendPacket(port int) {
+	BaseStationClient := NewBaseStationClient("127.0.0.1:"+strconv.Itoa(port))
+	BaseStationClient.Init()
+
+	// Creates 2 random actions to send
+	actions := []action.Action{
+		&action.Stop{Id: 2},
+		&action.Move{
+			Id: 3,
+			Pos: mat.NewVecDense(3, []float64{100, 200, math.Pi}), // Example values for Pos
+			Goal: mat.NewVecDense(3, []float64{300, 400, -math.Pi}), // Example values for Goal
+		},
+	}
+
+	BaseStationClient.Send(actions)
+	// time.Sleep(2 * time.Second)
+
+	// BaseStationClient.Send(actions) // Send the messages again for fun
+	// time.Sleep(2 * time.Second)
+
+}
+
+func startServer(port int, wg *sync.WaitGroup, actionChan chan<- Response) {
+    defer wg.Done()
+	p := make([]byte, 32)
+	addr := net.UDPAddr{
+		Port: port,
+		IP:   net.ParseIP("127.0.0.1"),
+	}
+	ser, err := net.ListenUDP("udp", &addr)
+	if err != nil {
+		fmt.Printf("Some error %v\n", err)
+		return
+	}
+    ser.SetReadDeadline(time.Now().Add(1 * time.Second))
+    ser.ReadFromUDP(p)
+    //fmt.Printf("Read a message from %v \n", remoteaddr)
+
+    command := &basestation.Command{}
+    proto.Unmarshal(p, command)
+    fmt.Printf("Unmarshalled command: %v\n", command)
+
+    response := Response{Message: command}
+    actionChan <- response
+    
+		
+	
 }
