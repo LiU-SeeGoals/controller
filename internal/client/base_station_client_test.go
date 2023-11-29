@@ -1,57 +1,136 @@
 package client
 
 import (
-	"reflect"
+	"fmt"
+	"math"
+	"net"
+	"strconv"
 	"testing"
 
+	"gonum.org/v1/gonum/mat"
+
 	"github.com/LiU-SeeGoals/controller/internal/action"
+	"github.com/LiU-SeeGoals/controller/internal/proto/basestation"
+	"google.golang.org/protobuf/proto"
 )
 
-type MockConnection struct {
-    SentMessages [][]byte
+var globalCommand *basestation.Command
+
+// This test starts a client and a sever and then sends a action to the server
+// and then checks if the response matches what was sent.
+// Only checks commandID and robotID in the message.
+func TestSocketCommunication(t *testing.T) {
+
+// Define stop action
+stopAction := &action.Stop{Id: 2}
+stopCommand := &basestation.Command{CommandId: basestation.ActionType_STOP_ACTION, RobotId: 2}
+
+// Define kick action
+kickAction := &action.Kick{Id: 6, Speed: 5}
+kickCommand := &basestation.Command{CommandId: basestation.ActionType_KICK_ACTION, RobotId: 6, Speed: 5}
+
+// Define init action
+initAction := &action.Init{Id: 3}
+initCommand := &basestation.Command{CommandId: basestation.ActionType_INIT_ACTION, RobotId: 3}
+
+// Define move action
+moveAction := &action.Move{
+    Id:   1,
+    Pos:  mat.NewVecDense(3, []float64{100, 200, math.Pi}),
+    Goal: mat.NewVecDense(3, []float64{300, 400, -math.Pi}),
+}
+moveCommand := &basestation.Command{
+    CommandId: basestation.ActionType_MOVE_ACTION,
+    RobotId:   1,
+    Pos:       &basestation.Vector3D{X: int32(100), Y: int32(200), W: float32(math.Pi)},
+    Goal:      &basestation.Vector3D{X: int32(300), Y: int32(400), W: float32(-math.Pi)},
 }
 
-func (m *MockConnection) Write(b []byte) (n int, err error) {
-    m.SentMessages = append(m.SentMessages, b)
-    return len(b), nil
+// Define set navigation direction action.
+setNavDirAction := &action.SetNavigationDirection{
+    Id:   9,
+    Direction:  mat.NewVecDense(2, []float64{100, 200}),
+}
+setNavDirCommand := &basestation.Command{
+    CommandId: basestation.ActionType_SET_NAVIGATION_DIRECTION_ACTION,
+    RobotId:   9,
+    Direction: &basestation.Vector3D{X: int32(100), Y: int32(200)},
 }
 
-func (m *MockConnection) Close() error {
-    return nil
+// Define rotate.
+rotateAction := &action.Rotate{
+    Id:   3,
+    Angle:  5,
+}
+rotateCommand := &basestation.Command{
+    CommandId: basestation.ActionType_ROTATE_ACTION,
+    RobotId:   3,
+    Angle: 5,
 }
 
-func TestSendAction(t *testing.T) {
-    testCases := []struct {
-        actions         []action.Action
-        expectedMessages [][]byte
-    }{
-        {
-            []action.Action{&action.Stop{Id: 1}},
-            [][]byte{{0x03, 0x00, 0x01}}, // Replace with the actual expected bytes for Stop{Id: 1}
-        },
-        {
-            []action.Action{&action.Stop{Id: 2}},
-            [][]byte{{0x03, 0x00, 0x02}}, // Replace with the actual expected bytes for Stop{Id: 2}
-        },
-        // Add more test cases with different actions and their expected byte representations
+// Test cases
+testCases := []struct {
+    input    action.Action
+    expected *basestation.Command
+}{
+    {stopAction, stopCommand},
+    {kickAction, kickCommand},
+    {initAction, initCommand},
+    {moveAction, moveCommand},
+    {setNavDirAction, setNavDirCommand},
+	{rotateAction, rotateCommand},
+}
+			
+	
+
+	commandChan := make(chan *basestation.Command)
+	var port int = 25565
+    go startServer(port, commandChan)
+
+	for _, tc := range testCases {
+
+		command := testCommunication(tc.input, commandChan, port)
+
+		if command.GetRobotId() != tc.expected.GetRobotId() {
+			t.Errorf("Expected: %v, got: %v", tc.expected, command)
+		}
+
+		if command.GetCommandId() != tc.expected.GetCommandId() {
+			t.Errorf("Expected: %v, got: %v", tc.expected, command)
+		}
+	}
+}
+
+func testCommunication(newCommand action.Action, commandChan chan*basestation.Command, port int) *basestation.Command {
+
+
+    BaseStationClient := NewBaseStationClient("127.0.0.1:" + strconv.Itoa(port))
+    BaseStationClient.Init()
+    BaseStationClient.Send([]action.Action{newCommand})
+
+    command := <-commandChan
+
+    return command
+}
+
+func startServer(port int, commandChan chan<- *basestation.Command) {
+    addr := net.UDPAddr{
+        Port: port,
+        IP:   net.ParseIP("127.0.0.1"),
     }
-
-    for _, tc := range testCases {
-        mockConn := &MockConnection{}
-        client := NewBaseStationClient("localhost:8080")
-        client.connection = mockConn
-
-        client.SendActions(tc.actions)
-
-        if len(mockConn.SentMessages) != len(tc.expectedMessages) {
-            t.Errorf("Expected %d messages to be sent, got %d", len(tc.expectedMessages), len(mockConn.SentMessages))
-            continue
-        }
-
-        for i, msg := range mockConn.SentMessages {
-            if !reflect.DeepEqual(msg, tc.expectedMessages[i]) {
-                t.Errorf("Sent message #%d = %v, want %v", i+1, msg, tc.expectedMessages[i])
-            }
-        }
+    ser, err := net.ListenUDP("udp", &addr)
+    if err != nil {
+        fmt.Printf("Some error %v\n", err)
+        return
     }
+	for {
+	p := make([]byte, 32) // Reinitialize before each read
+
+    ser.ReadFromUDP(p)
+    command := &basestation.Command{}
+    proto.Unmarshal(p, command)
+
+    // Send the command to the channel
+    commandChan <- command
+	}
 }
