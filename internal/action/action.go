@@ -29,6 +29,16 @@ type Move struct {
 	Goal *mat.VecDense
 }
 
+type SetNavigationDirection struct {
+	Id   int
+	Direction  *mat.VecDense
+}
+
+type Rotate struct {
+	Id   int
+	Angle int
+}
+
 type Kick struct {
 	Id int
 	Speed int
@@ -57,7 +67,43 @@ func (m *Move) TranslateReal() *basestation.Command {
 	return command_move
 }
 
+func (s *SetNavigationDirection) TranslateReal() *basestation.Command {
+	command := &basestation.Command{
+		CommandId: basestation.ActionType_SET_NAVIGATION_DIRECTION_ACTION,
+		RobotId: int32(s.Id),         
+		Direction: &basestation.Vector3D{
+			X: int32(s.Direction.AtVec(0)),
+			Y: int32(s.Direction.AtVec(1)),
+		},
+	}
+
+	return command
+}
+
+func (s *SetNavigationDirection) TranslateGrsim() int {
+	return 0;
+}
+
+func (r *Rotate) TranslateReal() *basestation.Command {
+	command_move := &basestation.Command{
+		CommandId: basestation.ActionType_ROTATE_ACTION,
+		RobotId: int32(r.Id),         
+		Angle: int32(r.Angle),
+	}
+
+	return command_move
+}
+
+func (r *Rotate) TranslateGrsim() int {
+	return 0
+}
+
+
 func (m *Move) TranslateGrsim() int {
+	return 0
+}
+
+func (i *Init) TranslateGrsim() int {
 	return 0
 }
 

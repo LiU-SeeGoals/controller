@@ -9,6 +9,8 @@ enum ActionType {
   KICK_ACTION = 1;
   MOVE_ACTION = 2;
   INIT_ACTION = 3;
+  SET_NAVIGATION_DIRECTION_ACTION = 4;
+  ROTATE_ACTION = 5;
 }
 
 message Command {
@@ -17,29 +19,8 @@ message Command {
   int32 speed = 3;
   Vector3D pos = 4;
   Vector3D goal = 5;
-}
-
-// Message for Stop action communication
-message StopCommand {
-  int32 id = 1;
-}
-
-// Message for Move action communication
-message MoveCommand {
-  int32 id = 1;
-  Vector3D pos = 2;
-  Vector3D goal = 3;
-}
-
-// Message for Kick action communication
-message KickCommand {
-  int32 id = 1;
-  int32 speed = 2;
-}
-
-// Message for Init action communication
-message InitCommand {
-  int32 id = 1;
+  Vector3D direction = 6;
+  int32 angle = 7;
 }
 
 // Structure for 3D vector

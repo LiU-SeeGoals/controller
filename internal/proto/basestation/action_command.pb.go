@@ -24,10 +24,12 @@ const (
 type ActionType int32
 
 const (
-	ActionType_STOP_ACTION ActionType = 0
-	ActionType_KICK_ACTION ActionType = 1
-	ActionType_MOVE_ACTION ActionType = 2
-	ActionType_INIT_ACTION ActionType = 3
+	ActionType_STOP_ACTION                     ActionType = 0
+	ActionType_KICK_ACTION                     ActionType = 1
+	ActionType_MOVE_ACTION                     ActionType = 2
+	ActionType_INIT_ACTION                     ActionType = 3
+	ActionType_SET_NAVIGATION_DIRECTION_ACTION ActionType = 4
+	ActionType_ROTATE_ACTION                   ActionType = 5
 )
 
 // Enum value maps for ActionType.
@@ -37,12 +39,16 @@ var (
 		1: "KICK_ACTION",
 		2: "MOVE_ACTION",
 		3: "INIT_ACTION",
+		4: "SET_NAVIGATION_DIRECTION_ACTION",
+		5: "ROTATE_ACTION",
 	}
 	ActionType_value = map[string]int32{
-		"STOP_ACTION": 0,
-		"KICK_ACTION": 1,
-		"MOVE_ACTION": 2,
-		"INIT_ACTION": 3,
+		"STOP_ACTION":                     0,
+		"KICK_ACTION":                     1,
+		"MOVE_ACTION":                     2,
+		"INIT_ACTION":                     3,
+		"SET_NAVIGATION_DIRECTION_ACTION": 4,
+		"ROTATE_ACTION":                   5,
 	}
 )
 
@@ -83,6 +89,8 @@ type Command struct {
 	Speed     int32      `protobuf:"varint,3,opt,name=speed,proto3" json:"speed,omitempty"`
 	Pos       *Vector3D  `protobuf:"bytes,4,opt,name=pos,proto3" json:"pos,omitempty"`
 	Goal      *Vector3D  `protobuf:"bytes,5,opt,name=goal,proto3" json:"goal,omitempty"`
+	Direction *Vector3D  `protobuf:"bytes,6,opt,name=direction,proto3" json:"direction,omitempty"`
+	Angle     int32      `protobuf:"varint,7,opt,name=angle,proto3" json:"angle,omitempty"`
 }
 
 func (x *Command) Reset() {
@@ -152,218 +160,16 @@ func (x *Command) GetGoal() *Vector3D {
 	return nil
 }
 
-// Message for Stop action communication
-type StopCommand struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Id int32 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-}
-
-func (x *StopCommand) Reset() {
-	*x = StopCommand{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_action_command_proto_msgTypes[1]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *StopCommand) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*StopCommand) ProtoMessage() {}
-
-func (x *StopCommand) ProtoReflect() protoreflect.Message {
-	mi := &file_action_command_proto_msgTypes[1]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use StopCommand.ProtoReflect.Descriptor instead.
-func (*StopCommand) Descriptor() ([]byte, []int) {
-	return file_action_command_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *StopCommand) GetId() int32 {
+func (x *Command) GetDirection() *Vector3D {
 	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-// Message for Move action communication
-type MoveCommand struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Id   int32     `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Pos  *Vector3D `protobuf:"bytes,2,opt,name=pos,proto3" json:"pos,omitempty"`
-	Goal *Vector3D `protobuf:"bytes,3,opt,name=goal,proto3" json:"goal,omitempty"`
-}
-
-func (x *MoveCommand) Reset() {
-	*x = MoveCommand{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_action_command_proto_msgTypes[2]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *MoveCommand) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*MoveCommand) ProtoMessage() {}
-
-func (x *MoveCommand) ProtoReflect() protoreflect.Message {
-	mi := &file_action_command_proto_msgTypes[2]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use MoveCommand.ProtoReflect.Descriptor instead.
-func (*MoveCommand) Descriptor() ([]byte, []int) {
-	return file_action_command_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *MoveCommand) GetId() int32 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *MoveCommand) GetPos() *Vector3D {
-	if x != nil {
-		return x.Pos
+		return x.Direction
 	}
 	return nil
 }
 
-func (x *MoveCommand) GetGoal() *Vector3D {
+func (x *Command) GetAngle() int32 {
 	if x != nil {
-		return x.Goal
-	}
-	return nil
-}
-
-// Message for Kick action communication
-type KickCommand struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Id    int32 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Speed int32 `protobuf:"varint,2,opt,name=speed,proto3" json:"speed,omitempty"`
-}
-
-func (x *KickCommand) Reset() {
-	*x = KickCommand{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_action_command_proto_msgTypes[3]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *KickCommand) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*KickCommand) ProtoMessage() {}
-
-func (x *KickCommand) ProtoReflect() protoreflect.Message {
-	mi := &file_action_command_proto_msgTypes[3]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use KickCommand.ProtoReflect.Descriptor instead.
-func (*KickCommand) Descriptor() ([]byte, []int) {
-	return file_action_command_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *KickCommand) GetId() int32 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *KickCommand) GetSpeed() int32 {
-	if x != nil {
-		return x.Speed
-	}
-	return 0
-}
-
-// Message for Init action communication
-type InitCommand struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Id int32 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-}
-
-func (x *InitCommand) Reset() {
-	*x = InitCommand{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_action_command_proto_msgTypes[4]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *InitCommand) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*InitCommand) ProtoMessage() {}
-
-func (x *InitCommand) ProtoReflect() protoreflect.Message {
-	mi := &file_action_command_proto_msgTypes[4]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use InitCommand.ProtoReflect.Descriptor instead.
-func (*InitCommand) Descriptor() ([]byte, []int) {
-	return file_action_command_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *InitCommand) GetId() int32 {
-	if x != nil {
-		return x.Id
+		return x.Angle
 	}
 	return 0
 }
@@ -382,7 +188,7 @@ type Vector3D struct {
 func (x *Vector3D) Reset() {
 	*x = Vector3D{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_action_command_proto_msgTypes[5]
+		mi := &file_action_command_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -395,7 +201,7 @@ func (x *Vector3D) String() string {
 func (*Vector3D) ProtoMessage() {}
 
 func (x *Vector3D) ProtoReflect() protoreflect.Message {
-	mi := &file_action_command_proto_msgTypes[5]
+	mi := &file_action_command_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -408,7 +214,7 @@ func (x *Vector3D) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Vector3D.ProtoReflect.Descriptor instead.
 func (*Vector3D) Descriptor() ([]byte, []int) {
-	return file_action_command_proto_rawDescGZIP(), []int{5}
+	return file_action_command_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *Vector3D) GetX() int32 {
@@ -436,7 +242,7 @@ var File_action_command_proto protoreflect.FileDescriptor
 
 var file_action_command_proto_rawDesc = []byte{
 	0x0a, 0x14, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x63, 0x6f, 0x6d, 0x6d, 0x61, 0x6e, 0x64,
-	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x06, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0xb7,
+	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x06, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0xfd,
 	0x01, 0x0a, 0x07, 0x43, 0x6f, 0x6d, 0x6d, 0x61, 0x6e, 0x64, 0x12, 0x31, 0x0a, 0x0a, 0x63, 0x6f,
 	0x6d, 0x6d, 0x61, 0x6e, 0x64, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x12,
 	0x2e, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x79,
@@ -448,31 +254,25 @@ var file_action_command_proto_rawDesc = []byte{
 	0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x56, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x33, 0x44, 0x52, 0x03, 0x70,
 	0x6f, 0x73, 0x12, 0x24, 0x0a, 0x04, 0x67, 0x6f, 0x61, 0x6c, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b,
 	0x32, 0x10, 0x2e, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x56, 0x65, 0x63, 0x74, 0x6f, 0x72,
-	0x33, 0x44, 0x52, 0x04, 0x67, 0x6f, 0x61, 0x6c, 0x22, 0x1d, 0x0a, 0x0b, 0x53, 0x74, 0x6f, 0x70,
-	0x43, 0x6f, 0x6d, 0x6d, 0x61, 0x6e, 0x64, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x05, 0x52, 0x02, 0x69, 0x64, 0x22, 0x67, 0x0a, 0x0b, 0x4d, 0x6f, 0x76, 0x65, 0x43,
-	0x6f, 0x6d, 0x6d, 0x61, 0x6e, 0x64, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x05, 0x52, 0x02, 0x69, 0x64, 0x12, 0x22, 0x0a, 0x03, 0x70, 0x6f, 0x73, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x56, 0x65, 0x63,
-	0x74, 0x6f, 0x72, 0x33, 0x44, 0x52, 0x03, 0x70, 0x6f, 0x73, 0x12, 0x24, 0x0a, 0x04, 0x67, 0x6f,
-	0x61, 0x6c, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x61, 0x63, 0x74, 0x69, 0x6f,
-	0x6e, 0x2e, 0x56, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x33, 0x44, 0x52, 0x04, 0x67, 0x6f, 0x61, 0x6c,
-	0x22, 0x33, 0x0a, 0x0b, 0x4b, 0x69, 0x63, 0x6b, 0x43, 0x6f, 0x6d, 0x6d, 0x61, 0x6e, 0x64, 0x12,
-	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x02, 0x69, 0x64, 0x12,
-	0x14, 0x0a, 0x05, 0x73, 0x70, 0x65, 0x65, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x05,
-	0x73, 0x70, 0x65, 0x65, 0x64, 0x22, 0x1d, 0x0a, 0x0b, 0x49, 0x6e, 0x69, 0x74, 0x43, 0x6f, 0x6d,
-	0x6d, 0x61, 0x6e, 0x64, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05,
-	0x52, 0x02, 0x69, 0x64, 0x22, 0x34, 0x0a, 0x08, 0x56, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x33, 0x44,
-	0x12, 0x0c, 0x0a, 0x01, 0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x01, 0x78, 0x12, 0x0c,
-	0x0a, 0x01, 0x79, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x01, 0x79, 0x12, 0x0c, 0x0a, 0x01,
-	0x77, 0x18, 0x03, 0x20, 0x01, 0x28, 0x02, 0x52, 0x01, 0x77, 0x2a, 0x50, 0x0a, 0x0a, 0x41, 0x63,
-	0x74, 0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x12, 0x0f, 0x0a, 0x0b, 0x53, 0x54, 0x4f, 0x50,
-	0x5f, 0x41, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x10, 0x00, 0x12, 0x0f, 0x0a, 0x0b, 0x4b, 0x49, 0x43,
-	0x4b, 0x5f, 0x41, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x10, 0x01, 0x12, 0x0f, 0x0a, 0x0b, 0x4d, 0x4f,
-	0x56, 0x45, 0x5f, 0x41, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x10, 0x02, 0x12, 0x0f, 0x0a, 0x0b, 0x49,
-	0x4e, 0x49, 0x54, 0x5f, 0x41, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x10, 0x03, 0x42, 0x0f, 0x5a, 0x0d,
-	0x2e, 0x2f, 0x62, 0x61, 0x73, 0x65, 0x73, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x62, 0x06, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x33, 0x44, 0x52, 0x04, 0x67, 0x6f, 0x61, 0x6c, 0x12, 0x2e, 0x0a, 0x09, 0x64, 0x69, 0x72, 0x65,
+	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x61, 0x63,
+	0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x56, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x33, 0x44, 0x52, 0x09, 0x64,
+	0x69, 0x72, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x14, 0x0a, 0x05, 0x61, 0x6e, 0x67, 0x6c,
+	0x65, 0x18, 0x07, 0x20, 0x01, 0x28, 0x05, 0x52, 0x05, 0x61, 0x6e, 0x67, 0x6c, 0x65, 0x22, 0x34,
+	0x0a, 0x08, 0x56, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x33, 0x44, 0x12, 0x0c, 0x0a, 0x01, 0x78, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x01, 0x78, 0x12, 0x0c, 0x0a, 0x01, 0x79, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x05, 0x52, 0x01, 0x79, 0x12, 0x0c, 0x0a, 0x01, 0x77, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x02, 0x52, 0x01, 0x77, 0x2a, 0x88, 0x01, 0x0a, 0x0a, 0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x54,
+	0x79, 0x70, 0x65, 0x12, 0x0f, 0x0a, 0x0b, 0x53, 0x54, 0x4f, 0x50, 0x5f, 0x41, 0x43, 0x54, 0x49,
+	0x4f, 0x4e, 0x10, 0x00, 0x12, 0x0f, 0x0a, 0x0b, 0x4b, 0x49, 0x43, 0x4b, 0x5f, 0x41, 0x43, 0x54,
+	0x49, 0x4f, 0x4e, 0x10, 0x01, 0x12, 0x0f, 0x0a, 0x0b, 0x4d, 0x4f, 0x56, 0x45, 0x5f, 0x41, 0x43,
+	0x54, 0x49, 0x4f, 0x4e, 0x10, 0x02, 0x12, 0x0f, 0x0a, 0x0b, 0x49, 0x4e, 0x49, 0x54, 0x5f, 0x41,
+	0x43, 0x54, 0x49, 0x4f, 0x4e, 0x10, 0x03, 0x12, 0x23, 0x0a, 0x1f, 0x53, 0x45, 0x54, 0x5f, 0x4e,
+	0x41, 0x56, 0x49, 0x47, 0x41, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x44, 0x49, 0x52, 0x45, 0x43, 0x54,
+	0x49, 0x4f, 0x4e, 0x5f, 0x41, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x10, 0x04, 0x12, 0x11, 0x0a, 0x0d,
+	0x52, 0x4f, 0x54, 0x41, 0x54, 0x45, 0x5f, 0x41, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x10, 0x05, 0x42,
+	0x0f, 0x5a, 0x0d, 0x2e, 0x2f, 0x62, 0x61, 0x73, 0x65, 0x73, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -488,27 +288,22 @@ func file_action_command_proto_rawDescGZIP() []byte {
 }
 
 var file_action_command_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_action_command_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_action_command_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_action_command_proto_goTypes = []interface{}{
-	(ActionType)(0),     // 0: action.ActionType
-	(*Command)(nil),     // 1: action.Command
-	(*StopCommand)(nil), // 2: action.StopCommand
-	(*MoveCommand)(nil), // 3: action.MoveCommand
-	(*KickCommand)(nil), // 4: action.KickCommand
-	(*InitCommand)(nil), // 5: action.InitCommand
-	(*Vector3D)(nil),    // 6: action.Vector3D
+	(ActionType)(0),  // 0: action.ActionType
+	(*Command)(nil),  // 1: action.Command
+	(*Vector3D)(nil), // 2: action.Vector3D
 }
 var file_action_command_proto_depIdxs = []int32{
 	0, // 0: action.Command.command_id:type_name -> action.ActionType
-	6, // 1: action.Command.pos:type_name -> action.Vector3D
-	6, // 2: action.Command.goal:type_name -> action.Vector3D
-	6, // 3: action.MoveCommand.pos:type_name -> action.Vector3D
-	6, // 4: action.MoveCommand.goal:type_name -> action.Vector3D
-	5, // [5:5] is the sub-list for method output_type
-	5, // [5:5] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	2, // 1: action.Command.pos:type_name -> action.Vector3D
+	2, // 2: action.Command.goal:type_name -> action.Vector3D
+	2, // 3: action.Command.direction:type_name -> action.Vector3D
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_action_command_proto_init() }
@@ -530,54 +325,6 @@ func file_action_command_proto_init() {
 			}
 		}
 		file_action_command_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StopCommand); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_action_command_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MoveCommand); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_action_command_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*KickCommand); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_action_command_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*InitCommand); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_action_command_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Vector3D); i {
 			case 0:
 				return &v.state
@@ -596,7 +343,7 @@ func file_action_command_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_action_command_proto_rawDesc,
 			NumEnums:      1,
-			NumMessages:   6,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

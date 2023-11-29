@@ -1,16 +1,17 @@
 package client
 
 import (
-	"time"
-	"net"
 	"fmt"
+	"math"
+	"net"
 	"strconv"
 	"testing"
-    "sync"
+
+	"gonum.org/v1/gonum/mat"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
-	"google.golang.org/protobuf/proto"
 	"github.com/LiU-SeeGoals/controller/internal/proto/basestation"
+	"google.golang.org/protobuf/proto"
 )
 
 var globalCommand *basestation.Command
@@ -19,18 +20,76 @@ var globalCommand *basestation.Command
 // and then checks if the response matches what was sent.
 // Only checks commandID and robotID in the message.
 func TestSocketCommunication(t *testing.T) {
-	testCases := []struct {
-		input         action.Action
-		expected      *basestation.Command
-	}{
-		{&action.Stop{Id: 2}, &basestation.Command{CommandId: basestation.ActionType_STOP_ACTION,RobotId: 2,}},
-		{&action.Kick{Id: 6, Speed: 5}, &basestation.Command{CommandId: basestation.ActionType_KICK_ACTION,RobotId: 6, Speed: 5,}},
-	}
 
+// Define stop action
+stopAction := &action.Stop{Id: 2}
+stopCommand := &basestation.Command{CommandId: basestation.ActionType_STOP_ACTION, RobotId: 2}
+
+// Define kick action
+kickAction := &action.Kick{Id: 6, Speed: 5}
+kickCommand := &basestation.Command{CommandId: basestation.ActionType_KICK_ACTION, RobotId: 6, Speed: 5}
+
+// Define init action
+initAction := &action.Init{Id: 3}
+initCommand := &basestation.Command{CommandId: basestation.ActionType_INIT_ACTION, RobotId: 3}
+
+// Define move action
+moveAction := &action.Move{
+    Id:   1,
+    Pos:  mat.NewVecDense(3, []float64{100, 200, math.Pi}),
+    Goal: mat.NewVecDense(3, []float64{300, 400, -math.Pi}),
+}
+moveCommand := &basestation.Command{
+    CommandId: basestation.ActionType_MOVE_ACTION,
+    RobotId:   1,
+    Pos:       &basestation.Vector3D{X: int32(100), Y: int32(200), W: float32(math.Pi)},
+    Goal:      &basestation.Vector3D{X: int32(300), Y: int32(400), W: float32(-math.Pi)},
+}
+
+// Define set navigation direction action.
+setNavDirAction := &action.SetNavigationDirection{
+    Id:   9,
+    Direction:  mat.NewVecDense(2, []float64{100, 200}),
+}
+setNavDirCommand := &basestation.Command{
+    CommandId: basestation.ActionType_SET_NAVIGATION_DIRECTION_ACTION,
+    RobotId:   9,
+    Direction: &basestation.Vector3D{X: int32(100), Y: int32(200)},
+}
+
+// Define rotate.
+rotateAction := &action.Rotate{
+    Id:   3,
+    Angle:  5,
+}
+rotateCommand := &basestation.Command{
+    CommandId: basestation.ActionType_ROTATE_ACTION,
+    RobotId:   3,
+    Angle: 5,
+}
+
+// Test cases
+testCases := []struct {
+    input    action.Action
+    expected *basestation.Command
+}{
+    {stopAction, stopCommand},
+    {kickAction, kickCommand},
+    {initAction, initCommand},
+    {moveAction, moveCommand},
+    {setNavDirAction, setNavDirCommand},
+	{rotateAction, rotateCommand},
+}
+			
+	
+
+	commandChan := make(chan *basestation.Command)
+	var port int = 25565
+    go startServer(port, commandChan)
 
 	for _, tc := range testCases {
-		command := testCommunication(tc.input)
-		time.Sleep(1000 * time.Millisecond)
+
+		command := testCommunication(tc.input, commandChan, port)
 
 		if command.GetRobotId() != tc.expected.GetRobotId() {
 			t.Errorf("Expected: %v, got: %v", tc.expected, command)
@@ -42,42 +101,36 @@ func TestSocketCommunication(t *testing.T) {
 	}
 }
 
-func testCommunication(newCommand action.Action) *basestation.Command{
-	var wg sync.WaitGroup
-    wg.Add(1)
-    var port int = 25565
+func testCommunication(newCommand action.Action, commandChan chan*basestation.Command, port int) *basestation.Command {
 
-	go startServer(port, &wg)
 
-	BaseStationClient := NewBaseStationClient("127.0.0.1:"+strconv.Itoa(port))
-	BaseStationClient.Init()
-	BaseStationClient.Send([]action.Action{newCommand})
+    BaseStationClient := NewBaseStationClient("127.0.0.1:" + strconv.Itoa(port))
+    BaseStationClient.Init()
+    BaseStationClient.Send([]action.Action{newCommand})
 
-    wg.Wait()
-	return globalCommand
-	
-	
+    command := <-commandChan
+
+    return command
 }
 
-func startServer(port int, wg *sync.WaitGroup) {
-    defer wg.Done()
-	p := make([]byte, 32)
-	addr := net.UDPAddr{
-		Port: port,
-		IP:   net.ParseIP("127.0.0.1"),
-	}
-	ser, err := net.ListenUDP("udp", &addr)
-	if err != nil {
-		fmt.Printf("Some error %v\n", err)
-		return
-	}
-    ser.SetReadDeadline(time.Now().Add(1 * time.Second)) // one sec timeout
+func startServer(port int, commandChan chan<- *basestation.Command) {
+    addr := net.UDPAddr{
+        Port: port,
+        IP:   net.ParseIP("127.0.0.1"),
+    }
+    ser, err := net.ListenUDP("udp", &addr)
+    if err != nil {
+        fmt.Printf("Some error %v\n", err)
+        return
+    }
+	for {
+	p := make([]byte, 32) // Reinitialize before each read
+
     ser.ReadFromUDP(p)
     command := &basestation.Command{}
     proto.Unmarshal(p, command)
 
-    globalCommand = command
-	ser.Close()
-		
-	
+    // Send the command to the channel
+    commandChan <- command
+	}
 }
