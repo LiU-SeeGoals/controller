@@ -37,10 +37,10 @@ func sendPacket(port int) {
 		},
 	}
 
-	BaseStationClient.Send(actions)
+	BaseStationClient.SendActions(actions)
 	time.Sleep(2 * time.Second)
 
-	BaseStationClient.Send(actions) // Send the messages again for fun
+	BaseStationClient.SendActions(actions) // Send the messages again for fun
 	time.Sleep(2 * time.Second)
 
 }
