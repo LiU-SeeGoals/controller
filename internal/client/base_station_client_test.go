@@ -26,8 +26,8 @@ stopAction := &action.Stop{Id: 2}
 stopCommand := &basestation.Command{CommandId: basestation.ActionType_STOP_ACTION, RobotId: 2}
 
 // Define kick action
-kickAction := &action.Kick{Id: 6, Speed: 5}
-kickCommand := &basestation.Command{CommandId: basestation.ActionType_KICK_ACTION, RobotId: 6, Speed: 5}
+kickAction := &action.Kick{Id: 6, KickSpeed: 5}
+kickCommand := &basestation.Command{CommandId: basestation.ActionType_KICK_ACTION, RobotId: 6, KickSpeed: 5}
 
 // Define init action
 initAction := &action.Init{Id: 3}
@@ -37,13 +37,13 @@ initCommand := &basestation.Command{CommandId: basestation.ActionType_INIT_ACTIO
 moveAction := &action.Move{
     Id:   1,
     Pos:  mat.NewVecDense(3, []float64{100, 200, math.Pi}),
-    Goal: mat.NewVecDense(3, []float64{300, 400, -math.Pi}),
+    Dest: mat.NewVecDense(3, []float64{300, 400, -math.Pi}),
 }
 moveCommand := &basestation.Command{
     CommandId: basestation.ActionType_MOVE_ACTION,
     RobotId:   1,
     Pos:       &basestation.Vector3D{X: int32(100), Y: int32(200), W: float32(math.Pi)},
-    Goal:      &basestation.Vector3D{X: int32(300), Y: int32(400), W: float32(-math.Pi)},
+    Dest:      &basestation.Vector3D{X: int32(300), Y: int32(400), W: float32(-math.Pi)},
 }
 
 // Define set navigation direction action.
@@ -54,18 +54,18 @@ setNavDirAction := &action.SetNavigationDirection{
 setNavDirCommand := &basestation.Command{
     CommandId: basestation.ActionType_SET_NAVIGATION_DIRECTION_ACTION,
     RobotId:   9,
-    Direction: &basestation.Vector3D{X: int32(100), Y: int32(200)},
+    Direction: &basestation.Vector2D{X: int32(100), Y: int32(200)},
 }
 
 // Define rotate.
 rotateAction := &action.Rotate{
     Id:   3,
-    Angle:  5,
+    AngularVel:  5,
 }
 rotateCommand := &basestation.Command{
     CommandId: basestation.ActionType_ROTATE_ACTION,
     RobotId:   3,
-    Angle: 5,
+    AngularVel: 5,
 }
 
 // Test cases
