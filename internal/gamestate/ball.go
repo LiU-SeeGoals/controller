@@ -9,12 +9,11 @@ type Ball struct {
 	vel *mat.VecDense
 }
 
-
 func NewBall() *Ball {
 	return &Ball{
 		pos: mat.NewVecDense(3, []float64{0, 0, 0}),
 		vel: mat.NewVecDense(3, []float64{0, 0, 0}),
-	}	
+	}
 }
 
 func (b *Ball) SetPosition(x, y, w float64) {

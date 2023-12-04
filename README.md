@@ -1,3 +1,5 @@
+![Team logo](./images/logo.png)
+
 # See Goals Robot Controller
 
 ## Project Structure
