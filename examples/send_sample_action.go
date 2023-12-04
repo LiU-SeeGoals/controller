@@ -1,4 +1,4 @@
-package main
+package examples
 
 import (
 	"math"
@@ -9,7 +9,7 @@ import (
 )
 
 
-func main() {
+func sendSampleAction() {
 	BaseStationClient  := client.NewBaseStationClient("127.0.0.1:25565")
 
 
@@ -18,11 +18,11 @@ func main() {
 		&action.Move{
 			Id: 3,
 			Pos: mat.NewVecDense(3, []float64{100, 200, math.Pi}), // Example values for Pos
-			Goal: mat.NewVecDense(3, []float64{300, 400, -math.Pi}), // Example values for Goal
+			Dest: mat.NewVecDense(3, []float64{300, 400, -math.Pi}), // Example values for Goal
 		},
 	}
 
 		// Create a list of actions with different robot IDs
 
-	BaseStationClient.SendActions(actions)
+	BaseStationClient.Send(actions)
 }
