@@ -47,19 +47,22 @@ func NewGrsimClient(addr string) *GrsimClient {
 
 // Connect/subscribe receiver to UDP multicast.
 // Note, this will NOT block.
-func (client *GrsimClient) Connect() {
+func (client *GrsimClient) Init() {
 	conn, err := net.DialUDP("udp", nil, client.addr)
 	if err != nil {
 		panic(err)
 	}
+	client.conn = conn	
+}
 
-	client.conn = conn
+func (client *GrsimClient) CloseConnection() {
+	// Do nothing, only implemented to satisfy interface
 }
 
 // Send a slice of actions to GrSim
 // Actions need to be ordered by robot id.
 // One action per robot.
-func (client *GrsimClient) AddActions(actions []action.Action) {
+func (client *GrsimClient) SendActions(actions []action.Action) {
 
 	for id, action := range actions {
 		params := datatypes.NewParameters()

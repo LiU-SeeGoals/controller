@@ -106,7 +106,7 @@ func testCommunication(newCommand action.Action, commandChan chan*basestation.Co
 
     BaseStationClient := NewBaseStationClient("127.0.0.1:" + strconv.Itoa(port))
     BaseStationClient.Init()
-    BaseStationClient.Send([]action.Action{newCommand})
+    BaseStationClient.SendActions([]action.Action{newCommand})
 
     command := <-commandChan
 

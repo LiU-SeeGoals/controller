@@ -72,7 +72,7 @@ func (b *BaseStationClient) sendCommands() {
 }
 
 // send list of actions to the base station
-func (b *BaseStationClient) Send(actions []action.Action) {
+func (b *BaseStationClient) SendActions(actions []action.Action) {
 	if !b.hasBeenInited{
 		fmt.Println( "\033[0m Base station client has not been inited\033[33m")
 	}
