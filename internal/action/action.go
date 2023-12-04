@@ -1,22 +1,18 @@
 package action
 
 import (
+	"fmt"
+	"math"
+
+	"github.com/LiU-SeeGoals/controller/internal/datatypes"
 	"github.com/LiU-SeeGoals/controller/internal/proto/basestation"
 	"gonum.org/v1/gonum/mat"
 )
 
-type RealAction int
-
-const (
-	RealStop RealAction = 0
-	RealKick = 1
-	RealMove = 2
-	RealInit = 3
-)
-
 type Action interface {
 	TranslateReal() *basestation.Command
-	TranslateGrsim() int
+	// Translates an action to parameters defined for grsim
+	TranslateGrsim(params *datatypes.Parameters)
 }
 
 type Stop struct {
@@ -24,54 +20,55 @@ type Stop struct {
 }
 
 type Move struct {
+	// The id of the robot.
 	Id   int
-	Pos  *mat.VecDense
-	Goal *mat.VecDense
+	// Current position of Robot, vector contains (x,y,w)
+	Pos *mat.VecDense
+	// Goal destination of Robot, vector contains (x,y,w)
+	Dest *mat.VecDense
+	// Decides if the robot should dribble while moving
+	Dribble bool
 }
 
-type SetNavigationDirection struct {
-	Id   int
-	Direction  *mat.VecDense
-}
 
-type Rotate struct {
-	Id   int
-	Angle int
+type Dribble struct {
+	// set Dribbling, useless right now
+	Dribble bool
 }
 
 type Kick struct {
-	Id int
-	Speed int
+	Id   int
+	// 1 is slow, 10 is faster, limits unknown
+	KickSpeed int
+}
+
+// Negative value rotates robot clockwise
+type Rotate struct {
+	Id   int
+	AngularVel int
+}
+
+// index 0: positive left
+// index 1: positive forward
+type SetNavigationDirection struct {
+	Id   int
+	Direction *mat.VecDense
 }
 
 type Init struct {
 	Id int
 }
 
-func (m *Move) TranslateReal() *basestation.Command {
-	command_move := &basestation.Command{
-		CommandId: basestation.ActionType_MOVE_ACTION,
-		RobotId: int32(m.Id),         
-		Pos: &basestation.Vector3D{
-			X: int32(m.Pos.AtVec(0)),
-			Y: int32(m.Pos.AtVec(1)),
-			W: float32(m.Pos.AtVec(2)),
-		},
-		Goal: &basestation.Vector3D{
-			X: int32(m.Goal.AtVec(0)),
-			Y: int32(m.Goal.AtVec(1)),
-			W: float32(m.Goal.AtVec(2)),
-		},
-	}
-
-	return command_move
+func (s *SetNavigationDirection) TranslateGrsim(params *datatypes.Parameters) {
+	params.VelNormal = float32(s.Direction.AtVec(0))
+	params.VelTangent = float32(s.Direction.AtVec(1))
 }
 
 func (s *SetNavigationDirection) TranslateReal() *basestation.Command {
 	command := &basestation.Command{
 		CommandId: basestation.ActionType_SET_NAVIGATION_DIRECTION_ACTION,
 		RobotId: int32(s.Id),         
-		Direction: &basestation.Vector3D{
+		Direction: &basestation.Vector2D{
 			X: int32(s.Direction.AtVec(0)),
 			Y: int32(s.Direction.AtVec(1)),
 		},
@@ -80,31 +77,42 @@ func (s *SetNavigationDirection) TranslateReal() *basestation.Command {
 	return command
 }
 
-func (s *SetNavigationDirection) TranslateGrsim() int {
-	return 0;
+func (r *Rotate) TranslateGrsim(params *datatypes.Parameters) {
+	params.VelAngular = float32(r.AngularVel)
 }
 
 func (r *Rotate) TranslateReal() *basestation.Command {
 	command_move := &basestation.Command{
 		CommandId: basestation.ActionType_ROTATE_ACTION,
 		RobotId: int32(r.Id),         
-		Angle: int32(r.Angle),
+		AngularVel: int32(r.AngularVel),
 	}
 
 	return command_move
 }
 
-func (r *Rotate) TranslateGrsim() int {
-	return 0
+func (d *Dribble) TranslateGrsim(params *datatypes.Parameters) {
+
+	params.Spinner = d.Dribble
 }
 
+func (k *Kick) TranslateGrsim(params *datatypes.Parameters) {
 
-func (m *Move) TranslateGrsim() int {
-	return 0
+	params.KickSpeedX = float32(k.KickSpeed)
 }
 
-func (i *Init) TranslateGrsim() int {
-	return 0
+func (k *Kick) TranslateReal() *basestation.Command {
+	command_move := &basestation.Command{
+		CommandId: basestation.ActionType_KICK_ACTION,
+		RobotId: int32(k.Id),
+		KickSpeed: int32(k.KickSpeed),
+	}
+
+	return command_move
+}
+
+func (s *Stop) TranslateGrsim(params *datatypes.Parameters) {
+
 }
 
 func (s *Stop) TranslateReal() *basestation.Command {
@@ -116,23 +124,52 @@ func (s *Stop) TranslateReal() *basestation.Command {
 	return command_move
 }
 
-func (s *Stop) TranslateGrsim() int {
-	return 0
+func (mv *Move) TranslateGrsim(params *datatypes.Parameters) {
+	diff := mat.NewVecDense(3, nil)
+	diff.SubVec(mv.Dest, mv.Pos)
+	params.Spinner = mv.Dribble
+
+	angle := math.Atan2(diff.AtVec(1), diff.AtVec(0))
+	diffPosAngle := angle - mv.Pos.AtVec(2)
+	diffDestAngle := mv.Pos.AtVec(2) - mv.Dest.AtVec(2)
+
+	fmt.Println(diffPosAngle)
+	if math.Abs(diff.AtVec(0)) > 100 || math.Abs(diff.AtVec(1)) > 100 {
+
+		if diffPosAngle > 0.2 {
+			params.VelAngular = 4
+		} else if diffPosAngle < -0.2 {
+			params.VelAngular = -4
+		} else {
+			params.VelTangent = 1
+		}
+	} else if diffDestAngle > 0.2 {
+		params.VelAngular = -4
+	} else if diffDestAngle < -0.2 {
+		params.VelAngular = 4
+	}
 }
 
-func (k *Kick) TranslateReal() *basestation.Command {
+func (m *Move) TranslateReal() *basestation.Command {
 	command_move := &basestation.Command{
-		CommandId: basestation.ActionType_KICK_ACTION,
-		RobotId: int32(k.Id),
-		Speed: int32(k.Speed),
+		CommandId: basestation.ActionType_MOVE_ACTION,
+		RobotId: int32(m.Id),         
+		Pos: &basestation.Vector3D{
+			X: int32(m.Pos.AtVec(0)),
+			Y: int32(m.Pos.AtVec(1)),
+			W: float32(m.Pos.AtVec(2)),
+		},
+		Dest: &basestation.Vector3D{
+			X: int32(m.Dest.AtVec(0)),
+			Y: int32(m.Dest.AtVec(1)),
+			W: float32(m.Dest.AtVec(2)),
+		},
 	}
 
 	return command_move
 }
 
-func (s *Kick) TranslateGrsim() int {
-	return 0
-}
+func (i *Init) TranslateGrsim(params *datatypes.Parameters) {}
 
 func (i *Init) TranslateReal() *basestation.Command {
 
@@ -143,3 +180,4 @@ func (i *Init) TranslateReal() *basestation.Command {
 
 	return command_move
 }
+
