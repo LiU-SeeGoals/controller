@@ -13,7 +13,7 @@ import (
 // receives a stop action.
 func GrsimClientExample() {
 	c := client.NewGrsimClient("127.0.0.1:20011")
-	c.Connect()
+	c.Init()
 
 	move := &action.Move{
 		Pos:     mat.NewVecDense(3, []float64{1.0, 1.0, 0.0}),
@@ -24,5 +24,5 @@ func GrsimClientExample() {
 	stop := &action.Stop{}
 
 	actions := []action.Action{stop, stop, move, stop}
-	c.AddActions(actions)
+	c.SendActions(actions)
 }

@@ -132,7 +132,7 @@ type CircularArc struct {
 }
 
 // Add a new line segment to Field object
-func (f *Field) addLine(
+func (f *Field) SetLine(
 	name string,
 	p1x float32,
 	p1y float32,
@@ -153,20 +153,8 @@ func (f *Field) addLine(
 	f.FieldLines = append(f.FieldLines, line)
 }
 
-// Check if Field contains some line
-// with given name.
-func (f *Field) hasLine(name string) bool {
-	for _, line := range f.FieldLines {
-		if line.Name == name {
-			return true
-		}
-	}
-
-	return false
-}
-
 // Adds a new arc to Field object
-func (f *Field) addArc(
+func (f *Field) SetArc(
 	name string,
 	centerX float32,
 	centerY float32,
@@ -188,18 +176,6 @@ func (f *Field) addArc(
 		ShapeType: shape,
 	}
 	f.FieldArcs = append(f.FieldArcs, arc)
-}
-
-// Check if Field contains some arc
-// with given name.
-func (f *Field) hasArc(name string) bool {
-	for _, arc := range f.FieldArcs {
-		if arc.Name == name {
-			return true
-		}
-	}
-
-	return false
 }
 
 // String representation of LineSegment

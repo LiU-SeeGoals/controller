@@ -5,7 +5,9 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/LiU-SeeGoals/controller/internal/ai"
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
+	"github.com/LiU-SeeGoals/controller/internal/world_predictor"
 )
 
 type Config struct {
@@ -18,10 +20,13 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	gs := gamestate.NewGameState()
+	worldPredictor := world_predictor.NewWorldPredictor(conf.SSLClientAddress, gs)
+	ai := ai.NewAi(gs, conf.GrSimAddress)
 
-	gs := gamestate.NewGameState(conf.GrSimAddress, conf.SSLClientAddress)
 	for {
-		gs.Update()
+		ai.Update()
+		worldPredictor.Update()
 		fmt.Println(gs)
 	}
 }
