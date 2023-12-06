@@ -1,7 +1,6 @@
 package action
 
 import (
-	"fmt"
 	"math"
 
 	"github.com/LiU-SeeGoals/controller/internal/datatypes"
@@ -60,6 +59,7 @@ type Init struct {
 }
 
 func (s *SetNavigationDirection) TranslateGrsim(params *datatypes.Parameters) {
+	params.RobotId = uint32(s.Id)
 	params.VelNormal = float32(s.Direction.AtVec(0))
 	params.VelTangent = float32(s.Direction.AtVec(1))
 }
@@ -135,8 +135,7 @@ func (mv *Move) TranslateGrsim(params *datatypes.Parameters) {
 	diffPosAngle := angle - mv.Pos.AtVec(2)
 	diffDestAngle := mv.Pos.AtVec(2) - mv.Dest.AtVec(2)
 
-	fmt.Println(diffPosAngle)
-	if math.Abs(diff.AtVec(0)) > 0.1 || math.Abs(diff.AtVec(1)) > 0.1 {
+	if math.Abs(diff.AtVec(0)) > 50 || math.Abs(diff.AtVec(1)) > 50 {
 
 		if diffPosAngle > 0.2 {
 			params.VelAngular = 4

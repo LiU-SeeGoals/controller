@@ -30,14 +30,15 @@ type GameState struct {
 // Method used for testing actions,
 // a proper test should be implemented
 func (gs *GameState) TestActions() {
+	id := 0
 	act := &action.Move{}
-	act.Pos = gs.yellow_team[0].pos
+	act.Pos = gs.yellow_team[id].pos
 	act.Dest = mat.NewVecDense(3, nil)
-	act.Id = 3
-	act.Dest.SetVec(0, 4)
-	act.Dest.SetVec(1, 4)
+	act.Id = id
+	act.Dest.SetVec(0, 0)
+	act.Dest.SetVec(1, 0)
 	act.Dest.SetVec(2, 0)
-	act.Dribble = true
+	//act.Dribble = true
 
 	//act := &action.Kick{}
 	//act.Kickspeed = 10
