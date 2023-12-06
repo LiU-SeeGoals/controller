@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/lapack.GenerateQ</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">const <b><a href="../../../../pkg/gonum.org/v1/gonum/lapack.html">gonum.org/v1/gonum/lapack</a>.<a href="../../../../src/gonum.org/v1/gonum/lapack/lapack.go.html#line-111">GenerateQ</a></b></span>
+
+<span class="title">18 uses</span>
+
+	gonum.org/v1/gonum/lapack (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/lapack.go.html#line-111">lapack.go#L111</a>: 	<b>GenerateQ</b>  GenOrtho = 'Q' // Generate Q.
+
+	<a href="../../../../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-139">dgesvd.go#L139</a>: 		impl.Dorgbr(lapack.<b>GenerateQ</b>, n, n, n, a, lda, nil, work, -1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-227" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-227">#L227</a>: 				impl.Dorgbr(lapack.<b>GenerateQ</b>, m, n, n, a, lda, nil, work, -1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-232" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-232">#L232</a>: 				impl.Dorgbr(lapack.<b>GenerateQ</b>, m, m, n, a, lda, nil, work, -1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-258" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-258">#L258</a>: 		impl.Dorgbr(lapack.<b>GenerateQ</b>, m, m, m, a, n, nil, work, -1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-476" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-476">#L476</a>: 						impl.Dorgbr(lapack.<b>GenerateQ</b>, n, n, n, work[ir:], ldworkr,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-559" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-559">#L559</a>: 						impl.Dorgbr(lapack.<b>GenerateQ</b>, n, n, n, work[iu:], ldworku,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-653" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-653">#L653</a>: 						impl.Dorgbr(lapack.<b>GenerateQ</b>, n, n, n, work[ir:], ldworkr,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-741" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-741">#L741</a>: 						impl.Dorgbr(lapack.<b>GenerateQ</b>, n, n, n, work[iu:], ldworku,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-849" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-849">#L849</a>: 				impl.Dorgbr(lapack.<b>GenerateQ</b>, m, ncu, n, u, ldu, work[itauq:], work[iwork:], lwork-iwork)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-911" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-911">#L911</a>: 					impl.Dorgbr(lapack.<b>GenerateQ</b>, m, m, m, a, lda,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-1058" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-1058">#L1058</a>: 						impl.Dorgbr(lapack.<b>GenerateQ</b>, m, m, m, u, ldu, work[itauq:], work[iwork:], lwork-iwork)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-1101" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-1101">#L1101</a>: 						impl.Dorgbr(lapack.<b>GenerateQ</b>, m, m, m, u, ldu, work[itauq:], work[iwork:], lwork-iwork)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-1238" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-1238">#L1238</a>: 						impl.Dorgbr(lapack.<b>GenerateQ</b>, m, m, m, u, ldu, work[itauq:], work[iwork:], lwork-iwork)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-1284" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-1284">#L1284</a>: 						impl.Dorgbr(lapack.<b>GenerateQ</b>, m, m, m, u, ldu, work[itauq:], work[iwork:], lwork-iwork)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-1309" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-1309">#L1309</a>: 				impl.Dorgbr(lapack.<b>GenerateQ</b>, m, m, n, u, ldu, work[itauq:], work[iwork:], lwork-iwork)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dorgbr.go.html#line-23">dorgbr.go#L23</a>: 	wantq := vect == lapack.<b>GenerateQ</b>
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dorgbr.go.html#line-26" class="path-duplicate">dorgbr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dorgbr.go.html#line-26">#L26</a>: 	case vect != lapack.<b>GenerateQ</b> &amp;&amp; vect != lapack.GeneratePT:
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

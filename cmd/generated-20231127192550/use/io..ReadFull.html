@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: io.ReadFull</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../pkg/io.html">io</a>.<a href="../src/io/io.go.html#line-353">ReadFull</a></b></span>
+
+<span class="title">14 uses</span>
+
+	io (current package)
+		<a href="../src/io/io.go.html#line-353">io.go#L353</a>: func <b>ReadFull</b>(r Reader, buf []byte) (n int, err error) {
+
+	<a href="../pkg/compress/flate.html">compress/flate</a>
+		<a href="../src/compress/flate/inflate.go.html#line-630">inflate.go#L630</a>: 	nr, err := io.<b>ReadFull</b>(f.r, f.buf[0:4])
+		<a href="../src/compress/flate/inflate.go.html#line-661" class="path-duplicate">inflate.go</a><a href="../src/compress/flate/inflate.go.html#line-661">#L661</a>: 	cnt, err := io.<b>ReadFull</b>(f.r, buf)
+
+	<a href="../pkg/compress/gzip.html">compress/gzip</a>
+		<a href="../src/compress/gzip/gunzip.go.html#line-175">gunzip.go#L175</a>: 	if _, err = io.<b>ReadFull</b>(z.r, z.buf[:10]); err != nil {
+		<a href="../src/compress/gzip/gunzip.go.html#line-199" class="path-duplicate">gunzip.go</a><a href="../src/compress/gzip/gunzip.go.html#line-199">#L199</a>: 		if _, err = io.<b>ReadFull</b>(z.r, z.buf[:2]); err != nil {
+		<a href="../src/compress/gzip/gunzip.go.html#line-204" class="path-duplicate">gunzip.go</a><a href="../src/compress/gzip/gunzip.go.html#line-204">#L204</a>: 		if _, err = io.<b>ReadFull</b>(z.r, data); err != nil {
+		<a href="../src/compress/gzip/gunzip.go.html#line-227" class="path-duplicate">gunzip.go</a><a href="../src/compress/gzip/gunzip.go.html#line-227">#L227</a>: 		if _, err = io.<b>ReadFull</b>(z.r, z.buf[:2]); err != nil {
+		<a href="../src/compress/gzip/gunzip.go.html#line-261" class="path-duplicate">gunzip.go</a><a href="../src/compress/gzip/gunzip.go.html#line-261">#L261</a>: 		if _, err := io.<b>ReadFull</b>(z.r, z.buf[:8]); err != nil {
+
+	<a href="../pkg/encoding/binary.html">encoding/binary</a>
+		<a href="../src/encoding/binary/binary.go.html#line-237">binary.go#L237</a>: 		if _, err := io.<b>ReadFull</b>(r, bs); err != nil {
+		<a href="../src/encoding/binary/binary.go.html#line-327" class="path-duplicate">binary.go</a><a href="../src/encoding/binary/binary.go.html#line-327">#L327</a>: 	if _, err := io.<b>ReadFull</b>(r, d.buf); err != nil {
+
+	<a href="../pkg/fmt.html">fmt</a>
+		<a href="../src/fmt/scan.go.html#line-321">scan.go#L321</a>: 	n, err := io.<b>ReadFull</b>(r.reader, r.pendBuf[:1])
+
+	<a href="../pkg/net.html">net</a>
+		<a href="../src/net/dnsclient_unix.go.html#line-134">dnsclient_unix.go#L134</a>: 	if _, err := io.<b>ReadFull</b>(c, b[:2]); err != nil {
+		<a href="../src/net/dnsclient_unix.go.html#line-141" class="path-duplicate">dnsclient_unix.go</a><a href="../src/net/dnsclient_unix.go.html#line-141">#L141</a>: 	n, err := io.<b>ReadFull</b>(c, b[:l])
+		<a href="../src/net/parse.go.html#line-55">parse.go#L55</a>: 		n, err := io.<b>ReadFull</b>(f.file, f.data[ln:cap(f.data)])
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

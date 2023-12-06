@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/mat.MutableVector.AtVec</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-33">MutableVector</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-28">AtVec</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">36 uses</span>
+
+	gonum.org/v1/gonum/mat (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-829">dense_arithmetic.go#L829</a>: 			m.set(i, j, a.At(i, j)+alpha*x.<b>AtVec</b>(i)*y.<b>AtVec</b>(j))
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-874" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-874">#L874</a>: 			m.set(i, j, alpha*x.<b>AtVec</b>(i)*y.<b>AtVec</b>(j))
+		<a href="../../../../src/gonum.org/v1/gonum/mat/inner.go.html#line-57">inner.go#L57</a>: 			xi := x.<b>AtVec</b>(i)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/inner.go.html#line-73" class="path-duplicate">inner.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/inner.go.html#line-73">#L73</a>: 			yi := y.<b>AtVec</b>(i)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/inner.go.html#line-100" class="path-duplicate">inner.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/inner.go.html#line-100">#L100</a>: 			xi := x.<b>AtVec</b>(i)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/inner.go.html#line-120" class="path-duplicate">inner.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/inner.go.html#line-120">#L120</a>: 		xi := x.<b>AtVec</b>(i)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/inner.go.html#line-122" class="path-duplicate">inner.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/inner.go.html#line-122">#L122</a>: 			sum += xi * a.At(i, j) * y.<b>AtVec</b>(j)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-222">lu.go#L222</a>: 		xs[i] = x.<b>AtVec</b>(i)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-223" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-223">#L223</a>: 		ys[i] = y.<b>AtVec</b>(i)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-352">symmetric.go#L352</a>: 			s.set(i, j, s.at(i, j)+alpha*x.<b>AtVec</b>(i)*x.<b>AtVec</b>(j))
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-496" class="path-duplicate">symmetric.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-496">#L496</a>: 			s.set(i, j, a.At(i, j)+alpha*(x.<b>AtVec</b>(i)*y.<b>AtVec</b>(j)+y.<b>AtVec</b>(i)*x.<b>AtVec</b>(j)))
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-28">vector.go#L28</a>: 	<b>AtVec</b>(int) float64
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-53" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-53">#L53</a>: 	return t.Vector.<b>AtVec</b>(i)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-220" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-220">#L220</a>: 		v.setVec(i, a.<b>AtVec</b>(i))
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-262" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-262">#L262</a>: 		v.setVec(i, a.<b>AtVec</b>(i))
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-320" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-320">#L320</a>: 		v.setVec(i, alpha*a.<b>AtVec</b>(i))
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-375" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-375">#L375</a>: 			v.setVec(i, a.<b>AtVec</b>(i)+alpha*b.<b>AtVec</b>(i))
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-436" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-436">#L436</a>: 		v.setVec(i, a.<b>AtVec</b>(i)+b.<b>AtVec</b>(i))
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-479" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-479">#L479</a>: 		v.setVec(i, a.<b>AtVec</b>(i)-b.<b>AtVec</b>(i))
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-528" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-528">#L528</a>: 		v.setVec(i, a.<b>AtVec</b>(i)*b.<b>AtVec</b>(i))
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-576" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-576">#L576</a>: 		v.setVec(i, a.<b>AtVec</b>(i)/b.<b>AtVec</b>(i))
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-618" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-618">#L618</a>: 			v.ScaleVec(b.<b>AtVec</b>(0), aU)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-642" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-642">#L642</a>: 			sum += aU.<b>AtVec</b>(i) * b.<b>AtVec</b>(i)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-695" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-695">#L695</a>: 			f += a.At(i, j) * b.<b>AtVec</b>(j)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

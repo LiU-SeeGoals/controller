@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.mheap</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/mheap.go.html#line-61">mheap</a></b></span>
+
+<span class="title">24 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/arena.go.html#line-896">arena.go#L896</a>: func (h *<b>mheap</b>) allocUserArenaChunk() *mspan {
+		<a href="../src/runtime/malloc.go.html#line-621">malloc.go#L621</a>: func (h *<b>mheap</b>) sysAlloc(n uintptr, hintList **arenaHint, register bool) (v unsafe.Pointer, size uintptr) {
+		<a href="../src/runtime/malloc.go.html#line-856" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-856">#L856</a>: func (h *<b>mheap</b>) enableMetadataHugePages() {
+		<a href="../src/runtime/mgcsweep.go.html#line-99">mgcsweep.go#L99</a>: func (h *<b>mheap</b>) nextSpanForSweep() *mspan {
+		<a href="../src/runtime/mheap.go.html#line-61">mheap.go#L61</a>: type <b>mheap</b> struct {
+		<a href="../src/runtime/mheap.go.html#line-233" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-233">#L233</a>: var mheap_ <b>mheap</b>
+		<a href="../src/runtime/mheap.go.html#line-533" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-533">#L533</a>: 	h := (*<b>mheap</b>)(vh)
+		<a href="../src/runtime/mheap.go.html#line-752" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-752">#L752</a>: func (h *<b>mheap</b>) init() {
+		<a href="../src/runtime/mheap.go.html#line-788" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-788">#L788</a>: func (h *<b>mheap</b>) reclaim(npage uintptr) {
+		<a href="../src/runtime/mheap.go.html#line-864" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-864">#L864</a>: func (h *<b>mheap</b>) reclaimChunk(arenas []arenaIdx, pageIdx, n uintptr) uintptr {
+		<a href="../src/runtime/mheap.go.html#line-957" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-957">#L957</a>: func (h *<b>mheap</b>) alloc(npages uintptr, spanclass spanClass) *mspan {
+		<a href="../src/runtime/mheap.go.html#line-990" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-990">#L990</a>: func (h *<b>mheap</b>) allocManual(npages uintptr, typ spanAllocType) *mspan {
+		<a href="../src/runtime/mheap.go.html#line-999" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-999">#L999</a>: func (h *<b>mheap</b>) setSpans(base, npage uintptr, s *mspan) {
+		<a href="../src/runtime/mheap.go.html#line-1023" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1023">#L1023</a>: func (h *<b>mheap</b>) allocNeedsZero(base, npage uintptr) (needZero bool) {
+		<a href="../src/runtime/mheap.go.html#line-1088" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1088">#L1088</a>: func (h *<b>mheap</b>) tryAllocMSpan() *mspan {
+		<a href="../src/runtime/mheap.go.html#line-1111" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1111">#L1111</a>: func (h *<b>mheap</b>) allocMSpanLocked() *mspan {
+		<a href="../src/runtime/mheap.go.html#line-1143" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1143">#L1143</a>: func (h *<b>mheap</b>) freeMSpanLocked(s *mspan) {
+		<a href="../src/runtime/mheap.go.html#line-1175" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1175">#L1175</a>: func (h *<b>mheap</b>) allocSpan(npages uintptr, typ spanAllocType, spanclass spanClass) (s *mspan) {
+		<a href="../src/runtime/mheap.go.html#line-1381" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1381">#L1381</a>: func (h *<b>mheap</b>) initSpan(s *mspan, typ spanAllocType, spanclass spanClass, base, npages uintptr) {
+		<a href="../src/runtime/mheap.go.html#line-1464" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1464">#L1464</a>: func (h *<b>mheap</b>) grow(npage uintptr) (uintptr, bool) {
+		<a href="../src/runtime/mheap.go.html#line-1549" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1549">#L1549</a>: func (h *<b>mheap</b>) freeSpan(s *mspan) {
+		<a href="../src/runtime/mheap.go.html#line-1582" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1582">#L1582</a>: func (h *<b>mheap</b>) freeManual(s *mspan, typ spanAllocType) {
+		<a href="../src/runtime/mheap.go.html#line-1591" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1591">#L1591</a>: func (h *<b>mheap</b>) freeSpanLocked(s *mspan, typ spanAllocType) {
+		<a href="../src/runtime/mheap.go.html#line-1653" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1653">#L1653</a>: func (h *<b>mheap</b>) scavengeAll() {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

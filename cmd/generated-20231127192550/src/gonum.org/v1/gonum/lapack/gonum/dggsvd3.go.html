@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: dggsvd3.go in package gonum.org/v1/gonum/lapack/gonum</title>
+<link href="../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	dggsvd3.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10],
+input[id=r11]:checked ~pre label[for=r11],
+input[id=r12]:checked ~pre label[for=r12],
+input[id=r13]:checked ~pre label[for=r13],
+input[id=r14]:checked ~pre label[for=r14],
+input[id=r15]:checked ~pre label[for=r15],
+input[id=r16]:checked ~pre label[for=r16],
+input[id=r17]:checked ~pre label[for=r17],
+input[id=r18]:checked ~pre label[for=r18],
+input[id=r19]:checked ~pre label[for=r19],
+input[id=r20]:checked ~pre label[for=r20],
+input[id=r21]:checked ~pre label[for=r21],
+input[id=r22]:checked ~pre label[for=r22],
+input[id=r23]:checked ~pre label[for=r23],
+input[id=r24]:checked ~pre label[for=r24],
+input[id=r25]:checked ~pre label[for=r25],
+input[id=r26]:checked ~pre label[for=r26],
+input[id=r27]:checked ~pre label[for=r27],
+input[id=r28]:checked ~pre label[for=r28],
+input[id=r29]:checked ~pre label[for=r29],
+input[id=r30]:checked ~pre label[for=r30],
+input[id=r31]:checked ~pre label[for=r31],
+input[id=r32]:checked ~pre label[for=r32],
+input[id=r33]:checked ~pre label[for=r33],
+input[id=r34]:checked ~pre label[for=r34],
+input[id=r35]:checked ~pre label[for=r35],
+input[id=r36]:checked ~pre label[for=r36],
+input[id=r37]:checked ~pre label[for=r37],
+input[id=r38]:checked ~pre label[for=r38],
+input[id=r39]:checked ~pre label[for=r39],
+input[id=r40]:checked ~pre label[for=r40]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1,
+input[id=i2]:checked ~pre .i2
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="r11" type="radio" name="g"/>
+<input id="r12" type="radio" name="g"/>
+<input id="r13" type="radio" name="g"/>
+<input id="r14" type="radio" name="g"/>
+<input id="r15" type="radio" name="g"/>
+<input id="r16" type="radio" name="g"/>
+<input id="r17" type="radio" name="g"/>
+<input id="r18" type="radio" name="g"/>
+<input id="r19" type="radio" name="g"/>
+<input id="r20" type="radio" name="g"/>
+<input id="r21" type="radio" name="g"/>
+<input id="r22" type="radio" name="g"/>
+<input id="r23" type="radio" name="g"/>
+<input id="r24" type="radio" name="g"/>
+<input id="r25" type="radio" name="g"/>
+<input id="r26" type="radio" name="g"/>
+<input id="r27" type="radio" name="g"/>
+<input id="r28" type="radio" name="g"/>
+<input id="r29" type="radio" name="g"/>
+<input id="r30" type="radio" name="g"/>
+<input id="r31" type="radio" name="g"/>
+<input id="r32" type="radio" name="g"/>
+<input id="r33" type="radio" name="g"/>
+<input id="r34" type="radio" name="g"/>
+<input id="r35" type="radio" name="g"/>
+<input id="r36" type="radio" name="g"/>
+<input id="r37" type="radio" name="g"/>
+<input id="r38" type="radio" name="g"/>
+<input id="r39" type="radio" name="g"/>
+<input id="r40" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+<input id="i2" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">// Copyright ©2017 The Gonum Authors. All rights reserved.</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment">// Use of this source code is governed by a BSD-style</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment">// license that can be found in the LICENSE file.</span></code></span>
+<span class="codeline" id="line-4"><code></code></span>
+<span class="codeline" id="line-5"><code><span class="keyword">package</span> gonum</code></span>
+<span class="codeline" id="line-6"><code></code></span>
+<span class="codeline" id="line-7"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-8"><code>	<label for="i0"><span class="lit-string i0">"math"</span></label></code></span>
+<span class="codeline" id="line-9"><code></code></span>
+<span class="codeline" id="line-10"><code>	<label for="i1"><span class="lit-string i1">"gonum.org/v1/gonum/blas/blas64"</span></label></code></span>
+<span class="codeline" id="line-11"><code>	<label for="i2"><span class="lit-string i2">"gonum.org/v1/gonum/lapack"</span></label></code></span>
+<span class="codeline" id="line-12"><code>)</code></span>
+<span class="codeline" id="line-13"><code></code></span>
+<span class="codeline" id="line-14"><code><span class="comment">// Dggsvd3 computes the generalized singular value decomposition (GSVD)</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment">// of an m×n matrix A and p×n matrix B:</span></code></span>
+<span class="codeline" id="line-16"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-17"><code><span class="comment">//	Uᵀ*A*Q = D1*[ 0 R ]</span></code></span>
+<span class="codeline" id="line-18"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-19"><code><span class="comment">//	Vᵀ*B*Q = D2*[ 0 R ]</span></code></span>
+<span class="codeline" id="line-20"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-21"><code><span class="comment">// where U, V and Q are orthogonal matrices.</span></code></span>
+<span class="codeline" id="line-22"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-23"><code><span class="comment">// Dggsvd3 returns k and l, the dimensions of the sub-blocks. k+l</span></code></span>
+<span class="codeline" id="line-24"><code><span class="comment">// is the effective numerical rank of the (m+p)×n matrix [ Aᵀ Bᵀ ]ᵀ.</span></code></span>
+<span class="codeline" id="line-25"><code><span class="comment">// R is a (k+l)×(k+l) nonsingular upper triangular matrix, D1 and</span></code></span>
+<span class="codeline" id="line-26"><code><span class="comment">// D2 are m×(k+l) and p×(k+l) diagonal matrices and of the following</span></code></span>
+<span class="codeline" id="line-27"><code><span class="comment">// structures, respectively:</span></code></span>
+<span class="codeline" id="line-28"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-29"><code><span class="comment">// If m-k-l &gt;= 0,</span></code></span>
+<span class="codeline" id="line-30"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-31"><code><span class="comment">//	                  k  l</span></code></span>
+<span class="codeline" id="line-32"><code><span class="comment">//	     D1 =     k [ I  0 ]</span></code></span>
+<span class="codeline" id="line-33"><code><span class="comment">//	              l [ 0  C ]</span></code></span>
+<span class="codeline" id="line-34"><code><span class="comment">//	          m-k-l [ 0  0 ]</span></code></span>
+<span class="codeline" id="line-35"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-36"><code><span class="comment">//	                k  l</span></code></span>
+<span class="codeline" id="line-37"><code><span class="comment">//	     D2 = l   [ 0  S ]</span></code></span>
+<span class="codeline" id="line-38"><code><span class="comment">//	          p-l [ 0  0 ]</span></code></span>
+<span class="codeline" id="line-39"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-40"><code><span class="comment">//	             n-k-l  k    l</span></code></span>
+<span class="codeline" id="line-41"><code><span class="comment">//	[ 0 R ] = k [  0   R11  R12 ] k</span></code></span>
+<span class="codeline" id="line-42"><code><span class="comment">//	          l [  0    0   R22 ] l</span></code></span>
+<span class="codeline" id="line-43"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-44"><code><span class="comment">// where</span></code></span>
+<span class="codeline" id="line-45"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-46"><code><span class="comment">//	C = diag( alpha_k, ... , alpha_{k+l} ),</span></code></span>
+<span class="codeline" id="line-47"><code><span class="comment">//	S = diag( beta_k,  ... , beta_{k+l} ),</span></code></span>
+<span class="codeline" id="line-48"><code><span class="comment">//	C^2 + S^2 = I.</span></code></span>
+<span class="codeline" id="line-49"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-50"><code><span class="comment">// R is stored in</span></code></span>
+<span class="codeline" id="line-51"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-52"><code><span class="comment">//	A[0:k+l, n-k-l:n]</span></code></span>
+<span class="codeline" id="line-53"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-54"><code><span class="comment">// on exit.</span></code></span>
+<span class="codeline" id="line-55"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-56"><code><span class="comment">// If m-k-l &lt; 0,</span></code></span>
+<span class="codeline" id="line-57"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-58"><code><span class="comment">//	               k m-k k+l-m</span></code></span>
+<span class="codeline" id="line-59"><code><span class="comment">//	    D1 =   k [ I  0    0  ]</span></code></span>
+<span class="codeline" id="line-60"><code><span class="comment">//	         m-k [ 0  C    0  ]</span></code></span>
+<span class="codeline" id="line-61"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-62"><code><span class="comment">//	                 k m-k k+l-m</span></code></span>
+<span class="codeline" id="line-63"><code><span class="comment">//	    D2 =   m-k [ 0  S    0  ]</span></code></span>
+<span class="codeline" id="line-64"><code><span class="comment">//	         k+l-m [ 0  0    I  ]</span></code></span>
+<span class="codeline" id="line-65"><code><span class="comment">//	           p-l [ 0  0    0  ]</span></code></span>
+<span class="codeline" id="line-66"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-67"><code><span class="comment">//	               n-k-l  k   m-k  k+l-m</span></code></span>
+<span class="codeline" id="line-68"><code><span class="comment">//	[ 0 R ] =    k [ 0    R11  R12  R13 ]</span></code></span>
+<span class="codeline" id="line-69"><code><span class="comment">//	           m-k [ 0     0   R22  R23 ]</span></code></span>
+<span class="codeline" id="line-70"><code><span class="comment">//	         k+l-m [ 0     0    0   R33 ]</span></code></span>
+<span class="codeline" id="line-71"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-72"><code><span class="comment">// where</span></code></span>
+<span class="codeline" id="line-73"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-74"><code><span class="comment">//	C = diag( alpha_k, ... , alpha_m ),</span></code></span>
+<span class="codeline" id="line-75"><code><span class="comment">//	S = diag( beta_k,  ... , beta_m ),</span></code></span>
+<span class="codeline" id="line-76"><code><span class="comment">//	C^2 + S^2 = I.</span></code></span>
+<span class="codeline" id="line-77"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-78"><code><span class="comment">//	R = [ R11 R12 R13 ] is stored in A[1:m, n-k-l+1:n]</span></code></span>
+<span class="codeline" id="line-79"><code><span class="comment">//	    [  0  R22 R23 ]</span></code></span>
+<span class="codeline" id="line-80"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-81"><code><span class="comment">// and R33 is stored in</span></code></span>
+<span class="codeline" id="line-82"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-83"><code><span class="comment">//	B[m-k:l, n+m-k-l:n] on exit.</span></code></span>
+<span class="codeline" id="line-84"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-85"><code><span class="comment">// Dggsvd3 computes C, S, R, and optionally the orthogonal transformation</span></code></span>
+<span class="codeline" id="line-86"><code><span class="comment">// matrices U, V and Q.</span></code></span>
+<span class="codeline" id="line-87"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-88"><code><span class="comment">// jobU, jobV and jobQ are options for computing the orthogonal matrices. The behavior</span></code></span>
+<span class="codeline" id="line-89"><code><span class="comment">// is as follows</span></code></span>
+<span class="codeline" id="line-90"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-91"><code><span class="comment">//	jobU == lapack.GSVDU        Compute orthogonal matrix U</span></code></span>
+<span class="codeline" id="line-92"><code><span class="comment">//	jobU == lapack.GSVDNone     Do not compute orthogonal matrix.</span></code></span>
+<span class="codeline" id="line-93"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-94"><code><span class="comment">// The behavior is the same for jobV and jobQ with the exception that instead of</span></code></span>
+<span class="codeline" id="line-95"><code><span class="comment">// lapack.GSVDU these accept lapack.GSVDV and lapack.GSVDQ respectively.</span></code></span>
+<span class="codeline" id="line-96"><code><span class="comment">// The matrices U, V and Q must be m×m, p×p and n×n respectively unless the</span></code></span>
+<span class="codeline" id="line-97"><code><span class="comment">// relevant job parameter is lapack.GSVDNone.</span></code></span>
+<span class="codeline" id="line-98"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-99"><code><span class="comment">// alpha and beta must have length n or Dggsvd3 will panic. On exit, alpha and</span></code></span>
+<span class="codeline" id="line-100"><code><span class="comment">// beta contain the generalized singular value pairs of A and B</span></code></span>
+<span class="codeline" id="line-101"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-102"><code><span class="comment">//	alpha[0:k] = 1,</span></code></span>
+<span class="codeline" id="line-103"><code><span class="comment">//	beta[0:k]  = 0,</span></code></span>
+<span class="codeline" id="line-104"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-105"><code><span class="comment">// if m-k-l &gt;= 0,</span></code></span>
+<span class="codeline" id="line-106"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-107"><code><span class="comment">//	alpha[k:k+l] = diag(C),</span></code></span>
+<span class="codeline" id="line-108"><code><span class="comment">//	beta[k:k+l]  = diag(S),</span></code></span>
+<span class="codeline" id="line-109"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-110"><code><span class="comment">// if m-k-l &lt; 0,</span></code></span>
+<span class="codeline" id="line-111"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-112"><code><span class="comment">//	alpha[k:m]= C, alpha[m:k+l]= 0</span></code></span>
+<span class="codeline" id="line-113"><code><span class="comment">//	beta[k:m] = S, beta[m:k+l] = 1.</span></code></span>
+<span class="codeline" id="line-114"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-115"><code><span class="comment">// if k+l &lt; n,</span></code></span>
+<span class="codeline" id="line-116"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-117"><code><span class="comment">//	alpha[k+l:n] = 0 and</span></code></span>
+<span class="codeline" id="line-118"><code><span class="comment">//	beta[k+l:n]  = 0.</span></code></span>
+<span class="codeline" id="line-119"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-120"><code><span class="comment">// On exit, iwork contains the permutation required to sort alpha descending.</span></code></span>
+<span class="codeline" id="line-121"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-122"><code><span class="comment">// iwork must have length n, work must have length at least max(1, lwork), and</span></code></span>
+<span class="codeline" id="line-123"><code><span class="comment">// lwork must be -1 or greater than n, otherwise Dggsvd3 will panic. If</span></code></span>
+<span class="codeline" id="line-124"><code><span class="comment">// lwork is -1, work[0] holds the optimal lwork on return, but Dggsvd3 does</span></code></span>
+<span class="codeline" id="line-125"><code><span class="comment">// not perform the GSVD.</span></code></span>
+<span class="codeline" id="line-126"><code><span class="keyword">func</span> (<label for="r0" class="ident">impl</label> <a href="lapack.go.html#line-12" class="ident">Implementation</a>) <label for="r1" class="ident"><a href="../../../../../../use/gonum.org/v1/gonum/lapack/gonum..Implementation.Dggsvd3.html" class="ident">Dggsvd3</a></label>(<label for="r2" class="ident">jobU</label>, <label for="r3" class="ident">jobV</label>, <label for="r4" class="ident">jobQ</label> <a href="../../../../../../pkg/gonum.org/v1/gonum/lapack.html" class="ident i2">lapack</a>.<a href="../lapack.go.html#line-125" class="ident">GSVDJob</a>, <label for="r5" class="ident">m</label>, <label for="r6" class="ident">n</label>, <label for="r7" class="ident">p</label> <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a>, <label for="r8" class="ident">a</label> []<a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r9" class="ident">lda</label> <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a>, <label for="r10" class="ident">b</label> []<a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r11" class="ident">ldb</label> <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a>, <label for="r12" class="ident">alpha</label>, <label for="r13" class="ident">beta</label>, <label for="r14" class="ident">u</label> []<a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r15" class="ident">ldu</label> <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a>, <label for="r16" class="ident">v</label> []<a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r17" class="ident">ldv</label> <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a>, <label for="r18" class="ident">q</label> []<a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r19" class="ident">ldq</label> <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a>, <label for="r20" class="ident">work</label> []<a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r21" class="ident">lwork</label> <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a>, <label for="r22" class="ident">iwork</label> []<a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a>) (<label for="r23" class="ident">k</label>, <label for="r24" class="ident">l</label> <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a>, <label for="r25" class="ident">ok</label> <a href="../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>) {</code></span>
+<span class="codeline" id="line-127"><code>	<label for="r26" class="ident">wantu</label> := <label for="r2" class="ident">jobU</label> == <a href="../../../../../../pkg/gonum.org/v1/gonum/lapack.html" class="ident i2">lapack</a>.<a href="../lapack.go.html#line-128" class="ident">GSVDU</a></code></span>
+<span class="codeline" id="line-128"><code>	<label for="r27" class="ident">wantv</label> := <label for="r3" class="ident">jobV</label> == <a href="../../../../../../pkg/gonum.org/v1/gonum/lapack.html" class="ident i2">lapack</a>.<a href="../lapack.go.html#line-129" class="ident">GSVDV</a></code></span>
+<span class="codeline" id="line-129"><code>	<label for="r28" class="ident">wantq</label> := <label for="r4" class="ident">jobQ</label> == <a href="../../../../../../pkg/gonum.org/v1/gonum/lapack.html" class="ident i2">lapack</a>.<a href="../lapack.go.html#line-130" class="ident">GSVDQ</a></code></span>
+<span class="codeline" id="line-130"><code>	<span class="keyword">switch</span> {</code></span>
+<span class="codeline" id="line-131"><code>	<span class="keyword">case</span> !<label for="r26" class="ident">wantu</label> &amp;&amp; <label for="r2" class="ident">jobU</label> != <a href="../../../../../../pkg/gonum.org/v1/gonum/lapack.html" class="ident i2">lapack</a>.<a href="../lapack.go.html#line-132" class="ident">GSVDNone</a>:</code></span>
+<span class="codeline" id="line-132"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-18" class="ident">badGSVDJob</a> + <span class="lit-string">"U"</span>)</code></span>
+<span class="codeline" id="line-133"><code>	<span class="keyword">case</span> !<label for="r27" class="ident">wantv</label> &amp;&amp; <label for="r3" class="ident">jobV</label> != <a href="../../../../../../pkg/gonum.org/v1/gonum/lapack.html" class="ident i2">lapack</a>.<a href="../lapack.go.html#line-132" class="ident">GSVDNone</a>:</code></span>
+<span class="codeline" id="line-134"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-18" class="ident">badGSVDJob</a> + <span class="lit-string">"V"</span>)</code></span>
+<span class="codeline" id="line-135"><code>	<span class="keyword">case</span> !<label for="r28" class="ident">wantq</label> &amp;&amp; <label for="r4" class="ident">jobQ</label> != <a href="../../../../../../pkg/gonum.org/v1/gonum/lapack.html" class="ident i2">lapack</a>.<a href="../lapack.go.html#line-132" class="ident">GSVDNone</a>:</code></span>
+<span class="codeline" id="line-136"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-18" class="ident">badGSVDJob</a> + <span class="lit-string">"Q"</span>)</code></span>
+<span class="codeline" id="line-137"><code>	<span class="keyword">case</span> <label for="r5" class="ident">m</label> &lt; <span class="lit-number">0</span>:</code></span>
+<span class="codeline" id="line-138"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-72" class="ident">mLT0</a>)</code></span>
+<span class="codeline" id="line-139"><code>	<span class="keyword">case</span> <label for="r6" class="ident">n</label> &lt; <span class="lit-number">0</span>:</code></span>
+<span class="codeline" id="line-140"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-76" class="ident">nLT0</a>)</code></span>
+<span class="codeline" id="line-141"><code>	<span class="keyword">case</span> <label for="r7" class="ident">p</label> &lt; <span class="lit-number">0</span>:</code></span>
+<span class="codeline" id="line-142"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-97" class="ident">pLT0</a>)</code></span>
+<span class="codeline" id="line-143"><code>	<span class="keyword">case</span> <label for="r9" class="ident">lda</label> &lt; <a href="lapack.go.html#line-23" class="ident">max</a>(<span class="lit-number">1</span>, <label for="r6" class="ident">n</label>):</code></span>
+<span class="codeline" id="line-144"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-157" class="ident">badLdA</a>)</code></span>
+<span class="codeline" id="line-145"><code>	<span class="keyword">case</span> <label for="r11" class="ident">ldb</label> &lt; <a href="lapack.go.html#line-23" class="ident">max</a>(<span class="lit-number">1</span>, <label for="r6" class="ident">n</label>):</code></span>
+<span class="codeline" id="line-146"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-158" class="ident">badLdB</a>)</code></span>
+<span class="codeline" id="line-147"><code>	<span class="keyword">case</span> <label for="r15" class="ident">ldu</label> &lt; <span class="lit-number">1</span>, <label for="r26" class="ident">wantu</label> &amp;&amp; <label for="r15" class="ident">ldu</label> &lt; <label for="r5" class="ident">m</label>:</code></span>
+<span class="codeline" id="line-148"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-164" class="ident">badLdU</a>)</code></span>
+<span class="codeline" id="line-149"><code>	<span class="keyword">case</span> <label for="r17" class="ident">ldv</label> &lt; <span class="lit-number">1</span>, <label for="r27" class="ident">wantv</label> &amp;&amp; <label for="r17" class="ident">ldv</label> &lt; <label for="r7" class="ident">p</label>:</code></span>
+<span class="codeline" id="line-150"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-165" class="ident">badLdV</a>)</code></span>
+<span class="codeline" id="line-151"><code>	<span class="keyword">case</span> <label for="r19" class="ident">ldq</label> &lt; <span class="lit-number">1</span>, <label for="r28" class="ident">wantq</label> &amp;&amp; <label for="r19" class="ident">ldq</label> &lt; <label for="r6" class="ident">n</label>:</code></span>
+<span class="codeline" id="line-152"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-162" class="ident">badLdQ</a>)</code></span>
+<span class="codeline" id="line-153"><code>	<span class="keyword">case</span> <a href="../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r22" class="ident">iwork</label>) &lt; <label for="r6" class="ident">n</label>:</code></span>
+<span class="codeline" id="line-154"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-150" class="ident">shortWork</a>)</code></span>
+<span class="codeline" id="line-155"><code>	<span class="keyword">case</span> <label for="r21" class="ident">lwork</label> &lt; <span class="lit-number">1</span> &amp;&amp; <label for="r21" class="ident">lwork</label> != -<span class="lit-number">1</span>:</code></span>
+<span class="codeline" id="line-156"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-53" class="ident">badLWork</a>)</code></span>
+<span class="codeline" id="line-157"><code>	<span class="keyword">case</span> <a href="../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r20" class="ident">work</label>) &lt; <a href="lapack.go.html#line-23" class="ident">max</a>(<span class="lit-number">1</span>, <label for="r21" class="ident">lwork</label>):</code></span>
+<span class="codeline" id="line-158"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-150" class="ident">shortWork</a>)</code></span>
+<span class="codeline" id="line-159"><code>	}</code></span>
+<span class="codeline" id="line-160"><code></code></span>
+<span class="codeline" id="line-161"><code>	<span class="comment">// Determine optimal work length.</span></code></span>
+<span class="codeline" id="line-162"><code>	<label for="r0" class="ident">impl</label>.<a href="dggsvp3.go.html#line-60" class="ident">Dggsvp3</a>(<label for="r2" class="ident">jobU</label>, <label for="r3" class="ident">jobV</label>, <label for="r4" class="ident">jobQ</label>,</code></span>
+<span class="codeline" id="line-163"><code>		<label for="r5" class="ident">m</label>, <label for="r7" class="ident">p</label>, <label for="r6" class="ident">n</label>,</code></span>
+<span class="codeline" id="line-164"><code>		<label for="r8" class="ident">a</label>, <label for="r9" class="ident">lda</label>,</code></span>
+<span class="codeline" id="line-165"><code>		<label for="r10" class="ident">b</label>, <label for="r11" class="ident">ldb</label>,</code></span>
+<span class="codeline" id="line-166"><code>		<span class="lit-number">0</span>, <span class="lit-number">0</span>,</code></span>
+<span class="codeline" id="line-167"><code>		<label for="r14" class="ident">u</label>, <label for="r15" class="ident">ldu</label>,</code></span>
+<span class="codeline" id="line-168"><code>		<label for="r16" class="ident">v</label>, <label for="r17" class="ident">ldv</label>,</code></span>
+<span class="codeline" id="line-169"><code>		<label for="r18" class="ident">q</label>, <label for="r19" class="ident">ldq</label>,</code></span>
+<span class="codeline" id="line-170"><code>		<label for="r22" class="ident">iwork</label>,</code></span>
+<span class="codeline" id="line-171"><code>		<label for="r20" class="ident">work</label>, <label for="r20" class="ident">work</label>, -<span class="lit-number">1</span>)</code></span>
+<span class="codeline" id="line-172"><code>	<label for="r29" class="ident">lwkopt</label> := <label for="r6" class="ident">n</label> + <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a>(<label for="r20" class="ident">work</label>[<span class="lit-number">0</span>])</code></span>
+<span class="codeline" id="line-173"><code>	<label for="r29" class="ident">lwkopt</label> = <a href="lapack.go.html#line-23" class="ident">max</a>(<label for="r29" class="ident">lwkopt</label>, <span class="lit-number">2</span>*<label for="r6" class="ident">n</label>)</code></span>
+<span class="codeline" id="line-174"><code>	<label for="r29" class="ident">lwkopt</label> = <a href="lapack.go.html#line-23" class="ident">max</a>(<label for="r29" class="ident">lwkopt</label>, <span class="lit-number">1</span>)</code></span>
+<span class="codeline" id="line-175"><code>	<label for="r20" class="ident">work</label>[<span class="lit-number">0</span>] = <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>(<label for="r29" class="ident">lwkopt</label>)</code></span>
+<span class="codeline" id="line-176"><code>	<span class="keyword">if</span> <label for="r21" class="ident">lwork</label> == -<span class="lit-number">1</span> {</code></span>
+<span class="codeline" id="line-177"><code>		<span class="keyword">return</span> <span class="lit-number">0</span>, <span class="lit-number">0</span>, <a href="../../../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-178"><code>	}</code></span>
+<span class="codeline" id="line-179"><code></code></span>
+<span class="codeline" id="line-180"><code>	<span class="keyword">switch</span> {</code></span>
+<span class="codeline" id="line-181"><code>	<span class="keyword">case</span> <a href="../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r8" class="ident">a</label>) &lt; (<label for="r5" class="ident">m</label>-<span class="lit-number">1</span>)*<label for="r9" class="ident">lda</label>+<label for="r6" class="ident">n</label>:</code></span>
+<span class="codeline" id="line-182"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-117" class="ident">shortA</a>)</code></span>
+<span class="codeline" id="line-183"><code>	<span class="keyword">case</span> <a href="../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r10" class="ident">b</label>) &lt; (<label for="r7" class="ident">p</label>-<span class="lit-number">1</span>)*<label for="r11" class="ident">ldb</label>+<label for="r6" class="ident">n</label>:</code></span>
+<span class="codeline" id="line-184"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-120" class="ident">shortB</a>)</code></span>
+<span class="codeline" id="line-185"><code>	<span class="keyword">case</span> <label for="r26" class="ident">wantu</label> &amp;&amp; <a href="../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r14" class="ident">u</label>) &lt; (<label for="r5" class="ident">m</label>-<span class="lit-number">1</span>)*<label for="r15" class="ident">ldu</label>+<label for="r5" class="ident">m</label>:</code></span>
+<span class="codeline" id="line-186"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-139" class="ident">shortU</a>)</code></span>
+<span class="codeline" id="line-187"><code>	<span class="keyword">case</span> <label for="r27" class="ident">wantv</label> &amp;&amp; <a href="../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r16" class="ident">v</label>) &lt; (<label for="r7" class="ident">p</label>-<span class="lit-number">1</span>)*<label for="r17" class="ident">ldv</label>+<label for="r7" class="ident">p</label>:</code></span>
+<span class="codeline" id="line-188"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-140" class="ident">shortV</a>)</code></span>
+<span class="codeline" id="line-189"><code>	<span class="keyword">case</span> <label for="r28" class="ident">wantq</label> &amp;&amp; <a href="../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r18" class="ident">q</label>) &lt; (<label for="r6" class="ident">n</label>-<span class="lit-number">1</span>)*<label for="r19" class="ident">ldq</label>+<label for="r6" class="ident">n</label>:</code></span>
+<span class="codeline" id="line-190"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-131" class="ident">shortQ</a>)</code></span>
+<span class="codeline" id="line-191"><code>	<span class="keyword">case</span> <a href="../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r12" class="ident">alpha</label>) != <label for="r6" class="ident">n</label>:</code></span>
+<span class="codeline" id="line-192"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-102" class="ident">badLenAlpha</a>)</code></span>
+<span class="codeline" id="line-193"><code>	<span class="keyword">case</span> <a href="../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r13" class="ident">beta</label>) != <label for="r6" class="ident">n</label>:</code></span>
+<span class="codeline" id="line-194"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-103" class="ident">badLenBeta</a>)</code></span>
+<span class="codeline" id="line-195"><code>	}</code></span>
+<span class="codeline" id="line-196"><code></code></span>
+<span class="codeline" id="line-197"><code>	<span class="comment">// Compute the Frobenius norm of matrices A and B.</span></code></span>
+<span class="codeline" id="line-198"><code>	<label for="r30" class="ident">anorm</label> := <label for="r0" class="ident">impl</label>.<a href="dlange.go.html#line-22" class="ident">Dlange</a>(<a href="../../../../../../pkg/gonum.org/v1/gonum/lapack.html" class="ident i2">lapack</a>.<a href="../lapack.go.html#line-77" class="ident">Frobenius</a>, <label for="r5" class="ident">m</label>, <label for="r6" class="ident">n</label>, <label for="r8" class="ident">a</label>, <label for="r9" class="ident">lda</label>, <a href="../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>)</code></span>
+<span class="codeline" id="line-199"><code>	<label for="r31" class="ident">bnorm</label> := <label for="r0" class="ident">impl</label>.<a href="dlange.go.html#line-22" class="ident">Dlange</a>(<a href="../../../../../../pkg/gonum.org/v1/gonum/lapack.html" class="ident i2">lapack</a>.<a href="../lapack.go.html#line-77" class="ident">Frobenius</a>, <label for="r7" class="ident">p</label>, <label for="r6" class="ident">n</label>, <label for="r10" class="ident">b</label>, <label for="r11" class="ident">ldb</label>, <a href="../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>)</code></span>
+<span class="codeline" id="line-200"><code></code></span>
+<span class="codeline" id="line-201"><code>	<span class="comment">// Get machine precision and set up threshold for determining</span></code></span>
+<span class="codeline" id="line-202"><code><span class="comment">	// the effective numerical rank of the matrices A and B.</span></code></span>
+<span class="codeline" id="line-203"><code>	<label for="r32" class="ident">tola</label> := <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>(<a href="lapack.go.html#line-23" class="ident">max</a>(<label for="r5" class="ident">m</label>, <label for="r6" class="ident">n</label>)) * <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/dim.go.html#line-40" class="ident">Max</a>(<label for="r30" class="ident">anorm</label>, <a href="lapack.go.html#line-50" class="ident">dlamchS</a>) * <a href="lapack.go.html#line-45" class="ident">dlamchP</a></code></span>
+<span class="codeline" id="line-204"><code>	<label for="r33" class="ident">tolb</label> := <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>(<a href="lapack.go.html#line-23" class="ident">max</a>(<label for="r7" class="ident">p</label>, <label for="r6" class="ident">n</label>)) * <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/dim.go.html#line-40" class="ident">Max</a>(<label for="r31" class="ident">bnorm</label>, <a href="lapack.go.html#line-50" class="ident">dlamchS</a>) * <a href="lapack.go.html#line-45" class="ident">dlamchP</a></code></span>
+<span class="codeline" id="line-205"><code></code></span>
+<span class="codeline" id="line-206"><code>	<span class="comment">// Preprocessing.</span></code></span>
+<span class="codeline" id="line-207"><code>	<label for="r23" class="ident">k</label>, <label for="r24" class="ident">l</label> = <label for="r0" class="ident">impl</label>.<a href="dggsvp3.go.html#line-60" class="ident">Dggsvp3</a>(<label for="r2" class="ident">jobU</label>, <label for="r3" class="ident">jobV</label>, <label for="r4" class="ident">jobQ</label>,</code></span>
+<span class="codeline" id="line-208"><code>		<label for="r5" class="ident">m</label>, <label for="r7" class="ident">p</label>, <label for="r6" class="ident">n</label>,</code></span>
+<span class="codeline" id="line-209"><code>		<label for="r8" class="ident">a</label>, <label for="r9" class="ident">lda</label>,</code></span>
+<span class="codeline" id="line-210"><code>		<label for="r10" class="ident">b</label>, <label for="r11" class="ident">ldb</label>,</code></span>
+<span class="codeline" id="line-211"><code>		<label for="r32" class="ident">tola</label>, <label for="r33" class="ident">tolb</label>,</code></span>
+<span class="codeline" id="line-212"><code>		<label for="r14" class="ident">u</label>, <label for="r15" class="ident">ldu</label>,</code></span>
+<span class="codeline" id="line-213"><code>		<label for="r16" class="ident">v</label>, <label for="r17" class="ident">ldv</label>,</code></span>
+<span class="codeline" id="line-214"><code>		<label for="r18" class="ident">q</label>, <label for="r19" class="ident">ldq</label>,</code></span>
+<span class="codeline" id="line-215"><code>		<label for="r22" class="ident">iwork</label>,</code></span>
+<span class="codeline" id="line-216"><code>		<label for="r20" class="ident">work</label>[:<label for="r6" class="ident">n</label>], <label for="r20" class="ident">work</label>[<label for="r6" class="ident">n</label>:], <label for="r21" class="ident">lwork</label>-<label for="r6" class="ident">n</label>)</code></span>
+<span class="codeline" id="line-217"><code></code></span>
+<span class="codeline" id="line-218"><code>	<span class="comment">// Compute the GSVD of two upper "triangular" matrices.</span></code></span>
+<span class="codeline" id="line-219"><code>	_, <label for="r25" class="ident">ok</label> = <label for="r0" class="ident">impl</label>.<a href="dtgsja.go.html#line-177" class="ident">Dtgsja</a>(<label for="r2" class="ident">jobU</label>, <label for="r3" class="ident">jobV</label>, <label for="r4" class="ident">jobQ</label>,</code></span>
+<span class="codeline" id="line-220"><code>		<label for="r5" class="ident">m</label>, <label for="r7" class="ident">p</label>, <label for="r6" class="ident">n</label>,</code></span>
+<span class="codeline" id="line-221"><code>		<label for="r23" class="ident">k</label>, <label for="r24" class="ident">l</label>,</code></span>
+<span class="codeline" id="line-222"><code>		<label for="r8" class="ident">a</label>, <label for="r9" class="ident">lda</label>,</code></span>
+<span class="codeline" id="line-223"><code>		<label for="r10" class="ident">b</label>, <label for="r11" class="ident">ldb</label>,</code></span>
+<span class="codeline" id="line-224"><code>		<label for="r32" class="ident">tola</label>, <label for="r33" class="ident">tolb</label>,</code></span>
+<span class="codeline" id="line-225"><code>		<label for="r12" class="ident">alpha</label>, <label for="r13" class="ident">beta</label>,</code></span>
+<span class="codeline" id="line-226"><code>		<label for="r14" class="ident">u</label>, <label for="r15" class="ident">ldu</label>,</code></span>
+<span class="codeline" id="line-227"><code>		<label for="r16" class="ident">v</label>, <label for="r17" class="ident">ldv</label>,</code></span>
+<span class="codeline" id="line-228"><code>		<label for="r18" class="ident">q</label>, <label for="r19" class="ident">ldq</label>,</code></span>
+<span class="codeline" id="line-229"><code>		<label for="r20" class="ident">work</label>)</code></span>
+<span class="codeline" id="line-230"><code></code></span>
+<span class="codeline" id="line-231"><code>	<span class="comment">// Sort the singular values and store the pivot indices in iwork</span></code></span>
+<span class="codeline" id="line-232"><code><span class="comment">	// Copy alpha to work, then sort alpha in work.</span></code></span>
+<span class="codeline" id="line-233"><code>	<label for="r34" class="ident">bi</label> := <a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html" class="ident i1">blas64</a>.<a href="../../blas/blas64/blas64.go.html#line-25" class="ident">Implementation</a>()</code></span>
+<span class="codeline" id="line-234"><code>	<label for="r34" class="ident">bi</label>.<a href="../../blas/blas.go.html#line-136" class="ident">Dcopy</a>(<label for="r6" class="ident">n</label>, <label for="r12" class="ident">alpha</label>, <span class="lit-number">1</span>, <label for="r20" class="ident">work</label>[:<label for="r6" class="ident">n</label>], <span class="lit-number">1</span>)</code></span>
+<span class="codeline" id="line-235"><code>	<label for="r35" class="ident">ibnd</label> := <a href="lapack.go.html#line-16" class="ident">min</a>(<label for="r24" class="ident">l</label>, <label for="r5" class="ident">m</label>-<label for="r23" class="ident">k</label>)</code></span>
+<span class="codeline" id="line-236"><code>	<span class="keyword">for</span> <label for="r36" class="ident">i</label> := <span class="lit-number">0</span>; <label for="r36" class="ident">i</label> &lt; <label for="r35" class="ident">ibnd</label>; <label for="r36" class="ident">i</label>++ {</code></span>
+<span class="codeline" id="line-237"><code>		<span class="comment">// Scan for largest alpha_{k+i}.</span></code></span>
+<span class="codeline" id="line-238"><code>		<label for="r37" class="ident">isub</label> := <label for="r36" class="ident">i</label></code></span>
+<span class="codeline" id="line-239"><code>		<label for="r38" class="ident">smax</label> := <label for="r20" class="ident">work</label>[<label for="r23" class="ident">k</label>+<label for="r36" class="ident">i</label>]</code></span>
+<span class="codeline" id="line-240"><code>		<span class="keyword">for</span> <label for="r39" class="ident">j</label> := <label for="r36" class="ident">i</label> + <span class="lit-number">1</span>; <label for="r39" class="ident">j</label> &lt; <label for="r35" class="ident">ibnd</label>; <label for="r39" class="ident">j</label>++ {</code></span>
+<span class="codeline" id="line-241"><code>			<span class="keyword">if</span> <label for="r40" class="ident">v</label> := <label for="r20" class="ident">work</label>[<label for="r23" class="ident">k</label>+<label for="r39" class="ident">j</label>]; <label for="r40" class="ident">v</label> &gt; <label for="r38" class="ident">smax</label> {</code></span>
+<span class="codeline" id="line-242"><code>				<label for="r37" class="ident">isub</label> = <label for="r39" class="ident">j</label></code></span>
+<span class="codeline" id="line-243"><code>				<label for="r38" class="ident">smax</label> = <label for="r40" class="ident">v</label></code></span>
+<span class="codeline" id="line-244"><code>			}</code></span>
+<span class="codeline" id="line-245"><code>		}</code></span>
+<span class="codeline" id="line-246"><code>		<span class="keyword">if</span> <label for="r37" class="ident">isub</label> != <label for="r36" class="ident">i</label> {</code></span>
+<span class="codeline" id="line-247"><code>			<label for="r20" class="ident">work</label>[<label for="r23" class="ident">k</label>+<label for="r37" class="ident">isub</label>] = <label for="r20" class="ident">work</label>[<label for="r23" class="ident">k</label>+<label for="r36" class="ident">i</label>]</code></span>
+<span class="codeline" id="line-248"><code>			<label for="r20" class="ident">work</label>[<label for="r23" class="ident">k</label>+<label for="r36" class="ident">i</label>] = <label for="r38" class="ident">smax</label></code></span>
+<span class="codeline" id="line-249"><code>			<label for="r22" class="ident">iwork</label>[<label for="r23" class="ident">k</label>+<label for="r36" class="ident">i</label>] = <label for="r23" class="ident">k</label> + <label for="r37" class="ident">isub</label></code></span>
+<span class="codeline" id="line-250"><code>		} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-251"><code>			<label for="r22" class="ident">iwork</label>[<label for="r23" class="ident">k</label>+<label for="r36" class="ident">i</label>] = <label for="r23" class="ident">k</label> + <label for="r36" class="ident">i</label></code></span>
+<span class="codeline" id="line-252"><code>		}</code></span>
+<span class="codeline" id="line-253"><code>	}</code></span>
+<span class="codeline" id="line-254"><code></code></span>
+<span class="codeline" id="line-255"><code>	<label for="r20" class="ident">work</label>[<span class="lit-number">0</span>] = <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>(<label for="r29" class="ident">lwkopt</label>)</code></span>
+<span class="codeline" id="line-256"><code></code></span>
+<span class="codeline" id="line-257"><code>	<span class="keyword">return</span> <label for="r23" class="ident">k</label>, <label for="r24" class="ident">l</label>, <label for="r25" class="ident">ok</label></code></span>
+<span class="codeline" id="line-258"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/blas.Float64Level3.Dtrmm</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../../pkg/gonum.org/v1/gonum/blas.html">gonum.org/v1/gonum/blas</a>.<a href="../../../../src/gonum.org/v1/gonum/blas/blas.go.html#line-166">Float64Level3</a>.<a href="../../../../src/gonum.org/v1/gonum/blas/blas.go.html#line-171">Dtrmm</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">33 uses</span>
+
+	gonum.org/v1/gonum/blas (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/blas/blas.go.html#line-171">blas.go#L171</a>: 	<b>Dtrmm</b>(s Side, ul Uplo, tA Transpose, d Diag, m, n int, alpha float64, a []float64, lda int, b []float64, ldb int)
+
+	<a href="../../../../pkg/gonum.org/v1/gonum/blas/blas64.html">gonum.org/v1/gonum/blas/blas64</a>
+		<a href="../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-514">blas64.go#L514</a>: 	blas64.<b>Dtrmm</b>(s, a.Uplo, tA, a.Diag, b.Rows, b.Cols, alpha, a.Data, a.Stride, b.Data, b.Stride)
+
+	<a href="../../../../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgehrd.go.html#line-186">dgehrd.go#L186</a>: 			bi.<b>Dtrmm</b>(blas.Right, blas.Lower, blas.Trans, blas.Unit, i+1, ib-1,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlahr2.go.html#line-192">dlahr2.go#L192</a>: 	bi.<b>Dtrmm</b>(blas.Right, blas.Lower, blas.NoTrans, blas.Unit, k, nb,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlahr2.go.html#line-200" class="path-duplicate">dlahr2.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlahr2.go.html#line-200">#L200</a>: 	bi.<b>Dtrmm</b>(blas.Right, blas.Upper, blas.NoTrans, blas.NonUnit, k, nb,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-146">dlarfb.go#L146</a>: 				bi.<b>Dtrmm</b>(blas.Right, blas.Lower, blas.NoTrans, blas.Unit,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-157" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-157">#L157</a>: 				bi.<b>Dtrmm</b>(blas.Right, blas.Upper, transt, blas.NonUnit, n, k,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-168" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-168">#L168</a>: 				bi.<b>Dtrmm</b>(blas.Right, blas.Lower, blas.Trans, blas.Unit, n, k,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-187" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-187">#L187</a>: 			bi.<b>Dtrmm</b>(blas.Right, blas.Lower, blas.NoTrans, blas.Unit, m, k,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-196" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-196">#L196</a>: 			bi.<b>Dtrmm</b>(blas.Right, blas.Upper, trans, blas.NonUnit, m, k,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-205" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-205">#L205</a>: 			bi.<b>Dtrmm</b>(blas.Right, blas.Lower, blas.Trans, blas.Unit, m, k,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-229" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-229">#L229</a>: 			bi.<b>Dtrmm</b>(blas.Right, blas.Upper, blas.NoTrans, blas.Unit, n, k,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-239" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-239">#L239</a>: 			bi.<b>Dtrmm</b>(blas.Right, blas.Lower, transt, blas.NonUnit, n, k,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-249" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-249">#L249</a>: 			bi.<b>Dtrmm</b>(blas.Right, blas.Upper, blas.Trans, blas.Unit, n, k,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-270" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-270">#L270</a>: 		bi.<b>Dtrmm</b>(blas.Right, blas.Upper, blas.NoTrans, blas.Unit, m, k,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-279" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-279">#L279</a>: 		bi.<b>Dtrmm</b>(blas.Right, blas.Lower, trans, blas.NonUnit, m, k,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-290" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-290">#L290</a>: 		bi.<b>Dtrmm</b>(blas.Right, blas.Upper, blas.Trans, blas.Unit, m, k,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-314" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-314">#L314</a>: 			bi.<b>Dtrmm</b>(blas.Right, blas.Upper, blas.Trans, blas.Unit, n, k,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-323" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-323">#L323</a>: 			bi.<b>Dtrmm</b>(blas.Right, blas.Upper, transt, blas.NonUnit, n, k,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-333" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-333">#L333</a>: 			bi.<b>Dtrmm</b>(blas.Right, blas.Upper, blas.NoTrans, blas.Unit, n, k,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-353" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-353">#L353</a>: 		bi.<b>Dtrmm</b>(blas.Right, blas.Upper, blas.Trans, blas.Unit, m, k,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-362" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-362">#L362</a>: 		bi.<b>Dtrmm</b>(blas.Right, blas.Upper, trans, blas.NonUnit, m, k,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-372" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-372">#L372</a>: 		bi.<b>Dtrmm</b>(blas.Right, blas.Upper, blas.NoTrans, blas.Unit, m, k,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-394" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-394">#L394</a>: 		bi.<b>Dtrmm</b>(blas.Right, blas.Lower, blas.Trans, blas.Unit, n, k,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-403" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-403">#L403</a>: 		bi.<b>Dtrmm</b>(blas.Right, blas.Lower, transt, blas.NonUnit, n, k,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-413" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-413">#L413</a>: 		bi.<b>Dtrmm</b>(blas.Right, blas.Lower, blas.NoTrans, blas.Unit, n, k,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-432" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-432">#L432</a>: 	bi.<b>Dtrmm</b>(blas.Right, blas.Lower, blas.Trans, blas.Unit, m, k,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-441" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-441">#L441</a>: 	bi.<b>Dtrmm</b>(blas.Right, blas.Lower, trans, blas.NonUnit, m, k,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-451" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-451">#L451</a>: 	bi.<b>Dtrmm</b>(blas.Right, blas.Lower, blas.NoTrans, blas.Unit, m, k,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlauum.go.html#line-58">dlauum.go#L58</a>: 			bi.<b>Dtrmm</b>(blas.Right, blas.Upper, blas.Trans, blas.NonUnit,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlauum.go.html#line-72" class="path-duplicate">dlauum.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlauum.go.html#line-72">#L72</a>: 			bi.<b>Dtrmm</b>(blas.Left, blas.Lower, blas.Trans, blas.NonUnit,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrtri.go.html#line-56">dtrtri.go#L56</a>: 			bi.<b>Dtrmm</b>(blas.Left, blas.Upper, blas.NoTrans, diag, j, jb, 1, a, lda, a[j:], lda)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrtri.go.html#line-66" class="path-duplicate">dtrtri.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrtri.go.html#line-66">#L66</a>: 			bi.<b>Dtrmm</b>(blas.Left, blas.Lower, blas.NoTrans, diag, n-j-jb, jb, 1, a[(j+jb)*lda+j+jb:], lda, a[(j+jb)*lda+j:], lda)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: sync.Map.Load</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/sync.html">sync</a>.<a href="../src/sync/map.go.html#line-35">Map</a>.<a href="../src/sync/map.go.html#line-120">Load</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">38 uses</span>
+
+	sync (current package)
+		<a href="../src/sync/map.go.html#line-120">map.go#L120</a>: func (m *Map) <b>Load</b>(key any) (value any, ok bool) {
+
+	<a href="../pkg/encoding/binary.html">encoding/binary</a>
+		<a href="../src/encoding/binary/binary.go.html#line-485">binary.go#L485</a>: 		if size, ok := structSize.<b>Load</b>(t); ok {
+
+	<a href="../pkg/encoding/json.html">encoding/json</a>
+		<a href="../src/encoding/json/encode.go.html#line-345">encode.go#L345</a>: 	if fi, ok := encoderCache.<b>Load</b>(t); ok {
+		<a href="../src/encoding/json/encode.go.html#line-1271" class="path-duplicate">encode.go</a><a href="../src/encoding/json/encode.go.html#line-1271">#L1271</a>: 	if f, ok := fieldCache.<b>Load</b>(t); ok {
+
+	<a href="../pkg/github.com/golang/protobuf/proto.html">github.com/golang/protobuf/proto</a>
+		<a href="../src/github.com/golang/protobuf/proto/properties.go.html#line-220">properties.go#L220</a>: 	if p, ok := propertiesCache.<b>Load</b>(t); ok {
+		<a href="../src/github.com/golang/protobuf/proto/registry.go.html#line-59">registry.go#L59</a>: 	if v, ok := fileCache.<b>Load</b>(s); ok {
+		<a href="../src/github.com/golang/protobuf/proto/registry.go.html#line-97" class="path-duplicate">registry.go</a><a href="../src/github.com/golang/protobuf/proto/registry.go.html#line-97">#L97</a>: 	if _, ok := enumCache.<b>Load</b>(s); ok {
+		<a href="../src/github.com/golang/protobuf/proto/registry.go.html#line-111" class="path-duplicate">registry.go</a><a href="../src/github.com/golang/protobuf/proto/registry.go.html#line-111">#L111</a>: 	if v, ok := enumCache.<b>Load</b>(s); ok {
+		<a href="../src/github.com/golang/protobuf/proto/registry.go.html#line-122" class="path-duplicate">registry.go</a><a href="../src/github.com/golang/protobuf/proto/registry.go.html#line-122">#L122</a>: 	v, _ := numFilesCache.<b>Load</b>(protoPkg)
+		<a href="../src/github.com/golang/protobuf/proto/registry.go.html#line-133" class="path-duplicate">registry.go</a><a href="../src/github.com/golang/protobuf/proto/registry.go.html#line-133">#L133</a>: 			if _, ok := enumCache.<b>Load</b>(name); !ok {
+		<a href="../src/github.com/golang/protobuf/proto/registry.go.html#line-149" class="path-duplicate">registry.go</a><a href="../src/github.com/golang/protobuf/proto/registry.go.html#line-149">#L149</a>: 	if v, ok := enumCache.<b>Load</b>(s); ok {
+		<a href="../src/github.com/golang/protobuf/proto/registry.go.html#line-196" class="path-duplicate">registry.go</a><a href="../src/github.com/golang/protobuf/proto/registry.go.html#line-196">#L196</a>: 	if _, ok := messageTypeCache.<b>Load</b>(s); ok {
+		<a href="../src/github.com/golang/protobuf/proto/registry.go.html#line-207" class="path-duplicate">registry.go</a><a href="../src/github.com/golang/protobuf/proto/registry.go.html#line-207">#L207</a>: 	if v, ok := messageTypeCache.<b>Load</b>(s); ok {
+		<a href="../src/github.com/golang/protobuf/proto/registry.go.html#line-297" class="path-duplicate">registry.go</a><a href="../src/github.com/golang/protobuf/proto/registry.go.html#line-297">#L297</a>: 	v, _ := extensionCache.<b>Load</b>(s)
+
+	<a href="../pkg/google.golang.org/protobuf/internal/impl.html">google.golang.org/protobuf/internal/impl</a>
+		<a href="../src/google.golang.org/protobuf/internal/impl/checkinit.go.html#line-94">checkinit.go#L94</a>: 	if v, ok := needsInitCheckMap.<b>Load</b>(md); ok {
+		<a href="../src/google.golang.org/protobuf/internal/impl/checkinit.go.html#line-105" class="path-duplicate">checkinit.go</a><a href="../src/google.golang.org/protobuf/internal/impl/checkinit.go.html#line-105">#L105</a>: 	if v, ok := needsInitCheckMap.<b>Load</b>(md); ok {
+		<a href="../src/google.golang.org/protobuf/internal/impl/codec_extension.go.html#line-36">codec_extension.go#L36</a>: 	if xi, ok := legacyExtensionFieldInfoCache.<b>Load</b>(xt); ok {
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_enum.go.html#line-47">legacy_enum.go#L47</a>: 	if et, ok := legacyEnumTypeCache.<b>Load</b>(t); ok {
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_enum.go.html#line-71" class="path-duplicate">legacy_enum.go</a><a href="../src/google.golang.org/protobuf/internal/impl/legacy_enum.go.html#line-71">#L71</a>: 	if e, ok := t.m.<b>Load</b>(n); ok {
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_enum.go.html#line-119" class="path-duplicate">legacy_enum.go</a><a href="../src/google.golang.org/protobuf/internal/impl/legacy_enum.go.html#line-119">#L119</a>: 	if ed, ok := legacyEnumDescCache.<b>Load</b>(t); ok {
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_enum.go.html#line-162" class="path-duplicate">legacy_enum.go</a><a href="../src/google.golang.org/protobuf/internal/impl/legacy_enum.go.html#line-162">#L162</a>: 	if ed, ok := aberrantEnumDescCache.<b>Load</b>(t); ok {
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_file.go.html#line-45">legacy_file.go#L45</a>: 	if fd, ok := legacyFileDescCache.<b>Load</b>(&amp;b[0]); ok {
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-50">legacy_message.go#L50</a>: 	if mt, ok := legacyMessageTypeCache.<b>Load</b>(t); ok {
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-95" class="path-duplicate">legacy_message.go</a><a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-95">#L95</a>: 	if mi, ok := legacyMessageDescCache.<b>Load</b>(t); ok {
+
+	<a href="../pkg/internal/godebug.html">internal/godebug</a>
+		<a href="../src/internal/godebug/godebug.go.html#line-153">godebug.go#L153</a>: 	if v, ok := cache.<b>Load</b>(name); ok {
+
+	<a href="../pkg/reflect.html">reflect</a>
+		<a href="../src/reflect/type.go.html#line-1189">type.go#L1189</a>: 	if pi, ok := ptrMap.<b>Load</b>(t); ok {
+		<a href="../src/reflect/type.go.html#line-1591" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1591">#L1591</a>: 	if ch, ok := lookupCache.<b>Load</b>(ckey); ok {
+		<a href="../src/reflect/type.go.html#line-1659" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1659">#L1659</a>: 	if mt, ok := lookupCache.<b>Load</b>(ckey); ok {
+		<a href="../src/reflect/type.go.html#line-1796" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1796">#L1796</a>: 	if ts, ok := funcLookupCache.m.<b>Load</b>(hash); ok {
+		<a href="../src/reflect/type.go.html#line-1807" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1807">#L1807</a>: 	if ts, ok := funcLookupCache.m.<b>Load</b>(hash); ok {
+		<a href="../src/reflect/type.go.html#line-1817" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1817">#L1817</a>: 		if rti, ok := funcLookupCache.m.<b>Load</b>(hash); ok {
+		<a href="../src/reflect/type.go.html#line-2077" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2077">#L2077</a>: 	if slice, ok := lookupCache.<b>Load</b>(ckey); ok {
+		<a href="../src/reflect/type.go.html#line-2442" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2442">#L2442</a>: 	if ts, ok := structLookupCache.m.<b>Load</b>(hash); ok {
+		<a href="../src/reflect/type.go.html#line-2454" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2454">#L2454</a>: 	if ts, ok := structLookupCache.m.<b>Load</b>(hash); ok {
+		<a href="../src/reflect/type.go.html#line-2465" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2465">#L2465</a>: 		if ti, ok := structLookupCache.m.<b>Load</b>(hash); ok {
+		<a href="../src/reflect/type.go.html#line-2633" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2633">#L2633</a>: 	if array, ok := lookupCache.<b>Load</b>(ckey); ok {
+		<a href="../src/reflect/type.go.html#line-2807" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2807">#L2807</a>: 	if lti, ok := layoutCache.<b>Load</b>(k); ok {
+
+	<a href="../pkg/runtime/cgo.html">runtime/cgo</a>
+		<a href="../src/runtime/cgo/handle.go.html#line-122">handle.go#L122</a>: 	v, ok := handles.<b>Load</b>(uintptr(h))
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: linfnorm_amd64.s in package gonum.org/v1/gonum/internal/asm/f64</title>
+<link href="../../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	linfnorm_amd64.s
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/gonum.org/v1/gonum/internal/asm/f64.html">gonum.org/v1/gonum/internal/asm/f64</a>
+</code></pre>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code>// Copyright ©2016 The Gonum Authors. All rights reserved.</code></span>
+<span class="codeline" id="line-2"><code>// Use of this source code is governed by a BSD-style</code></span>
+<span class="codeline" id="line-3"><code>// license that can be found in the LICENSE file.</code></span>
+<span class="codeline" id="line-4"><code></code></span>
+<span class="codeline" id="line-5"><code>// +build !noasm,!gccgo,!safe</code></span>
+<span class="codeline" id="line-6"><code></code></span>
+<span class="codeline" id="line-7"><code>#include "textflag.h"</code></span>
+<span class="codeline" id="line-8"><code></code></span>
+<span class="codeline" id="line-9"><code>// func LinfDist(s, t []float64) float64</code></span>
+<span class="codeline" id="line-10"><code>TEXT ·LinfDist(SB), NOSPLIT, $0</code></span>
+<span class="codeline" id="line-11"><code>	MOVQ    s_base+0(FP), DI  // DI = &amp;s</code></span>
+<span class="codeline" id="line-12"><code>	MOVQ    t_base+24(FP), SI // SI = &amp;t</code></span>
+<span class="codeline" id="line-13"><code>	MOVQ    s_len+8(FP), CX   // CX = len(s)</code></span>
+<span class="codeline" id="line-14"><code>	CMPQ    t_len+32(FP), CX  // CX = max( CX, len(t) )</code></span>
+<span class="codeline" id="line-15"><code>	CMOVQLE t_len+32(FP), CX</code></span>
+<span class="codeline" id="line-16"><code>	PXOR    X3, X3            // norm = 0</code></span>
+<span class="codeline" id="line-17"><code>	CMPQ    CX, $0            // if CX == 0 { return 0 }</code></span>
+<span class="codeline" id="line-18"><code>	JE      l1_end</code></span>
+<span class="codeline" id="line-19"><code>	XORQ    AX, AX            // i = 0</code></span>
+<span class="codeline" id="line-20"><code>	MOVQ    CX, BX</code></span>
+<span class="codeline" id="line-21"><code>	ANDQ    $1, BX            // BX = CX % 2</code></span>
+<span class="codeline" id="line-22"><code>	SHRQ    $1, CX            // CX = floor( CX / 2 )</code></span>
+<span class="codeline" id="line-23"><code>	JZ      l1_tail_start     // if CX == 0 { return 0 }</code></span>
+<span class="codeline" id="line-24"><code></code></span>
+<span class="codeline" id="line-25"><code>l1_loop: // Loop unrolled 2x  do {</code></span>
+<span class="codeline" id="line-26"><code>	MOVUPS (SI)(AX*8), X0 // X0 = t[i:i+1]</code></span>
+<span class="codeline" id="line-27"><code>	MOVUPS (DI)(AX*8), X1 // X1 = s[i:i+1]</code></span>
+<span class="codeline" id="line-28"><code>	MOVAPS X0, X2</code></span>
+<span class="codeline" id="line-29"><code>	SUBPD  X1, X0</code></span>
+<span class="codeline" id="line-30"><code>	SUBPD  X2, X1</code></span>
+<span class="codeline" id="line-31"><code>	MAXPD  X1, X0         // X0 = max( X0 - X1, X1 - X0 )</code></span>
+<span class="codeline" id="line-32"><code>	MAXPD  X0, X3         // norm = max( norm, X0 )</code></span>
+<span class="codeline" id="line-33"><code>	ADDQ   $2, AX         // i += 2</code></span>
+<span class="codeline" id="line-34"><code>	LOOP   l1_loop        // } while --CX &gt; 0</code></span>
+<span class="codeline" id="line-35"><code>	CMPQ   BX, $0         // if BX == 0 { return }</code></span>
+<span class="codeline" id="line-36"><code>	JE     l1_end</code></span>
+<span class="codeline" id="line-37"><code></code></span>
+<span class="codeline" id="line-38"><code>l1_tail_start: // Reset loop registers</code></span>
+<span class="codeline" id="line-39"><code>	MOVQ BX, CX // Loop counter: CX = BX</code></span>
+<span class="codeline" id="line-40"><code>	PXOR X0, X0 // reset X0, X1 to break dependencies</code></span>
+<span class="codeline" id="line-41"><code>	PXOR X1, X1</code></span>
+<span class="codeline" id="line-42"><code></code></span>
+<span class="codeline" id="line-43"><code>l1_tail:</code></span>
+<span class="codeline" id="line-44"><code>	MOVSD  (SI)(AX*8), X0 // X0 = t[i]</code></span>
+<span class="codeline" id="line-45"><code>	MOVSD  (DI)(AX*8), X1 // X1 = s[i]</code></span>
+<span class="codeline" id="line-46"><code>	MOVAPD X0, X2</code></span>
+<span class="codeline" id="line-47"><code>	SUBSD  X1, X0</code></span>
+<span class="codeline" id="line-48"><code>	SUBSD  X2, X1</code></span>
+<span class="codeline" id="line-49"><code>	MAXSD  X1, X0         // X0 = max( X0 - X1, X1 - X0 )</code></span>
+<span class="codeline" id="line-50"><code>	MAXSD  X0, X3         // norm = max( norm, X0 )</code></span>
+<span class="codeline" id="line-51"><code></code></span>
+<span class="codeline" id="line-52"><code>l1_end:</code></span>
+<span class="codeline" id="line-53"><code>	MOVAPS X3, X2</code></span>
+<span class="codeline" id="line-54"><code>	SHUFPD $1, X2, X2</code></span>
+<span class="codeline" id="line-55"><code>	MAXSD  X3, X2         // X2 = max( X3[1], X3[0] )</code></span>
+<span class="codeline" id="line-56"><code>	MOVSD  X2, ret+48(FP) // return X2</code></span>
+<span class="codeline" id="line-57"><code>	RET</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

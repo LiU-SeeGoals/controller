@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: reflect.StructField.Anonymous</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/reflect.html">reflect</a>.<a href="../src/reflect/type.go.html#line-869">StructField</a>.<a href="../src/reflect/type.go.html#line-882">Anonymous</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">7 uses</span>
+
+	reflect (current package)
+		<a href="../src/reflect/type.go.html#line-882">type.go#L882</a>: 	<b>Anonymous</b> bool      // is an embedded field
+		<a href="../src/reflect/type.go.html#line-978" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-978">#L978</a>: 	f.<b>Anonymous</b> = p.Embedded()
+		<a href="../src/reflect/type.go.html#line-2568" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2568">#L2568</a>: 	if field.<b>Anonymous</b> &amp;&amp; field.PkgPath != "" {
+		<a href="../src/reflect/type.go.html#line-2583" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2583">#L2583</a>: 		Name:   newName(field.Name, string(field.Tag), field.IsExported(), field.<b>Anonymous</b>),
+		<a href="../src/reflect/visiblefields.go.html#line-94">visiblefields.go#L94</a>: 		if f.<b>Anonymous</b> {
+
+	<a href="../pkg/encoding/json.html">encoding/json</a>
+		<a href="../src/encoding/json/encode.go.html#line-1100">encode.go#L1100</a>: 				if sf.<b>Anonymous</b> {
+		<a href="../src/encoding/json/encode.go.html#line-1147" class="path-duplicate">encode.go</a><a href="../src/encoding/json/encode.go.html#line-1147">#L1147</a>: 				if name != "" || !sf.<b>Anonymous</b> || ft.Kind() != reflect.Struct {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

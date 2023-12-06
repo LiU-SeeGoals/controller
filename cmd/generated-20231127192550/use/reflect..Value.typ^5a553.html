@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: reflect.Value.typ</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/reflect.html">reflect</a>.<a href="../src/reflect/value.go.html#line-39">Value</a>.<a href="../src/reflect/value.go.html#line-96">typ</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">110 uses</span>
+
+	reflect (current package)
+		<a href="../src/reflect/deepequal.go.html#line-42">deepequal.go#L42</a>: 			if v1.<b>typ</b>().PtrBytes == 0 {
+		<a href="../src/reflect/makefunc.go.html#line-103">makefunc.go#L103</a>: 	fl |= flag(v.<b>typ</b>().Kind())
+		<a href="../src/reflect/makefunc.go.html#line-104" class="path-duplicate">makefunc.go</a><a href="../src/reflect/makefunc.go.html#line-104">#L104</a>: 	rcvr := Value{v.<b>typ</b>(), v.ptr, fl}
+		<a href="../src/reflect/value.go.html#line-96">value.go#L96</a>: func (v Value) <b>typ</b>() *abi.Type {
+		<a href="../src/reflect/value.go.html#line-109" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-109">#L109</a>: 	if v.<b>typ</b>().Size() != goarch.PtrSize || !v.<b>typ</b>().Pointers() {
+		<a href="../src/reflect/value.go.html#line-120" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-120">#L120</a>: 	t := v.<b>typ</b>()
+		<a href="../src/reflect/value.go.html#line-288" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-288">#L288</a>: 	return Value{ptrTo(v.<b>typ</b>()), v.ptr, fl | flag(Pointer)}
+		<a href="../src/reflect/value.go.html#line-321" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-321">#L321</a>: 		if v.<b>typ</b>().Elem().Kind() != abi.Uint8 {
+		<a href="../src/reflect/value.go.html#line-327" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-327">#L327</a>: 		if v.<b>typ</b>().Elem().Kind() != abi.Uint8 {
+		<a href="../src/reflect/value.go.html#line-334" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-334">#L334</a>: 		n := int((*arrayType)(unsafe.Pointer(v.<b>typ</b>())).Len)
+		<a href="../src/reflect/value.go.html#line-344" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-344">#L344</a>: 	if v.<b>typ</b>().Elem().Kind() != abi.Int32 {
+		<a href="../src/reflect/value.go.html#line-402" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-402">#L402</a>: 	t := (*funcType)(unsafe.Pointer(v.<b>typ</b>()))
+		<a href="../src/reflect/value.go.html#line-792" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-792">#L792</a>: 			if v.<b>typ</b>() == nil {
+		<a href="../src/reflect/value.go.html#line-889" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-889">#L889</a>: 	if v.<b>typ</b>().Kind() == abi.Interface {
+		<a href="../src/reflect/value.go.html#line-890" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-890">#L890</a>: 		tt := (*interfaceType)(unsafe.Pointer(v.<b>typ</b>()))
+		<a href="../src/reflect/value.go.html#line-906" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-906">#L906</a>: 		rcvrtype = v.<b>typ</b>()
+		<a href="../src/reflect/value.go.html#line-907" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-907">#L907</a>: 		ms := v.<b>typ</b>().ExportedMethods()
+		<a href="../src/reflect/value.go.html#line-912" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-912">#L912</a>: 		if !nameOffFor(v.<b>typ</b>(), m.Name).IsExported() {
+		<a href="../src/reflect/value.go.html#line-915" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-915">#L915</a>: 		ifn := textOffFor(v.<b>typ</b>(), m.Ifn)
+		<a href="../src/reflect/value.go.html#line-917" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-917">#L917</a>: 		t = (*funcType)(unsafe.Pointer(typeOffFor(v.<b>typ</b>(), m.Mtyp)))
+		<a href="../src/reflect/value.go.html#line-927" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-927">#L927</a>: 	t := v.<b>typ</b>()
+		<a href="../src/reflect/value.go.html#line-1177" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1177">#L1177</a>: 		return v.<b>typ</b>().Len()
+		<a href="../src/reflect/value.go.html#line-1181" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1181">#L1181</a>: 		if v.<b>typ</b>().Elem().Kind() == abi.Array {
+		<a href="../src/reflect/value.go.html#line-1182" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1182">#L1182</a>: 			return v.<b>typ</b>().Elem().Len()
+		<a href="../src/reflect/value.go.html#line-1229" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1229">#L1229</a>: 		if v.<b>typ</b>().NumMethod() == 0 {
+		<a href="../src/reflect/value.go.html#line-1244" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1244">#L1244</a>: 			if ifaceIndir(v.<b>typ</b>()) {
+		<a href="../src/reflect/value.go.html#line-1265" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1265">#L1265</a>: 		tt := (*ptrType)(unsafe.Pointer(v.<b>typ</b>()))
+		<a href="../src/reflect/value.go.html#line-1280" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1280">#L1280</a>: 	tt := (*structType)(unsafe.Pointer(v.<b>typ</b>()))
+		<a href="../src/reflect/value.go.html#line-1316" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1316">#L1316</a>: 			if v.Kind() == Pointer &amp;&amp; v.<b>typ</b>().Elem().Kind() == abi.Struct {
+		<a href="../src/reflect/value.go.html#line-1339" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1339">#L1339</a>: 			if v.Kind() == Ptr &amp;&amp; v.<b>typ</b>().Elem().Kind() == abi.Struct {
+		<a href="../src/reflect/value.go.html#line-1341" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1341">#L1341</a>: 					return Value{}, errors.New("reflect: indirection through nil pointer to embedded struct field " + nameFor(v.<b>typ</b>().Elem()))
+		<a href="../src/reflect/value.go.html#line-1356" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1356">#L1356</a>: 	if f, ok := toRType(v.<b>typ</b>()).FieldByName(name); ok {
+		<a href="../src/reflect/value.go.html#line-1367" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1367">#L1367</a>: 	if f, ok := toRType(v.<b>typ</b>()).FieldByNameFunc(match); ok {
+		<a href="../src/reflect/value.go.html#line-1403" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1403">#L1403</a>: 		tt := (*arrayType)(unsafe.Pointer(v.<b>typ</b>()))
+		<a href="../src/reflect/value.go.html#line-1426" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1426">#L1426</a>: 		tt := (*sliceType)(unsafe.Pointer(v.<b>typ</b>()))
+		<a href="../src/reflect/value.go.html#line-1597" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1597">#L1597</a>: 		if v.<b>typ</b>().Equal != nil &amp;&amp; v.<b>typ</b>().Size() &lt;= maxZero {
+		<a href="../src/reflect/value.go.html#line-1604" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1604">#L1604</a>: 			return v.<b>typ</b>().Equal(noescape(v.ptr), unsafe.Pointer(&amp;zeroVal[0]))
+		<a href="../src/reflect/value.go.html#line-1620" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1620">#L1620</a>: 		if v.<b>typ</b>().Equal != nil &amp;&amp; v.<b>typ</b>().Size() &lt;= maxZero {
+		<a href="../src/reflect/value.go.html#line-1625" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1625">#L1625</a>: 			return v.<b>typ</b>().Equal(noescape(v.ptr), unsafe.Pointer(&amp;zeroVal[0]))
+		<a href="../src/reflect/value.go.html#line-1688" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1688">#L1688</a>: 		typedmemclr(v.<b>typ</b>(), v.ptr)
+		<a href="../src/reflect/value.go.html#line-1715" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1715">#L1715</a>: 		tt := (*arrayType)(unsafe.Pointer(v.<b>typ</b>()))
+		<a href="../src/reflect/value.go.html#line-1725" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1725">#L1725</a>: 		if v.<b>typ</b>().Elem().Kind() == abi.Array {
+		<a href="../src/reflect/value.go.html#line-1726" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1726">#L1726</a>: 			return v.<b>typ</b>().Elem().Len()
+		<a href="../src/reflect/value.go.html#line-1741" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1741">#L1741</a>: 	tt := (*mapType)(unsafe.Pointer(v.<b>typ</b>()))
+		<a href="../src/reflect/value.go.html#line-1752" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1752">#L1752</a>: 	if (tt.Key == stringType || key.kind() == String) &amp;&amp; tt.Key == key.<b>typ</b>() &amp;&amp; tt.Elem.Size() &lt;= maxValSize {
+		<a href="../src/reflect/value.go.html#line-1754" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1754">#L1754</a>: 		e = mapaccess_faststr(v.<b>typ</b>(), v.pointer(), k)
+		<a href="../src/reflect/value.go.html#line-1763" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1763">#L1763</a>: 		e = mapaccess(v.<b>typ</b>(), v.pointer(), k)
+		<a href="../src/reflect/value.go.html#line-1780" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1780">#L1780</a>: 	tt := (*mapType)(unsafe.Pointer(v.<b>typ</b>()))
+		<a href="../src/reflect/value.go.html#line-1791" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1791">#L1791</a>: 	mapiterinit(v.<b>typ</b>(), m, &amp;it)
+		<a href="../src/reflect/value.go.html#line-1851" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1851">#L1851</a>: 	t := (*mapType)(unsafe.Pointer(iter.m.<b>typ</b>()))
+		<a href="../src/reflect/value.go.html#line-1875" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1875">#L1875</a>: 	t := (*mapType)(unsafe.Pointer(iter.m.<b>typ</b>()))
+		<a href="../src/reflect/value.go.html#line-1880" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1880">#L1880</a>: 	key = key.assignTo("reflect.MapIter.SetKey", v.<b>typ</b>(), target)
+		<a href="../src/reflect/value.go.html#line-1881" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1881">#L1881</a>: 	typedmemmove(v.<b>typ</b>(), v.ptr, key.ptr)
+		<a href="../src/reflect/value.go.html#line-1894" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1894">#L1894</a>: 	t := (*mapType)(unsafe.Pointer(iter.m.<b>typ</b>()))
+		<a href="../src/reflect/value.go.html#line-1918" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1918">#L1918</a>: 	t := (*mapType)(unsafe.Pointer(iter.m.<b>typ</b>()))
+		<a href="../src/reflect/value.go.html#line-1923" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1923">#L1923</a>: 	elem = elem.assignTo("reflect.MapIter.SetValue", v.<b>typ</b>(), target)
+		<a href="../src/reflect/value.go.html#line-1924" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1924">#L1924</a>: 	typedmemmove(v.<b>typ</b>(), v.ptr, elem.ptr)
+		<a href="../src/reflect/value.go.html#line-1935" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1935">#L1935</a>: 		mapiterinit(iter.m.<b>typ</b>(), iter.m.pointer(), &amp;iter.hiter)
+		<a href="../src/reflect/value.go.html#line-2010" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2010">#L2010</a>: 	if v.<b>typ</b>() == nil {
+		<a href="../src/reflect/value.go.html#line-2013" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2013">#L2013</a>: 	if v.flag&amp;flagMethod != 0 || uint(i) &gt;= uint(toRType(v.<b>typ</b>()).NumMethod()) {
+		<a href="../src/reflect/value.go.html#line-2016" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2016">#L2016</a>: 	if v.<b>typ</b>().Kind() == abi.Interface &amp;&amp; v.IsNil() {
+		<a href="../src/reflect/value.go.html#line-2022" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2022">#L2022</a>: 	return Value{v.<b>typ</b>(), v.ptr, fl}
+		<a href="../src/reflect/value.go.html#line-2031" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2031">#L2031</a>: 	if v.<b>typ</b>() == nil {
+		<a href="../src/reflect/value.go.html#line-2037" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2037">#L2037</a>: 	return toRType(v.<b>typ</b>()).NumMethod()
+		<a href="../src/reflect/value.go.html#line-2046" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2046">#L2046</a>: 	if v.<b>typ</b>() == nil {
+		<a href="../src/reflect/value.go.html#line-2052" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2052">#L2052</a>: 	m, ok := toRType(v.<b>typ</b>()).MethodByName(name)
+		<a href="../src/reflect/value.go.html#line-2063" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2063">#L2063</a>: 	tt := (*structType)(unsafe.Pointer(v.<b>typ</b>()))
+		<a href="../src/reflect/value.go.html#line-2106" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2106">#L2106</a>: 		bitSize := v.<b>typ</b>().Size() * 8
+		<a href="../src/reflect/value.go.html#line-2151" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2151">#L2151</a>: 		if v.<b>typ</b>().PtrBytes == 0 {
+		<a href="../src/reflect/value.go.html#line-2201" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2201">#L2201</a>: 	tt := (*chanType)(unsafe.Pointer(v.<b>typ</b>()))
+		<a href="../src/reflect/value.go.html#line-2234" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2234">#L2234</a>: 	tt := (*chanType)(unsafe.Pointer(v.<b>typ</b>()))
+		<a href="../src/reflect/value.go.html#line-2260" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2260">#L2260</a>: 	x = x.assignTo("reflect.Set", v.<b>typ</b>(), target)
+		<a href="../src/reflect/value.go.html#line-2263" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2263">#L2263</a>: 			typedmemclr(v.<b>typ</b>(), v.ptr)
+		<a href="../src/reflect/value.go.html#line-2265" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2265">#L2265</a>: 			typedmemmove(v.<b>typ</b>(), v.ptr, x.ptr)
+		<a href="../src/reflect/value.go.html#line-2285" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2285">#L2285</a>: 	if toRType(v.<b>typ</b>()).Elem().Kind() != Uint8 { // TODO add Elem method, fix mustBe(Slice) to return slice.
+		<a href="../src/reflect/value.go.html#line-2296" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2296">#L2296</a>: 	if v.<b>typ</b>().Elem().Kind() != abi.Int32 {
+		<a href="../src/reflect/value.go.html#line-2386" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2386">#L2386</a>: 	tt := (*mapType)(unsafe.Pointer(v.<b>typ</b>()))
+		<a href="../src/reflect/value.go.html#line-2388" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2388">#L2388</a>: 	if (tt.Key == stringType || key.kind() == String) &amp;&amp; tt.Key == key.<b>typ</b>() &amp;&amp; tt.Elem.Size() &lt;= maxValSize {
+		<a href="../src/reflect/value.go.html#line-2390" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2390">#L2390</a>: 		if elem.<b>typ</b>() == nil {
+		<a href="../src/reflect/value.go.html#line-2391" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2391">#L2391</a>: 			mapdelete_faststr(v.<b>typ</b>(), v.pointer(), k)
+		<a href="../src/reflect/value.go.html#line-2402" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2402">#L2402</a>: 		mapassign_faststr(v.<b>typ</b>(), v.pointer(), k, e)
+		<a href="../src/reflect/value.go.html#line-2413" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2413">#L2413</a>: 	if elem.<b>typ</b>() == nil {
+		<a href="../src/reflect/value.go.html#line-2414" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2414">#L2414</a>: 		mapdelete(v.<b>typ</b>(), v.pointer(), k)
+		<a href="../src/reflect/value.go.html#line-2425" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2425">#L2425</a>: 	mapassign(v.<b>typ</b>(), v.pointer(), k, e)
+		<a href="../src/reflect/value.go.html#line-2483" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2483">#L2483</a>: 		tt := (*arrayType)(unsafe.Pointer(v.<b>typ</b>()))
+		<a href="../src/reflect/value.go.html#line-2489" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2489">#L2489</a>: 		typ = (*sliceType)(unsafe.Pointer(v.<b>typ</b>()))
+		<a href="../src/reflect/value.go.html#line-2503" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2503">#L2503</a>: 		return Value{v.<b>typ</b>(), unsafe.Pointer(&amp;t), v.flag}
+		<a href="../src/reflect/value.go.html#line-2545" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2545">#L2545</a>: 		tt := (*arrayType)(unsafe.Pointer(v.<b>typ</b>()))
+		<a href="../src/reflect/value.go.html#line-2551" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2551">#L2551</a>: 		typ = (*sliceType)(unsafe.Pointer(v.<b>typ</b>()))
+		<a href="../src/reflect/value.go.html#line-2637" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2637">#L2637</a>: 	typ := v.<b>typ</b>()
+		<a href="../src/reflect/value.go.html#line-2639" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2639">#L2639</a>: 		return toRType(v.<b>typ</b>())
+		<a href="../src/reflect/value.go.html#line-2645" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2645">#L2645</a>: 	if v.<b>typ</b>().Kind() == abi.Interface {
+		<a href="../src/reflect/value.go.html#line-2705" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2705">#L2705</a>: 	if v.<b>typ</b>() == nil {
+		<a href="../src/reflect/value.go.html#line-2731" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2731">#L2731</a>: 		if v.<b>typ</b>().PtrBytes == 0 {
+		<a href="../src/reflect/value.go.html#line-2832" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2832">#L2832</a>: 		t := v.<b>typ</b>().Elem()
+		<a href="../src/reflect/value.go.html#line-2865" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2865">#L2865</a>: 		st := (*sliceType)(unsafe.Pointer(v.<b>typ</b>()))
+		<a href="../src/reflect/value.go.html#line-2868" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2868">#L2868</a>: 		mapclear(v.<b>typ</b>(), v.pointer())
+		<a href="../src/reflect/value.go.html#line-2919" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2919">#L2919</a>: 		stringCopy = sk == String &amp;&amp; dst.<b>typ</b>().Elem().Kind() == abi.Uint8
+		<a href="../src/reflect/value.go.html#line-2926" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2926">#L2926</a>: 	de := dst.<b>typ</b>().Elem()
+		<a href="../src/reflect/value.go.html#line-2928" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2928">#L2928</a>: 		se := src.<b>typ</b>().Elem()
+		<a href="../src/reflect/value.go.html#line-3063" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3063">#L3063</a>: 			tt := (*chanType)(unsafe.Pointer(ch.<b>typ</b>()))
+		<a href="../src/reflect/value.go.html#line-3094" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3094">#L3094</a>: 			tt := (*chanType)(unsafe.Pointer(ch.<b>typ</b>()))
+		<a href="../src/reflect/value.go.html#line-3280" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3280">#L3280</a>: 	case directlyAssignable(dst, v.<b>typ</b>()):
+		<a href="../src/reflect/value.go.html#line-3287" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3287">#L3287</a>: 	case implements(dst, v.<b>typ</b>()):
+		<a href="../src/reflect/value.go.html#line-3307" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3307">#L3307</a>: 	panic(context + ": value of type " + stringFor(v.<b>typ</b>()) + " is not assignable to type " + stringFor(dst))
+		<a href="../src/reflect/value.go.html#line-3317" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3317">#L3317</a>: 	op := convertOp(t.common(), v.<b>typ</b>())
+		<a href="../src/reflect/value.go.html#line-3319" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3319">#L3319</a>: 		panic("reflect.Value.Convert: value of type " + stringFor(v.<b>typ</b>()) + " cannot be converted to type " + t.String())
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

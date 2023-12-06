@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: encoding/json.encodeState.error</title>
+<link href="../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../pkg/encoding/json.html">encoding/json</a>.<a href="../../src/encoding/json/encode.go.html#line-251">encodeState</a>.<a href="../../src/encoding/json/encode.go.html#line-300">error</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">12 uses</span>
+
+	encoding/json (current package)
+		<a href="../../src/encoding/json/encode.go.html#line-300">encode.go#L300</a>: func (e *encodeState) <b>error</b>(err error) {
+		<a href="../../src/encoding/json/encode.go.html#line-450" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-450">#L450</a>: 		e.<b>error</b>(&amp;MarshalerError{v.Type(), err, "MarshalJSON"})
+		<a href="../../src/encoding/json/encode.go.html#line-469" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-469">#L469</a>: 		e.<b>error</b>(&amp;MarshalerError{v.Type(), err, "MarshalJSON"})
+		<a href="../../src/encoding/json/encode.go.html#line-485" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-485">#L485</a>: 		e.<b>error</b>(&amp;MarshalerError{v.Type(), err, "MarshalText"})
+		<a href="../../src/encoding/json/encode.go.html#line-499" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-499">#L499</a>: 		e.<b>error</b>(&amp;MarshalerError{v.Type(), err, "MarshalText"})
+		<a href="../../src/encoding/json/encode.go.html#line-533" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-533">#L533</a>: 		e.<b>error</b>(&amp;UnsupportedValueError{v, strconv.FormatFloat(f, 'g', -1, int(bits))})
+		<a href="../../src/encoding/json/encode.go.html#line-578" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-578">#L578</a>: 			e.<b>error</b>(fmt.Errorf("json: invalid number literal %q", numStr))
+		<a href="../../src/encoding/json/encode.go.html#line-664" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-664">#L664</a>: 	e.<b>error</b>(&amp;UnsupportedTypeError{v.Type()})
+		<a href="../../src/encoding/json/encode.go.html#line-734" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-734">#L734</a>: 			e.<b>error</b>(&amp;UnsupportedValueError{v, fmt.Sprintf("encountered a cycle via %s", v.Type())})
+		<a href="../../src/encoding/json/encode.go.html#line-748" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-748">#L748</a>: 			e.<b>error</b>(fmt.Errorf("json: encoding error for type %q: %q", v.Type().String(), err.Error()))
+		<a href="../../src/encoding/json/encode.go.html#line-817" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-817">#L817</a>: 			e.<b>error</b>(&amp;UnsupportedValueError{v, fmt.Sprintf("encountered a cycle via %s", v.Type())})
+		<a href="../../src/encoding/json/encode.go.html#line-873" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-873">#L873</a>: 			e.<b>error</b>(&amp;UnsupportedValueError{v, fmt.Sprintf("encountered a cycle via %s", v.Type())})
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

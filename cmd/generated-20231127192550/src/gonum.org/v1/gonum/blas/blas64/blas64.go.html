@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: blas64.go in package gonum.org/v1/gonum/blas/blas64</title>
+<link href="../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	blas64.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html">gonum.org/v1/gonum/blas/blas64</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10],
+input[id=r11]:checked ~pre label[for=r11],
+input[id=r12]:checked ~pre label[for=r12],
+input[id=r13]:checked ~pre label[for=r13],
+input[id=r14]:checked ~pre label[for=r14],
+input[id=r15]:checked ~pre label[for=r15],
+input[id=r16]:checked ~pre label[for=r16],
+input[id=r17]:checked ~pre label[for=r17],
+input[id=r18]:checked ~pre label[for=r18],
+input[id=r19]:checked ~pre label[for=r19],
+input[id=r20]:checked ~pre label[for=r20],
+input[id=r21]:checked ~pre label[for=r21],
+input[id=r22]:checked ~pre label[for=r22],
+input[id=r23]:checked ~pre label[for=r23],
+input[id=r24]:checked ~pre label[for=r24],
+input[id=r25]:checked ~pre label[for=r25],
+input[id=r26]:checked ~pre label[for=r26],
+input[id=r27]:checked ~pre label[for=r27],
+input[id=r28]:checked ~pre label[for=r28],
+input[id=r29]:checked ~pre label[for=r29],
+input[id=r30]:checked ~pre label[for=r30],
+input[id=r31]:checked ~pre label[for=r31],
+input[id=r32]:checked ~pre label[for=r32],
+input[id=r33]:checked ~pre label[for=r33],
+input[id=r34]:checked ~pre label[for=r34],
+input[id=r35]:checked ~pre label[for=r35],
+input[id=r36]:checked ~pre label[for=r36],
+input[id=r37]:checked ~pre label[for=r37],
+input[id=r38]:checked ~pre label[for=r38],
+input[id=r39]:checked ~pre label[for=r39],
+input[id=r40]:checked ~pre label[for=r40],
+input[id=r41]:checked ~pre label[for=r41],
+input[id=r42]:checked ~pre label[for=r42],
+input[id=r43]:checked ~pre label[for=r43],
+input[id=r44]:checked ~pre label[for=r44],
+input[id=r45]:checked ~pre label[for=r45],
+input[id=r46]:checked ~pre label[for=r46],
+input[id=r47]:checked ~pre label[for=r47],
+input[id=r48]:checked ~pre label[for=r48],
+input[id=r49]:checked ~pre label[for=r49],
+input[id=r50]:checked ~pre label[for=r50],
+input[id=r51]:checked ~pre label[for=r51],
+input[id=r52]:checked ~pre label[for=r52],
+input[id=r53]:checked ~pre label[for=r53],
+input[id=r54]:checked ~pre label[for=r54],
+input[id=r55]:checked ~pre label[for=r55],
+input[id=r56]:checked ~pre label[for=r56],
+input[id=r57]:checked ~pre label[for=r57],
+input[id=r58]:checked ~pre label[for=r58],
+input[id=r59]:checked ~pre label[for=r59],
+input[id=r60]:checked ~pre label[for=r60],
+input[id=r61]:checked ~pre label[for=r61],
+input[id=r62]:checked ~pre label[for=r62],
+input[id=r63]:checked ~pre label[for=r63],
+input[id=r64]:checked ~pre label[for=r64],
+input[id=r65]:checked ~pre label[for=r65],
+input[id=r66]:checked ~pre label[for=r66],
+input[id=r67]:checked ~pre label[for=r67],
+input[id=r68]:checked ~pre label[for=r68],
+input[id=r69]:checked ~pre label[for=r69],
+input[id=r70]:checked ~pre label[for=r70],
+input[id=r71]:checked ~pre label[for=r71],
+input[id=r72]:checked ~pre label[for=r72],
+input[id=r73]:checked ~pre label[for=r73],
+input[id=r74]:checked ~pre label[for=r74],
+input[id=r75]:checked ~pre label[for=r75],
+input[id=r76]:checked ~pre label[for=r76],
+input[id=r77]:checked ~pre label[for=r77],
+input[id=r78]:checked ~pre label[for=r78],
+input[id=r79]:checked ~pre label[for=r79],
+input[id=r80]:checked ~pre label[for=r80],
+input[id=r81]:checked ~pre label[for=r81],
+input[id=r82]:checked ~pre label[for=r82],
+input[id=r83]:checked ~pre label[for=r83],
+input[id=r84]:checked ~pre label[for=r84],
+input[id=r85]:checked ~pre label[for=r85],
+input[id=r86]:checked ~pre label[for=r86],
+input[id=r87]:checked ~pre label[for=r87],
+input[id=r88]:checked ~pre label[for=r88],
+input[id=r89]:checked ~pre label[for=r89],
+input[id=r90]:checked ~pre label[for=r90],
+input[id=r91]:checked ~pre label[for=r91],
+input[id=r92]:checked ~pre label[for=r92],
+input[id=r93]:checked ~pre label[for=r93],
+input[id=r94]:checked ~pre label[for=r94],
+input[id=r95]:checked ~pre label[for=r95],
+input[id=r96]:checked ~pre label[for=r96],
+input[id=r97]:checked ~pre label[for=r97],
+input[id=r98]:checked ~pre label[for=r98],
+input[id=r99]:checked ~pre label[for=r99],
+input[id=r100]:checked ~pre label[for=r100],
+input[id=r101]:checked ~pre label[for=r101],
+input[id=r102]:checked ~pre label[for=r102],
+input[id=r103]:checked ~pre label[for=r103],
+input[id=r104]:checked ~pre label[for=r104],
+input[id=r105]:checked ~pre label[for=r105],
+input[id=r106]:checked ~pre label[for=r106],
+input[id=r107]:checked ~pre label[for=r107],
+input[id=r108]:checked ~pre label[for=r108],
+input[id=r109]:checked ~pre label[for=r109],
+input[id=r110]:checked ~pre label[for=r110],
+input[id=r111]:checked ~pre label[for=r111],
+input[id=r112]:checked ~pre label[for=r112],
+input[id=r113]:checked ~pre label[for=r113],
+input[id=r114]:checked ~pre label[for=r114],
+input[id=r115]:checked ~pre label[for=r115],
+input[id=r116]:checked ~pre label[for=r116],
+input[id=r117]:checked ~pre label[for=r117],
+input[id=r118]:checked ~pre label[for=r118],
+input[id=r119]:checked ~pre label[for=r119],
+input[id=r120]:checked ~pre label[for=r120],
+input[id=r121]:checked ~pre label[for=r121],
+input[id=r122]:checked ~pre label[for=r122],
+input[id=r123]:checked ~pre label[for=r123],
+input[id=r124]:checked ~pre label[for=r124],
+input[id=r125]:checked ~pre label[for=r125],
+input[id=r126]:checked ~pre label[for=r126],
+input[id=r127]:checked ~pre label[for=r127],
+input[id=r128]:checked ~pre label[for=r128],
+input[id=r129]:checked ~pre label[for=r129],
+input[id=r130]:checked ~pre label[for=r130],
+input[id=r131]:checked ~pre label[for=r131],
+input[id=r132]:checked ~pre label[for=r132],
+input[id=r133]:checked ~pre label[for=r133],
+input[id=r134]:checked ~pre label[for=r134],
+input[id=r135]:checked ~pre label[for=r135],
+input[id=r136]:checked ~pre label[for=r136],
+input[id=r137]:checked ~pre label[for=r137],
+input[id=r138]:checked ~pre label[for=r138],
+input[id=r139]:checked ~pre label[for=r139],
+input[id=r140]:checked ~pre label[for=r140],
+input[id=r141]:checked ~pre label[for=r141],
+input[id=r142]:checked ~pre label[for=r142],
+input[id=r143]:checked ~pre label[for=r143],
+input[id=r144]:checked ~pre label[for=r144],
+input[id=r145]:checked ~pre label[for=r145],
+input[id=r146]:checked ~pre label[for=r146],
+input[id=r147]:checked ~pre label[for=r147],
+input[id=r148]:checked ~pre label[for=r148],
+input[id=r149]:checked ~pre label[for=r149],
+input[id=r150]:checked ~pre label[for=r150],
+input[id=r151]:checked ~pre label[for=r151],
+input[id=r152]:checked ~pre label[for=r152],
+input[id=r153]:checked ~pre label[for=r153],
+input[id=r154]:checked ~pre label[for=r154],
+input[id=r155]:checked ~pre label[for=r155],
+input[id=r156]:checked ~pre label[for=r156],
+input[id=r157]:checked ~pre label[for=r157],
+input[id=r158]:checked ~pre label[for=r158],
+input[id=r159]:checked ~pre label[for=r159],
+input[id=r160]:checked ~pre label[for=r160],
+input[id=r161]:checked ~pre label[for=r161],
+input[id=r162]:checked ~pre label[for=r162],
+input[id=r163]:checked ~pre label[for=r163],
+input[id=r164]:checked ~pre label[for=r164],
+input[id=r165]:checked ~pre label[for=r165],
+input[id=r166]:checked ~pre label[for=r166],
+input[id=r167]:checked ~pre label[for=r167],
+input[id=r168]:checked ~pre label[for=r168],
+input[id=r169]:checked ~pre label[for=r169],
+input[id=r170]:checked ~pre label[for=r170],
+input[id=r171]:checked ~pre label[for=r171],
+input[id=r172]:checked ~pre label[for=r172],
+input[id=r173]:checked ~pre label[for=r173],
+input[id=r174]:checked ~pre label[for=r174],
+input[id=r175]:checked ~pre label[for=r175],
+input[id=r176]:checked ~pre label[for=r176],
+input[id=r177]:checked ~pre label[for=r177]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="r11" type="radio" name="g"/>
+<input id="r12" type="radio" name="g"/>
+<input id="r13" type="radio" name="g"/>
+<input id="r14" type="radio" name="g"/>
+<input id="r15" type="radio" name="g"/>
+<input id="r16" type="radio" name="g"/>
+<input id="r17" type="radio" name="g"/>
+<input id="r18" type="radio" name="g"/>
+<input id="r19" type="radio" name="g"/>
+<input id="r20" type="radio" name="g"/>
+<input id="r21" type="radio" name="g"/>
+<input id="r22" type="radio" name="g"/>
+<input id="r23" type="radio" name="g"/>
+<input id="r24" type="radio" name="g"/>
+<input id="r25" type="radio" name="g"/>
+<input id="r26" type="radio" name="g"/>
+<input id="r27" type="radio" name="g"/>
+<input id="r28" type="radio" name="g"/>
+<input id="r29" type="radio" name="g"/>
+<input id="r30" type="radio" name="g"/>
+<input id="r31" type="radio" name="g"/>
+<input id="r32" type="radio" name="g"/>
+<input id="r33" type="radio" name="g"/>
+<input id="r34" type="radio" name="g"/>
+<input id="r35" type="radio" name="g"/>
+<input id="r36" type="radio" name="g"/>
+<input id="r37" type="radio" name="g"/>
+<input id="r38" type="radio" name="g"/>
+<input id="r39" type="radio" name="g"/>
+<input id="r40" type="radio" name="g"/>
+<input id="r41" type="radio" name="g"/>
+<input id="r42" type="radio" name="g"/>
+<input id="r43" type="radio" name="g"/>
+<input id="r44" type="radio" name="g"/>
+<input id="r45" type="radio" name="g"/>
+<input id="r46" type="radio" name="g"/>
+<input id="r47" type="radio" name="g"/>
+<input id="r48" type="radio" name="g"/>
+<input id="r49" type="radio" name="g"/>
+<input id="r50" type="radio" name="g"/>
+<input id="r51" type="radio" name="g"/>
+<input id="r52" type="radio" name="g"/>
+<input id="r53" type="radio" name="g"/>
+<input id="r54" type="radio" name="g"/>
+<input id="r55" type="radio" name="g"/>
+<input id="r56" type="radio" name="g"/>
+<input id="r57" type="radio" name="g"/>
+<input id="r58" type="radio" name="g"/>
+<input id="r59" type="radio" name="g"/>
+<input id="r60" type="radio" name="g"/>
+<input id="r61" type="radio" name="g"/>
+<input id="r62" type="radio" name="g"/>
+<input id="r63" type="radio" name="g"/>
+<input id="r64" type="radio" name="g"/>
+<input id="r65" type="radio" name="g"/>
+<input id="r66" type="radio" name="g"/>
+<input id="r67" type="radio" name="g"/>
+<input id="r68" type="radio" name="g"/>
+<input id="r69" type="radio" name="g"/>
+<input id="r70" type="radio" name="g"/>
+<input id="r71" type="radio" name="g"/>
+<input id="r72" type="radio" name="g"/>
+<input id="r73" type="radio" name="g"/>
+<input id="r74" type="radio" name="g"/>
+<input id="r75" type="radio" name="g"/>
+<input id="r76" type="radio" name="g"/>
+<input id="r77" type="radio" name="g"/>
+<input id="r78" type="radio" name="g"/>
+<input id="r79" type="radio" name="g"/>
+<input id="r80" type="radio" name="g"/>
+<input id="r81" type="radio" name="g"/>
+<input id="r82" type="radio" name="g"/>
+<input id="r83" type="radio" name="g"/>
+<input id="r84" type="radio" name="g"/>
+<input id="r85" type="radio" name="g"/>
+<input id="r86" type="radio" name="g"/>
+<input id="r87" type="radio" name="g"/>
+<input id="r88" type="radio" name="g"/>
+<input id="r89" type="radio" name="g"/>
+<input id="r90" type="radio" name="g"/>
+<input id="r91" type="radio" name="g"/>
+<input id="r92" type="radio" name="g"/>
+<input id="r93" type="radio" name="g"/>
+<input id="r94" type="radio" name="g"/>
+<input id="r95" type="radio" name="g"/>
+<input id="r96" type="radio" name="g"/>
+<input id="r97" type="radio" name="g"/>
+<input id="r98" type="radio" name="g"/>
+<input id="r99" type="radio" name="g"/>
+<input id="r100" type="radio" name="g"/>
+<input id="r101" type="radio" name="g"/>
+<input id="r102" type="radio" name="g"/>
+<input id="r103" type="radio" name="g"/>
+<input id="r104" type="radio" name="g"/>
+<input id="r105" type="radio" name="g"/>
+<input id="r106" type="radio" name="g"/>
+<input id="r107" type="radio" name="g"/>
+<input id="r108" type="radio" name="g"/>
+<input id="r109" type="radio" name="g"/>
+<input id="r110" type="radio" name="g"/>
+<input id="r111" type="radio" name="g"/>
+<input id="r112" type="radio" name="g"/>
+<input id="r113" type="radio" name="g"/>
+<input id="r114" type="radio" name="g"/>
+<input id="r115" type="radio" name="g"/>
+<input id="r116" type="radio" name="g"/>
+<input id="r117" type="radio" name="g"/>
+<input id="r118" type="radio" name="g"/>
+<input id="r119" type="radio" name="g"/>
+<input id="r120" type="radio" name="g"/>
+<input id="r121" type="radio" name="g"/>
+<input id="r122" type="radio" name="g"/>
+<input id="r123" type="radio" name="g"/>
+<input id="r124" type="radio" name="g"/>
+<input id="r125" type="radio" name="g"/>
+<input id="r126" type="radio" name="g"/>
+<input id="r127" type="radio" name="g"/>
+<input id="r128" type="radio" name="g"/>
+<input id="r129" type="radio" name="g"/>
+<input id="r130" type="radio" name="g"/>
+<input id="r131" type="radio" name="g"/>
+<input id="r132" type="radio" name="g"/>
+<input id="r133" type="radio" name="g"/>
+<input id="r134" type="radio" name="g"/>
+<input id="r135" type="radio" name="g"/>
+<input id="r136" type="radio" name="g"/>
+<input id="r137" type="radio" name="g"/>
+<input id="r138" type="radio" name="g"/>
+<input id="r139" type="radio" name="g"/>
+<input id="r140" type="radio" name="g"/>
+<input id="r141" type="radio" name="g"/>
+<input id="r142" type="radio" name="g"/>
+<input id="r143" type="radio" name="g"/>
+<input id="r144" type="radio" name="g"/>
+<input id="r145" type="radio" name="g"/>
+<input id="r146" type="radio" name="g"/>
+<input id="r147" type="radio" name="g"/>
+<input id="r148" type="radio" name="g"/>
+<input id="r149" type="radio" name="g"/>
+<input id="r150" type="radio" name="g"/>
+<input id="r151" type="radio" name="g"/>
+<input id="r152" type="radio" name="g"/>
+<input id="r153" type="radio" name="g"/>
+<input id="r154" type="radio" name="g"/>
+<input id="r155" type="radio" name="g"/>
+<input id="r156" type="radio" name="g"/>
+<input id="r157" type="radio" name="g"/>
+<input id="r158" type="radio" name="g"/>
+<input id="r159" type="radio" name="g"/>
+<input id="r160" type="radio" name="g"/>
+<input id="r161" type="radio" name="g"/>
+<input id="r162" type="radio" name="g"/>
+<input id="r163" type="radio" name="g"/>
+<input id="r164" type="radio" name="g"/>
+<input id="r165" type="radio" name="g"/>
+<input id="r166" type="radio" name="g"/>
+<input id="r167" type="radio" name="g"/>
+<input id="r168" type="radio" name="g"/>
+<input id="r169" type="radio" name="g"/>
+<input id="r170" type="radio" name="g"/>
+<input id="r171" type="radio" name="g"/>
+<input id="r172" type="radio" name="g"/>
+<input id="r173" type="radio" name="g"/>
+<input id="r174" type="radio" name="g"/>
+<input id="r175" type="radio" name="g"/>
+<input id="r176" type="radio" name="g"/>
+<input id="r177" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">// Copyright ©2015 The Gonum Authors. All rights reserved.</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment">// Use of this source code is governed by a BSD-style</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment">// license that can be found in the LICENSE file.</span></code></span>
+<span class="codeline" id="line-4"><code></code></span>
+<span class="codeline" id="line-5"><code><span class="keyword">package</span> blas64</code></span>
+<span class="codeline" id="line-6"><code></code></span>
+<span class="codeline" id="line-7"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-8"><code>	<label for="i0"><span class="lit-string i0">"gonum.org/v1/gonum/blas"</span></label></code></span>
+<span class="codeline" id="line-9"><code>	<label for="i1"><span class="lit-string i1">"gonum.org/v1/gonum/blas/gonum"</span></label></code></span>
+<span class="codeline" id="line-10"><code>)</code></span>
+<span class="codeline" id="line-11"><code></code></span>
+<span class="codeline" id="line-12"><code><span class="keyword">var</span> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-blas64" class="ident">blas64</a> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-123" class="ident">Float64</a> = <a href="../../../../../../pkg/gonum.org/v1/gonum/blas/gonum.html" class="ident i1">gonum</a>.<a href="../gonum/gonum.go.html#line-15" class="ident">Implementation</a>{}</code></span>
+<span class="codeline" id="line-13"><code></code></span>
+<span class="codeline" id="line-14"><code><span class="comment">// Use sets the BLAS float64 implementation to be used by subsequent BLAS calls.</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment">// The default implementation is</span></code></span>
+<span class="codeline" id="line-16"><code><span class="comment">// gonum.org/v1/gonum/blas/gonum.Implementation.</span></code></span>
+<span class="codeline" id="line-17"><code><span class="keyword">func</span> <label for="r0" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Use" class="ident">Use</a></label>(<label for="r1" class="ident">b</label> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-123" class="ident">Float64</a>) {</code></span>
+<span class="codeline" id="line-18"><code>	<a href="#line-12" class="ident">blas64</a> = <label for="r1" class="ident">b</label></code></span>
+<span class="codeline" id="line-19"><code>}</code></span>
+<span class="codeline" id="line-20"><code></code></span>
+<span class="codeline" id="line-21"><code><span class="comment">// Implementation returns the current BLAS float64 implementation.</span></code></span>
+<span class="codeline" id="line-22"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-23"><code><span class="comment">// Implementation allows direct calls to the current the BLAS float64 implementation</span></code></span>
+<span class="codeline" id="line-24"><code><span class="comment">// giving finer control of parameters.</span></code></span>
+<span class="codeline" id="line-25"><code><span class="keyword">func</span> <label for="r2" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Implementation" class="ident">Implementation</a></label>() <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-123" class="ident">Float64</a> {</code></span>
+<span class="codeline" id="line-26"><code>	<span class="keyword">return</span> <a href="#line-12" class="ident">blas64</a></code></span>
+<span class="codeline" id="line-27"><code>}</code></span>
+<span class="codeline" id="line-28"><code></code></span>
+<span class="codeline" id="line-29"><code><span class="comment">// Vector represents a vector with an associated element increment.</span></code></span>
+<span class="codeline" id="line-30"><code><span class="keyword">type</span> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Vector" class="ident">Vector</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-31"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..Vector.N.html" class="ident">N</a>    <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-32"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..Vector.Data.html" class="ident">Data</a> []<a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a></code></span>
+<span class="codeline" id="line-33"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..Vector.Inc^740a3.html" class="ident">Inc</a>  <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-34"><code>}</code></span>
+<span class="codeline" id="line-35"><code></code></span>
+<span class="codeline" id="line-36"><code><span class="comment">// General represents a matrix using the conventional storage scheme.</span></code></span>
+<span class="codeline" id="line-37"><code><span class="keyword">type</span> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-General" class="ident">General</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-38"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..General.Rows.html" class="ident">Rows</a>, <a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..General.Cols.html" class="ident">Cols</a> <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-39"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..General.Data.html" class="ident">Data</a>       []<a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a></code></span>
+<span class="codeline" id="line-40"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..General.Stride.html" class="ident">Stride</a>     <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-41"><code>}</code></span>
+<span class="codeline" id="line-42"><code></code></span>
+<span class="codeline" id="line-43"><code><span class="comment">// Band represents a band matrix using the band storage scheme.</span></code></span>
+<span class="codeline" id="line-44"><code><span class="keyword">type</span> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Band" class="ident">Band</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-45"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..Band.Rows.html" class="ident">Rows</a>, <a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..Band.Cols.html" class="ident">Cols</a> <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-46"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..Band.KL.html" class="ident">KL</a>, <a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..Band.KU.html" class="ident">KU</a>     <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-47"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..Band.Data.html" class="ident">Data</a>       []<a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a></code></span>
+<span class="codeline" id="line-48"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..Band.Stride.html" class="ident">Stride</a>     <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-49"><code>}</code></span>
+<span class="codeline" id="line-50"><code></code></span>
+<span class="codeline" id="line-51"><code><span class="comment">// Triangular represents a triangular matrix using the conventional storage scheme.</span></code></span>
+<span class="codeline" id="line-52"><code><span class="keyword">type</span> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Triangular" class="ident">Triangular</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-53"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..Triangular.Uplo.html" class="ident">Uplo</a>   <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-43" class="ident">Uplo</a></code></span>
+<span class="codeline" id="line-54"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..Triangular.Diag.html" class="ident">Diag</a>   <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-52" class="ident">Diag</a></code></span>
+<span class="codeline" id="line-55"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..Triangular.N.html" class="ident">N</a>      <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-56"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..Triangular.Data.html" class="ident">Data</a>   []<a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a></code></span>
+<span class="codeline" id="line-57"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..Triangular.Stride.html" class="ident">Stride</a> <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-58"><code>}</code></span>
+<span class="codeline" id="line-59"><code></code></span>
+<span class="codeline" id="line-60"><code><span class="comment">// TriangularBand represents a triangular matrix using the band storage scheme.</span></code></span>
+<span class="codeline" id="line-61"><code><span class="keyword">type</span> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-TriangularBand" class="ident">TriangularBand</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-62"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..TriangularBand.Uplo.html" class="ident">Uplo</a>   <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-43" class="ident">Uplo</a></code></span>
+<span class="codeline" id="line-63"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..TriangularBand.Diag.html" class="ident">Diag</a>   <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-52" class="ident">Diag</a></code></span>
+<span class="codeline" id="line-64"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..TriangularBand.N.html" class="ident">N</a>, <a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..TriangularBand.K.html" class="ident">K</a>   <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-65"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..TriangularBand.Data.html" class="ident">Data</a>   []<a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a></code></span>
+<span class="codeline" id="line-66"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..TriangularBand.Stride.html" class="ident">Stride</a> <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-67"><code>}</code></span>
+<span class="codeline" id="line-68"><code></code></span>
+<span class="codeline" id="line-69"><code><span class="comment">// TriangularPacked represents a triangular matrix using the packed storage scheme.</span></code></span>
+<span class="codeline" id="line-70"><code><span class="keyword">type</span> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-TriangularPacked" class="ident">TriangularPacked</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-71"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..TriangularPacked.Uplo.html" class="ident">Uplo</a> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-43" class="ident">Uplo</a></code></span>
+<span class="codeline" id="line-72"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..TriangularPacked.Diag.html" class="ident">Diag</a> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-52" class="ident">Diag</a></code></span>
+<span class="codeline" id="line-73"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..TriangularPacked.N.html" class="ident">N</a>    <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-74"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..TriangularPacked.Data.html" class="ident">Data</a> []<a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a></code></span>
+<span class="codeline" id="line-75"><code>}</code></span>
+<span class="codeline" id="line-76"><code></code></span>
+<span class="codeline" id="line-77"><code><span class="comment">// Symmetric represents a symmetric matrix using the conventional storage scheme.</span></code></span>
+<span class="codeline" id="line-78"><code><span class="keyword">type</span> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Symmetric" class="ident">Symmetric</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-79"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..Symmetric.Uplo.html" class="ident">Uplo</a>   <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-43" class="ident">Uplo</a></code></span>
+<span class="codeline" id="line-80"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..Symmetric.N.html" class="ident">N</a>      <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-81"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..Symmetric.Data.html" class="ident">Data</a>   []<a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a></code></span>
+<span class="codeline" id="line-82"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..Symmetric.Stride.html" class="ident">Stride</a> <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-83"><code>}</code></span>
+<span class="codeline" id="line-84"><code></code></span>
+<span class="codeline" id="line-85"><code><span class="comment">// SymmetricBand represents a symmetric matrix using the band storage scheme.</span></code></span>
+<span class="codeline" id="line-86"><code><span class="keyword">type</span> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-SymmetricBand" class="ident">SymmetricBand</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-87"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..SymmetricBand.Uplo.html" class="ident">Uplo</a>   <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-43" class="ident">Uplo</a></code></span>
+<span class="codeline" id="line-88"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..SymmetricBand.N.html" class="ident">N</a>, <a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..SymmetricBand.K.html" class="ident">K</a>   <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-89"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..SymmetricBand.Data.html" class="ident">Data</a>   []<a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a></code></span>
+<span class="codeline" id="line-90"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..SymmetricBand.Stride.html" class="ident">Stride</a> <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-91"><code>}</code></span>
+<span class="codeline" id="line-92"><code></code></span>
+<span class="codeline" id="line-93"><code><span class="comment">// SymmetricPacked represents a symmetric matrix using the packed storage scheme.</span></code></span>
+<span class="codeline" id="line-94"><code><span class="keyword">type</span> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-SymmetricPacked" class="ident">SymmetricPacked</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-95"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..SymmetricPacked.Uplo.html" class="ident">Uplo</a> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-43" class="ident">Uplo</a></code></span>
+<span class="codeline" id="line-96"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..SymmetricPacked.N.html" class="ident">N</a>    <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-97"><code>	<a href="../../../../../../use/gonum.org/v1/gonum/blas/blas64..SymmetricPacked.Data.html" class="ident">Data</a> []<a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a></code></span>
+<span class="codeline" id="line-98"><code>}</code></span>
+<span class="codeline" id="line-99"><code></code></span>
+<span class="codeline" id="line-100"><code><span class="comment">// Level 1</span></code></span>
+<span class="codeline" id="line-101"><code></code></span>
+<span class="codeline" id="line-102"><code><span class="keyword">const</span> (</code></span>
+<span class="codeline" id="line-103"><code>	<a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-negInc" class="ident">negInc</a>    = <span class="lit-string">"blas64: negative vector increment"</span></code></span>
+<span class="codeline" id="line-104"><code>	<a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-badLength" class="ident">badLength</a> = <span class="lit-string">"blas64: vector length mismatch"</span></code></span>
+<span class="codeline" id="line-105"><code>)</code></span>
+<span class="codeline" id="line-106"><code></code></span>
+<span class="codeline" id="line-107"><code><span class="comment">// Dot computes the dot product of the two vectors:</span></code></span>
+<span class="codeline" id="line-108"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-109"><code><span class="comment">//	\sum_i x[i]*y[i].</span></code></span>
+<span class="codeline" id="line-110"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-111"><code><span class="comment">// Dot will panic if the lengths of x and y do not match.</span></code></span>
+<span class="codeline" id="line-112"><code><span class="keyword">func</span> <label for="r3" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Dot" class="ident">Dot</a></label>(<label for="r4" class="ident">x</label>, <label for="r5" class="ident">y</label> <a href="#line-30" class="ident">Vector</a>) <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a> {</code></span>
+<span class="codeline" id="line-113"><code>	<span class="keyword">if</span> <label for="r4" class="ident">x</label>.<a href="#line-31" class="ident">N</a> != <label for="r5" class="ident">y</label>.<a href="#line-31" class="ident">N</a> {</code></span>
+<span class="codeline" id="line-114"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="#line-104" class="ident">badLength</a>)</code></span>
+<span class="codeline" id="line-115"><code>	}</code></span>
+<span class="codeline" id="line-116"><code>	<span class="keyword">return</span> <a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-131" class="ident">Ddot</a>(<label for="r4" class="ident">x</label>.<a href="#line-31" class="ident">N</a>, <label for="r4" class="ident">x</label>.<a href="#line-32" class="ident">Data</a>, <label for="r4" class="ident">x</label>.<a href="#line-33" class="ident">Inc</a>, <label for="r5" class="ident">y</label>.<a href="#line-32" class="ident">Data</a>, <label for="r5" class="ident">y</label>.<a href="#line-33" class="ident">Inc</a>)</code></span>
+<span class="codeline" id="line-117"><code>}</code></span>
+<span class="codeline" id="line-118"><code></code></span>
+<span class="codeline" id="line-119"><code><span class="comment">// Nrm2 computes the Euclidean norm of the vector x:</span></code></span>
+<span class="codeline" id="line-120"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-121"><code><span class="comment">//	sqrt(\sum_i x[i]*x[i]).</span></code></span>
+<span class="codeline" id="line-122"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-123"><code><span class="comment">// Nrm2 will panic if the vector increment is negative.</span></code></span>
+<span class="codeline" id="line-124"><code><span class="keyword">func</span> <label for="r6" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Nrm2" class="ident">Nrm2</a></label>(<label for="r7" class="ident">x</label> <a href="#line-30" class="ident">Vector</a>) <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a> {</code></span>
+<span class="codeline" id="line-125"><code>	<span class="keyword">if</span> <label for="r7" class="ident">x</label>.<a href="#line-33" class="ident">Inc</a> &lt; <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-126"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="#line-103" class="ident">negInc</a>)</code></span>
+<span class="codeline" id="line-127"><code>	}</code></span>
+<span class="codeline" id="line-128"><code>	<span class="keyword">return</span> <a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-132" class="ident">Dnrm2</a>(<label for="r7" class="ident">x</label>.<a href="#line-31" class="ident">N</a>, <label for="r7" class="ident">x</label>.<a href="#line-32" class="ident">Data</a>, <label for="r7" class="ident">x</label>.<a href="#line-33" class="ident">Inc</a>)</code></span>
+<span class="codeline" id="line-129"><code>}</code></span>
+<span class="codeline" id="line-130"><code></code></span>
+<span class="codeline" id="line-131"><code><span class="comment">// Asum computes the sum of the absolute values of the elements of x:</span></code></span>
+<span class="codeline" id="line-132"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-133"><code><span class="comment">//	\sum_i |x[i]|.</span></code></span>
+<span class="codeline" id="line-134"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-135"><code><span class="comment">// Asum will panic if the vector increment is negative.</span></code></span>
+<span class="codeline" id="line-136"><code><span class="keyword">func</span> <label for="r8" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Asum" class="ident">Asum</a></label>(<label for="r9" class="ident">x</label> <a href="#line-30" class="ident">Vector</a>) <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a> {</code></span>
+<span class="codeline" id="line-137"><code>	<span class="keyword">if</span> <label for="r9" class="ident">x</label>.<a href="#line-33" class="ident">Inc</a> &lt; <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-138"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="#line-103" class="ident">negInc</a>)</code></span>
+<span class="codeline" id="line-139"><code>	}</code></span>
+<span class="codeline" id="line-140"><code>	<span class="keyword">return</span> <a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-133" class="ident">Dasum</a>(<label for="r9" class="ident">x</label>.<a href="#line-31" class="ident">N</a>, <label for="r9" class="ident">x</label>.<a href="#line-32" class="ident">Data</a>, <label for="r9" class="ident">x</label>.<a href="#line-33" class="ident">Inc</a>)</code></span>
+<span class="codeline" id="line-141"><code>}</code></span>
+<span class="codeline" id="line-142"><code></code></span>
+<span class="codeline" id="line-143"><code><span class="comment">// Iamax returns the index of an element of x with the largest absolute value.</span></code></span>
+<span class="codeline" id="line-144"><code><span class="comment">// If there are multiple such indices the earliest is returned.</span></code></span>
+<span class="codeline" id="line-145"><code><span class="comment">// Iamax returns -1 if n == 0.</span></code></span>
+<span class="codeline" id="line-146"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-147"><code><span class="comment">// Iamax will panic if the vector increment is negative.</span></code></span>
+<span class="codeline" id="line-148"><code><span class="keyword">func</span> <label for="r10" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Iamax" class="ident">Iamax</a></label>(<label for="r11" class="ident">x</label> <a href="#line-30" class="ident">Vector</a>) <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a> {</code></span>
+<span class="codeline" id="line-149"><code>	<span class="keyword">if</span> <label for="r11" class="ident">x</label>.<a href="#line-33" class="ident">Inc</a> &lt; <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-150"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="#line-103" class="ident">negInc</a>)</code></span>
+<span class="codeline" id="line-151"><code>	}</code></span>
+<span class="codeline" id="line-152"><code>	<span class="keyword">return</span> <a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-134" class="ident">Idamax</a>(<label for="r11" class="ident">x</label>.<a href="#line-31" class="ident">N</a>, <label for="r11" class="ident">x</label>.<a href="#line-32" class="ident">Data</a>, <label for="r11" class="ident">x</label>.<a href="#line-33" class="ident">Inc</a>)</code></span>
+<span class="codeline" id="line-153"><code>}</code></span>
+<span class="codeline" id="line-154"><code></code></span>
+<span class="codeline" id="line-155"><code><span class="comment">// Swap exchanges the elements of the two vectors:</span></code></span>
+<span class="codeline" id="line-156"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-157"><code><span class="comment">//	x[i], y[i] = y[i], x[i] for all i.</span></code></span>
+<span class="codeline" id="line-158"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-159"><code><span class="comment">// Swap will panic if the lengths of x and y do not match.</span></code></span>
+<span class="codeline" id="line-160"><code><span class="keyword">func</span> <label for="r12" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Swap" class="ident">Swap</a></label>(<label for="r13" class="ident">x</label>, <label for="r14" class="ident">y</label> <a href="#line-30" class="ident">Vector</a>) {</code></span>
+<span class="codeline" id="line-161"><code>	<span class="keyword">if</span> <label for="r13" class="ident">x</label>.<a href="#line-31" class="ident">N</a> != <label for="r14" class="ident">y</label>.<a href="#line-31" class="ident">N</a> {</code></span>
+<span class="codeline" id="line-162"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="#line-104" class="ident">badLength</a>)</code></span>
+<span class="codeline" id="line-163"><code>	}</code></span>
+<span class="codeline" id="line-164"><code>	<a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-135" class="ident">Dswap</a>(<label for="r13" class="ident">x</label>.<a href="#line-31" class="ident">N</a>, <label for="r13" class="ident">x</label>.<a href="#line-32" class="ident">Data</a>, <label for="r13" class="ident">x</label>.<a href="#line-33" class="ident">Inc</a>, <label for="r14" class="ident">y</label>.<a href="#line-32" class="ident">Data</a>, <label for="r14" class="ident">y</label>.<a href="#line-33" class="ident">Inc</a>)</code></span>
+<span class="codeline" id="line-165"><code>}</code></span>
+<span class="codeline" id="line-166"><code></code></span>
+<span class="codeline" id="line-167"><code><span class="comment">// Copy copies the elements of x into the elements of y:</span></code></span>
+<span class="codeline" id="line-168"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-169"><code><span class="comment">//	y[i] = x[i] for all i.</span></code></span>
+<span class="codeline" id="line-170"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-171"><code><span class="comment">// Copy will panic if the lengths of x and y do not match.</span></code></span>
+<span class="codeline" id="line-172"><code><span class="keyword">func</span> <label for="r15" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Copy" class="ident">Copy</a></label>(<label for="r16" class="ident">x</label>, <label for="r17" class="ident">y</label> <a href="#line-30" class="ident">Vector</a>) {</code></span>
+<span class="codeline" id="line-173"><code>	<span class="keyword">if</span> <label for="r16" class="ident">x</label>.<a href="#line-31" class="ident">N</a> != <label for="r17" class="ident">y</label>.<a href="#line-31" class="ident">N</a> {</code></span>
+<span class="codeline" id="line-174"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="#line-104" class="ident">badLength</a>)</code></span>
+<span class="codeline" id="line-175"><code>	}</code></span>
+<span class="codeline" id="line-176"><code>	<a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-136" class="ident">Dcopy</a>(<label for="r16" class="ident">x</label>.<a href="#line-31" class="ident">N</a>, <label for="r16" class="ident">x</label>.<a href="#line-32" class="ident">Data</a>, <label for="r16" class="ident">x</label>.<a href="#line-33" class="ident">Inc</a>, <label for="r17" class="ident">y</label>.<a href="#line-32" class="ident">Data</a>, <label for="r17" class="ident">y</label>.<a href="#line-33" class="ident">Inc</a>)</code></span>
+<span class="codeline" id="line-177"><code>}</code></span>
+<span class="codeline" id="line-178"><code></code></span>
+<span class="codeline" id="line-179"><code><span class="comment">// Axpy adds x scaled by alpha to y:</span></code></span>
+<span class="codeline" id="line-180"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-181"><code><span class="comment">//	y[i] += alpha*x[i] for all i.</span></code></span>
+<span class="codeline" id="line-182"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-183"><code><span class="comment">// Axpy will panic if the lengths of x and y do not match.</span></code></span>
+<span class="codeline" id="line-184"><code><span class="keyword">func</span> <label for="r18" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Axpy" class="ident">Axpy</a></label>(<label for="r19" class="ident">alpha</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r20" class="ident">x</label>, <label for="r21" class="ident">y</label> <a href="#line-30" class="ident">Vector</a>) {</code></span>
+<span class="codeline" id="line-185"><code>	<span class="keyword">if</span> <label for="r20" class="ident">x</label>.<a href="#line-31" class="ident">N</a> != <label for="r21" class="ident">y</label>.<a href="#line-31" class="ident">N</a> {</code></span>
+<span class="codeline" id="line-186"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="#line-104" class="ident">badLength</a>)</code></span>
+<span class="codeline" id="line-187"><code>	}</code></span>
+<span class="codeline" id="line-188"><code>	<a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-137" class="ident">Daxpy</a>(<label for="r20" class="ident">x</label>.<a href="#line-31" class="ident">N</a>, <label for="r19" class="ident">alpha</label>, <label for="r20" class="ident">x</label>.<a href="#line-32" class="ident">Data</a>, <label for="r20" class="ident">x</label>.<a href="#line-33" class="ident">Inc</a>, <label for="r21" class="ident">y</label>.<a href="#line-32" class="ident">Data</a>, <label for="r21" class="ident">y</label>.<a href="#line-33" class="ident">Inc</a>)</code></span>
+<span class="codeline" id="line-189"><code>}</code></span>
+<span class="codeline" id="line-190"><code></code></span>
+<span class="codeline" id="line-191"><code><span class="comment">// Rotg computes the parameters of a Givens plane rotation so that</span></code></span>
+<span class="codeline" id="line-192"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-193"><code><span class="comment">//	⎡ c s⎤   ⎡a⎤   ⎡r⎤</span></code></span>
+<span class="codeline" id="line-194"><code><span class="comment">//	⎣-s c⎦ * ⎣b⎦ = ⎣0⎦</span></code></span>
+<span class="codeline" id="line-195"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-196"><code><span class="comment">// where a and b are the Cartesian coordinates of a given point.</span></code></span>
+<span class="codeline" id="line-197"><code><span class="comment">// c, s, and r are defined as</span></code></span>
+<span class="codeline" id="line-198"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-199"><code><span class="comment">//	r = ±Sqrt(a^2 + b^2),</span></code></span>
+<span class="codeline" id="line-200"><code><span class="comment">//	c = a/r, the cosine of the rotation angle,</span></code></span>
+<span class="codeline" id="line-201"><code><span class="comment">//	s = a/r, the sine of the rotation angle,</span></code></span>
+<span class="codeline" id="line-202"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-203"><code><span class="comment">// and z is defined such that</span></code></span>
+<span class="codeline" id="line-204"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-205"><code><span class="comment">//	if |a| &gt; |b|,        z = s,</span></code></span>
+<span class="codeline" id="line-206"><code><span class="comment">//	otherwise if c != 0, z = 1/c,</span></code></span>
+<span class="codeline" id="line-207"><code><span class="comment">//	otherwise            z = 1.</span></code></span>
+<span class="codeline" id="line-208"><code><span class="keyword">func</span> <label for="r22" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Rotg" class="ident">Rotg</a></label>(<label for="r23" class="ident">a</label>, <label for="r24" class="ident">b</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>) (<label for="r25" class="ident">c</label>, <label for="r26" class="ident">s</label>, <label for="r27" class="ident">r</label>, <label for="r28" class="ident">z</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>) {</code></span>
+<span class="codeline" id="line-209"><code>	<span class="keyword">return</span> <a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-138" class="ident">Drotg</a>(<label for="r23" class="ident">a</label>, <label for="r24" class="ident">b</label>)</code></span>
+<span class="codeline" id="line-210"><code>}</code></span>
+<span class="codeline" id="line-211"><code></code></span>
+<span class="codeline" id="line-212"><code><span class="comment">// Rotmg computes the modified Givens rotation. See</span></code></span>
+<span class="codeline" id="line-213"><code><span class="comment">// http://www.netlib.org/lapack/explore-html/df/deb/drotmg_8f.html</span></code></span>
+<span class="codeline" id="line-214"><code><span class="comment">// for more details.</span></code></span>
+<span class="codeline" id="line-215"><code><span class="keyword">func</span> <label for="r29" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Rotmg" class="ident">Rotmg</a></label>(<label for="r30" class="ident">d1</label>, <label for="r31" class="ident">d2</label>, <label for="r32" class="ident">b1</label>, <label for="r33" class="ident">b2</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>) (<label for="r34" class="ident">p</label> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-28" class="ident">DrotmParams</a>, <label for="r35" class="ident">rd1</label>, <label for="r36" class="ident">rd2</label>, <label for="r37" class="ident">rb1</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>) {</code></span>
+<span class="codeline" id="line-216"><code>	<span class="keyword">return</span> <a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-139" class="ident">Drotmg</a>(<label for="r30" class="ident">d1</label>, <label for="r31" class="ident">d2</label>, <label for="r32" class="ident">b1</label>, <label for="r33" class="ident">b2</label>)</code></span>
+<span class="codeline" id="line-217"><code>}</code></span>
+<span class="codeline" id="line-218"><code></code></span>
+<span class="codeline" id="line-219"><code><span class="comment">// Rot applies a plane transformation to n points represented by the vectors x</span></code></span>
+<span class="codeline" id="line-220"><code><span class="comment">// and y:</span></code></span>
+<span class="codeline" id="line-221"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-222"><code><span class="comment">//	x[i] =  c*x[i] + s*y[i],</span></code></span>
+<span class="codeline" id="line-223"><code><span class="comment">//	y[i] = -s*x[i] + c*y[i], for all i.</span></code></span>
+<span class="codeline" id="line-224"><code><span class="keyword">func</span> <label for="r38" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Rot" class="ident">Rot</a></label>(<label for="r39" class="ident">x</label>, <label for="r40" class="ident">y</label> <a href="#line-30" class="ident">Vector</a>, <label for="r41" class="ident">c</label>, <label for="r42" class="ident">s</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>) {</code></span>
+<span class="codeline" id="line-225"><code>	<span class="keyword">if</span> <label for="r39" class="ident">x</label>.<a href="#line-31" class="ident">N</a> != <label for="r40" class="ident">y</label>.<a href="#line-31" class="ident">N</a> {</code></span>
+<span class="codeline" id="line-226"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="#line-104" class="ident">badLength</a>)</code></span>
+<span class="codeline" id="line-227"><code>	}</code></span>
+<span class="codeline" id="line-228"><code>	<a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-140" class="ident">Drot</a>(<label for="r39" class="ident">x</label>.<a href="#line-31" class="ident">N</a>, <label for="r39" class="ident">x</label>.<a href="#line-32" class="ident">Data</a>, <label for="r39" class="ident">x</label>.<a href="#line-33" class="ident">Inc</a>, <label for="r40" class="ident">y</label>.<a href="#line-32" class="ident">Data</a>, <label for="r40" class="ident">y</label>.<a href="#line-33" class="ident">Inc</a>, <label for="r41" class="ident">c</label>, <label for="r42" class="ident">s</label>)</code></span>
+<span class="codeline" id="line-229"><code>}</code></span>
+<span class="codeline" id="line-230"><code></code></span>
+<span class="codeline" id="line-231"><code><span class="comment">// Rotm applies the modified Givens rotation to n points represented by the</span></code></span>
+<span class="codeline" id="line-232"><code><span class="comment">// vectors x and y.</span></code></span>
+<span class="codeline" id="line-233"><code><span class="keyword">func</span> <label for="r43" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Rotm" class="ident">Rotm</a></label>(<label for="r44" class="ident">x</label>, <label for="r45" class="ident">y</label> <a href="#line-30" class="ident">Vector</a>, <label for="r46" class="ident">p</label> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-28" class="ident">DrotmParams</a>) {</code></span>
+<span class="codeline" id="line-234"><code>	<span class="keyword">if</span> <label for="r44" class="ident">x</label>.<a href="#line-31" class="ident">N</a> != <label for="r45" class="ident">y</label>.<a href="#line-31" class="ident">N</a> {</code></span>
+<span class="codeline" id="line-235"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="#line-104" class="ident">badLength</a>)</code></span>
+<span class="codeline" id="line-236"><code>	}</code></span>
+<span class="codeline" id="line-237"><code>	<a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-141" class="ident">Drotm</a>(<label for="r44" class="ident">x</label>.<a href="#line-31" class="ident">N</a>, <label for="r44" class="ident">x</label>.<a href="#line-32" class="ident">Data</a>, <label for="r44" class="ident">x</label>.<a href="#line-33" class="ident">Inc</a>, <label for="r45" class="ident">y</label>.<a href="#line-32" class="ident">Data</a>, <label for="r45" class="ident">y</label>.<a href="#line-33" class="ident">Inc</a>, <label for="r46" class="ident">p</label>)</code></span>
+<span class="codeline" id="line-238"><code>}</code></span>
+<span class="codeline" id="line-239"><code></code></span>
+<span class="codeline" id="line-240"><code><span class="comment">// Scal scales the vector x by alpha:</span></code></span>
+<span class="codeline" id="line-241"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-242"><code><span class="comment">//	x[i] *= alpha for all i.</span></code></span>
+<span class="codeline" id="line-243"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-244"><code><span class="comment">// Scal will panic if the vector increment is negative.</span></code></span>
+<span class="codeline" id="line-245"><code><span class="keyword">func</span> <label for="r47" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Scal" class="ident">Scal</a></label>(<label for="r48" class="ident">alpha</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r49" class="ident">x</label> <a href="#line-30" class="ident">Vector</a>) {</code></span>
+<span class="codeline" id="line-246"><code>	<span class="keyword">if</span> <label for="r49" class="ident">x</label>.<a href="#line-33" class="ident">Inc</a> &lt; <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-247"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="#line-103" class="ident">negInc</a>)</code></span>
+<span class="codeline" id="line-248"><code>	}</code></span>
+<span class="codeline" id="line-249"><code>	<a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-142" class="ident">Dscal</a>(<label for="r49" class="ident">x</label>.<a href="#line-31" class="ident">N</a>, <label for="r48" class="ident">alpha</label>, <label for="r49" class="ident">x</label>.<a href="#line-32" class="ident">Data</a>, <label for="r49" class="ident">x</label>.<a href="#line-33" class="ident">Inc</a>)</code></span>
+<span class="codeline" id="line-250"><code>}</code></span>
+<span class="codeline" id="line-251"><code></code></span>
+<span class="codeline" id="line-252"><code><span class="comment">// Level 2</span></code></span>
+<span class="codeline" id="line-253"><code></code></span>
+<span class="codeline" id="line-254"><code><span class="comment">// Gemv computes</span></code></span>
+<span class="codeline" id="line-255"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-256"><code><span class="comment">//	y = alpha * A * x + beta * y   if t == blas.NoTrans,</span></code></span>
+<span class="codeline" id="line-257"><code><span class="comment">//	y = alpha * Aᵀ * x + beta * y  if t == blas.Trans or blas.ConjTrans,</span></code></span>
+<span class="codeline" id="line-258"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-259"><code><span class="comment">// where A is an m×n dense matrix, x and y are vectors, and alpha and beta are scalars.</span></code></span>
+<span class="codeline" id="line-260"><code><span class="keyword">func</span> <label for="r50" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Gemv" class="ident">Gemv</a></label>(<label for="r51" class="ident">t</label> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-34" class="ident">Transpose</a>, <label for="r52" class="ident">alpha</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r53" class="ident">a</label> <a href="#line-37" class="ident">General</a>, <label for="r54" class="ident">x</label> <a href="#line-30" class="ident">Vector</a>, <label for="r55" class="ident">beta</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r56" class="ident">y</label> <a href="#line-30" class="ident">Vector</a>) {</code></span>
+<span class="codeline" id="line-261"><code>	<a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-147" class="ident">Dgemv</a>(<label for="r51" class="ident">t</label>, <label for="r53" class="ident">a</label>.<a href="#line-38" class="ident">Rows</a>, <label for="r53" class="ident">a</label>.<a href="#line-38" class="ident">Cols</a>, <label for="r52" class="ident">alpha</label>, <label for="r53" class="ident">a</label>.<a href="#line-39" class="ident">Data</a>, <label for="r53" class="ident">a</label>.<a href="#line-40" class="ident">Stride</a>, <label for="r54" class="ident">x</label>.<a href="#line-32" class="ident">Data</a>, <label for="r54" class="ident">x</label>.<a href="#line-33" class="ident">Inc</a>, <label for="r55" class="ident">beta</label>, <label for="r56" class="ident">y</label>.<a href="#line-32" class="ident">Data</a>, <label for="r56" class="ident">y</label>.<a href="#line-33" class="ident">Inc</a>)</code></span>
+<span class="codeline" id="line-262"><code>}</code></span>
+<span class="codeline" id="line-263"><code></code></span>
+<span class="codeline" id="line-264"><code><span class="comment">// Gbmv computes</span></code></span>
+<span class="codeline" id="line-265"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-266"><code><span class="comment">//	y = alpha * A * x + beta * y   if t == blas.NoTrans,</span></code></span>
+<span class="codeline" id="line-267"><code><span class="comment">//	y = alpha * Aᵀ * x + beta * y  if t == blas.Trans or blas.ConjTrans,</span></code></span>
+<span class="codeline" id="line-268"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-269"><code><span class="comment">// where A is an m×n band matrix, x and y are vectors, and alpha and beta are scalars.</span></code></span>
+<span class="codeline" id="line-270"><code><span class="keyword">func</span> <label for="r57" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Gbmv" class="ident">Gbmv</a></label>(<label for="r58" class="ident">t</label> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-34" class="ident">Transpose</a>, <label for="r59" class="ident">alpha</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r60" class="ident">a</label> <a href="#line-44" class="ident">Band</a>, <label for="r61" class="ident">x</label> <a href="#line-30" class="ident">Vector</a>, <label for="r62" class="ident">beta</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r63" class="ident">y</label> <a href="#line-30" class="ident">Vector</a>) {</code></span>
+<span class="codeline" id="line-271"><code>	<a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-148" class="ident">Dgbmv</a>(<label for="r58" class="ident">t</label>, <label for="r60" class="ident">a</label>.<a href="#line-45" class="ident">Rows</a>, <label for="r60" class="ident">a</label>.<a href="#line-45" class="ident">Cols</a>, <label for="r60" class="ident">a</label>.<a href="#line-46" class="ident">KL</a>, <label for="r60" class="ident">a</label>.<a href="#line-46" class="ident">KU</a>, <label for="r59" class="ident">alpha</label>, <label for="r60" class="ident">a</label>.<a href="#line-47" class="ident">Data</a>, <label for="r60" class="ident">a</label>.<a href="#line-48" class="ident">Stride</a>, <label for="r61" class="ident">x</label>.<a href="#line-32" class="ident">Data</a>, <label for="r61" class="ident">x</label>.<a href="#line-33" class="ident">Inc</a>, <label for="r62" class="ident">beta</label>, <label for="r63" class="ident">y</label>.<a href="#line-32" class="ident">Data</a>, <label for="r63" class="ident">y</label>.<a href="#line-33" class="ident">Inc</a>)</code></span>
+<span class="codeline" id="line-272"><code>}</code></span>
+<span class="codeline" id="line-273"><code></code></span>
+<span class="codeline" id="line-274"><code><span class="comment">// Trmv computes</span></code></span>
+<span class="codeline" id="line-275"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-276"><code><span class="comment">//	x = A * x   if t == blas.NoTrans,</span></code></span>
+<span class="codeline" id="line-277"><code><span class="comment">//	x = Aᵀ * x  if t == blas.Trans or blas.ConjTrans,</span></code></span>
+<span class="codeline" id="line-278"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-279"><code><span class="comment">// where A is an n×n triangular matrix, and x is a vector.</span></code></span>
+<span class="codeline" id="line-280"><code><span class="keyword">func</span> <label for="r64" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Trmv" class="ident">Trmv</a></label>(<label for="r65" class="ident">t</label> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-34" class="ident">Transpose</a>, <label for="r66" class="ident">a</label> <a href="#line-52" class="ident">Triangular</a>, <label for="r67" class="ident">x</label> <a href="#line-30" class="ident">Vector</a>) {</code></span>
+<span class="codeline" id="line-281"><code>	<a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-149" class="ident">Dtrmv</a>(<label for="r66" class="ident">a</label>.<a href="#line-53" class="ident">Uplo</a>, <label for="r65" class="ident">t</label>, <label for="r66" class="ident">a</label>.<a href="#line-54" class="ident">Diag</a>, <label for="r66" class="ident">a</label>.<a href="#line-55" class="ident">N</a>, <label for="r66" class="ident">a</label>.<a href="#line-56" class="ident">Data</a>, <label for="r66" class="ident">a</label>.<a href="#line-57" class="ident">Stride</a>, <label for="r67" class="ident">x</label>.<a href="#line-32" class="ident">Data</a>, <label for="r67" class="ident">x</label>.<a href="#line-33" class="ident">Inc</a>)</code></span>
+<span class="codeline" id="line-282"><code>}</code></span>
+<span class="codeline" id="line-283"><code></code></span>
+<span class="codeline" id="line-284"><code><span class="comment">// Tbmv computes</span></code></span>
+<span class="codeline" id="line-285"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-286"><code><span class="comment">//	x = A * x   if t == blas.NoTrans,</span></code></span>
+<span class="codeline" id="line-287"><code><span class="comment">//	x = Aᵀ * x  if t == blas.Trans or blas.ConjTrans,</span></code></span>
+<span class="codeline" id="line-288"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-289"><code><span class="comment">// where A is an n×n triangular band matrix, and x is a vector.</span></code></span>
+<span class="codeline" id="line-290"><code><span class="keyword">func</span> <label for="r68" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Tbmv" class="ident">Tbmv</a></label>(<label for="r69" class="ident">t</label> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-34" class="ident">Transpose</a>, <label for="r70" class="ident">a</label> <a href="#line-61" class="ident">TriangularBand</a>, <label for="r71" class="ident">x</label> <a href="#line-30" class="ident">Vector</a>) {</code></span>
+<span class="codeline" id="line-291"><code>	<a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-150" class="ident">Dtbmv</a>(<label for="r70" class="ident">a</label>.<a href="#line-62" class="ident">Uplo</a>, <label for="r69" class="ident">t</label>, <label for="r70" class="ident">a</label>.<a href="#line-63" class="ident">Diag</a>, <label for="r70" class="ident">a</label>.<a href="#line-64" class="ident">N</a>, <label for="r70" class="ident">a</label>.<a href="#line-64" class="ident">K</a>, <label for="r70" class="ident">a</label>.<a href="#line-65" class="ident">Data</a>, <label for="r70" class="ident">a</label>.<a href="#line-66" class="ident">Stride</a>, <label for="r71" class="ident">x</label>.<a href="#line-32" class="ident">Data</a>, <label for="r71" class="ident">x</label>.<a href="#line-33" class="ident">Inc</a>)</code></span>
+<span class="codeline" id="line-292"><code>}</code></span>
+<span class="codeline" id="line-293"><code></code></span>
+<span class="codeline" id="line-294"><code><span class="comment">// Tpmv computes</span></code></span>
+<span class="codeline" id="line-295"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-296"><code><span class="comment">//	x = A * x   if t == blas.NoTrans,</span></code></span>
+<span class="codeline" id="line-297"><code><span class="comment">//	x = Aᵀ * x  if t == blas.Trans or blas.ConjTrans,</span></code></span>
+<span class="codeline" id="line-298"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-299"><code><span class="comment">// where A is an n×n triangular matrix in packed format, and x is a vector.</span></code></span>
+<span class="codeline" id="line-300"><code><span class="keyword">func</span> <label for="r72" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Tpmv" class="ident">Tpmv</a></label>(<label for="r73" class="ident">t</label> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-34" class="ident">Transpose</a>, <label for="r74" class="ident">a</label> <a href="#line-70" class="ident">TriangularPacked</a>, <label for="r75" class="ident">x</label> <a href="#line-30" class="ident">Vector</a>) {</code></span>
+<span class="codeline" id="line-301"><code>	<a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-151" class="ident">Dtpmv</a>(<label for="r74" class="ident">a</label>.<a href="#line-71" class="ident">Uplo</a>, <label for="r73" class="ident">t</label>, <label for="r74" class="ident">a</label>.<a href="#line-72" class="ident">Diag</a>, <label for="r74" class="ident">a</label>.<a href="#line-73" class="ident">N</a>, <label for="r74" class="ident">a</label>.<a href="#line-74" class="ident">Data</a>, <label for="r75" class="ident">x</label>.<a href="#line-32" class="ident">Data</a>, <label for="r75" class="ident">x</label>.<a href="#line-33" class="ident">Inc</a>)</code></span>
+<span class="codeline" id="line-302"><code>}</code></span>
+<span class="codeline" id="line-303"><code></code></span>
+<span class="codeline" id="line-304"><code><span class="comment">// Trsv solves</span></code></span>
+<span class="codeline" id="line-305"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-306"><code><span class="comment">//	A * x = b   if t == blas.NoTrans,</span></code></span>
+<span class="codeline" id="line-307"><code><span class="comment">//	Aᵀ * x = b  if t == blas.Trans or blas.ConjTrans,</span></code></span>
+<span class="codeline" id="line-308"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-309"><code><span class="comment">// where A is an n×n triangular matrix, and x and b are vectors.</span></code></span>
+<span class="codeline" id="line-310"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-311"><code><span class="comment">// At entry to the function, x contains the values of b, and the result is</span></code></span>
+<span class="codeline" id="line-312"><code><span class="comment">// stored in-place into x.</span></code></span>
+<span class="codeline" id="line-313"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-314"><code><span class="comment">// No test for singularity or near-singularity is included in this</span></code></span>
+<span class="codeline" id="line-315"><code><span class="comment">// routine. Such tests must be performed before calling this routine.</span></code></span>
+<span class="codeline" id="line-316"><code><span class="keyword">func</span> <label for="r76" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Trsv" class="ident">Trsv</a></label>(<label for="r77" class="ident">t</label> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-34" class="ident">Transpose</a>, <label for="r78" class="ident">a</label> <a href="#line-52" class="ident">Triangular</a>, <label for="r79" class="ident">x</label> <a href="#line-30" class="ident">Vector</a>) {</code></span>
+<span class="codeline" id="line-317"><code>	<a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-152" class="ident">Dtrsv</a>(<label for="r78" class="ident">a</label>.<a href="#line-53" class="ident">Uplo</a>, <label for="r77" class="ident">t</label>, <label for="r78" class="ident">a</label>.<a href="#line-54" class="ident">Diag</a>, <label for="r78" class="ident">a</label>.<a href="#line-55" class="ident">N</a>, <label for="r78" class="ident">a</label>.<a href="#line-56" class="ident">Data</a>, <label for="r78" class="ident">a</label>.<a href="#line-57" class="ident">Stride</a>, <label for="r79" class="ident">x</label>.<a href="#line-32" class="ident">Data</a>, <label for="r79" class="ident">x</label>.<a href="#line-33" class="ident">Inc</a>)</code></span>
+<span class="codeline" id="line-318"><code>}</code></span>
+<span class="codeline" id="line-319"><code></code></span>
+<span class="codeline" id="line-320"><code><span class="comment">// Tbsv solves</span></code></span>
+<span class="codeline" id="line-321"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-322"><code><span class="comment">//	A * x = b   if t == blas.NoTrans,</span></code></span>
+<span class="codeline" id="line-323"><code><span class="comment">//	Aᵀ * x = b  if t == blas.Trans or blas.ConjTrans,</span></code></span>
+<span class="codeline" id="line-324"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-325"><code><span class="comment">// where A is an n×n triangular band matrix, and x and b are vectors.</span></code></span>
+<span class="codeline" id="line-326"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-327"><code><span class="comment">// At entry to the function, x contains the values of b, and the result is</span></code></span>
+<span class="codeline" id="line-328"><code><span class="comment">// stored in place into x.</span></code></span>
+<span class="codeline" id="line-329"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-330"><code><span class="comment">// No test for singularity or near-singularity is included in this</span></code></span>
+<span class="codeline" id="line-331"><code><span class="comment">// routine. Such tests must be performed before calling this routine.</span></code></span>
+<span class="codeline" id="line-332"><code><span class="keyword">func</span> <label for="r80" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Tbsv" class="ident">Tbsv</a></label>(<label for="r81" class="ident">t</label> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-34" class="ident">Transpose</a>, <label for="r82" class="ident">a</label> <a href="#line-61" class="ident">TriangularBand</a>, <label for="r83" class="ident">x</label> <a href="#line-30" class="ident">Vector</a>) {</code></span>
+<span class="codeline" id="line-333"><code>	<a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-153" class="ident">Dtbsv</a>(<label for="r82" class="ident">a</label>.<a href="#line-62" class="ident">Uplo</a>, <label for="r81" class="ident">t</label>, <label for="r82" class="ident">a</label>.<a href="#line-63" class="ident">Diag</a>, <label for="r82" class="ident">a</label>.<a href="#line-64" class="ident">N</a>, <label for="r82" class="ident">a</label>.<a href="#line-64" class="ident">K</a>, <label for="r82" class="ident">a</label>.<a href="#line-65" class="ident">Data</a>, <label for="r82" class="ident">a</label>.<a href="#line-66" class="ident">Stride</a>, <label for="r83" class="ident">x</label>.<a href="#line-32" class="ident">Data</a>, <label for="r83" class="ident">x</label>.<a href="#line-33" class="ident">Inc</a>)</code></span>
+<span class="codeline" id="line-334"><code>}</code></span>
+<span class="codeline" id="line-335"><code></code></span>
+<span class="codeline" id="line-336"><code><span class="comment">// Tpsv solves</span></code></span>
+<span class="codeline" id="line-337"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-338"><code><span class="comment">//	A * x = b   if t == blas.NoTrans,</span></code></span>
+<span class="codeline" id="line-339"><code><span class="comment">//	Aᵀ * x = b  if t == blas.Trans or blas.ConjTrans,</span></code></span>
+<span class="codeline" id="line-340"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-341"><code><span class="comment">// where A is an n×n triangular matrix in packed format, and x and b are</span></code></span>
+<span class="codeline" id="line-342"><code><span class="comment">// vectors.</span></code></span>
+<span class="codeline" id="line-343"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-344"><code><span class="comment">// At entry to the function, x contains the values of b, and the result is</span></code></span>
+<span class="codeline" id="line-345"><code><span class="comment">// stored in place into x.</span></code></span>
+<span class="codeline" id="line-346"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-347"><code><span class="comment">// No test for singularity or near-singularity is included in this</span></code></span>
+<span class="codeline" id="line-348"><code><span class="comment">// routine. Such tests must be performed before calling this routine.</span></code></span>
+<span class="codeline" id="line-349"><code><span class="keyword">func</span> <label for="r84" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Tpsv" class="ident">Tpsv</a></label>(<label for="r85" class="ident">t</label> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-34" class="ident">Transpose</a>, <label for="r86" class="ident">a</label> <a href="#line-70" class="ident">TriangularPacked</a>, <label for="r87" class="ident">x</label> <a href="#line-30" class="ident">Vector</a>) {</code></span>
+<span class="codeline" id="line-350"><code>	<a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-154" class="ident">Dtpsv</a>(<label for="r86" class="ident">a</label>.<a href="#line-71" class="ident">Uplo</a>, <label for="r85" class="ident">t</label>, <label for="r86" class="ident">a</label>.<a href="#line-72" class="ident">Diag</a>, <label for="r86" class="ident">a</label>.<a href="#line-73" class="ident">N</a>, <label for="r86" class="ident">a</label>.<a href="#line-74" class="ident">Data</a>, <label for="r87" class="ident">x</label>.<a href="#line-32" class="ident">Data</a>, <label for="r87" class="ident">x</label>.<a href="#line-33" class="ident">Inc</a>)</code></span>
+<span class="codeline" id="line-351"><code>}</code></span>
+<span class="codeline" id="line-352"><code></code></span>
+<span class="codeline" id="line-353"><code><span class="comment">// Symv computes</span></code></span>
+<span class="codeline" id="line-354"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-355"><code><span class="comment">//	y = alpha * A * x + beta * y,</span></code></span>
+<span class="codeline" id="line-356"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-357"><code><span class="comment">// where A is an n×n symmetric matrix, x and y are vectors, and alpha and</span></code></span>
+<span class="codeline" id="line-358"><code><span class="comment">// beta are scalars.</span></code></span>
+<span class="codeline" id="line-359"><code><span class="keyword">func</span> <label for="r88" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Symv" class="ident">Symv</a></label>(<label for="r89" class="ident">alpha</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r90" class="ident">a</label> <a href="#line-78" class="ident">Symmetric</a>, <label for="r91" class="ident">x</label> <a href="#line-30" class="ident">Vector</a>, <label for="r92" class="ident">beta</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r93" class="ident">y</label> <a href="#line-30" class="ident">Vector</a>) {</code></span>
+<span class="codeline" id="line-360"><code>	<a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-155" class="ident">Dsymv</a>(<label for="r90" class="ident">a</label>.<a href="#line-79" class="ident">Uplo</a>, <label for="r90" class="ident">a</label>.<a href="#line-80" class="ident">N</a>, <label for="r89" class="ident">alpha</label>, <label for="r90" class="ident">a</label>.<a href="#line-81" class="ident">Data</a>, <label for="r90" class="ident">a</label>.<a href="#line-82" class="ident">Stride</a>, <label for="r91" class="ident">x</label>.<a href="#line-32" class="ident">Data</a>, <label for="r91" class="ident">x</label>.<a href="#line-33" class="ident">Inc</a>, <label for="r92" class="ident">beta</label>, <label for="r93" class="ident">y</label>.<a href="#line-32" class="ident">Data</a>, <label for="r93" class="ident">y</label>.<a href="#line-33" class="ident">Inc</a>)</code></span>
+<span class="codeline" id="line-361"><code>}</code></span>
+<span class="codeline" id="line-362"><code></code></span>
+<span class="codeline" id="line-363"><code><span class="comment">// Sbmv performs</span></code></span>
+<span class="codeline" id="line-364"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-365"><code><span class="comment">//	y = alpha * A * x + beta * y,</span></code></span>
+<span class="codeline" id="line-366"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-367"><code><span class="comment">// where A is an n×n symmetric band matrix, x and y are vectors, and alpha</span></code></span>
+<span class="codeline" id="line-368"><code><span class="comment">// and beta are scalars.</span></code></span>
+<span class="codeline" id="line-369"><code><span class="keyword">func</span> <label for="r94" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Sbmv" class="ident">Sbmv</a></label>(<label for="r95" class="ident">alpha</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r96" class="ident">a</label> <a href="#line-86" class="ident">SymmetricBand</a>, <label for="r97" class="ident">x</label> <a href="#line-30" class="ident">Vector</a>, <label for="r98" class="ident">beta</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r99" class="ident">y</label> <a href="#line-30" class="ident">Vector</a>) {</code></span>
+<span class="codeline" id="line-370"><code>	<a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-156" class="ident">Dsbmv</a>(<label for="r96" class="ident">a</label>.<a href="#line-87" class="ident">Uplo</a>, <label for="r96" class="ident">a</label>.<a href="#line-88" class="ident">N</a>, <label for="r96" class="ident">a</label>.<a href="#line-88" class="ident">K</a>, <label for="r95" class="ident">alpha</label>, <label for="r96" class="ident">a</label>.<a href="#line-89" class="ident">Data</a>, <label for="r96" class="ident">a</label>.<a href="#line-90" class="ident">Stride</a>, <label for="r97" class="ident">x</label>.<a href="#line-32" class="ident">Data</a>, <label for="r97" class="ident">x</label>.<a href="#line-33" class="ident">Inc</a>, <label for="r98" class="ident">beta</label>, <label for="r99" class="ident">y</label>.<a href="#line-32" class="ident">Data</a>, <label for="r99" class="ident">y</label>.<a href="#line-33" class="ident">Inc</a>)</code></span>
+<span class="codeline" id="line-371"><code>}</code></span>
+<span class="codeline" id="line-372"><code></code></span>
+<span class="codeline" id="line-373"><code><span class="comment">// Spmv performs</span></code></span>
+<span class="codeline" id="line-374"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-375"><code><span class="comment">//	y = alpha * A * x + beta * y,</span></code></span>
+<span class="codeline" id="line-376"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-377"><code><span class="comment">// where A is an n×n symmetric matrix in packed format, x and y are vectors,</span></code></span>
+<span class="codeline" id="line-378"><code><span class="comment">// and alpha and beta are scalars.</span></code></span>
+<span class="codeline" id="line-379"><code><span class="keyword">func</span> <label for="r100" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Spmv" class="ident">Spmv</a></label>(<label for="r101" class="ident">alpha</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r102" class="ident">a</label> <a href="#line-94" class="ident">SymmetricPacked</a>, <label for="r103" class="ident">x</label> <a href="#line-30" class="ident">Vector</a>, <label for="r104" class="ident">beta</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r105" class="ident">y</label> <a href="#line-30" class="ident">Vector</a>) {</code></span>
+<span class="codeline" id="line-380"><code>	<a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-157" class="ident">Dspmv</a>(<label for="r102" class="ident">a</label>.<a href="#line-95" class="ident">Uplo</a>, <label for="r102" class="ident">a</label>.<a href="#line-96" class="ident">N</a>, <label for="r101" class="ident">alpha</label>, <label for="r102" class="ident">a</label>.<a href="#line-97" class="ident">Data</a>, <label for="r103" class="ident">x</label>.<a href="#line-32" class="ident">Data</a>, <label for="r103" class="ident">x</label>.<a href="#line-33" class="ident">Inc</a>, <label for="r104" class="ident">beta</label>, <label for="r105" class="ident">y</label>.<a href="#line-32" class="ident">Data</a>, <label for="r105" class="ident">y</label>.<a href="#line-33" class="ident">Inc</a>)</code></span>
+<span class="codeline" id="line-381"><code>}</code></span>
+<span class="codeline" id="line-382"><code></code></span>
+<span class="codeline" id="line-383"><code><span class="comment">// Ger performs a rank-1 update</span></code></span>
+<span class="codeline" id="line-384"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-385"><code><span class="comment">//	A += alpha * x * yᵀ,</span></code></span>
+<span class="codeline" id="line-386"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-387"><code><span class="comment">// where A is an m×n dense matrix, x and y are vectors, and alpha is a scalar.</span></code></span>
+<span class="codeline" id="line-388"><code><span class="keyword">func</span> <label for="r106" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Ger" class="ident">Ger</a></label>(<label for="r107" class="ident">alpha</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r108" class="ident">x</label>, <label for="r109" class="ident">y</label> <a href="#line-30" class="ident">Vector</a>, <label for="r110" class="ident">a</label> <a href="#line-37" class="ident">General</a>) {</code></span>
+<span class="codeline" id="line-389"><code>	<a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-158" class="ident">Dger</a>(<label for="r110" class="ident">a</label>.<a href="#line-38" class="ident">Rows</a>, <label for="r110" class="ident">a</label>.<a href="#line-38" class="ident">Cols</a>, <label for="r107" class="ident">alpha</label>, <label for="r108" class="ident">x</label>.<a href="#line-32" class="ident">Data</a>, <label for="r108" class="ident">x</label>.<a href="#line-33" class="ident">Inc</a>, <label for="r109" class="ident">y</label>.<a href="#line-32" class="ident">Data</a>, <label for="r109" class="ident">y</label>.<a href="#line-33" class="ident">Inc</a>, <label for="r110" class="ident">a</label>.<a href="#line-39" class="ident">Data</a>, <label for="r110" class="ident">a</label>.<a href="#line-40" class="ident">Stride</a>)</code></span>
+<span class="codeline" id="line-390"><code>}</code></span>
+<span class="codeline" id="line-391"><code></code></span>
+<span class="codeline" id="line-392"><code><span class="comment">// Syr performs a rank-1 update</span></code></span>
+<span class="codeline" id="line-393"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-394"><code><span class="comment">//	A += alpha * x * xᵀ,</span></code></span>
+<span class="codeline" id="line-395"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-396"><code><span class="comment">// where A is an n×n symmetric matrix, x is a vector, and alpha is a scalar.</span></code></span>
+<span class="codeline" id="line-397"><code><span class="keyword">func</span> <label for="r111" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Syr" class="ident">Syr</a></label>(<label for="r112" class="ident">alpha</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r113" class="ident">x</label> <a href="#line-30" class="ident">Vector</a>, <label for="r114" class="ident">a</label> <a href="#line-78" class="ident">Symmetric</a>) {</code></span>
+<span class="codeline" id="line-398"><code>	<a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-159" class="ident">Dsyr</a>(<label for="r114" class="ident">a</label>.<a href="#line-79" class="ident">Uplo</a>, <label for="r114" class="ident">a</label>.<a href="#line-80" class="ident">N</a>, <label for="r112" class="ident">alpha</label>, <label for="r113" class="ident">x</label>.<a href="#line-32" class="ident">Data</a>, <label for="r113" class="ident">x</label>.<a href="#line-33" class="ident">Inc</a>, <label for="r114" class="ident">a</label>.<a href="#line-81" class="ident">Data</a>, <label for="r114" class="ident">a</label>.<a href="#line-82" class="ident">Stride</a>)</code></span>
+<span class="codeline" id="line-399"><code>}</code></span>
+<span class="codeline" id="line-400"><code></code></span>
+<span class="codeline" id="line-401"><code><span class="comment">// Spr performs the rank-1 update</span></code></span>
+<span class="codeline" id="line-402"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-403"><code><span class="comment">//	A += alpha * x * xᵀ,</span></code></span>
+<span class="codeline" id="line-404"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-405"><code><span class="comment">// where A is an n×n symmetric matrix in packed format, x is a vector, and</span></code></span>
+<span class="codeline" id="line-406"><code><span class="comment">// alpha is a scalar.</span></code></span>
+<span class="codeline" id="line-407"><code><span class="keyword">func</span> <label for="r115" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Spr" class="ident">Spr</a></label>(<label for="r116" class="ident">alpha</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r117" class="ident">x</label> <a href="#line-30" class="ident">Vector</a>, <label for="r118" class="ident">a</label> <a href="#line-94" class="ident">SymmetricPacked</a>) {</code></span>
+<span class="codeline" id="line-408"><code>	<a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-160" class="ident">Dspr</a>(<label for="r118" class="ident">a</label>.<a href="#line-95" class="ident">Uplo</a>, <label for="r118" class="ident">a</label>.<a href="#line-96" class="ident">N</a>, <label for="r116" class="ident">alpha</label>, <label for="r117" class="ident">x</label>.<a href="#line-32" class="ident">Data</a>, <label for="r117" class="ident">x</label>.<a href="#line-33" class="ident">Inc</a>, <label for="r118" class="ident">a</label>.<a href="#line-97" class="ident">Data</a>)</code></span>
+<span class="codeline" id="line-409"><code>}</code></span>
+<span class="codeline" id="line-410"><code></code></span>
+<span class="codeline" id="line-411"><code><span class="comment">// Syr2 performs a rank-2 update</span></code></span>
+<span class="codeline" id="line-412"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-413"><code><span class="comment">//	A += alpha * x * yᵀ + alpha * y * xᵀ,</span></code></span>
+<span class="codeline" id="line-414"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-415"><code><span class="comment">// where A is a symmetric n×n matrix, x and y are vectors, and alpha is a scalar.</span></code></span>
+<span class="codeline" id="line-416"><code><span class="keyword">func</span> <label for="r119" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Syr2" class="ident">Syr2</a></label>(<label for="r120" class="ident">alpha</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r121" class="ident">x</label>, <label for="r122" class="ident">y</label> <a href="#line-30" class="ident">Vector</a>, <label for="r123" class="ident">a</label> <a href="#line-78" class="ident">Symmetric</a>) {</code></span>
+<span class="codeline" id="line-417"><code>	<a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-161" class="ident">Dsyr2</a>(<label for="r123" class="ident">a</label>.<a href="#line-79" class="ident">Uplo</a>, <label for="r123" class="ident">a</label>.<a href="#line-80" class="ident">N</a>, <label for="r120" class="ident">alpha</label>, <label for="r121" class="ident">x</label>.<a href="#line-32" class="ident">Data</a>, <label for="r121" class="ident">x</label>.<a href="#line-33" class="ident">Inc</a>, <label for="r122" class="ident">y</label>.<a href="#line-32" class="ident">Data</a>, <label for="r122" class="ident">y</label>.<a href="#line-33" class="ident">Inc</a>, <label for="r123" class="ident">a</label>.<a href="#line-81" class="ident">Data</a>, <label for="r123" class="ident">a</label>.<a href="#line-82" class="ident">Stride</a>)</code></span>
+<span class="codeline" id="line-418"><code>}</code></span>
+<span class="codeline" id="line-419"><code></code></span>
+<span class="codeline" id="line-420"><code><span class="comment">// Spr2 performs a rank-2 update</span></code></span>
+<span class="codeline" id="line-421"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-422"><code><span class="comment">//	A += alpha * x * yᵀ + alpha * y * xᵀ,</span></code></span>
+<span class="codeline" id="line-423"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-424"><code><span class="comment">// where A is an n×n symmetric matrix in packed format, x and y are vectors,</span></code></span>
+<span class="codeline" id="line-425"><code><span class="comment">// and alpha is a scalar.</span></code></span>
+<span class="codeline" id="line-426"><code><span class="keyword">func</span> <label for="r124" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Spr2" class="ident">Spr2</a></label>(<label for="r125" class="ident">alpha</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r126" class="ident">x</label>, <label for="r127" class="ident">y</label> <a href="#line-30" class="ident">Vector</a>, <label for="r128" class="ident">a</label> <a href="#line-94" class="ident">SymmetricPacked</a>) {</code></span>
+<span class="codeline" id="line-427"><code>	<a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-162" class="ident">Dspr2</a>(<label for="r128" class="ident">a</label>.<a href="#line-95" class="ident">Uplo</a>, <label for="r128" class="ident">a</label>.<a href="#line-96" class="ident">N</a>, <label for="r125" class="ident">alpha</label>, <label for="r126" class="ident">x</label>.<a href="#line-32" class="ident">Data</a>, <label for="r126" class="ident">x</label>.<a href="#line-33" class="ident">Inc</a>, <label for="r127" class="ident">y</label>.<a href="#line-32" class="ident">Data</a>, <label for="r127" class="ident">y</label>.<a href="#line-33" class="ident">Inc</a>, <label for="r128" class="ident">a</label>.<a href="#line-97" class="ident">Data</a>)</code></span>
+<span class="codeline" id="line-428"><code>}</code></span>
+<span class="codeline" id="line-429"><code></code></span>
+<span class="codeline" id="line-430"><code><span class="comment">// Level 3</span></code></span>
+<span class="codeline" id="line-431"><code></code></span>
+<span class="codeline" id="line-432"><code><span class="comment">// Gemm computes</span></code></span>
+<span class="codeline" id="line-433"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-434"><code><span class="comment">//	C = alpha * A * B + beta * C,</span></code></span>
+<span class="codeline" id="line-435"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-436"><code><span class="comment">// where A, B, and C are dense matrices, and alpha and beta are scalars.</span></code></span>
+<span class="codeline" id="line-437"><code><span class="comment">// tA and tB specify whether A or B are transposed.</span></code></span>
+<span class="codeline" id="line-438"><code><span class="keyword">func</span> <label for="r129" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Gemm" class="ident">Gemm</a></label>(<label for="r130" class="ident">tA</label>, <label for="r131" class="ident">tB</label> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-34" class="ident">Transpose</a>, <label for="r132" class="ident">alpha</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r133" class="ident">a</label>, <label for="r134" class="ident">b</label> <a href="#line-37" class="ident">General</a>, <label for="r135" class="ident">beta</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r136" class="ident">c</label> <a href="#line-37" class="ident">General</a>) {</code></span>
+<span class="codeline" id="line-439"><code>	<span class="keyword">var</span> <label for="r137" class="ident">m</label>, <label for="r138" class="ident">n</label>, <label for="r139" class="ident">k</label> <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-440"><code>	<span class="keyword">if</span> <label for="r130" class="ident">tA</label> == <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-37" class="ident">NoTrans</a> {</code></span>
+<span class="codeline" id="line-441"><code>		<label for="r137" class="ident">m</label>, <label for="r139" class="ident">k</label> = <label for="r133" class="ident">a</label>.<a href="#line-38" class="ident">Rows</a>, <label for="r133" class="ident">a</label>.<a href="#line-38" class="ident">Cols</a></code></span>
+<span class="codeline" id="line-442"><code>	} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-443"><code>		<label for="r137" class="ident">m</label>, <label for="r139" class="ident">k</label> = <label for="r133" class="ident">a</label>.<a href="#line-38" class="ident">Cols</a>, <label for="r133" class="ident">a</label>.<a href="#line-38" class="ident">Rows</a></code></span>
+<span class="codeline" id="line-444"><code>	}</code></span>
+<span class="codeline" id="line-445"><code>	<span class="keyword">if</span> <label for="r131" class="ident">tB</label> == <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-37" class="ident">NoTrans</a> {</code></span>
+<span class="codeline" id="line-446"><code>		<label for="r138" class="ident">n</label> = <label for="r134" class="ident">b</label>.<a href="#line-38" class="ident">Cols</a></code></span>
+<span class="codeline" id="line-447"><code>	} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-448"><code>		<label for="r138" class="ident">n</label> = <label for="r134" class="ident">b</label>.<a href="#line-38" class="ident">Rows</a></code></span>
+<span class="codeline" id="line-449"><code>	}</code></span>
+<span class="codeline" id="line-450"><code>	<a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-167" class="ident">Dgemm</a>(<label for="r130" class="ident">tA</label>, <label for="r131" class="ident">tB</label>, <label for="r137" class="ident">m</label>, <label for="r138" class="ident">n</label>, <label for="r139" class="ident">k</label>, <label for="r132" class="ident">alpha</label>, <label for="r133" class="ident">a</label>.<a href="#line-39" class="ident">Data</a>, <label for="r133" class="ident">a</label>.<a href="#line-40" class="ident">Stride</a>, <label for="r134" class="ident">b</label>.<a href="#line-39" class="ident">Data</a>, <label for="r134" class="ident">b</label>.<a href="#line-40" class="ident">Stride</a>, <label for="r135" class="ident">beta</label>, <label for="r136" class="ident">c</label>.<a href="#line-39" class="ident">Data</a>, <label for="r136" class="ident">c</label>.<a href="#line-40" class="ident">Stride</a>)</code></span>
+<span class="codeline" id="line-451"><code>}</code></span>
+<span class="codeline" id="line-452"><code></code></span>
+<span class="codeline" id="line-453"><code><span class="comment">// Symm performs</span></code></span>
+<span class="codeline" id="line-454"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-455"><code><span class="comment">//	C = alpha * A * B + beta * C  if s == blas.Left,</span></code></span>
+<span class="codeline" id="line-456"><code><span class="comment">//	C = alpha * B * A + beta * C  if s == blas.Right,</span></code></span>
+<span class="codeline" id="line-457"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-458"><code><span class="comment">// where A is an n×n or m×m symmetric matrix, B and C are m×n matrices, and</span></code></span>
+<span class="codeline" id="line-459"><code><span class="comment">// alpha is a scalar.</span></code></span>
+<span class="codeline" id="line-460"><code><span class="keyword">func</span> <label for="r140" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Symm" class="ident">Symm</a></label>(<label for="r141" class="ident">s</label> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-60" class="ident">Side</a>, <label for="r142" class="ident">alpha</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r143" class="ident">a</label> <a href="#line-78" class="ident">Symmetric</a>, <label for="r144" class="ident">b</label> <a href="#line-37" class="ident">General</a>, <label for="r145" class="ident">beta</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r146" class="ident">c</label> <a href="#line-37" class="ident">General</a>) {</code></span>
+<span class="codeline" id="line-461"><code>	<span class="keyword">var</span> <label for="r147" class="ident">m</label>, <label for="r148" class="ident">n</label> <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-462"><code>	<span class="keyword">if</span> <label for="r141" class="ident">s</label> == <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-63" class="ident">Left</a> {</code></span>
+<span class="codeline" id="line-463"><code>		<label for="r147" class="ident">m</label>, <label for="r148" class="ident">n</label> = <label for="r143" class="ident">a</label>.<a href="#line-80" class="ident">N</a>, <label for="r144" class="ident">b</label>.<a href="#line-38" class="ident">Cols</a></code></span>
+<span class="codeline" id="line-464"><code>	} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-465"><code>		<label for="r147" class="ident">m</label>, <label for="r148" class="ident">n</label> = <label for="r144" class="ident">b</label>.<a href="#line-38" class="ident">Rows</a>, <label for="r143" class="ident">a</label>.<a href="#line-80" class="ident">N</a></code></span>
+<span class="codeline" id="line-466"><code>	}</code></span>
+<span class="codeline" id="line-467"><code>	<a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-168" class="ident">Dsymm</a>(<label for="r141" class="ident">s</label>, <label for="r143" class="ident">a</label>.<a href="#line-79" class="ident">Uplo</a>, <label for="r147" class="ident">m</label>, <label for="r148" class="ident">n</label>, <label for="r142" class="ident">alpha</label>, <label for="r143" class="ident">a</label>.<a href="#line-81" class="ident">Data</a>, <label for="r143" class="ident">a</label>.<a href="#line-82" class="ident">Stride</a>, <label for="r144" class="ident">b</label>.<a href="#line-39" class="ident">Data</a>, <label for="r144" class="ident">b</label>.<a href="#line-40" class="ident">Stride</a>, <label for="r145" class="ident">beta</label>, <label for="r146" class="ident">c</label>.<a href="#line-39" class="ident">Data</a>, <label for="r146" class="ident">c</label>.<a href="#line-40" class="ident">Stride</a>)</code></span>
+<span class="codeline" id="line-468"><code>}</code></span>
+<span class="codeline" id="line-469"><code></code></span>
+<span class="codeline" id="line-470"><code><span class="comment">// Syrk performs a symmetric rank-k update</span></code></span>
+<span class="codeline" id="line-471"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-472"><code><span class="comment">//	C = alpha * A * Aᵀ + beta * C  if t == blas.NoTrans,</span></code></span>
+<span class="codeline" id="line-473"><code><span class="comment">//	C = alpha * Aᵀ * A + beta * C  if t == blas.Trans or blas.ConjTrans,</span></code></span>
+<span class="codeline" id="line-474"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-475"><code><span class="comment">// where C is an n×n symmetric matrix, A is an n×k matrix if t == blas.NoTrans and</span></code></span>
+<span class="codeline" id="line-476"><code><span class="comment">// a k×n matrix otherwise, and alpha and beta are scalars.</span></code></span>
+<span class="codeline" id="line-477"><code><span class="keyword">func</span> <label for="r149" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Syrk" class="ident">Syrk</a></label>(<label for="r150" class="ident">t</label> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-34" class="ident">Transpose</a>, <label for="r151" class="ident">alpha</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r152" class="ident">a</label> <a href="#line-37" class="ident">General</a>, <label for="r153" class="ident">beta</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r154" class="ident">c</label> <a href="#line-78" class="ident">Symmetric</a>) {</code></span>
+<span class="codeline" id="line-478"><code>	<span class="keyword">var</span> <label for="r155" class="ident">n</label>, <label for="r156" class="ident">k</label> <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-479"><code>	<span class="keyword">if</span> <label for="r150" class="ident">t</label> == <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-37" class="ident">NoTrans</a> {</code></span>
+<span class="codeline" id="line-480"><code>		<label for="r155" class="ident">n</label>, <label for="r156" class="ident">k</label> = <label for="r152" class="ident">a</label>.<a href="#line-38" class="ident">Rows</a>, <label for="r152" class="ident">a</label>.<a href="#line-38" class="ident">Cols</a></code></span>
+<span class="codeline" id="line-481"><code>	} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-482"><code>		<label for="r155" class="ident">n</label>, <label for="r156" class="ident">k</label> = <label for="r152" class="ident">a</label>.<a href="#line-38" class="ident">Cols</a>, <label for="r152" class="ident">a</label>.<a href="#line-38" class="ident">Rows</a></code></span>
+<span class="codeline" id="line-483"><code>	}</code></span>
+<span class="codeline" id="line-484"><code>	<a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-169" class="ident">Dsyrk</a>(<label for="r154" class="ident">c</label>.<a href="#line-79" class="ident">Uplo</a>, <label for="r150" class="ident">t</label>, <label for="r155" class="ident">n</label>, <label for="r156" class="ident">k</label>, <label for="r151" class="ident">alpha</label>, <label for="r152" class="ident">a</label>.<a href="#line-39" class="ident">Data</a>, <label for="r152" class="ident">a</label>.<a href="#line-40" class="ident">Stride</a>, <label for="r153" class="ident">beta</label>, <label for="r154" class="ident">c</label>.<a href="#line-81" class="ident">Data</a>, <label for="r154" class="ident">c</label>.<a href="#line-82" class="ident">Stride</a>)</code></span>
+<span class="codeline" id="line-485"><code>}</code></span>
+<span class="codeline" id="line-486"><code></code></span>
+<span class="codeline" id="line-487"><code><span class="comment">// Syr2k performs a symmetric rank-2k update</span></code></span>
+<span class="codeline" id="line-488"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-489"><code><span class="comment">//	C = alpha * A * Bᵀ + alpha * B * Aᵀ + beta * C  if t == blas.NoTrans,</span></code></span>
+<span class="codeline" id="line-490"><code><span class="comment">//	C = alpha * Aᵀ * B + alpha * Bᵀ * A + beta * C  if t == blas.Trans or blas.ConjTrans,</span></code></span>
+<span class="codeline" id="line-491"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-492"><code><span class="comment">// where C is an n×n symmetric matrix, A and B are n×k matrices if t == NoTrans</span></code></span>
+<span class="codeline" id="line-493"><code><span class="comment">// and k×n matrices otherwise, and alpha and beta are scalars.</span></code></span>
+<span class="codeline" id="line-494"><code><span class="keyword">func</span> <label for="r157" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Syr2k" class="ident">Syr2k</a></label>(<label for="r158" class="ident">t</label> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-34" class="ident">Transpose</a>, <label for="r159" class="ident">alpha</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r160" class="ident">a</label>, <label for="r161" class="ident">b</label> <a href="#line-37" class="ident">General</a>, <label for="r162" class="ident">beta</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r163" class="ident">c</label> <a href="#line-78" class="ident">Symmetric</a>) {</code></span>
+<span class="codeline" id="line-495"><code>	<span class="keyword">var</span> <label for="r164" class="ident">n</label>, <label for="r165" class="ident">k</label> <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-496"><code>	<span class="keyword">if</span> <label for="r158" class="ident">t</label> == <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-37" class="ident">NoTrans</a> {</code></span>
+<span class="codeline" id="line-497"><code>		<label for="r164" class="ident">n</label>, <label for="r165" class="ident">k</label> = <label for="r160" class="ident">a</label>.<a href="#line-38" class="ident">Rows</a>, <label for="r160" class="ident">a</label>.<a href="#line-38" class="ident">Cols</a></code></span>
+<span class="codeline" id="line-498"><code>	} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-499"><code>		<label for="r164" class="ident">n</label>, <label for="r165" class="ident">k</label> = <label for="r160" class="ident">a</label>.<a href="#line-38" class="ident">Cols</a>, <label for="r160" class="ident">a</label>.<a href="#line-38" class="ident">Rows</a></code></span>
+<span class="codeline" id="line-500"><code>	}</code></span>
+<span class="codeline" id="line-501"><code>	<a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-170" class="ident">Dsyr2k</a>(<label for="r163" class="ident">c</label>.<a href="#line-79" class="ident">Uplo</a>, <label for="r158" class="ident">t</label>, <label for="r164" class="ident">n</label>, <label for="r165" class="ident">k</label>, <label for="r159" class="ident">alpha</label>, <label for="r160" class="ident">a</label>.<a href="#line-39" class="ident">Data</a>, <label for="r160" class="ident">a</label>.<a href="#line-40" class="ident">Stride</a>, <label for="r161" class="ident">b</label>.<a href="#line-39" class="ident">Data</a>, <label for="r161" class="ident">b</label>.<a href="#line-40" class="ident">Stride</a>, <label for="r162" class="ident">beta</label>, <label for="r163" class="ident">c</label>.<a href="#line-81" class="ident">Data</a>, <label for="r163" class="ident">c</label>.<a href="#line-82" class="ident">Stride</a>)</code></span>
+<span class="codeline" id="line-502"><code>}</code></span>
+<span class="codeline" id="line-503"><code></code></span>
+<span class="codeline" id="line-504"><code><span class="comment">// Trmm performs</span></code></span>
+<span class="codeline" id="line-505"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-506"><code><span class="comment">//	B = alpha * A * B   if tA == blas.NoTrans and s == blas.Left,</span></code></span>
+<span class="codeline" id="line-507"><code><span class="comment">//	B = alpha * Aᵀ * B  if tA == blas.Trans or blas.ConjTrans, and s == blas.Left,</span></code></span>
+<span class="codeline" id="line-508"><code><span class="comment">//	B = alpha * B * A   if tA == blas.NoTrans and s == blas.Right,</span></code></span>
+<span class="codeline" id="line-509"><code><span class="comment">//	B = alpha * B * Aᵀ  if tA == blas.Trans or blas.ConjTrans, and s == blas.Right,</span></code></span>
+<span class="codeline" id="line-510"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-511"><code><span class="comment">// where A is an n×n or m×m triangular matrix, B is an m×n matrix, and alpha is</span></code></span>
+<span class="codeline" id="line-512"><code><span class="comment">// a scalar.</span></code></span>
+<span class="codeline" id="line-513"><code><span class="keyword">func</span> <label for="r166" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Trmm" class="ident">Trmm</a></label>(<label for="r167" class="ident">s</label> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-60" class="ident">Side</a>, <label for="r168" class="ident">tA</label> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-34" class="ident">Transpose</a>, <label for="r169" class="ident">alpha</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r170" class="ident">a</label> <a href="#line-52" class="ident">Triangular</a>, <label for="r171" class="ident">b</label> <a href="#line-37" class="ident">General</a>) {</code></span>
+<span class="codeline" id="line-514"><code>	<a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-171" class="ident">Dtrmm</a>(<label for="r167" class="ident">s</label>, <label for="r170" class="ident">a</label>.<a href="#line-53" class="ident">Uplo</a>, <label for="r168" class="ident">tA</label>, <label for="r170" class="ident">a</label>.<a href="#line-54" class="ident">Diag</a>, <label for="r171" class="ident">b</label>.<a href="#line-38" class="ident">Rows</a>, <label for="r171" class="ident">b</label>.<a href="#line-38" class="ident">Cols</a>, <label for="r169" class="ident">alpha</label>, <label for="r170" class="ident">a</label>.<a href="#line-56" class="ident">Data</a>, <label for="r170" class="ident">a</label>.<a href="#line-57" class="ident">Stride</a>, <label for="r171" class="ident">b</label>.<a href="#line-39" class="ident">Data</a>, <label for="r171" class="ident">b</label>.<a href="#line-40" class="ident">Stride</a>)</code></span>
+<span class="codeline" id="line-515"><code>}</code></span>
+<span class="codeline" id="line-516"><code></code></span>
+<span class="codeline" id="line-517"><code><span class="comment">// Trsm solves</span></code></span>
+<span class="codeline" id="line-518"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-519"><code><span class="comment">//	A * X = alpha * B   if tA == blas.NoTrans and s == blas.Left,</span></code></span>
+<span class="codeline" id="line-520"><code><span class="comment">//	Aᵀ * X = alpha * B  if tA == blas.Trans or blas.ConjTrans, and s == blas.Left,</span></code></span>
+<span class="codeline" id="line-521"><code><span class="comment">//	X * A = alpha * B   if tA == blas.NoTrans and s == blas.Right,</span></code></span>
+<span class="codeline" id="line-522"><code><span class="comment">//	X * Aᵀ = alpha * B  if tA == blas.Trans or blas.ConjTrans, and s == blas.Right,</span></code></span>
+<span class="codeline" id="line-523"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-524"><code><span class="comment">// where A is an n×n or m×m triangular matrix, X and B are m×n matrices, and</span></code></span>
+<span class="codeline" id="line-525"><code><span class="comment">// alpha is a scalar.</span></code></span>
+<span class="codeline" id="line-526"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-527"><code><span class="comment">// At entry to the function, X contains the values of B, and the result is</span></code></span>
+<span class="codeline" id="line-528"><code><span class="comment">// stored in-place into X.</span></code></span>
+<span class="codeline" id="line-529"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-530"><code><span class="comment">// No check is made that A is invertible.</span></code></span>
+<span class="codeline" id="line-531"><code><span class="keyword">func</span> <label for="r172" class="ident"><a href="../../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html#name-Trsm" class="ident">Trsm</a></label>(<label for="r173" class="ident">s</label> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-60" class="ident">Side</a>, <label for="r174" class="ident">tA</label> <a href="../../../../../../pkg/gonum.org/v1/gonum/blas.html" class="ident i0">blas</a>.<a href="../blas.go.html#line-34" class="ident">Transpose</a>, <label for="r175" class="ident">alpha</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r176" class="ident">a</label> <a href="#line-52" class="ident">Triangular</a>, <label for="r177" class="ident">b</label> <a href="#line-37" class="ident">General</a>) {</code></span>
+<span class="codeline" id="line-532"><code>	<a href="#line-12" class="ident">blas64</a>.<a href="../blas.go.html#line-172" class="ident">Dtrsm</a>(<label for="r173" class="ident">s</label>, <label for="r176" class="ident">a</label>.<a href="#line-53" class="ident">Uplo</a>, <label for="r174" class="ident">tA</label>, <label for="r176" class="ident">a</label>.<a href="#line-54" class="ident">Diag</a>, <label for="r177" class="ident">b</label>.<a href="#line-38" class="ident">Rows</a>, <label for="r177" class="ident">b</label>.<a href="#line-38" class="ident">Cols</a>, <label for="r175" class="ident">alpha</label>, <label for="r176" class="ident">a</label>.<a href="#line-56" class="ident">Data</a>, <label for="r176" class="ident">a</label>.<a href="#line-57" class="ident">Stride</a>, <label for="r177" class="ident">b</label>.<a href="#line-39" class="ident">Data</a>, <label for="r177" class="ident">b</label>.<a href="#line-40" class="ident">Stride</a>)</code></span>
+<span class="codeline" id="line-533"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

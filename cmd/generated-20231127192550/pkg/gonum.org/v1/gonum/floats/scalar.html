@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: gonum.org/v1/gonum/floats/scalar</title>
+<link href="../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>scalar</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../../../index.html#pkg-gonum.org/v1/gonum/floats/scalar">gonum.org/v1/gonum/floats/scalar</a><i> (on <a href="https://pkg.go.dev/gonum.org/v1/gonum/floats/scalar" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../../../dep/gonum.org/v1/gonum/floats/scalar.html">2 packages</a>, and imported by <a href="../../../../../dep/gonum.org/v1/gonum/floats/scalar.html#imported-by">2 packages</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<input type='checkbox' checked class="fold" id="file-0-fold-content"><label for="file-0-fold-content">  <a href="../../../../../src/gonum.org/v1/gonum/floats/scalar/doc.go.html#doc">d</a> <a href="../../../../../src/gonum.org/v1/gonum/floats/scalar/doc.go.html">doc.go</a></label><span id='file-0-fold-content-items' class="fold-items">
+<span class="md-text">		Package scalar provides a set of helper routines for dealing with float64 values.</span>
+</span>
+	<span class="nodocs">    <a href="../../../../../src/gonum.org/v1/gonum/floats/scalar/scalar.go.html">scalar.go</a></span></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (total 11, in which 10 are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-EqualWithinAbs">	<input type='checkbox' class="fold" id="EqualWithinAbs-fold-content"><label for="EqualWithinAbs-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/floats/scalar..EqualWithinAbs.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/floats/scalar/scalar.go.html#line-14">EqualWithinAbs</a>(a, b, tol <a href="../../../../builtin.html#name-float64">float64</a>) <a href="../../../../builtin.html#name-bool">bool</a></label><span id='EqualWithinAbs-fold-content-docs' class="fold-docs">
+<span class="md-text">		EqualWithinAbs returns true when a and b have an absolute difference
+		not greater than tol.</span>
+
+</span></div><div class="anchor value-res" id="name-EqualWithinAbsOrRel">	<input type='checkbox' class="fold" id="EqualWithinAbsOrRel-fold-content"><label for="EqualWithinAbsOrRel-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/floats/scalar..EqualWithinAbsOrRel.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/floats/scalar/scalar.go.html#line-44">EqualWithinAbsOrRel</a>(a, b, absTol, relTol <a href="../../../../builtin.html#name-float64">float64</a>) <a href="../../../../builtin.html#name-bool">bool</a></label><span id='EqualWithinAbsOrRel-fold-content-docs' class="fold-docs">
+<span class="md-text">		EqualWithinAbsOrRel returns true when a and b are equal to within
+		the absolute or relative tolerances. See EqualWithinAbs and
+		EqualWithinRel for details.</span>
+
+</span></div><div class="anchor value-res" id="name-EqualWithinRel">	<input type='checkbox' class="fold" id="EqualWithinRel-fold-content"><label for="EqualWithinRel-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/floats/scalar..EqualWithinRel.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/floats/scalar/scalar.go.html#line-26">EqualWithinRel</a>(a, b, tol <a href="../../../../builtin.html#name-float64">float64</a>) <a href="../../../../builtin.html#name-bool">bool</a></label><span id='EqualWithinRel-fold-content-docs' class="fold-docs">
+<span class="md-text">		EqualWithinRel returns true when the difference between a and b
+		is not greater than tol times the greater absolute value of a and b,
+		
+			abs(a-b) &lt;= tol * max(abs(a), abs(b)).</span>
+
+</span></div><div class="anchor value-res" id="name-EqualWithinULP">	<input type='checkbox' class="fold" id="EqualWithinULP-fold-content"><label for="EqualWithinULP-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/floats/scalar..EqualWithinULP.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/floats/scalar/scalar.go.html#line-50">EqualWithinULP</a>(a, b <a href="../../../../builtin.html#name-float64">float64</a>, ulp <a href="../../../../builtin.html#name-uint">uint</a>) <a href="../../../../builtin.html#name-bool">bool</a></label><span id='EqualWithinULP-fold-content-docs' class="fold-docs">
+<span class="md-text">		EqualWithinULP returns true when a and b are equal to within
+		the specified number of floating point units in the last place.</span>
+
+</span></div><div class="anchor value-res" id="name-NaNPayload">	<input type='checkbox' class="fold" id="NaNPayload-fold-content"><label for="NaNPayload-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/floats/scalar..NaNPayload.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/floats/scalar/scalar.go.html#line-85">NaNPayload</a>(f <a href="../../../../builtin.html#name-float64">float64</a>) (payload <a href="../../../../builtin.html#name-uint64">uint64</a>, ok <a href="../../../../builtin.html#name-bool">bool</a>)</label><span id='NaNPayload-fold-content-docs' class="fold-docs">
+<span class="md-text">		NaNPayload returns the lowest 51 bits payload of an IEEE 754 "quiet
+		not-a-number". For values of f other than quiet-NaN, NaNPayload
+		returns zero and false.</span>
+
+</span></div><div class="anchor value-res" id="name-NaNWith">	<input type='checkbox' class="fold" id="NaNWith-fold-content"><label for="NaNWith-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/floats/scalar..NaNWith.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/floats/scalar/scalar.go.html#line-78">NaNWith</a>(payload <a href="../../../../builtin.html#name-uint64">uint64</a>) <a href="../../../../builtin.html#name-float64">float64</a></label><span id='NaNWith-fold-content-docs' class="fold-docs">
+<span class="md-text">		NaNWith returns an IEEE 754 "quiet not-a-number" value with the
+		payload specified in the low 51 bits of payload.
+		The NaN returned by math.NaN has a bit pattern equal to NaNWith(1).</span>
+
+</span></div><div class="anchor value-res" id="name-ParseWithNA">	<input type='checkbox' class="fold" id="ParseWithNA-fold-content"><label for="ParseWithNA-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/floats/scalar..ParseWithNA.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/floats/scalar/scalar.go.html#line-95">ParseWithNA</a>(s, missing <a href="../../../../builtin.html#name-string">string</a>) (value, weight <a href="../../../../builtin.html#name-float64">float64</a>, err <a href="../../../../builtin.html#name-error">error</a>)</label><span id='ParseWithNA-fold-content-docs' class="fold-docs">
+<span class="md-text">		ParseWithNA converts the string s to a float64 in value.
+		If s equals missing, weight is returned as 0, otherwise 1.</span>
+
+</span></div><div class="anchor value-res" id="name-Round">	<input type='checkbox' class="fold" id="Round-fold-content"><label for="Round-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/floats/scalar..Round.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/floats/scalar/scalar.go.html#line-113">Round</a>(x <a href="../../../../builtin.html#name-float64">float64</a>, prec <a href="../../../../builtin.html#name-int">int</a>) <a href="../../../../builtin.html#name-float64">float64</a></label><span id='Round-fold-content-docs' class="fold-docs">
+<span class="md-text">		Round returns the half away from zero rounded value of x with prec precision.
+		
+		Special cases are:
+		
+			Round(±0) = +0
+			Round(±Inf) = ±Inf
+			Round(NaN) = NaN</span>
+
+</span></div><div class="anchor value-res" id="name-RoundEven">	<input type='checkbox' class="fold" id="RoundEven-fold-content"><label for="RoundEven-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/floats/scalar..RoundEven.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/floats/scalar/scalar.go.html#line-144">RoundEven</a>(x <a href="../../../../builtin.html#name-float64">float64</a>, prec <a href="../../../../builtin.html#name-int">int</a>) <a href="../../../../builtin.html#name-float64">float64</a></label><span id='RoundEven-fold-content-docs' class="fold-docs">
+<span class="md-text">		RoundEven returns the half even rounded value of x with prec precision.
+		
+		Special cases are:
+		
+			RoundEven(±0) = +0
+			RoundEven(±Inf) = ±Inf
+			RoundEven(NaN) = NaN</span>
+
+</span></div><div class="anchor value-res" id="name-Same">	<input type='checkbox' class="fold" id="Same-fold-content"><label for="Same-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/floats/scalar..Same.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/floats/scalar/scalar.go.html#line-169">Same</a>(a, b <a href="../../../../builtin.html#name-float64">float64</a>) <a href="../../../../builtin.html#name-bool">bool</a></label><span id='Same-fold-content-docs' class="fold-docs">
+<span class="md-text">		Same returns true when the inputs have the same value, allowing NaN equality.</span>
+
+</span></div>	<input type='checkbox' class="showhide" id="unexported-functions-showhide"><i><label for="unexported-functions-showhide" class="show-inline">/* one unexported ... */</label><label for="unexported-functions-showhide" class="hide-inline">/* one unexported: */</label></i><div class="anchor value-res hidden" id="name-ulpDiff"><i>	<span class="nodocs"> <a href="../../../../../use/gonum.org/v1/gonum/floats/scalar..ulpDiff^0ecd6.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/floats/scalar/scalar.go.html#line-63">ulpDiff</a>(a, b <a href="../../../../builtin.html#name-uint64">uint64</a>) <a href="../../../../builtin.html#name-uint64">uint64</a></span></i></div></div>
+<div id="exported-constants"><span class="title">Package-Level Constants<span class="title-stat"><i> (total 3, none are exported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-constants-showhide"><i><label for="unexported-constants-showhide" class="show-inline">/* 3 unexporteds ... */</label><label for="unexported-constants-showhide" class="hide-inline">/* 3 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-minNormalFloat64"><i>	<input type='checkbox' class="fold" id="minNormalFloat64-fold-content"><label for="minNormalFloat64-fold-content"><a href="../../../../../use/gonum.org/v1/gonum/floats/scalar..minNormalFloat64^b2c01.html">const</a> <a href="../../../../../src/gonum.org/v1/gonum/floats/scalar/scalar.go.html#line-20">minNormalFloat64</a> = 2.22507e-308</label><span id='minNormalFloat64-fold-content-docs' class="fold-docs">
+<span class="md-text">		minNormalFloat64 is the smallest normal number. For 64 bit IEEE-754
+		floats this is 2^{-1022}.</span>
+
+</span></i></div><div class="anchor value-res hidden" id="name-nanBits"><i>	<span class="nodocs"><a href="../../../../../use/gonum.org/v1/gonum/floats/scalar..nanBits^40f09.html">const</a> <a href="../../../../../src/gonum.org/v1/gonum/floats/scalar/scalar.go.html#line-71">nanBits</a> = 9221120237041090560</span></i></div><div class="anchor value-res hidden" id="name-nanMask"><i>	<span class="nodocs"><a href="../../../../../use/gonum.org/v1/gonum/floats/scalar..nanMask^c312e.html">const</a> <a href="../../../../../src/gonum.org/v1/gonum/floats/scalar/scalar.go.html#line-72">nanMask</a> = 18444492273895866368</span></i></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

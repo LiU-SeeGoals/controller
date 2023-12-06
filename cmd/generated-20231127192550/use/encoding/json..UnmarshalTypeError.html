@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: encoding/json.UnmarshalTypeError</title>
+<link href="../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../../pkg/encoding/json.html">encoding/json</a>.<a href="../../src/encoding/json/decode.go.html#line-125">UnmarshalTypeError</a></b></span>
+
+<span class="title">22 uses</span>
+
+	encoding/json (current package)
+		<a href="../../src/encoding/json/decode.go.html#line-125">decode.go#L125</a>: type <b>UnmarshalTypeError</b> struct {
+		<a href="../../src/encoding/json/decode.go.html#line-133" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-133">#L133</a>: func (e *<b>UnmarshalTypeError</b>) Error() string {
+		<a href="../../src/encoding/json/decode.go.html#line-256" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-256">#L256</a>: 		case *<b>UnmarshalTypeError</b>:
+		<a href="../../src/encoding/json/decode.go.html#line-510" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-510">#L510</a>: 		d.saveError(&amp;<b>UnmarshalTypeError</b>{Value: "array", Type: v.Type(), Offset: int64(d.off)})
+		<a href="../../src/encoding/json/decode.go.html#line-528" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-528">#L528</a>: 		d.saveError(&amp;<b>UnmarshalTypeError</b>{Value: "array", Type: v.Type(), Offset: int64(d.off)})
+		<a href="../../src/encoding/json/decode.go.html#line-607" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-607">#L607</a>: 		d.saveError(&amp;<b>UnmarshalTypeError</b>{Value: "object", Type: v.Type(), Offset: int64(d.off)})
+		<a href="../../src/encoding/json/decode.go.html#line-637" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-637">#L637</a>: 				d.saveError(&amp;<b>UnmarshalTypeError</b>{Value: "object", Type: t, Offset: int64(d.off)})
+		<a href="../../src/encoding/json/decode.go.html#line-649" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-649">#L649</a>: 		d.saveError(&amp;<b>UnmarshalTypeError</b>{Value: "object", Type: t, Offset: int64(d.off)})
+		<a href="../../src/encoding/json/decode.go.html#line-780" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-780">#L780</a>: 						d.saveError(&amp;<b>UnmarshalTypeError</b>{Value: "number " + s, Type: kt, Offset: int64(start + 1)})
+		<a href="../../src/encoding/json/decode.go.html#line-788" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-788">#L788</a>: 						d.saveError(&amp;<b>UnmarshalTypeError</b>{Value: "number " + s, Type: kt, Offset: int64(start + 1)})
+		<a href="../../src/encoding/json/decode.go.html#line-830" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-830">#L830</a>: 		return nil, &amp;<b>UnmarshalTypeError</b>{Value: "number " + s, Type: reflect.TypeOf(0.0), Offset: int64(d.off)}
+		<a href="../../src/encoding/json/decode.go.html#line-867" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-867">#L867</a>: 			d.saveError(&amp;<b>UnmarshalTypeError</b>{Value: val, Type: v.Type(), Offset: int64(d.readIndex())})
+		<a href="../../src/encoding/json/decode.go.html#line-908" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-908">#L908</a>: 				d.saveError(&amp;<b>UnmarshalTypeError</b>{Value: "bool", Type: v.Type(), Offset: int64(d.readIndex())})
+		<a href="../../src/encoding/json/decode.go.html#line-916" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-916">#L916</a>: 				d.saveError(&amp;<b>UnmarshalTypeError</b>{Value: "bool", Type: v.Type(), Offset: int64(d.readIndex())})
+		<a href="../../src/encoding/json/decode.go.html#line-930" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-930">#L930</a>: 			d.saveError(&amp;<b>UnmarshalTypeError</b>{Value: "string", Type: v.Type(), Offset: int64(d.readIndex())})
+		<a href="../../src/encoding/json/decode.go.html#line-933" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-933">#L933</a>: 				d.saveError(&amp;<b>UnmarshalTypeError</b>{Value: "string", Type: v.Type(), Offset: int64(d.readIndex())})
+		<a href="../../src/encoding/json/decode.go.html#line-952" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-952">#L952</a>: 				d.saveError(&amp;<b>UnmarshalTypeError</b>{Value: "string", Type: v.Type(), Offset: int64(d.readIndex())})
+		<a href="../../src/encoding/json/decode.go.html#line-975" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-975">#L975</a>: 			d.saveError(&amp;<b>UnmarshalTypeError</b>{Value: "number", Type: v.Type(), Offset: int64(d.readIndex())})
+		<a href="../../src/encoding/json/decode.go.html#line-983" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-983">#L983</a>: 				d.saveError(&amp;<b>UnmarshalTypeError</b>{Value: "number", Type: v.Type(), Offset: int64(d.readIndex())})
+		<a href="../../src/encoding/json/decode.go.html#line-991" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-991">#L991</a>: 				d.saveError(&amp;<b>UnmarshalTypeError</b>{Value: "number " + s, Type: v.Type(), Offset: int64(d.readIndex())})
+		<a href="../../src/encoding/json/decode.go.html#line-999" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-999">#L999</a>: 				d.saveError(&amp;<b>UnmarshalTypeError</b>{Value: "number " + s, Type: v.Type(), Offset: int64(d.readIndex())})
+		<a href="../../src/encoding/json/decode.go.html#line-1007" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-1007">#L1007</a>: 				d.saveError(&amp;<b>UnmarshalTypeError</b>{Value: "number " + s, Type: v.Type(), Offset: int64(d.readIndex())})
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

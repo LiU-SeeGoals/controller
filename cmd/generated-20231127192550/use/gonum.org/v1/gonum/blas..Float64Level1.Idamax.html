@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/blas.Float64Level1.Idamax</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../../pkg/gonum.org/v1/gonum/blas.html">gonum.org/v1/gonum/blas</a>.<a href="../../../../src/gonum.org/v1/gonum/blas/blas.go.html#line-130">Float64Level1</a>.<a href="../../../../src/gonum.org/v1/gonum/blas/blas.go.html#line-134">Idamax</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">31 uses</span>
+
+	gonum.org/v1/gonum/blas (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/blas/blas.go.html#line-134">blas.go#L134</a>: 	<b>Idamax</b>(n int, x []float64, incX int) int
+
+	<a href="../../../../pkg/gonum.org/v1/gonum/blas/blas64.html">gonum.org/v1/gonum/blas/blas64</a>
+		<a href="../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-152">blas64.go#L152</a>: 	return blas64.<b>Idamax</b>(x.N, x.Data, x.Inc)
+
+	<a href="../../../../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgebal.go.html#line-195">dgebal.go#L195</a>: 			ica := bi.<b>Idamax</b>(ihi+1, a[i:], lda)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgebal.go.html#line-197" class="path-duplicate">dgebal.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgebal.go.html#line-197">#L197</a>: 			ira := bi.<b>Idamax</b>(n-ilo, a[i*lda+ilo:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgecon.go.html#line-93">dgecon.go#L93</a>: 			ix := bi.<b>Idamax</b>(n, work, 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-245">dgeev.go#L245</a>: 			k := bi.<b>Idamax</b>(n, work[iwrk:iwrk+n], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-272" class="path-duplicate">dgeev.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-272">#L272</a>: 			k := bi.<b>Idamax</b>(n, work[iwrk:iwrk+n], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesc2.go.html#line-73">dgesc2.go#L73</a>: 	i := bi.<b>Idamax</b>(n, rhs, 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgetf2.go.html#line-61">dgetf2.go#L61</a>: 		jp := j + bi.<b>Idamax</b>(m-j, a[j*lda+j:], lda)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlacn2.go.html#line-76">dlacn2.go#L76</a>: 		isave[1] = bi.<b>Idamax</b>(n, x, 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlacn2.go.html#line-107" class="path-duplicate">dlacn2.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlacn2.go.html#line-107">#L107</a>: 		isave[1] = bi.<b>Idamax</b>(n, x, 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqp2.go.html#line-80">dlaqp2.go#L80</a>: 		p := i + bi.<b>Idamax</b>(n-i, vn1[i:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqps.go.html#line-114">dlaqps.go#L114</a>: 		p := k + bi.<b>Idamax</b>(n-k, vn1[k:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlasy2.go.html#line-115">dlasy2.go#L115</a>: 		ipiv := bi.<b>Idamax</b>(len(tmp), tmp[:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatbs.go.html#line-129">dlatbs.go#L129</a>: 	tmax := cnorm[bi.<b>Idamax</b>(n, cnorm, 1)]
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatbs.go.html#line-139" class="path-duplicate">dlatbs.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatbs.go.html#line-139">#L139</a>: 	xMax := math.Abs(x[bi.<b>Idamax</b>(n, x, 1)])
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatbs.go.html#line-326" class="path-duplicate">dlatbs.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatbs.go.html#line-326">#L326</a>: 					i := bi.<b>Idamax</b>(j, x, 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatbs.go.html#line-336" class="path-duplicate">dlatbs.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatbs.go.html#line-336">#L336</a>: 				i := j + 1 + bi.<b>Idamax</b>(n-j-1, x[j+1:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatrs.go.html#line-84">dlatrs.go#L84</a>: 	imax := bi.<b>Idamax</b>(n, cnorm, 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatrs.go.html#line-143" class="path-duplicate">dlatrs.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatrs.go.html#line-143">#L143</a>: 	j := bi.<b>Idamax</b>(n, x, 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatrs.go.html#line-306" class="path-duplicate">dlatrs.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatrs.go.html#line-306">#L306</a>: 					i := bi.<b>Idamax</b>(j, x, 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatrs.go.html#line-312" class="path-duplicate">dlatrs.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatrs.go.html#line-312">#L312</a>: 					i := j + bi.<b>Idamax</b>(n-j-1, x[j+1:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpbcon.go.html#line-99">dpbcon.go#L99</a>: 			ix := bi.<b>Idamax</b>(n, x, 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpocon.go.html#line-83">dpocon.go#L83</a>: 			ix := bi.<b>Idamax</b>(n, work, 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrcon.go.html#line-82">dtrcon.go#L82</a>: 			ix := bi.<b>Idamax</b>(n, work, 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrevc3.go.html#line-375">dtrevc3.go#L375</a>: 				ii := bi.<b>Idamax</b>(ki+1, vr[is:], ldvr)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrevc3.go.html#line-387" class="path-duplicate">dtrevc3.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrevc3.go.html#line-387">#L387</a>: 				ii := bi.<b>Idamax</b>(n, vr[ki:], ldvr)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrevc3.go.html#line-549" class="path-duplicate">dtrevc3.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrevc3.go.html#line-549">#L549</a>: 						ii := bi.<b>Idamax</b>(n, b[nb+k:], ldb)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrevc3.go.html#line-685" class="path-duplicate">dtrevc3.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrevc3.go.html#line-685">#L685</a>: 				ii := bi.<b>Idamax</b>(n-ki, vl[ki*ldvl+is:], ldvl) + ki
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrevc3.go.html#line-698" class="path-duplicate">dtrevc3.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrevc3.go.html#line-698">#L698</a>: 				ii := bi.<b>Idamax</b>(n, vl[ki:], ldvl)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrevc3.go.html#line-867" class="path-duplicate">dtrevc3.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrevc3.go.html#line-867">#L867</a>: 						ii := bi.<b>Idamax</b>(n, b[nb+k:], ldb)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

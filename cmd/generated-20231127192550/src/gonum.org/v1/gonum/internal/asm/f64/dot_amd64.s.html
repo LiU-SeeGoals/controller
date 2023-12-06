@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: dot_amd64.s in package gonum.org/v1/gonum/internal/asm/f64</title>
+<link href="../../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	dot_amd64.s
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/gonum.org/v1/gonum/internal/asm/f64.html">gonum.org/v1/gonum/internal/asm/f64</a>
+</code></pre>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code>// Copyright ©2015 The Gonum Authors. All rights reserved.</code></span>
+<span class="codeline" id="line-2"><code>// Use of this source code is governed by a BSD-style</code></span>
+<span class="codeline" id="line-3"><code>// license that can be found in the LICENSE file.</code></span>
+<span class="codeline" id="line-4"><code>//</code></span>
+<span class="codeline" id="line-5"><code>// Some of the loop unrolling code is copied from:</code></span>
+<span class="codeline" id="line-6"><code>// http://golang.org/src/math/big/arith_amd64.s</code></span>
+<span class="codeline" id="line-7"><code>// which is distributed under these terms:</code></span>
+<span class="codeline" id="line-8"><code>//</code></span>
+<span class="codeline" id="line-9"><code>// Copyright (c) 2012 The Go Authors. All rights reserved.</code></span>
+<span class="codeline" id="line-10"><code>//</code></span>
+<span class="codeline" id="line-11"><code>// Redistribution and use in source and binary forms, with or without</code></span>
+<span class="codeline" id="line-12"><code>// modification, are permitted provided that the following conditions are</code></span>
+<span class="codeline" id="line-13"><code>// met:</code></span>
+<span class="codeline" id="line-14"><code>//</code></span>
+<span class="codeline" id="line-15"><code>//    * Redistributions of source code must retain the above copyright</code></span>
+<span class="codeline" id="line-16"><code>// notice, this list of conditions and the following disclaimer.</code></span>
+<span class="codeline" id="line-17"><code>//    * Redistributions in binary form must reproduce the above</code></span>
+<span class="codeline" id="line-18"><code>// copyright notice, this list of conditions and the following disclaimer</code></span>
+<span class="codeline" id="line-19"><code>// in the documentation and/or other materials provided with the</code></span>
+<span class="codeline" id="line-20"><code>// distribution.</code></span>
+<span class="codeline" id="line-21"><code>//    * Neither the name of Google Inc. nor the names of its</code></span>
+<span class="codeline" id="line-22"><code>// contributors may be used to endorse or promote products derived from</code></span>
+<span class="codeline" id="line-23"><code>// this software without specific prior written permission.</code></span>
+<span class="codeline" id="line-24"><code>//</code></span>
+<span class="codeline" id="line-25"><code>// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS</code></span>
+<span class="codeline" id="line-26"><code>// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT</code></span>
+<span class="codeline" id="line-27"><code>// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR</code></span>
+<span class="codeline" id="line-28"><code>// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT</code></span>
+<span class="codeline" id="line-29"><code>// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,</code></span>
+<span class="codeline" id="line-30"><code>// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT</code></span>
+<span class="codeline" id="line-31"><code>// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,</code></span>
+<span class="codeline" id="line-32"><code>// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY</code></span>
+<span class="codeline" id="line-33"><code>// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</code></span>
+<span class="codeline" id="line-34"><code>// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</code></span>
+<span class="codeline" id="line-35"><code>// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</code></span>
+<span class="codeline" id="line-36"><code></code></span>
+<span class="codeline" id="line-37"><code>// +build !noasm,!gccgo,!safe</code></span>
+<span class="codeline" id="line-38"><code></code></span>
+<span class="codeline" id="line-39"><code>#include "textflag.h"</code></span>
+<span class="codeline" id="line-40"><code></code></span>
+<span class="codeline" id="line-41"><code>// func DdotUnitary(x, y []float64) (sum float64)</code></span>
+<span class="codeline" id="line-42"><code>// This function assumes len(y) &gt;= len(x).</code></span>
+<span class="codeline" id="line-43"><code>TEXT ·DotUnitary(SB), NOSPLIT, $0</code></span>
+<span class="codeline" id="line-44"><code>	MOVQ x+0(FP), R8</code></span>
+<span class="codeline" id="line-45"><code>	MOVQ x_len+8(FP), DI // n = len(x)</code></span>
+<span class="codeline" id="line-46"><code>	MOVQ y+24(FP), R9</code></span>
+<span class="codeline" id="line-47"><code></code></span>
+<span class="codeline" id="line-48"><code>	MOVSD $(0.0), X7 // sum = 0</code></span>
+<span class="codeline" id="line-49"><code>	MOVSD $(0.0), X8 // sum = 0</code></span>
+<span class="codeline" id="line-50"><code></code></span>
+<span class="codeline" id="line-51"><code>	MOVQ $0, SI   // i = 0</code></span>
+<span class="codeline" id="line-52"><code>	SUBQ $4, DI   // n -= 4</code></span>
+<span class="codeline" id="line-53"><code>	JL   tail_uni // if n &lt; 0 goto tail_uni</code></span>
+<span class="codeline" id="line-54"><code></code></span>
+<span class="codeline" id="line-55"><code>loop_uni:</code></span>
+<span class="codeline" id="line-56"><code>	// sum += x[i] * y[i] unrolled 4x.</code></span>
+<span class="codeline" id="line-57"><code>	MOVUPD 0(R8)(SI*8), X0</code></span>
+<span class="codeline" id="line-58"><code>	MOVUPD 0(R9)(SI*8), X1</code></span>
+<span class="codeline" id="line-59"><code>	MOVUPD 16(R8)(SI*8), X2</code></span>
+<span class="codeline" id="line-60"><code>	MOVUPD 16(R9)(SI*8), X3</code></span>
+<span class="codeline" id="line-61"><code>	MULPD  X1, X0</code></span>
+<span class="codeline" id="line-62"><code>	MULPD  X3, X2</code></span>
+<span class="codeline" id="line-63"><code>	ADDPD  X0, X7</code></span>
+<span class="codeline" id="line-64"><code>	ADDPD  X2, X8</code></span>
+<span class="codeline" id="line-65"><code></code></span>
+<span class="codeline" id="line-66"><code>	ADDQ $4, SI   // i += 4</code></span>
+<span class="codeline" id="line-67"><code>	SUBQ $4, DI   // n -= 4</code></span>
+<span class="codeline" id="line-68"><code>	JGE  loop_uni // if n &gt;= 0 goto loop_uni</code></span>
+<span class="codeline" id="line-69"><code></code></span>
+<span class="codeline" id="line-70"><code>tail_uni:</code></span>
+<span class="codeline" id="line-71"><code>	ADDQ $4, DI  // n += 4</code></span>
+<span class="codeline" id="line-72"><code>	JLE  end_uni // if n &lt;= 0 goto end_uni</code></span>
+<span class="codeline" id="line-73"><code></code></span>
+<span class="codeline" id="line-74"><code>onemore_uni:</code></span>
+<span class="codeline" id="line-75"><code>	// sum += x[i] * y[i] for the remaining 1-3 elements.</code></span>
+<span class="codeline" id="line-76"><code>	MOVSD 0(R8)(SI*8), X0</code></span>
+<span class="codeline" id="line-77"><code>	MOVSD 0(R9)(SI*8), X1</code></span>
+<span class="codeline" id="line-78"><code>	MULSD X1, X0</code></span>
+<span class="codeline" id="line-79"><code>	ADDSD X0, X7</code></span>
+<span class="codeline" id="line-80"><code></code></span>
+<span class="codeline" id="line-81"><code>	ADDQ $1, SI      // i++</code></span>
+<span class="codeline" id="line-82"><code>	SUBQ $1, DI      // n--</code></span>
+<span class="codeline" id="line-83"><code>	JNZ  onemore_uni // if n != 0 goto onemore_uni</code></span>
+<span class="codeline" id="line-84"><code></code></span>
+<span class="codeline" id="line-85"><code>end_uni:</code></span>
+<span class="codeline" id="line-86"><code>	// Add the four sums together.</code></span>
+<span class="codeline" id="line-87"><code>	ADDPD    X8, X7</code></span>
+<span class="codeline" id="line-88"><code>	MOVSD    X7, X0</code></span>
+<span class="codeline" id="line-89"><code>	UNPCKHPD X7, X7</code></span>
+<span class="codeline" id="line-90"><code>	ADDSD    X0, X7</code></span>
+<span class="codeline" id="line-91"><code>	MOVSD    X7, sum+48(FP) // Return final sum.</code></span>
+<span class="codeline" id="line-92"><code>	RET</code></span>
+<span class="codeline" id="line-93"><code></code></span>
+<span class="codeline" id="line-94"><code>// func DdotInc(x, y []float64, n, incX, incY, ix, iy uintptr) (sum float64)</code></span>
+<span class="codeline" id="line-95"><code>TEXT ·DotInc(SB), NOSPLIT, $0</code></span>
+<span class="codeline" id="line-96"><code>	MOVQ x+0(FP), R8</code></span>
+<span class="codeline" id="line-97"><code>	MOVQ y+24(FP), R9</code></span>
+<span class="codeline" id="line-98"><code>	MOVQ n+48(FP), CX</code></span>
+<span class="codeline" id="line-99"><code>	MOVQ incX+56(FP), R11</code></span>
+<span class="codeline" id="line-100"><code>	MOVQ incY+64(FP), R12</code></span>
+<span class="codeline" id="line-101"><code>	MOVQ ix+72(FP), R13</code></span>
+<span class="codeline" id="line-102"><code>	MOVQ iy+80(FP), R14</code></span>
+<span class="codeline" id="line-103"><code></code></span>
+<span class="codeline" id="line-104"><code>	MOVSD $(0.0), X7      // sum = 0</code></span>
+<span class="codeline" id="line-105"><code>	LEAQ  (R8)(R13*8), SI // p = &amp;x[ix]</code></span>
+<span class="codeline" id="line-106"><code>	LEAQ  (R9)(R14*8), DI // q = &amp;y[ix]</code></span>
+<span class="codeline" id="line-107"><code>	SHLQ  $3, R11         // incX *= sizeof(float64)</code></span>
+<span class="codeline" id="line-108"><code>	SHLQ  $3, R12         // indY *= sizeof(float64)</code></span>
+<span class="codeline" id="line-109"><code></code></span>
+<span class="codeline" id="line-110"><code>	SUBQ $2, CX   // n -= 2</code></span>
+<span class="codeline" id="line-111"><code>	JL   tail_inc // if n &lt; 0 goto tail_inc</code></span>
+<span class="codeline" id="line-112"><code></code></span>
+<span class="codeline" id="line-113"><code>loop_inc:</code></span>
+<span class="codeline" id="line-114"><code>	// sum += *p * *q unrolled 2x.</code></span>
+<span class="codeline" id="line-115"><code>	MOVHPD (SI), X0</code></span>
+<span class="codeline" id="line-116"><code>	MOVHPD (DI), X1</code></span>
+<span class="codeline" id="line-117"><code>	ADDQ   R11, SI  // p += incX</code></span>
+<span class="codeline" id="line-118"><code>	ADDQ   R12, DI  // q += incY</code></span>
+<span class="codeline" id="line-119"><code>	MOVLPD (SI), X0</code></span>
+<span class="codeline" id="line-120"><code>	MOVLPD (DI), X1</code></span>
+<span class="codeline" id="line-121"><code>	ADDQ   R11, SI  // p += incX</code></span>
+<span class="codeline" id="line-122"><code>	ADDQ   R12, DI  // q += incY</code></span>
+<span class="codeline" id="line-123"><code></code></span>
+<span class="codeline" id="line-124"><code>	MULPD X1, X0</code></span>
+<span class="codeline" id="line-125"><code>	ADDPD X0, X7</code></span>
+<span class="codeline" id="line-126"><code></code></span>
+<span class="codeline" id="line-127"><code>	SUBQ $2, CX   // n -= 2</code></span>
+<span class="codeline" id="line-128"><code>	JGE  loop_inc // if n &gt;= 0 goto loop_inc</code></span>
+<span class="codeline" id="line-129"><code></code></span>
+<span class="codeline" id="line-130"><code>tail_inc:</code></span>
+<span class="codeline" id="line-131"><code>	ADDQ $2, CX  // n += 2</code></span>
+<span class="codeline" id="line-132"><code>	JLE  end_inc // if n &lt;= 0 goto end_inc</code></span>
+<span class="codeline" id="line-133"><code></code></span>
+<span class="codeline" id="line-134"><code>	// sum += *p * *q for the last iteration if n is odd.</code></span>
+<span class="codeline" id="line-135"><code>	MOVSD (SI), X0</code></span>
+<span class="codeline" id="line-136"><code>	MULSD (DI), X0</code></span>
+<span class="codeline" id="line-137"><code>	ADDSD X0, X7</code></span>
+<span class="codeline" id="line-138"><code></code></span>
+<span class="codeline" id="line-139"><code>end_inc:</code></span>
+<span class="codeline" id="line-140"><code>	// Add the two sums together.</code></span>
+<span class="codeline" id="line-141"><code>	MOVSD    X7, X0</code></span>
+<span class="codeline" id="line-142"><code>	UNPCKHPD X7, X7</code></span>
+<span class="codeline" id="line-143"><code>	ADDSD    X0, X7</code></span>
+<span class="codeline" id="line-144"><code>	MOVSD    X7, sum+88(FP) // Return final sum.</code></span>
+<span class="codeline" id="line-145"><code>	RET</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

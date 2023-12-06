@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime/internal/atomic.Uintptr.Store</title>
+<link href="../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../pkg/runtime/internal/atomic.html">runtime/internal/atomic</a>.<a href="../../../src/runtime/internal/atomic/types.go.html#line-350">Uintptr</a>.<a href="../../../src/runtime/internal/atomic/types.go.html#line-378">Store</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">14 uses</span>
+
+	runtime/internal/atomic (current package)
+		<a href="../../../src/runtime/internal/atomic/types.go.html#line-378">types.go#L378</a>: func (u *Uintptr) <b>Store</b>(value uintptr) {
+
+	<a href="../../../pkg/runtime.html">runtime</a>
+		<a href="../../../src/runtime/mgc.go.html#line-1557">mgc.go#L1557</a>: 	mheap_.reclaimCredit.<b>Store</b>(0)
+		<a href="../../../src/runtime/mgcscavenge.go.html#line-1080">mgcscavenge.go#L1080</a>: 		s.minHeapIdx.<b>Store</b>(baseIdx)
+		<a href="../../../src/runtime/mpagealloc_64bit.go.html#line-239">mpagealloc_64bit.go#L239</a>: 			s.min.<b>Store</b>(needMin)
+		<a href="../../../src/runtime/mpagealloc_64bit.go.html#line-242" class="path-duplicate">mpagealloc_64bit.go</a><a href="../../../src/runtime/mpagealloc_64bit.go.html#line-242">#L242</a>: 			s.max.<b>Store</b>(needMax)
+		<a href="../../../src/runtime/mspanset.go.html#line-130">mspanset.go#L130</a>: 		b.spineLen.<b>Store</b>(spineLen + 1)
+		<a href="../../../src/runtime/mspanset.go.html#line-268" class="path-duplicate">mspanset.go</a><a href="../../../src/runtime/mspanset.go.html#line-268">#L268</a>: 	b.spineLen.<b>Store</b>(0)
+		<a href="../../../src/runtime/netpoll.go.html#line-250">netpoll.go#L250</a>: 		pd.fdseq.<b>Store</b>(1)
+		<a href="../../../src/runtime/netpoll.go.html#line-255" class="path-duplicate">netpoll.go</a><a href="../../../src/runtime/netpoll.go.html#line-255">#L255</a>: 	pd.rg.<b>Store</b>(pdNil)
+		<a href="../../../src/runtime/netpoll.go.html#line-258" class="path-duplicate">netpoll.go</a><a href="../../../src/runtime/netpoll.go.html#line-258">#L258</a>: 	pd.wg.<b>Store</b>(pdNil)
+		<a href="../../../src/runtime/netpoll.go.html#line-298" class="path-duplicate">netpoll.go</a><a href="../../../src/runtime/netpoll.go.html#line-298">#L298</a>: 	pd.fdseq.<b>Store</b>(fdseq)
+		<a href="../../../src/runtime/netpoll.go.html#line-321" class="path-duplicate">netpoll.go</a><a href="../../../src/runtime/netpoll.go.html#line-321">#L321</a>: 		pd.rg.<b>Store</b>(pdNil)
+		<a href="../../../src/runtime/netpoll.go.html#line-323" class="path-duplicate">netpoll.go</a><a href="../../../src/runtime/netpoll.go.html#line-323">#L323</a>: 		pd.wg.<b>Store</b>(pdNil)
+		<a href="../../../src/runtime/proc.go.html#line-2303">proc.go#L2303</a>: 	extraM.<b>Store</b>(uintptr(unsafe.Pointer(mp)))
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

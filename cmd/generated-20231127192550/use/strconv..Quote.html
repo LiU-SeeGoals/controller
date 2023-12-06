@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: strconv.Quote</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../pkg/strconv.html">strconv</a>.<a href="../src/strconv/quote.go.html#line-128">Quote</a></b></span>
+
+<span class="title">18 uses</span>
+
+	strconv (current package)
+		<a href="../src/strconv/atoi.go.html#line-31">atoi.go#L31</a>: 	return "strconv." + e.Func + ": " + "parsing " + <b>Quote</b>(e.Num) + ": " + e.Err.Error()
+		<a href="../src/strconv/quote.go.html#line-128">quote.go#L128</a>: func <b>Quote</b>(s string) string {
+
+	<a href="../pkg/encoding/json.html">encoding/json</a>
+		<a href="../src/encoding/json/decode.go.html#line-151">decode.go#L151</a>: 	return "json: cannot unmarshal object key " + strconv.<b>Quote</b>(e.Key) + " into unexported field " + e.Field.Name + " of type " + e.Type.String()
+		<a href="../src/encoding/json/encode.go.html#line-225">encode.go#L225</a>: 	return "json: invalid UTF-8 in string: " + strconv.<b>Quote</b>(e.S)
+		<a href="../src/encoding/json/scanner.go.html#line-608">scanner.go#L608</a>: 	s := strconv.<b>Quote</b>(string(c))
+
+	<a href="../pkg/google.golang.org/protobuf/internal/descfmt.html">google.golang.org/protobuf/internal/descfmt</a>
+		<a href="../src/google.golang.org/protobuf/internal/descfmt/stringer.go.html#line-258">stringer.go#L258</a>: 			s = strconv.<b>Quote</b>(v)
+
+	<a href="../pkg/net/netip.html">net/netip</a>
+		<a href="../src/net/netip/netip.go.html#line-147">netip.go#L147</a>: 	q := strconv.<b>Quote</b>
+		<a href="../src/net/netip/netip.go.html#line-1081" class="path-duplicate">netip.go</a><a href="../src/net/netip/netip.go.html#line-1081">#L1081</a>: 		return ipp, errors.New("invalid port " + strconv.<b>Quote</b>(port) + " parsing " + strconv.<b>Quote</b>(s))
+		<a href="../src/net/netip/netip.go.html#line-1089" class="path-duplicate">netip.go</a><a href="../src/net/netip/netip.go.html#line-1089">#L1089</a>: 		return AddrPort{}, errors.New("invalid ip:port " + strconv.<b>Quote</b>(s) + ", square brackets can only be used with IPv6 addresses")
+		<a href="../src/net/netip/netip.go.html#line-1091" class="path-duplicate">netip.go</a><a href="../src/net/netip/netip.go.html#line-1091">#L1091</a>: 		return AddrPort{}, errors.New("invalid ip:port " + strconv.<b>Quote</b>(s) + ", IPv6 addresses must be surrounded by square brackets")
+		<a href="../src/net/netip/netip.go.html#line-1279" class="path-duplicate">netip.go</a><a href="../src/net/netip/netip.go.html#line-1279">#L1279</a>: 		return Prefix{}, errors.New("netip.ParsePrefix(" + strconv.<b>Quote</b>(s) + "): no '/'")
+		<a href="../src/net/netip/netip.go.html#line-1283" class="path-duplicate">netip.go</a><a href="../src/net/netip/netip.go.html#line-1283">#L1283</a>: 		return Prefix{}, errors.New("netip.ParsePrefix(" + strconv.<b>Quote</b>(s) + "): " + err.Error())
+		<a href="../src/net/netip/netip.go.html#line-1287" class="path-duplicate">netip.go</a><a href="../src/net/netip/netip.go.html#line-1287">#L1287</a>: 		return Prefix{}, errors.New("netip.ParsePrefix(" + strconv.<b>Quote</b>(s) + "): IPv6 zones cannot be present in a prefix")
+		<a href="../src/net/netip/netip.go.html#line-1293" class="path-duplicate">netip.go</a><a href="../src/net/netip/netip.go.html#line-1293">#L1293</a>: 		return Prefix{}, errors.New("netip.ParsePrefix(" + strconv.<b>Quote</b>(s) + "): bad bits after slash: " + strconv.<b>Quote</b>(bitsStr))
+		<a href="../src/net/netip/netip.go.html#line-1300" class="path-duplicate">netip.go</a><a href="../src/net/netip/netip.go.html#line-1300">#L1300</a>: 		return Prefix{}, errors.New("netip.ParsePrefix(" + strconv.<b>Quote</b>(s) + "): prefix length out of range")
+
+	<a href="../pkg/reflect.html">reflect</a>
+		<a href="../src/reflect/type.go.html#line-2346">type.go#L2346</a>: 			repr = append(repr, (" " + strconv.<b>Quote</b>(f.Name.Tag()))...)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

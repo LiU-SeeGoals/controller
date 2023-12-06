@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/mat.Error</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-112">Error</a></b></span>
+
+<span class="title">28 uses</span>
+
+	gonum.org/v1/gonum/mat (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-53">errors.go#L53</a>: 			if e, ok := r.(<b>Error</b>); ok {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-75" class="path-duplicate">errors.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-75">#L75</a>: 			if e, ok := r.(<b>Error</b>); ok {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-96" class="path-duplicate">errors.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-96">#L96</a>: 			if e, ok := r.(<b>Error</b>); ok {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-112" class="path-duplicate">errors.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-112">#L112</a>: type <b>Error</b> struct{ string }
+		<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-114" class="path-duplicate">errors.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-114">#L114</a>: func (err <b>Error</b>) Error() string { return err.string }
+		<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-117" class="path-duplicate">errors.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-117">#L117</a>: 	ErrNegativeDimension   = <b>Error</b>{"mat: negative dimension"}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-118" class="path-duplicate">errors.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-118">#L118</a>: 	ErrIndexOutOfRange     = <b>Error</b>{"mat: index out of range"}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-119" class="path-duplicate">errors.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-119">#L119</a>: 	ErrReuseNonEmpty       = <b>Error</b>{"mat: reuse of non-empty matrix"}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-120" class="path-duplicate">errors.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-120">#L120</a>: 	ErrRowAccess           = <b>Error</b>{"mat: row index out of range"}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-121" class="path-duplicate">errors.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-121">#L121</a>: 	ErrColAccess           = <b>Error</b>{"mat: column index out of range"}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-122" class="path-duplicate">errors.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-122">#L122</a>: 	ErrVectorAccess        = <b>Error</b>{"mat: vector index out of range"}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-123" class="path-duplicate">errors.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-123">#L123</a>: 	ErrZeroLength          = <b>Error</b>{"mat: zero length in matrix dimension"}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-124" class="path-duplicate">errors.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-124">#L124</a>: 	ErrRowLength           = <b>Error</b>{"mat: row length mismatch"}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-125" class="path-duplicate">errors.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-125">#L125</a>: 	ErrColLength           = <b>Error</b>{"mat: col length mismatch"}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-126" class="path-duplicate">errors.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-126">#L126</a>: 	ErrSquare              = <b>Error</b>{"mat: expect square matrix"}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-127" class="path-duplicate">errors.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-127">#L127</a>: 	ErrNormOrder           = <b>Error</b>{"mat: invalid norm order for matrix"}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-128" class="path-duplicate">errors.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-128">#L128</a>: 	ErrSingular            = <b>Error</b>{"mat: matrix is singular"}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-129" class="path-duplicate">errors.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-129">#L129</a>: 	ErrShape               = <b>Error</b>{"mat: dimension mismatch"}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-130" class="path-duplicate">errors.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-130">#L130</a>: 	ErrIllegalStride       = <b>Error</b>{"mat: illegal stride"}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-131" class="path-duplicate">errors.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-131">#L131</a>: 	ErrPivot               = <b>Error</b>{"mat: malformed pivot list"}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-132" class="path-duplicate">errors.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-132">#L132</a>: 	ErrTriangle            = <b>Error</b>{"mat: triangular storage mismatch"}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-133" class="path-duplicate">errors.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-133">#L133</a>: 	ErrTriangleSet         = <b>Error</b>{"mat: triangular set out of bounds"}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-134" class="path-duplicate">errors.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-134">#L134</a>: 	ErrBandwidth           = <b>Error</b>{"mat: bandwidth out of range"}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-135" class="path-duplicate">errors.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-135">#L135</a>: 	ErrBandSet             = <b>Error</b>{"mat: band set out of bounds"}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-136" class="path-duplicate">errors.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-136">#L136</a>: 	ErrDiagSet             = <b>Error</b>{"mat: diagonal set out of bounds"}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-137" class="path-duplicate">errors.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-137">#L137</a>: 	ErrSliceLengthMismatch = <b>Error</b>{"mat: input slice length mismatch"}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-138" class="path-duplicate">errors.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-138">#L138</a>: 	ErrNotPSD              = <b>Error</b>{"mat: input not positive symmetric definite"}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-139" class="path-duplicate">errors.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-139">#L139</a>: 	ErrFailedEigen         = <b>Error</b>{"mat: eigendecomposition not successful"}
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

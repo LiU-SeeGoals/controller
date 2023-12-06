@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/mat.Vector</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-26">Vector</a></b></span>
+
+<span class="title">48 uses</span>
+
+	gonum.org/v1/gonum/mat (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-336">band.go#L336</a>: func (b *BandDense) MulVecTo(dst *VecDense, trans bool, x <b>Vector</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-284">cholesky.go#L284</a>: func (c *Cholesky) SolveVecTo(dst *VecDense, b <b>Vector</b>) error {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-495" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-495">#L495</a>: func (c *Cholesky) ExtendVecSym(a *Cholesky, v <b>Vector</b>) (ok bool) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-564" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-564">#L564</a>: func (c *Cholesky) SymRankOne(orig *Cholesky, alpha float64, x <b>Vector</b>) (ok bool) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-807" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-807">#L807</a>: func (ch *BandCholesky) SolveVecTo(dst *VecDense, b <b>Vector</b>) error {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-1114" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-1114">#L1114</a>: func (c *PivotedCholesky) SolveVecTo(dst *VecDense, b <b>Vector</b>) error {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-246">dense.go#L246</a>: func (m *Dense) ColView(j int) <b>Vector</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-285" class="path-duplicate">dense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-285">#L285</a>: func (m *Dense) RowView(i int) <b>Vector</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-782">dense_arithmetic.go#L782</a>: func (m *Dense) RankOne(a Matrix, alpha float64, x, y <b>Vector</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-840" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-840">#L840</a>: func (m *Dense) Outer(alpha float64, x, y <b>Vector</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/inner.go.html#line-24">inner.go#L24</a>: func Inner(x <b>Vector</b>, a Matrix, y <b>Vector</b>) float64 {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-244">lq.go#L244</a>: func (lq *LQ) SolveVecTo(dst *VecDense, trans bool, b <b>Vector</b>) error {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-184">lu.go#L184</a>: func (lu *LU) RankOne(orig *LU, alpha float64, x, y <b>Vector</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-397" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-397">#L397</a>: func (lu *LU) SolveVecTo(dst *VecDense, trans bool, b <b>Vector</b>) error {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-128">matrix.go#L128</a>: 	RowView(i int) <b>Vector</b>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-140" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-140">#L140</a>: 	ColView(j int) <b>Vector</b>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-430" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-430">#L430</a>: func Dot(a, b <b>Vector</b>) float64 {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-242">qr.go#L242</a>: func (qr *QR) SolveVecTo(dst *VecDense, trans bool, b <b>Vector</b>) error {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/solve.go.html#line-140">solve.go#L140</a>: func (v *VecDense) SolveVec(a Matrix, b <b>Vector</b>) error {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-383">svd.go#L383</a>: func (svd *SVD) SolveVecTo(dst *VecDense, b <b>Vector</b>, rank int) float64 {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symband.go.html#line-288">symband.go#L288</a>: func (s *SymBandDense) MulVecTo(dst *VecDense, _ bool, x <b>Vector</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-327">symmetric.go#L327</a>: func (s *SymDense) SymRankOne(a Symmetric, alpha float64, x <b>Vector</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-442" class="path-duplicate">symmetric.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-442">#L442</a>: func (s *SymDense) RankTwo(a Symmetric, alpha float64, x, y <b>Vector</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-604">triband.go#L604</a>: func (t *TriBandDense) SolveVecTo(dst *VecDense, trans bool, b <b>Vector</b>) error {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-205">tridiag.go#L205</a>: func (a *Tridiag) MulVecTo(dst *VecDense, trans bool, x <b>Vector</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-263" class="path-duplicate">tridiag.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-263">#L263</a>: func (a *Tridiag) SolveVecTo(dst *VecDense, trans bool, b <b>Vector</b>) error {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-20">vector.go#L20</a>: 	_ <b>Vector</b>        = vector
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-26" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-26">#L26</a>: type <b>Vector</b> interface {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-34" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-34">#L34</a>: 	<b>Vector</b>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-42" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-42">#L42</a>: 	Vector <b>Vector</b>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-73" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-73">#L73</a>: func (t TransposeVec) TVec() <b>Vector</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-82" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-82">#L82</a>: func (t TransposeVec) UntransposeVec() <b>Vector</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-125" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-125">#L125</a>: func (v *VecDense) SliceVec(i, k int) <b>Vector</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-179" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-179">#L179</a>: func (v *VecDense) TVec() <b>Vector</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-205" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-205">#L205</a>: func (v *VecDense) CloneFromVec(a <b>Vector</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-225" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-225">#L225</a>: func VecDenseCopyOf(a <b>Vector</b>) *VecDense {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-248" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-248">#L248</a>: func (v *VecDense) CopyVec(a <b>Vector</b>) int {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-293" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-293">#L293</a>: func (v *VecDense) ScaleVec(alpha float64, a <b>Vector</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-325" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-325">#L325</a>: func (v *VecDense) AddScaledVec(a <b>Vector</b>, alpha float64, b <b>Vector</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-398" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-398">#L398</a>: func (v *VecDense) AddVec(a, b <b>Vector</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-441" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-441">#L441</a>: func (v *VecDense) SubVec(a, b <b>Vector</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-485" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-485">#L485</a>: func (v *VecDense) MulElemVec(a, b <b>Vector</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-534" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-534">#L534</a>: func (v *VecDense) DivElemVec(a, b <b>Vector</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-583" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-583">#L583</a>: func (v *VecDense) MulVec(a Matrix, b <b>Vector</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-615" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-615">#L615</a>: 	case <b>Vector</b>:
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-772" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-772">#L772</a>: func (v *VecDense) isolatedWorkspace(a <b>Vector</b>) (n *VecDense, restore func()) {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

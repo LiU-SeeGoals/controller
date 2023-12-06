@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.m.locks</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/runtime2.go.html#line-533">m</a>.<a href="../src/runtime/runtime2.go.html#line-555">locks</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">42 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/lock_futex.go.html#line-54">lock_futex.go#L54</a>: 	if gp.m.<b>locks</b> &lt; 0 {
+		<a href="../src/runtime/lock_futex.go.html#line-57" class="path-duplicate">lock_futex.go</a><a href="../src/runtime/lock_futex.go.html#line-57">#L57</a>: 	gp.m.<b>locks</b>++
+		<a href="../src/runtime/lock_futex.go.html#line-125" class="path-duplicate">lock_futex.go</a><a href="../src/runtime/lock_futex.go.html#line-125">#L125</a>: 	gp.m.<b>locks</b>--
+		<a href="../src/runtime/lock_futex.go.html#line-126" class="path-duplicate">lock_futex.go</a><a href="../src/runtime/lock_futex.go.html#line-126">#L126</a>: 	if gp.m.<b>locks</b> &lt; 0 {
+		<a href="../src/runtime/lock_futex.go.html#line-129" class="path-duplicate">lock_futex.go</a><a href="../src/runtime/lock_futex.go.html#line-129">#L129</a>: 	if gp.m.<b>locks</b> == 0 &amp;&amp; gp.preempt { // restore the preemption request in case we've cleared it in newstack
+		<a href="../src/runtime/mgc.go.html#line-606">mgc.go#L606</a>: 	if gp := getg(); gp == mp.g0 || mp.<b>locks</b> &gt; 1 || mp.preemptoff != "" {
+		<a href="../src/runtime/mgcmark.go.html#line-412">mgcmark.go#L412</a>: 	if mp := getg().m; mp.<b>locks</b> &gt; 0 || mp.preemptoff != "" {
+		<a href="../src/runtime/mgcsweep.go.html#line-361">mgcsweep.go#L361</a>: 	gp.m.<b>locks</b>++
+		<a href="../src/runtime/mgcsweep.go.html#line-367" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-367">#L367</a>: 		gp.m.<b>locks</b>--
+		<a href="../src/runtime/mgcsweep.go.html#line-445" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-445">#L445</a>: 	gp.m.<b>locks</b>--
+		<a href="../src/runtime/mgcsweep.go.html#line-467" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-467">#L467</a>: 	if gp.m.<b>locks</b> == 0 &amp;&amp; gp.m.mallocing == 0 &amp;&amp; gp != gp.m.g0 {
+		<a href="../src/runtime/mgcsweep.go.html#line-506" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-506">#L506</a>: 	if gp.m.<b>locks</b> == 0 &amp;&amp; gp.m.mallocing == 0 &amp;&amp; gp != gp.m.g0 {
+		<a href="../src/runtime/panic.go.html#line-858">panic.go#L858</a>: 	if gp.m.<b>locks</b> != 0 {
+		<a href="../src/runtime/panic.go.html#line-1250" class="path-duplicate">panic.go</a><a href="../src/runtime/panic.go.html#line-1250">#L1250</a>: 	if gp.m.<b>locks</b> &lt; 0 {
+		<a href="../src/runtime/panic.go.html#line-1251" class="path-duplicate">panic.go</a><a href="../src/runtime/panic.go.html#line-1251">#L1251</a>: 		gp.m.<b>locks</b> = 1
+		<a href="../src/runtime/panic.go.html#line-1351" class="path-duplicate">panic.go</a><a href="../src/runtime/panic.go.html#line-1351">#L1351</a>: 	if mp.<b>locks</b> != 1 || mp.mallocing != 0 || mp.throwing != throwTypeNone || mp.preemptoff != "" || mp.dying != 0 {
+		<a href="../src/runtime/preempt.go.html#line-287">preempt.go#L287</a>: 	return mp.<b>locks</b> == 0 &amp;&amp; mp.mallocing == 0 &amp;&amp; mp.preemptoff == "" &amp;&amp; mp.p.ptr().status == _Prunning
+		<a href="../src/runtime/print.go.html#line-67">print.go#L67</a>: 	mp.<b>locks</b>++ // do not reschedule between printlock++ and lock(&amp;debuglock).
+		<a href="../src/runtime/print.go.html#line-72" class="path-duplicate">print.go</a><a href="../src/runtime/print.go.html#line-72">#L72</a>: 	mp.<b>locks</b>-- // now we know debuglock is held and holding up mp.locks for us.
+		<a href="../src/runtime/proc.go.html#line-1359">proc.go#L1359</a>: 	if gp.m.<b>locks</b> &gt; 0 {
+		<a href="../src/runtime/proc.go.html#line-2523" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-2523">#L2523</a>: 	if gp.m.<b>locks</b> != 0 {
+		<a href="../src/runtime/proc.go.html#line-3556" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-3556">#L3556</a>: 	if mp.<b>locks</b> != 0 {
+		<a href="../src/runtime/proc.go.html#line-3998" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-3998">#L3998</a>: 	gp.m.<b>locks</b>++
+		<a href="../src/runtime/proc.go.html#line-4054" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4054">#L4054</a>: 	gp.m.<b>locks</b>--
+		<a href="../src/runtime/proc.go.html#line-4100" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4100">#L4100</a>: 	gp.m.<b>locks</b>++ // see comment in entersyscall
+		<a href="../src/runtime/proc.go.html#line-4134" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4134">#L4134</a>: 	gp.m.<b>locks</b>--
+		<a href="../src/runtime/proc.go.html#line-4160" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4160">#L4160</a>: 	gp.m.<b>locks</b>++ // see comment in entersyscall
+		<a href="../src/runtime/proc.go.html#line-4192" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4192">#L4192</a>: 		gp.m.<b>locks</b>--
+		<a href="../src/runtime/proc.go.html#line-4223" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4223">#L4223</a>: 	gp.m.<b>locks</b>--
+		<a href="../src/runtime/proc.go.html#line-4372" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4372">#L4372</a>: 	gp.m.<b>locks</b>++
+		<a href="../src/runtime/proc.go.html#line-4395" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4395">#L4395</a>: 	gp.m.<b>locks</b>--
+		<a href="../src/runtime/proc.go.html#line-5023" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5023">#L5023</a>: 	gp.m.<b>locks</b>++
+		<a href="../src/runtime/proc.go.html#line-5047" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5047">#L5047</a>: 	gp.m.<b>locks</b>--
+		<a href="../src/runtime/proc.go.html#line-5857" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5857">#L5857</a>: 		print(" mallocing=", mp.mallocing, " throwing=", mp.throwing, " preemptoff=", mp.preemptoff, " locks=", mp.<b>locks</b>, " dying=", mp.dying, " spinning=", mp.spinning, " blocked=", mp.blocked, " lockedg=")
+		<a href="../src/runtime/proc.go.html#line-6571" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-6571">#L6571</a>: 	mp.<b>locks</b>++
+		<a href="../src/runtime/proc.go.html#line-6578" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-6578">#L6578</a>: 	gp.m.<b>locks</b>--
+		<a href="../src/runtime/runtime1.go.html#line-574">runtime1.go#L574</a>: 	gp.m.<b>locks</b>++
+		<a href="../src/runtime/runtime1.go.html#line-581" class="path-duplicate">runtime1.go</a><a href="../src/runtime/runtime1.go.html#line-581">#L581</a>: 	mp.<b>locks</b>--
+		<a href="../src/runtime/runtime1.go.html#line-582" class="path-duplicate">runtime1.go</a><a href="../src/runtime/runtime1.go.html#line-582">#L582</a>: 	if mp.<b>locks</b> == 0 &amp;&amp; gp.preempt {
+		<a href="../src/runtime/runtime2.go.html#line-555">runtime2.go#L555</a>: 	<b>locks</b>         int32
+		<a href="../src/runtime/sema.go.html#line-211">sema.go#L211</a>: 		if s.ticket == 1 &amp;&amp; getg().m.<b>locks</b> == 0 {
+		<a href="../src/runtime/stack.go.html#line-1058">stack.go#L1058</a>: 		if thisg.m.p == 0 &amp;&amp; thisg.m.<b>locks</b> == 0 {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

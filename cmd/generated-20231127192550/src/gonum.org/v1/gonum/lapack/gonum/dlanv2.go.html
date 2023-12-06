@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: dlanv2.go in package gonum.org/v1/gonum/lapack/gonum</title>
+<link href="../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	dlanv2.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10],
+input[id=r11]:checked ~pre label[for=r11],
+input[id=r12]:checked ~pre label[for=r12],
+input[id=r13]:checked ~pre label[for=r13],
+input[id=r14]:checked ~pre label[for=r14],
+input[id=r15]:checked ~pre label[for=r15],
+input[id=r16]:checked ~pre label[for=r16],
+input[id=r17]:checked ~pre label[for=r17],
+input[id=r18]:checked ~pre label[for=r18],
+input[id=r19]:checked ~pre label[for=r19],
+input[id=r20]:checked ~pre label[for=r20],
+input[id=r21]:checked ~pre label[for=r21],
+input[id=r22]:checked ~pre label[for=r22],
+input[id=r23]:checked ~pre label[for=r23],
+input[id=r24]:checked ~pre label[for=r24],
+input[id=r25]:checked ~pre label[for=r25],
+input[id=r26]:checked ~pre label[for=r26],
+input[id=r27]:checked ~pre label[for=r27],
+input[id=r28]:checked ~pre label[for=r28],
+input[id=r29]:checked ~pre label[for=r29],
+input[id=r30]:checked ~pre label[for=r30],
+input[id=r31]:checked ~pre label[for=r31],
+input[id=r32]:checked ~pre label[for=r32],
+input[id=r33]:checked ~pre label[for=r33]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="r11" type="radio" name="g"/>
+<input id="r12" type="radio" name="g"/>
+<input id="r13" type="radio" name="g"/>
+<input id="r14" type="radio" name="g"/>
+<input id="r15" type="radio" name="g"/>
+<input id="r16" type="radio" name="g"/>
+<input id="r17" type="radio" name="g"/>
+<input id="r18" type="radio" name="g"/>
+<input id="r19" type="radio" name="g"/>
+<input id="r20" type="radio" name="g"/>
+<input id="r21" type="radio" name="g"/>
+<input id="r22" type="radio" name="g"/>
+<input id="r23" type="radio" name="g"/>
+<input id="r24" type="radio" name="g"/>
+<input id="r25" type="radio" name="g"/>
+<input id="r26" type="radio" name="g"/>
+<input id="r27" type="radio" name="g"/>
+<input id="r28" type="radio" name="g"/>
+<input id="r29" type="radio" name="g"/>
+<input id="r30" type="radio" name="g"/>
+<input id="r31" type="radio" name="g"/>
+<input id="r32" type="radio" name="g"/>
+<input id="r33" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">// Copyright ©2016 The Gonum Authors. All rights reserved.</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment">// Use of this source code is governed by a BSD-style</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment">// license that can be found in the LICENSE file.</span></code></span>
+<span class="codeline" id="line-4"><code></code></span>
+<span class="codeline" id="line-5"><code><span class="keyword">package</span> gonum</code></span>
+<span class="codeline" id="line-6"><code></code></span>
+<span class="codeline" id="line-7"><code><span class="keyword">import</span> <label for="i0"><span class="lit-string i0">"math"</span></label></code></span>
+<span class="codeline" id="line-8"><code></code></span>
+<span class="codeline" id="line-9"><code><span class="comment">// Dlanv2 computes the Schur factorization of a real 2×2 matrix:</span></code></span>
+<span class="codeline" id="line-10"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-11"><code><span class="comment">//	[ a b ] = [ cs -sn ] * [ aa bb ] * [ cs sn ]</span></code></span>
+<span class="codeline" id="line-12"><code><span class="comment">//	[ c d ]   [ sn  cs ]   [ cc dd ] * [-sn cs ]</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-14"><code><span class="comment">// If cc is zero, aa and dd are real eigenvalues of the matrix. Otherwise it</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment">// holds that aa = dd and bb*cc &lt; 0, and aa ± sqrt(bb*cc) are complex conjugate</span></code></span>
+<span class="codeline" id="line-16"><code><span class="comment">// eigenvalues. The real and imaginary parts of the eigenvalues are returned in</span></code></span>
+<span class="codeline" id="line-17"><code><span class="comment">// (rt1r,rt1i) and (rt2r,rt2i).</span></code></span>
+<span class="codeline" id="line-18"><code><span class="keyword">func</span> (<label for="r0" class="ident">impl</label> <a href="lapack.go.html#line-12" class="ident">Implementation</a>) <label for="r1" class="ident"><a href="../../../../../../use/gonum.org/v1/gonum/lapack/gonum..Implementation.Dlanv2.html" class="ident">Dlanv2</a></label>(<label for="r2" class="ident">a</label>, <label for="r3" class="ident">b</label>, <label for="r4" class="ident">c</label>, <label for="r5" class="ident">d</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>) (<label for="r6" class="ident">aa</label>, <label for="r7" class="ident">bb</label>, <label for="r8" class="ident">cc</label>, <label for="r9" class="ident">dd</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r10" class="ident">rt1r</label>, <label for="r11" class="ident">rt1i</label>, <label for="r12" class="ident">rt2r</label>, <label for="r13" class="ident">rt2i</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r14" class="ident">cs</label>, <label for="r15" class="ident">sn</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>) {</code></span>
+<span class="codeline" id="line-19"><code>	<span class="keyword">switch</span> {</code></span>
+<span class="codeline" id="line-20"><code>	<span class="keyword">case</span> <label for="r4" class="ident">c</label> == <span class="lit-number">0</span>: <span class="comment">// Matrix is already upper triangular.</span></code></span>
+<span class="codeline" id="line-21"><code>		<label for="r6" class="ident">aa</label> = <label for="r2" class="ident">a</label></code></span>
+<span class="codeline" id="line-22"><code>		<label for="r7" class="ident">bb</label> = <label for="r3" class="ident">b</label></code></span>
+<span class="codeline" id="line-23"><code>		<label for="r8" class="ident">cc</label> = <span class="lit-number">0</span></code></span>
+<span class="codeline" id="line-24"><code>		<label for="r9" class="ident">dd</label> = <label for="r5" class="ident">d</label></code></span>
+<span class="codeline" id="line-25"><code>		<label for="r14" class="ident">cs</label> = <span class="lit-number">1</span></code></span>
+<span class="codeline" id="line-26"><code>		<label for="r15" class="ident">sn</label> = <span class="lit-number">0</span></code></span>
+<span class="codeline" id="line-27"><code>	<span class="keyword">case</span> <label for="r3" class="ident">b</label> == <span class="lit-number">0</span>: <span class="comment">// Matrix is lower triangular, swap rows and columns.</span></code></span>
+<span class="codeline" id="line-28"><code>		<label for="r6" class="ident">aa</label> = <label for="r5" class="ident">d</label></code></span>
+<span class="codeline" id="line-29"><code>		<label for="r7" class="ident">bb</label> = -<label for="r4" class="ident">c</label></code></span>
+<span class="codeline" id="line-30"><code>		<label for="r8" class="ident">cc</label> = <span class="lit-number">0</span></code></span>
+<span class="codeline" id="line-31"><code>		<label for="r9" class="ident">dd</label> = <label for="r2" class="ident">a</label></code></span>
+<span class="codeline" id="line-32"><code>		<label for="r14" class="ident">cs</label> = <span class="lit-number">0</span></code></span>
+<span class="codeline" id="line-33"><code>		<label for="r15" class="ident">sn</label> = <span class="lit-number">1</span></code></span>
+<span class="codeline" id="line-34"><code>	<span class="keyword">case</span> <label for="r2" class="ident">a</label> == <label for="r5" class="ident">d</label> &amp;&amp; <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/signbit.go.html#line-8" class="ident">Signbit</a>(<label for="r3" class="ident">b</label>) != <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/signbit.go.html#line-8" class="ident">Signbit</a>(<label for="r4" class="ident">c</label>): <span class="comment">// Matrix is already in the standard Schur form.</span></code></span>
+<span class="codeline" id="line-35"><code>		<label for="r6" class="ident">aa</label> = <label for="r2" class="ident">a</label></code></span>
+<span class="codeline" id="line-36"><code>		<label for="r7" class="ident">bb</label> = <label for="r3" class="ident">b</label></code></span>
+<span class="codeline" id="line-37"><code>		<label for="r8" class="ident">cc</label> = <label for="r4" class="ident">c</label></code></span>
+<span class="codeline" id="line-38"><code>		<label for="r9" class="ident">dd</label> = <label for="r5" class="ident">d</label></code></span>
+<span class="codeline" id="line-39"><code>		<label for="r14" class="ident">cs</label> = <span class="lit-number">1</span></code></span>
+<span class="codeline" id="line-40"><code>		<label for="r15" class="ident">sn</label> = <span class="lit-number">0</span></code></span>
+<span class="codeline" id="line-41"><code>	<span class="keyword">default</span>:</code></span>
+<span class="codeline" id="line-42"><code>		<label for="r16" class="ident">temp</label> := <label for="r2" class="ident">a</label> - <label for="r5" class="ident">d</label></code></span>
+<span class="codeline" id="line-43"><code>		<label for="r17" class="ident">p</label> := <label for="r16" class="ident">temp</label> / <span class="lit-number">2</span></code></span>
+<span class="codeline" id="line-44"><code>		<label for="r18" class="ident">bcmax</label> := <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/dim.go.html#line-40" class="ident">Max</a>(<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r3" class="ident">b</label>), <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r4" class="ident">c</label>))</code></span>
+<span class="codeline" id="line-45"><code>		<label for="r19" class="ident">bcmis</label> := <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/dim.go.html#line-76" class="ident">Min</a>(<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r3" class="ident">b</label>), <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r4" class="ident">c</label>))</code></span>
+<span class="codeline" id="line-46"><code>		<span class="keyword">if</span> <label for="r3" class="ident">b</label>*<label for="r4" class="ident">c</label> &lt; <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-47"><code>			<label for="r19" class="ident">bcmis</label> *= -<span class="lit-number">1</span></code></span>
+<span class="codeline" id="line-48"><code>		}</code></span>
+<span class="codeline" id="line-49"><code>		<label for="r20" class="ident">scale</label> := <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/dim.go.html#line-40" class="ident">Max</a>(<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r17" class="ident">p</label>), <label for="r18" class="ident">bcmax</label>)</code></span>
+<span class="codeline" id="line-50"><code>		<label for="r21" class="ident">z</label> := <label for="r17" class="ident">p</label>/<label for="r20" class="ident">scale</label>*<label for="r17" class="ident">p</label> + <label for="r18" class="ident">bcmax</label>/<label for="r20" class="ident">scale</label>*<label for="r19" class="ident">bcmis</label></code></span>
+<span class="codeline" id="line-51"><code>		<label for="r22" class="ident">eps</label> := <a href="lapack.go.html#line-45" class="ident">dlamchP</a></code></span>
+<span class="codeline" id="line-52"><code></code></span>
+<span class="codeline" id="line-53"><code>		<span class="keyword">if</span> <label for="r21" class="ident">z</label> &gt;= <span class="lit-number">4</span>*<label for="r22" class="ident">eps</label> {</code></span>
+<span class="codeline" id="line-54"><code>			<span class="comment">// Real eigenvalues. Compute aa and dd.</span></code></span>
+<span class="codeline" id="line-55"><code>			<span class="keyword">if</span> <label for="r17" class="ident">p</label> &gt; <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-56"><code>				<label for="r21" class="ident">z</label> = <label for="r17" class="ident">p</label> + <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/sqrt.go.html#line-93" class="ident">Sqrt</a>(<label for="r20" class="ident">scale</label>)*<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/sqrt.go.html#line-93" class="ident">Sqrt</a>(<label for="r21" class="ident">z</label>)</code></span>
+<span class="codeline" id="line-57"><code>			} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-58"><code>				<label for="r21" class="ident">z</label> = <label for="r17" class="ident">p</label> - <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/sqrt.go.html#line-93" class="ident">Sqrt</a>(<label for="r20" class="ident">scale</label>)*<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/sqrt.go.html#line-93" class="ident">Sqrt</a>(<label for="r21" class="ident">z</label>)</code></span>
+<span class="codeline" id="line-59"><code>			}</code></span>
+<span class="codeline" id="line-60"><code>			<label for="r6" class="ident">aa</label> = <label for="r5" class="ident">d</label> + <label for="r21" class="ident">z</label></code></span>
+<span class="codeline" id="line-61"><code>			<label for="r9" class="ident">dd</label> = <label for="r5" class="ident">d</label> - <label for="r18" class="ident">bcmax</label>/<label for="r21" class="ident">z</label>*<label for="r19" class="ident">bcmis</label></code></span>
+<span class="codeline" id="line-62"><code>			<span class="comment">// Compute bb and the rotation matrix.</span></code></span>
+<span class="codeline" id="line-63"><code>			<label for="r23" class="ident">tau</label> := <label for="r0" class="ident">impl</label>.<a href="dlapy2.go.html#line-12" class="ident">Dlapy2</a>(<label for="r4" class="ident">c</label>, <label for="r21" class="ident">z</label>)</code></span>
+<span class="codeline" id="line-64"><code>			<label for="r14" class="ident">cs</label> = <label for="r21" class="ident">z</label> / <label for="r23" class="ident">tau</label></code></span>
+<span class="codeline" id="line-65"><code>			<label for="r15" class="ident">sn</label> = <label for="r4" class="ident">c</label> / <label for="r23" class="ident">tau</label></code></span>
+<span class="codeline" id="line-66"><code>			<label for="r7" class="ident">bb</label> = <label for="r3" class="ident">b</label> - <label for="r4" class="ident">c</label></code></span>
+<span class="codeline" id="line-67"><code>			<label for="r8" class="ident">cc</label> = <span class="lit-number">0</span></code></span>
+<span class="codeline" id="line-68"><code>		} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-69"><code>			<span class="comment">// Complex eigenvalues, or real (almost) equal eigenvalues.</span></code></span>
+<span class="codeline" id="line-70"><code><span class="comment">			// Make diagonal elements equal.</span></code></span>
+<span class="codeline" id="line-71"><code>			<label for="r24" class="ident">safmn2</label> := <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/pow.go.html#line-48" class="ident">Pow</a>(<a href="lapack.go.html#line-42" class="ident">dlamchB</a>, <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/log.go.html#line-81" class="ident">Log</a>(<a href="lapack.go.html#line-50" class="ident">dlamchS</a>/<a href="lapack.go.html#line-39" class="ident">dlamchE</a>)/<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/log.go.html#line-81" class="ident">Log</a>(<a href="lapack.go.html#line-42" class="ident">dlamchB</a>)/<span class="lit-number">2</span>)</code></span>
+<span class="codeline" id="line-72"><code>			<label for="r25" class="ident">safmx2</label> := <span class="lit-number">1</span> / <label for="r24" class="ident">safmn2</label></code></span>
+<span class="codeline" id="line-73"><code>			<label for="r26" class="ident">sigma</label> := <label for="r3" class="ident">b</label> + <label for="r4" class="ident">c</label></code></span>
+<span class="codeline" id="line-74"><code>		<label for="r27" class="ident">loop</label>:</code></span>
+<span class="codeline" id="line-75"><code>			<span class="keyword">for</span> <label for="r28" class="ident">iter</label> := <span class="lit-number">0</span>; <label for="r28" class="ident">iter</label> &lt; <span class="lit-number">20</span>; <label for="r28" class="ident">iter</label>++ {</code></span>
+<span class="codeline" id="line-76"><code>				<label for="r20" class="ident">scale</label> = <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/dim.go.html#line-40" class="ident">Max</a>(<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r16" class="ident">temp</label>), <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r26" class="ident">sigma</label>))</code></span>
+<span class="codeline" id="line-77"><code>				<span class="keyword">switch</span> {</code></span>
+<span class="codeline" id="line-78"><code>				<span class="keyword">case</span> <label for="r20" class="ident">scale</label> &gt;= <label for="r25" class="ident">safmx2</label>:</code></span>
+<span class="codeline" id="line-79"><code>					<label for="r26" class="ident">sigma</label> *= <label for="r24" class="ident">safmn2</label></code></span>
+<span class="codeline" id="line-80"><code>					<label for="r16" class="ident">temp</label> *= <label for="r24" class="ident">safmn2</label></code></span>
+<span class="codeline" id="line-81"><code>				<span class="keyword">case</span> <label for="r20" class="ident">scale</label> &lt;= <label for="r24" class="ident">safmn2</label>:</code></span>
+<span class="codeline" id="line-82"><code>					<label for="r26" class="ident">sigma</label> *= <label for="r25" class="ident">safmx2</label></code></span>
+<span class="codeline" id="line-83"><code>					<label for="r16" class="ident">temp</label> *= <label for="r25" class="ident">safmx2</label></code></span>
+<span class="codeline" id="line-84"><code>				<span class="keyword">default</span>:</code></span>
+<span class="codeline" id="line-85"><code>					<span class="keyword">break</span> <label for="r27" class="ident">loop</label></code></span>
+<span class="codeline" id="line-86"><code>				}</code></span>
+<span class="codeline" id="line-87"><code>			}</code></span>
+<span class="codeline" id="line-88"><code>			<label for="r17" class="ident">p</label> = <label for="r16" class="ident">temp</label> / <span class="lit-number">2</span></code></span>
+<span class="codeline" id="line-89"><code>			<label for="r29" class="ident">tau</label> := <label for="r0" class="ident">impl</label>.<a href="dlapy2.go.html#line-12" class="ident">Dlapy2</a>(<label for="r26" class="ident">sigma</label>, <label for="r16" class="ident">temp</label>)</code></span>
+<span class="codeline" id="line-90"><code>			<label for="r14" class="ident">cs</label> = <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/sqrt.go.html#line-93" class="ident">Sqrt</a>((<span class="lit-number">1</span> + <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r26" class="ident">sigma</label>)/<label for="r29" class="ident">tau</label>) / <span class="lit-number">2</span>)</code></span>
+<span class="codeline" id="line-91"><code>			<label for="r15" class="ident">sn</label> = -<label for="r17" class="ident">p</label> / (<label for="r29" class="ident">tau</label> * <label for="r14" class="ident">cs</label>)</code></span>
+<span class="codeline" id="line-92"><code>			<span class="keyword">if</span> <label for="r26" class="ident">sigma</label> &lt; <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-93"><code>				<label for="r15" class="ident">sn</label> *= -<span class="lit-number">1</span></code></span>
+<span class="codeline" id="line-94"><code>			}</code></span>
+<span class="codeline" id="line-95"><code>			<span class="comment">// Compute [ aa bb ] = [ a b ] [ cs -sn ]</span></code></span>
+<span class="codeline" id="line-96"><code><span class="comment">			//         [ cc dd ]   [ c d ] [ sn  cs ]</span></code></span>
+<span class="codeline" id="line-97"><code>			<label for="r6" class="ident">aa</label> = <label for="r2" class="ident">a</label>*<label for="r14" class="ident">cs</label> + <label for="r3" class="ident">b</label>*<label for="r15" class="ident">sn</label></code></span>
+<span class="codeline" id="line-98"><code>			<label for="r7" class="ident">bb</label> = -<label for="r2" class="ident">a</label>*<label for="r15" class="ident">sn</label> + <label for="r3" class="ident">b</label>*<label for="r14" class="ident">cs</label></code></span>
+<span class="codeline" id="line-99"><code>			<label for="r8" class="ident">cc</label> = <label for="r4" class="ident">c</label>*<label for="r14" class="ident">cs</label> + <label for="r5" class="ident">d</label>*<label for="r15" class="ident">sn</label></code></span>
+<span class="codeline" id="line-100"><code>			<label for="r9" class="ident">dd</label> = -<label for="r4" class="ident">c</label>*<label for="r15" class="ident">sn</label> + <label for="r5" class="ident">d</label>*<label for="r14" class="ident">cs</label></code></span>
+<span class="codeline" id="line-101"><code>			<span class="comment">// Compute [ a b ] = [ cs sn ] [ aa bb ]</span></code></span>
+<span class="codeline" id="line-102"><code><span class="comment">			//         [ c d ]   [-sn cs ] [ cc dd ]</span></code></span>
+<span class="codeline" id="line-103"><code>			<label for="r2" class="ident">a</label> = <label for="r6" class="ident">aa</label>*<label for="r14" class="ident">cs</label> + <label for="r8" class="ident">cc</label>*<label for="r15" class="ident">sn</label></code></span>
+<span class="codeline" id="line-104"><code>			<label for="r3" class="ident">b</label> = <label for="r7" class="ident">bb</label>*<label for="r14" class="ident">cs</label> + <label for="r9" class="ident">dd</label>*<label for="r15" class="ident">sn</label></code></span>
+<span class="codeline" id="line-105"><code>			<label for="r4" class="ident">c</label> = -<label for="r6" class="ident">aa</label>*<label for="r15" class="ident">sn</label> + <label for="r8" class="ident">cc</label>*<label for="r14" class="ident">cs</label></code></span>
+<span class="codeline" id="line-106"><code>			<label for="r5" class="ident">d</label> = -<label for="r7" class="ident">bb</label>*<label for="r15" class="ident">sn</label> + <label for="r9" class="ident">dd</label>*<label for="r14" class="ident">cs</label></code></span>
+<span class="codeline" id="line-107"><code></code></span>
+<span class="codeline" id="line-108"><code>			<label for="r16" class="ident">temp</label> = (<label for="r2" class="ident">a</label> + <label for="r5" class="ident">d</label>) / <span class="lit-number">2</span></code></span>
+<span class="codeline" id="line-109"><code>			<label for="r6" class="ident">aa</label> = <label for="r16" class="ident">temp</label></code></span>
+<span class="codeline" id="line-110"><code>			<label for="r7" class="ident">bb</label> = <label for="r3" class="ident">b</label></code></span>
+<span class="codeline" id="line-111"><code>			<label for="r8" class="ident">cc</label> = <label for="r4" class="ident">c</label></code></span>
+<span class="codeline" id="line-112"><code>			<label for="r9" class="ident">dd</label> = <label for="r16" class="ident">temp</label></code></span>
+<span class="codeline" id="line-113"><code></code></span>
+<span class="codeline" id="line-114"><code>			<span class="keyword">if</span> <label for="r8" class="ident">cc</label> != <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-115"><code>				<span class="keyword">if</span> <label for="r7" class="ident">bb</label> != <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-116"><code>					<span class="keyword">if</span> <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/signbit.go.html#line-8" class="ident">Signbit</a>(<label for="r7" class="ident">bb</label>) == <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/signbit.go.html#line-8" class="ident">Signbit</a>(<label for="r8" class="ident">cc</label>) {</code></span>
+<span class="codeline" id="line-117"><code>						<span class="comment">// Real eigenvalues, reduce to</span></code></span>
+<span class="codeline" id="line-118"><code><span class="comment">						// upper triangular form.</span></code></span>
+<span class="codeline" id="line-119"><code>						<label for="r30" class="ident">sab</label> := <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/sqrt.go.html#line-93" class="ident">Sqrt</a>(<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r7" class="ident">bb</label>))</code></span>
+<span class="codeline" id="line-120"><code>						<label for="r31" class="ident">sac</label> := <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/sqrt.go.html#line-93" class="ident">Sqrt</a>(<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r8" class="ident">cc</label>))</code></span>
+<span class="codeline" id="line-121"><code>						<label for="r17" class="ident">p</label> = <label for="r30" class="ident">sab</label> * <label for="r31" class="ident">sac</label></code></span>
+<span class="codeline" id="line-122"><code>						<span class="keyword">if</span> <label for="r8" class="ident">cc</label> &lt; <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-123"><code>							<label for="r17" class="ident">p</label> *= -<span class="lit-number">1</span></code></span>
+<span class="codeline" id="line-124"><code>						}</code></span>
+<span class="codeline" id="line-125"><code>						<label for="r29" class="ident">tau</label> = <span class="lit-number">1</span> / <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/sqrt.go.html#line-93" class="ident">Sqrt</a>(<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r7" class="ident">bb</label>+<label for="r8" class="ident">cc</label>))</code></span>
+<span class="codeline" id="line-126"><code>						<label for="r6" class="ident">aa</label> = <label for="r16" class="ident">temp</label> + <label for="r17" class="ident">p</label></code></span>
+<span class="codeline" id="line-127"><code>						<label for="r7" class="ident">bb</label> = <label for="r7" class="ident">bb</label> - <label for="r8" class="ident">cc</label></code></span>
+<span class="codeline" id="line-128"><code>						<label for="r8" class="ident">cc</label> = <span class="lit-number">0</span></code></span>
+<span class="codeline" id="line-129"><code>						<label for="r9" class="ident">dd</label> = <label for="r16" class="ident">temp</label> - <label for="r17" class="ident">p</label></code></span>
+<span class="codeline" id="line-130"><code>						<label for="r32" class="ident">cs1</label> := <label for="r30" class="ident">sab</label> * <label for="r29" class="ident">tau</label></code></span>
+<span class="codeline" id="line-131"><code>						<label for="r33" class="ident">sn1</label> := <label for="r31" class="ident">sac</label> * <label for="r29" class="ident">tau</label></code></span>
+<span class="codeline" id="line-132"><code>						<label for="r14" class="ident">cs</label>, <label for="r15" class="ident">sn</label> = <label for="r14" class="ident">cs</label>*<label for="r32" class="ident">cs1</label>-<label for="r15" class="ident">sn</label>*<label for="r33" class="ident">sn1</label>, <label for="r14" class="ident">cs</label>*<label for="r33" class="ident">sn1</label>+<label for="r15" class="ident">sn</label>*<label for="r32" class="ident">cs1</label></code></span>
+<span class="codeline" id="line-133"><code>					}</code></span>
+<span class="codeline" id="line-134"><code>				} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-135"><code>					<label for="r7" class="ident">bb</label> = -<label for="r8" class="ident">cc</label></code></span>
+<span class="codeline" id="line-136"><code>					<label for="r8" class="ident">cc</label> = <span class="lit-number">0</span></code></span>
+<span class="codeline" id="line-137"><code>					<label for="r14" class="ident">cs</label>, <label for="r15" class="ident">sn</label> = -<label for="r15" class="ident">sn</label>, <label for="r14" class="ident">cs</label></code></span>
+<span class="codeline" id="line-138"><code>				}</code></span>
+<span class="codeline" id="line-139"><code>			}</code></span>
+<span class="codeline" id="line-140"><code>		}</code></span>
+<span class="codeline" id="line-141"><code>	}</code></span>
+<span class="codeline" id="line-142"><code></code></span>
+<span class="codeline" id="line-143"><code>	<span class="comment">// Store eigenvalues in (rt1r,rt1i) and (rt2r,rt2i).</span></code></span>
+<span class="codeline" id="line-144"><code>	<label for="r10" class="ident">rt1r</label> = <label for="r6" class="ident">aa</label></code></span>
+<span class="codeline" id="line-145"><code>	<label for="r12" class="ident">rt2r</label> = <label for="r9" class="ident">dd</label></code></span>
+<span class="codeline" id="line-146"><code>	<span class="keyword">if</span> <label for="r8" class="ident">cc</label> != <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-147"><code>		<label for="r11" class="ident">rt1i</label> = <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/sqrt.go.html#line-93" class="ident">Sqrt</a>(<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r7" class="ident">bb</label>)) * <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/sqrt.go.html#line-93" class="ident">Sqrt</a>(<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r8" class="ident">cc</label>))</code></span>
+<span class="codeline" id="line-148"><code>		<label for="r13" class="ident">rt2i</label> = -<label for="r11" class="ident">rt1i</label></code></span>
+<span class="codeline" id="line-149"><code>	}</code></span>
+<span class="codeline" id="line-150"><code>	<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-151"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

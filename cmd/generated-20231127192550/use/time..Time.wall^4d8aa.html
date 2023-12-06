@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: time.Time.wall</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/time.html">time</a>.<a href="../src/time/time.go.html#line-129">Time</a>.<a href="../src/time/time.go.html#line-141">wall</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">30 uses</span>
+
+	time (current package)
+		<a href="../src/time/format.go.html#line-531">format.go#L531</a>: 	if t.<b>wall</b>&amp;hasMonotonic != 0 {
+		<a href="../src/time/time.go.html#line-141">time.go#L141</a>: 	<b>wall</b> uint64
+		<a href="../src/time/time.go.html#line-166" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-166">#L166</a>: 	return int32(t.<b>wall</b> &amp; nsecMask)
+		<a href="../src/time/time.go.html#line-171" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-171">#L171</a>: 	if t.<b>wall</b>&amp;hasMonotonic != 0 {
+		<a href="../src/time/time.go.html#line-172" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-172">#L172</a>: 		return wallToInternal + int64(t.<b>wall</b>&lt;&lt;1&gt;&gt;(nsecShift+1))
+		<a href="../src/time/time.go.html#line-182" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-182">#L182</a>: 	if t.<b>wall</b>&amp;hasMonotonic != 0 {
+		<a href="../src/time/time.go.html#line-183" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-183">#L183</a>: 		sec := int64(t.<b>wall</b> &lt;&lt; 1 &gt;&gt; (nsecShift + 1))
+		<a href="../src/time/time.go.html#line-186" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-186">#L186</a>: 			t.<b>wall</b> = t.<b>wall</b>&amp;nsecMask | uint64(dsec)&lt;&lt;nsecShift | hasMonotonic
+		<a href="../src/time/time.go.html#line-216" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-216">#L216</a>: 	if t.<b>wall</b>&amp;hasMonotonic != 0 {
+		<a href="../src/time/time.go.html#line-218" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-218">#L218</a>: 		t.<b>wall</b> &amp;= nsecMask
+		<a href="../src/time/time.go.html#line-227" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-227">#L227</a>: 	if t.<b>wall</b>&amp;hasMonotonic == 0 {
+		<a href="../src/time/time.go.html#line-232" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-232">#L232</a>: 		t.<b>wall</b> |= hasMonotonic | uint64(sec-minWall)&lt;&lt;nsecShift
+		<a href="../src/time/time.go.html#line-243" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-243">#L243</a>: 	if t.<b>wall</b>&amp;hasMonotonic == 0 {
+		<a href="../src/time/time.go.html#line-251" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-251">#L251</a>: 	if t.<b>wall</b>&amp;u.<b>wall</b>&amp;hasMonotonic != 0 {
+		<a href="../src/time/time.go.html#line-261" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-261">#L261</a>: 	if t.<b>wall</b>&amp;u.<b>wall</b>&amp;hasMonotonic != 0 {
+		<a href="../src/time/time.go.html#line-273" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-273">#L273</a>: 	if t.<b>wall</b>&amp;u.<b>wall</b>&amp;hasMonotonic != 0 {
+		<a href="../src/time/time.go.html#line-296" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-296">#L296</a>: 	if t.<b>wall</b>&amp;u.<b>wall</b>&amp;hasMonotonic != 0 {
+		<a href="../src/time/time.go.html#line-866" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-866">#L866</a>: 	t.<b>wall</b> = t.<b>wall</b>&amp;^nsecMask | uint64(nsec) // update nsec
+		<a href="../src/time/time.go.html#line-868" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-868">#L868</a>: 	if t.<b>wall</b>&amp;hasMonotonic != 0 {
+		<a href="../src/time/time.go.html#line-885" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-885">#L885</a>: 	if t.<b>wall</b>&amp;u.<b>wall</b>&amp;hasMonotonic != 0 {
+		<a href="../src/time/time.go.html#line-913" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-913">#L913</a>: 	if t.<b>wall</b>&amp;hasMonotonic != 0 {
+		<a href="../src/time/time.go.html#line-926" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-926">#L926</a>: 	if t.<b>wall</b>&amp;hasMonotonic != 0 {
+		<a href="../src/time/time.go.html#line-1311" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-1311">#L1311</a>: 	t.<b>wall</b> = uint64(nsec)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

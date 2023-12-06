@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: io.ErrUnexpectedEOF</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">var <b><a href="../pkg/io.html">io</a>.<a href="../src/io/io.go.html#line-48">ErrUnexpectedEOF</a></b></span>
+
+<span class="title">18 uses</span>
+
+	io (current package)
+		<a href="../src/io/io.go.html#line-48">io.go#L48</a>: var <b>ErrUnexpectedEOF</b> = errors.New("unexpected EOF")
+		<a href="../src/io/io.go.html#line-341" class="path-duplicate">io.go</a><a href="../src/io/io.go.html#line-341">#L341</a>: 		err = <b>ErrUnexpectedEOF</b>
+
+	<a href="../pkg/compress/flate.html">compress/flate</a>
+		<a href="../src/compress/flate/inflate.go.html#line-691">inflate.go#L691</a>: 		return io.<b>ErrUnexpectedEOF</b>
+
+	<a href="../pkg/compress/gzip.html">compress/gzip</a>
+		<a href="../src/compress/gzip/gunzip.go.html#line-42">gunzip.go#L42</a>: 		return io.<b>ErrUnexpectedEOF</b>
+
+	<a href="../pkg/encoding/base64.html">encoding/base64</a>
+		<a href="../src/encoding/base64/base64.go.html#line-461">base64.go#L461</a>: 			d.err = io.<b>ErrUnexpectedEOF</b>
+
+	<a href="../pkg/encoding/binary.html">encoding/binary</a>
+		<a href="../src/encoding/binary/varint.go.html#line-139">varint.go#L139</a>: 				err = io.<b>ErrUnexpectedEOF</b>
+
+	<a href="../pkg/encoding/json.html">encoding/json</a>
+		<a href="../src/encoding/json/stream.go.html#line-132">stream.go#L132</a>: 					err = io.<b>ErrUnexpectedEOF</b>
+
+	<a href="../pkg/fmt.html">fmt</a>
+		<a href="../src/fmt/scan.go.html#line-227">scan.go#L227</a>: 		s.error(io.<b>ErrUnexpectedEOF</b>)
+		<a href="../src/fmt/scan.go.html#line-961" class="path-duplicate">scan.go</a><a href="../src/fmt/scan.go.html#line-961">#L961</a>: 				err = io.<b>ErrUnexpectedEOF</b>
+
+	<a href="../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>
+		<a href="../src/gonum.org/v1/gonum/mat/io.go.html#line-239">io.go#L239</a>: 				return n, io.<b>ErrUnexpectedEOF</b>
+		<a href="../src/gonum.org/v1/gonum/mat/io.go.html#line-421" class="path-duplicate">io.go</a><a href="../src/gonum.org/v1/gonum/mat/io.go.html#line-421">#L421</a>: 				return n, io.<b>ErrUnexpectedEOF</b>
+		<a href="../src/gonum.org/v1/gonum/mat/io.go.html#line-492" class="path-duplicate">io.go</a><a href="../src/gonum.org/v1/gonum/mat/io.go.html#line-492">#L492</a>: 		return n, io.<b>ErrUnexpectedEOF</b>
+
+	<a href="../pkg/google.golang.org/protobuf/encoding/protowire.html">google.golang.org/protobuf/encoding/protowire</a>
+		<a href="../src/google.golang.org/protobuf/encoding/protowire/wire.go.html#line-74">wire.go#L74</a>: 		return io.<b>ErrUnexpectedEOF</b>
+
+	<a href="../pkg/google.golang.org/protobuf/internal/encoding/text.html">google.golang.org/protobuf/internal/encoding/text</a>
+		<a href="../src/google.golang.org/protobuf/internal/encoding/text/decode.go.html#line-48">decode.go#L48</a>: var ErrUnexpectedEOF = errors.New("%v", io.<b>ErrUnexpectedEOF</b>)
+
+	<a href="../pkg/internal/poll.html">internal/poll</a>
+		<a href="../src/internal/poll/fd_unix.go.html#line-396">fd_unix.go#L396</a>: 			return nn, io.<b>ErrUnexpectedEOF</b>
+		<a href="../src/internal/poll/fd_unix.go.html#line-430" class="path-duplicate">fd_unix.go</a><a href="../src/internal/poll/fd_unix.go.html#line-430">#L430</a>: 			return nn, io.<b>ErrUnexpectedEOF</b>
+		<a href="../src/internal/poll/writev.go.html#line-87">writev.go#L87</a>: 			err = io.<b>ErrUnexpectedEOF</b>
+
+	<a href="../pkg/net.html">net</a>
+		<a href="../src/net/parse.go.html#line-59">parse.go#L59</a>: 		if err == io.EOF || err == io.<b>ErrUnexpectedEOF</b> {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

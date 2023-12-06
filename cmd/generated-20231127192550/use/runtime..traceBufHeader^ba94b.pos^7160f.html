@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.traceBufHeader.pos</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/trace.go.html#line-230">traceBufHeader</a>.<a href="../src/runtime/trace.go.html#line-233">pos</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">25 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/trace.go.html#line-233">trace.go#L233</a>: 	<b>pos</b>      int                     // next write offset in arr
+		<a href="../src/runtime/trace.go.html#line-448" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-448">#L448</a>: 		if buf.ptr().<b>pos</b> != 0 {
+		<a href="../src/runtime/trace.go.html#line-455" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-455">#L455</a>: 		if buf.ptr().<b>pos</b> != 0 {
+		<a href="../src/runtime/trace.go.html#line-623" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-623">#L623</a>: 		return buf.ptr().arr[:buf.ptr().<b>pos</b>], false
+		<a href="../src/runtime/trace.go.html#line-795" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-795">#L795</a>: 	if buf == nil || len(buf.arr)-buf.<b>pos</b> &lt; maxSize {
+		<a href="../src/runtime/trace.go.html#line-817" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-817">#L817</a>: 	startPos := buf.<b>pos</b>
+		<a href="../src/runtime/trace.go.html#line-823" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-823">#L823</a>: 		lenp = &amp;buf.arr[buf.<b>pos</b>-1]
+		<a href="../src/runtime/trace.go.html#line-836" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-836">#L836</a>: 	evSize := buf.<b>pos</b> - startPos
+		<a href="../src/runtime/trace.go.html#line-1075" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1075">#L1075</a>: 	bufp.<b>pos</b> = 0
+		<a href="../src/runtime/trace.go.html#line-1129" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1129">#L1129</a>: 	if buf == nil || len(buf.arr)-buf.<b>pos</b> &lt; size {
+		<a href="../src/runtime/trace.go.html#line-1141" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1141">#L1141</a>: 	if room := len(buf.arr) - buf.<b>pos</b>; room &lt; slen+traceBytesPerNumber {
+		<a href="../src/runtime/trace.go.html#line-1146" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1146">#L1146</a>: 	buf.<b>pos</b> += copy(buf.arr[buf.<b>pos</b>:], s[:slen])
+		<a href="../src/runtime/trace.go.html#line-1154" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1154">#L1154</a>: 	pos := buf.<b>pos</b>
+		<a href="../src/runtime/trace.go.html#line-1161" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1161">#L1161</a>: 	buf.<b>pos</b> = pos
+		<a href="../src/runtime/trace.go.html#line-1182" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1182">#L1182</a>: 	buf.arr[buf.<b>pos</b>] = v
+		<a href="../src/runtime/trace.go.html#line-1183" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1183">#L1183</a>: 	buf.<b>pos</b>++
+		<a href="../src/runtime/trace.go.html#line-1306" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1306">#L1306</a>: 			if buf := bufp.ptr(); len(buf.arr)-buf.<b>pos</b> &lt; maxSize {
+		<a href="../src/runtime/trace.go.html#line-1313" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1313">#L1313</a>: 			lenPos := buf.<b>pos</b>
+		<a href="../src/runtime/trace.go.html#line-1314" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1314">#L1314</a>: 			buf.<b>pos</b> += traceBytesPerNumber
+		<a href="../src/runtime/trace.go.html#line-1317" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1317">#L1317</a>: 			recPos := buf.<b>pos</b>
+		<a href="../src/runtime/trace.go.html#line-1328" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1328">#L1328</a>: 			buf.varintAt(lenPos, uint64(buf.<b>pos</b>-recPos))
+		<a href="../src/runtime/trace.go.html#line-1770" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1770">#L1770</a>: 	if room := len(buf.arr) - buf.<b>pos</b>; room &lt; slen+traceBytesPerNumber {
+		<a href="../src/runtime/trace.go.html#line-1774" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1774">#L1774</a>: 	buf.<b>pos</b> += copy(buf.arr[buf.<b>pos</b>:], message[:slen])
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

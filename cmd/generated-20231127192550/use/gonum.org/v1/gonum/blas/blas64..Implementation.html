@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/blas/blas64.Implementation</title>
+<link href="../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html">gonum.org/v1/gonum/blas/blas64</a>.<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-25">Implementation</a></b></span>
+
+<span class="title">69 uses</span>
+
+	gonum.org/v1/gonum/blas/blas64 (current package)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-25">blas64.go#L25</a>: func <b>Implementation</b>() blas.Float64 {
+
+	<a href="../../../../../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-100">dbdsqr.go#L100</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgebak.go.html#line-60">dgebak.go#L60</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgebal.go.html#line-98">dgebal.go#L98</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgebrd.go.html#line-128">dgebrd.go#L128</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgecon.go.html#line-63">dgecon.go#L63</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-223">dgeev.go#L223</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgehrd.go.html#line-163">dgehrd.go#L163</a>: 		bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeqp3.go.html#line-98">dgeqp3.go#L98</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesc2.go.html#line-72">dgesc2.go#L72</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-397">dgesvd.go#L397</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgetc2.go.html#line-75">dgetc2.go#L75</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgetf2.go.html#line-55">dgetf2.go#L55</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgetrf.go.html#line-54">dgetrf.go#L54</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgetri.go.html#line-71">dgetri.go#L71</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgetrs.go.html#line-53">dgetrs.go#L53</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dggsvd3.go.html#line-233">dggsvd3.go#L233</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlabrd.go.html#line-106">dlabrd.go#L106</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlacn2.go.html#line-49">dlacn2.go#L49</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaexc.go.html#line-80">dlaexc.go#L80</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlahqr.go.html#line-161">dlahqr.go#L161</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlahr2.go.html#line-113">dlahr2.go#L113</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlapll.go.html#line-47">dlapll.go#L47</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlapmr.go.html#line-48">dlapmr.go#L48</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlapmt.go.html#line-53">dlapmt.go#L53</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqp2.go.html#line-73">dlaqp2.go#L73</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqps.go.html#line-107">dlaqps.go#L107</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqr23.go.html#line-214">dlaqr23.go#L214</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqr5.go.html#line-527">dlaqr5.go#L527</a>: 		bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarf.go.html#line-88">dlarf.go#L88</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-123">dlarfb.go#L123</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfg.go.html#line-45">dlarfg.go#L45</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarft.go.html#line-67">dlarft.go#L67</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlasq1.go.html#line-72">dlasq1.go#L72</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaswp.go.html#line-42">dlaswp.go#L42</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlasy2.go.html#line-114">dlasy2.go#L114</a>: 		bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatbs.go.html#line-71">dlatbs.go#L71</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatdf.go.html#line-89">dlatdf.go#L89</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatrd.go.html#line-110">dlatrd.go#L110</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatrs.go.html#line-68">dlatrs.go#L68</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlauu2.go.html#line-39">dlauu2.go#L39</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlauum.go.html#line-53">dlauum.go#L53</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dorg2l.go.html#line-63">dorg2l.go#L63</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dorg2r.go.html#line-50">dorg2r.go#L50</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dorgl2.go.html#line-48">dorgl2.go#L48</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dorgr2.go.html#line-68">dorgr2.go#L68</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dpbcon.go.html#line-75">dpbcon.go#L75</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dpbtf2.go.html#line-73">dpbtf2.go#L73</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dpbtrf.go.html#line-81">dpbtrf.go#L81</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dpbtrs.go.html#line-51">dpbtrs.go#L51</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dpocon.go.html#line-53">dpocon.go#L53</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dpotf2.go.html#line-40">dpotf2.go#L40</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dpotrf.go.html#line-40">dpotrf.go#L40</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dpotrs.go.html#line-47">dpotrs.go#L47</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dpstf2.go.html#line-97">dpstf2.go#L97</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dpstrf.go.html#line-97">dpstrf.go#L97</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/drscl.go.html#line-34">drscl.go#L34</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-79">dsteqr.go#L79</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dsyev.go.html#line-125">dsyev.go#L125</a>: 		bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dsytd2.go.html#line-88">dsytd2.go#L88</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dsytrd.go.html#line-107">dsytrd.go#L107</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtbtrs.go.html#line-72">dtbtrs.go#L72</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtgsja.go.html#line-248">dtgsja.go#L248</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrcon.go.html#line-48">dtrcon.go#L48</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrevc3.go.html#line-250">dtrevc3.go#L250</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrti2.go.html#line-36">dtrti2.go#L36</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrtri.go.html#line-46">dtrtri.go#L46</a>: 	bi := blas64.<b>Implementation</b>()
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrtrs.go.html#line-52">dtrtrs.go#L52</a>: 	bi := blas64.<b>Implementation</b>()
+
+	<a href="../../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-409">cholesky.go#L409</a>: 	bi := blas64.<b>Implementation</b>()
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

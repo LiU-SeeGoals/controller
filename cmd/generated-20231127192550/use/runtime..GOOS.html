@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.GOOS</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">const <b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/extern.go.html#line-337">GOOS</a></b></span>
+
+<span class="title">127 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/cgocall.go.html#line-125">cgocall.go#L125</a>: 	if !iscgo &amp;&amp; <b>GOOS</b> != "solaris" &amp;&amp; <b>GOOS</b> != "illumos" &amp;&amp; <b>GOOS</b> != "windows" {
+		<a href="../src/runtime/cpuprof.go.html#line-231">cpuprof.go#L231</a>: 	if <b>GOOS</b> == "darwin" || <b>GOOS</b> == "ios" {
+		<a href="../src/runtime/env_posix.go.html#line-25">env_posix.go#L25</a>: 	if <b>GOOS</b> == "windows" { // case insensitive
+		<a href="../src/runtime/extern.go.html#line-337">extern.go#L337</a>: const <b>GOOS</b> string = goos.GOOS
+		<a href="../src/runtime/malloc.go.html#line-500">malloc.go#L500</a>: 			case GOARCH == "arm64" &amp;&amp; <b>GOOS</b> == "ios":
+		<a href="../src/runtime/malloc.go.html#line-504" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-504">#L504</a>: 			case <b>GOOS</b> == "aix":
+		<a href="../src/runtime/malloc.go.html#line-816" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-816">#L816</a>: 	case <b>GOOS</b> == "windows":
+		<a href="../src/runtime/malloc.go.html#line-1378" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-1378">#L1378</a>: 	if <b>GOOS</b> == "plan9" {
+		<a href="../src/runtime/mheap.go.html#line-52">mheap.go#L52</a>: 	physPageAlignedStacks = <b>GOOS</b> == "openbsd"
+		<a href="../src/runtime/netpoll.go.html#line-340">netpoll.go#L340</a>: 	if <b>GOOS</b> == "solaris" || <b>GOOS</b> == "illumos" || <b>GOOS</b> == "aix" || <b>GOOS</b> == "wasip1" {
+		<a href="../src/runtime/panic.go.html#line-1360">panic.go#L1360</a>: 	if <b>GOOS</b> == "windows" &amp;&amp; mp.libcallsp != 0 {
+		<a href="../src/runtime/proc.go.html#line-219">proc.go#L219</a>: 		if <b>GOOS</b> != "windows" {
+		<a href="../src/runtime/proc.go.html#line-635" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-635">#L635</a>: 	switch <b>GOOS</b> {
+		<a href="../src/runtime/proc.go.html#line-663" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-663">#L663</a>: 	switch <b>GOOS</b> {
+		<a href="../src/runtime/proc.go.html#line-867" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-867">#L867</a>: 	if iscgo || <b>GOOS</b> == "solaris" || <b>GOOS</b> == "illumos" || <b>GOOS</b> == "windows" {
+		<a href="../src/runtime/proc.go.html#line-1494" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1494">#L1494</a>: 	switch <b>GOOS</b> {
+		<a href="../src/runtime/proc.go.html#line-1506" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1506">#L1506</a>: 	switch <b>GOOS</b> {
+		<a href="../src/runtime/proc.go.html#line-1620" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1620">#L1620</a>: 	if (iscgo || <b>GOOS</b> == "windows") &amp;&amp; !cgoHasExtraM {
+		<a href="../src/runtime/proc.go.html#line-1721" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1721">#L1721</a>: 	if <b>GOOS</b> == "darwin" || <b>GOOS</b> == "ios" {
+		<a href="../src/runtime/proc.go.html#line-1995" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1995">#L1995</a>: 	if (iscgo || <b>GOOS</b> == "windows") &amp;&amp; !cgoHasExtraM {
+		<a href="../src/runtime/proc.go.html#line-2230" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-2230">#L2230</a>: 	if <b>GOOS</b> == "windows" || <b>GOOS</b> == "plan9" {
+		<a href="../src/runtime/proc.go.html#line-2401" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-2401">#L2401</a>: 	if gp := getg(); gp != nil &amp;&amp; gp.m != nil &amp;&amp; (gp.m.lockedExt != 0 || gp.m.incgo) &amp;&amp; <b>GOOS</b> != "plan9" {
+		<a href="../src/runtime/proc.go.html#line-3447" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-3447">#L3447</a>: 		if <b>GOOS</b> != "plan9" { // Temporary workaround - see issue #42303.
+		<a href="../src/runtime/proc.go.html#line-3913" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-3913">#L3913</a>: 		if <b>GOOS</b> != "plan9" { // See golang.org/issue/22227.
+		<a href="../src/runtime/proc.go.html#line-4443" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4443">#L4443</a>: 	if <b>GOOS</b> == "darwin" || <b>GOOS</b> == "ios" {
+		<a href="../src/runtime/proc.go.html#line-4784" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4784">#L4784</a>: 	if atomic.Load(&amp;newmHandoff.haveTemplateThread) == 0 &amp;&amp; <b>GOOS</b> != "plan9" {
+		<a href="../src/runtime/proc.go.html#line-4921" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4921">#L4921</a>: 		if GOARCH == "arm" &amp;&amp; goarm &lt; 7 &amp;&amp; <b>GOOS</b> == "linux" &amp;&amp; pc&amp;0xffff0000 == 0xffff0000 {
+		<a href="../src/runtime/proc.go.html#line-5613" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5613">#L5613</a>: 		if <b>GOOS</b> == "netbsd" &amp;&amp; needSysmonWorkaround {
+		<a href="../src/runtime/proc.go.html#line-6398" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-6398">#L6398</a>: 						if <b>GOOS</b> != "windows" &amp;&amp; <b>GOOS</b> != "openbsd" &amp;&amp; <b>GOOS</b> != "netbsd" {
+		<a href="../src/runtime/runtime1.go.html#line-73">runtime1.go#L73</a>: 	if <b>GOOS</b> == "windows" {
+		<a href="../src/runtime/runtime1.go.html#line-372" class="path-duplicate">runtime1.go</a><a href="../src/runtime/runtime1.go.html#line-372">#L372</a>: 	if <b>GOOS</b> == "linux" {
+		<a href="../src/runtime/runtime1.go.html#line-517" class="path-duplicate">runtime1.go</a><a href="../src/runtime/runtime1.go.html#line-517">#L517</a>: 		if <b>GOOS</b> == "windows" {
+		<a href="../src/runtime/signal_amd64.go.html#line-53">signal_amd64.go#L53</a>: 	if <b>GOOS</b> == "darwin" &amp;&amp; sig == _SIGFPE &amp;&amp; gp.sigcode0 == 0 {
+		<a href="../src/runtime/signal_unix.go.html#line-165">signal_unix.go#L165</a>: 	if (<b>GOOS</b> == "linux" || <b>GOOS</b> == "android") &amp;&amp; !iscgo &amp;&amp; sig == sigPerThreadSyscall {
+		<a href="../src/runtime/signal_unix.go.html#line-355" class="path-duplicate">signal_unix.go</a><a href="../src/runtime/signal_unix.go.html#line-355">#L355</a>: 	if <b>GOOS</b> == "darwin" || <b>GOOS</b> == "ios" {
+		<a href="../src/runtime/signal_unix.go.html#line-371" class="path-duplicate">signal_unix.go</a><a href="../src/runtime/signal_unix.go.html#line-371">#L371</a>: 	if <b>GOOS</b> == "darwin" || <b>GOOS</b> == "ios" {
+		<a href="../src/runtime/signal_unix.go.html#line-376" class="path-duplicate">signal_unix.go</a><a href="../src/runtime/signal_unix.go.html#line-376">#L376</a>: 		if <b>GOOS</b> == "darwin" || <b>GOOS</b> == "ios" {
+		<a href="../src/runtime/signal_unix.go.html#line-388" class="path-duplicate">signal_unix.go</a><a href="../src/runtime/signal_unix.go.html#line-388">#L388</a>: 	if <b>GOOS</b> == "darwin" || <b>GOOS</b> == "ios" {
+		<a href="../src/runtime/signal_unix.go.html#line-455" class="path-duplicate">signal_unix.go</a><a href="../src/runtime/signal_unix.go.html#line-455">#L455</a>: 			if <b>GOOS</b> == "darwin" || <b>GOOS</b> == "ios" {
+		<a href="../src/runtime/signal_unix.go.html#line-655" class="path-duplicate">signal_unix.go</a><a href="../src/runtime/signal_unix.go.html#line-655">#L655</a>: 	if (<b>GOOS</b> == "linux" || <b>GOOS</b> == "android") &amp;&amp; sig == sigPerThreadSyscall {
+		<a href="../src/runtime/signal_unix.go.html#line-963" class="path-duplicate">signal_unix.go</a><a href="../src/runtime/signal_unix.go.html#line-963">#L963</a>: 	if <b>GOOS</b> != "freebsd" &amp;&amp; (isarchive || islibrary) &amp;&amp; handler == _SIG_DFL &amp;&amp; !c.sigFromUser() {
+		<a href="../src/runtime/signal_unix.go.html#line-1119" class="path-duplicate">signal_unix.go</a><a href="../src/runtime/signal_unix.go.html#line-1119">#L1119</a>: 	if (<b>GOOS</b> == "darwin" || <b>GOOS</b> == "ios") &amp;&amp; sig == _SIGPIPE {
+		<a href="../src/runtime/sigqueue.go.html#line-112">sigqueue.go#L112</a>: 				if <b>GOOS</b> == "darwin" || <b>GOOS</b> == "ios" {
+		<a href="../src/runtime/sigqueue.go.html#line-148" class="path-duplicate">sigqueue.go</a><a href="../src/runtime/sigqueue.go.html#line-148">#L148</a>: 					if <b>GOOS</b> == "darwin" || <b>GOOS</b> == "ios" {
+		<a href="../src/runtime/sigqueue.go.html#line-204" class="path-duplicate">sigqueue.go</a><a href="../src/runtime/sigqueue.go.html#line-204">#L204</a>: 		if <b>GOOS</b> == "darwin" || <b>GOOS</b> == "ios" {
+		<a href="../src/runtime/string.go.html#line-516">string.go#L516</a>: 	if <b>GOOS</b> == "plan9" {
+		<a href="../src/runtime/symtab.go.html#line-551">symtab.go#L551</a>: 			if <b>GOOS</b> == "aix" &amp;&amp; isarchive {
+		<a href="../src/runtime/tagptr_64bit.go.html#line-58">tagptr_64bit.go#L58</a>: 	if <b>GOOS</b> == "aix" {
+		<a href="../src/runtime/tagptr_64bit.go.html#line-77" class="path-duplicate">tagptr_64bit.go</a><a href="../src/runtime/tagptr_64bit.go.html#line-77">#L77</a>: 	if <b>GOOS</b> == "aix" {
+		<a href="../src/runtime/trace.go.html#line-1639">trace.go#L1639</a>: 	case <b>GOOS</b> == "solaris" || <b>GOOS</b> == "illumos":
+		<a href="../src/runtime/traceback.go.html#line-192">traceback.go#L192</a>: 	if GOARCH == "arm" &amp;&amp; goarm &lt; 7 &amp;&amp; <b>GOOS</b> == "linux" &amp;&amp; frame.pc&amp;0xffff0000 == 0xffff0000 {
+
+	<a href="../pkg/internal/poll.html">internal/poll</a>
+		<a href="../src/internal/poll/writev.go.html#line-33">writev.go#L33</a>: 	if runtime.<b>GOOS</b> == "aix" || runtime.<b>GOOS</b> == "solaris" {
+
+	<a href="../pkg/internal/safefilepath.html">internal/safefilepath</a>
+		<a href="../src/internal/safefilepath/path_other.go.html#line-12">path_other.go#L12</a>: 	if runtime.<b>GOOS</b> == "plan9" {
+
+	<a href="../pkg/net.html">net</a>
+		<a href="../src/net/conf.go.html#line-76">conf.go#L76</a>: 	confVal  = &amp;conf{goos: runtime.<b>GOOS</b>}
+		<a href="../src/net/conf.go.html#line-133" class="path-duplicate">conf.go</a><a href="../src/net/conf.go.html#line-133">#L133</a>: 	switch runtime.<b>GOOS</b> {
+		<a href="../src/net/conf.go.html#line-150" class="path-duplicate">conf.go</a><a href="../src/net/conf.go.html#line-150">#L150</a>: 	if runtime.<b>GOOS</b> == "openbsd" &amp;&amp; os.Getenv("ASR_CONFIG") != "" {
+		<a href="../src/net/conf.go.html#line-159" class="path-duplicate">conf.go</a><a href="../src/net/conf.go.html#line-159">#L159</a>: 	switch runtime.<b>GOOS</b> {
+		<a href="../src/net/dnsclient_unix.go.html#line-390">dnsclient_unix.go#L390</a>: 	switch runtime.<b>GOOS</b> {
+		<a href="../src/net/fd_unix.go.html#line-78">fd_unix.go#L78</a>: 		if runtime.<b>GOOS</b> == "solaris" || runtime.<b>GOOS</b> == "illumos" {
+		<a href="../src/net/ipsock.go.html#line-50">ipsock.go#L50</a>: 	switch runtime.<b>GOOS</b> {
+		<a href="../src/net/ipsock_posix.go.html#line-44">ipsock_posix.go#L44</a>: 	switch runtime.<b>GOOS</b> {
+		<a href="../src/net/ipsock_posix.go.html#line-138" class="path-duplicate">ipsock_posix.go</a><a href="../src/net/ipsock_posix.go.html#line-138">#L138</a>: 	if (runtime.<b>GOOS</b> == "aix" || runtime.<b>GOOS</b> == "windows" || runtime.<b>GOOS</b> == "openbsd") &amp;&amp; mode == "dial" &amp;&amp; raddr.isWildcard() {
+
+	<a href="../pkg/os.html">os</a>
+		<a href="../src/os/dir_unix.go.html#line-96">dir_unix.go#L96</a>: 		if ino == 0 &amp;&amp; runtime.<b>GOOS</b> != "wasip1" {
+		<a href="../src/os/exec_posix.go.html#line-107">exec_posix.go#L107</a>: 		if runtime.<b>GOOS</b> == "windows" &amp;&amp; uint(code) &gt;= 1&lt;&lt;16 { // windows uses large hex numbers
+		<a href="../src/os/executable_procfs.go.html#line-16">executable_procfs.go#L16</a>: 	switch runtime.<b>GOOS</b> {
+		<a href="../src/os/executable_procfs.go.html#line-18" class="path-duplicate">executable_procfs.go</a><a href="../src/os/executable_procfs.go.html#line-18">#L18</a>: 		return "", errors.New("Executable not implemented for " + runtime.<b>GOOS</b>)
+		<a href="../src/os/file.go.html#line-412">file.go#L412</a>: 	switch runtime.<b>GOOS</b> {
+		<a href="../src/os/file.go.html#line-463" class="path-duplicate">file.go</a><a href="../src/os/file.go.html#line-463">#L463</a>: 	switch runtime.<b>GOOS</b> {
+		<a href="../src/os/file.go.html#line-508" class="path-duplicate">file.go</a><a href="../src/os/file.go.html#line-508">#L508</a>: 	switch runtime.<b>GOOS</b> {
+		<a href="../src/os/file.go.html#line-518" class="path-duplicate">file.go</a><a href="../src/os/file.go.html#line-518">#L518</a>: 	switch runtime.<b>GOOS</b> {
+		<a href="../src/os/file_unix.go.html#line-184">file_unix.go#L184</a>: 		switch runtime.<b>GOOS</b> {
+		<a href="../src/os/file_unix.go.html#line-206" class="path-duplicate">file_unix.go</a><a href="../src/os/file_unix.go.html#line-206">#L206</a>: 			if (runtime.<b>GOOS</b> == "darwin" || runtime.<b>GOOS</b> == "ios") &amp;&amp; typ == syscall.S_IFIFO {
+		<a href="../src/os/file_unix.go.html#line-394" class="path-duplicate">file_unix.go</a><a href="../src/os/file_unix.go.html#line-394">#L394</a>: 		if runtime.<b>GOOS</b> == "android" {
+		<a href="../src/os/file_unix.go.html#line-445" class="path-duplicate">file_unix.go</a><a href="../src/os/file_unix.go.html#line-445">#L445</a>: 		if (runtime.<b>GOOS</b> == "aix" || runtime.<b>GOOS</b> == "wasip1") &amp;&amp; e == syscall.ERANGE {
+		<a href="../src/os/getwd.go.html#line-23">getwd.go#L23</a>: 	if runtime.<b>GOOS</b> == "windows" || runtime.<b>GOOS</b> == "plan9" {
+		<a href="../src/os/proc.go.html#line-19">proc.go#L19</a>: 	if runtime.<b>GOOS</b> == "windows" {
+		<a href="../src/os/sys_linux.go.html#line-31">sys_linux.go#L31</a>: 	if runtime.<b>GOOS</b> == "android" {
+
+	<a href="../pkg/syscall.html">syscall</a>
+		<a href="../src/syscall/dirent.go.html#line-83">dirent.go#L83</a>: 		if ino == 0 &amp;&amp; runtime.<b>GOOS</b> != "wasip1" { // File absent in directory.
+		<a href="../src/syscall/env_unix.go.html#line-102">env_unix.go#L102</a>: 	if runtime.<b>GOOS</b> != "plan9" {
+		<a href="../src/syscall/exec_unix.go.html#line-168">exec_unix.go#L168</a>: 	if (runtime.<b>GOOS</b> == "freebsd" || runtime.<b>GOOS</b> == "dragonfly") &amp;&amp; len(argv) &gt; 0 &amp;&amp; len(argv[0]) &gt; len(argv0) {
+		<a href="../src/syscall/exec_unix.go.html#line-287" class="path-duplicate">exec_unix.go</a><a href="../src/syscall/exec_unix.go.html#line-287">#L287</a>: 	if runtime.<b>GOOS</b> == "solaris" || runtime.<b>GOOS</b> == "illumos" || runtime.<b>GOOS</b> == "aix" {
+		<a href="../src/syscall/exec_unix.go.html#line-293" class="path-duplicate">exec_unix.go</a><a href="../src/syscall/exec_unix.go.html#line-293">#L293</a>: 	} else if runtime.<b>GOOS</b> == "darwin" || runtime.<b>GOOS</b> == "ios" {
+		<a href="../src/syscall/exec_unix.go.html#line-296" class="path-duplicate">exec_unix.go</a><a href="../src/syscall/exec_unix.go.html#line-296">#L296</a>: 	} else if runtime.<b>GOOS</b> == "openbsd" &amp;&amp; (runtime.GOARCH == "386" || runtime.GOARCH == "amd64" || runtime.GOARCH == "arm" || runtime.GOARCH == "arm64") {
+		<a href="../src/syscall/sockcmsg_unix_other.go.html#line-19">sockcmsg_unix_other.go#L19</a>: 	switch runtime.<b>GOOS</b> {
+		<a href="../src/syscall/sockcmsg_unix_other.go.html#line-36" class="path-duplicate">sockcmsg_unix_other.go</a><a href="../src/syscall/sockcmsg_unix_other.go.html#line-36">#L36</a>: 		if runtime.<b>GOOS</b> == "netbsd" &amp;&amp; runtime.GOARCH == "arm64" {
+		<a href="../src/syscall/syscall_linux.go.html#line-166">syscall_linux.go#L166</a>: 	if runtime.<b>GOOS</b> != "android" {
+		<a href="../src/syscall/syscall_unix.go.html#line-27">syscall_unix.go#L27</a>: 	darwin64Bit = (runtime.<b>GOOS</b> == "darwin" || runtime.<b>GOOS</b> == "ios") &amp;&amp; sizeofPtr == 8
+		<a href="../src/syscall/syscall_unix.go.html#line-28" class="path-duplicate">syscall_unix.go</a><a href="../src/syscall/syscall_unix.go.html#line-28">#L28</a>: 	netbsd32Bit = runtime.<b>GOOS</b> == "netbsd" &amp;&amp; sizeofPtr == 4
+
+	<a href="../pkg/time.html">time</a>
+		<a href="../src/time/sys_unix.go.html#line-22">sys_unix.go#L22</a>: 	if runtime.<b>GOOS</b> != "wasip1" {
+		<a href="../src/time/zoneinfo_read.go.html#line-270">zoneinfo_read.go#L270</a>: 		if runtime.<b>GOOS</b> == "aix" &amp;&amp; len(name) &gt; 8 &amp;&amp; (name[:8] == "Etc/GMT+" || name[:8] == "Etc/GMT-") {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

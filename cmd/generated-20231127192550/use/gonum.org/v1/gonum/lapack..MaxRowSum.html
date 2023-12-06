@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/lapack.MaxRowSum</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">const <b><a href="../../../../pkg/gonum.org/v1/gonum/lapack.html">gonum.org/v1/gonum/lapack</a>.<a href="../../../../src/gonum.org/v1/gonum/lapack/lapack.go.html#line-76">MaxRowSum</a></b></span>
+
+<span class="title">29 uses</span>
+
+	gonum.org/v1/gonum/lapack (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/lapack.go.html#line-76">lapack.go#L76</a>: 	<b>MaxRowSum</b>    MatrixNorm = 'I' // Maximum absolute row sum (infinity norm)
+
+	<a href="../../../../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgecon.go.html#line-28">dgecon.go#L28</a>: 	case norm != lapack.MaxColumnSum &amp;&amp; norm != lapack.<b>MaxRowSum</b>:
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlangb.go.html#line-19">dlangb.go#L19</a>: 	case norm != lapack.MaxAbs &amp;&amp; norm != lapack.<b>MaxRowSum</b> &amp;&amp; norm != lapack.MaxColumnSum &amp;&amp; norm != lapack.Frobenius:
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlangb.go.html#line-56" class="path-duplicate">dlangb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlangb.go.html#line-56">#L56</a>: 	case lapack.<b>MaxRowSum</b>:
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlange.go.html#line-25">dlange.go#L25</a>: 	case norm != lapack.<b>MaxRowSum</b> &amp;&amp; norm != lapack.MaxColumnSum &amp;&amp; norm != lapack.Frobenius &amp;&amp; norm != lapack.MaxAbs:
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlange.go.html#line-70" class="path-duplicate">dlange.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlange.go.html#line-70">#L70</a>: 	case lapack.<b>MaxRowSum</b>:
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlangt.go.html#line-19">dlangt.go#L19</a>: 	case norm != lapack.MaxAbs &amp;&amp; norm != lapack.<b>MaxRowSum</b> &amp;&amp; norm != lapack.MaxColumnSum &amp;&amp; norm != lapack.Frobenius:
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlangt.go.html#line-80" class="path-duplicate">dlangt.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlangt.go.html#line-80">#L80</a>: 	case lapack.<b>MaxRowSum</b>:
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlansb.go.html#line-21">dlansb.go#L21</a>: 	case norm != lapack.MaxAbs &amp;&amp; norm != lapack.<b>MaxRowSum</b> &amp;&amp; norm != lapack.MaxColumnSum &amp;&amp; norm != lapack.Frobenius:
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlansb.go.html#line-41" class="path-duplicate">dlansb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlansb.go.html#line-41">#L41</a>: 	case len(work) &lt; n &amp;&amp; (norm == lapack.MaxColumnSum || norm == lapack.<b>MaxRowSum</b>):
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlansb.go.html#line-67" class="path-duplicate">dlansb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlansb.go.html#line-67">#L67</a>: 	case lapack.MaxColumnSum, lapack.<b>MaxRowSum</b>:
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlanst.go.html#line-18">dlanst.go#L18</a>: 	case norm != lapack.<b>MaxRowSum</b> &amp;&amp; norm != lapack.MaxColumnSum &amp;&amp; norm != lapack.Frobenius &amp;&amp; norm != lapack.MaxAbs:
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlanst.go.html#line-49" class="path-duplicate">dlanst.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlanst.go.html#line-49">#L49</a>: 	case lapack.MaxColumnSum, lapack.<b>MaxRowSum</b>:
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlansy.go.html#line-19">dlansy.go#L19</a>: 	case norm != lapack.<b>MaxRowSum</b> &amp;&amp; norm != lapack.MaxColumnSum &amp;&amp; norm != lapack.Frobenius &amp;&amp; norm != lapack.MaxAbs:
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlansy.go.html#line-37" class="path-duplicate">dlansy.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlansy.go.html#line-37">#L37</a>: 	case (norm == lapack.MaxColumnSum || norm == lapack.<b>MaxRowSum</b>) &amp;&amp; len(work) &lt; n:
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlansy.go.html#line-71" class="path-duplicate">dlansy.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlansy.go.html#line-71">#L71</a>: 	case lapack.<b>MaxRowSum</b>, lapack.MaxColumnSum:
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlantb.go.html#line-20">dlantb.go#L20</a>: 	case norm != lapack.MaxAbs &amp;&amp; norm != lapack.<b>MaxRowSum</b> &amp;&amp; norm != lapack.MaxColumnSum &amp;&amp; norm != lapack.Frobenius:
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlantb.go.html#line-82" class="path-duplicate">dlantb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlantb.go.html#line-82">#L82</a>: 	case lapack.<b>MaxRowSum</b>:
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlantr.go.html#line-19">dlantr.go#L19</a>: 	case norm != lapack.<b>MaxRowSum</b> &amp;&amp; norm != lapack.MaxColumnSum &amp;&amp; norm != lapack.Frobenius &amp;&amp; norm != lapack.MaxAbs:
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlantr.go.html#line-153" class="path-duplicate">dlantr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlantr.go.html#line-153">#L153</a>: 	case lapack.<b>MaxRowSum</b>:
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatdf.go.html#line-94">dlatdf.go#L94</a>: 		_ = impl.Dgecon(lapack.<b>MaxRowSum</b>, n, z, ldz, 1, work[:], iwork[:])
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrcon.go.html#line-23">dtrcon.go#L23</a>: 	case norm != lapack.MaxColumnSum &amp;&amp; norm != lapack.<b>MaxRowSum</b>:
+
+	<a href="../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-309">band.go#L309</a>: 	if lnorm == lapack.MaxColumnSum || lnorm == lapack.<b>MaxRowSum</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-38">errors.go#L38</a>: 	CondNorm = lapack.<b>MaxRowSum</b>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-395">matrix.go#L395</a>: 		lnorm = lapack.<b>MaxRowSum</b>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-840" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-840">#L840</a>: 			n = lapack.<b>MaxRowSum</b>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-846" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-846">#L846</a>: 		n := lapack.<b>MaxRowSum</b>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symband.go.html#line-264">symband.go#L264</a>: 	if lnorm == lapack.MaxColumnSum || lnorm == lapack.<b>MaxRowSum</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-600">symmetric.go#L600</a>: 	if lnorm == lapack.MaxColumnSum || lnorm == lapack.<b>MaxRowSum</b> {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

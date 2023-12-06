@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: asin.go in package math/cmplx</title>
+<link href="../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	asin.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../pkg/math/cmplx.html">math/cmplx</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10],
+input[id=r11]:checked ~pre label[for=r11],
+input[id=r12]:checked ~pre label[for=r12],
+input[id=r13]:checked ~pre label[for=r13],
+input[id=r14]:checked ~pre label[for=r14],
+input[id=r15]:checked ~pre label[for=r15],
+input[id=r16]:checked ~pre label[for=r16],
+input[id=r17]:checked ~pre label[for=r17],
+input[id=r18]:checked ~pre label[for=r18],
+input[id=r19]:checked ~pre label[for=r19],
+input[id=r20]:checked ~pre label[for=r20],
+input[id=r21]:checked ~pre label[for=r21],
+input[id=r22]:checked ~pre label[for=r22],
+input[id=r23]:checked ~pre label[for=r23],
+input[id=r24]:checked ~pre label[for=r24],
+input[id=r25]:checked ~pre label[for=r25],
+input[id=r26]:checked ~pre label[for=r26],
+input[id=r27]:checked ~pre label[for=r27],
+input[id=r28]:checked ~pre label[for=r28],
+input[id=r29]:checked ~pre label[for=r29],
+input[id=r30]:checked ~pre label[for=r30],
+input[id=r31]:checked ~pre label[for=r31],
+input[id=r32]:checked ~pre label[for=r32],
+input[id=r33]:checked ~pre label[for=r33]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="r11" type="radio" name="g"/>
+<input id="r12" type="radio" name="g"/>
+<input id="r13" type="radio" name="g"/>
+<input id="r14" type="radio" name="g"/>
+<input id="r15" type="radio" name="g"/>
+<input id="r16" type="radio" name="g"/>
+<input id="r17" type="radio" name="g"/>
+<input id="r18" type="radio" name="g"/>
+<input id="r19" type="radio" name="g"/>
+<input id="r20" type="radio" name="g"/>
+<input id="r21" type="radio" name="g"/>
+<input id="r22" type="radio" name="g"/>
+<input id="r23" type="radio" name="g"/>
+<input id="r24" type="radio" name="g"/>
+<input id="r25" type="radio" name="g"/>
+<input id="r26" type="radio" name="g"/>
+<input id="r27" type="radio" name="g"/>
+<input id="r28" type="radio" name="g"/>
+<input id="r29" type="radio" name="g"/>
+<input id="r30" type="radio" name="g"/>
+<input id="r31" type="radio" name="g"/>
+<input id="r32" type="radio" name="g"/>
+<input id="r33" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">// Copyright 2010 The Go Authors. All rights reserved.</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment">// Use of this source code is governed by a BSD-style</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment">// license that can be found in the LICENSE file.</span></code></span>
+<span class="codeline" id="line-4"><code></code></span>
+<span class="codeline" id="line-5"><code><span class="keyword">package</span> cmplx</code></span>
+<span class="codeline" id="line-6"><code></code></span>
+<span class="codeline" id="line-7"><code><span class="keyword">import</span> <label for="i0"><span class="lit-string i0">"math"</span></label></code></span>
+<span class="codeline" id="line-8"><code></code></span>
+<span class="codeline" id="line-9"><code><span class="comment">// The original C code, the long comment, and the constants</span></code></span>
+<span class="codeline" id="line-10"><code><span class="comment">// below are from http://netlib.sandia.gov/cephes/c9x-complex/clog.c.</span></code></span>
+<span class="codeline" id="line-11"><code><span class="comment">// The go code is a simplified version of the original C.</span></code></span>
+<span class="codeline" id="line-12"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment">// Cephes Math Library Release 2.8:  June, 2000</span></code></span>
+<span class="codeline" id="line-14"><code><span class="comment">// Copyright 1984, 1987, 1989, 1992, 2000 by Stephen L. Moshier</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-16"><code><span class="comment">// The readme file at http://netlib.sandia.gov/cephes/ says:</span></code></span>
+<span class="codeline" id="line-17"><code><span class="comment">//    Some software in this archive may be from the book _Methods and</span></code></span>
+<span class="codeline" id="line-18"><code><span class="comment">// Programs for Mathematical Functions_ (Prentice-Hall or Simon &amp; Schuster</span></code></span>
+<span class="codeline" id="line-19"><code><span class="comment">// International, 1989) or from the Cephes Mathematical Library, a</span></code></span>
+<span class="codeline" id="line-20"><code><span class="comment">// commercial product. In either event, it is copyrighted by the author.</span></code></span>
+<span class="codeline" id="line-21"><code><span class="comment">// What you see here may be used freely but it comes with no support or</span></code></span>
+<span class="codeline" id="line-22"><code><span class="comment">// guarantee.</span></code></span>
+<span class="codeline" id="line-23"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-24"><code><span class="comment">//   The two known misprints in the book are repaired here in the</span></code></span>
+<span class="codeline" id="line-25"><code><span class="comment">// source listings for the gamma function and the incomplete beta</span></code></span>
+<span class="codeline" id="line-26"><code><span class="comment">// integral.</span></code></span>
+<span class="codeline" id="line-27"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-28"><code><span class="comment">//   Stephen L. Moshier</span></code></span>
+<span class="codeline" id="line-29"><code><span class="comment">//   moshier@na-net.ornl.gov</span></code></span>
+<span class="codeline" id="line-30"><code></code></span>
+<span class="codeline" id="line-31"><code><span class="comment">// Complex circular arc sine</span></code></span>
+<span class="codeline" id="line-32"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-33"><code><span class="comment">// DESCRIPTION:</span></code></span>
+<span class="codeline" id="line-34"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-35"><code><span class="comment">// Inverse complex sine:</span></code></span>
+<span class="codeline" id="line-36"><code><span class="comment">//                               2</span></code></span>
+<span class="codeline" id="line-37"><code><span class="comment">// w = -i clog( iz + csqrt( 1 - z ) ).</span></code></span>
+<span class="codeline" id="line-38"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-39"><code><span class="comment">// casin(z) = -i casinh(iz)</span></code></span>
+<span class="codeline" id="line-40"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-41"><code><span class="comment">// ACCURACY:</span></code></span>
+<span class="codeline" id="line-42"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-43"><code><span class="comment">//                      Relative error:</span></code></span>
+<span class="codeline" id="line-44"><code><span class="comment">// arithmetic   domain     # trials      peak         rms</span></code></span>
+<span class="codeline" id="line-45"><code><span class="comment">//    DEC       -10,+10     10100       2.1e-15     3.4e-16</span></code></span>
+<span class="codeline" id="line-46"><code><span class="comment">//    IEEE      -10,+10     30000       2.2e-14     2.7e-15</span></code></span>
+<span class="codeline" id="line-47"><code><span class="comment">// Larger relative error can be observed for z near zero.</span></code></span>
+<span class="codeline" id="line-48"><code><span class="comment">// Also tested by csin(casin(z)) = z.</span></code></span>
+<span class="codeline" id="line-49"><code></code></span>
+<span class="codeline" id="line-50"><code><span class="comment">// Asin returns the inverse sine of x.</span></code></span>
+<span class="codeline" id="line-51"><code><span class="keyword">func</span> <label for="r0" class="ident"><a href="../../../pkg/math/cmplx.html#name-Asin" class="ident">Asin</a></label>(<label for="r1" class="ident">x</label> <a href="../../../pkg/builtin.html#name-complex128" class="ident">complex128</a>) <a href="../../../pkg/builtin.html#name-complex128" class="ident">complex128</a> {</code></span>
+<span class="codeline" id="line-52"><code>	<span class="keyword">switch</span> <label for="r2" class="ident">re</label>, <label for="r3" class="ident">im</label> := <a href="../../../pkg/builtin.html#name-real" class="ident">real</a>(<label for="r1" class="ident">x</label>), <a href="../../../pkg/builtin.html#name-imag" class="ident">imag</a>(<label for="r1" class="ident">x</label>); {</code></span>
+<span class="codeline" id="line-53"><code>	<span class="keyword">case</span> <label for="r3" class="ident">im</label> == <span class="lit-number">0</span> &amp;&amp; <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../abs.go.html#line-13" class="ident">Abs</a>(<label for="r2" class="ident">re</label>) &lt;= <span class="lit-number">1</span>:</code></span>
+<span class="codeline" id="line-54"><code>		<span class="keyword">return</span> <a href="../../../pkg/builtin.html#name-complex" class="ident">complex</a>(<a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../asin.go.html#line-20" class="ident">Asin</a>(<label for="r2" class="ident">re</label>), <label for="r3" class="ident">im</label>)</code></span>
+<span class="codeline" id="line-55"><code>	<span class="keyword">case</span> <label for="r2" class="ident">re</label> == <span class="lit-number">0</span> &amp;&amp; <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../abs.go.html#line-13" class="ident">Abs</a>(<label for="r3" class="ident">im</label>) &lt;= <span class="lit-number">1</span>:</code></span>
+<span class="codeline" id="line-56"><code>		<span class="keyword">return</span> <a href="../../../pkg/builtin.html#name-complex" class="ident">complex</a>(<label for="r2" class="ident">re</label>, <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../asinh.go.html#line-40" class="ident">Asinh</a>(<label for="r3" class="ident">im</label>))</code></span>
+<span class="codeline" id="line-57"><code>	<span class="keyword">case</span> <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../bits.go.html#line-34" class="ident">IsNaN</a>(<label for="r3" class="ident">im</label>):</code></span>
+<span class="codeline" id="line-58"><code>		<span class="keyword">switch</span> {</code></span>
+<span class="codeline" id="line-59"><code>		<span class="keyword">case</span> <label for="r2" class="ident">re</label> == <span class="lit-number">0</span>:</code></span>
+<span class="codeline" id="line-60"><code>			<span class="keyword">return</span> <a href="../../../pkg/builtin.html#name-complex" class="ident">complex</a>(<label for="r2" class="ident">re</label>, <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../bits.go.html#line-31" class="ident">NaN</a>())</code></span>
+<span class="codeline" id="line-61"><code>		<span class="keyword">case</span> <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../bits.go.html#line-46" class="ident">IsInf</a>(<label for="r2" class="ident">re</label>, <span class="lit-number">0</span>):</code></span>
+<span class="codeline" id="line-62"><code>			<span class="keyword">return</span> <a href="../../../pkg/builtin.html#name-complex" class="ident">complex</a>(<a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../bits.go.html#line-31" class="ident">NaN</a>(), <label for="r2" class="ident">re</label>)</code></span>
+<span class="codeline" id="line-63"><code>		<span class="keyword">default</span>:</code></span>
+<span class="codeline" id="line-64"><code>			<span class="keyword">return</span> <a href="isnan.go.html#line-22" class="ident">NaN</a>()</code></span>
+<span class="codeline" id="line-65"><code>		}</code></span>
+<span class="codeline" id="line-66"><code>	<span class="keyword">case</span> <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../bits.go.html#line-46" class="ident">IsInf</a>(<label for="r3" class="ident">im</label>, <span class="lit-number">0</span>):</code></span>
+<span class="codeline" id="line-67"><code>		<span class="keyword">switch</span> {</code></span>
+<span class="codeline" id="line-68"><code>		<span class="keyword">case</span> <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../bits.go.html#line-34" class="ident">IsNaN</a>(<label for="r2" class="ident">re</label>):</code></span>
+<span class="codeline" id="line-69"><code>			<span class="keyword">return</span> <label for="r1" class="ident">x</label></code></span>
+<span class="codeline" id="line-70"><code>		<span class="keyword">case</span> <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../bits.go.html#line-46" class="ident">IsInf</a>(<label for="r2" class="ident">re</label>, <span class="lit-number">0</span>):</code></span>
+<span class="codeline" id="line-71"><code>			<span class="keyword">return</span> <a href="../../../pkg/builtin.html#name-complex" class="ident">complex</a>(<a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../copysign.go.html#line-9" class="ident">Copysign</a>(<a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../const.go.html#line-13" class="ident">Pi</a>/<span class="lit-number">4</span>, <label for="r2" class="ident">re</label>), <label for="r3" class="ident">im</label>)</code></span>
+<span class="codeline" id="line-72"><code>		<span class="keyword">default</span>:</code></span>
+<span class="codeline" id="line-73"><code>			<span class="keyword">return</span> <a href="../../../pkg/builtin.html#name-complex" class="ident">complex</a>(<a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../copysign.go.html#line-9" class="ident">Copysign</a>(<span class="lit-number">0</span>, <label for="r2" class="ident">re</label>), <label for="r3" class="ident">im</label>)</code></span>
+<span class="codeline" id="line-74"><code>		}</code></span>
+<span class="codeline" id="line-75"><code>	<span class="keyword">case</span> <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../bits.go.html#line-46" class="ident">IsInf</a>(<label for="r2" class="ident">re</label>, <span class="lit-number">0</span>):</code></span>
+<span class="codeline" id="line-76"><code>		<span class="keyword">return</span> <a href="../../../pkg/builtin.html#name-complex" class="ident">complex</a>(<a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../copysign.go.html#line-9" class="ident">Copysign</a>(<a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../const.go.html#line-13" class="ident">Pi</a>/<span class="lit-number">2</span>, <label for="r2" class="ident">re</label>), <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../copysign.go.html#line-9" class="ident">Copysign</a>(<label for="r2" class="ident">re</label>, <label for="r3" class="ident">im</label>))</code></span>
+<span class="codeline" id="line-77"><code>	}</code></span>
+<span class="codeline" id="line-78"><code>	<label for="r4" class="ident">ct</label> := <a href="../../../pkg/builtin.html#name-complex" class="ident">complex</a>(-<a href="../../../pkg/builtin.html#name-imag" class="ident">imag</a>(<label for="r1" class="ident">x</label>), <a href="../../../pkg/builtin.html#name-real" class="ident">real</a>(<label for="r1" class="ident">x</label>)) <span class="comment">// i * x</span></code></span>
+<span class="codeline" id="line-79"><code>	<label for="r5" class="ident">xx</label> := <label for="r1" class="ident">x</label> * <label for="r1" class="ident">x</label></code></span>
+<span class="codeline" id="line-80"><code>	<label for="r6" class="ident">x1</label> := <a href="../../../pkg/builtin.html#name-complex" class="ident">complex</a>(<span class="lit-number">1</span>-<a href="../../../pkg/builtin.html#name-real" class="ident">real</a>(<label for="r5" class="ident">xx</label>), -<a href="../../../pkg/builtin.html#name-imag" class="ident">imag</a>(<label for="r5" class="ident">xx</label>)) <span class="comment">// 1 - x*x</span></code></span>
+<span class="codeline" id="line-81"><code>	<label for="r7" class="ident">x2</label> := <a href="sqrt.go.html#line-58" class="ident">Sqrt</a>(<label for="r6" class="ident">x1</label>)                       <span class="comment">// x2 = sqrt(1 - x*x)</span></code></span>
+<span class="codeline" id="line-82"><code>	<label for="r8" class="ident">w</label> := <a href="log.go.html#line-57" class="ident">Log</a>(<label for="r4" class="ident">ct</label> + <label for="r7" class="ident">x2</label>)</code></span>
+<span class="codeline" id="line-83"><code>	<span class="keyword">return</span> <a href="../../../pkg/builtin.html#name-complex" class="ident">complex</a>(<a href="../../../pkg/builtin.html#name-imag" class="ident">imag</a>(<label for="r8" class="ident">w</label>), -<a href="../../../pkg/builtin.html#name-real" class="ident">real</a>(<label for="r8" class="ident">w</label>)) <span class="comment">// -i * w</span></code></span>
+<span class="codeline" id="line-84"><code>}</code></span>
+<span class="codeline" id="line-85"><code></code></span>
+<span class="codeline" id="line-86"><code><span class="comment">// Asinh returns the inverse hyperbolic sine of x.</span></code></span>
+<span class="codeline" id="line-87"><code><span class="keyword">func</span> <label for="r9" class="ident"><a href="../../../pkg/math/cmplx.html#name-Asinh" class="ident">Asinh</a></label>(<label for="r10" class="ident">x</label> <a href="../../../pkg/builtin.html#name-complex128" class="ident">complex128</a>) <a href="../../../pkg/builtin.html#name-complex128" class="ident">complex128</a> {</code></span>
+<span class="codeline" id="line-88"><code>	<span class="keyword">switch</span> <label for="r11" class="ident">re</label>, <label for="r12" class="ident">im</label> := <a href="../../../pkg/builtin.html#name-real" class="ident">real</a>(<label for="r10" class="ident">x</label>), <a href="../../../pkg/builtin.html#name-imag" class="ident">imag</a>(<label for="r10" class="ident">x</label>); {</code></span>
+<span class="codeline" id="line-89"><code>	<span class="keyword">case</span> <label for="r12" class="ident">im</label> == <span class="lit-number">0</span> &amp;&amp; <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../abs.go.html#line-13" class="ident">Abs</a>(<label for="r11" class="ident">re</label>) &lt;= <span class="lit-number">1</span>:</code></span>
+<span class="codeline" id="line-90"><code>		<span class="keyword">return</span> <a href="../../../pkg/builtin.html#name-complex" class="ident">complex</a>(<a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../asinh.go.html#line-40" class="ident">Asinh</a>(<label for="r11" class="ident">re</label>), <label for="r12" class="ident">im</label>)</code></span>
+<span class="codeline" id="line-91"><code>	<span class="keyword">case</span> <label for="r11" class="ident">re</label> == <span class="lit-number">0</span> &amp;&amp; <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../abs.go.html#line-13" class="ident">Abs</a>(<label for="r12" class="ident">im</label>) &lt;= <span class="lit-number">1</span>:</code></span>
+<span class="codeline" id="line-92"><code>		<span class="keyword">return</span> <a href="../../../pkg/builtin.html#name-complex" class="ident">complex</a>(<label for="r11" class="ident">re</label>, <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../asin.go.html#line-20" class="ident">Asin</a>(<label for="r12" class="ident">im</label>))</code></span>
+<span class="codeline" id="line-93"><code>	<span class="keyword">case</span> <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../bits.go.html#line-46" class="ident">IsInf</a>(<label for="r11" class="ident">re</label>, <span class="lit-number">0</span>):</code></span>
+<span class="codeline" id="line-94"><code>		<span class="keyword">switch</span> {</code></span>
+<span class="codeline" id="line-95"><code>		<span class="keyword">case</span> <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../bits.go.html#line-46" class="ident">IsInf</a>(<label for="r12" class="ident">im</label>, <span class="lit-number">0</span>):</code></span>
+<span class="codeline" id="line-96"><code>			<span class="keyword">return</span> <a href="../../../pkg/builtin.html#name-complex" class="ident">complex</a>(<label for="r11" class="ident">re</label>, <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../copysign.go.html#line-9" class="ident">Copysign</a>(<a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../const.go.html#line-13" class="ident">Pi</a>/<span class="lit-number">4</span>, <label for="r12" class="ident">im</label>))</code></span>
+<span class="codeline" id="line-97"><code>		<span class="keyword">case</span> <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../bits.go.html#line-34" class="ident">IsNaN</a>(<label for="r12" class="ident">im</label>):</code></span>
+<span class="codeline" id="line-98"><code>			<span class="keyword">return</span> <label for="r10" class="ident">x</label></code></span>
+<span class="codeline" id="line-99"><code>		<span class="keyword">default</span>:</code></span>
+<span class="codeline" id="line-100"><code>			<span class="keyword">return</span> <a href="../../../pkg/builtin.html#name-complex" class="ident">complex</a>(<label for="r11" class="ident">re</label>, <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../copysign.go.html#line-9" class="ident">Copysign</a>(<span class="lit-number">0.0</span>, <label for="r12" class="ident">im</label>))</code></span>
+<span class="codeline" id="line-101"><code>		}</code></span>
+<span class="codeline" id="line-102"><code>	<span class="keyword">case</span> <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../bits.go.html#line-34" class="ident">IsNaN</a>(<label for="r11" class="ident">re</label>):</code></span>
+<span class="codeline" id="line-103"><code>		<span class="keyword">switch</span> {</code></span>
+<span class="codeline" id="line-104"><code>		<span class="keyword">case</span> <label for="r12" class="ident">im</label> == <span class="lit-number">0</span>:</code></span>
+<span class="codeline" id="line-105"><code>			<span class="keyword">return</span> <label for="r10" class="ident">x</label></code></span>
+<span class="codeline" id="line-106"><code>		<span class="keyword">case</span> <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../bits.go.html#line-46" class="ident">IsInf</a>(<label for="r12" class="ident">im</label>, <span class="lit-number">0</span>):</code></span>
+<span class="codeline" id="line-107"><code>			<span class="keyword">return</span> <a href="../../../pkg/builtin.html#name-complex" class="ident">complex</a>(<label for="r12" class="ident">im</label>, <label for="r11" class="ident">re</label>)</code></span>
+<span class="codeline" id="line-108"><code>		<span class="keyword">default</span>:</code></span>
+<span class="codeline" id="line-109"><code>			<span class="keyword">return</span> <a href="isnan.go.html#line-22" class="ident">NaN</a>()</code></span>
+<span class="codeline" id="line-110"><code>		}</code></span>
+<span class="codeline" id="line-111"><code>	<span class="keyword">case</span> <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../bits.go.html#line-46" class="ident">IsInf</a>(<label for="r12" class="ident">im</label>, <span class="lit-number">0</span>):</code></span>
+<span class="codeline" id="line-112"><code>		<span class="keyword">return</span> <a href="../../../pkg/builtin.html#name-complex" class="ident">complex</a>(<a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../copysign.go.html#line-9" class="ident">Copysign</a>(<label for="r12" class="ident">im</label>, <label for="r11" class="ident">re</label>), <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../copysign.go.html#line-9" class="ident">Copysign</a>(<a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../const.go.html#line-13" class="ident">Pi</a>/<span class="lit-number">2</span>, <label for="r12" class="ident">im</label>))</code></span>
+<span class="codeline" id="line-113"><code>	}</code></span>
+<span class="codeline" id="line-114"><code>	<label for="r13" class="ident">xx</label> := <label for="r10" class="ident">x</label> * <label for="r10" class="ident">x</label></code></span>
+<span class="codeline" id="line-115"><code>	<label for="r14" class="ident">x1</label> := <a href="../../../pkg/builtin.html#name-complex" class="ident">complex</a>(<span class="lit-number">1</span>+<a href="../../../pkg/builtin.html#name-real" class="ident">real</a>(<label for="r13" class="ident">xx</label>), <a href="../../../pkg/builtin.html#name-imag" class="ident">imag</a>(<label for="r13" class="ident">xx</label>)) <span class="comment">// 1 + x*x</span></code></span>
+<span class="codeline" id="line-116"><code>	<span class="keyword">return</span> <a href="log.go.html#line-57" class="ident">Log</a>(<label for="r10" class="ident">x</label> + <a href="sqrt.go.html#line-58" class="ident">Sqrt</a>(<label for="r14" class="ident">x1</label>))            <span class="comment">// log(x + sqrt(1 + x*x))</span></code></span>
+<span class="codeline" id="line-117"><code>}</code></span>
+<span class="codeline" id="line-118"><code></code></span>
+<span class="codeline" id="line-119"><code><span class="comment">// Complex circular arc cosine</span></code></span>
+<span class="codeline" id="line-120"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-121"><code><span class="comment">// DESCRIPTION:</span></code></span>
+<span class="codeline" id="line-122"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-123"><code><span class="comment">// w = arccos z  =  PI/2 - arcsin z.</span></code></span>
+<span class="codeline" id="line-124"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-125"><code><span class="comment">// ACCURACY:</span></code></span>
+<span class="codeline" id="line-126"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-127"><code><span class="comment">//                      Relative error:</span></code></span>
+<span class="codeline" id="line-128"><code><span class="comment">// arithmetic   domain     # trials      peak         rms</span></code></span>
+<span class="codeline" id="line-129"><code><span class="comment">//    DEC       -10,+10      5200      1.6e-15      2.8e-16</span></code></span>
+<span class="codeline" id="line-130"><code><span class="comment">//    IEEE      -10,+10     30000      1.8e-14      2.2e-15</span></code></span>
+<span class="codeline" id="line-131"><code></code></span>
+<span class="codeline" id="line-132"><code><span class="comment">// Acos returns the inverse cosine of x.</span></code></span>
+<span class="codeline" id="line-133"><code><span class="keyword">func</span> <label for="r15" class="ident"><a href="../../../pkg/math/cmplx.html#name-Acos" class="ident">Acos</a></label>(<label for="r16" class="ident">x</label> <a href="../../../pkg/builtin.html#name-complex128" class="ident">complex128</a>) <a href="../../../pkg/builtin.html#name-complex128" class="ident">complex128</a> {</code></span>
+<span class="codeline" id="line-134"><code>	<label for="r17" class="ident">w</label> := <a href="#line-51" class="ident">Asin</a>(<label for="r16" class="ident">x</label>)</code></span>
+<span class="codeline" id="line-135"><code>	<span class="keyword">return</span> <a href="../../../pkg/builtin.html#name-complex" class="ident">complex</a>(<a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../const.go.html#line-13" class="ident">Pi</a>/<span class="lit-number">2</span>-<a href="../../../pkg/builtin.html#name-real" class="ident">real</a>(<label for="r17" class="ident">w</label>), -<a href="../../../pkg/builtin.html#name-imag" class="ident">imag</a>(<label for="r17" class="ident">w</label>))</code></span>
+<span class="codeline" id="line-136"><code>}</code></span>
+<span class="codeline" id="line-137"><code></code></span>
+<span class="codeline" id="line-138"><code><span class="comment">// Acosh returns the inverse hyperbolic cosine of x.</span></code></span>
+<span class="codeline" id="line-139"><code><span class="keyword">func</span> <label for="r18" class="ident"><a href="../../../pkg/math/cmplx.html#name-Acosh" class="ident">Acosh</a></label>(<label for="r19" class="ident">x</label> <a href="../../../pkg/builtin.html#name-complex128" class="ident">complex128</a>) <a href="../../../pkg/builtin.html#name-complex128" class="ident">complex128</a> {</code></span>
+<span class="codeline" id="line-140"><code>	<span class="keyword">if</span> <label for="r19" class="ident">x</label> == <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-141"><code>		<span class="keyword">return</span> <a href="../../../pkg/builtin.html#name-complex" class="ident">complex</a>(<span class="lit-number">0</span>, <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../copysign.go.html#line-9" class="ident">Copysign</a>(<a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../const.go.html#line-13" class="ident">Pi</a>/<span class="lit-number">2</span>, <a href="../../../pkg/builtin.html#name-imag" class="ident">imag</a>(<label for="r19" class="ident">x</label>)))</code></span>
+<span class="codeline" id="line-142"><code>	}</code></span>
+<span class="codeline" id="line-143"><code>	<label for="r20" class="ident">w</label> := <a href="#line-133" class="ident">Acos</a>(<label for="r19" class="ident">x</label>)</code></span>
+<span class="codeline" id="line-144"><code>	<span class="keyword">if</span> <a href="../../../pkg/builtin.html#name-imag" class="ident">imag</a>(<label for="r20" class="ident">w</label>) &lt;= <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-145"><code>		<span class="keyword">return</span> <a href="../../../pkg/builtin.html#name-complex" class="ident">complex</a>(-<a href="../../../pkg/builtin.html#name-imag" class="ident">imag</a>(<label for="r20" class="ident">w</label>), <a href="../../../pkg/builtin.html#name-real" class="ident">real</a>(<label for="r20" class="ident">w</label>)) <span class="comment">// i * w</span></code></span>
+<span class="codeline" id="line-146"><code>	}</code></span>
+<span class="codeline" id="line-147"><code>	<span class="keyword">return</span> <a href="../../../pkg/builtin.html#name-complex" class="ident">complex</a>(<a href="../../../pkg/builtin.html#name-imag" class="ident">imag</a>(<label for="r20" class="ident">w</label>), -<a href="../../../pkg/builtin.html#name-real" class="ident">real</a>(<label for="r20" class="ident">w</label>)) <span class="comment">// -i * w</span></code></span>
+<span class="codeline" id="line-148"><code>}</code></span>
+<span class="codeline" id="line-149"><code></code></span>
+<span class="codeline" id="line-150"><code><span class="comment">// Complex circular arc tangent</span></code></span>
+<span class="codeline" id="line-151"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-152"><code><span class="comment">// DESCRIPTION:</span></code></span>
+<span class="codeline" id="line-153"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-154"><code><span class="comment">// If</span></code></span>
+<span class="codeline" id="line-155"><code><span class="comment">//     z = x + iy,</span></code></span>
+<span class="codeline" id="line-156"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-157"><code><span class="comment">// then</span></code></span>
+<span class="codeline" id="line-158"><code><span class="comment">//          1       (    2x     )</span></code></span>
+<span class="codeline" id="line-159"><code><span class="comment">// Re w  =  - arctan(-----------)  +  k PI</span></code></span>
+<span class="codeline" id="line-160"><code><span class="comment">//          2       (     2    2)</span></code></span>
+<span class="codeline" id="line-161"><code><span class="comment">//                  (1 - x  - y )</span></code></span>
+<span class="codeline" id="line-162"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-163"><code><span class="comment">//               ( 2         2)</span></code></span>
+<span class="codeline" id="line-164"><code><span class="comment">//          1    (x  +  (y+1) )</span></code></span>
+<span class="codeline" id="line-165"><code><span class="comment">// Im w  =  - log(------------)</span></code></span>
+<span class="codeline" id="line-166"><code><span class="comment">//          4    ( 2         2)</span></code></span>
+<span class="codeline" id="line-167"><code><span class="comment">//               (x  +  (y-1) )</span></code></span>
+<span class="codeline" id="line-168"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-169"><code><span class="comment">// Where k is an arbitrary integer.</span></code></span>
+<span class="codeline" id="line-170"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-171"><code><span class="comment">// catan(z) = -i catanh(iz).</span></code></span>
+<span class="codeline" id="line-172"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-173"><code><span class="comment">// ACCURACY:</span></code></span>
+<span class="codeline" id="line-174"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-175"><code><span class="comment">//                      Relative error:</span></code></span>
+<span class="codeline" id="line-176"><code><span class="comment">// arithmetic   domain     # trials      peak         rms</span></code></span>
+<span class="codeline" id="line-177"><code><span class="comment">//    DEC       -10,+10      5900       1.3e-16     7.8e-18</span></code></span>
+<span class="codeline" id="line-178"><code><span class="comment">//    IEEE      -10,+10     30000       2.3e-15     8.5e-17</span></code></span>
+<span class="codeline" id="line-179"><code><span class="comment">// The check catan( ctan(z) )  =  z, with |x| and |y| &lt; PI/2,</span></code></span>
+<span class="codeline" id="line-180"><code><span class="comment">// had peak relative error 1.5e-16, rms relative error</span></code></span>
+<span class="codeline" id="line-181"><code><span class="comment">// 2.9e-17.  See also clog().</span></code></span>
+<span class="codeline" id="line-182"><code></code></span>
+<span class="codeline" id="line-183"><code><span class="comment">// Atan returns the inverse tangent of x.</span></code></span>
+<span class="codeline" id="line-184"><code><span class="keyword">func</span> <label for="r21" class="ident"><a href="../../../pkg/math/cmplx.html#name-Atan" class="ident">Atan</a></label>(<label for="r22" class="ident">x</label> <a href="../../../pkg/builtin.html#name-complex128" class="ident">complex128</a>) <a href="../../../pkg/builtin.html#name-complex128" class="ident">complex128</a> {</code></span>
+<span class="codeline" id="line-185"><code>	<span class="keyword">switch</span> <label for="r23" class="ident">re</label>, <label for="r24" class="ident">im</label> := <a href="../../../pkg/builtin.html#name-real" class="ident">real</a>(<label for="r22" class="ident">x</label>), <a href="../../../pkg/builtin.html#name-imag" class="ident">imag</a>(<label for="r22" class="ident">x</label>); {</code></span>
+<span class="codeline" id="line-186"><code>	<span class="keyword">case</span> <label for="r24" class="ident">im</label> == <span class="lit-number">0</span>:</code></span>
+<span class="codeline" id="line-187"><code>		<span class="keyword">return</span> <a href="../../../pkg/builtin.html#name-complex" class="ident">complex</a>(<a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../atan.go.html#line-96" class="ident">Atan</a>(<label for="r23" class="ident">re</label>), <label for="r24" class="ident">im</label>)</code></span>
+<span class="codeline" id="line-188"><code>	<span class="keyword">case</span> <label for="r23" class="ident">re</label> == <span class="lit-number">0</span> &amp;&amp; <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../abs.go.html#line-13" class="ident">Abs</a>(<label for="r24" class="ident">im</label>) &lt;= <span class="lit-number">1</span>:</code></span>
+<span class="codeline" id="line-189"><code>		<span class="keyword">return</span> <a href="../../../pkg/builtin.html#name-complex" class="ident">complex</a>(<label for="r23" class="ident">re</label>, <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../atanh.go.html#line-48" class="ident">Atanh</a>(<label for="r24" class="ident">im</label>))</code></span>
+<span class="codeline" id="line-190"><code>	<span class="keyword">case</span> <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../bits.go.html#line-46" class="ident">IsInf</a>(<label for="r24" class="ident">im</label>, <span class="lit-number">0</span>) || <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../bits.go.html#line-46" class="ident">IsInf</a>(<label for="r23" class="ident">re</label>, <span class="lit-number">0</span>):</code></span>
+<span class="codeline" id="line-191"><code>		<span class="keyword">if</span> <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../bits.go.html#line-34" class="ident">IsNaN</a>(<label for="r23" class="ident">re</label>) {</code></span>
+<span class="codeline" id="line-192"><code>			<span class="keyword">return</span> <a href="../../../pkg/builtin.html#name-complex" class="ident">complex</a>(<a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../bits.go.html#line-31" class="ident">NaN</a>(), <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../copysign.go.html#line-9" class="ident">Copysign</a>(<span class="lit-number">0</span>, <label for="r24" class="ident">im</label>))</code></span>
+<span class="codeline" id="line-193"><code>		}</code></span>
+<span class="codeline" id="line-194"><code>		<span class="keyword">return</span> <a href="../../../pkg/builtin.html#name-complex" class="ident">complex</a>(<a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../copysign.go.html#line-9" class="ident">Copysign</a>(<a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../const.go.html#line-13" class="ident">Pi</a>/<span class="lit-number">2</span>, <label for="r23" class="ident">re</label>), <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../copysign.go.html#line-9" class="ident">Copysign</a>(<span class="lit-number">0</span>, <label for="r24" class="ident">im</label>))</code></span>
+<span class="codeline" id="line-195"><code>	<span class="keyword">case</span> <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../bits.go.html#line-34" class="ident">IsNaN</a>(<label for="r23" class="ident">re</label>) || <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../bits.go.html#line-34" class="ident">IsNaN</a>(<label for="r24" class="ident">im</label>):</code></span>
+<span class="codeline" id="line-196"><code>		<span class="keyword">return</span> <a href="isnan.go.html#line-22" class="ident">NaN</a>()</code></span>
+<span class="codeline" id="line-197"><code>	}</code></span>
+<span class="codeline" id="line-198"><code>	<label for="r25" class="ident">x2</label> := <a href="../../../pkg/builtin.html#name-real" class="ident">real</a>(<label for="r22" class="ident">x</label>) * <a href="../../../pkg/builtin.html#name-real" class="ident">real</a>(<label for="r22" class="ident">x</label>)</code></span>
+<span class="codeline" id="line-199"><code>	<label for="r26" class="ident">a</label> := <span class="lit-number">1</span> - <label for="r25" class="ident">x2</label> - <a href="../../../pkg/builtin.html#name-imag" class="ident">imag</a>(<label for="r22" class="ident">x</label>)*<a href="../../../pkg/builtin.html#name-imag" class="ident">imag</a>(<label for="r22" class="ident">x</label>)</code></span>
+<span class="codeline" id="line-200"><code>	<span class="keyword">if</span> <label for="r26" class="ident">a</label> == <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-201"><code>		<span class="keyword">return</span> <a href="isnan.go.html#line-22" class="ident">NaN</a>()</code></span>
+<span class="codeline" id="line-202"><code>	}</code></span>
+<span class="codeline" id="line-203"><code>	<label for="r27" class="ident">t</label> := <span class="lit-number">0.5</span> * <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../atan2.go.html#line-30" class="ident">Atan2</a>(<span class="lit-number">2</span>*<a href="../../../pkg/builtin.html#name-real" class="ident">real</a>(<label for="r22" class="ident">x</label>), <label for="r26" class="ident">a</label>)</code></span>
+<span class="codeline" id="line-204"><code>	<label for="r28" class="ident">w</label> := <a href="tan.go.html#line-122" class="ident">reducePi</a>(<label for="r27" class="ident">t</label>)</code></span>
+<span class="codeline" id="line-205"><code></code></span>
+<span class="codeline" id="line-206"><code>	<label for="r27" class="ident">t</label> = <a href="../../../pkg/builtin.html#name-imag" class="ident">imag</a>(<label for="r22" class="ident">x</label>) - <span class="lit-number">1</span></code></span>
+<span class="codeline" id="line-207"><code>	<label for="r29" class="ident">b</label> := <label for="r25" class="ident">x2</label> + <label for="r27" class="ident">t</label>*<label for="r27" class="ident">t</label></code></span>
+<span class="codeline" id="line-208"><code>	<span class="keyword">if</span> <label for="r29" class="ident">b</label> == <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-209"><code>		<span class="keyword">return</span> <a href="isnan.go.html#line-22" class="ident">NaN</a>()</code></span>
+<span class="codeline" id="line-210"><code>	}</code></span>
+<span class="codeline" id="line-211"><code>	<label for="r27" class="ident">t</label> = <a href="../../../pkg/builtin.html#name-imag" class="ident">imag</a>(<label for="r22" class="ident">x</label>) + <span class="lit-number">1</span></code></span>
+<span class="codeline" id="line-212"><code>	<label for="r30" class="ident">c</label> := (<label for="r25" class="ident">x2</label> + <label for="r27" class="ident">t</label>*<label for="r27" class="ident">t</label>) / <label for="r29" class="ident">b</label></code></span>
+<span class="codeline" id="line-213"><code>	<span class="keyword">return</span> <a href="../../../pkg/builtin.html#name-complex" class="ident">complex</a>(<label for="r28" class="ident">w</label>, <span class="lit-number">0.25</span>*<a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../log.go.html#line-81" class="ident">Log</a>(<label for="r30" class="ident">c</label>))</code></span>
+<span class="codeline" id="line-214"><code>}</code></span>
+<span class="codeline" id="line-215"><code></code></span>
+<span class="codeline" id="line-216"><code><span class="comment">// Atanh returns the inverse hyperbolic tangent of x.</span></code></span>
+<span class="codeline" id="line-217"><code><span class="keyword">func</span> <label for="r31" class="ident"><a href="../../../pkg/math/cmplx.html#name-Atanh" class="ident">Atanh</a></label>(<label for="r32" class="ident">x</label> <a href="../../../pkg/builtin.html#name-complex128" class="ident">complex128</a>) <a href="../../../pkg/builtin.html#name-complex128" class="ident">complex128</a> {</code></span>
+<span class="codeline" id="line-218"><code>	<label for="r33" class="ident">z</label> := <a href="../../../pkg/builtin.html#name-complex" class="ident">complex</a>(-<a href="../../../pkg/builtin.html#name-imag" class="ident">imag</a>(<label for="r32" class="ident">x</label>), <a href="../../../pkg/builtin.html#name-real" class="ident">real</a>(<label for="r32" class="ident">x</label>)) <span class="comment">// z = i * x</span></code></span>
+<span class="codeline" id="line-219"><code>	<label for="r33" class="ident">z</label> = <a href="#line-184" class="ident">Atan</a>(<label for="r33" class="ident">z</label>)</code></span>
+<span class="codeline" id="line-220"><code>	<span class="keyword">return</span> <a href="../../../pkg/builtin.html#name-complex" class="ident">complex</a>(<a href="../../../pkg/builtin.html#name-imag" class="ident">imag</a>(<label for="r33" class="ident">z</label>), -<a href="../../../pkg/builtin.html#name-real" class="ident">real</a>(<label for="r33" class="ident">z</label>)) <span class="comment">// z = -i * z</span></code></span>
+<span class="codeline" id="line-221"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

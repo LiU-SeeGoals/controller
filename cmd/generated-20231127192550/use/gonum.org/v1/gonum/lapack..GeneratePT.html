@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/lapack.GeneratePT</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">const <b><a href="../../../../pkg/gonum.org/v1/gonum/lapack.html">gonum.org/v1/gonum/lapack</a>.<a href="../../../../src/gonum.org/v1/gonum/lapack/lapack.go.html#line-110">GeneratePT</a></b></span>
+
+<span class="title">17 uses</span>
+
+	gonum.org/v1/gonum/lapack (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/lapack.go.html#line-110">lapack.go#L110</a>: 	<b>GeneratePT</b> GenOrtho = 'P' // Generate Pᵀ.
+
+	<a href="../../../../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-136">dgesvd.go#L136</a>: 		impl.Dorgbr(lapack.<b>GeneratePT</b>, n, n, n, a, lda, nil, work, -1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-255" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-255">#L255</a>: 		impl.Dorgbr(lapack.<b>GeneratePT</b>, m, m, m, a, n, nil, work, -1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-346" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-346">#L346</a>: 				impl.Dorgbr(lapack.<b>GeneratePT</b>, m, n, m, a, n, nil, work, -1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-351" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-351">#L351</a>: 				impl.Dorgbr(lapack.<b>GeneratePT</b>, n, n, m, a, n, nil, work, -1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-422" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-422">#L422</a>: 					impl.Dorgbr(lapack.<b>GeneratePT</b>, n, n, n, a, lda, work[itaup:],
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-563" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-563">#L563</a>: 						impl.Dorgbr(lapack.<b>GeneratePT</b>, n, n, n, vt, ldvt,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-607" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-607">#L607</a>: 						impl.Dorgbr(lapack.<b>GeneratePT</b>, n, n, n, vt, ldvt,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-745" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-745">#L745</a>: 						impl.Dorgbr(lapack.<b>GeneratePT</b>, n, n, n, vt, ldvt,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-815" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-815">#L815</a>: 						impl.Dorgbr(lapack.<b>GeneratePT</b>, n, n, n, vt, ldvt,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-855" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-855">#L855</a>: 				impl.Dorgbr(lapack.<b>GeneratePT</b>, n, n, n, vt, ldvt, work[itaup:], work[iwork:], lwork-iwork)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-969" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-969">#L969</a>: 						impl.Dorgbr(lapack.<b>GeneratePT</b>, m, m, m, work[ir:], ldworkr,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-1054" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-1054">#L1054</a>: 						impl.Dorgbr(lapack.<b>GeneratePT</b>, m, m, m, work[iu:], ldworku,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-1147" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-1147">#L1147</a>: 						impl.Dorgbr(lapack.<b>GeneratePT</b>, m, m, m, work[ir:], ldworkr,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-1234" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-1234">#L1234</a>: 						impl.Dorgbr(lapack.<b>GeneratePT</b>, m, m, m, work[iu:], ldworku,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-1321" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-1321">#L1321</a>: 				impl.Dorgbr(lapack.<b>GeneratePT</b>, nrvt, n, m, vt, ldvt, work[itaup:], work[iwork:], lwork-iwork)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dorgbr.go.html#line-26">dorgbr.go#L26</a>: 	case vect != lapack.GenerateQ &amp;&amp; vect != lapack.<b>GeneratePT</b>:
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

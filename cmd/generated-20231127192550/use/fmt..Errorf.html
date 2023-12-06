@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: fmt.Errorf</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../pkg/fmt.html">fmt</a>.<a href="../src/fmt/errors.go.html#line-22">Errorf</a></b></span>
+
+<span class="title">45 uses</span>
+
+	fmt (current package)
+		<a href="../src/fmt/errors.go.html#line-22">errors.go#L22</a>: func <b>Errorf</b>(format string, a ...any) error {
+
+	<a href="../pkg/compress/flate.html">compress/flate</a>
+		<a href="../src/compress/flate/deflate.go.html#line-596">deflate.go#L596</a>: 		return fmt.<b>Errorf</b>("flate: invalid compression level %d: want value in range [-2, 9]", level)
+
+	<a href="../pkg/compress/gzip.html">compress/gzip</a>
+		<a href="../src/compress/gzip/gzip.go.html#line-62">gzip.go#L62</a>: 		return nil, fmt.<b>Errorf</b>("gzip: invalid compression level: %d", level)
+
+	<a href="../pkg/encoding/json.html">encoding/json</a>
+		<a href="../src/encoding/json/decode.go.html#line-709">decode.go#L709</a>: 								d.saveError(fmt.<b>Errorf</b>("json: cannot set embedded pointer to unexported struct: %v", subv.Type().Elem()))
+		<a href="../src/encoding/json/decode.go.html#line-728" class="path-duplicate">decode.go</a><a href="../src/encoding/json/decode.go.html#line-728">#L728</a>: 				d.saveError(fmt.<b>Errorf</b>("json: unknown field %q", key))
+		<a href="../src/encoding/json/decode.go.html#line-752" class="path-duplicate">decode.go</a><a href="../src/encoding/json/decode.go.html#line-752">#L752</a>: 				d.saveError(fmt.<b>Errorf</b>("json: invalid use of ,string struct tag, trying to unmarshal unquoted value into %v", subv.Type()))
+		<a href="../src/encoding/json/decode.go.html#line-846" class="path-duplicate">decode.go</a><a href="../src/encoding/json/decode.go.html#line-846">#L846</a>: 		d.saveError(fmt.<b>Errorf</b>("json: invalid use of ,string struct tag, trying to unmarshal %q into %v", item, v.Type()))
+		<a href="../src/encoding/json/decode.go.html#line-857" class="path-duplicate">decode.go</a><a href="../src/encoding/json/decode.go.html#line-857">#L857</a>: 				d.saveError(fmt.<b>Errorf</b>("json: invalid use of ,string struct tag, trying to unmarshal %q into %v", item, v.Type()))
+		<a href="../src/encoding/json/decode.go.html#line-873" class="path-duplicate">decode.go</a><a href="../src/encoding/json/decode.go.html#line-873">#L873</a>: 				return fmt.<b>Errorf</b>("json: invalid use of ,string struct tag, trying to unmarshal %q into %v", item, v.Type())
+		<a href="../src/encoding/json/decode.go.html#line-887" class="path-duplicate">decode.go</a><a href="../src/encoding/json/decode.go.html#line-887">#L887</a>: 			d.saveError(fmt.<b>Errorf</b>("json: invalid use of ,string struct tag, trying to unmarshal %q into %v", item, v.Type()))
+		<a href="../src/encoding/json/decode.go.html#line-900" class="path-duplicate">decode.go</a><a href="../src/encoding/json/decode.go.html#line-900">#L900</a>: 			d.saveError(fmt.<b>Errorf</b>("json: invalid use of ,string struct tag, trying to unmarshal %q into %v", item, v.Type()))
+		<a href="../src/encoding/json/decode.go.html#line-906" class="path-duplicate">decode.go</a><a href="../src/encoding/json/decode.go.html#line-906">#L906</a>: 				d.saveError(fmt.<b>Errorf</b>("json: invalid use of ,string struct tag, trying to unmarshal %q into %v", item, v.Type()))
+		<a href="../src/encoding/json/decode.go.html#line-924" class="path-duplicate">decode.go</a><a href="../src/encoding/json/decode.go.html#line-924">#L924</a>: 				return fmt.<b>Errorf</b>("json: invalid use of ,string struct tag, trying to unmarshal %q into %v", item, v.Type())
+		<a href="../src/encoding/json/decode.go.html#line-945" class="path-duplicate">decode.go</a><a href="../src/encoding/json/decode.go.html#line-945">#L945</a>: 				return fmt.<b>Errorf</b>("json: invalid number literal, trying to unmarshal %q into Number", item)
+		<a href="../src/encoding/json/decode.go.html#line-959" class="path-duplicate">decode.go</a><a href="../src/encoding/json/decode.go.html#line-959">#L959</a>: 				return fmt.<b>Errorf</b>("json: invalid use of ,string struct tag, trying to unmarshal %q into %v", item, v.Type())
+		<a href="../src/encoding/json/decode.go.html#line-973" class="path-duplicate">decode.go</a><a href="../src/encoding/json/decode.go.html#line-973">#L973</a>: 				return fmt.<b>Errorf</b>("json: invalid use of ,string struct tag, trying to unmarshal %q into %v", item, v.Type())
+		<a href="../src/encoding/json/encode.go.html#line-578">encode.go#L578</a>: 			e.error(fmt.<b>Errorf</b>("json: invalid number literal %q", numStr))
+		<a href="../src/encoding/json/encode.go.html#line-748" class="path-duplicate">encode.go</a><a href="../src/encoding/json/encode.go.html#line-748">#L748</a>: 			e.error(fmt.<b>Errorf</b>("json: encoding error for type %q: %q", v.Type().String(), err.Error()))
+
+	<a href="../pkg/github.com/golang/protobuf/proto.html">github.com/golang/protobuf/proto</a>
+		<a href="../src/github.com/golang/protobuf/proto/deprecated.go.html#line-75">deprecated.go#L75</a>: 			return 0, fmt.<b>Errorf</b>("unrecognized enum %s value %q", enumName, repr)
+		<a href="../src/github.com/golang/protobuf/proto/deprecated.go.html#line-82" class="path-duplicate">deprecated.go</a><a href="../src/github.com/golang/protobuf/proto/deprecated.go.html#line-82">#L82</a>: 		return 0, fmt.<b>Errorf</b>("cannot unmarshal %#q into enum %s", data, enumName)
+		<a href="../src/github.com/golang/protobuf/proto/extensions.go.html#line-145">extensions.go#L145</a>: 		return nil, fmt.<b>Errorf</b>("proto: bad extended type; %T does not extend %T", xt.ExtendedType, m)
+		<a href="../src/github.com/golang/protobuf/proto/extensions.go.html#line-231" class="path-duplicate">extensions.go</a><a href="../src/github.com/golang/protobuf/proto/extensions.go.html#line-231">#L231</a>: 		return fmt.<b>Errorf</b>("proto: bad extension value type. got: %T, want: %T", v, xt.ExtensionType)
+		<a href="../src/github.com/golang/protobuf/proto/extensions.go.html#line-235" class="path-duplicate">extensions.go</a><a href="../src/github.com/golang/protobuf/proto/extensions.go.html#line-235">#L235</a>: 			return fmt.<b>Errorf</b>("proto: SetExtension called with nil value of type %T", v)
+		<a href="../src/github.com/golang/protobuf/proto/extensions.go.html#line-244" class="path-duplicate">extensions.go</a><a href="../src/github.com/golang/protobuf/proto/extensions.go.html#line-244">#L244</a>: 		return fmt.<b>Errorf</b>("proto: bad extended type; %T does not extend %T", xt.ExtendedType, m)
+		<a href="../src/github.com/golang/protobuf/proto/registry.go.html#line-197">registry.go#L197</a>: 		panic(fmt.<b>Errorf</b>("proto: duplicate proto message registered: %s", s))
+		<a href="../src/github.com/golang/protobuf/proto/text_decode.go.html#line-734">text_decode.go#L734</a>: 			return "", "", fmt.<b>Errorf</b>(`\%c requires 2 following digits`, r)
+		<a href="../src/github.com/golang/protobuf/proto/text_decode.go.html#line-740" class="path-duplicate">text_decode.go</a><a href="../src/github.com/golang/protobuf/proto/text_decode.go.html#line-740">#L740</a>: 			return "", "", fmt.<b>Errorf</b>(`\%s contains non-octal digits`, ss)
+		<a href="../src/github.com/golang/protobuf/proto/text_decode.go.html#line-754" class="path-duplicate">text_decode.go</a><a href="../src/github.com/golang/protobuf/proto/text_decode.go.html#line-754">#L754</a>: 			return "", "", fmt.<b>Errorf</b>(`\%c requires %d following digits`, r, n)
+		<a href="../src/github.com/golang/protobuf/proto/text_decode.go.html#line-760" class="path-duplicate">text_decode.go</a><a href="../src/github.com/golang/protobuf/proto/text_decode.go.html#line-760">#L760</a>: 			return "", "", fmt.<b>Errorf</b>(`\%c%s contains non-hexadecimal digits`, r, ss)
+		<a href="../src/github.com/golang/protobuf/proto/text_decode.go.html#line-766" class="path-duplicate">text_decode.go</a><a href="../src/github.com/golang/protobuf/proto/text_decode.go.html#line-766">#L766</a>: 			return "", "", fmt.<b>Errorf</b>(`\%c%s is not a valid Unicode code point`, r, ss)
+		<a href="../src/github.com/golang/protobuf/proto/text_decode.go.html#line-770" class="path-duplicate">text_decode.go</a><a href="../src/github.com/golang/protobuf/proto/text_decode.go.html#line-770">#L770</a>: 	return "", "", fmt.<b>Errorf</b>(`unknown escape \%c`, r)
+
+	<a href="../pkg/github.com/LiU-SeeGoals^6eac6/controller/internal/client.html">github.com/LiU-SeeGoals/controller/internal/client</a>
+		<a href="../src/github.com/LiU-SeeGoals^6eac6/controller/internal/client/grsim_client.go.html#line-128">grsim_client.go#L128</a>: 		err = fmt.<b>Errorf</b>("unable to marshal yellow team data: %w", err)
+		<a href="../src/github.com/LiU-SeeGoals^6eac6/controller/internal/client/grsim_client.go.html#line-134" class="path-duplicate">grsim_client.go</a><a href="../src/github.com/LiU-SeeGoals^6eac6/controller/internal/client/grsim_client.go.html#line-134">#L134</a>: 		err = fmt.<b>Errorf</b>("unable to send yellow team data over socket: %w", err)
+		<a href="../src/github.com/LiU-SeeGoals^6eac6/controller/internal/client/grsim_client.go.html#line-148" class="path-duplicate">grsim_client.go</a><a href="../src/github.com/LiU-SeeGoals^6eac6/controller/internal/client/grsim_client.go.html#line-148">#L148</a>: 		err = fmt.<b>Errorf</b>("unable to marshal blue team data: %w", err)
+		<a href="../src/github.com/LiU-SeeGoals^6eac6/controller/internal/client/grsim_client.go.html#line-154" class="path-duplicate">grsim_client.go</a><a href="../src/github.com/LiU-SeeGoals^6eac6/controller/internal/client/grsim_client.go.html#line-154">#L154</a>: 		err = fmt.<b>Errorf</b>("unable to send blue team data over socket: %w", err)
+
+	<a href="../pkg/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim.html">github.com/LiU-SeeGoals/controller/internal/proto/grsim</a>
+		<a href="../src/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim/grsim_commands.pb.go.html#line-14">grsim_commands.pb.go#L14</a>: var _ = fmt.<b>Errorf</b>
+		<a href="../src/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim/grsim_packet.pb.go.html#line-14">grsim_packet.pb.go#L14</a>: var _ = fmt.<b>Errorf</b>
+		<a href="../src/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim/grsim_replacement.pb.go.html#line-14">grsim_replacement.pb.go#L14</a>: var _ = fmt.<b>Errorf</b>
+		<a href="../src/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim/grsim_robotstatus.pb.go.html#line-14">grsim_robotstatus.pb.go#L14</a>: var _ = fmt.<b>Errorf</b>
+
+	<a href="../pkg/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/ssl_vision.html">github.com/LiU-SeeGoals/controller/internal/proto/ssl_vision</a>
+		<a href="../src/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/ssl_vision/ssl_detection.pb.go.html#line-14">ssl_detection.pb.go#L14</a>: var _ = fmt.<b>Errorf</b>
+		<a href="../src/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/ssl_vision/ssl_detection_tracked.pb.go.html#line-14">ssl_detection_tracked.pb.go#L14</a>: var _ = fmt.<b>Errorf</b>
+		<a href="../src/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/ssl_vision/ssl_geometry.pb.go.html#line-14">ssl_geometry.pb.go#L14</a>: var _ = fmt.<b>Errorf</b>
+		<a href="../src/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/ssl_vision/ssl_wrapper.pb.go.html#line-14">ssl_wrapper.pb.go#L14</a>: var _ = fmt.<b>Errorf</b>
+		<a href="../src/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/ssl_vision/ssl_wrapper_tracked.pb.go.html#line-14">ssl_wrapper_tracked.pb.go#L14</a>: var _ = fmt.<b>Errorf</b>
+
+	<a href="../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>
+		<a href="../src/gonum.org/v1/gonum/mat/io.go.html#line-463">io.go#L463</a>: 		return fmt.<b>Errorf</b>("mat: incorrect version: %d", s.Version)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.sweep</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">var <b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/mgcsweep.go.html#line-32">sweep</a></b></span>
+
+<span class="title">44 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/mcentral.go.html#line-115">mcentral.go#L115</a>: 	sl = <b>sweep</b>.active.begin()
+		<a href="../src/runtime/mcentral.go.html#line-126" class="path-duplicate">mcentral.go</a><a href="../src/runtime/mcentral.go.html#line-126">#L126</a>: 				<b>sweep</b>.active.end(sl)
+		<a href="../src/runtime/mcentral.go.html#line-150" class="path-duplicate">mcentral.go</a><a href="../src/runtime/mcentral.go.html#line-150">#L150</a>: 					<b>sweep</b>.active.end(sl)
+		<a href="../src/runtime/mcentral.go.html#line-158" class="path-duplicate">mcentral.go</a><a href="../src/runtime/mcentral.go.html#line-158">#L158</a>: 		<b>sweep</b>.active.end(sl)
+		<a href="../src/runtime/mgc.go.html#line-179">mgc.go#L179</a>: 	<b>sweep</b>.active.state.Store(sweepDrainedMask)
+		<a href="../src/runtime/mgc.go.html#line-476" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-476">#L476</a>: 		<b>sweep</b>.nbgsweep++
+		<a href="../src/runtime/mgc.go.html#line-624" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-624">#L624</a>: 		<b>sweep</b>.nbgsweep++
+		<a href="../src/runtime/mgc.go.html#line-1051" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1051">#L1051</a>: 	<b>sweep</b>.nbgsweep = 0
+		<a href="../src/runtime/mgc.go.html#line-1052" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1052">#L1052</a>: 	<b>sweep</b>.npausesweep = 0
+		<a href="../src/runtime/mgc.go.html#line-1082" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1082">#L1082</a>: 	sl := <b>sweep</b>.active.begin()
+		<a href="../src/runtime/mgc.go.html#line-1128" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1128">#L1128</a>: 	<b>sweep</b>.active.end(sl)
+		<a href="../src/runtime/mgc.go.html#line-1553" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1553">#L1553</a>: 	<b>sweep</b>.active.reset()
+		<a href="../src/runtime/mgc.go.html#line-1560" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1560">#L1560</a>: 	<b>sweep</b>.centralIndex.clear()
+		<a href="../src/runtime/mgc.go.html#line-1570" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1570">#L1570</a>: 			<b>sweep</b>.npausesweep++
+		<a href="../src/runtime/mgc.go.html#line-1585" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1585">#L1585</a>: 	lock(&amp;<b>sweep</b>.lock)
+		<a href="../src/runtime/mgc.go.html#line-1586" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1586">#L1586</a>: 	if <b>sweep</b>.parked {
+		<a href="../src/runtime/mgc.go.html#line-1587" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1587">#L1587</a>: 		<b>sweep</b>.parked = false
+		<a href="../src/runtime/mgc.go.html#line-1588" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1588">#L1588</a>: 		ready(<b>sweep</b>.g, 0, true)
+		<a href="../src/runtime/mgc.go.html#line-1590" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1590">#L1590</a>: 	unlock(&amp;<b>sweep</b>.lock)
+		<a href="../src/runtime/mgcsweep.go.html#line-32">mgcsweep.go#L32</a>: var <b>sweep</b> sweepdata
+		<a href="../src/runtime/mgcsweep.go.html#line-101" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-101">#L101</a>: 	for sc := <b>sweep</b>.centralIndex.load(); sc &lt; numSweepClasses; sc++ {
+		<a href="../src/runtime/mgcsweep.go.html#line-113" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-113">#L113</a>: 			<b>sweep</b>.centralIndex.update(sc)
+		<a href="../src/runtime/mgcsweep.go.html#line-118" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-118">#L118</a>: 	<b>sweep</b>.centralIndex.update(sweepClassDone)
+		<a href="../src/runtime/mgcsweep.go.html#line-240" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-240">#L240</a>: 		<b>sweep</b>.npausesweep++
+		<a href="../src/runtime/mgcsweep.go.html#line-248" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-248">#L248</a>: 	if <b>sweep</b>.active.sweepers() != 0 {
+		<a href="../src/runtime/mgcsweep.go.html#line-274" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-274">#L274</a>: 	<b>sweep</b>.g = getg()
+		<a href="../src/runtime/mgcsweep.go.html#line-276" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-276">#L276</a>: 	lockInit(&amp;<b>sweep</b>.lock, lockRankSweep)
+		<a href="../src/runtime/mgcsweep.go.html#line-277" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-277">#L277</a>: 	lock(&amp;<b>sweep</b>.lock)
+		<a href="../src/runtime/mgcsweep.go.html#line-278" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-278">#L278</a>: 	<b>sweep</b>.parked = true
+		<a href="../src/runtime/mgcsweep.go.html#line-280" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-280">#L280</a>: 	goparkunlock(&amp;<b>sweep</b>.lock, waitReasonGCSweepWait, traceBlockGCSweep, 1)
+		<a href="../src/runtime/mgcsweep.go.html#line-302" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-302">#L302</a>: 			<b>sweep</b>.nbgsweep++
+		<a href="../src/runtime/mgcsweep.go.html#line-312" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-312">#L312</a>: 		lock(&amp;<b>sweep</b>.lock)
+		<a href="../src/runtime/mgcsweep.go.html#line-317" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-317">#L317</a>: 			unlock(&amp;<b>sweep</b>.lock)
+		<a href="../src/runtime/mgcsweep.go.html#line-320" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-320">#L320</a>: 		<b>sweep</b>.parked = true
+		<a href="../src/runtime/mgcsweep.go.html#line-321" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-321">#L321</a>: 		goparkunlock(&amp;<b>sweep</b>.lock, waitReasonGCSweepWait, traceBlockGCSweep, 1)
+		<a href="../src/runtime/mgcsweep.go.html#line-365" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-365">#L365</a>: 	sl := <b>sweep</b>.active.begin()
+		<a href="../src/runtime/mgcsweep.go.html#line-377" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-377">#L377</a>: 			noMoreWork = <b>sweep</b>.active.markDrained()
+		<a href="../src/runtime/mgcsweep.go.html#line-407" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-407">#L407</a>: 	<b>sweep</b>.active.end(sl)
+		<a href="../src/runtime/mgcsweep.go.html#line-456" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-456">#L456</a>: 	return <b>sweep</b>.active.isDone()
+		<a href="../src/runtime/mgcsweep.go.html#line-474" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-474">#L474</a>: 	sl := <b>sweep</b>.active.begin()
+		<a href="../src/runtime/mgcsweep.go.html#line-479" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-479">#L479</a>: 			<b>sweep</b>.active.end(sl)
+		<a href="../src/runtime/mgcsweep.go.html#line-482" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-482">#L482</a>: 		<b>sweep</b>.active.end(sl)
+		<a href="../src/runtime/mheap.go.html#line-874">mheap.go#L874</a>: 	sl := <b>sweep</b>.active.begin()
+		<a href="../src/runtime/mheap.go.html#line-923" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-923">#L923</a>: 	<b>sweep</b>.active.end(sl)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

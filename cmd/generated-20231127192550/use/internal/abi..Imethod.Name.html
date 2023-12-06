@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: internal/abi.Imethod.Name</title>
+<link href="../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../pkg/internal/abi.html">internal/abi</a>.<a href="../../src/internal/abi/type.go.html#line-231">Imethod</a>.<a href="../../src/internal/abi/type.go.html#line-232">Name</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">16 uses</span>
+
+	internal/abi (current package)
+		<a href="../../src/internal/abi/type.go.html#line-232">type.go#L232</a>: 	<b>Name</b> NameOff // name of method
+
+	<a href="../../pkg/internal/reflectlite.html">internal/reflectlite</a>
+		<a href="../../src/internal/reflectlite/type.go.html#line-453">type.go#L453</a>: 			tmName := rT.nameOff(tm.<b>Name</b>)
+		<a href="../../src/internal/reflectlite/type.go.html#line-455" class="path-duplicate">type.go</a><a href="../../src/internal/reflectlite/type.go.html#line-455">#L455</a>: 			vmName := rV.nameOff(vm.<b>Name</b>)
+		<a href="../../src/internal/reflectlite/type.go.html#line-486" class="path-duplicate">type.go</a><a href="../../src/internal/reflectlite/type.go.html#line-486">#L486</a>: 		tmName := rT.nameOff(tm.<b>Name</b>)
+
+	<a href="../../pkg/reflect.html">reflect</a>
+		<a href="../../src/reflect/type.go.html#line-837">type.go#L837</a>: 	pname := t.nameOff(p.<b>Name</b>)
+		<a href="../../src/reflect/type.go.html#line-861" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-861">#L861</a>: 		if t.nameOff(p.<b>Name</b>).Name() == name {
+		<a href="../../src/reflect/type.go.html#line-1294" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-1294">#L1294</a>: 			tmName := t.nameOff(tm.<b>Name</b>)
+		<a href="../../src/reflect/type.go.html#line-1296" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-1296">#L1296</a>: 			vmName := nameOffFor(V, vm.<b>Name</b>)
+		<a href="../../src/reflect/type.go.html#line-1327" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-1327">#L1327</a>: 		tmName := t.nameOff(tm.<b>Name</b>)
+		<a href="../../src/reflect/type.go.html#line-2212" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2212">#L2212</a>: 					if pkgPath(ift.nameOff(m.<b>Name</b>)) != "" {
+		<a href="../../src/reflect/type.go.html#line-2262" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2262">#L2262</a>: 						Name: resolveReflectName(ift.nameOff(m.<b>Name</b>)),
+		<a href="../../src/reflect/value.go.html#line-895">value.go#L895</a>: 		if !tt.nameOff(m.<b>Name</b>).IsExported() {
+
+	<a href="../../pkg/runtime.html">runtime</a>
+		<a href="../../src/runtime/iface.go.html#line-44">iface.go#L44</a>: 		name := toRType(&amp;inter.Type).nameOff(inter.Methods[0].<b>Name</b>)
+		<a href="../../src/runtime/iface.go.html#line-211" class="path-duplicate">iface.go</a><a href="../../src/runtime/iface.go.html#line-211">#L211</a>: 		name := toRType(&amp;inter.Type).nameOff(i.<b>Name</b>)
+		<a href="../../src/runtime/type.go.html#line-408">type.go#L408</a>: 			tname := resolveNameOff(unsafe.Pointer(tm), tm.<b>Name</b>)
+		<a href="../../src/runtime/type.go.html#line-409" class="path-duplicate">type.go</a><a href="../../src/runtime/type.go.html#line-409">#L409</a>: 			vname := resolveNameOff(unsafe.Pointer(vm), vm.<b>Name</b>)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

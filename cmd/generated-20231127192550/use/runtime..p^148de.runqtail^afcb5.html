@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.p.runqtail</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/runtime2.go.html#line-621">p</a>.<a href="../src/runtime/runtime2.go.html#line-642">runqtail</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">18 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/proc.go.html#line-3578">proc.go#L3578</a>: 	if mp.spinning &amp;&amp; (pp.runnext != 0 || pp.runqhead != pp.<b>runqtail</b>) {
+		<a href="../src/runtime/proc.go.html#line-5097" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5097">#L5097</a>: 	for pp.runqhead != pp.<b>runqtail</b> {
+		<a href="../src/runtime/proc.go.html#line-5099" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5099">#L5099</a>: 		pp.<b>runqtail</b>--
+		<a href="../src/runtime/proc.go.html#line-5100" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5100">#L5100</a>: 		gp := pp.runq[pp.<b>runqtail</b>%uint32(len(pp.runq))].ptr()
+		<a href="../src/runtime/proc.go.html#line-5815" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5815">#L5815</a>: 		t := atomic.Load(&amp;pp.<b>runqtail</b>)
+		<a href="../src/runtime/proc.go.html#line-6175" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-6175">#L6175</a>: 		tail := atomic.Load(&amp;pp.<b>runqtail</b>)
+		<a href="../src/runtime/proc.go.html#line-6177" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-6177">#L6177</a>: 		if tail == atomic.Load(&amp;pp.<b>runqtail</b>) {
+		<a href="../src/runtime/proc.go.html#line-6219" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-6219">#L6219</a>: 	t := pp.<b>runqtail</b>
+		<a href="../src/runtime/proc.go.html#line-6222" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-6222">#L6222</a>: 		atomic.StoreRel(&amp;pp.<b>runqtail</b>, t+1) // store-release, makes the item available for consumption
+		<a href="../src/runtime/proc.go.html#line-6279" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-6279">#L6279</a>: 	t := pp.<b>runqtail</b>
+		<a href="../src/runtime/proc.go.html#line-6291" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-6291">#L6291</a>: 			return (pp.<b>runqtail</b> + o) % uint32(len(pp.runq))
+		<a href="../src/runtime/proc.go.html#line-6299" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-6299">#L6299</a>: 	atomic.StoreRel(&amp;pp.<b>runqtail</b>, t)
+		<a href="../src/runtime/proc.go.html#line-6323" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-6323">#L6323</a>: 		t := pp.<b>runqtail</b>
+		<a href="../src/runtime/proc.go.html#line-6345" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-6345">#L6345</a>: 	t := pp.<b>runqtail</b>
+		<a href="../src/runtime/proc.go.html#line-6380" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-6380">#L6380</a>: 		t := atomic.LoadAcq(&amp;pp.<b>runqtail</b>) // load-acquire, synchronize with the producer
+		<a href="../src/runtime/proc.go.html#line-6433" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-6433">#L6433</a>: 	t := pp.<b>runqtail</b>
+		<a href="../src/runtime/proc.go.html#line-6447" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-6447">#L6447</a>: 	atomic.StoreRel(&amp;pp.<b>runqtail</b>, t+n) // store-release, makes the item available for consumption
+		<a href="../src/runtime/runtime2.go.html#line-642">runtime2.go#L642</a>: 	<b>runqtail</b> uint32
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

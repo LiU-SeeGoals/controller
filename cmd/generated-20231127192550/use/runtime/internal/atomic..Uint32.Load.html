@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime/internal/atomic.Uint32.Load</title>
+<link href="../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../pkg/runtime/internal/atomic.html">runtime/internal/atomic</a>.<a href="../../../src/runtime/internal/atomic/types.go.html#line-185">Uint32</a>.<a href="../../../src/runtime/internal/atomic/types.go.html#line-193">Load</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">95 uses</span>
+
+	runtime/internal/atomic (current package)
+		<a href="../../../src/runtime/internal/atomic/types.go.html#line-193">types.go#L193</a>: func (u *Uint32) <b>Load</b>() uint32 {
+
+	<a href="../../../pkg/runtime.html">runtime</a>
+		<a href="../../../src/runtime/cgocall.go.html#line-275">cgocall.go#L275</a>: 	if gp.m.needextram || extraMWaiters.<b>Load</b>() &gt; 0 {
+		<a href="../../../src/runtime/debuglog.go.html#line-67">debuglog.go#L67</a>: 			if l1.owned.<b>Load</b>() == 0 &amp;&amp; l1.owned.CompareAndSwap(0, 1) {
+		<a href="../../../src/runtime/mcache.go.html#line-321">mcache.go#L321</a>: 	flushGen := c.flushGen.<b>Load</b>()
+		<a href="../../../src/runtime/metrics.go.html#line-315">metrics.go#L315</a>: 				out.scalar = uint64(gcCPULimiter.lastEnabledCycle.<b>Load</b>())
+		<a href="../../../src/runtime/mfinal.go.html#line-162">mfinal.go#L162</a>: 	if fingStatus.<b>Load</b>() == fingUninitialized &amp;&amp; fingStatus.CompareAndSwap(fingUninitialized, fingCreated) {
+		<a href="../../../src/runtime/mgc.go.html#line-460">mgc.go#L460</a>: 	n := work.cycles.<b>Load</b>()
+		<a href="../../../src/runtime/mgc.go.html#line-475" class="path-duplicate">mgc.go</a><a href="../../../src/runtime/mgc.go.html#line-475">#L475</a>: 	for work.cycles.<b>Load</b>() == n+1 &amp;&amp; sweepone() != ^uintptr(0) {
+		<a href="../../../src/runtime/mgc.go.html#line-491" class="path-duplicate">mgc.go</a><a href="../../../src/runtime/mgc.go.html#line-491">#L491</a>: 	for work.cycles.<b>Load</b>() == n+1 &amp;&amp; !isSweepDone() {
+		<a href="../../../src/runtime/mgc.go.html#line-499" class="path-duplicate">mgc.go</a><a href="../../../src/runtime/mgc.go.html#line-499">#L499</a>: 	cycle := work.cycles.<b>Load</b>()
+		<a href="../../../src/runtime/mgc.go.html#line-512" class="path-duplicate">mgc.go</a><a href="../../../src/runtime/mgc.go.html#line-512">#L512</a>: 		nMarks := work.cycles.<b>Load</b>()
+		<a href="../../../src/runtime/mgc.go.html#line-570" class="path-duplicate">mgc.go</a><a href="../../../src/runtime/mgc.go.html#line-570">#L570</a>: 	if !memstats.enablegc || panicking.<b>Load</b>() != 0 || gcphase != _GCoff {
+		<a href="../../../src/runtime/mgc.go.html#line-589" class="path-duplicate">mgc.go</a><a href="../../../src/runtime/mgc.go.html#line-589">#L589</a>: 		return int32(t.n-work.cycles.<b>Load</b>()) &gt; 0
+		<a href="../../../src/runtime/mgc.go.html#line-661" class="path-duplicate">mgc.go</a><a href="../../../src/runtime/mgc.go.html#line-661">#L661</a>: 		if fg := p.mcache.flushGen.<b>Load</b>(); fg != mheap_.sweepgen {
+		<a href="../../../src/runtime/mgcpacer.go.html#line-1271">mgcpacer.go#L1271</a>: 		gcWaitOnMark(work.cycles.<b>Load</b>())
+		<a href="../../../src/runtime/mgcsweep.go.html#line-153">mgcsweep.go#L153</a>: 		state := a.state.<b>Load</b>()
+		<a href="../../../src/runtime/mgcsweep.go.html#line-170" class="path-duplicate">mgcsweep.go</a><a href="../../../src/runtime/mgcsweep.go.html#line-170">#L170</a>: 		state := a.state.<b>Load</b>()
+		<a href="../../../src/runtime/mgcsweep.go.html#line-195" class="path-duplicate">mgcsweep.go</a><a href="../../../src/runtime/mgcsweep.go.html#line-195">#L195</a>: 		state := a.state.<b>Load</b>()
+		<a href="../../../src/runtime/mgcsweep.go.html#line-207" class="path-duplicate">mgcsweep.go</a><a href="../../../src/runtime/mgcsweep.go.html#line-207">#L207</a>: 	return a.state.<b>Load</b>() &amp;^ sweepDrainedMask
+		<a href="../../../src/runtime/mgcsweep.go.html#line-214" class="path-duplicate">mgcsweep.go</a><a href="../../../src/runtime/mgcsweep.go.html#line-214">#L214</a>: 	return a.state.<b>Load</b>() == sweepDrainedMask
+		<a href="../../../src/runtime/mprof.go.html#line-177">mprof.go#L177</a>: 	v := c.value.<b>Load</b>()
+		<a href="../../../src/runtime/mprof.go.html#line-186" class="path-duplicate">mprof.go</a><a href="../../../src/runtime/mprof.go.html#line-186">#L186</a>: 		prev := c.value.<b>Load</b>()
+		<a href="../../../src/runtime/mprof.go.html#line-203" class="path-duplicate">mprof.go</a><a href="../../../src/runtime/mprof.go.html#line-203">#L203</a>: 		prev := c.value.<b>Load</b>()
+		<a href="../../../src/runtime/mprof.go.html#line-888" class="path-duplicate">mprof.go</a><a href="../../../src/runtime/mprof.go.html#line-888">#L888</a>: 	return goroutineProfileState((*atomic.Uint32)(p).<b>Load</b>())
+		<a href="../../../src/runtime/mprof.go.html#line-913" class="path-duplicate">mprof.go</a><a href="../../../src/runtime/mprof.go.html#line-913">#L913</a>: 	if fingStatus.<b>Load</b>()&amp;fingRunningFinalizer != 0 {
+		<a href="../../../src/runtime/mspanset.go.html#line-247">mspanset.go#L247</a>: 			if block.popped.<b>Load</b>() == 0 {
+		<a href="../../../src/runtime/mspanset.go.html#line-253" class="path-duplicate">mspanset.go</a><a href="../../../src/runtime/mspanset.go.html#line-253">#L253</a>: 			if block.popped.<b>Load</b>() == spanSetBlockEntries {
+		<a href="../../../src/runtime/mstats.go.html#line-779">mstats.go#L779</a>: 	gen := m.gen.<b>Load</b>() % 3
+		<a href="../../../src/runtime/mstats.go.html#line-850" class="path-duplicate">mstats.go</a><a href="../../../src/runtime/mstats.go.html#line-850">#L850</a>: 	currGen := m.gen.<b>Load</b>()
+		<a href="../../../src/runtime/mstats.go.html#line-873" class="path-duplicate">mstats.go</a><a href="../../../src/runtime/mstats.go.html#line-873">#L873</a>: 		for p.statsSeq.<b>Load</b>()%2 != 0 {
+		<a href="../../../src/runtime/netpoll.go.html#line-139">netpoll.go#L139</a>: 	return pollInfo(pd.atomicInfo.<b>Load</b>())
+		<a href="../../../src/runtime/netpoll.go.html#line-163" class="path-duplicate">netpoll.go</a><a href="../../../src/runtime/netpoll.go.html#line-163">#L163</a>: 	x := pd.atomicInfo.<b>Load</b>()
+		<a href="../../../src/runtime/netpoll.go.html#line-165" class="path-duplicate">netpoll.go</a><a href="../../../src/runtime/netpoll.go.html#line-165">#L165</a>: 		x = pd.atomicInfo.<b>Load</b>()
+		<a href="../../../src/runtime/netpoll.go.html#line-174" class="path-duplicate">netpoll.go</a><a href="../../../src/runtime/netpoll.go.html#line-174">#L174</a>: 	x := pd.atomicInfo.<b>Load</b>()
+		<a href="../../../src/runtime/netpoll.go.html#line-180" class="path-duplicate">netpoll.go</a><a href="../../../src/runtime/netpoll.go.html#line-180">#L180</a>: 		x = pd.atomicInfo.<b>Load</b>()
+		<a href="../../../src/runtime/netpoll.go.html#line-212" class="path-duplicate">netpoll.go</a><a href="../../../src/runtime/netpoll.go.html#line-212">#L212</a>: 	if netpollInited.<b>Load</b>() == 0 {
+		<a href="../../../src/runtime/netpoll.go.html#line-215" class="path-duplicate">netpoll.go</a><a href="../../../src/runtime/netpoll.go.html#line-215">#L215</a>: 		if netpollInited.<b>Load</b>() == 0 {
+		<a href="../../../src/runtime/netpoll.go.html#line-224" class="path-duplicate">netpoll.go</a><a href="../../../src/runtime/netpoll.go.html#line-224">#L224</a>: 	return netpollInited.<b>Load</b>() != 0
+		<a href="../../../src/runtime/preempt.go.html#line-194">preempt.go#L194</a>: 			if gp.preemptStop &amp;&amp; gp.preempt &amp;&amp; gp.stackguard0 == stackPreempt &amp;&amp; asyncM == gp.m &amp;&amp; asyncM.preemptGen.<b>Load</b>() == asyncGen {
+		<a href="../../../src/runtime/preempt.go.html#line-210" class="path-duplicate">preempt.go</a><a href="../../../src/runtime/preempt.go.html#line-210">#L210</a>: 			asyncGen2 := asyncM2.preemptGen.<b>Load</b>()
+		<a href="../../../src/runtime/print.go.html#line-42">print.go#L42</a>: 	if panicking.<b>Load</b>() == 0 {
+		<a href="../../../src/runtime/proc.go.html#line-277">proc.go#L277</a>: 	if runningPanicDefers.<b>Load</b>() != 0 {
+		<a href="../../../src/runtime/proc.go.html#line-280" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-280">#L280</a>: 			if runningPanicDefers.<b>Load</b>() == 0 {
+		<a href="../../../src/runtime/proc.go.html#line-286" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-286">#L286</a>: 	if panicking.<b>Load</b>() != 0 {
+		<a href="../../../src/runtime/proc.go.html#line-799" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-799">#L799</a>: 	count := mcount() - int32(extraMInUse.<b>Load</b>()) - int32(extraMLength.<b>Load</b>())
+		<a href="../../../src/runtime/proc.go.html#line-977" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-977">#L977</a>: 	return gp.atomicstatus.<b>Load</b>()
+		<a href="../../../src/runtime/proc.go.html#line-1060" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-1060">#L1060</a>: 		if oldval == _Gwaiting &amp;&amp; gp.atomicstatus.<b>Load</b>() == _Grunnable {
+		<a href="../../../src/runtime/proc.go.html#line-1067" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-1067">#L1067</a>: 			for x := 0; x &lt; 10 &amp;&amp; gp.atomicstatus.<b>Load</b>() != oldval; x++ {
+		<a href="../../../src/runtime/proc.go.html#line-1724" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-1724">#L1724</a>: 		if mp.signalPending.<b>Load</b>() != 0 {
+		<a href="../../../src/runtime/proc.go.html#line-1908" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-1908">#L1908</a>: 			wait := freem.freeWait.<b>Load</b>()
+		<a href="../../../src/runtime/proc.go.html#line-2099" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-2099">#L2099</a>: 	} else if extraMLength.<b>Load</b>() == 0 {
+		<a href="../../../src/runtime/proc.go.html#line-2946" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-2946">#L2946</a>: 	if fingStatus.<b>Load</b>()&amp;(fingWait|fingWake) == fingWait|fingWake {
+		<a href="../../../src/runtime/proc.go.html#line-2977" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-2977">#L2977</a>: 	if netpollinited() &amp;&amp; netpollWaiters.<b>Load</b>() &gt; 0 &amp;&amp; sched.lastpoll.Load() != 0 {
+		<a href="../../../src/runtime/proc.go.html#line-3072" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-3072">#L3072</a>: 	if !mp.spinning &amp;&amp; sched.needspinning.<b>Load</b>() == 1 {
+		<a href="../../../src/runtime/proc.go.html#line-3169" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-3169">#L3169</a>: 	if netpollinited() &amp;&amp; (netpollWaiters.<b>Load</b>() &gt; 0 || pollUntil != 0) &amp;&amp; sched.lastpoll.Swap(0) != 0 {
+		<a href="../../../src/runtime/proc.go.html#line-3245" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-3245">#L3245</a>: 	if netpollinited() &amp;&amp; netpollWaiters.<b>Load</b>() &gt; 0 &amp;&amp; sched.lastpoll.Load() != 0 {
+		<a href="../../../src/runtime/proc.go.html#line-3681" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-3681">#L3681</a>: 		if pp != getg().m.p.ptr() || int(pp.deletedTimers.<b>Load</b>()) &lt;= int(pp.numTimers.<b>Load</b>()/4) {
+		<a href="../../../src/runtime/proc.go.html#line-3706" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-3706">#L3706</a>: 	if pp == getg().m.p.ptr() &amp;&amp; int(pp.deletedTimers.<b>Load</b>()) &gt; len(pp.timers)/4 {
+		<a href="../../../src/runtime/proc.go.html#line-4948" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-4948">#L4948</a>: 		if mp.cgoCallersUse.<b>Load</b>() == 0 &amp;&amp; mp.cgoCallers != nil &amp;&amp; mp.cgoCallers[0] != 0 {
+		<a href="../../../src/runtime/proc.go.html#line-5413" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-5413">#L5413</a>: 	if panicking.<b>Load</b>() &gt; 0 {
+		<a href="../../../src/runtime/proc.go.html#line-5422" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-5422">#L5422</a>: 	if !iscgo &amp;&amp; cgoHasExtraM &amp;&amp; extraMLength.<b>Load</b>() &gt; 0 {
+		<a href="../../../src/runtime/proc.go.html#line-5633" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-5633">#L5633</a>: 		if scavenger.sysmonWake.<b>Load</b>() != 0 {
+		<a href="../../../src/runtime/proc.go.html#line-5805" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-5805">#L5805</a>: 	print("SCHED ", (now-starttime)/1e6, "ms: gomaxprocs=", gomaxprocs, " idleprocs=", sched.npidle.Load(), " threads=", mcount(), " spinningthreads=", sched.nmspinning.Load(), " needspinning=", sched.needspinning.<b>Load</b>(), " idlethreads=", sched.nmidle, " runqueue=", sched.runqsize)
+		<a href="../../../src/runtime/proc.go.html#line-6071" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-6071">#L6071</a>: 	if pp.numTimers.<b>Load</b>() &gt; 0 {
+		<a href="../../../src/runtime/proc.go.html#line-6079" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-6079">#L6079</a>: 	if pp.numTimers.<b>Load</b>() == 0 {
+		<a href="../../../src/runtime/profbuf.go.html#line-397">profbuf.go#L397</a>: 	if b.eof.<b>Load</b>() &gt; 0 {
+		<a href="../../../src/runtime/profbuf.go.html#line-478" class="path-duplicate">profbuf.go</a><a href="../../../src/runtime/profbuf.go.html#line-478">#L478</a>: 		if b.eof.<b>Load</b>() &gt; 0 {
+		<a href="../../../src/runtime/sema.go.html#line-182">sema.go#L182</a>: 	if root.nwait.<b>Load</b>() == 0 {
+		<a href="../../../src/runtime/sema.go.html#line-188" class="path-duplicate">sema.go</a><a href="../../../src/runtime/sema.go.html#line-188">#L188</a>: 	if root.nwait.<b>Load</b>() == 0 {
+		<a href="../../../src/runtime/sema.go.html#line-540" class="path-duplicate">sema.go</a><a href="../../../src/runtime/sema.go.html#line-540">#L540</a>: 	if l.wait.<b>Load</b>() == atomic.Load(&amp;l.notify) {
+		<a href="../../../src/runtime/sema.go.html#line-555" class="path-duplicate">sema.go</a><a href="../../../src/runtime/sema.go.html#line-555">#L555</a>: 	atomic.Store(&amp;l.notify, l.wait.<b>Load</b>())
+		<a href="../../../src/runtime/sema.go.html#line-573" class="path-duplicate">sema.go</a><a href="../../../src/runtime/sema.go.html#line-573">#L573</a>: 	if l.wait.<b>Load</b>() == atomic.Load(&amp;l.notify) {
+		<a href="../../../src/runtime/sema.go.html#line-581" class="path-duplicate">sema.go</a><a href="../../../src/runtime/sema.go.html#line-581">#L581</a>: 	if t == l.wait.<b>Load</b>() {
+		<a href="../../../src/runtime/signal_unix.go.html#line-756">signal_unix.go#L756</a>: 		if crashing &lt; mcount()-int32(extraMLength.<b>Load</b>()) {
+		<a href="../../../src/runtime/sigqueue.go.html#line-100">sigqueue.go#L100</a>: 		switch sig.state.<b>Load</b>() {
+		<a href="../../../src/runtime/sigqueue.go.html#line-143" class="path-duplicate">sigqueue.go</a><a href="../../../src/runtime/sigqueue.go.html#line-143">#L143</a>: 			switch sig.state.<b>Load</b>() {
+		<a href="../../../src/runtime/sigqueue.go.html#line-185" class="path-duplicate">sigqueue.go</a><a href="../../../src/runtime/sigqueue.go.html#line-185">#L185</a>: 	for sig.delivering.<b>Load</b>() != 0 {
+		<a href="../../../src/runtime/sigqueue.go.html#line-192" class="path-duplicate">sigqueue.go</a><a href="../../../src/runtime/sigqueue.go.html#line-192">#L192</a>: 	for sig.state.<b>Load</b>() != sigReceiving {
+		<a href="../../../src/runtime/symtab.go.html#line-873">symtab.go#L873</a>: 		if strict &amp;&amp; panicking.<b>Load</b>() == 0 {
+		<a href="../../../src/runtime/symtab.go.html#line-916" class="path-duplicate">symtab.go</a><a href="../../../src/runtime/symtab.go.html#line-916">#L916</a>: 	if panicking.<b>Load</b>() != 0 || !strict {
+		<a href="../../../src/runtime/time.go.html#line-267">time.go#L267</a>: 	if t.status.<b>Load</b>() != timerNoStatus {
+		<a href="../../../src/runtime/time.go.html#line-293" class="path-duplicate">time.go</a><a href="../../../src/runtime/time.go.html#line-293">#L293</a>: 	if netpollInited.<b>Load</b>() == 0 {
+		<a href="../../../src/runtime/time.go.html#line-316" class="path-duplicate">time.go</a><a href="../../../src/runtime/time.go.html#line-316">#L316</a>: 		switch s := t.status.<b>Load</b>(); s {
+		<a href="../../../src/runtime/time.go.html#line-453" class="path-duplicate">time.go</a><a href="../../../src/runtime/time.go.html#line-453">#L453</a>: 		switch status = t.status.<b>Load</b>(); status {
+		<a href="../../../src/runtime/time.go.html#line-581" class="path-duplicate">time.go</a><a href="../../../src/runtime/time.go.html#line-581">#L581</a>: 		switch s := t.status.<b>Load</b>(); s {
+		<a href="../../../src/runtime/time.go.html#line-618" class="path-duplicate">time.go</a><a href="../../../src/runtime/time.go.html#line-618">#L618</a>: 			switch s := t.status.<b>Load</b>(); s {
+		<a href="../../../src/runtime/time.go.html#line-692" class="path-duplicate">time.go</a><a href="../../../src/runtime/time.go.html#line-692">#L692</a>: 		switch s := t.status.<b>Load</b>(); s {
+		<a href="../../../src/runtime/time.go.html#line-780" class="path-duplicate">time.go</a><a href="../../../src/runtime/time.go.html#line-780">#L780</a>: 		switch s := t.status.<b>Load</b>(); s {
+		<a href="../../../src/runtime/time.go.html#line-916" class="path-duplicate">time.go</a><a href="../../../src/runtime/time.go.html#line-916">#L916</a>: 			switch s := t.status.<b>Load</b>(); s {
+		<a href="../../../src/runtime/time.go.html#line-997" class="path-duplicate">time.go</a><a href="../../../src/runtime/time.go.html#line-997">#L997</a>: 	if numTimers := int(pp.numTimers.<b>Load</b>()); len(pp.timers) != numTimers {
+		<a href="../../../src/runtime/traceback.go.html#line-1331">traceback.go#L1331</a>: 		return fingStatus.<b>Load</b>()&amp;fingRunningFinalizer == 0
+		<a href="../../../src/runtime/traceback.go.html#line-1606" class="path-duplicate">traceback.go</a><a href="../../../src/runtime/traceback.go.html#line-1606">#L1606</a>: 	if panicking.<b>Load</b>() &gt; 0 || getg().m.curg != getg() {
+		<a href="../../../src/runtime/traceback.go.html#line-1626" class="path-duplicate">traceback.go</a><a href="../../../src/runtime/traceback.go.html#line-1626">#L1626</a>: 	if panicking.<b>Load</b>() &gt; 0 || getg().m.curg != getg() {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

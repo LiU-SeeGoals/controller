@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime/internal/atomic.Load</title>
+<link href="../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../../../pkg/runtime/internal/atomic.html">runtime/internal/atomic</a>.<a href="../../../src/runtime/internal/atomic/atomic_amd64.go.html#line-17">Load</a></b></span>
+
+<span class="title">31 uses</span>
+
+	runtime/internal/atomic (current package)
+		<a href="../../../src/runtime/internal/atomic/atomic_amd64.go.html#line-17">atomic_amd64.go#L17</a>: func <b>Load</b>(ptr *uint32) uint32 {
+		<a href="../../../src/runtime/internal/atomic/types.go.html#line-194">types.go#L194</a>: 	return <b>Load</b>(&amp;u.value)
+
+	<a href="../../../pkg/runtime.html">runtime</a>
+		<a href="../../../src/runtime/chan.go.html#line-484">chan.go#L484</a>: 		if atomic.<b>Load</b>(&amp;c.closed) == 0 {
+		<a href="../../../src/runtime/lock_futex.go.html#line-158">lock_futex.go#L158</a>: 	for atomic.<b>Load</b>(key32(&amp;n.key)) == 0 {
+		<a href="../../../src/runtime/lock_futex.go.html#line-181" class="path-duplicate">lock_futex.go</a><a href="../../../src/runtime/lock_futex.go.html#line-181">#L181</a>: 		for atomic.<b>Load</b>(key32(&amp;n.key)) == 0 {
+		<a href="../../../src/runtime/lock_futex.go.html#line-192" class="path-duplicate">lock_futex.go</a><a href="../../../src/runtime/lock_futex.go.html#line-192">#L192</a>: 	if atomic.<b>Load</b>(key32(&amp;n.key)) != 0 {
+		<a href="../../../src/runtime/lock_futex.go.html#line-207" class="path-duplicate">lock_futex.go</a><a href="../../../src/runtime/lock_futex.go.html#line-207">#L207</a>: 		if atomic.<b>Load</b>(key32(&amp;n.key)) != 0 {
+		<a href="../../../src/runtime/lock_futex.go.html#line-216" class="path-duplicate">lock_futex.go</a><a href="../../../src/runtime/lock_futex.go.html#line-216">#L216</a>: 	return atomic.<b>Load</b>(key32(&amp;n.key)) != 0
+		<a href="../../../src/runtime/mem_linux.go.html#line-49">mem_linux.go#L49</a>: 	advise := atomic.<b>Load</b>(&amp;adviseUnused)
+		<a href="../../../src/runtime/mgcmark.go.html#line-182">mgcmark.go#L182</a>: 			cnt := uintptr(atomic.<b>Load</b>(&amp;fb.cnt))
+		<a href="../../../src/runtime/mgcmark.go.html#line-536" class="path-duplicate">mgcmark.go</a><a href="../../../src/runtime/mgcmark.go.html#line-536">#L536</a>: 	if atomic.<b>Load</b>(&amp;gcBlackenEnabled) == 0 {
+		<a href="../../../src/runtime/mgcmark.go.html#line-630" class="path-duplicate">mgcmark.go</a><a href="../../../src/runtime/mgcmark.go.html#line-630">#L630</a>: 	if atomic.<b>Load</b>(&amp;gcBlackenEnabled) == 0 {
+		<a href="../../../src/runtime/mgcsweep.go.html#line-67">mgcsweep.go#L67</a>: 	return sweepClass(atomic.<b>Load</b>((*uint32)(s)))
+		<a href="../../../src/runtime/mgcsweep.go.html#line-344" class="path-duplicate">mgcsweep.go</a><a href="../../../src/runtime/mgcsweep.go.html#line-344">#L344</a>: 	if atomic.<b>Load</b>(&amp;s.sweepgen) != l.sweepGen-2 {
+		<a href="../../../src/runtime/mgcsweep.go.html#line-489" class="path-duplicate">mgcsweep.go</a><a href="../../../src/runtime/mgcsweep.go.html#line-489">#L489</a>: 		spangen := atomic.<b>Load</b>(&amp;s.sweepgen)
+		<a href="../../../src/runtime/proc.go.html#line-3380">proc.go#L3380</a>: 	if atomic.<b>Load</b>(&amp;gcBlackenEnabled) == 0 || !gcController.needIdleMarkWorker() {
+		<a href="../../../src/runtime/proc.go.html#line-4784" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-4784">#L4784</a>: 	if atomic.<b>Load</b>(&amp;newmHandoff.haveTemplateThread) == 0 &amp;&amp; GOOS != "plan9" {
+		<a href="../../../src/runtime/proc.go.html#line-5814" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-5814">#L5814</a>: 		h := atomic.<b>Load</b>(&amp;pp.runqhead)
+		<a href="../../../src/runtime/proc.go.html#line-5815" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-5815">#L5815</a>: 		t := atomic.<b>Load</b>(&amp;pp.runqtail)
+		<a href="../../../src/runtime/proc.go.html#line-6028" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-6028">#L6028</a>: 	return (atomic.<b>Load</b>(&amp;p[word]) &amp; mask) != 0
+		<a href="../../../src/runtime/proc.go.html#line-6174" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-6174">#L6174</a>: 		head := atomic.<b>Load</b>(&amp;pp.runqhead)
+		<a href="../../../src/runtime/proc.go.html#line-6175" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-6175">#L6175</a>: 		tail := atomic.<b>Load</b>(&amp;pp.runqtail)
+		<a href="../../../src/runtime/proc.go.html#line-6177" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-6177">#L6177</a>: 		if tail == atomic.<b>Load</b>(&amp;pp.runqtail) {
+		<a href="../../../src/runtime/runtime1.go.html#line-39">runtime1.go#L39</a>: 	t := atomic.<b>Load</b>(&amp;traceback_cache)
+		<a href="../../../src/runtime/sema.go.html#line-235">sema.go#L235</a>: 		v := atomic.<b>Load</b>(addr)
+		<a href="../../../src/runtime/sema.go.html#line-540" class="path-duplicate">sema.go</a><a href="../../../src/runtime/sema.go.html#line-540">#L540</a>: 	if l.wait.Load() == atomic.<b>Load</b>(&amp;l.notify) {
+		<a href="../../../src/runtime/sema.go.html#line-573" class="path-duplicate">sema.go</a><a href="../../../src/runtime/sema.go.html#line-573">#L573</a>: 	if l.wait.Load() == atomic.<b>Load</b>(&amp;l.notify) {
+		<a href="../../../src/runtime/signal_unix.go.html#line-269">signal_unix.go#L269</a>: 		if atomic.<b>Load</b>(&amp;handlingSig[i]) != 0 {
+		<a href="../../../src/runtime/signal_unix.go.html#line-1099" class="path-duplicate">signal_unix.go</a><a href="../../../src/runtime/signal_unix.go.html#line-1099">#L1099</a>: 	if atomic.<b>Load</b>(&amp;handlingSig[sig]) == 0 || !signalsOK {
+		<a href="../../../src/runtime/sigqueue.go.html#line-80">sigqueue.go#L80</a>: 	if w := atomic.<b>Load</b>(&amp;sig.wanted[s/32]); w&amp;bit == 0 {
+		<a href="../../../src/runtime/sigqueue.go.html#line-273" class="path-duplicate">sigqueue.go</a><a href="../../../src/runtime/sigqueue.go.html#line-273">#L273</a>: 	i := atomic.<b>Load</b>(&amp;sig.ignored[s/32])
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

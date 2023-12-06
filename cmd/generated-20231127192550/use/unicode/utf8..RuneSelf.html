@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: unicode/utf8.RuneSelf</title>
+<link href="../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">const <b><a href="../../pkg/unicode/utf8.html">unicode/utf8</a>.<a href="../../src/unicode/utf8/utf8.go.html#line-17">RuneSelf</a></b></span>
+
+<span class="title">80 uses</span>
+
+	unicode/utf8 (current package)
+		<a href="../../src/unicode/utf8/utf8.go.html#line-17">utf8.go#L17</a>: 	<b>RuneSelf</b>  = 0x80         // characters below RuneSelf are represented as themselves in a single byte.
+		<a href="../../src/unicode/utf8/utf8.go.html#line-254" class="path-duplicate">utf8.go</a><a href="../../src/unicode/utf8/utf8.go.html#line-254">#L254</a>: 	if r &lt; <b>RuneSelf</b> {
+		<a href="../../src/unicode/utf8/utf8.go.html#line-294" class="path-duplicate">utf8.go</a><a href="../../src/unicode/utf8/utf8.go.html#line-294">#L294</a>: 	if r &lt; <b>RuneSelf</b> {
+		<a href="../../src/unicode/utf8/utf8.go.html#line-406" class="path-duplicate">utf8.go</a><a href="../../src/unicode/utf8/utf8.go.html#line-406">#L406</a>: 		if c &lt; <b>RuneSelf</b> {
+		<a href="../../src/unicode/utf8/utf8.go.html#line-441" class="path-duplicate">utf8.go</a><a href="../../src/unicode/utf8/utf8.go.html#line-441">#L441</a>: 		if c &lt; <b>RuneSelf</b> {
+		<a href="../../src/unicode/utf8/utf8.go.html#line-500" class="path-duplicate">utf8.go</a><a href="../../src/unicode/utf8/utf8.go.html#line-500">#L500</a>: 		if pi &lt; <b>RuneSelf</b> {
+		<a href="../../src/unicode/utf8/utf8.go.html#line-546" class="path-duplicate">utf8.go</a><a href="../../src/unicode/utf8/utf8.go.html#line-546">#L546</a>: 		if si &lt; <b>RuneSelf</b> {
+
+	<a href="../../pkg/bufio.html">bufio</a>
+		<a href="../../src/bufio/bufio.go.html#line-314">bufio.go#L314</a>: 	if r &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/bufio/bufio.go.html#line-717" class="path-duplicate">bufio.go</a><a href="../../src/bufio/bufio.go.html#line-717">#L717</a>: 	if uint32(r) &lt; utf8.<b>RuneSelf</b> {
+		<a href="../../src/bufio/scan.go.html#line-310">scan.go#L310</a>: 	if data[0] &lt; utf8.<b>RuneSelf</b> {
+
+	<a href="../../pkg/bytes.html">bytes</a>
+		<a href="../../src/bytes/buffer.go.html#line-301">buffer.go#L301</a>: 	if uint32(r) &lt; utf8.<b>RuneSelf</b> {
+		<a href="../../src/bytes/buffer.go.html#line-380" class="path-duplicate">buffer.go</a><a href="../../src/bytes/buffer.go.html#line-380">#L380</a>: 	if c &lt; utf8.<b>RuneSelf</b> {
+		<a href="../../src/bytes/bytes.go.html#line-162">bytes.go#L162</a>: 	case 0 &lt;= r &amp;&amp; r &lt; utf8.<b>RuneSelf</b>:
+		<a href="../../src/bytes/bytes.go.html#line-193" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-193">#L193</a>: 		if r &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/bytes/bytes.go.html#line-209" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-209">#L209</a>: 		if r &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/bytes/bytes.go.html#line-227" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-227">#L227</a>: 		if r &lt; utf8.<b>RuneSelf</b> {
+		<a href="../../src/bytes/bytes.go.html#line-281" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-281">#L281</a>: 		if r &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/bytes/bytes.go.html#line-296" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-296">#L296</a>: 		if cr &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/bytes/bytes.go.html#line-310" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-310">#L310</a>: 		if r &lt; utf8.<b>RuneSelf</b> {
+		<a href="../../src/bytes/bytes.go.html#line-437" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-437">#L437</a>: 	if setBits &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/bytes/bytes.go.html#line-496" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-496">#L496</a>: 		if r &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/bytes/bytes.go.html#line-582" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-582">#L582</a>: 		if r &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/bytes/bytes.go.html#line-654" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-654">#L654</a>: 		if c &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/bytes/bytes.go.html#line-685" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-685">#L685</a>: 		if c &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/bytes/bytes.go.html#line-737" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-737">#L737</a>: 		if c &lt; utf8.<b>RuneSelf</b> {
+		<a href="../../src/bytes/bytes.go.html#line-820" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-820">#L820</a>: 	if i &gt;= 0 &amp;&amp; s[i] &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/bytes/bytes.go.html#line-875" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-875">#L875</a>: 		if r &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/bytes/bytes.go.html#line-892" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-892">#L892</a>: 		if r &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/bytes/bytes.go.html#line-918" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-918">#L918</a>: 		if c &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/bytes/bytes.go.html#line-953" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-953">#L953</a>: 	if len(cutset) == 1 &amp;&amp; cutset[0] &lt; utf8.<b>RuneSelf</b> {
+		<a href="../../src/bytes/bytes.go.html#line-972" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-972">#L972</a>: 	if len(cutset) == 1 &amp;&amp; cutset[0] &lt; utf8.<b>RuneSelf</b> {
+		<a href="../../src/bytes/bytes.go.html#line-1009" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-1009">#L1009</a>: 		if r &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/bytes/bytes.go.html#line-1030" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-1030">#L1030</a>: 	if len(cutset) == 1 &amp;&amp; cutset[0] &lt; utf8.<b>RuneSelf</b> {
+		<a href="../../src/bytes/bytes.go.html#line-1059" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-1059">#L1059</a>: 		if r &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/bytes/bytes.go.html#line-1077" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-1077">#L1077</a>: 		if c &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/bytes/bytes.go.html#line-1091" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-1091">#L1091</a>: 		if c &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/bytes/bytes.go.html#line-1184" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-1184">#L1184</a>: 		if sr|tr &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/bytes/bytes.go.html#line-1212" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-1212">#L1212</a>: 		if s[0] &lt; utf8.<b>RuneSelf</b> {
+		<a href="../../src/bytes/bytes.go.html#line-1218" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-1218">#L1218</a>: 		if t[0] &lt; utf8.<b>RuneSelf</b> {
+		<a href="../../src/bytes/bytes.go.html#line-1237" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-1237">#L1237</a>: 		if tr &lt; utf8.<b>RuneSelf</b> {
+		<a href="../../src/bytes/reader.go.html#line-93">reader.go#L93</a>: 	if c := r.s[r.i]; c &lt; utf8.<b>RuneSelf</b> {
+
+	<a href="../../pkg/encoding/json.html">encoding/json</a>
+		<a href="../../src/encoding/json/decode.go.html#line-1194">decode.go#L1194</a>: 		if c &lt; utf8.<b>RuneSelf</b> {
+		<a href="../../src/encoding/json/decode.go.html#line-1278" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-1278">#L1278</a>: 		case c &lt; utf8.<b>RuneSelf</b>:
+		<a href="../../src/encoding/json/encode.go.html#line-967">encode.go#L967</a>: 		if b := src[i]; b &lt; utf8.<b>RuneSelf</b> {
+		<a href="../../src/encoding/json/fold.go.html#line-23">fold.go#L23</a>: 		if c := in[i]; c &lt; utf8.<b>RuneSelf</b> {
+		<a href="../../src/encoding/json/tables.go.html#line-15">tables.go#L15</a>: var safeSet = [utf8.<b>RuneSelf</b>]bool{
+		<a href="../../src/encoding/json/tables.go.html#line-121" class="path-duplicate">tables.go</a><a href="../../src/encoding/json/tables.go.html#line-121">#L121</a>: var htmlSafeSet = [utf8.<b>RuneSelf</b>]bool{
+
+	<a href="../../pkg/fmt.html">fmt</a>
+		<a href="../../src/fmt/format.go.html#line-347">format.go#L347</a>: 			if b[i] &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/fmt/print.go.html#line-1152">print.go#L1152</a>: 		if verb &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/fmt/scan.go.html#line-341">scan.go#L341</a>: 	if r.buf[0] &lt; utf8.<b>RuneSelf</b> { // fast check for common ASCII case
+
+	<a href="../../pkg/github.com/golang/protobuf/proto.html">github.com/golang/protobuf/proto</a>
+		<a href="../../src/github.com/golang/protobuf/proto/text_decode.go.html#line-689">text_decode.go#L689</a>: 			if r &lt; utf8.<b>RuneSelf</b> {
+
+	<a href="../../pkg/google.golang.org/protobuf/internal/encoding/text.html">google.golang.org/protobuf/internal/encoding/text</a>
+		<a href="../../src/google.golang.org/protobuf/internal/encoding/text/decode.go.html#line-665">decode.go#L665</a>: 		if r &gt; utf8.<b>RuneSelf</b> || (r != '/' &amp;&amp; isDelim(byte(r))) {
+		<a href="../../src/google.golang.org/protobuf/internal/encoding/text/encode.go.html#line-146">encode.go#L146</a>: 		case r &gt;= utf8.<b>RuneSelf</b> &amp;&amp; (outputASCII || r &lt;= 0x009f):
+
+	<a href="../../pkg/reflect.html">reflect</a>
+		<a href="../../src/reflect/type.go.html#line-2123">type.go#L2123</a>: 	return 'a' &lt;= ch &amp;&amp; ch &lt;= 'z' || 'A' &lt;= ch &amp;&amp; ch &lt;= 'Z' || ch == '_' || ch &gt;= utf8.<b>RuneSelf</b> &amp;&amp; unicode.IsLetter(ch)
+
+	<a href="../../pkg/strconv.html">strconv</a>
+		<a href="../../src/strconv/quote.go.html#line-43">quote.go#L43</a>: 		if r &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/strconv/quote.go.html#line-76" class="path-duplicate">quote.go</a><a href="../../src/strconv/quote.go.html#line-76">#L76</a>: 		if r &lt; utf8.<b>RuneSelf</b> &amp;&amp; IsPrint(r) {
+		<a href="../../src/strconv/quote.go.html#line-272" class="path-duplicate">quote.go</a><a href="../../src/strconv/quote.go.html#line-272">#L272</a>: 	case c &gt;= utf8.<b>RuneSelf</b>:
+		<a href="../../src/strconv/quote.go.html#line-471" class="path-duplicate">quote.go</a><a href="../../src/strconv/quote.go.html#line-471">#L471</a>: 				if r &lt; utf8.<b>RuneSelf</b> || !multibyte {
+
+	<a href="../../pkg/strings.html">strings</a>
+		<a href="../../src/strings/reader.go.html#line-93">reader.go#L93</a>: 	if c := r.s[r.i]; c &lt; utf8.<b>RuneSelf</b> {
+		<a href="../../src/strings/strings.go.html#line-127">strings.go#L127</a>: 	case 0 &lt;= r &amp;&amp; r &lt; utf8.<b>RuneSelf</b>:
+		<a href="../../src/strings/strings.go.html#line-153" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-153">#L153</a>: 		if r &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/strings/strings.go.html#line-186" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-186">#L186</a>: 		if rc &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/strings/strings.go.html#line-206" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-206">#L206</a>: 		if rc &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/strings/strings.go.html#line-348" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-348">#L348</a>: 	if setBits &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/strings/strings.go.html#line-526" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-526">#L526</a>: 			if r &lt; utf8.<b>RuneSelf</b> {
+		<a href="../../src/strings/strings.go.html#line-605" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-605">#L605</a>: 		if c &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/strings/strings.go.html#line-645" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-645">#L645</a>: 		if c &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/strings/strings.go.html#line-729" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-729">#L729</a>: 		if c &lt; utf8.<b>RuneSelf</b> {
+		<a href="../../src/strings/strings.go.html#line-813" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-813">#L813</a>: 	if i &gt;= 0 &amp;&amp; s[i] &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/strings/strings.go.html#line-881" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-881">#L881</a>: 		if c &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/strings/strings.go.html#line-900" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-900">#L900</a>: 	if len(cutset) == 1 &amp;&amp; cutset[0] &lt; utf8.<b>RuneSelf</b> {
+		<a href="../../src/strings/strings.go.html#line-917" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-917">#L917</a>: 	if len(cutset) == 1 &amp;&amp; cutset[0] &lt; utf8.<b>RuneSelf</b> {
+		<a href="../../src/strings/strings.go.html#line-946" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-946">#L946</a>: 		if r &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/strings/strings.go.html#line-965" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-965">#L965</a>: 	if len(cutset) == 1 &amp;&amp; cutset[0] &lt; utf8.<b>RuneSelf</b> {
+		<a href="../../src/strings/strings.go.html#line-994" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-994">#L994</a>: 		if r &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/strings/strings.go.html#line-1012" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-1012">#L1012</a>: 		if c &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/strings/strings.go.html#line-1026" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-1026">#L1026</a>: 		if c &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/strings/strings.go.html#line-1117" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-1117">#L1117</a>: 		if sr|tr &gt;= utf8.<b>RuneSelf</b> {
+		<a href="../../src/strings/strings.go.html#line-1150" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-1150">#L1150</a>: 		if t[0] &lt; utf8.<b>RuneSelf</b> {
+		<a href="../../src/strings/strings.go.html#line-1169" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-1169">#L1169</a>: 		if tr &lt; utf8.<b>RuneSelf</b> {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

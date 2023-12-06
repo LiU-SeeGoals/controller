@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/mat.MutableSymmetric.Dims</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-50">MutableSymmetric</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-19">Dims</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">109 uses</span>
+
+	gonum.org/v1/gonum/mat (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-81">band.go#L81</a>: 	c, r = t.Banded.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-238">cholesky.go#L238</a>: 	bm, bn := b.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-289" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-289">#L289</a>: 	if br, bc := b.<b>Dims</b>(); br != n || bc != 1 {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-569" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-569">#L569</a>: 	if r, c := x.<b>Dims</b>(); r != n || c != 1 {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-788" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-788">#L788</a>: 	br, bc := b.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-812" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-812">#L812</a>: 	if br, bc := b.<b>Dims</b>(); br != n || bc != 1 {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-1085" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-1085">#L1085</a>: 	bm, bn := b.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-1119" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-1119">#L1119</a>: 	if br, bc := b.<b>Dims</b>(); br != n || bc != 1 {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-165">dense.go#L165</a>: 	r, c := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-414" class="path-duplicate">dense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-414">#L414</a>: 	r, c := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-465" class="path-duplicate">dense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-465">#L465</a>: 	r, c = a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-545" class="path-duplicate">dense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-545">#L545</a>: 	ar, ac := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-546" class="path-duplicate">dense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-546">#L546</a>: 	br, bc := b.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-563" class="path-duplicate">dense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-563">#L563</a>: 	ar, ac := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-564" class="path-duplicate">dense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-564">#L564</a>: 	br, bc := b.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-18">dense_arithmetic.go#L18</a>: 	ar, ac := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-19" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-19">#L19</a>: 	br, bc := b.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-67" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-67">#L67</a>: 	ar, ac := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-68" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-68">#L68</a>: 	br, bc := b.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-117" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-117">#L117</a>: 	ar, ac := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-118" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-118">#L118</a>: 	br, bc := b.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-167" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-167">#L167</a>: 	ar, ac := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-168" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-168">#L168</a>: 	br, bc := b.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-219" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-219">#L219</a>: 	r, c := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-223" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-223">#L223</a>: 	m.reuseAsNonZeroed(a.<b>Dims</b>())
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-279" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-279">#L279</a>: 	ar, ac := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-280" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-280">#L280</a>: 	br, bc := b.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-476" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-476">#L476</a>: 	r, c := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-638" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-638">#L638</a>: 	r, c := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-686" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-686">#L686</a>: 	ra, ca := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-687" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-687">#L687</a>: 	rb, cb := b.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-701" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-701">#L701</a>: 	ar, ac := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-741" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-741">#L741</a>: 	ar, ac := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-783" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-783">#L783</a>: 	ar, ac := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-802" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-802">#L802</a>: 		r, c := xU.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-810" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-810">#L810</a>: 		r, c := yU.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-849" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-849">#L849</a>: 		r, c := xU.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-857" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-857">#L857</a>: 		r, c := yU.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-178">diagonal.go#L178</a>: 	n := min(m.<b>Dims</b>())
+		<a href="../../../../src/gonum.org/v1/gonum/mat/eigen.go.html#line-181">eigen.go#L181</a>: 	r, c := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/format.go.html#line-98">format.go#L98</a>: 	rows, cols := m.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/format.go.html#line-224" class="path-duplicate">format.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/format.go.html#line-224">#L224</a>: 	rows, cols := m.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/format.go.html#line-337" class="path-duplicate">format.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/format.go.html#line-337">#L337</a>: 	rows, cols := m.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/format.go.html#line-477" class="path-duplicate">format.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/format.go.html#line-477">#L477</a>: 		rows, cols = m.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/gsvd.go.html#line-86">gsvd.go#L86</a>: 	r, c := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/gsvd.go.html#line-88" class="path-duplicate">gsvd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/gsvd.go.html#line-88">#L88</a>: 	p, c := b.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/hogsvd.go.html#line-58">hogsvd.go#L58</a>: 	r, c := m[0].<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/hogsvd.go.html#line-62" class="path-duplicate">hogsvd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/hogsvd.go.html#line-62">#L62</a>: 		rd, cd := d.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/inner.go.html#line-25">inner.go#L25</a>: 	m, n := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-54">lq.go#L54</a>: 	m, n := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-185" class="path-duplicate">lq.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-185">#L185</a>: 	br, bc := b.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-250" class="path-duplicate">lq.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-250">#L250</a>: 	if _, bc := b.<b>Dims</b>(); bc != 1 {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-67">lu.go#L67</a>: 	r, c := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-193" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-193">#L193</a>: 	if r, c := x.<b>Dims</b>(); r != n || c != 1 {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-196" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-196">#L196</a>: 	if r, c := y.<b>Dims</b>(); r != n || c != 1 {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-353" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-353">#L353</a>: 	br, bc := b.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-403" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-403">#L403</a>: 	if br, bc := b.<b>Dims</b>(); br != n || bc != 1 {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-19">matrix.go#L19</a>: 	<b>Dims</b>() (r, c int)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-71" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-71">#L71</a>: 	c, r = t.Matrix.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-305" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-305">#L305</a>: 	r, c := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-338" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-338">#L338</a>: 	r, c := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-377" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-377">#L377</a>: 	m, n := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-454" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-454">#L454</a>: 	ar, ac := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-455" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-455">#L455</a>: 	br, bc := b.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-526" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-526">#L526</a>: 	ar, ac := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-527" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-527">#L527</a>: 	br, bc := b.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-611" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-611">#L611</a>: 	r, c := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-669" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-669">#L669</a>: 		r, c := aU.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-687" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-687">#L687</a>: 	r, c := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-745" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-745">#L745</a>: 		r, c := aU.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-779" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-779">#L779</a>: 	r, c := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-860" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-860">#L860</a>: 	r, c := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-914" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-914">#L914</a>: 		r, c := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-936" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-936">#L936</a>: 	r, c := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/product.go.html#line-34">product.go#L34</a>: 		m.reuseAsNonZeroed(factors[0].<b>Dims</b>())
+		<a href="../../../../src/gonum.org/v1/gonum/mat/product.go.html#line-73" class="path-duplicate">product.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/product.go.html#line-73">#L73</a>: 	fr, fc := factors[0].<b>Dims</b>() // newMultiplier is only called with len(factors) &gt; 2.
+		<a href="../../../../src/gonum.org/v1/gonum/mat/product.go.html#line-78" class="path-duplicate">product.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/product.go.html#line-78">#L78</a>: 		if _, lc := factors[len(factors)-1].<b>Dims</b>(); lc != c {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/product.go.html#line-88" class="path-duplicate">product.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/product.go.html#line-88">#L88</a>: 		cr, cc := f.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/product.go.html#line-130" class="path-duplicate">product.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/product.go.html#line-130">#L130</a>: 		r, c := result.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/product.go.html#line-144" class="path-duplicate">product.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/product.go.html#line-144">#L144</a>: 	ar, ac := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/product.go.html#line-145" class="path-duplicate">product.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/product.go.html#line-145">#L145</a>: 	br, bc := b.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-54">qr.go#L54</a>: 	m, n := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-180" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-180">#L180</a>: 	br, bc := b.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-248" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-248">#L248</a>: 	if _, bc := b.<b>Dims</b>(); bc != 1 {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/shadow.go.html#line-75">shadow.go#L75</a>: 		r, c := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/shadow.go.html#line-102" class="path-duplicate">shadow.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/shadow.go.html#line-102">#L102</a>: 		r, c := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/shadow.go.html#line-140" class="path-duplicate">shadow.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/shadow.go.html#line-140">#L140</a>: 		r, c := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/shadow.go.html#line-228" class="path-duplicate">shadow.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/shadow.go.html#line-228">#L228</a>: 		r, c := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/solve.go.html#line-36">solve.go#L36</a>: 	ar, ac := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/solve.go.html#line-37" class="path-duplicate">solve.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/solve.go.html#line-37">#L37</a>: 	br, bc := b.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/solve.go.html#line-141" class="path-duplicate">solve.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/solve.go.html#line-141">#L141</a>: 	if _, bc := b.<b>Dims</b>(); bc != 1 {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/solve.go.html#line-144" class="path-duplicate">solve.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/solve.go.html#line-144">#L144</a>: 	_, c := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-84">svd.go#L84</a>: 	m, n := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-328" class="path-duplicate">svd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-328">#L328</a>: 	_, bc := b.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-343">symmetric.go#L343</a>: 		r, c := xU.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-363" class="path-duplicate">symmetric.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-363">#L363</a>: 	r, _ := x.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-397" class="path-duplicate">symmetric.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-397">#L397</a>: 	n, _ := x.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-461" class="path-duplicate">symmetric.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-461">#L461</a>: 		r, c := xU.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-469" class="path-duplicate">symmetric.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-469">#L469</a>: 		r, c := yU.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-84">triangular.go#L84</a>: 	c, r = t.Triangular.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-398" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-398">#L398</a>: 	r, c = a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-93">triband.go#L93</a>: 	c, r = t.TriBanded.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-576" class="path-duplicate">triband.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-576">#L576</a>: 	n, nrhs := b.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-605" class="path-duplicate">triband.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-605">#L605</a>: 	n, nrhs := b.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-233">tridiag.go#L233</a>: 	n, nrhs := b.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-264" class="path-duplicate">tridiag.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-264">#L264</a>: 	n, nrhs := b.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-58">vector.go#L58</a>: 	c, r = t.Vector.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-584" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-584">#L584</a>: 	r, c := a.<b>Dims</b>()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-585" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-585">#L585</a>: 	br, bc := b.<b>Dims</b>()
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

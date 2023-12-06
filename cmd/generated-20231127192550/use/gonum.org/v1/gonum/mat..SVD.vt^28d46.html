@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/mat.SVD.vt</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-17">SVD</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-22">vt</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">18 uses</span>
+
+	gonum.org/v1/gonum/mat (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-22">svd.go#L22</a>: 	<b>vt</b> blas64.General
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-112" class="path-duplicate">svd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-112">#L112</a>: 		svd.<b>vt</b> = blas64.General{
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-116" class="path-duplicate">svd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-116">#L116</a>: 			Data:   use(svd.<b>vt</b>.Data, n*n),
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-120" class="path-duplicate">svd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-120">#L120</a>: 		svd.<b>vt</b> = blas64.General{
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-124" class="path-duplicate">svd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-124">#L124</a>: 			Data:   use(svd.<b>vt</b>.Data, min(m, n)*n),
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-137" class="path-duplicate">svd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-137">#L137</a>: 	lapack64.Gesvd(jobU, jobVT, aCopy.mat, svd.u, svd.<b>vt</b>, svd.s, work, -1)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-139" class="path-duplicate">svd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-139">#L139</a>: 	ok = lapack64.Gesvd(jobU, jobVT, aCopy.mat, svd.u, svd.<b>vt</b>, svd.s, work, len(work))
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-260" class="path-duplicate">svd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-260">#L260</a>: 	r := svd.<b>vt</b>.Rows
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-261" class="path-duplicate">svd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-261">#L261</a>: 	c := svd.<b>vt</b>.Cols
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-272" class="path-duplicate">svd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-272">#L272</a>: 		mat:     svd.<b>vt</b>,
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-322" class="path-duplicate">svd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-322">#L322</a>: 		mat:     svd.<b>vt</b>,
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-323" class="path-duplicate">svd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-323">#L323</a>: 		capRows: svd.<b>vt</b>.Rows,
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-324" class="path-duplicate">svd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-324">#L324</a>: 		capCols: svd.<b>vt</b>.Cols,
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-336" class="path-duplicate">svd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-336">#L336</a>: 	dst.Mul(vt.slice(0, rank, 0, svd.<b>vt</b>.Cols).T(), y)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-404" class="path-duplicate">svd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-404">#L404</a>: 		mat:     svd.<b>vt</b>,
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-405" class="path-duplicate">svd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-405">#L405</a>: 		capRows: svd.<b>vt</b>.Rows,
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-406" class="path-duplicate">svd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-406">#L406</a>: 		capCols: svd.<b>vt</b>.Cols,
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-417" class="path-duplicate">svd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-417">#L417</a>: 	dst.MulVec(vt.slice(0, rank, 0, svd.<b>vt</b>.Cols).T(), y)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

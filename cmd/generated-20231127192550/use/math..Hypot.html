@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: math.Hypot</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../pkg/math.html">math</a>.<a href="../src/math/hypot.go.html#line-20">Hypot</a></b></span>
+
+<span class="title">7 uses</span>
+
+	math (current package)
+		<a href="../src/math/hypot.go.html#line-20">hypot.go#L20</a>: func <b>Hypot</b>(p, q float64) float64 {
+
+	<a href="../pkg/math/cmplx.html">math/cmplx</a>
+		<a href="../src/math/cmplx/abs.go.html#line-13">abs.go#L13</a>: func Abs(x complex128) float64 { return math.<b>Hypot</b>(real(x), imag(x)) }
+		<a href="../src/math/cmplx/sqrt.go.html#line-92">sqrt.go#L92</a>: 	r := math.<b>Hypot</b>(a, b)
+
+	<a href="../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlapy2.go.html#line-13">dlapy2.go#L13</a>: 	return math.<b>Hypot</b>(x, y)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasv2.go.html#line-68">dlasv2.go#L68</a>: 			s := math.<b>Hypot</b>(t, m)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasv2.go.html#line-73" class="path-duplicate">dlasv2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasv2.go.html#line-73">#L73</a>: 				r = math.<b>Hypot</b>(l, m)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasv2.go.html#line-87" class="path-duplicate">dlasv2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasv2.go.html#line-87">#L87</a>: 			l = math.<b>Hypot</b>(t, 2)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

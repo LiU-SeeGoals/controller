@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: net.onlyValuesCtx.Done</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/net.html">net</a>.<a href="../src/net/lookup.go.html#line-267">onlyValuesCtx</a>.<a href="../src/context/context.go.html#line-105">Done</a></b></span><span style="font-size: large;"><i> (method, <a href="../imp/net.onlyValuesCtx^d2215.html#name-Done">view implemented interface methods</a>)</i></span>
+
+<span class="title">12 uses</span>
+
+	net (current package)
+		<a href="../src/net/cgo_unix.go.html#line-44">cgo_unix.go#L44</a>: 	if ctx.<b>Done</b>() == nil {
+		<a href="../src/net/cgo_unix.go.html#line-63" class="path-duplicate">cgo_unix.go</a><a href="../src/net/cgo_unix.go.html#line-63">#L63</a>: 	case &lt;-ctx.<b>Done</b>():
+		<a href="../src/net/dial.go.html#line-473">dial.go#L473</a>: 			case &lt;-subCtx.<b>Done</b>():
+		<a href="../src/net/dial.go.html#line-592" class="path-duplicate">dial.go</a><a href="../src/net/dial.go.html#line-592">#L592</a>: 		case &lt;-ctx.<b>Done</b>():
+		<a href="../src/net/fd_unix.go.html#line-63">fd_unix.go#L63</a>: 		case &lt;-ctx.<b>Done</b>():
+		<a href="../src/net/fd_unix.go.html#line-98" class="path-duplicate">fd_unix.go</a><a href="../src/net/fd_unix.go.html#line-98">#L98</a>: 	ctxDone := ctx.<b>Done</b>()
+		<a href="../src/net/lookup.go.html#line-277">lookup.go#L277</a>: 	case &lt;-ovc.lookupValues.<b>Done</b>():
+		<a href="../src/net/lookup.go.html#line-333" class="path-duplicate">lookup.go</a><a href="../src/net/lookup.go.html#line-333">#L333</a>: 	case &lt;-ctx.<b>Done</b>():
+
+	<a href="../pkg/context.html">context</a>
+		<a href="../src/context/context.go.html#line-105">context.go#L105</a>: 	<b>Done</b>() &lt;-chan struct{}
+		<a href="../src/context/context.go.html#line-368" class="path-duplicate">context.go</a><a href="../src/context/context.go.html#line-368">#L368</a>: 	done := parent.<b>Done</b>()
+		<a href="../src/context/context.go.html#line-460" class="path-duplicate">context.go</a><a href="../src/context/context.go.html#line-460">#L460</a>: 	done := parent.<b>Done</b>()
+		<a href="../src/context/context.go.html#line-506" class="path-duplicate">context.go</a><a href="../src/context/context.go.html#line-506">#L506</a>: 		case &lt;-parent.<b>Done</b>():
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

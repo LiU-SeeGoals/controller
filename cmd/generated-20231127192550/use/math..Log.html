@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: math.Log</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../pkg/math.html">math</a>.<a href="../src/math/log.go.html#line-81">Log</a></b></span>
+
+<span class="title">31 uses</span>
+
+	math (current package)
+		<a href="../src/math/acosh.go.html#line-59">acosh.go#L59</a>: 		return <b>Log</b>(x) + Ln2 // x &gt; 2**28
+		<a href="../src/math/acosh.go.html#line-61" class="path-duplicate">acosh.go</a><a href="../src/math/acosh.go.html#line-61">#L61</a>: 		return <b>Log</b>(2*x - 1/(x+Sqrt(x*x-1))) // 2**28 &gt; x &gt; 2
+		<a href="../src/math/asinh.go.html#line-65">asinh.go#L65</a>: 		temp = <b>Log</b>(x) + Ln2 // |x| &gt; 2**28
+		<a href="../src/math/asinh.go.html#line-67" class="path-duplicate">asinh.go</a><a href="../src/math/asinh.go.html#line-67">#L67</a>: 		temp = <b>Log</b>(2*x + 1/(Sqrt(x*x+1)+x)) // 2**28 &gt; |x| &gt; 2.0
+		<a href="../src/math/erfinv.go.html#line-100">erfinv.go#L100</a>: 		r := Sqrt(Ln2 - <b>Log</b>(1.0-x))
+		<a href="../src/math/j0.go.html#line-222">j0.go#L222</a>: 		return U00 + (2/Pi)*<b>Log</b>(x) // |x| &lt; ~7.4506e-9
+		<a href="../src/math/j0.go.html#line-227" class="path-duplicate">j0.go</a><a href="../src/math/j0.go.html#line-227">#L227</a>: 	return u/v + (2/Pi)*J0(x)*<b>Log</b>(x) // ~7.4506e-9 &lt; |x| &lt; 2.0
+		<a href="../src/math/j1.go.html#line-222">j1.go#L222</a>: 	return x*(u/v) + (2/Pi)*(J1(x)*<b>Log</b>(x)-1/x)
+		<a href="../src/math/jn.go.html#line-199">jn.go#L199</a>: 			tmp = tmp * <b>Log</b>(Abs(v*tmp))
+		<a href="../src/math/lgamma.go.html#line-211">lgamma.go#L211</a>: 		lgamma = -<b>Log</b>(x)
+		<a href="../src/math/lgamma.go.html#line-225" class="path-duplicate">lgamma.go</a><a href="../src/math/lgamma.go.html#line-225">#L225</a>: 		nadj = <b>Log</b>(Pi / Abs(t*x))
+		<a href="../src/math/lgamma.go.html#line-239" class="path-duplicate">lgamma.go</a><a href="../src/math/lgamma.go.html#line-239">#L239</a>: 			lgamma = -<b>Log</b>(x)
+		<a href="../src/math/lgamma.go.html#line-307" class="path-duplicate">lgamma.go</a><a href="../src/math/lgamma.go.html#line-307">#L307</a>: 			lgamma += <b>Log</b>(z)
+		<a href="../src/math/lgamma.go.html#line-310" class="path-duplicate">lgamma.go</a><a href="../src/math/lgamma.go.html#line-310">#L310</a>: 		t := <b>Log</b>(x)
+		<a href="../src/math/lgamma.go.html#line-316" class="path-duplicate">lgamma.go</a><a href="../src/math/lgamma.go.html#line-316">#L316</a>: 		lgamma = x * (<b>Log</b>(x) - 1)
+		<a href="../src/math/log.go.html#line-81">log.go#L81</a>: func <b>Log</b>(x float64) float64 {
+		<a href="../src/math/log10.go.html#line-17">log10.go#L17</a>: 	return <b>Log</b>(x) * (1 / Ln10)
+		<a href="../src/math/log10.go.html#line-36" class="path-duplicate">log10.go</a><a href="../src/math/log10.go.html#line-36">#L36</a>: 	return <b>Log</b>(frac)*(1/Ln2) + float64(exp)
+		<a href="../src/math/pow.go.html#line-128">pow.go#L128</a>: 		a1 = Exp(yf * <b>Log</b>(x))
+
+	<a href="../pkg/math/cmplx.html">math/cmplx</a>
+		<a href="../src/math/cmplx/asin.go.html#line-213">asin.go#L213</a>: 	return complex(w, 0.25*math.<b>Log</b>(c))
+		<a href="../src/math/cmplx/log.go.html#line-58">log.go#L58</a>: 	return complex(math.<b>Log</b>(Abs(x)), Phase(x))
+		<a href="../src/math/cmplx/pow.go.html#line-78">pow.go#L78</a>: 		theta += imag(y) * math.<b>Log</b>(modulus)
+
+	<a href="../pkg/gonum.org/v1/gonum/floats.html">gonum.org/v1/gonum/floats</a>
+		<a href="../src/gonum.org/v1/gonum/floats/floats.go.html#line-366">floats.go#L366</a>: 	Span(dst, math.<b>Log</b>(l), math.<b>Log</b>(u))
+		<a href="../src/gonum.org/v1/gonum/floats/floats.go.html#line-391" class="path-duplicate">floats.go</a><a href="../src/gonum.org/v1/gonum/floats/floats.go.html#line-391">#L391</a>: 	return math.<b>Log</b>(lse) + maxval
+
+	<a href="../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlanv2.go.html#line-71">dlanv2.go#L71</a>: 			safmn2 := math.Pow(dlamchB, math.<b>Log</b>(dlamchS/dlamchE)/math.<b>Log</b>(dlamchB)/2)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/iparmq.go.html#line-45">iparmq.go#L45</a>: 		ns = max(10, nh/int(math.<b>Log</b>(float64(nh))/math.Ln2))
+
+	<a href="../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>
+		<a href="../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-224">cholesky.go#L224</a>: 		det += 2 * math.<b>Log</b>(c.chol.mat.Data[i*c.chol.mat.Stride+i])
+		<a href="../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-934" class="path-duplicate">cholesky.go</a><a href="../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-934">#L934</a>: 		det += 2 * math.<b>Log</b>(ch.chol.mat.Data[i*ch.chol.mat.Stride])
+		<a href="../src/gonum.org/v1/gonum/mat/lu.go.html#line-145">lu.go#L145</a>: 		logDiag[i] = math.<b>Log</b>(math.Abs(v))
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

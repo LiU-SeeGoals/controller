@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/blas.Float64Level1.Dnrm2</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../../pkg/gonum.org/v1/gonum/blas.html">gonum.org/v1/gonum/blas</a>.<a href="../../../../src/gonum.org/v1/gonum/blas/blas.go.html#line-130">Float64Level1</a>.<a href="../../../../src/gonum.org/v1/gonum/blas/blas.go.html#line-132">Dnrm2</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">16 uses</span>
+
+	gonum.org/v1/gonum/blas (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/blas/blas.go.html#line-132">blas.go#L132</a>: 	<b>Dnrm2</b>(n int, x []float64, incX int) float64
+
+	<a href="../../../../pkg/gonum.org/v1/gonum/blas/blas64.html">gonum.org/v1/gonum/blas/blas64</a>
+		<a href="../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-128">blas64.go#L128</a>: 	return blas64.<b>Dnrm2</b>(x.N, x.Data, x.Inc)
+
+	<a href="../../../../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgebal.go.html#line-193">dgebal.go#L193</a>: 			c := bi.<b>Dnrm2</b>(ihi-ilo+1, a[ilo*lda+i:], lda)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgebal.go.html#line-194" class="path-duplicate">dgebal.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgebal.go.html#line-194">#L194</a>: 			r := bi.<b>Dnrm2</b>(ihi-ilo+1, a[i*lda+ilo:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-233">dgeev.go#L233</a>: 				scl := 1 / bi.<b>Dnrm2</b>(n, vl[i:], ldvl)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-237" class="path-duplicate">dgeev.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-237">#L237</a>: 			scl := 1 / impl.Dlapy2(bi.<b>Dnrm2</b>(n, vl[i:], ldvl), bi.<b>Dnrm2</b>(n, vl[i+1:], ldvl))
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-260" class="path-duplicate">dgeev.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-260">#L260</a>: 				scl := 1 / bi.<b>Dnrm2</b>(n, vr[i:], ldvr)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-264" class="path-duplicate">dgeev.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-264">#L264</a>: 			scl := 1 / impl.Dlapy2(bi.<b>Dnrm2</b>(n, vr[i:], ldvr), bi.<b>Dnrm2</b>(n, vr[i+1:], ldvr))
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeqp3.go.html#line-165">dgeqp3.go#L165</a>: 		work[j] = bi.<b>Dnrm2</b>(sm, a[nfxd*lda+j:], lda)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqp2.go.html#line-118">dlaqp2.go#L118</a>: 					v = bi.<b>Dnrm2</b>(m-offpi-1, a[(offpi+1)*lda+j:], lda)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqps.go.html#line-236">dlaqps.go#L236</a>: 		v := bi.<b>Dnrm2</b>(m-rk, a[rk*lda+lsticc:], lda)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfg.go.html#line-47">dlarfg.go#L47</a>: 	xnorm := bi.<b>Dnrm2</b>(n-1, x, incX)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfg.go.html#line-66" class="path-duplicate">dlarfg.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfg.go.html#line-66">#L66</a>: 		xnorm = bi.<b>Dnrm2</b>(n-1, x, incX)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatdf.go.html#line-100">dlatdf.go#L100</a>: 		tmp := 1 / bi.<b>Dnrm2</b>(n, xm, 1)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

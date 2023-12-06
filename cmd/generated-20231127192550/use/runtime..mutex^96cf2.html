@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.mutex</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/runtime2.go.html#line-163">mutex</a></b></span>
+
+<span class="title">70 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/arena.go.html#line-420">arena.go#L420</a>: 	lock <b>mutex</b>
+		<a href="../src/runtime/chan.go.html#line-51">chan.go#L51</a>: 	lock <b>mutex</b>
+		<a href="../src/runtime/chan.go.html#line-673" class="path-duplicate">chan.go</a><a href="../src/runtime/chan.go.html#line-673">#L673</a>: 	unlock((*<b>mutex</b>)(chanLock))
+		<a href="../src/runtime/cpuprof.go.html#line-38">cpuprof.go#L38</a>: 	lock <b>mutex</b>
+		<a href="../src/runtime/iface.go.html#line-17">iface.go#L17</a>: 	itabLock      <b>mutex</b>                               // lock for accessing itab table
+		<a href="../src/runtime/lock_futex.go.html#line-47">lock_futex.go#L47</a>: func lock(l *<b>mutex</b>) {
+		<a href="../src/runtime/lock_futex.go.html#line-51" class="path-duplicate">lock_futex.go</a><a href="../src/runtime/lock_futex.go.html#line-51">#L51</a>: func lock2(l *<b>mutex</b>) {
+		<a href="../src/runtime/lock_futex.go.html#line-111" class="path-duplicate">lock_futex.go</a><a href="../src/runtime/lock_futex.go.html#line-111">#L111</a>: func unlock(l *<b>mutex</b>) {
+		<a href="../src/runtime/lock_futex.go.html#line-115" class="path-duplicate">lock_futex.go</a><a href="../src/runtime/lock_futex.go.html#line-115">#L115</a>: func unlock2(l *<b>mutex</b>) {
+		<a href="../src/runtime/lockrank_off.go.html#line-16">lockrank_off.go#L16</a>: func lockInit(l *<b>mutex</b>, rank lockRank) {
+		<a href="../src/runtime/lockrank_off.go.html#line-19" class="path-duplicate">lockrank_off.go</a><a href="../src/runtime/lockrank_off.go.html#line-19">#L19</a>: func getLockRank(l *<b>mutex</b>) lockRank {
+		<a href="../src/runtime/lockrank_off.go.html#line-23" class="path-duplicate">lockrank_off.go</a><a href="../src/runtime/lockrank_off.go.html#line-23">#L23</a>: func lockWithRank(l *<b>mutex</b>, rank lockRank) {
+		<a href="../src/runtime/lockrank_off.go.html#line-33" class="path-duplicate">lockrank_off.go</a><a href="../src/runtime/lockrank_off.go.html#line-33">#L33</a>: func unlockWithRank(l *<b>mutex</b>) {
+		<a href="../src/runtime/lockrank_off.go.html#line-43" class="path-duplicate">lockrank_off.go</a><a href="../src/runtime/lockrank_off.go.html#line-43">#L43</a>: func lockWithRankMayAcquire(l *<b>mutex</b>, rank lockRank) {
+		<a href="../src/runtime/lockrank_off.go.html#line-47" class="path-duplicate">lockrank_off.go</a><a href="../src/runtime/lockrank_off.go.html#line-47">#L47</a>: func assertLockHeld(l *<b>mutex</b>) {
+		<a href="../src/runtime/lockrank_off.go.html#line-67" class="path-duplicate">lockrank_off.go</a><a href="../src/runtime/lockrank_off.go.html#line-67">#L67</a>: func assertWorldStoppedOrLockHeld(l *<b>mutex</b>) {
+		<a href="../src/runtime/malloc.go.html#line-1438">malloc.go#L1438</a>: 	<b>mutex</b>
+		<a href="../src/runtime/mbitmap.go.html#line-1115">mbitmap.go#L1115</a>: 	lock <b>mutex</b>
+		<a href="../src/runtime/mfinal.go.html#line-43">mfinal.go#L43</a>: var finlock <b>mutex</b>  // protects the following variables
+		<a href="../src/runtime/mfinal.go.html#line-168" class="path-duplicate">mfinal.go</a><a href="../src/runtime/mfinal.go.html#line-168">#L168</a>: 	unlock((*<b>mutex</b>)(lock))
+		<a href="../src/runtime/mgc.go.html#line-312">mgc.go#L312</a>: 		lock <b>mutex</b>
+		<a href="../src/runtime/mgc.go.html#line-399" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-399">#L399</a>: 		lock <b>mutex</b>
+		<a href="../src/runtime/mgc.go.html#line-406" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-406">#L406</a>: 		lock <b>mutex</b>
+		<a href="../src/runtime/mgcscavenge.go.html#line-279">mgcscavenge.go#L279</a>: 	lock <b>mutex</b>
+		<a href="../src/runtime/mgcsweep.go.html#line-36">mgcsweep.go#L36</a>: 	lock   <b>mutex</b>
+		<a href="../src/runtime/mheap.go.html#line-66">mheap.go#L66</a>: 	lock <b>mutex</b>
+		<a href="../src/runtime/mheap.go.html#line-208" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-208">#L208</a>: 	speciallock            <b>mutex</b>    // lock for special record allocators.
+		<a href="../src/runtime/mheap.go.html#line-493" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-493">#L493</a>: 	speciallock           <b>mutex</b>         // guards specials list and changes to pinnerBits
+		<a href="../src/runtime/mheap.go.html#line-2116" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-2116">#L2116</a>: 	lock     <b>mutex</b>
+		<a href="../src/runtime/mpagealloc.go.html#line-285">mpagealloc.go#L285</a>: 	mheapLock *<b>mutex</b>
+		<a href="../src/runtime/mpagealloc.go.html#line-305" class="path-duplicate">mpagealloc.go</a><a href="../src/runtime/mpagealloc.go.html#line-305">#L305</a>: func (p *pageAlloc) init(mheapLock *<b>mutex</b>, sysStat *sysMemStat, test bool) {
+		<a href="../src/runtime/mprof.go.html#line-20">mprof.go#L20</a>: 	profInsertLock <b>mutex</b>
+		<a href="../src/runtime/mprof.go.html#line-22" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-22">#L22</a>: 	profBlockLock <b>mutex</b>
+		<a href="../src/runtime/mprof.go.html#line-24" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-24">#L24</a>: 	profMemActiveLock <b>mutex</b>
+		<a href="../src/runtime/mprof.go.html#line-27" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-27">#L27</a>: 	profMemFutureLock [len(memRecord{}.future)]<b>mutex</b>
+		<a href="../src/runtime/mprof.go.html#line-1224" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-1224">#L1224</a>: var tracelock <b>mutex</b>
+		<a href="../src/runtime/mspanset.go.html#line-35">mspanset.go#L35</a>: 	spineLock <b>mutex</b>
+		<a href="../src/runtime/mstats.go.html#line-748">mstats.go#L748</a>: 	noPLock <b>mutex</b>
+		<a href="../src/runtime/netpoll.go.html#line-101">netpoll.go#L101</a>: 	lock    <b>mutex</b> // protects the following fields
+		<a href="../src/runtime/netpoll.go.html#line-189" class="path-duplicate">netpoll.go</a><a href="../src/runtime/netpoll.go.html#line-189">#L189</a>: 	lock  <b>mutex</b>
+		<a href="../src/runtime/netpoll.go.html#line-199" class="path-duplicate">netpoll.go</a><a href="../src/runtime/netpoll.go.html#line-199">#L199</a>: 	netpollInitLock <b>mutex</b>
+		<a href="../src/runtime/panic.go.html#line-1108">panic.go#L1108</a>: var paniclk <b>mutex</b>
+		<a href="../src/runtime/panic.go.html#line-1286" class="path-duplicate">panic.go</a><a href="../src/runtime/panic.go.html#line-1286">#L1286</a>: var deadlock <b>mutex</b>
+		<a href="../src/runtime/print.go.html#line-55">print.go#L55</a>: var debuglock <b>mutex</b>
+		<a href="../src/runtime/proc.go.html#line-118">proc.go#L118</a>: 	raceFiniLock <b>mutex</b>
+		<a href="../src/runtime/proc.go.html#line-403" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-403">#L403</a>: func goparkunlock(lock *<b>mutex</b>, reason waitReason, traceReason traceBlockReason, traceskip int) {
+		<a href="../src/runtime/proc.go.html#line-543" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-543">#L543</a>: 	allglock <b>mutex</b>
+		<a href="../src/runtime/proc.go.html#line-2361" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-2361">#L2361</a>: 	lock <b>mutex</b>
+		<a href="../src/runtime/proc.go.html#line-3716" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-3716">#L3716</a>: 	unlock((*<b>mutex</b>)(lock))
+		<a href="../src/runtime/runtime.go.html#line-20">runtime.go#L20</a>: 	lock <b>mutex</b>
+		<a href="../src/runtime/runtime2.go.html#line-163">runtime2.go#L163</a>: type <b>mutex</b> struct {
+		<a href="../src/runtime/runtime2.go.html#line-731" class="path-duplicate">runtime2.go</a><a href="../src/runtime/runtime2.go.html#line-731">#L731</a>: 	timersLock <b>mutex</b>
+		<a href="../src/runtime/runtime2.go.html#line-779" class="path-duplicate">runtime2.go</a><a href="../src/runtime/runtime2.go.html#line-779">#L779</a>: 	lock <b>mutex</b>
+		<a href="../src/runtime/runtime2.go.html#line-817" class="path-duplicate">runtime2.go</a><a href="../src/runtime/runtime2.go.html#line-817">#L817</a>: 		lock    <b>mutex</b>
+		<a href="../src/runtime/runtime2.go.html#line-824" class="path-duplicate">runtime2.go</a><a href="../src/runtime/runtime2.go.html#line-824">#L824</a>: 	sudoglock  <b>mutex</b>
+		<a href="../src/runtime/runtime2.go.html#line-828" class="path-duplicate">runtime2.go</a><a href="../src/runtime/runtime2.go.html#line-828">#L828</a>: 	deferlock <b>mutex</b>
+		<a href="../src/runtime/runtime2.go.html#line-856" class="path-duplicate">runtime2.go</a><a href="../src/runtime/runtime2.go.html#line-856">#L856</a>: 	sysmonlock <b>mutex</b>
+		<a href="../src/runtime/runtime2.go.html#line-967" class="path-duplicate">runtime2.go</a><a href="../src/runtime/runtime2.go.html#line-967">#L967</a>: 	lock <b>mutex</b>
+		<a href="../src/runtime/runtime2.go.html#line-1150" class="path-duplicate">runtime2.go</a><a href="../src/runtime/runtime2.go.html#line-1150">#L1150</a>: 	allpLock <b>mutex</b>
+		<a href="../src/runtime/rwmutex.go.html#line-19">rwmutex.go#L19</a>: 	rLock      <b>mutex</b>    // protects readers, readerPass, writer
+		<a href="../src/runtime/rwmutex.go.html#line-23" class="path-duplicate">rwmutex.go</a><a href="../src/runtime/rwmutex.go.html#line-23">#L23</a>: 	wLock  <b>mutex</b>    // serializes writers
+		<a href="../src/runtime/sema.go.html#line-41">sema.go#L41</a>: 	lock  <b>mutex</b>
+		<a href="../src/runtime/sema.go.html#line-476" class="path-duplicate">sema.go</a><a href="../src/runtime/sema.go.html#line-476">#L476</a>: 	lock <b>mutex</b>
+		<a href="../src/runtime/stack.go.html#line-157">stack.go#L157</a>: 	mu   <b>mutex</b>
+		<a href="../src/runtime/stack.go.html#line-163" class="path-duplicate">stack.go</a><a href="../src/runtime/stack.go.html#line-163">#L163</a>: 	lock <b>mutex</b>
+		<a href="../src/runtime/trace.go.html#line-136">trace.go#L136</a>: 	lock          <b>mutex</b>       // protects the following members
+		<a href="../src/runtime/trace.go.html#line-182" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-182">#L182</a>: 	stringsLock <b>mutex</b>
+		<a href="../src/runtime/trace.go.html#line-189" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-189">#L189</a>: 	bufLock <b>mutex</b>       // protects buf
+		<a href="../src/runtime/trace.go.html#line-1189" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1189">#L1189</a>: 	lock <b>mutex</b> // Must be acquired on the system stack
+		<a href="../src/runtime/type.go.html#line-89">type.go#L89</a>: 	lock <b>mutex</b>
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.mspan.isFree</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/mheap.go.html#line-410">mspan</a>.<a href="../src/runtime/mbitmap.go.html#line-193">isFree</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">5 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/heapdump.go.html#line-492">heapdump.go#L492</a>: 			if s.<b>isFree</b>(freeIndex) {
+		<a href="../src/runtime/mbitmap.go.html#line-193">mbitmap.go#L193</a>: func (s *mspan) <b>isFree</b>(index uintptr) bool {
+		<a href="../src/runtime/mgcmark.go.html#line-1375">mgcmark.go#L1375</a>: 			if span.<b>isFree</b>(idx) {
+		<a href="../src/runtime/mgcmark.go.html#line-1429" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-1429">#L1429</a>: 		if span.<b>isFree</b>(idx) {
+		<a href="../src/runtime/mgcmark.go.html#line-1471" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-1471">#L1471</a>: 		if debug.gccheckmark &gt; 0 &amp;&amp; span.<b>isFree</b>(objIndex) {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

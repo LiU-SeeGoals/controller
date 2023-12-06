@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: reflect.flag.kind</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/reflect.html">reflect</a>.<a href="../src/reflect/value.go.html#line-71">flag</a>.<a href="../src/reflect/value.go.html#line-85">kind</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">69 uses</span>
+
+	reflect (current package)
+		<a href="../src/reflect/value.go.html#line-85">value.go#L85</a>: func (f flag) <b>kind</b>() Kind {
+		<a href="../src/reflect/value.go.html#line-233" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-233">#L233</a>: 		panic(&amp;ValueError{valueMethodName(), f.<b>kind</b>()})
+		<a href="../src/reflect/value.go.html#line-295" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-295">#L295</a>: 	if v.<b>kind</b>() != Bool {
+		<a href="../src/reflect/value.go.html#line-319" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-319">#L319</a>: 	switch v.<b>kind</b>() {
+		<a href="../src/reflect/value.go.html#line-337" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-337">#L337</a>: 	panic(&amp;ValueError{"reflect.Value.Bytes", v.<b>kind</b>()})
+		<a href="../src/reflect/value.go.html#line-1167" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1167">#L1167</a>: 	if v.<b>kind</b>() == Slice {
+		<a href="../src/reflect/value.go.html#line-1174" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1174">#L1174</a>: 	k := v.<b>kind</b>()
+		<a href="../src/reflect/value.go.html#line-1186" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1186">#L1186</a>: 	panic(&amp;ValueError{"reflect.Value.Cap", v.<b>kind</b>()})
+		<a href="../src/reflect/value.go.html#line-1199" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1199">#L1199</a>: 	switch v.<b>kind</b>() {
+		<a href="../src/reflect/value.go.html#line-1210" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1210">#L1210</a>: 	k := v.<b>kind</b>()
+		<a href="../src/reflect/value.go.html#line-1217" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1217">#L1217</a>: 	panic(&amp;ValueError{"reflect.Value.Complex", v.<b>kind</b>()})
+		<a href="../src/reflect/value.go.html#line-1225" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1225">#L1225</a>: 	k := v.<b>kind</b>()
+		<a href="../src/reflect/value.go.html#line-1271" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1271">#L1271</a>: 	panic(&amp;ValueError{"reflect.Value.Elem", v.<b>kind</b>()})
+		<a href="../src/reflect/value.go.html#line-1277" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1277">#L1277</a>: 	if v.<b>kind</b>() != Struct {
+		<a href="../src/reflect/value.go.html#line-1278" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1278">#L1278</a>: 		panic(&amp;ValueError{"reflect.Value.Field", v.<b>kind</b>()})
+		<a href="../src/reflect/value.go.html#line-1375" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1375">#L1375</a>: 	switch v.<b>kind</b>() {
+		<a href="../src/reflect/value.go.html#line-1386" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1386">#L1386</a>: 	k := v.<b>kind</b>()
+		<a href="../src/reflect/value.go.html#line-1393" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1393">#L1393</a>: 	panic(&amp;ValueError{"reflect.Value.Float", v.<b>kind</b>()})
+		<a href="../src/reflect/value.go.html#line-1401" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1401">#L1401</a>: 	switch v.<b>kind</b>() {
+		<a href="../src/reflect/value.go.html#line-1441" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1441">#L1441</a>: 	panic(&amp;ValueError{"reflect.Value.Index", v.<b>kind</b>()})
+		<a href="../src/reflect/value.go.html#line-1446" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1446">#L1446</a>: 	switch v.<b>kind</b>() {
+		<a href="../src/reflect/value.go.html#line-1457" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1457">#L1457</a>: 	k := v.<b>kind</b>()
+		<a href="../src/reflect/value.go.html#line-1471" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1471">#L1471</a>: 	panic(&amp;ValueError{"reflect.Value.Int", v.<b>kind</b>()})
+		<a href="../src/reflect/value.go.html#line-1507" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1507">#L1507</a>: 	if v.<b>kind</b>() == Interface {
+		<a href="../src/reflect/value.go.html#line-1552" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1552">#L1552</a>: 	k := v.<b>kind</b>()
+		<a href="../src/reflect/value.go.html#line-1568" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1568">#L1568</a>: 	panic(&amp;ValueError{"reflect.Value.IsNil", v.<b>kind</b>()})
+		<a href="../src/reflect/value.go.html#line-1583" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1583">#L1583</a>: 	switch v.<b>kind</b>() {
+		<a href="../src/reflect/value.go.html#line-1646" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1646">#L1646</a>: 	switch v.<b>kind</b>() {
+		<a href="../src/reflect/value.go.html#line-1699" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1699">#L1699</a>: 	return v.<b>kind</b>()
+		<a href="../src/reflect/value.go.html#line-1706" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1706">#L1706</a>: 	if v.<b>kind</b>() == Slice {
+		<a href="../src/reflect/value.go.html#line-1713" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1713">#L1713</a>: 	switch k := v.<b>kind</b>(); k {
+		<a href="../src/reflect/value.go.html#line-1730" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1730">#L1730</a>: 	panic(&amp;ValueError{"reflect.Value.Len", v.<b>kind</b>()})
+		<a href="../src/reflect/value.go.html#line-1752" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1752">#L1752</a>: 	if (tt.Key == stringType || key.<b>kind</b>() == String) &amp;&amp; tt.Key == key.typ() &amp;&amp; tt.Elem.Size() &lt;= maxValSize {
+		<a href="../src/reflect/value.go.html#line-1871" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1871">#L1871</a>: 	if v.<b>kind</b>() == Interface {
+		<a href="../src/reflect/value.go.html#line-1914" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1914">#L1914</a>: 	if v.<b>kind</b>() == Interface {
+		<a href="../src/reflect/value.go.html#line-1977" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1977">#L1977</a>: 	if v.<b>kind</b>() != Map {
+		<a href="../src/reflect/value.go.html#line-2070" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2070">#L2070</a>: 	k := v.<b>kind</b>()
+		<a href="../src/reflect/value.go.html#line-2077" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2077">#L2077</a>: 	panic(&amp;ValueError{"reflect.Value.OverflowComplex", v.<b>kind</b>()})
+		<a href="../src/reflect/value.go.html#line-2083" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2083">#L2083</a>: 	k := v.<b>kind</b>()
+		<a href="../src/reflect/value.go.html#line-2090" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2090">#L2090</a>: 	panic(&amp;ValueError{"reflect.Value.OverflowFloat", v.<b>kind</b>()})
+		<a href="../src/reflect/value.go.html#line-2103" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2103">#L2103</a>: 	k := v.<b>kind</b>()
+		<a href="../src/reflect/value.go.html#line-2110" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2110">#L2110</a>: 	panic(&amp;ValueError{"reflect.Value.OverflowInt", v.<b>kind</b>()})
+		<a href="../src/reflect/value.go.html#line-2116" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2116">#L2116</a>: 	k := v.<b>kind</b>()
+		<a href="../src/reflect/value.go.html#line-2123" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2123">#L2123</a>: 	panic(&amp;ValueError{"reflect.Value.OverflowUint", v.<b>kind</b>()})
+		<a href="../src/reflect/value.go.html#line-2148" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2148">#L2148</a>: 	k := v.<b>kind</b>()
+		<a href="../src/reflect/value.go.html#line-2184" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2184">#L2184</a>: 	panic(&amp;ValueError{"reflect.Value.Pointer", v.<b>kind</b>()})
+		<a href="../src/reflect/value.go.html#line-2257" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2257">#L2257</a>: 	if v.<b>kind</b>() == Interface {
+		<a href="../src/reflect/value.go.html#line-2306" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2306">#L2306</a>: 	switch k := v.<b>kind</b>(); k {
+		<a href="../src/reflect/value.go.html#line-2308" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2308">#L2308</a>: 		panic(&amp;ValueError{"reflect.Value.SetComplex", v.<b>kind</b>()})
+		<a href="../src/reflect/value.go.html#line-2320" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2320">#L2320</a>: 	switch k := v.<b>kind</b>(); k {
+		<a href="../src/reflect/value.go.html#line-2322" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2322">#L2322</a>: 		panic(&amp;ValueError{"reflect.Value.SetFloat", v.<b>kind</b>()})
+		<a href="../src/reflect/value.go.html#line-2334" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2334">#L2334</a>: 	switch k := v.<b>kind</b>(); k {
+		<a href="../src/reflect/value.go.html#line-2336" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2336">#L2336</a>: 		panic(&amp;ValueError{"reflect.Value.SetInt", v.<b>kind</b>()})
+		<a href="../src/reflect/value.go.html#line-2388" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2388">#L2388</a>: 	if (tt.Key == stringType || key.<b>kind</b>() == String) &amp;&amp; tt.Key == key.typ() &amp;&amp; tt.Elem.Size() &lt;= maxValSize {
+		<a href="../src/reflect/value.go.html#line-2432" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2432">#L2432</a>: 	switch k := v.<b>kind</b>(); k {
+		<a href="../src/reflect/value.go.html#line-2434" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2434">#L2434</a>: 		panic(&amp;ValueError{"reflect.Value.SetUint", v.<b>kind</b>()})
+		<a href="../src/reflect/value.go.html#line-2475" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2475">#L2475</a>: 	switch kind := v.<b>kind</b>(); kind {
+		<a href="../src/reflect/value.go.html#line-2477" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2477">#L2477</a>: 		panic(&amp;ValueError{"reflect.Value.Slice", v.<b>kind</b>()})
+		<a href="../src/reflect/value.go.html#line-2537" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2537">#L2537</a>: 	switch kind := v.<b>kind</b>(); kind {
+		<a href="../src/reflect/value.go.html#line-2539" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2539">#L2539</a>: 		panic(&amp;ValueError{"reflect.Value.Slice3", v.<b>kind</b>()})
+		<a href="../src/reflect/value.go.html#line-2588" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2588">#L2588</a>: 	if v.<b>kind</b>() == String {
+		<a href="../src/reflect/value.go.html#line-2595" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2595">#L2595</a>: 	if v.<b>kind</b>() == Invalid {
+		<a href="../src/reflect/value.go.html#line-2665" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2665">#L2665</a>: 	switch v.<b>kind</b>() {
+		<a href="../src/reflect/value.go.html#line-2676" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2676">#L2676</a>: 	k := v.<b>kind</b>()
+		<a href="../src/reflect/value.go.html#line-2692" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2692">#L2692</a>: 	panic(&amp;ValueError{"reflect.Value.Uint", v.<b>kind</b>()})
+		<a href="../src/reflect/value.go.html#line-2728" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2728">#L2728</a>: 	k := v.<b>kind</b>()
+		<a href="../src/reflect/value.go.html#line-2764" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2764">#L2764</a>: 	panic(&amp;ValueError{"reflect.Value.UnsafePointer", v.<b>kind</b>()})
+		<a href="../src/reflect/value.go.html#line-2907" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2907">#L2907</a>: 	dk := dst.<b>kind</b>()
+		<a href="../src/reflect/value.go.html#line-2916" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2916">#L2916</a>: 	sk := src.<b>kind</b>()
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

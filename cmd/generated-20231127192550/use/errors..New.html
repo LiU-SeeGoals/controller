@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: errors.New</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../pkg/errors.html">errors</a>.<a href="../src/errors/errors.go.html#line-61">New</a></b></span>
+
+<span class="title">228 uses</span>
+
+	errors (current package)
+		<a href="../src/errors/errors.go.html#line-61">errors.go#L61</a>: func <b>New</b>(text string) error {
+		<a href="../src/errors/errors.go.html#line-87" class="path-duplicate">errors.go</a><a href="../src/errors/errors.go.html#line-87">#L87</a>: var ErrUnsupported = <b>New</b>("unsupported operation")
+
+	<a href="../pkg/bufio.html">bufio</a>
+		<a href="../src/bufio/bufio.go.html#line-23">bufio.go#L23</a>: 	ErrInvalidUnreadByte = errors.<b>New</b>("bufio: invalid use of UnreadByte")
+		<a href="../src/bufio/bufio.go.html#line-24" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-24">#L24</a>: 	ErrInvalidUnreadRune = errors.<b>New</b>("bufio: invalid use of UnreadRune")
+		<a href="../src/bufio/bufio.go.html#line-25" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-25">#L25</a>: 	ErrBufferFull        = errors.<b>New</b>("bufio: buffer full")
+		<a href="../src/bufio/bufio.go.html#line-26" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-26">#L26</a>: 	ErrNegativeCount     = errors.<b>New</b>("bufio: negative count")
+		<a href="../src/bufio/bufio.go.html#line-96" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-96">#L96</a>: var errNegativeRead = errors.<b>New</b>("bufio: reader returned negative count from Read")
+		<a href="../src/bufio/bufio.go.html#line-559" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-559">#L559</a>: var errNegativeWrite = errors.<b>New</b>("bufio: writer returned negative count from Write")
+		<a href="../src/bufio/scan.go.html#line-69">scan.go#L69</a>: 	ErrTooLong         = errors.<b>New</b>("bufio.Scanner: token too long")
+		<a href="../src/bufio/scan.go.html#line-70" class="path-duplicate">scan.go</a><a href="../src/bufio/scan.go.html#line-70">#L70</a>: 	ErrNegativeAdvance = errors.<b>New</b>("bufio.Scanner: SplitFunc returns negative advance count")
+		<a href="../src/bufio/scan.go.html#line-71" class="path-duplicate">scan.go</a><a href="../src/bufio/scan.go.html#line-71">#L71</a>: 	ErrAdvanceTooFar   = errors.<b>New</b>("bufio.Scanner: SplitFunc returns advance count beyond input")
+		<a href="../src/bufio/scan.go.html#line-72" class="path-duplicate">scan.go</a><a href="../src/bufio/scan.go.html#line-72">#L72</a>: 	ErrBadReadCount    = errors.<b>New</b>("bufio.Scanner: Read returned impossible count")
+		<a href="../src/bufio/scan.go.html#line-124" class="path-duplicate">scan.go</a><a href="../src/bufio/scan.go.html#line-124">#L124</a>: var ErrFinalToken = errors.<b>New</b>("final token")
+
+	<a href="../pkg/bytes.html">bytes</a>
+		<a href="../src/bytes/buffer.go.html#line-44">buffer.go#L44</a>: var ErrTooLarge = errors.<b>New</b>("bytes.Buffer: too large")
+		<a href="../src/bytes/buffer.go.html#line-45" class="path-duplicate">buffer.go</a><a href="../src/bytes/buffer.go.html#line-45">#L45</a>: var errNegativeRead = errors.<b>New</b>("bytes.Buffer: reader returned negative count from Read")
+		<a href="../src/bytes/buffer.go.html#line-398" class="path-duplicate">buffer.go</a><a href="../src/bytes/buffer.go.html#line-398">#L398</a>: 		return errors.<b>New</b>("bytes.Buffer: UnreadRune: previous operation was not a successful ReadRune")
+		<a href="../src/bytes/buffer.go.html#line-407" class="path-duplicate">buffer.go</a><a href="../src/bytes/buffer.go.html#line-407">#L407</a>: var errUnreadByte = errors.<b>New</b>("bytes.Buffer: UnreadByte: previous operation was not a successful read")
+		<a href="../src/bytes/reader.go.html#line-53">reader.go#L53</a>: 		return 0, errors.<b>New</b>("bytes.Reader.ReadAt: negative offset")
+		<a href="../src/bytes/reader.go.html#line-79" class="path-duplicate">reader.go</a><a href="../src/bytes/reader.go.html#line-79">#L79</a>: 		return errors.<b>New</b>("bytes.Reader.UnreadByte: at beginning of slice")
+		<a href="../src/bytes/reader.go.html#line-105" class="path-duplicate">reader.go</a><a href="../src/bytes/reader.go.html#line-105">#L105</a>: 		return errors.<b>New</b>("bytes.Reader.UnreadRune: at beginning of slice")
+		<a href="../src/bytes/reader.go.html#line-108" class="path-duplicate">reader.go</a><a href="../src/bytes/reader.go.html#line-108">#L108</a>: 		return errors.<b>New</b>("bytes.Reader.UnreadRune: previous operation was not ReadRune")
+		<a href="../src/bytes/reader.go.html#line-127" class="path-duplicate">reader.go</a><a href="../src/bytes/reader.go.html#line-127">#L127</a>: 		return 0, errors.<b>New</b>("bytes.Reader.Seek: invalid whence")
+		<a href="../src/bytes/reader.go.html#line-130" class="path-duplicate">reader.go</a><a href="../src/bytes/reader.go.html#line-130">#L130</a>: 		return 0, errors.<b>New</b>("bytes.Reader.Seek: negative position")
+
+	<a href="../pkg/compress/flate.html">compress/flate</a>
+		<a href="../src/compress/flate/deflate.go.html#line-698">deflate.go#L698</a>: var errWriterClosed = errors.<b>New</b>("flate: closed writer")
+
+	<a href="../pkg/compress/gzip.html">compress/gzip</a>
+		<a href="../src/compress/gzip/gunzip.go.html#line-32">gunzip.go#L32</a>: 	ErrChecksum = errors.<b>New</b>("gzip: invalid checksum")
+		<a href="../src/compress/gzip/gunzip.go.html#line-34" class="path-duplicate">gunzip.go</a><a href="../src/compress/gzip/gunzip.go.html#line-34">#L34</a>: 	ErrHeader = errors.<b>New</b>("gzip: invalid header")
+		<a href="../src/compress/gzip/gzip.go.html#line-95">gzip.go#L95</a>: 		return errors.<b>New</b>("gzip.Write: Extra data is too large")
+		<a href="../src/compress/gzip/gzip.go.html#line-113" class="path-duplicate">gzip.go</a><a href="../src/compress/gzip/gzip.go.html#line-113">#L113</a>: 			return errors.<b>New</b>("gzip.Write: non-Latin-1 header string")
+
+	<a href="../pkg/context.html">context</a>
+		<a href="../src/context/context.go.html#line-163">context.go#L163</a>: var Canceled = errors.<b>New</b>("context canceled")
+
+	<a href="../pkg/encoding/binary.html">encoding/binary</a>
+		<a href="../src/encoding/binary/binary.go.html#line-324">binary.go#L324</a>: 		return errors.<b>New</b>("binary.Read: invalid type " + reflect.TypeOf(data).String())
+		<a href="../src/encoding/binary/binary.go.html#line-454" class="path-duplicate">binary.go</a><a href="../src/encoding/binary/binary.go.html#line-454">#L454</a>: 		return errors.<b>New</b>("binary.Write: some values are not fixed-sized in type " + reflect.TypeOf(data).String())
+		<a href="../src/encoding/binary/varint.go.html#line-126">varint.go#L126</a>: var errOverflow = errors.<b>New</b>("binary: varint overflows a 64-bit integer")
+
+	<a href="../pkg/encoding/json.html">encoding/json</a>
+		<a href="../src/encoding/json/stream.go.html#line-271">stream.go#L271</a>: 		return errors.<b>New</b>("json.RawMessage: UnmarshalJSON on nil pointer")
+
+	<a href="../pkg/fmt.html">fmt</a>
+		<a href="../src/fmt/errors.go.html#line-30">errors.go#L30</a>: 		err = errors.<b>New</b>(s)
+		<a href="../src/fmt/scan.go.html#line-180">scan.go#L180</a>: 	return 0, errors.<b>New</b>("ScanState's Read should not be called. Use ReadRune")
+		<a href="../src/fmt/scan.go.html#line-244" class="path-duplicate">scan.go</a><a href="../src/fmt/scan.go.html#line-244">#L244</a>: 	panic(scanError{errors.<b>New</b>(err)})
+		<a href="../src/fmt/scan.go.html#line-371" class="path-duplicate">scan.go</a><a href="../src/fmt/scan.go.html#line-371">#L371</a>: 		return errors.<b>New</b>("fmt: scanning called UnreadRune with no rune available")
+		<a href="../src/fmt/scan.go.html#line-465" class="path-duplicate">scan.go</a><a href="../src/fmt/scan.go.html#line-465">#L465</a>: var errComplex = errors.<b>New</b>("syntax error scanning complex number")
+		<a href="../src/fmt/scan.go.html#line-466" class="path-duplicate">scan.go</a><a href="../src/fmt/scan.go.html#line-466">#L466</a>: var errBool = errors.<b>New</b>("syntax error scanning boolean")
+
+	<a href="../pkg/github.com/golang/protobuf/proto.html">github.com/golang/protobuf/proto</a>
+		<a href="../src/github.com/golang/protobuf/proto/buffer.go.html#line-313">buffer.go#L313</a>: 			return nil, 0, errors.<b>New</b>("proto: cannot parse reserved wire type")
+		<a href="../src/github.com/golang/protobuf/proto/deprecated.go.html#line-18">deprecated.go#L18</a>: 	ErrNil = errors.<b>New</b>("proto: Marshal called with nil")
+		<a href="../src/github.com/golang/protobuf/proto/deprecated.go.html#line-21" class="path-duplicate">deprecated.go</a><a href="../src/github.com/golang/protobuf/proto/deprecated.go.html#line-21">#L21</a>: 	ErrTooLarge = errors.<b>New</b>("proto: message encodes to over 2 GB")
+		<a href="../src/github.com/golang/protobuf/proto/deprecated.go.html#line-24" class="path-duplicate">deprecated.go</a><a href="../src/github.com/golang/protobuf/proto/deprecated.go.html#line-24">#L24</a>: 	ErrInternalBadWireType = errors.<b>New</b>("proto: internal error: bad wiretype for oneof")
+		<a href="../src/github.com/golang/protobuf/proto/deprecated.go.html#line-35" class="path-duplicate">deprecated.go</a><a href="../src/github.com/golang/protobuf/proto/deprecated.go.html#line-35">#L35</a>: 	return nil, errors.<b>New</b>("proto: not implemented")
+		<a href="../src/github.com/golang/protobuf/proto/deprecated.go.html#line-40" class="path-duplicate">deprecated.go</a><a href="../src/github.com/golang/protobuf/proto/deprecated.go.html#line-40">#L40</a>: 	return errors.<b>New</b>("proto: not implemented")
+		<a href="../src/github.com/golang/protobuf/proto/deprecated.go.html#line-45" class="path-duplicate">deprecated.go</a><a href="../src/github.com/golang/protobuf/proto/deprecated.go.html#line-45">#L45</a>: 	return nil, errors.<b>New</b>("proto: not implemented")
+		<a href="../src/github.com/golang/protobuf/proto/deprecated.go.html#line-50" class="path-duplicate">deprecated.go</a><a href="../src/github.com/golang/protobuf/proto/deprecated.go.html#line-50">#L50</a>: 	return errors.<b>New</b>("proto: not implemented")
+		<a href="../src/github.com/golang/protobuf/proto/extensions.go.html#line-39">extensions.go#L39</a>: var ErrMissingExtension = errors.<b>New</b>("proto: missing extension")
+		<a href="../src/github.com/golang/protobuf/proto/extensions.go.html#line-41" class="path-duplicate">extensions.go</a><a href="../src/github.com/golang/protobuf/proto/extensions.go.html#line-41">#L41</a>: var errNotExtendable = errors.<b>New</b>("proto: not an extendable proto.Message")
+		<a href="../src/github.com/golang/protobuf/proto/text_decode.go.html#line-662">text_decode.go#L662</a>: var errBadUTF8 = errors.<b>New</b>("proto: bad UTF-8")
+
+	<a href="../pkg/gonum.org/v1/gonum/floats.html">gonum.org/v1/gonum/floats</a>
+		<a href="../src/gonum.org/v1/gonum/floats/floats.go.html#line-342">floats.go#L342</a>: 	return inds, errors.<b>New</b>("floats: insufficient elements found")
+
+	<a href="../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>
+		<a href="../src/gonum.org/v1/gonum/mat/hogsvd.go.html#line-77">hogsvd.go#L77</a>: 			gsvd.err = errors.<b>New</b>("hogsvd: cholesky decomposition failed")
+		<a href="../src/gonum.org/v1/gonum/mat/hogsvd.go.html#line-106" class="path-duplicate">hogsvd.go</a><a href="../src/gonum.org/v1/gonum/mat/hogsvd.go.html#line-106">#L106</a>: 		gsvd.err = errors.<b>New</b>("hogsvd: eigen decomposition failed")
+		<a href="../src/gonum.org/v1/gonum/mat/io.go.html#line-26">io.go#L26</a>: 	errWrongType = errors.<b>New</b>("mat: wrong data type")
+		<a href="../src/gonum.org/v1/gonum/mat/io.go.html#line-28" class="path-duplicate">io.go</a><a href="../src/gonum.org/v1/gonum/mat/io.go.html#line-28">#L28</a>: 	errTooBig    = errors.<b>New</b>("mat: resulting data slice too big")
+		<a href="../src/gonum.org/v1/gonum/mat/io.go.html#line-29" class="path-duplicate">io.go</a><a href="../src/gonum.org/v1/gonum/mat/io.go.html#line-29">#L29</a>: 	errTooSmall  = errors.<b>New</b>("mat: input slice too small")
+		<a href="../src/gonum.org/v1/gonum/mat/io.go.html#line-30" class="path-duplicate">io.go</a><a href="../src/gonum.org/v1/gonum/mat/io.go.html#line-30">#L30</a>: 	errBadBuffer = errors.<b>New</b>("mat: data buffer size mismatch")
+		<a href="../src/gonum.org/v1/gonum/mat/io.go.html#line-31" class="path-duplicate">io.go</a><a href="../src/gonum.org/v1/gonum/mat/io.go.html#line-31">#L31</a>: 	errBadSize   = errors.<b>New</b>("mat: invalid dimension")
+
+	<a href="../pkg/google.golang.org/protobuf/internal/errors.html">google.golang.org/protobuf/internal/errors</a>
+		<a href="../src/google.golang.org/protobuf/internal/errors/errors.go.html#line-16">errors.go#L16</a>: var Error = errors.<b>New</b>("protobuf error")
+
+	<a href="../pkg/hash/crc32.html">hash/crc32</a>
+		<a href="../src/hash/crc32/crc32.go.html#line-182">crc32.go#L182</a>: 		return errors.<b>New</b>("hash/crc32: invalid hash state identifier")
+		<a href="../src/hash/crc32/crc32.go.html#line-185" class="path-duplicate">crc32.go</a><a href="../src/hash/crc32/crc32.go.html#line-185">#L185</a>: 		return errors.<b>New</b>("hash/crc32: invalid hash state size")
+		<a href="../src/hash/crc32/crc32.go.html#line-188" class="path-duplicate">crc32.go</a><a href="../src/hash/crc32/crc32.go.html#line-188">#L188</a>: 		return errors.<b>New</b>("hash/crc32: tables do not match")
+
+	<a href="../pkg/hash/fnv.html">hash/fnv</a>
+		<a href="../src/hash/fnv/fnv.go.html#line-272">fnv.go#L272</a>: 		return errors.<b>New</b>("hash/fnv: invalid hash state identifier")
+		<a href="../src/hash/fnv/fnv.go.html#line-275" class="path-duplicate">fnv.go</a><a href="../src/hash/fnv/fnv.go.html#line-275">#L275</a>: 		return errors.<b>New</b>("hash/fnv: invalid hash state size")
+		<a href="../src/hash/fnv/fnv.go.html#line-283" class="path-duplicate">fnv.go</a><a href="../src/hash/fnv/fnv.go.html#line-283">#L283</a>: 		return errors.<b>New</b>("hash/fnv: invalid hash state identifier")
+		<a href="../src/hash/fnv/fnv.go.html#line-286" class="path-duplicate">fnv.go</a><a href="../src/hash/fnv/fnv.go.html#line-286">#L286</a>: 		return errors.<b>New</b>("hash/fnv: invalid hash state size")
+		<a href="../src/hash/fnv/fnv.go.html#line-294" class="path-duplicate">fnv.go</a><a href="../src/hash/fnv/fnv.go.html#line-294">#L294</a>: 		return errors.<b>New</b>("hash/fnv: invalid hash state identifier")
+		<a href="../src/hash/fnv/fnv.go.html#line-297" class="path-duplicate">fnv.go</a><a href="../src/hash/fnv/fnv.go.html#line-297">#L297</a>: 		return errors.<b>New</b>("hash/fnv: invalid hash state size")
+		<a href="../src/hash/fnv/fnv.go.html#line-305" class="path-duplicate">fnv.go</a><a href="../src/hash/fnv/fnv.go.html#line-305">#L305</a>: 		return errors.<b>New</b>("hash/fnv: invalid hash state identifier")
+		<a href="../src/hash/fnv/fnv.go.html#line-308" class="path-duplicate">fnv.go</a><a href="../src/hash/fnv/fnv.go.html#line-308">#L308</a>: 		return errors.<b>New</b>("hash/fnv: invalid hash state size")
+		<a href="../src/hash/fnv/fnv.go.html#line-316" class="path-duplicate">fnv.go</a><a href="../src/hash/fnv/fnv.go.html#line-316">#L316</a>: 		return errors.<b>New</b>("hash/fnv: invalid hash state identifier")
+		<a href="../src/hash/fnv/fnv.go.html#line-319" class="path-duplicate">fnv.go</a><a href="../src/hash/fnv/fnv.go.html#line-319">#L319</a>: 		return errors.<b>New</b>("hash/fnv: invalid hash state size")
+		<a href="../src/hash/fnv/fnv.go.html#line-328" class="path-duplicate">fnv.go</a><a href="../src/hash/fnv/fnv.go.html#line-328">#L328</a>: 		return errors.<b>New</b>("hash/fnv: invalid hash state identifier")
+		<a href="../src/hash/fnv/fnv.go.html#line-331" class="path-duplicate">fnv.go</a><a href="../src/hash/fnv/fnv.go.html#line-331">#L331</a>: 		return errors.<b>New</b>("hash/fnv: invalid hash state size")
+
+	<a href="../pkg/internal/oserror.html">internal/oserror</a>
+		<a href="../src/internal/oserror/errors.go.html#line-13">errors.go#L13</a>: 	ErrInvalid    = errors.<b>New</b>("invalid argument")
+		<a href="../src/internal/oserror/errors.go.html#line-14" class="path-duplicate">errors.go</a><a href="../src/internal/oserror/errors.go.html#line-14">#L14</a>: 	ErrPermission = errors.<b>New</b>("permission denied")
+		<a href="../src/internal/oserror/errors.go.html#line-15" class="path-duplicate">errors.go</a><a href="../src/internal/oserror/errors.go.html#line-15">#L15</a>: 	ErrExist      = errors.<b>New</b>("file already exists")
+		<a href="../src/internal/oserror/errors.go.html#line-16" class="path-duplicate">errors.go</a><a href="../src/internal/oserror/errors.go.html#line-16">#L16</a>: 	ErrNotExist   = errors.<b>New</b>("file does not exist")
+		<a href="../src/internal/oserror/errors.go.html#line-17" class="path-duplicate">errors.go</a><a href="../src/internal/oserror/errors.go.html#line-17">#L17</a>: 	ErrClosed     = errors.<b>New</b>("file already closed")
+
+	<a href="../pkg/internal/poll.html">internal/poll</a>
+		<a href="../src/internal/poll/fd.go.html#line-35">fd.go#L35</a>: var ErrFileClosing = errors.<b>New</b>("use of closed file")
+		<a href="../src/internal/poll/fd.go.html#line-39" class="path-duplicate">fd.go</a><a href="../src/internal/poll/fd.go.html#line-39">#L39</a>: var ErrNoDeadline = errors.<b>New</b>("file type does not support deadline")
+		<a href="../src/internal/poll/fd.go.html#line-66" class="path-duplicate">fd.go</a><a href="../src/internal/poll/fd.go.html#line-66">#L66</a>: var ErrNotPollable = errors.<b>New</b>("not pollable")
+		<a href="../src/internal/poll/fd_poll_runtime.go.html#line-82">fd_poll_runtime.go#L82</a>: 		return errors.<b>New</b>("waiting for unsupported file type")
+
+	<a href="../pkg/internal/safefilepath.html">internal/safefilepath</a>
+		<a href="../src/internal/safefilepath/path.go.html#line-12">path.go#L12</a>: var errInvalidPath = errors.<b>New</b>("invalid path")
+
+	<a href="../pkg/io.html">io</a>
+		<a href="../src/io/io.go.html#line-29">io.go#L29</a>: var ErrShortWrite = errors.<b>New</b>("short write")
+		<a href="../src/io/io.go.html#line-32" class="path-duplicate">io.go</a><a href="../src/io/io.go.html#line-32">#L32</a>: var errInvalidWrite = errors.<b>New</b>("invalid write result")
+		<a href="../src/io/io.go.html#line-35" class="path-duplicate">io.go</a><a href="../src/io/io.go.html#line-35">#L35</a>: var ErrShortBuffer = errors.<b>New</b>("short buffer")
+		<a href="../src/io/io.go.html#line-44" class="path-duplicate">io.go</a><a href="../src/io/io.go.html#line-44">#L44</a>: var EOF = errors.<b>New</b>("EOF")
+		<a href="../src/io/io.go.html#line-48" class="path-duplicate">io.go</a><a href="../src/io/io.go.html#line-48">#L48</a>: var ErrUnexpectedEOF = errors.<b>New</b>("unexpected EOF")
+		<a href="../src/io/io.go.html#line-53" class="path-duplicate">io.go</a><a href="../src/io/io.go.html#line-53">#L53</a>: var ErrNoProgress = errors.<b>New</b>("multiple Read calls return no data or error")
+		<a href="../src/io/io.go.html#line-521" class="path-duplicate">io.go</a><a href="../src/io/io.go.html#line-521">#L521</a>: var errWhence = errors.<b>New</b>("Seek: invalid whence")
+		<a href="../src/io/io.go.html#line-522" class="path-duplicate">io.go</a><a href="../src/io/io.go.html#line-522">#L522</a>: var errOffset = errors.<b>New</b>("Seek: invalid offset")
+		<a href="../src/io/pipe.go.html#line-36">pipe.go#L36</a>: var ErrClosedPipe = errors.<b>New</b>("io: read/write on closed pipe")
+
+	<a href="../pkg/io/fs.html">io/fs</a>
+		<a href="../src/io/fs/readdir.go.html#line-41">readdir.go#L41</a>: 		return nil, &amp;PathError{Op: "readdir", Path: name, Err: errors.<b>New</b>("not implemented")}
+		<a href="../src/io/fs/sub.go.html#line-36">sub.go#L36</a>: 		return nil, &amp;PathError{Op: "sub", Path: dir, Err: errors.<b>New</b>("invalid name")}
+		<a href="../src/io/fs/sub.go.html#line-55" class="path-duplicate">sub.go</a><a href="../src/io/fs/sub.go.html#line-55">#L55</a>: 		return "", &amp;PathError{Op: op, Path: name, Err: errors.<b>New</b>("invalid name")}
+		<a href="../src/io/fs/sub.go.html#line-122" class="path-duplicate">sub.go</a><a href="../src/io/fs/sub.go.html#line-122">#L122</a>: 			return nil, errors.<b>New</b>("invalid result from inner fsys Glob: " + name + " not in " + f.dir) // can't use fmt in this package
+		<a href="../src/io/fs/walk.go.html#line-15">walk.go#L15</a>: var SkipDir = errors.<b>New</b>("skip this directory")
+		<a href="../src/io/fs/walk.go.html#line-20" class="path-duplicate">walk.go</a><a href="../src/io/fs/walk.go.html#line-20">#L20</a>: var SkipAll = errors.<b>New</b>("skip everything and stop the walk")
+
+	<a href="../pkg/net.html">net</a>
+		<a href="../src/net/cgo_unix.go.html#line-323">cgo_unix.go#L323</a>: 		return nil, errors.<b>New</b>("res_ninit failure: " + err.Error())
+		<a href="../src/net/cgo_unix.go.html#line-348" class="path-duplicate">cgo_unix.go</a><a href="../src/net/cgo_unix.go.html#line-348">#L348</a>: 			return nil, errors.<b>New</b>("res_nsearch failure")
+		<a href="../src/net/dnsclient_unix.go.html#line-42">dnsclient_unix.go#L42</a>: 	errLameReferral              = errors.<b>New</b>("lame referral")
+		<a href="../src/net/dnsclient_unix.go.html#line-43" class="path-duplicate">dnsclient_unix.go</a><a href="../src/net/dnsclient_unix.go.html#line-43">#L43</a>: 	errCannotUnmarshalDNSMessage = errors.<b>New</b>("cannot unmarshal DNS message")
+		<a href="../src/net/dnsclient_unix.go.html#line-44" class="path-duplicate">dnsclient_unix.go</a><a href="../src/net/dnsclient_unix.go.html#line-44">#L44</a>: 	errCannotMarshalDNSMessage   = errors.<b>New</b>("cannot marshal DNS message")
+		<a href="../src/net/dnsclient_unix.go.html#line-45" class="path-duplicate">dnsclient_unix.go</a><a href="../src/net/dnsclient_unix.go.html#line-45">#L45</a>: 	errServerMisbehaving         = errors.<b>New</b>("server misbehaving")
+		<a href="../src/net/dnsclient_unix.go.html#line-46" class="path-duplicate">dnsclient_unix.go</a><a href="../src/net/dnsclient_unix.go.html#line-46">#L46</a>: 	errInvalidDNSResponse        = errors.<b>New</b>("invalid DNS response")
+		<a href="../src/net/dnsclient_unix.go.html#line-47" class="path-duplicate">dnsclient_unix.go</a><a href="../src/net/dnsclient_unix.go.html#line-47">#L47</a>: 	errNoAnswerFromDNSServer     = errors.<b>New</b>("no answer from DNS server")
+		<a href="../src/net/dnsclient_unix.go.html#line-52" class="path-duplicate">dnsclient_unix.go</a><a href="../src/net/dnsclient_unix.go.html#line-52">#L52</a>: 	errServerTemporarilyMisbehaving = errors.<b>New</b>("server misbehaving")
+		<a href="../src/net/interface.go.html#line-21">interface.go#L21</a>: 	errInvalidInterface         = errors.<b>New</b>("invalid network interface")
+		<a href="../src/net/interface.go.html#line-22" class="path-duplicate">interface.go</a><a href="../src/net/interface.go.html#line-22">#L22</a>: 	errInvalidInterfaceIndex    = errors.<b>New</b>("invalid network interface index")
+		<a href="../src/net/interface.go.html#line-23" class="path-duplicate">interface.go</a><a href="../src/net/interface.go.html#line-23">#L23</a>: 	errInvalidInterfaceName     = errors.<b>New</b>("invalid network interface name")
+		<a href="../src/net/interface.go.html#line-24" class="path-duplicate">interface.go</a><a href="../src/net/interface.go.html#line-24">#L24</a>: 	errNoSuchInterface          = errors.<b>New</b>("no such network interface")
+		<a href="../src/net/interface.go.html#line-25" class="path-duplicate">interface.go</a><a href="../src/net/interface.go.html#line-25">#L25</a>: 	errNoSuchMulticastInterface = errors.<b>New</b>("no such multicast network interface")
+		<a href="../src/net/lookup.go.html#line-901">lookup.go#L901</a>: 		return "", errors.<b>New</b>("no CNAME record received")
+		<a href="../src/net/lookup.go.html#line-905" class="path-duplicate">lookup.go</a><a href="../src/net/lookup.go.html#line-905">#L905</a>: 		return "", errors.<b>New</b>("could not parse CNAME record")
+		<a href="../src/net/net.go.html#line-406">net.go#L406</a>: 	errNoSuitableAddress = errors.<b>New</b>("no suitable address found")
+		<a href="../src/net/net.go.html#line-409" class="path-duplicate">net.go</a><a href="../src/net/net.go.html#line-409">#L409</a>: 	errMissingAddress = errors.<b>New</b>("missing address")
+		<a href="../src/net/net.go.html#line-413" class="path-duplicate">net.go</a><a href="../src/net/net.go.html#line-413">#L413</a>: 	ErrWriteToConnected = errors.<b>New</b>("use of WriteTo with pre-connected connection")
+		<a href="../src/net/net.go.html#line-617" class="path-duplicate">net.go</a><a href="../src/net/net.go.html#line-617">#L617</a>: 	errNoSuchHost = errors.<b>New</b>("no such host")
+		<a href="../src/net/nss.go.html#line-174">nss.go#L174</a>: 			conf.err = errors.<b>New</b>("no colon on line")
+		<a href="../src/net/nss.go.html#line-198" class="path-duplicate">nss.go</a><a href="../src/net/nss.go.html#line-198">#L198</a>: 					conf.err = errors.<b>New</b>("unclosed criterion bracket")
+		<a href="../src/net/nss.go.html#line-204" class="path-duplicate">nss.go</a><a href="../src/net/nss.go.html#line-204">#L204</a>: 					conf.err = errors.<b>New</b>("invalid criteria: " + srcs[1:bclose])
+		<a href="../src/net/nss.go.html#line-230" class="path-duplicate">nss.go</a><a href="../src/net/nss.go.html#line-230">#L230</a>: 			return errors.<b>New</b>("criterion too short")
+		<a href="../src/net/nss.go.html#line-234" class="path-duplicate">nss.go</a><a href="../src/net/nss.go.html#line-234">#L234</a>: 			return errors.<b>New</b>("criterion lacks equal sign")
+		<a href="../src/net/unixsock_posix.go.html#line-42">unixsock_posix.go#L42</a>: 		return nil, errors.<b>New</b>("unknown mode: " + mode)
+
+	<a href="../pkg/net/netip.html">net/netip</a>
+		<a href="../src/net/netip/netip.go.html#line-644">netip.go#L644</a>: 		return Prefix{}, errors.<b>New</b>("negative Prefix bits")
+		<a href="../src/net/netip/netip.go.html#line-652" class="path-duplicate">netip.go</a><a href="../src/net/netip/netip.go.html#line-652">#L652</a>: 			return Prefix{}, errors.<b>New</b>("prefix length " + itoa.Itoa(b) + " too large for IPv4")
+		<a href="../src/net/netip/netip.go.html#line-657" class="path-duplicate">netip.go</a><a href="../src/net/netip/netip.go.html#line-657">#L657</a>: 			return Prefix{}, errors.<b>New</b>("prefix length " + itoa.Itoa(b) + " too large for IPv6")
+		<a href="../src/net/netip/netip.go.html#line-1021" class="path-duplicate">netip.go</a><a href="../src/net/netip/netip.go.html#line-1021">#L1021</a>: 	return errors.<b>New</b>("unexpected slice size")
+		<a href="../src/net/netip/netip.go.html#line-1048" class="path-duplicate">netip.go</a><a href="../src/net/netip/netip.go.html#line-1048">#L1048</a>: 		return "", "", false, errors.<b>New</b>("not an ip:port")
+		<a href="../src/net/netip/netip.go.html#line-1053" class="path-duplicate">netip.go</a><a href="../src/net/netip/netip.go.html#line-1053">#L1053</a>: 		return "", "", false, errors.<b>New</b>("no IP")
+		<a href="../src/net/netip/netip.go.html#line-1056" class="path-duplicate">netip.go</a><a href="../src/net/netip/netip.go.html#line-1056">#L1056</a>: 		return "", "", false, errors.<b>New</b>("no port")
+		<a href="../src/net/netip/netip.go.html#line-1060" class="path-duplicate">netip.go</a><a href="../src/net/netip/netip.go.html#line-1060">#L1060</a>: 			return "", "", false, errors.<b>New</b>("missing ]")
+		<a href="../src/net/netip/netip.go.html#line-1081" class="path-duplicate">netip.go</a><a href="../src/net/netip/netip.go.html#line-1081">#L1081</a>: 		return ipp, errors.<b>New</b>("invalid port " + strconv.Quote(port) + " parsing " + strconv.Quote(s))
+		<a href="../src/net/netip/netip.go.html#line-1089" class="path-duplicate">netip.go</a><a href="../src/net/netip/netip.go.html#line-1089">#L1089</a>: 		return AddrPort{}, errors.<b>New</b>("invalid ip:port " + strconv.Quote(s) + ", square brackets can only be used with IPv6 addresses")
+		<a href="../src/net/netip/netip.go.html#line-1091" class="path-duplicate">netip.go</a><a href="../src/net/netip/netip.go.html#line-1091">#L1091</a>: 		return AddrPort{}, errors.<b>New</b>("invalid ip:port " + strconv.Quote(s) + ", IPv6 addresses must be surrounded by square brackets")
+		<a href="../src/net/netip/netip.go.html#line-1209" class="path-duplicate">netip.go</a><a href="../src/net/netip/netip.go.html#line-1209">#L1209</a>: 		return errors.<b>New</b>("unexpected slice size")
+		<a href="../src/net/netip/netip.go.html#line-1279" class="path-duplicate">netip.go</a><a href="../src/net/netip/netip.go.html#line-1279">#L1279</a>: 		return Prefix{}, errors.<b>New</b>("netip.ParsePrefix(" + strconv.Quote(s) + "): no '/'")
+		<a href="../src/net/netip/netip.go.html#line-1283" class="path-duplicate">netip.go</a><a href="../src/net/netip/netip.go.html#line-1283">#L1283</a>: 		return Prefix{}, errors.<b>New</b>("netip.ParsePrefix(" + strconv.Quote(s) + "): " + err.Error())
+		<a href="../src/net/netip/netip.go.html#line-1287" class="path-duplicate">netip.go</a><a href="../src/net/netip/netip.go.html#line-1287">#L1287</a>: 		return Prefix{}, errors.<b>New</b>("netip.ParsePrefix(" + strconv.Quote(s) + "): IPv6 zones cannot be present in a prefix")
+		<a href="../src/net/netip/netip.go.html#line-1293" class="path-duplicate">netip.go</a><a href="../src/net/netip/netip.go.html#line-1293">#L1293</a>: 		return Prefix{}, errors.<b>New</b>("netip.ParsePrefix(" + strconv.Quote(s) + "): bad bits after slash: " + strconv.Quote(bitsStr))
+		<a href="../src/net/netip/netip.go.html#line-1300" class="path-duplicate">netip.go</a><a href="../src/net/netip/netip.go.html#line-1300">#L1300</a>: 		return Prefix{}, errors.<b>New</b>("netip.ParsePrefix(" + strconv.Quote(s) + "): prefix length out of range")
+		<a href="../src/net/netip/netip.go.html#line-1465" class="path-duplicate">netip.go</a><a href="../src/net/netip/netip.go.html#line-1465">#L1465</a>: 		return errors.<b>New</b>("unexpected slice size")
+
+	<a href="../pkg/os.html">os</a>
+		<a href="../src/os/exec.go.html#line-18">exec.go#L18</a>: var ErrProcessDone = errors.<b>New</b>("os: process already finished")
+		<a href="../src/os/exec_unix.go.html#line-64">exec_unix.go#L64</a>: 		return errors.<b>New</b>("os: process already released")
+		<a href="../src/os/exec_unix.go.html#line-67" class="path-duplicate">exec_unix.go</a><a href="../src/os/exec_unix.go.html#line-67">#L67</a>: 		return errors.<b>New</b>("os: process not initialized")
+		<a href="../src/os/exec_unix.go.html#line-76" class="path-duplicate">exec_unix.go</a><a href="../src/os/exec_unix.go.html#line-76">#L76</a>: 		return errors.<b>New</b>("os: unsupported signal type")
+		<a href="../src/os/executable_procfs.go.html#line-18">executable_procfs.go#L18</a>: 		return "", errors.<b>New</b>("Executable not implemented for " + runtime.GOOS)
+		<a href="../src/os/file.go.html#line-132">file.go#L132</a>: 		return 0, &amp;PathError{Op: "readat", Path: f.name, Err: errors.<b>New</b>("negative offset")}
+		<a href="../src/os/file.go.html#line-200" class="path-duplicate">file.go</a><a href="../src/os/file.go.html#line-200">#L200</a>: var errWriteAtInAppendMode = errors.<b>New</b>("os: invalid use of WriteAt on file opened with O_APPEND")
+		<a href="../src/os/file.go.html#line-216" class="path-duplicate">file.go</a><a href="../src/os/file.go.html#line-216">#L216</a>: 		return 0, &amp;PathError{Op: "writeat", Path: f.name, Err: errors.<b>New</b>("negative offset")}
+		<a href="../src/os/file.go.html#line-416" class="path-duplicate">file.go</a><a href="../src/os/file.go.html#line-416">#L416</a>: 			return "", errors.<b>New</b>("%LocalAppData% is not defined")
+		<a href="../src/os/file.go.html#line-422" class="path-duplicate">file.go</a><a href="../src/os/file.go.html#line-422">#L422</a>: 			return "", errors.<b>New</b>("$HOME is not defined")
+		<a href="../src/os/file.go.html#line-429" class="path-duplicate">file.go</a><a href="../src/os/file.go.html#line-429">#L429</a>: 			return "", errors.<b>New</b>("$home is not defined")
+		<a href="../src/os/file.go.html#line-438" class="path-duplicate">file.go</a><a href="../src/os/file.go.html#line-438">#L438</a>: 				return "", errors.<b>New</b>("neither $XDG_CACHE_HOME nor $HOME are defined")
+		<a href="../src/os/file.go.html#line-467" class="path-duplicate">file.go</a><a href="../src/os/file.go.html#line-467">#L467</a>: 			return "", errors.<b>New</b>("%AppData% is not defined")
+		<a href="../src/os/file.go.html#line-473" class="path-duplicate">file.go</a><a href="../src/os/file.go.html#line-473">#L473</a>: 			return "", errors.<b>New</b>("$HOME is not defined")
+		<a href="../src/os/file.go.html#line-480" class="path-duplicate">file.go</a><a href="../src/os/file.go.html#line-480">#L480</a>: 			return "", errors.<b>New</b>("$home is not defined")
+		<a href="../src/os/file.go.html#line-489" class="path-duplicate">file.go</a><a href="../src/os/file.go.html#line-489">#L489</a>: 				return "", errors.<b>New</b>("neither $XDG_CONFIG_HOME nor $HOME are defined")
+		<a href="../src/os/file.go.html#line-524" class="path-duplicate">file.go</a><a href="../src/os/file.go.html#line-524">#L524</a>: 	return "", errors.<b>New</b>(enverr + " is not defined")
+		<a href="../src/os/file.go.html#line-695" class="path-duplicate">file.go</a><a href="../src/os/file.go.html#line-695">#L695</a>: 		return "", errors.<b>New</b>("os: DirFS with empty root")
+		<a href="../src/os/tempfile.go.html#line-55">tempfile.go#L55</a>: var errPatternHasSeparator = errors.<b>New</b>("pattern contains path separator")
+
+	<a href="../pkg/path.html">path</a>
+		<a href="../src/path/match.go.html#line-14">match.go#L14</a>: var ErrBadPattern = errors.<b>New</b>("syntax error in pattern")
+
+	<a href="../pkg/reflect.html">reflect</a>
+		<a href="../src/reflect/value.go.html#line-1341">value.go#L1341</a>: 					return Value{}, errors.<b>New</b>("reflect: indirection through nil pointer to embedded struct field " + nameFor(v.typ().Elem()))
+
+	<a href="../pkg/strconv.html">strconv</a>
+		<a href="../src/strconv/atoi.go.html#line-18">atoi.go#L18</a>: var ErrRange = errors.<b>New</b>("value out of range")
+		<a href="../src/strconv/atoi.go.html#line-21" class="path-duplicate">atoi.go</a><a href="../src/strconv/atoi.go.html#line-21">#L21</a>: var ErrSyntax = errors.<b>New</b>("invalid syntax")
+		<a href="../src/strconv/atoi.go.html#line-61" class="path-duplicate">atoi.go</a><a href="../src/strconv/atoi.go.html#line-61">#L61</a>: 	return &amp;NumError{fn, cloneString(str), errors.<b>New</b>("invalid base " + Itoa(base))}
+		<a href="../src/strconv/atoi.go.html#line-65" class="path-duplicate">atoi.go</a><a href="../src/strconv/atoi.go.html#line-65">#L65</a>: 	return &amp;NumError{fn, cloneString(str), errors.<b>New</b>("invalid bit size " + Itoa(bitSize))}
+
+	<a href="../pkg/strings.html">strings</a>
+		<a href="../src/strings/reader.go.html#line-53">reader.go#L53</a>: 		return 0, errors.<b>New</b>("strings.Reader.ReadAt: negative offset")
+		<a href="../src/strings/reader.go.html#line-79" class="path-duplicate">reader.go</a><a href="../src/strings/reader.go.html#line-79">#L79</a>: 		return errors.<b>New</b>("strings.Reader.UnreadByte: at beginning of string")
+		<a href="../src/strings/reader.go.html#line-105" class="path-duplicate">reader.go</a><a href="../src/strings/reader.go.html#line-105">#L105</a>: 		return errors.<b>New</b>("strings.Reader.UnreadRune: at beginning of string")
+		<a href="../src/strings/reader.go.html#line-108" class="path-duplicate">reader.go</a><a href="../src/strings/reader.go.html#line-108">#L108</a>: 		return errors.<b>New</b>("strings.Reader.UnreadRune: previous operation was not ReadRune")
+		<a href="../src/strings/reader.go.html#line-127" class="path-duplicate">reader.go</a><a href="../src/strings/reader.go.html#line-127">#L127</a>: 		return 0, errors.<b>New</b>("strings.Reader.Seek: invalid whence")
+		<a href="../src/strings/reader.go.html#line-130" class="path-duplicate">reader.go</a><a href="../src/strings/reader.go.html#line-130">#L130</a>: 		return 0, errors.<b>New</b>("strings.Reader.Seek: negative position")
+
+	<a href="../pkg/syscall.html">syscall</a>
+		<a href="../src/syscall/exec_unix.go.html#line-190">exec_unix.go#L190</a>: 		return 0, errorspkg.<b>New</b>("both Setctty and Foreground set in SysProcAttr")
+		<a href="../src/syscall/exec_unix.go.html#line-193" class="path-duplicate">exec_unix.go</a><a href="../src/syscall/exec_unix.go.html#line-193">#L193</a>: 		return 0, errorspkg.<b>New</b>("Setctty set but Ctty not valid in child")
+
+	<a href="../pkg/time.html">time</a>
+		<a href="../src/time/format.go.html#line-449">format.go#L449</a>: var errAtoi = errors.<b>New</b>("time: invalid number")
+		<a href="../src/time/format.go.html#line-816" class="path-duplicate">format.go</a><a href="../src/time/format.go.html#line-816">#L816</a>: var errBad = errors.<b>New</b>("bad value for field") // placeholder not passed to user
+		<a href="../src/time/format.go.html#line-1519" class="path-duplicate">format.go</a><a href="../src/time/format.go.html#line-1519">#L1519</a>: var errLeadingInt = errors.<b>New</b>("time: bad [0-9]*") // never printed
+		<a href="../src/time/format.go.html#line-1608" class="path-duplicate">format.go</a><a href="../src/time/format.go.html#line-1608">#L1608</a>: 		return 0, errors.<b>New</b>("time: invalid duration " + quote(orig))
+		<a href="../src/time/format.go.html#line-1620" class="path-duplicate">format.go</a><a href="../src/time/format.go.html#line-1620">#L1620</a>: 			return 0, errors.<b>New</b>("time: invalid duration " + quote(orig))
+		<a href="../src/time/format.go.html#line-1626" class="path-duplicate">format.go</a><a href="../src/time/format.go.html#line-1626">#L1626</a>: 			return 0, errors.<b>New</b>("time: invalid duration " + quote(orig))
+		<a href="../src/time/format.go.html#line-1640" class="path-duplicate">format.go</a><a href="../src/time/format.go.html#line-1640">#L1640</a>: 			return 0, errors.<b>New</b>("time: invalid duration " + quote(orig))
+		<a href="../src/time/format.go.html#line-1652" class="path-duplicate">format.go</a><a href="../src/time/format.go.html#line-1652">#L1652</a>: 			return 0, errors.<b>New</b>("time: missing unit in duration " + quote(orig))
+		<a href="../src/time/format.go.html#line-1658" class="path-duplicate">format.go</a><a href="../src/time/format.go.html#line-1658">#L1658</a>: 			return 0, errors.<b>New</b>("time: unknown unit " + quote(u) + " in duration " + quote(orig))
+		<a href="../src/time/format.go.html#line-1662" class="path-duplicate">format.go</a><a href="../src/time/format.go.html#line-1662">#L1662</a>: 			return 0, errors.<b>New</b>("time: invalid duration " + quote(orig))
+		<a href="../src/time/format.go.html#line-1671" class="path-duplicate">format.go</a><a href="../src/time/format.go.html#line-1671">#L1671</a>: 				return 0, errors.<b>New</b>("time: invalid duration " + quote(orig))
+		<a href="../src/time/format.go.html#line-1676" class="path-duplicate">format.go</a><a href="../src/time/format.go.html#line-1676">#L1676</a>: 			return 0, errors.<b>New</b>("time: invalid duration " + quote(orig))
+		<a href="../src/time/format.go.html#line-1683" class="path-duplicate">format.go</a><a href="../src/time/format.go.html#line-1683">#L1683</a>: 		return 0, errors.<b>New</b>("time: invalid duration " + quote(orig))
+		<a href="../src/time/format_rfc3339.go.html#line-72">format_rfc3339.go#L72</a>: 		return b, errors.<b>New</b>("year outside of range [0,9999]")
+		<a href="../src/time/format_rfc3339.go.html#line-76" class="path-duplicate">format_rfc3339.go</a><a href="../src/time/format_rfc3339.go.html#line-76">#L76</a>: 			return b, errors.<b>New</b>("timezone hour outside of range [0,23]")
+		<a href="../src/time/sys_unix.go.html#line-55">sys_unix.go#L55</a>: 				return errors.<b>New</b>("short read")
+		<a href="../src/time/time.go.html#line-1246">time.go#L1246</a>: 			return nil, errors.<b>New</b>("Time.MarshalBinary: unexpected zone offset")
+		<a href="../src/time/time.go.html#line-1281" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-1281">#L1281</a>: 		return errors.<b>New</b>("Time.UnmarshalBinary: no data")
+		<a href="../src/time/time.go.html#line-1286" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-1286">#L1286</a>: 		return errors.<b>New</b>("Time.UnmarshalBinary: unsupported version")
+		<a href="../src/time/time.go.html#line-1294" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-1294">#L1294</a>: 		return errors.<b>New</b>("Time.UnmarshalBinary: invalid length")
+		<a href="../src/time/time.go.html#line-1349" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-1349">#L1349</a>: 		return nil, errors.<b>New</b>("Time.MarshalJSON: " + err.Error())
+		<a href="../src/time/time.go.html#line-1362" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-1362">#L1362</a>: 		return errors.<b>New</b>("Time.UnmarshalJSON: input is not a JSON string")
+		<a href="../src/time/time.go.html#line-1378" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-1378">#L1378</a>: 		return nil, errors.<b>New</b>("Time.MarshalText: " + err.Error())
+		<a href="../src/time/zoneinfo.go.html#line-642">zoneinfo.go#L642</a>: var errLocation = errors.<b>New</b>("time: invalid location name")
+		<a href="../src/time/zoneinfo_read.go.html#line-110">zoneinfo_read.go#L110</a>: var errBadData = errors.<b>New</b>("malformed time zone information")
+		<a href="../src/time/zoneinfo_read.go.html#line-419" class="path-duplicate">zoneinfo_read.go</a><a href="../src/time/zoneinfo_read.go.html#line-419">#L419</a>: 		return nil, errors.<b>New</b>("corrupt zip file " + zipfile)
+		<a href="../src/time/zoneinfo_read.go.html#line-427" class="path-duplicate">zoneinfo_read.go</a><a href="../src/time/zoneinfo_read.go.html#line-427">#L427</a>: 		return nil, errors.<b>New</b>("corrupt zip file " + zipfile)
+		<a href="../src/time/zoneinfo_read.go.html#line-469" class="path-duplicate">zoneinfo_read.go</a><a href="../src/time/zoneinfo_read.go.html#line-469">#L469</a>: 			return nil, errors.<b>New</b>("unsupported compression for " + name + " in " + zipfile)
+		<a href="../src/time/zoneinfo_read.go.html#line-494" class="path-duplicate">zoneinfo_read.go</a><a href="../src/time/zoneinfo_read.go.html#line-494">#L494</a>: 			return nil, errors.<b>New</b>("corrupt zip file " + zipfile)
+		<a href="../src/time/zoneinfo_read.go.html#line-500" class="path-duplicate">zoneinfo_read.go</a><a href="../src/time/zoneinfo_read.go.html#line-500">#L500</a>: 			return nil, errors.<b>New</b>("corrupt zip file " + zipfile)
+		<a href="../src/time/zoneinfo_read.go.html#line-566" class="path-duplicate">zoneinfo_read.go</a><a href="../src/time/zoneinfo_read.go.html#line-566">#L566</a>: 	return nil, errors.<b>New</b>("unknown time zone " + name)
+
+	<a href="../pkg/vendor/golang.org/x/net/dns/dnsmessage.html">vendor/golang.org/x/net/dns/dnsmessage</a>
+		<a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-252">message.go#L252</a>: 	ErrNotStarted = errors.<b>New</b>("parsing/packing of this type isn't available yet")
+		<a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-256" class="path-duplicate">message.go</a><a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-256">#L256</a>: 	ErrSectionDone = errors.<b>New</b>("parsing/packing of this section has completed")
+		<a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-258" class="path-duplicate">message.go</a><a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-258">#L258</a>: 	errBaseLen            = errors.<b>New</b>("insufficient data for base length type")
+		<a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-259" class="path-duplicate">message.go</a><a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-259">#L259</a>: 	errCalcLen            = errors.<b>New</b>("insufficient data for calculated length type")
+		<a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-260" class="path-duplicate">message.go</a><a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-260">#L260</a>: 	errReserved           = errors.<b>New</b>("segment prefix is reserved")
+		<a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-261" class="path-duplicate">message.go</a><a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-261">#L261</a>: 	errTooManyPtr         = errors.<b>New</b>("too many pointers (&gt;10)")
+		<a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-262" class="path-duplicate">message.go</a><a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-262">#L262</a>: 	errInvalidPtr         = errors.<b>New</b>("invalid pointer")
+		<a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-263" class="path-duplicate">message.go</a><a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-263">#L263</a>: 	errInvalidName        = errors.<b>New</b>("invalid dns name")
+		<a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-264" class="path-duplicate">message.go</a><a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-264">#L264</a>: 	errNilResouceBody     = errors.<b>New</b>("nil resource body")
+		<a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-265" class="path-duplicate">message.go</a><a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-265">#L265</a>: 	errResourceLen        = errors.<b>New</b>("insufficient data for resource body length")
+		<a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-266" class="path-duplicate">message.go</a><a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-266">#L266</a>: 	errSegTooLong         = errors.<b>New</b>("segment length too long")
+		<a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-267" class="path-duplicate">message.go</a><a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-267">#L267</a>: 	errNameTooLong        = errors.<b>New</b>("name too long")
+		<a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-268" class="path-duplicate">message.go</a><a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-268">#L268</a>: 	errZeroSegLen         = errors.<b>New</b>("zero length segment")
+		<a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-269" class="path-duplicate">message.go</a><a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-269">#L269</a>: 	errResTooLong         = errors.<b>New</b>("resource length too long")
+		<a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-270" class="path-duplicate">message.go</a><a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-270">#L270</a>: 	errTooManyQuestions   = errors.<b>New</b>("too many Questions to pack (&gt;65535)")
+		<a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-271" class="path-duplicate">message.go</a><a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-271">#L271</a>: 	errTooManyAnswers     = errors.<b>New</b>("too many Answers to pack (&gt;65535)")
+		<a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-272" class="path-duplicate">message.go</a><a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-272">#L272</a>: 	errTooManyAuthorities = errors.<b>New</b>("too many Authorities to pack (&gt;65535)")
+		<a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-273" class="path-duplicate">message.go</a><a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-273">#L273</a>: 	errTooManyAdditionals = errors.<b>New</b>("too many Additionals to pack (&gt;65535)")
+		<a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-274" class="path-duplicate">message.go</a><a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-274">#L274</a>: 	errNonCanonicalName   = errors.<b>New</b>("name is not in canonical format (it must end with a .)")
+		<a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-275" class="path-duplicate">message.go</a><a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-275">#L275</a>: 	errStringTooLong      = errors.<b>New</b>("character string exceeds maximum length (255)")
+		<a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-276" class="path-duplicate">message.go</a><a href="../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-276">#L276</a>: 	errCompressedSRV      = errors.<b>New</b>("compressed name in SRV resource data")
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

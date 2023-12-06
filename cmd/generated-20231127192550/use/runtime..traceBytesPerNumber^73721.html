@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.traceBytesPerNumber</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">const <b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/trace.go.html#line-127">traceBytesPerNumber</a></b></span>
+
+<span class="title">11 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/trace.go.html#line-127">trace.go#L127</a>: 	<b>traceBytesPerNumber</b> = 10
+		<a href="../src/runtime/trace.go.html#line-794" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-794">#L794</a>: 	maxSize := 2 + 5*<b>traceBytesPerNumber</b> + extraBytes // event type, length, sequence, timestamp, stack id and two add params
+		<a href="../src/runtime/trace.go.html#line-1128" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1128">#L1128</a>: 	size := 1 + 2*<b>traceBytesPerNumber</b> + len(s)
+		<a href="../src/runtime/trace.go.html#line-1141" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1141">#L1141</a>: 	if room := len(buf.arr) - buf.pos; room &lt; slen+<b>traceBytesPerNumber</b> {
+		<a href="../src/runtime/trace.go.html#line-1169" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1169">#L1169</a>: 	for i := 0; i &lt; <b>traceBytesPerNumber</b>; i++ {
+		<a href="../src/runtime/trace.go.html#line-1170" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1170">#L1170</a>: 		if i &lt; <b>traceBytesPerNumber</b>-1 {
+		<a href="../src/runtime/trace.go.html#line-1304" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1304">#L1304</a>: 			maxSize := 1 + <b>traceBytesPerNumber</b> + (2+4*len(frames))*<b>traceBytesPerNumber</b>
+		<a href="../src/runtime/trace.go.html#line-1314" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1314">#L1314</a>: 			buf.pos += <b>traceBytesPerNumber</b>
+		<a href="../src/runtime/trace.go.html#line-1763" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1763">#L1763</a>: 	extraSpace := <b>traceBytesPerNumber</b> + len(message)
+		<a href="../src/runtime/trace.go.html#line-1770" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1770">#L1770</a>: 	if room := len(buf.arr) - buf.pos; room &lt; slen+<b>traceBytesPerNumber</b> {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

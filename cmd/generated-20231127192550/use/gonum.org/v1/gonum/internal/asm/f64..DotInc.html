@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/internal/asm/f64.DotInc</title>
+<link href="../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../../../../../../pkg/gonum.org/v1/gonum/internal/asm/f64.html">gonum.org/v1/gonum/internal/asm/f64</a>.<a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html#line-128">DotInc</a></b></span>
+
+<span class="title">8 uses</span>
+
+	gonum.org/v1/gonum/internal/asm/f64 (current package)
+		<a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html#line-128">stubs_amd64.go#L128</a>: func <b>DotInc</b>(x, y []float64, n, incX, incY, ix, iy uintptr) (sum float64)
+
+	<a href="../../../../../../pkg/gonum.org/v1/gonum/blas/gonum.html">gonum.org/v1/gonum/blas/gonum</a>
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level1float64_ddot.go.html#line-49">level1float64_ddot.go#L49</a>: 	return f64.<b>DotInc</b>(x, y, uintptr(n), uintptr(incX), uintptr(incY), uintptr(ix), uintptr(iy))
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2float64.go.html#line-376">level2float64.go#L376</a>: 				x[ix] = tmp + f64.<b>DotInc</b>(x, a[ilda+i+1:ilda+n], uintptr(n-i-1), uintptr(incX), 1, uintptr(ix+incX), 0)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2float64.go.html#line-403" class="path-duplicate">level2float64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2float64.go.html#line-403">#L403</a>: 			x[ix] = tmp + f64.<b>DotInc</b>(x, a[ilda:ilda+i], uintptr(i), uintptr(incX), 1, uintptr(kx), 0)
+
+	<a href="../../../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>
+		<a href="../../../../../../src/gonum.org/v1/gonum/mat/inner.go.html#line-65">inner.go#L65</a>: 					sum += xi * f64.<b>DotInc</b>(
+		<a href="../../../../../../src/gonum.org/v1/gonum/mat/inner.go.html#line-81" class="path-duplicate">inner.go</a><a href="../../../../../../src/gonum.org/v1/gonum/mat/inner.go.html#line-81">#L81</a>: 					sum += yi * f64.<b>DotInc</b>(
+		<a href="../../../../../../src/gonum.org/v1/gonum/mat/inner.go.html#line-108" class="path-duplicate">inner.go</a><a href="../../../../../../src/gonum.org/v1/gonum/mat/inner.go.html#line-108">#L108</a>: 					sum += xi * f64.<b>DotInc</b>(
+		<a href="../../../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-635">vector.go#L635</a>: 				v.setVec(0, f64.<b>DotInc</b>(amat.Data, bmat.Data,
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

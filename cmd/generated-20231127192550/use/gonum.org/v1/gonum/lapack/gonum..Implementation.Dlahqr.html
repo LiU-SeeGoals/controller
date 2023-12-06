@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/lapack/gonum.Implementation.Dlahqr</title>
+<link href="../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../../../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>.<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/lapack.go.html#line-12">Implementation</a>.<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlahqr.go.html#line-84">Dlahqr</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">5 uses</span>
+
+	gonum.org/v1/gonum/lapack/gonum (current package)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dhseqr.go.html#line-236">dhseqr.go#L236</a>: 		unconverged = impl.<b>Dlahqr</b>(wantt, wantz, n, ilo, ihi, h, ldh, wr[:ihi+1], wi[:ihi+1],
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlahqr.go.html#line-84">dlahqr.go#L84</a>: func (impl Implementation) <b>Dlahqr</b>(wantt, wantz bool, n, ilo, ihi int, h []float64, ldh int, wr, wi []float64, iloz, ihiz int, z []float64, ldz int) (unconverged int) {
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqr04.go.html#line-198">dlaqr04.go#L198</a>: 		return impl.<b>Dlahqr</b>(wantt, wantz, n, ilo, ihi, h, ldh, wr, wi, iloz, ihiz, z, ldz)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqr04.go.html#line-401" class="path-duplicate">dlaqr04.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqr04.go.html#line-401">#L401</a>: 					ks += impl.<b>Dlahqr</b>(false, false, ns, 0, ns-1, h[kt*ldh:], ldh,
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqr23.go.html#line-222">dlaqr23.go#L222</a>: 		infqr = impl.<b>Dlahqr</b>(true, true, jw, 0, jw-1, t, ldt, sr[kwtop:], si[kwtop:], 0, jw-1, v, ldv)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

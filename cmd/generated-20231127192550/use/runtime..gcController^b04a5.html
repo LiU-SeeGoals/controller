@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.gcController</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">var <b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/mgcpacer.go.html#line-88">gcController</a></b></span>
+
+<span class="title">148 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/arena.go.html#line-787">arena.go#L787</a>: 	<b>gcController</b>.heapInUse.add(-int64(s.npages * pageSize))
+		<a href="../src/runtime/arena.go.html#line-793" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-793">#L793</a>: 	<b>gcController</b>.totalFree.Add(int64(s.npages * pageSize))
+		<a href="../src/runtime/arena.go.html#line-807" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-807">#L807</a>: 	<b>gcController</b>.update(-int64(s.npages*pageSize), 0)
+		<a href="../src/runtime/arena.go.html#line-948" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-948">#L948</a>: 	sysMap(unsafe.Pointer(base), userArenaChunkBytes, &amp;<b>gcController</b>.heapReleased)
+		<a href="../src/runtime/arena.go.html#line-957" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-957">#L957</a>: 	<b>gcController</b>.heapInUse.add(int64(userArenaChunkBytes))
+		<a href="../src/runtime/arena.go.html#line-958" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-958">#L958</a>: 	<b>gcController</b>.heapReleased.add(-int64(userArenaChunkBytes))
+		<a href="../src/runtime/arena.go.html#line-970" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-970">#L970</a>: 	<b>gcController</b>.totalAlloc.Add(int64(userArenaChunkBytes))
+		<a href="../src/runtime/arena.go.html#line-973" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-973">#L973</a>: 	<b>gcController</b>.update(int64(userArenaChunkBytes), 0)
+		<a href="../src/runtime/malloc.go.html#line-602">malloc.go#L602</a>: 	<b>gcController</b>.memoryLimit.Store(maxInt64)
+		<a href="../src/runtime/malloc.go.html#line-632" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-632">#L632</a>: 		v = h.arena.alloc(n, heapArenaBytes, &amp;<b>gcController</b>.heapReleased)
+		<a href="../src/runtime/mcache.go.html#line-175">mcache.go#L175</a>: 		<b>gcController</b>.totalAlloc.Add(bytesAllocated)
+		<a href="../src/runtime/mcache.go.html#line-212" class="path-duplicate">mcache.go</a><a href="../src/runtime/mcache.go.html#line-212">#L212</a>: 	<b>gcController</b>.update(int64(s.npages*pageSize)-int64(usedBytes), int64(c.scanAlloc))
+		<a href="../src/runtime/mcache.go.html#line-246" class="path-duplicate">mcache.go</a><a href="../src/runtime/mcache.go.html#line-246">#L246</a>: 	<b>gcController</b>.totalAlloc.Add(int64(npages * pageSize))
+		<a href="../src/runtime/mcache.go.html#line-249" class="path-duplicate">mcache.go</a><a href="../src/runtime/mcache.go.html#line-249">#L249</a>: 	<b>gcController</b>.update(int64(s.npages*pageSize), 0)
+		<a href="../src/runtime/mcache.go.html#line-279" class="path-duplicate">mcache.go</a><a href="../src/runtime/mcache.go.html#line-279">#L279</a>: 			<b>gcController</b>.totalAlloc.Add(slotsUsed * int64(s.elemsize))
+		<a href="../src/runtime/mcache.go.html#line-306" class="path-duplicate">mcache.go</a><a href="../src/runtime/mcache.go.html#line-306">#L306</a>: 	<b>gcController</b>.update(dHeapLive, scanAlloc)
+		<a href="../src/runtime/mem.go.html#line-51">mem.go#L51</a>: 	<b>gcController</b>.mappedReady.Add(int64(n))
+		<a href="../src/runtime/mem.go.html#line-61" class="path-duplicate">mem.go</a><a href="../src/runtime/mem.go.html#line-61">#L61</a>: 	<b>gcController</b>.mappedReady.Add(-int64(n))
+		<a href="../src/runtime/mem.go.html#line-76" class="path-duplicate">mem.go</a><a href="../src/runtime/mem.go.html#line-76">#L76</a>: 	<b>gcController</b>.mappedReady.Add(int64(prepared))
+		<a href="../src/runtime/mem.go.html#line-115" class="path-duplicate">mem.go</a><a href="../src/runtime/mem.go.html#line-115">#L115</a>: 	<b>gcController</b>.mappedReady.Add(-int64(n))
+		<a href="../src/runtime/mem.go.html#line-129" class="path-duplicate">mem.go</a><a href="../src/runtime/mem.go.html#line-129">#L129</a>: 	<b>gcController</b>.mappedReady.Add(-int64(n))
+		<a href="../src/runtime/metrics.go.html#line-282">metrics.go#L282</a>: 				out.scalar = uint64(<b>gcController</b>.memoryLimit.Load())
+		<a href="../src/runtime/metrics.go.html#line-288" class="path-duplicate">metrics.go</a><a href="../src/runtime/metrics.go.html#line-288">#L288</a>: 				out.scalar = uint64(<b>gcController</b>.gcPercent.Load())
+		<a href="../src/runtime/metrics.go.html#line-295" class="path-duplicate">metrics.go</a><a href="../src/runtime/metrics.go.html#line-295">#L295</a>: 				out.scalar = <b>gcController</b>.heapMarked
+		<a href="../src/runtime/metrics.go.html#line-644" class="path-duplicate">metrics.go</a><a href="../src/runtime/metrics.go.html#line-644">#L644</a>: 	a.heapGoal = <b>gcController</b>.heapGoal()
+		<a href="../src/runtime/metrics.go.html#line-685" class="path-duplicate">metrics.go</a><a href="../src/runtime/metrics.go.html#line-685">#L685</a>: 	a.heapScan = <b>gcController</b>.heapScan.Load()
+		<a href="../src/runtime/metrics.go.html#line-686" class="path-duplicate">metrics.go</a><a href="../src/runtime/metrics.go.html#line-686">#L686</a>: 	a.stackScan = uint64(<b>gcController</b>.lastStackScan.Load())
+		<a href="../src/runtime/metrics.go.html#line-687" class="path-duplicate">metrics.go</a><a href="../src/runtime/metrics.go.html#line-687">#L687</a>: 	a.globalsScan = <b>gcController</b>.globalsScan.Load()
+		<a href="../src/runtime/mgc.go.html#line-184">mgc.go#L184</a>: 	<b>gcController</b>.init(readGOGC(), readGOMEMLIMIT())
+		<a href="../src/runtime/mgc.go.html#line-292" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-292">#L292</a>: 	delta := now - <b>gcController</b>.markStartTime
+		<a href="../src/runtime/mgc.go.html#line-300" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-300">#L300</a>: 	return float64(selfTime)/float64(delta) &gt; 1.2*<b>gcController</b>.fractionalUtilizationGoal
+		<a href="../src/runtime/mgc.go.html#line-579" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-579">#L579</a>: 		trigger, _ := <b>gcController</b>.trigger()
+		<a href="../src/runtime/mgc.go.html#line-580" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-580">#L580</a>: 		return <b>gcController</b>.heapLive.Load() &gt;= trigger
+		<a href="../src/runtime/mgc.go.html#line-582" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-582">#L582</a>: 		if <b>gcController</b>.gcPercent.Load() &lt; 0 {
+		<a href="../src/runtime/mgc.go.html#line-677" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-677">#L677</a>: 	work.heap0 = <b>gcController</b>.heapLive.Load()
+		<a href="../src/runtime/mgc.go.html#line-698" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-698">#L698</a>: 	<b>gcController</b>.startCycle(now, int(gomaxprocs), trigger)
+		<a href="../src/runtime/mgc.go.html#line-935" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-935">#L935</a>: 	<b>gcController</b>.endCycle(now, int(gomaxprocs), work.userForced)
+		<a href="../src/runtime/mgc.go.html#line-947" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-947">#L947</a>: 	work.heap1 = <b>gcController</b>.heapLive.Load()
+		<a href="../src/runtime/mgc.go.html#line-1008" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1008">#L1008</a>: 	memstats.lastHeapInUse = <b>gcController</b>.heapInUse.load()
+		<a href="../src/runtime/mgc.go.html#line-1152" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1152">#L1152</a>: 			<b>gcController</b>.assistTime.Load(),
+		<a href="../src/runtime/mgc.go.html#line-1153" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1153">#L1153</a>: 			<b>gcController</b>.dedicatedMarkTime.Load() + <b>gcController</b>.fractionalMarkTime.Load(),
+		<a href="../src/runtime/mgc.go.html#line-1154" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1154">#L1154</a>: 			<b>gcController</b>.idleMarkTime.Load(),
+		<a href="../src/runtime/mgc.go.html#line-1167" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1167">#L1167</a>: 			<b>gcController</b>.lastHeapGoal&gt;&gt;20, " MB goal, ",
+		<a href="../src/runtime/mgc.go.html#line-1168" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1168">#L1168</a>: 			<b>gcController</b>.lastStackScan.Load()&gt;&gt;20, " MB stacks, ",
+		<a href="../src/runtime/mgc.go.html#line-1169" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1169">#L1169</a>: 			<b>gcController</b>.globalsScan.Load()&gt;&gt;20, " MB globals, ",
+		<a href="../src/runtime/mgc.go.html#line-1188" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1188">#L1188</a>: 	if <b>gcController</b>.heapGoal() &gt; minHeapForMetadataHugePages {
+		<a href="../src/runtime/mgc.go.html#line-1393" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1393">#L1393</a>: 		<b>gcController</b>.markWorkerStop(pp.gcMarkWorkerMode, duration)
+		<a href="../src/runtime/mgc.go.html#line-1535" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1535">#L1535</a>: 	<b>gcController</b>.resetLive(work.bytesMarked)
+		<a href="../src/runtime/mgc.go.html#line-1624" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1624">#L1624</a>: 	work.initialHeapLive = <b>gcController</b>.heapLive.Load()
+		<a href="../src/runtime/mgcmark.go.html#line-169">mgcmark.go#L169</a>: 		workCounter = &amp;<b>gcController</b>.globalsScanWork
+		<a href="../src/runtime/mgcmark.go.html#line-175" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-175">#L175</a>: 		workCounter = &amp;<b>gcController</b>.globalsScanWork
+		<a href="../src/runtime/mgcmark.go.html#line-197" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-197">#L197</a>: 		workCounter = &amp;<b>gcController</b>.stackScanWork
+		<a href="../src/runtime/mgcmark.go.html#line-430" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-430">#L430</a>: 	assistWorkPerByte := <b>gcController</b>.assistWorkPerByte.Load()
+		<a href="../src/runtime/mgcmark.go.html#line-431" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-431">#L431</a>: 	assistBytesPerWork := <b>gcController</b>.assistBytesPerWork.Load()
+		<a href="../src/runtime/mgcmark.go.html#line-445" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-445">#L445</a>: 	bgScanCredit := <b>gcController</b>.bgScanCredit.Load()
+		<a href="../src/runtime/mgcmark.go.html#line-455" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-455">#L455</a>: 		<b>gcController</b>.bgScanCredit.Add(-stolen)
+		<a href="../src/runtime/mgcmark.go.html#line-578" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-578">#L578</a>: 	assistBytesPerWork := <b>gcController</b>.assistBytesPerWork.Load()
+		<a href="../src/runtime/mgcmark.go.html#line-605" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-605">#L605</a>: 		<b>gcController</b>.assistTime.Add(pp.gcAssistTime)
+		<a href="../src/runtime/mgcmark.go.html#line-643" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-643">#L643</a>: 	if <b>gcController</b>.bgScanCredit.Load() &gt; 0 {
+		<a href="../src/runtime/mgcmark.go.html#line-672" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-672">#L672</a>: 		<b>gcController</b>.bgScanCredit.Add(scanWork)
+		<a href="../src/runtime/mgcmark.go.html#line-676" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-676">#L676</a>: 	assistBytesPerWork := <b>gcController</b>.assistBytesPerWork.Load()
+		<a href="../src/runtime/mgcmark.go.html#line-710" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-710">#L710</a>: 		assistWorkPerByte := <b>gcController</b>.assistWorkPerByte.Load()
+		<a href="../src/runtime/mgcmark.go.html#line-712" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-712">#L712</a>: 		<b>gcController</b>.bgScanCredit.Add(scanWork)
+		<a href="../src/runtime/mgcmark.go.html#line-1109" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-1109">#L1109</a>: 			<b>gcController</b>.heapScanWork.Add(gcw.heapScanWork)
+		<a href="../src/runtime/mgcmark.go.html#line-1129" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-1129">#L1129</a>: 		<b>gcController</b>.heapScanWork.Add(gcw.heapScanWork)
+		<a href="../src/runtime/mgcmark.go.html#line-1196" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-1196">#L1196</a>: 			<b>gcController</b>.heapScanWork.Add(gcw.heapScanWork)
+		<a href="../src/runtime/mgcpacer.go.html#line-88">mgcpacer.go#L88</a>: var <b>gcController</b> gcControllerState
+		<a href="../src/runtime/mgcpacer.go.html#line-460" class="path-duplicate">mgcpacer.go</a><a href="../src/runtime/mgcpacer.go.html#line-460">#L460</a>: 			" (scan ", <b>gcController</b>.heapScan.Load()&gt;&gt;20, " MB in ",
+		<a href="../src/runtime/mgcpacer.go.html#line-601" class="path-duplicate">mgcpacer.go</a><a href="../src/runtime/mgcpacer.go.html#line-601">#L601</a>: 	<b>gcController</b>.lastHeapGoal = c.heapGoal()
+		<a href="../src/runtime/mgcpacer.go.html#line-859" class="path-duplicate">mgcpacer.go</a><a href="../src/runtime/mgcpacer.go.html#line-859">#L859</a>: 		live := <b>gcController</b>.heapLive.Add(dHeapLive)
+		<a href="../src/runtime/mgcpacer.go.html#line-869" class="path-duplicate">mgcpacer.go</a><a href="../src/runtime/mgcpacer.go.html#line-869">#L869</a>: 			<b>gcController</b>.heapScan.Add(dHeapScan)
+		<a href="../src/runtime/mgcpacer.go.html#line-1263" class="path-duplicate">mgcpacer.go</a><a href="../src/runtime/mgcpacer.go.html#line-1263">#L1263</a>: 		out = <b>gcController</b>.setGCPercent(in)
+		<a href="../src/runtime/mgcpacer.go.html#line-1310" class="path-duplicate">mgcpacer.go</a><a href="../src/runtime/mgcpacer.go.html#line-1310">#L1310</a>: 		out = <b>gcController</b>.setMemoryLimit(in)
+		<a href="../src/runtime/mgcpacer.go.html#line-1428" class="path-duplicate">mgcpacer.go</a><a href="../src/runtime/mgcpacer.go.html#line-1428">#L1428</a>: 	<b>gcController</b>.commit(isSweepDone())
+		<a href="../src/runtime/mgcpacer.go.html#line-1432" class="path-duplicate">mgcpacer.go</a><a href="../src/runtime/mgcpacer.go.html#line-1432">#L1432</a>: 		<b>gcController</b>.revise()
+		<a href="../src/runtime/mgcpacer.go.html#line-1441" class="path-duplicate">mgcpacer.go</a><a href="../src/runtime/mgcpacer.go.html#line-1441">#L1441</a>: 	trigger, heapGoal := <b>gcController</b>.trigger()
+		<a href="../src/runtime/mgcpacer.go.html#line-1443" class="path-duplicate">mgcpacer.go</a><a href="../src/runtime/mgcpacer.go.html#line-1443">#L1443</a>: 	gcPaceScavenger(<b>gcController</b>.memoryLimit.Load(), heapGoal, <b>gcController</b>.lastHeapGoal)
+		<a href="../src/runtime/mgcscavenge.go.html#line-151">mgcscavenge.go#L151</a>: 	return <b>gcController</b>.heapInUse.load() + <b>gcController</b>.heapFree.load()
+		<a href="../src/runtime/mgcscavenge.go.html#line-179" class="path-duplicate">mgcscavenge.go</a><a href="../src/runtime/mgcscavenge.go.html#line-179">#L179</a>: 	mappedReady := <b>gcController</b>.mappedReady.Load()
+		<a href="../src/runtime/mgcscavenge.go.html#line-408" class="path-duplicate">mgcscavenge.go</a><a href="../src/runtime/mgcscavenge.go.html#line-408">#L408</a>: 				<b>gcController</b>.mappedReady.Load() &lt;= scavenge.memoryLimitGoal.Load()
+		<a href="../src/runtime/mgcscavenge.go.html#line-706" class="path-duplicate">mgcscavenge.go</a><a href="../src/runtime/mgcscavenge.go.html#line-706">#L706</a>: 		<b>gcController</b>.heapReleased.load()&gt;&gt;10, " KiB now, ",
+		<a href="../src/runtime/mgcscavenge.go.html#line-707" class="path-duplicate">mgcscavenge.go</a><a href="../src/runtime/mgcscavenge.go.html#line-707">#L707</a>: 		(<b>gcController</b>.heapInUse.load()*100)/heapRetained(), "% util",
+		<a href="../src/runtime/mgcscavenge.go.html#line-789" class="path-duplicate">mgcscavenge.go</a><a href="../src/runtime/mgcscavenge.go.html#line-789">#L789</a>: 				<b>gcController</b>.heapReleased.add(nbytes)
+		<a href="../src/runtime/mgcscavenge.go.html#line-790" class="path-duplicate">mgcscavenge.go</a><a href="../src/runtime/mgcscavenge.go.html#line-790">#L790</a>: 				<b>gcController</b>.heapFree.add(-nbytes)
+		<a href="../src/runtime/mgcsweep.go.html#line-179">mgcsweep.go#L179</a>: 				live := <b>gcController</b>.heapLive.Load()
+		<a href="../src/runtime/mgcsweep.go.html#line-749" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-749">#L749</a>: 			<b>gcController</b>.totalFree.Add(int64(nfreed) * int64(s.elemsize))
+		<a href="../src/runtime/mgcsweep.go.html#line-802" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-802">#L802</a>: 			<b>gcController</b>.totalFree.Add(int64(size))
+		<a href="../src/runtime/mgcsweep.go.html#line-894" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-894">#L894</a>: 	live := <b>gcController</b>.heapLive.Load()
+		<a href="../src/runtime/mgcsweep.go.html#line-958" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-958">#L958</a>: 		heapLiveBasis := <b>gcController</b>.heapLive.Load()
+		<a href="../src/runtime/mgcwork.go.html#line-144">mgcwork.go#L144</a>: 		<b>gcController</b>.enlistWorker()
+		<a href="../src/runtime/mgcwork.go.html#line-193" class="path-duplicate">mgcwork.go</a><a href="../src/runtime/mgcwork.go.html#line-193">#L193</a>: 		<b>gcController</b>.enlistWorker()
+		<a href="../src/runtime/mgcwork.go.html#line-279" class="path-duplicate">mgcwork.go</a><a href="../src/runtime/mgcwork.go.html#line-279">#L279</a>: 		<b>gcController</b>.heapScanWork.Add(w.heapScanWork)
+		<a href="../src/runtime/mgcwork.go.html#line-304" class="path-duplicate">mgcwork.go</a><a href="../src/runtime/mgcwork.go.html#line-304">#L304</a>: 		<b>gcController</b>.enlistWorker()
+		<a href="../src/runtime/mheap.go.html#line-1281">mheap.go#L1281</a>: 	if limit := <b>gcController</b>.memoryLimit.Load(); !gcCPULimiter.limiting() {
+		<a href="../src/runtime/mheap.go.html#line-1284" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1284">#L1284</a>: 		inuse := <b>gcController</b>.mappedReady.Load()
+		<a href="../src/runtime/mheap.go.html#line-1352" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1352">#L1352</a>: 		<b>gcController</b>.heapReleased.add(-int64(scav))
+		<a href="../src/runtime/mheap.go.html#line-1355" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1355">#L1355</a>: 	<b>gcController</b>.heapFree.add(-int64(nbytes - scav))
+		<a href="../src/runtime/mheap.go.html#line-1357" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1357">#L1357</a>: 		<b>gcController</b>.heapInUse.add(int64(nbytes))
+		<a href="../src/runtime/mheap.go.html#line-1485" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1485">#L1485</a>: 			inUse := <b>gcController</b>.heapFree.load() + <b>gcController</b>.heapReleased.load() + <b>gcController</b>.heapInUse.load()
+		<a href="../src/runtime/mheap.go.html#line-1502" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1502">#L1502</a>: 				sysMap(unsafe.Pointer(h.curArena.base), size, &amp;<b>gcController</b>.heapReleased)
+		<a href="../src/runtime/mheap.go.html#line-1533" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1533">#L1533</a>: 	sysMap(unsafe.Pointer(v), nBase-v, &amp;<b>gcController</b>.heapReleased)
+		<a href="../src/runtime/mheap.go.html#line-1620" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1620">#L1620</a>: 	<b>gcController</b>.heapFree.add(int64(nbytes))
+		<a href="../src/runtime/mheap.go.html#line-1622" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1622">#L1622</a>: 		<b>gcController</b>.heapInUse.add(-int64(nbytes))
+		<a href="../src/runtime/mstats.go.html#line-437">mstats.go#L437</a>: 	totalMapped := <b>gcController</b>.heapInUse.load() + <b>gcController</b>.heapFree.load() + <b>gcController</b>.heapReleased.load() +
+		<a href="../src/runtime/mstats.go.html#line-442" class="path-duplicate">mstats.go</a><a href="../src/runtime/mstats.go.html#line-442">#L442</a>: 	heapGoal := <b>gcController</b>.heapGoal()
+		<a href="../src/runtime/mstats.go.html#line-458" class="path-duplicate">mstats.go</a><a href="../src/runtime/mstats.go.html#line-458">#L458</a>: 	if <b>gcController</b>.heapInUse.load() != uint64(consStats.inHeap) {
+		<a href="../src/runtime/mstats.go.html#line-459" class="path-duplicate">mstats.go</a><a href="../src/runtime/mstats.go.html#line-459">#L459</a>: 		print("runtime: heapInUse=", <b>gcController</b>.heapInUse.load(), "\n")
+		<a href="../src/runtime/mstats.go.html#line-463" class="path-duplicate">mstats.go</a><a href="../src/runtime/mstats.go.html#line-463">#L463</a>: 	if <b>gcController</b>.heapReleased.load() != uint64(consStats.released) {
+		<a href="../src/runtime/mstats.go.html#line-464" class="path-duplicate">mstats.go</a><a href="../src/runtime/mstats.go.html#line-464">#L464</a>: 		print("runtime: heapReleased=", <b>gcController</b>.heapReleased.load(), "\n")
+		<a href="../src/runtime/mstats.go.html#line-468" class="path-duplicate">mstats.go</a><a href="../src/runtime/mstats.go.html#line-468">#L468</a>: 	heapRetained := <b>gcController</b>.heapInUse.load() + <b>gcController</b>.heapFree.load()
+		<a href="../src/runtime/mstats.go.html#line-475" class="path-duplicate">mstats.go</a><a href="../src/runtime/mstats.go.html#line-475">#L475</a>: 	if <b>gcController</b>.totalAlloc.Load() != totalAlloc {
+		<a href="../src/runtime/mstats.go.html#line-476" class="path-duplicate">mstats.go</a><a href="../src/runtime/mstats.go.html#line-476">#L476</a>: 		print("runtime: totalAlloc=", <b>gcController</b>.totalAlloc.Load(), "\n")
+		<a href="../src/runtime/mstats.go.html#line-480" class="path-duplicate">mstats.go</a><a href="../src/runtime/mstats.go.html#line-480">#L480</a>: 	if <b>gcController</b>.totalFree.Load() != totalFree {
+		<a href="../src/runtime/mstats.go.html#line-481" class="path-duplicate">mstats.go</a><a href="../src/runtime/mstats.go.html#line-481">#L481</a>: 		print("runtime: totalFree=", <b>gcController</b>.totalFree.Load(), "\n")
+		<a href="../src/runtime/mstats.go.html#line-488" class="path-duplicate">mstats.go</a><a href="../src/runtime/mstats.go.html#line-488">#L488</a>: 	if <b>gcController</b>.mappedReady.Load() != totalMapped-uint64(consStats.released) {
+		<a href="../src/runtime/mstats.go.html#line-489" class="path-duplicate">mstats.go</a><a href="../src/runtime/mstats.go.html#line-489">#L489</a>: 		print("runtime: mappedReady=", <b>gcController</b>.mappedReady.Load(), "\n")
+		<a href="../src/runtime/mstats.go.html#line-504" class="path-duplicate">mstats.go</a><a href="../src/runtime/mstats.go.html#line-504">#L504</a>: 	stats.HeapSys = <b>gcController</b>.heapInUse.load() + <b>gcController</b>.heapFree.load() + <b>gcController</b>.heapReleased.load()
+		<a href="../src/runtime/mstats.go.html#line-521" class="path-duplicate">mstats.go</a><a href="../src/runtime/mstats.go.html#line-521">#L521</a>: 	stats.HeapIdle = <b>gcController</b>.heapFree.load() + <b>gcController</b>.heapReleased.load()
+		<a href="../src/runtime/mstats.go.html#line-522" class="path-duplicate">mstats.go</a><a href="../src/runtime/mstats.go.html#line-522">#L522</a>: 	stats.HeapInuse = <b>gcController</b>.heapInUse.load()
+		<a href="../src/runtime/mstats.go.html#line-523" class="path-duplicate">mstats.go</a><a href="../src/runtime/mstats.go.html#line-523">#L523</a>: 	stats.HeapReleased = <b>gcController</b>.heapReleased.load()
+		<a href="../src/runtime/mstats.go.html#line-933" class="path-duplicate">mstats.go</a><a href="../src/runtime/mstats.go.html#line-933">#L933</a>: 		markAssistCpu = <b>gcController</b>.assistTime.Load()
+		<a href="../src/runtime/mstats.go.html#line-934" class="path-duplicate">mstats.go</a><a href="../src/runtime/mstats.go.html#line-934">#L934</a>: 		markDedicatedCpu = <b>gcController</b>.dedicatedMarkTime.Load()
+		<a href="../src/runtime/mstats.go.html#line-935" class="path-duplicate">mstats.go</a><a href="../src/runtime/mstats.go.html#line-935">#L935</a>: 		markFractionalCpu = <b>gcController</b>.fractionalMarkTime.Load()
+		<a href="../src/runtime/mstats.go.html#line-936" class="path-duplicate">mstats.go</a><a href="../src/runtime/mstats.go.html#line-936">#L936</a>: 		markIdleCpu = <b>gcController</b>.idleMarkTime.Load()
+		<a href="../src/runtime/proc.go.html#line-2926">proc.go#L2926</a>: 		gp, tnow := <b>gcController</b>.findRunnableGCWorker(pp, now)
+		<a href="../src/runtime/proc.go.html#line-3021" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-3021">#L3021</a>: 	if gcBlackenEnabled != 0 &amp;&amp; gcMarkWorkAvailable(pp) &amp;&amp; <b>gcController</b>.addIdleMarkWorker() {
+		<a href="../src/runtime/proc.go.html#line-3032" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-3032">#L3032</a>: 		<b>gcController</b>.removeIdleMarkWorker()
+		<a href="../src/runtime/proc.go.html#line-3380" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-3380">#L3380</a>: 	if atomic.Load(&amp;gcBlackenEnabled) == 0 || !<b>gcController</b>.needIdleMarkWorker() {
+		<a href="../src/runtime/proc.go.html#line-3412" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-3412">#L3412</a>: 	if gcBlackenEnabled == 0 || !<b>gcController</b>.addIdleMarkWorker() {
+		<a href="../src/runtime/proc.go.html#line-3422" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-3422">#L3422</a>: 		<b>gcController</b>.removeIdleMarkWorker()
+		<a href="../src/runtime/proc.go.html#line-3866" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-3866">#L3866</a>: 	<b>gcController</b>.addScannableStack(pp, -int64(gp.stack.hi-gp.stack.lo))
+		<a href="../src/runtime/proc.go.html#line-3888" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-3888">#L3888</a>: 		assistWorkPerByte := <b>gcController</b>.assistWorkPerByte.Load()
+		<a href="../src/runtime/proc.go.html#line-3890" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-3890">#L3890</a>: 		<b>gcController</b>.bgScanCredit.Add(scanCredit)
+		<a href="../src/runtime/proc.go.html#line-4559" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4559">#L4559</a>: 	<b>gcController</b>.addScannableStack(pp, int64(newg.stack.hi-newg.stack.lo))
+		<a href="../src/runtime/stack.go.html#line-871">stack.go#L871</a>: 	<b>gcController</b>.addScannableStack(getg().m.p.ptr(), int64(newsize)-int64(old.hi-old.lo))
+		<a href="../src/runtime/symtab.go.html#line-464">symtab.go#L464</a>: 			<b>gcController</b>.addGlobals(int64(scanDataSize + scanBSSSize))
+		<a href="../src/runtime/trace.go.html#line-1693">trace.go#L1693</a>: 	heapGoal := <b>gcController</b>.heapGoal()
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

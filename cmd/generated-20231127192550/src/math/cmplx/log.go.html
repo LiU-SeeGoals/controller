@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: log.go in package math/cmplx</title>
+<link href="../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	log.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../pkg/math/cmplx.html">math/cmplx</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">// Copyright 2010 The Go Authors. All rights reserved.</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment">// Use of this source code is governed by a BSD-style</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment">// license that can be found in the LICENSE file.</span></code></span>
+<span class="codeline" id="line-4"><code></code></span>
+<span class="codeline" id="line-5"><code><span class="keyword">package</span> cmplx</code></span>
+<span class="codeline" id="line-6"><code></code></span>
+<span class="codeline" id="line-7"><code><span class="keyword">import</span> <label for="i0"><span class="lit-string i0">"math"</span></label></code></span>
+<span class="codeline" id="line-8"><code></code></span>
+<span class="codeline" id="line-9"><code><span class="comment">// The original C code, the long comment, and the constants</span></code></span>
+<span class="codeline" id="line-10"><code><span class="comment">// below are from http://netlib.sandia.gov/cephes/c9x-complex/clog.c.</span></code></span>
+<span class="codeline" id="line-11"><code><span class="comment">// The go code is a simplified version of the original C.</span></code></span>
+<span class="codeline" id="line-12"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment">// Cephes Math Library Release 2.8:  June, 2000</span></code></span>
+<span class="codeline" id="line-14"><code><span class="comment">// Copyright 1984, 1987, 1989, 1992, 2000 by Stephen L. Moshier</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-16"><code><span class="comment">// The readme file at http://netlib.sandia.gov/cephes/ says:</span></code></span>
+<span class="codeline" id="line-17"><code><span class="comment">//    Some software in this archive may be from the book _Methods and</span></code></span>
+<span class="codeline" id="line-18"><code><span class="comment">// Programs for Mathematical Functions_ (Prentice-Hall or Simon &amp; Schuster</span></code></span>
+<span class="codeline" id="line-19"><code><span class="comment">// International, 1989) or from the Cephes Mathematical Library, a</span></code></span>
+<span class="codeline" id="line-20"><code><span class="comment">// commercial product. In either event, it is copyrighted by the author.</span></code></span>
+<span class="codeline" id="line-21"><code><span class="comment">// What you see here may be used freely but it comes with no support or</span></code></span>
+<span class="codeline" id="line-22"><code><span class="comment">// guarantee.</span></code></span>
+<span class="codeline" id="line-23"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-24"><code><span class="comment">//   The two known misprints in the book are repaired here in the</span></code></span>
+<span class="codeline" id="line-25"><code><span class="comment">// source listings for the gamma function and the incomplete beta</span></code></span>
+<span class="codeline" id="line-26"><code><span class="comment">// integral.</span></code></span>
+<span class="codeline" id="line-27"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-28"><code><span class="comment">//   Stephen L. Moshier</span></code></span>
+<span class="codeline" id="line-29"><code><span class="comment">//   moshier@na-net.ornl.gov</span></code></span>
+<span class="codeline" id="line-30"><code></code></span>
+<span class="codeline" id="line-31"><code><span class="comment">// Complex natural logarithm</span></code></span>
+<span class="codeline" id="line-32"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-33"><code><span class="comment">// DESCRIPTION:</span></code></span>
+<span class="codeline" id="line-34"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-35"><code><span class="comment">// Returns complex logarithm to the base e (2.718...) of</span></code></span>
+<span class="codeline" id="line-36"><code><span class="comment">// the complex argument z.</span></code></span>
+<span class="codeline" id="line-37"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-38"><code><span class="comment">// If</span></code></span>
+<span class="codeline" id="line-39"><code><span class="comment">//       z = x + iy, r = sqrt( x**2 + y**2 ),</span></code></span>
+<span class="codeline" id="line-40"><code><span class="comment">// then</span></code></span>
+<span class="codeline" id="line-41"><code><span class="comment">//       w = log(r) + i arctan(y/x).</span></code></span>
+<span class="codeline" id="line-42"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-43"><code><span class="comment">// The arctangent ranges from -PI to +PI.</span></code></span>
+<span class="codeline" id="line-44"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-45"><code><span class="comment">// ACCURACY:</span></code></span>
+<span class="codeline" id="line-46"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-47"><code><span class="comment">//                      Relative error:</span></code></span>
+<span class="codeline" id="line-48"><code><span class="comment">// arithmetic   domain     # trials      peak         rms</span></code></span>
+<span class="codeline" id="line-49"><code><span class="comment">//    DEC       -10,+10      7000       8.5e-17     1.9e-17</span></code></span>
+<span class="codeline" id="line-50"><code><span class="comment">//    IEEE      -10,+10     30000       5.0e-15     1.1e-16</span></code></span>
+<span class="codeline" id="line-51"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-52"><code><span class="comment">// Larger relative error can be observed for z near 1 +i0.</span></code></span>
+<span class="codeline" id="line-53"><code><span class="comment">// In IEEE arithmetic the peak absolute error is 5.2e-16, rms</span></code></span>
+<span class="codeline" id="line-54"><code><span class="comment">// absolute error 1.0e-16.</span></code></span>
+<span class="codeline" id="line-55"><code></code></span>
+<span class="codeline" id="line-56"><code><span class="comment">// Log returns the natural logarithm of x.</span></code></span>
+<span class="codeline" id="line-57"><code><span class="keyword">func</span> <label for="r0" class="ident"><a href="../../../pkg/math/cmplx.html#name-Log" class="ident">Log</a></label>(<label for="r1" class="ident">x</label> <a href="../../../pkg/builtin.html#name-complex128" class="ident">complex128</a>) <a href="../../../pkg/builtin.html#name-complex128" class="ident">complex128</a> {</code></span>
+<span class="codeline" id="line-58"><code>	<span class="keyword">return</span> <a href="../../../pkg/builtin.html#name-complex" class="ident">complex</a>(<a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../log.go.html#line-81" class="ident">Log</a>(<a href="abs.go.html#line-13" class="ident">Abs</a>(<label for="r1" class="ident">x</label>)), <a href="phase.go.html#line-11" class="ident">Phase</a>(<label for="r1" class="ident">x</label>))</code></span>
+<span class="codeline" id="line-59"><code>}</code></span>
+<span class="codeline" id="line-60"><code></code></span>
+<span class="codeline" id="line-61"><code><span class="comment">// Log10 returns the decimal logarithm of x.</span></code></span>
+<span class="codeline" id="line-62"><code><span class="keyword">func</span> <label for="r2" class="ident"><a href="../../../pkg/math/cmplx.html#name-Log10" class="ident">Log10</a></label>(<label for="r3" class="ident">x</label> <a href="../../../pkg/builtin.html#name-complex128" class="ident">complex128</a>) <a href="../../../pkg/builtin.html#name-complex128" class="ident">complex128</a> {</code></span>
+<span class="codeline" id="line-63"><code>	<label for="r4" class="ident">z</label> := <a href="#line-57" class="ident">Log</a>(<label for="r3" class="ident">x</label>)</code></span>
+<span class="codeline" id="line-64"><code>	<span class="keyword">return</span> <a href="../../../pkg/builtin.html#name-complex" class="ident">complex</a>(<a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../const.go.html#line-24" class="ident">Log10E</a>*<a href="../../../pkg/builtin.html#name-real" class="ident">real</a>(<label for="r4" class="ident">z</label>), <a href="../../../pkg/math.html" class="ident i0">math</a>.<a href="../const.go.html#line-24" class="ident">Log10E</a>*<a href="../../../pkg/builtin.html#name-imag" class="ident">imag</a>(<label for="r4" class="ident">z</label>))</code></span>
+<span class="codeline" id="line-65"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

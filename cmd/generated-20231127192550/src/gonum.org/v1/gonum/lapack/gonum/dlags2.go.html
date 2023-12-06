@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: dlags2.go in package gonum.org/v1/gonum/lapack/gonum</title>
+<link href="../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	dlags2.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10],
+input[id=r11]:checked ~pre label[for=r11],
+input[id=r12]:checked ~pre label[for=r12],
+input[id=r13]:checked ~pre label[for=r13],
+input[id=r14]:checked ~pre label[for=r14],
+input[id=r15]:checked ~pre label[for=r15],
+input[id=r16]:checked ~pre label[for=r16],
+input[id=r17]:checked ~pre label[for=r17],
+input[id=r18]:checked ~pre label[for=r18],
+input[id=r19]:checked ~pre label[for=r19],
+input[id=r20]:checked ~pre label[for=r20],
+input[id=r21]:checked ~pre label[for=r21],
+input[id=r22]:checked ~pre label[for=r22],
+input[id=r23]:checked ~pre label[for=r23],
+input[id=r24]:checked ~pre label[for=r24],
+input[id=r25]:checked ~pre label[for=r25],
+input[id=r26]:checked ~pre label[for=r26],
+input[id=r27]:checked ~pre label[for=r27],
+input[id=r28]:checked ~pre label[for=r28],
+input[id=r29]:checked ~pre label[for=r29],
+input[id=r30]:checked ~pre label[for=r30],
+input[id=r31]:checked ~pre label[for=r31],
+input[id=r32]:checked ~pre label[for=r32],
+input[id=r33]:checked ~pre label[for=r33],
+input[id=r34]:checked ~pre label[for=r34],
+input[id=r35]:checked ~pre label[for=r35],
+input[id=r36]:checked ~pre label[for=r36],
+input[id=r37]:checked ~pre label[for=r37],
+input[id=r38]:checked ~pre label[for=r38],
+input[id=r39]:checked ~pre label[for=r39],
+input[id=r40]:checked ~pre label[for=r40],
+input[id=r41]:checked ~pre label[for=r41],
+input[id=r42]:checked ~pre label[for=r42],
+input[id=r43]:checked ~pre label[for=r43],
+input[id=r44]:checked ~pre label[for=r44],
+input[id=r45]:checked ~pre label[for=r45],
+input[id=r46]:checked ~pre label[for=r46],
+input[id=r47]:checked ~pre label[for=r47],
+input[id=r48]:checked ~pre label[for=r48],
+input[id=r49]:checked ~pre label[for=r49],
+input[id=r50]:checked ~pre label[for=r50],
+input[id=r51]:checked ~pre label[for=r51],
+input[id=r52]:checked ~pre label[for=r52],
+input[id=r53]:checked ~pre label[for=r53],
+input[id=r54]:checked ~pre label[for=r54],
+input[id=r55]:checked ~pre label[for=r55],
+input[id=r56]:checked ~pre label[for=r56]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="r11" type="radio" name="g"/>
+<input id="r12" type="radio" name="g"/>
+<input id="r13" type="radio" name="g"/>
+<input id="r14" type="radio" name="g"/>
+<input id="r15" type="radio" name="g"/>
+<input id="r16" type="radio" name="g"/>
+<input id="r17" type="radio" name="g"/>
+<input id="r18" type="radio" name="g"/>
+<input id="r19" type="radio" name="g"/>
+<input id="r20" type="radio" name="g"/>
+<input id="r21" type="radio" name="g"/>
+<input id="r22" type="radio" name="g"/>
+<input id="r23" type="radio" name="g"/>
+<input id="r24" type="radio" name="g"/>
+<input id="r25" type="radio" name="g"/>
+<input id="r26" type="radio" name="g"/>
+<input id="r27" type="radio" name="g"/>
+<input id="r28" type="radio" name="g"/>
+<input id="r29" type="radio" name="g"/>
+<input id="r30" type="radio" name="g"/>
+<input id="r31" type="radio" name="g"/>
+<input id="r32" type="radio" name="g"/>
+<input id="r33" type="radio" name="g"/>
+<input id="r34" type="radio" name="g"/>
+<input id="r35" type="radio" name="g"/>
+<input id="r36" type="radio" name="g"/>
+<input id="r37" type="radio" name="g"/>
+<input id="r38" type="radio" name="g"/>
+<input id="r39" type="radio" name="g"/>
+<input id="r40" type="radio" name="g"/>
+<input id="r41" type="radio" name="g"/>
+<input id="r42" type="radio" name="g"/>
+<input id="r43" type="radio" name="g"/>
+<input id="r44" type="radio" name="g"/>
+<input id="r45" type="radio" name="g"/>
+<input id="r46" type="radio" name="g"/>
+<input id="r47" type="radio" name="g"/>
+<input id="r48" type="radio" name="g"/>
+<input id="r49" type="radio" name="g"/>
+<input id="r50" type="radio" name="g"/>
+<input id="r51" type="radio" name="g"/>
+<input id="r52" type="radio" name="g"/>
+<input id="r53" type="radio" name="g"/>
+<input id="r54" type="radio" name="g"/>
+<input id="r55" type="radio" name="g"/>
+<input id="r56" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">// Copyright ©2017 The Gonum Authors. All rights reserved.</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment">// Use of this source code is governed by a BSD-style</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment">// license that can be found in the LICENSE file.</span></code></span>
+<span class="codeline" id="line-4"><code></code></span>
+<span class="codeline" id="line-5"><code><span class="keyword">package</span> gonum</code></span>
+<span class="codeline" id="line-6"><code></code></span>
+<span class="codeline" id="line-7"><code><span class="keyword">import</span> <label for="i0"><span class="lit-string i0">"math"</span></label></code></span>
+<span class="codeline" id="line-8"><code></code></span>
+<span class="codeline" id="line-9"><code><span class="comment">// Dlags2 computes 2-by-2 orthogonal matrices U, V and Q with the</span></code></span>
+<span class="codeline" id="line-10"><code><span class="comment">// triangles of A and B specified by upper.</span></code></span>
+<span class="codeline" id="line-11"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-12"><code><span class="comment">// If upper is true</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-14"><code><span class="comment">//	Uᵀ*A*Q = Uᵀ*[ a1 a2 ]*Q = [ x  0 ]</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment">//	            [ 0  a3 ]     [ x  x ]</span></code></span>
+<span class="codeline" id="line-16"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-17"><code><span class="comment">// and</span></code></span>
+<span class="codeline" id="line-18"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-19"><code><span class="comment">//	Vᵀ*B*Q = Vᵀ*[ b1 b2 ]*Q = [ x  0 ]</span></code></span>
+<span class="codeline" id="line-20"><code><span class="comment">//	            [ 0  b3 ]     [ x  x ]</span></code></span>
+<span class="codeline" id="line-21"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-22"><code><span class="comment">// otherwise</span></code></span>
+<span class="codeline" id="line-23"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-24"><code><span class="comment">//	Uᵀ*A*Q = Uᵀ*[ a1 0  ]*Q = [ x  x ]</span></code></span>
+<span class="codeline" id="line-25"><code><span class="comment">//	            [ a2 a3 ]     [ 0  x ]</span></code></span>
+<span class="codeline" id="line-26"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-27"><code><span class="comment">// and</span></code></span>
+<span class="codeline" id="line-28"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-29"><code><span class="comment">//	Vᵀ*B*Q = Vᵀ*[ b1 0  ]*Q = [ x  x ]</span></code></span>
+<span class="codeline" id="line-30"><code><span class="comment">//	            [ b2 b3 ]     [ 0  x ].</span></code></span>
+<span class="codeline" id="line-31"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-32"><code><span class="comment">// The rows of the transformed A and B are parallel, where</span></code></span>
+<span class="codeline" id="line-33"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-34"><code><span class="comment">//	U = [  csu  snu ], V = [  csv snv ], Q = [  csq   snq ]</span></code></span>
+<span class="codeline" id="line-35"><code><span class="comment">//	    [ -snu  csu ]      [ -snv csv ]      [ -snq   csq ]</span></code></span>
+<span class="codeline" id="line-36"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-37"><code><span class="comment">// Dlags2 is an internal routine. It is exported for testing purposes.</span></code></span>
+<span class="codeline" id="line-38"><code><span class="keyword">func</span> (<label for="r0" class="ident">impl</label> <a href="lapack.go.html#line-12" class="ident">Implementation</a>) <label for="r1" class="ident"><a href="../../../../../../use/gonum.org/v1/gonum/lapack/gonum..Implementation.Dlags2.html" class="ident">Dlags2</a></label>(<label for="r2" class="ident">upper</label> <a href="../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>, <label for="r3" class="ident">a1</label>, <label for="r4" class="ident">a2</label>, <label for="r5" class="ident">a3</label>, <label for="r6" class="ident">b1</label>, <label for="r7" class="ident">b2</label>, <label for="r8" class="ident">b3</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>) (<label for="r9" class="ident">csu</label>, <label for="r10" class="ident">snu</label>, <label for="r11" class="ident">csv</label>, <label for="r12" class="ident">snv</label>, <label for="r13" class="ident">csq</label>, <label for="r14" class="ident">snq</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>) {</code></span>
+<span class="codeline" id="line-39"><code>	<span class="keyword">if</span> <label for="r2" class="ident">upper</label> {</code></span>
+<span class="codeline" id="line-40"><code>		<span class="comment">// Input matrices A and B are upper triangular matrices.</span></code></span>
+<span class="codeline" id="line-41"><code><span class="comment">		//</span></code></span>
+<span class="codeline" id="line-42"><code><span class="comment">		// Form matrix C = A*adj(B) = [ a b ]</span></code></span>
+<span class="codeline" id="line-43"><code><span class="comment">		//                            [ 0 d ]</span></code></span>
+<span class="codeline" id="line-44"><code>		<label for="r15" class="ident">a</label> := <label for="r3" class="ident">a1</label> * <label for="r8" class="ident">b3</label></code></span>
+<span class="codeline" id="line-45"><code>		<label for="r16" class="ident">d</label> := <label for="r5" class="ident">a3</label> * <label for="r6" class="ident">b1</label></code></span>
+<span class="codeline" id="line-46"><code>		<label for="r17" class="ident">b</label> := <label for="r4" class="ident">a2</label>*<label for="r6" class="ident">b1</label> - <label for="r3" class="ident">a1</label>*<label for="r7" class="ident">b2</label></code></span>
+<span class="codeline" id="line-47"><code></code></span>
+<span class="codeline" id="line-48"><code>		<span class="comment">// The SVD of real 2-by-2 triangular C.</span></code></span>
+<span class="codeline" id="line-49"><code><span class="comment">		//</span></code></span>
+<span class="codeline" id="line-50"><code><span class="comment">		//  [ csl -snl ]*[ a b ]*[  csr  snr ] = [ r 0 ]</span></code></span>
+<span class="codeline" id="line-51"><code><span class="comment">		//  [ snl  csl ] [ 0 d ] [ -snr  csr ]   [ 0 t ]</span></code></span>
+<span class="codeline" id="line-52"><code>		<label for="r18" class="ident">_</label>, <label for="r19" class="ident">_</label>, <label for="r20" class="ident">snr</label>, <label for="r21" class="ident">csr</label>, <label for="r22" class="ident">snl</label>, <label for="r23" class="ident">csl</label> := <label for="r0" class="ident">impl</label>.<a href="dlasv2.go.html#line-18" class="ident">Dlasv2</a>(<label for="r15" class="ident">a</label>, <label for="r17" class="ident">b</label>, <label for="r16" class="ident">d</label>)</code></span>
+<span class="codeline" id="line-53"><code></code></span>
+<span class="codeline" id="line-54"><code>		<span class="keyword">if</span> <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r23" class="ident">csl</label>) &gt;= <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r22" class="ident">snl</label>) || <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r21" class="ident">csr</label>) &gt;= <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r20" class="ident">snr</label>) {</code></span>
+<span class="codeline" id="line-55"><code>			<span class="comment">// Compute the [0, 0] and [0, 1] elements of Uᵀ*A and Vᵀ*B,</span></code></span>
+<span class="codeline" id="line-56"><code><span class="comment">			// and [0, 1] element of |U|ᵀ*|A| and |V|ᵀ*|B|.</span></code></span>
+<span class="codeline" id="line-57"><code></code></span>
+<span class="codeline" id="line-58"><code>			<label for="r24" class="ident">ua11r</label> := <label for="r23" class="ident">csl</label> * <label for="r3" class="ident">a1</label></code></span>
+<span class="codeline" id="line-59"><code>			<label for="r25" class="ident">ua12</label> := <label for="r23" class="ident">csl</label>*<label for="r4" class="ident">a2</label> + <label for="r22" class="ident">snl</label>*<label for="r5" class="ident">a3</label></code></span>
+<span class="codeline" id="line-60"><code></code></span>
+<span class="codeline" id="line-61"><code>			<label for="r26" class="ident">vb11r</label> := <label for="r21" class="ident">csr</label> * <label for="r6" class="ident">b1</label></code></span>
+<span class="codeline" id="line-62"><code>			<label for="r27" class="ident">vb12</label> := <label for="r21" class="ident">csr</label>*<label for="r7" class="ident">b2</label> + <label for="r20" class="ident">snr</label>*<label for="r8" class="ident">b3</label></code></span>
+<span class="codeline" id="line-63"><code></code></span>
+<span class="codeline" id="line-64"><code>			<label for="r28" class="ident">aua12</label> := <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r23" class="ident">csl</label>)*<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r4" class="ident">a2</label>) + <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r22" class="ident">snl</label>)*<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r5" class="ident">a3</label>)</code></span>
+<span class="codeline" id="line-65"><code>			<label for="r29" class="ident">avb12</label> := <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r21" class="ident">csr</label>)*<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r7" class="ident">b2</label>) + <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r20" class="ident">snr</label>)*<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r8" class="ident">b3</label>)</code></span>
+<span class="codeline" id="line-66"><code></code></span>
+<span class="codeline" id="line-67"><code>			<span class="comment">// Zero [0, 1] elements of Uᵀ*A and Vᵀ*B.</span></code></span>
+<span class="codeline" id="line-68"><code>			<span class="keyword">if</span> <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r24" class="ident">ua11r</label>)+<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r25" class="ident">ua12</label>) != <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-69"><code>				<span class="keyword">if</span> <label for="r28" class="ident">aua12</label>/(<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r24" class="ident">ua11r</label>)+<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r25" class="ident">ua12</label>)) &lt;= <label for="r29" class="ident">avb12</label>/(<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r26" class="ident">vb11r</label>)+<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r27" class="ident">vb12</label>)) {</code></span>
+<span class="codeline" id="line-70"><code>					<label for="r13" class="ident">csq</label>, <label for="r14" class="ident">snq</label>, _ = <label for="r0" class="ident">impl</label>.<a href="dlartg.go.html#line-23" class="ident">Dlartg</a>(-<label for="r24" class="ident">ua11r</label>, <label for="r25" class="ident">ua12</label>)</code></span>
+<span class="codeline" id="line-71"><code>				} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-72"><code>					<label for="r13" class="ident">csq</label>, <label for="r14" class="ident">snq</label>, _ = <label for="r0" class="ident">impl</label>.<a href="dlartg.go.html#line-23" class="ident">Dlartg</a>(-<label for="r26" class="ident">vb11r</label>, <label for="r27" class="ident">vb12</label>)</code></span>
+<span class="codeline" id="line-73"><code>				}</code></span>
+<span class="codeline" id="line-74"><code>			} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-75"><code>				<label for="r13" class="ident">csq</label>, <label for="r14" class="ident">snq</label>, _ = <label for="r0" class="ident">impl</label>.<a href="dlartg.go.html#line-23" class="ident">Dlartg</a>(-<label for="r26" class="ident">vb11r</label>, <label for="r27" class="ident">vb12</label>)</code></span>
+<span class="codeline" id="line-76"><code>			}</code></span>
+<span class="codeline" id="line-77"><code></code></span>
+<span class="codeline" id="line-78"><code>			<label for="r9" class="ident">csu</label> = <label for="r23" class="ident">csl</label></code></span>
+<span class="codeline" id="line-79"><code>			<label for="r10" class="ident">snu</label> = -<label for="r22" class="ident">snl</label></code></span>
+<span class="codeline" id="line-80"><code>			<label for="r11" class="ident">csv</label> = <label for="r21" class="ident">csr</label></code></span>
+<span class="codeline" id="line-81"><code>			<label for="r12" class="ident">snv</label> = -<label for="r20" class="ident">snr</label></code></span>
+<span class="codeline" id="line-82"><code>		} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-83"><code>			<span class="comment">// Compute the [1, 0] and [1, 1] elements of Uᵀ*A and Vᵀ*B,</span></code></span>
+<span class="codeline" id="line-84"><code><span class="comment">			// and [1, 1] element of |U|ᵀ*|A| and |V|ᵀ*|B|.</span></code></span>
+<span class="codeline" id="line-85"><code></code></span>
+<span class="codeline" id="line-86"><code>			<label for="r30" class="ident">ua21</label> := -<label for="r22" class="ident">snl</label> * <label for="r3" class="ident">a1</label></code></span>
+<span class="codeline" id="line-87"><code>			<label for="r31" class="ident">ua22</label> := -<label for="r22" class="ident">snl</label>*<label for="r4" class="ident">a2</label> + <label for="r23" class="ident">csl</label>*<label for="r5" class="ident">a3</label></code></span>
+<span class="codeline" id="line-88"><code></code></span>
+<span class="codeline" id="line-89"><code>			<label for="r32" class="ident">vb21</label> := -<label for="r20" class="ident">snr</label> * <label for="r6" class="ident">b1</label></code></span>
+<span class="codeline" id="line-90"><code>			<label for="r33" class="ident">vb22</label> := -<label for="r20" class="ident">snr</label>*<label for="r7" class="ident">b2</label> + <label for="r21" class="ident">csr</label>*<label for="r8" class="ident">b3</label></code></span>
+<span class="codeline" id="line-91"><code></code></span>
+<span class="codeline" id="line-92"><code>			<label for="r34" class="ident">aua22</label> := <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r22" class="ident">snl</label>)*<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r4" class="ident">a2</label>) + <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r23" class="ident">csl</label>)*<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r5" class="ident">a3</label>)</code></span>
+<span class="codeline" id="line-93"><code>			<label for="r35" class="ident">avb22</label> := <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r20" class="ident">snr</label>)*<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r7" class="ident">b2</label>) + <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r21" class="ident">csr</label>)*<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r8" class="ident">b3</label>)</code></span>
+<span class="codeline" id="line-94"><code></code></span>
+<span class="codeline" id="line-95"><code>			<span class="comment">// Zero [1, 1] elements of Uᵀ*A and Vᵀ*B, and then swap.</span></code></span>
+<span class="codeline" id="line-96"><code>			<span class="keyword">if</span> <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r30" class="ident">ua21</label>)+<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r31" class="ident">ua22</label>) != <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-97"><code>				<span class="keyword">if</span> <label for="r34" class="ident">aua22</label>/(<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r30" class="ident">ua21</label>)+<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r31" class="ident">ua22</label>)) &lt;= <label for="r35" class="ident">avb22</label>/(<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r32" class="ident">vb21</label>)+<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r33" class="ident">vb22</label>)) {</code></span>
+<span class="codeline" id="line-98"><code>					<label for="r13" class="ident">csq</label>, <label for="r14" class="ident">snq</label>, _ = <label for="r0" class="ident">impl</label>.<a href="dlartg.go.html#line-23" class="ident">Dlartg</a>(-<label for="r30" class="ident">ua21</label>, <label for="r31" class="ident">ua22</label>)</code></span>
+<span class="codeline" id="line-99"><code>				} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-100"><code>					<label for="r13" class="ident">csq</label>, <label for="r14" class="ident">snq</label>, _ = <label for="r0" class="ident">impl</label>.<a href="dlartg.go.html#line-23" class="ident">Dlartg</a>(-<label for="r32" class="ident">vb21</label>, <label for="r33" class="ident">vb22</label>)</code></span>
+<span class="codeline" id="line-101"><code>				}</code></span>
+<span class="codeline" id="line-102"><code>			} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-103"><code>				<label for="r13" class="ident">csq</label>, <label for="r14" class="ident">snq</label>, _ = <label for="r0" class="ident">impl</label>.<a href="dlartg.go.html#line-23" class="ident">Dlartg</a>(-<label for="r32" class="ident">vb21</label>, <label for="r33" class="ident">vb22</label>)</code></span>
+<span class="codeline" id="line-104"><code>			}</code></span>
+<span class="codeline" id="line-105"><code></code></span>
+<span class="codeline" id="line-106"><code>			<label for="r9" class="ident">csu</label> = <label for="r22" class="ident">snl</label></code></span>
+<span class="codeline" id="line-107"><code>			<label for="r10" class="ident">snu</label> = <label for="r23" class="ident">csl</label></code></span>
+<span class="codeline" id="line-108"><code>			<label for="r11" class="ident">csv</label> = <label for="r20" class="ident">snr</label></code></span>
+<span class="codeline" id="line-109"><code>			<label for="r12" class="ident">snv</label> = <label for="r21" class="ident">csr</label></code></span>
+<span class="codeline" id="line-110"><code>		}</code></span>
+<span class="codeline" id="line-111"><code>	} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-112"><code>		<span class="comment">// Input matrices A and B are lower triangular matrices</span></code></span>
+<span class="codeline" id="line-113"><code><span class="comment">		//</span></code></span>
+<span class="codeline" id="line-114"><code><span class="comment">		// Form matrix C = A*adj(B) = [ a 0 ]</span></code></span>
+<span class="codeline" id="line-115"><code><span class="comment">		//                            [ c d ]</span></code></span>
+<span class="codeline" id="line-116"><code>		<label for="r36" class="ident">a</label> := <label for="r3" class="ident">a1</label> * <label for="r8" class="ident">b3</label></code></span>
+<span class="codeline" id="line-117"><code>		<label for="r37" class="ident">d</label> := <label for="r5" class="ident">a3</label> * <label for="r6" class="ident">b1</label></code></span>
+<span class="codeline" id="line-118"><code>		<label for="r38" class="ident">c</label> := <label for="r4" class="ident">a2</label>*<label for="r8" class="ident">b3</label> - <label for="r5" class="ident">a3</label>*<label for="r7" class="ident">b2</label></code></span>
+<span class="codeline" id="line-119"><code></code></span>
+<span class="codeline" id="line-120"><code>		<span class="comment">// The SVD of real 2-by-2 triangular C</span></code></span>
+<span class="codeline" id="line-121"><code><span class="comment">		//</span></code></span>
+<span class="codeline" id="line-122"><code><span class="comment">		// [ csl -snl ]*[ a 0 ]*[  csr  snr ] = [ r 0 ]</span></code></span>
+<span class="codeline" id="line-123"><code><span class="comment">		// [ snl  csl ] [ c d ] [ -snr  csr ]   [ 0 t ]</span></code></span>
+<span class="codeline" id="line-124"><code>		<label for="r39" class="ident">_</label>, <label for="r40" class="ident">_</label>, <label for="r41" class="ident">snr</label>, <label for="r42" class="ident">csr</label>, <label for="r43" class="ident">snl</label>, <label for="r44" class="ident">csl</label> := <label for="r0" class="ident">impl</label>.<a href="dlasv2.go.html#line-18" class="ident">Dlasv2</a>(<label for="r36" class="ident">a</label>, <label for="r38" class="ident">c</label>, <label for="r37" class="ident">d</label>)</code></span>
+<span class="codeline" id="line-125"><code></code></span>
+<span class="codeline" id="line-126"><code>		<span class="keyword">if</span> <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r42" class="ident">csr</label>) &gt;= <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r41" class="ident">snr</label>) || <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r44" class="ident">csl</label>) &gt;= <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r43" class="ident">snl</label>) {</code></span>
+<span class="codeline" id="line-127"><code>			<span class="comment">// Compute the [1, 0] and [1, 1] elements of Uᵀ*A and Vᵀ*B,</span></code></span>
+<span class="codeline" id="line-128"><code><span class="comment">			// and [1, 0] element of |U|ᵀ*|A| and |V|ᵀ*|B|.</span></code></span>
+<span class="codeline" id="line-129"><code></code></span>
+<span class="codeline" id="line-130"><code>			<label for="r45" class="ident">ua21</label> := -<label for="r41" class="ident">snr</label>*<label for="r3" class="ident">a1</label> + <label for="r42" class="ident">csr</label>*<label for="r4" class="ident">a2</label></code></span>
+<span class="codeline" id="line-131"><code>			<label for="r46" class="ident">ua22r</label> := <label for="r42" class="ident">csr</label> * <label for="r5" class="ident">a3</label></code></span>
+<span class="codeline" id="line-132"><code></code></span>
+<span class="codeline" id="line-133"><code>			<label for="r47" class="ident">vb21</label> := -<label for="r43" class="ident">snl</label>*<label for="r6" class="ident">b1</label> + <label for="r44" class="ident">csl</label>*<label for="r7" class="ident">b2</label></code></span>
+<span class="codeline" id="line-134"><code>			<label for="r48" class="ident">vb22r</label> := <label for="r44" class="ident">csl</label> * <label for="r8" class="ident">b3</label></code></span>
+<span class="codeline" id="line-135"><code></code></span>
+<span class="codeline" id="line-136"><code>			<label for="r49" class="ident">aua21</label> := <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r41" class="ident">snr</label>)*<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r3" class="ident">a1</label>) + <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r42" class="ident">csr</label>)*<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r4" class="ident">a2</label>)</code></span>
+<span class="codeline" id="line-137"><code>			<label for="r50" class="ident">avb21</label> := <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r43" class="ident">snl</label>)*<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r6" class="ident">b1</label>) + <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r44" class="ident">csl</label>)*<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r7" class="ident">b2</label>)</code></span>
+<span class="codeline" id="line-138"><code></code></span>
+<span class="codeline" id="line-139"><code>			<span class="comment">// Zero [1, 0] elements of Uᵀ*A and Vᵀ*B.</span></code></span>
+<span class="codeline" id="line-140"><code>			<span class="keyword">if</span> (<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r45" class="ident">ua21</label>) + <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r46" class="ident">ua22r</label>)) != <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-141"><code>				<span class="keyword">if</span> <label for="r49" class="ident">aua21</label>/(<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r45" class="ident">ua21</label>)+<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r46" class="ident">ua22r</label>)) &lt;= <label for="r50" class="ident">avb21</label>/(<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r47" class="ident">vb21</label>)+<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r48" class="ident">vb22r</label>)) {</code></span>
+<span class="codeline" id="line-142"><code>					<label for="r13" class="ident">csq</label>, <label for="r14" class="ident">snq</label>, _ = <label for="r0" class="ident">impl</label>.<a href="dlartg.go.html#line-23" class="ident">Dlartg</a>(<label for="r46" class="ident">ua22r</label>, <label for="r45" class="ident">ua21</label>)</code></span>
+<span class="codeline" id="line-143"><code>				} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-144"><code>					<label for="r13" class="ident">csq</label>, <label for="r14" class="ident">snq</label>, _ = <label for="r0" class="ident">impl</label>.<a href="dlartg.go.html#line-23" class="ident">Dlartg</a>(<label for="r48" class="ident">vb22r</label>, <label for="r47" class="ident">vb21</label>)</code></span>
+<span class="codeline" id="line-145"><code>				}</code></span>
+<span class="codeline" id="line-146"><code>			} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-147"><code>				<label for="r13" class="ident">csq</label>, <label for="r14" class="ident">snq</label>, _ = <label for="r0" class="ident">impl</label>.<a href="dlartg.go.html#line-23" class="ident">Dlartg</a>(<label for="r48" class="ident">vb22r</label>, <label for="r47" class="ident">vb21</label>)</code></span>
+<span class="codeline" id="line-148"><code>			}</code></span>
+<span class="codeline" id="line-149"><code></code></span>
+<span class="codeline" id="line-150"><code>			<label for="r9" class="ident">csu</label> = <label for="r42" class="ident">csr</label></code></span>
+<span class="codeline" id="line-151"><code>			<label for="r10" class="ident">snu</label> = -<label for="r41" class="ident">snr</label></code></span>
+<span class="codeline" id="line-152"><code>			<label for="r11" class="ident">csv</label> = <label for="r44" class="ident">csl</label></code></span>
+<span class="codeline" id="line-153"><code>			<label for="r12" class="ident">snv</label> = -<label for="r43" class="ident">snl</label></code></span>
+<span class="codeline" id="line-154"><code>		} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-155"><code>			<span class="comment">// Compute the [0, 0] and [0, 1] elements of Uᵀ *A and Vᵀ *B,</span></code></span>
+<span class="codeline" id="line-156"><code><span class="comment">			// and [0, 0] element of |U|ᵀ*|A| and |V|ᵀ*|B|.</span></code></span>
+<span class="codeline" id="line-157"><code></code></span>
+<span class="codeline" id="line-158"><code>			<label for="r51" class="ident">ua11</label> := <label for="r42" class="ident">csr</label>*<label for="r3" class="ident">a1</label> + <label for="r41" class="ident">snr</label>*<label for="r4" class="ident">a2</label></code></span>
+<span class="codeline" id="line-159"><code>			<label for="r52" class="ident">ua12</label> := <label for="r41" class="ident">snr</label> * <label for="r5" class="ident">a3</label></code></span>
+<span class="codeline" id="line-160"><code></code></span>
+<span class="codeline" id="line-161"><code>			<label for="r53" class="ident">vb11</label> := <label for="r44" class="ident">csl</label>*<label for="r6" class="ident">b1</label> + <label for="r43" class="ident">snl</label>*<label for="r7" class="ident">b2</label></code></span>
+<span class="codeline" id="line-162"><code>			<label for="r54" class="ident">vb12</label> := <label for="r43" class="ident">snl</label> * <label for="r8" class="ident">b3</label></code></span>
+<span class="codeline" id="line-163"><code></code></span>
+<span class="codeline" id="line-164"><code>			<label for="r55" class="ident">aua11</label> := <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r42" class="ident">csr</label>)*<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r3" class="ident">a1</label>) + <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r41" class="ident">snr</label>)*<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r4" class="ident">a2</label>)</code></span>
+<span class="codeline" id="line-165"><code>			<label for="r56" class="ident">avb11</label> := <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r44" class="ident">csl</label>)*<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r6" class="ident">b1</label>) + <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r43" class="ident">snl</label>)*<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r7" class="ident">b2</label>)</code></span>
+<span class="codeline" id="line-166"><code></code></span>
+<span class="codeline" id="line-167"><code>			<span class="comment">// Zero [0, 0] elements of Uᵀ*A and Vᵀ*B, and then swap.</span></code></span>
+<span class="codeline" id="line-168"><code>			<span class="keyword">if</span> (<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r51" class="ident">ua11</label>) + <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r52" class="ident">ua12</label>)) != <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-169"><code>				<span class="keyword">if</span> <label for="r55" class="ident">aua11</label>/(<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r51" class="ident">ua11</label>)+<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r52" class="ident">ua12</label>)) &lt;= <label for="r56" class="ident">avb11</label>/(<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r53" class="ident">vb11</label>)+<a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r54" class="ident">vb12</label>)) {</code></span>
+<span class="codeline" id="line-170"><code>					<label for="r13" class="ident">csq</label>, <label for="r14" class="ident">snq</label>, _ = <label for="r0" class="ident">impl</label>.<a href="dlartg.go.html#line-23" class="ident">Dlartg</a>(<label for="r52" class="ident">ua12</label>, <label for="r51" class="ident">ua11</label>)</code></span>
+<span class="codeline" id="line-171"><code>				} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-172"><code>					<label for="r13" class="ident">csq</label>, <label for="r14" class="ident">snq</label>, _ = <label for="r0" class="ident">impl</label>.<a href="dlartg.go.html#line-23" class="ident">Dlartg</a>(<label for="r54" class="ident">vb12</label>, <label for="r53" class="ident">vb11</label>)</code></span>
+<span class="codeline" id="line-173"><code>				}</code></span>
+<span class="codeline" id="line-174"><code>			} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-175"><code>				<label for="r13" class="ident">csq</label>, <label for="r14" class="ident">snq</label>, _ = <label for="r0" class="ident">impl</label>.<a href="dlartg.go.html#line-23" class="ident">Dlartg</a>(<label for="r54" class="ident">vb12</label>, <label for="r53" class="ident">vb11</label>)</code></span>
+<span class="codeline" id="line-176"><code>			}</code></span>
+<span class="codeline" id="line-177"><code></code></span>
+<span class="codeline" id="line-178"><code>			<label for="r9" class="ident">csu</label> = <label for="r41" class="ident">snr</label></code></span>
+<span class="codeline" id="line-179"><code>			<label for="r10" class="ident">snu</label> = <label for="r42" class="ident">csr</label></code></span>
+<span class="codeline" id="line-180"><code>			<label for="r11" class="ident">csv</label> = <label for="r43" class="ident">snl</label></code></span>
+<span class="codeline" id="line-181"><code>			<label for="r12" class="ident">snv</label> = <label for="r44" class="ident">csl</label></code></span>
+<span class="codeline" id="line-182"><code>		}</code></span>
+<span class="codeline" id="line-183"><code>	}</code></span>
+<span class="codeline" id="line-184"><code></code></span>
+<span class="codeline" id="line-185"><code>	<span class="keyword">return</span> <label for="r9" class="ident">csu</label>, <label for="r10" class="ident">snu</label>, <label for="r11" class="ident">csv</label>, <label for="r12" class="ident">snv</label>, <label for="r13" class="ident">csq</label>, <label for="r14" class="ident">snq</label></code></span>
+<span class="codeline" id="line-186"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

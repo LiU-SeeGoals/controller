@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: vendor/golang.org/x/net/dns/dnsmessage.unpackUint16</title>
+<link href="../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../../../../../../pkg/vendor/golang.org/x/net/dns/dnsmessage.html">vendor/golang.org/x/net/dns/dnsmessage</a>.<a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-1789">unpackUint16</a></b></span>
+
+<span class="title">17 uses</span>
+
+	vendor/golang.org/x/net/dns/dnsmessage (current package)
+		<a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-441">message.go#L441</a>: 	if h.id, newOff, err = <b>unpackUint16</b>(msg, newOff); err != nil {
+		<a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-444" class="path-duplicate">message.go</a><a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-444">#L444</a>: 	if h.bits, newOff, err = <b>unpackUint16</b>(msg, newOff); err != nil {
+		<a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-447" class="path-duplicate">message.go</a><a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-447">#L447</a>: 	if h.questions, newOff, err = <b>unpackUint16</b>(msg, newOff); err != nil {
+		<a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-450" class="path-duplicate">message.go</a><a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-450">#L450</a>: 	if h.answers, newOff, err = <b>unpackUint16</b>(msg, newOff); err != nil {
+		<a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-453" class="path-duplicate">message.go</a><a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-453">#L453</a>: 	if h.authorities, newOff, err = <b>unpackUint16</b>(msg, newOff); err != nil {
+		<a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-456" class="path-duplicate">message.go</a><a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-456">#L456</a>: 	if h.additionals, newOff, err = <b>unpackUint16</b>(msg, newOff); err != nil {
+		<a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-1697" class="path-duplicate">message.go</a><a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-1697">#L1697</a>: 	if h.Length, newOff, err = <b>unpackUint16</b>(msg, newOff); err != nil {
+		<a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-1774" class="path-duplicate">message.go</a><a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-1774">#L1774</a>: 	length, newOff, err := <b>unpackUint16</b>(msg, newOff)
+		<a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-1789" class="path-duplicate">message.go</a><a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-1789">#L1789</a>: func <b>unpackUint16</b>(msg []byte, off int) (uint16, int, error) {
+		<a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-1809" class="path-duplicate">message.go</a><a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-1809">#L1809</a>: 	t, o, err := <b>unpackUint16</b>(msg, off)
+		<a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-1823" class="path-duplicate">message.go</a><a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-1823">#L1823</a>: 	c, o, err := <b>unpackUint16</b>(msg, off)
+		<a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-2278" class="path-duplicate">message.go</a><a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-2278">#L2278</a>: 	pref, off, err := <b>unpackUint16</b>(msg, off)
+		<a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-2513" class="path-duplicate">message.go</a><a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-2513">#L2513</a>: 	priority, off, err := <b>unpackUint16</b>(msg, off)
+		<a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-2517" class="path-duplicate">message.go</a><a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-2517">#L2517</a>: 	weight, off, err := <b>unpackUint16</b>(msg, off)
+		<a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-2521" class="path-duplicate">message.go</a><a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-2521">#L2521</a>: 	port, off, err := <b>unpackUint16</b>(msg, off)
+		<a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-2644" class="path-duplicate">message.go</a><a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-2644">#L2644</a>: 		o.Code, off, err = <b>unpackUint16</b>(msg, off)
+		<a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-2649" class="path-duplicate">message.go</a><a href="../../../../../../src/vendor/golang.org/x/net/dns/dnsmessage/message.go.html#line-2649">#L2649</a>: 		l, off, err = <b>unpackUint16</b>(msg, off)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

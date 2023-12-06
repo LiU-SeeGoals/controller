@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/blas.Float64Level1.Dswap</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../../pkg/gonum.org/v1/gonum/blas.html">gonum.org/v1/gonum/blas</a>.<a href="../../../../src/gonum.org/v1/gonum/blas/blas.go.html#line-130">Float64Level1</a>.<a href="../../../../src/gonum.org/v1/gonum/blas/blas.go.html#line-135">Dswap</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">38 uses</span>
+
+	gonum.org/v1/gonum/blas (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/blas/blas.go.html#line-135">blas.go#L135</a>: 	<b>Dswap</b>(n int, x []float64, incX int, y []float64, incY int)
+
+	<a href="../../../../pkg/gonum.org/v1/gonum/blas/blas64.html">gonum.org/v1/gonum/blas/blas64</a>
+		<a href="../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-164">blas64.go#L164</a>: 	blas64.<b>Dswap</b>(x.N, x.Data, x.Inc, y.Data, y.Inc)
+
+	<a href="../../../../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-489">dbdsqr.go#L489</a>: 				bi.<b>Dswap</b>(ncvt, vt[isub*ldvt:], 1, vt[(n-i-1)*ldvt:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-492" class="path-duplicate">dbdsqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-492">#L492</a>: 				bi.<b>Dswap</b>(nru, u[isub:], ldu, u[n-i-1:], ldu)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-495" class="path-duplicate">dbdsqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-495">#L495</a>: 				bi.<b>Dswap</b>(ncc, c[isub*ldc:], 1, c[(n-i-1)*ldc:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgebak.go.html#line-82">dgebak.go#L82</a>: 		bi.<b>Dswap</b>(m, v[i*ldv:], 1, v[k*ldv:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgebak.go.html#line-89" class="path-duplicate">dgebak.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgebak.go.html#line-89">#L89</a>: 		bi.<b>Dswap</b>(m, v[i*ldv:], 1, v[k*ldv:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgebal.go.html#line-124">dgebal.go#L124</a>: 				bi.<b>Dswap</b>(ihi+1, a[i:], lda, a[ihi:], lda)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgebal.go.html#line-125" class="path-duplicate">dgebal.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgebal.go.html#line-125">#L125</a>: 				bi.<b>Dswap</b>(n, a[i*lda:], 1, a[ihi*lda:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgebal.go.html#line-154" class="path-duplicate">dgebal.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgebal.go.html#line-154">#L154</a>: 				bi.<b>Dswap</b>(ihi+1, a[j:], lda, a[ilo:], lda)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgebal.go.html#line-155" class="path-duplicate">dgebal.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgebal.go.html#line-155">#L155</a>: 				bi.<b>Dswap</b>(n-ilo, a[j*lda+ilo:], 1, a[ilo*lda+ilo:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeqp3.go.html#line-108">dgeqp3.go#L108</a>: 			bi.<b>Dswap</b>(m, a[j:], lda, a[nfxd:], lda)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgetc2.go.html#line-93">dgetc2.go#L93</a>: 			bi.<b>Dswap</b>(n, a[ipv*lda:], 1, a[i*lda:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgetc2.go.html#line-99" class="path-duplicate">dgetc2.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgetc2.go.html#line-99">#L99</a>: 			bi.<b>Dswap</b>(n, a[jpv:], lda, a[i:], lda)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgetf2.go.html#line-68">dgetf2.go#L68</a>: 				bi.<b>Dswap</b>(n, a[j*lda:], 1, a[jp*lda:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgetri.go.html#line-111">dgetri.go#L111</a>: 			bi.<b>Dswap</b>(n, a[j:], lda, a[jp:], lda)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlapmr.go.html#line-65">dlapmr.go#L65</a>: 				bi.<b>Dswap</b>(n, x[j*ldx:], 1, x[in*ldx:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlapmr.go.html#line-82" class="path-duplicate">dlapmr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlapmr.go.html#line-82">#L82</a>: 				bi.<b>Dswap</b>(n, x[i*ldx:], 1, x[j*ldx:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlapmt.go.html#line-63">dlapmt.go#L63</a>: 				bi.<b>Dswap</b>(m, x[j:], ldx, x[i:], ldx)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlapmt.go.html#line-78" class="path-duplicate">dlapmt.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlapmt.go.html#line-78">#L78</a>: 				bi.<b>Dswap</b>(m, x[j:], ldx, x[i:], ldx)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqp2.go.html#line-82">dlaqp2.go#L82</a>: 			bi.<b>Dswap</b>(m, a[p:], lda, a[i:], lda)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqps.go.html#line-116">dlaqps.go#L116</a>: 			bi.<b>Dswap</b>(m, a[p:], lda, a[k:], lda)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqps.go.html#line-117" class="path-duplicate">dlaqps.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqps.go.html#line-117">#L117</a>: 			bi.<b>Dswap</b>(k, f[p*ldf:], 1, f[k*ldf:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaswp.go.html#line-48">dlaswp.go#L48</a>: 			bi.<b>Dswap</b>(n, a[k*lda:], 1, a[ipiv[k]*lda:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaswp.go.html#line-56" class="path-duplicate">dlaswp.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaswp.go.html#line-56">#L56</a>: 		bi.<b>Dswap</b>(n, a[k*lda:], 1, a[ipiv[k]*lda:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpstf2.go.html#line-130">dpstf2.go#L130</a>: 				bi.<b>Dswap</b>(j, a[j:], lda, a[pvt:], lda)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpstf2.go.html#line-132" class="path-duplicate">dpstf2.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpstf2.go.html#line-132">#L132</a>: 					bi.<b>Dswap</b>(n-pvt-1, a[j*lda+(pvt+1):], 1, a[pvt*lda+(pvt+1):], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpstf2.go.html#line-134" class="path-duplicate">dpstf2.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpstf2.go.html#line-134">#L134</a>: 				bi.<b>Dswap</b>(pvt-j-1, a[j*lda+(j+1):], 1, a[(j+1)*lda+pvt:], lda)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpstf2.go.html#line-181" class="path-duplicate">dpstf2.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpstf2.go.html#line-181">#L181</a>: 				bi.<b>Dswap</b>(j, a[j*lda:], 1, a[pvt*lda:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpstf2.go.html#line-183" class="path-duplicate">dpstf2.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpstf2.go.html#line-183">#L183</a>: 					bi.<b>Dswap</b>(n-pvt-1, a[(pvt+1)*lda+j:], lda, a[(pvt+1)*lda+pvt:], lda)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpstf2.go.html#line-185" class="path-duplicate">dpstf2.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpstf2.go.html#line-185">#L185</a>: 				bi.<b>Dswap</b>(pvt-j-1, a[(j+1)*lda+j:], lda, a[pvt*lda+(j+1):], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpstrf.go.html#line-140">dpstrf.go#L140</a>: 					bi.<b>Dswap</b>(j, a[j:], lda, a[pvt:], lda)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpstrf.go.html#line-142" class="path-duplicate">dpstrf.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpstrf.go.html#line-142">#L142</a>: 						bi.<b>Dswap</b>(n-pvt-1, a[j*lda+(pvt+1):], 1, a[pvt*lda+(pvt+1):], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpstrf.go.html#line-144" class="path-duplicate">dpstrf.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpstrf.go.html#line-144">#L144</a>: 					bi.<b>Dswap</b>(pvt-j-1, a[j*lda+(j+1):], 1, a[(j+1)*lda+pvt:], lda)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpstrf.go.html#line-205" class="path-duplicate">dpstrf.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpstrf.go.html#line-205">#L205</a>: 					bi.<b>Dswap</b>(j, a[j*lda:], 1, a[pvt*lda:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpstrf.go.html#line-207" class="path-duplicate">dpstrf.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpstrf.go.html#line-207">#L207</a>: 						bi.<b>Dswap</b>(n-pvt-1, a[(pvt+1)*lda+j:], lda, a[(pvt+1)*lda+pvt:], lda)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpstrf.go.html#line-209" class="path-duplicate">dpstrf.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpstrf.go.html#line-209">#L209</a>: 					bi.<b>Dswap</b>(pvt-j-1, a[(j+1)*lda+j:], lda, a[pvt*lda+(j+1):], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-129">dsteqr.go#L129</a>: 						bi.<b>Dswap</b>(n, z[i:], ldz, z[k:], ldz)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

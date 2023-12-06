@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/mat.TriDense</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-32">TriDense</a></b></span>
+
+<span class="title">63 uses</span>
+
+	gonum.org/v1/gonum/mat (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-52">cholesky.go#L52</a>: 	chol *<b>TriDense</b>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-328" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-328">#L328</a>: func (c *Cholesky) UTo(dst *<b>TriDense</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-355" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-355">#L355</a>: func (c *Cholesky) LTo(dst *<b>TriDense</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-395" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-395">#L395</a>: 	u := &amp;<b>TriDense</b>{
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-431" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-431">#L431</a>: 	u := &amp;<b>TriDense</b>{
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-959" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-959">#L959</a>: 	chol          *<b>TriDense</b> // The factor U
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-199">dense.go#L199</a>: func (m *Dense) asTriDense(n int, diag blas.Diag, uplo blas.Uplo) *<b>TriDense</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-200" class="path-duplicate">dense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-200">#L200</a>: 	return &amp;<b>TriDense</b>{
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-333">dense_arithmetic.go#L333</a>: 		case *<b>TriDense</b>:
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-392" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-392">#L392</a>: 		case *<b>TriDense</b>:
+		<a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-147">index_no_bound_checks.go#L147</a>: func (t *<b>TriDense</b>) At(i, j int) float64 {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-157" class="path-duplicate">index_no_bound_checks.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-157">#L157</a>: func (t *<b>TriDense</b>) at(i, j int) float64 {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-167" class="path-duplicate">index_no_bound_checks.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-167">#L167</a>: func (t *<b>TriDense</b>) SetTri(i, j int, v float64) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-181" class="path-duplicate">index_no_bound_checks.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-181">#L181</a>: func (t *<b>TriDense</b>) set(i, j int, v float64) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-110">lq.go#L110</a>: 	t := &amp;<b>TriDense</b>{
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-258">lu.go#L258</a>: func (lu *LU) LTo(dst *<b>TriDense</b>) *<b>TriDense</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-294" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-294">#L294</a>: func (lu *LU) UTo(dst *<b>TriDense</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-241">matrix.go#L241</a>: 	case *DiagDense, *SymBandDense, *TriBandDense, *BandDense, *<b>TriDense</b>, *SymDense, *Dense, *VecDense, *Tridiag:
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-269" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-269">#L269</a>: 		var t <b>TriDense</b>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-67">pool.go#L67</a>: 			return &amp;<b>TriDense</b>{mat: blas64.Triangular{
+		<a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-149" class="path-duplicate">pool.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-149">#L149</a>: func getTriDenseWorkspace(n int, kind TriKind, clear bool) *<b>TriDense</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-152" class="path-duplicate">pool.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-152">#L152</a>: 	t := poolTriDense[poolFor(l)].Get().(*<b>TriDense</b>)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-174" class="path-duplicate">pool.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-174">#L174</a>: func putTriWorkspace(t *<b>TriDense</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-110">qr.go#L110</a>: 	t := &amp;<b>TriDense</b>{
+		<a href="../../../../src/gonum.org/v1/gonum/mat/shadow.go.html#line-119">shadow.go#L119</a>: func (t *<b>TriDense</b>) checkOverlap(a blas64.General) bool {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/shadow.go.html#line-123" class="path-duplicate">shadow.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/shadow.go.html#line-123">#L123</a>: func (t *<b>TriDense</b>) checkOverlapMatrix(a Matrix) bool {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-17">triangular.go#L17</a>: 	triDense *<b>TriDense</b>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-32" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-32">#L32</a>: type <b>TriDense</b> struct {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-122" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-122">#L122</a>: func NewTriDense(n int, kind TriKind, data []float64) *<b>TriDense</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-139" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-139">#L139</a>: 	return &amp;<b>TriDense</b>{
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-151" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-151">#L151</a>: func (t *<b>TriDense</b>) Dims() (r, c int) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-157" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-157">#L157</a>: func (t *<b>TriDense</b>) Triangle() (n int, kind TriKind) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-161" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-161">#L161</a>: func (t *<b>TriDense</b>) isUpper() bool {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-165" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-165">#L165</a>: func (t *<b>TriDense</b>) triKind() TriKind {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-184" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-184">#L184</a>: func (t *<b>TriDense</b>) asSymBlas() blas64.Symmetric {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-197" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-197">#L197</a>: func (t *<b>TriDense</b>) T() Matrix {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-202" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-202">#L202</a>: func (t *<b>TriDense</b>) TTri() Triangular {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-206" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-206">#L206</a>: func (t *<b>TriDense</b>) RawTriangular() blas64.Triangular {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-215" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-215">#L215</a>: func (t *<b>TriDense</b>) SetRawTriangular(mat blas64.Triangular) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-228" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-228">#L228</a>: func (t *<b>TriDense</b>) Reset() {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-238" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-238">#L238</a>: func (t *<b>TriDense</b>) Zero() {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-253" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-253">#L253</a>: func (t *<b>TriDense</b>) IsEmpty() bool {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-277" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-277">#L277</a>: func (t *<b>TriDense</b>) ReuseAsTri(n int, kind TriKind) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-293" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-293">#L293</a>: func (t *<b>TriDense</b>) reuseAsNonZeroed(n int, kind TriKind) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-328" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-328">#L328</a>: func (t *<b>TriDense</b>) reuseAsZeroed(n int, kind TriKind) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-364" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-364">#L364</a>: func (t *<b>TriDense</b>) isolatedWorkspace(a Triangular) (w *<b>TriDense</b>, restore func()) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-377" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-377">#L377</a>: func (t *<b>TriDense</b>) DiagView() Diagonal {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-397" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-397">#L397</a>: func (t *<b>TriDense</b>) Copy(a Matrix) (r, c int) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-457" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-457">#L457</a>: func (t *<b>TriDense</b>) InverseTri(a Triangular) error {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-483" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-483">#L483</a>: func (t *<b>TriDense</b>) MulTri(a, b Triangular) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-558" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-558">#L558</a>: func (t *<b>TriDense</b>) ScaleTri(f float64, a Triangular) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-609" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-609">#L609</a>: func (t *<b>TriDense</b>) SliceTri(i, k int) Triangular {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-613" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-613">#L613</a>: func (t *<b>TriDense</b>) sliceTri(i, k int) *<b>TriDense</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-632" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-632">#L632</a>: func (t *<b>TriDense</b>) Norm(norm float64) float64 {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-648" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-648">#L648</a>: func (t *<b>TriDense</b>) Trace() float64 {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-661" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-661">#L661</a>: func copySymIntoTriangle(t *<b>TriDense</b>, s Symmetric) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-715" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-715">#L715</a>: func (t *<b>TriDense</b>) DoNonZero(fn func(i, j int, v float64)) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-739" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-739">#L739</a>: func (t *<b>TriDense</b>) DoRowNonZero(i int, fn func(i, j int, v float64)) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-762" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-762">#L762</a>: func (t *<b>TriDense</b>) DoColNonZero(j int, fn func(i, j int, v float64)) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-658">vector.go#L658</a>: 	case *<b>TriDense</b>:
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

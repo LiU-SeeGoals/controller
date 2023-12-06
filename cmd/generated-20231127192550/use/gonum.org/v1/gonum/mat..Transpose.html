@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/mat.Transpose</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-57">Transpose</a></b></span>
+
+<span class="title">14 uses</span>
+
+	gonum.org/v1/gonum/mat (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-187">band.go#L187</a>: 	return <b>Transpose</b>{b}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-240">dense.go#L240</a>: 	return <b>Transpose</b>{m}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-51">matrix.go#L51</a>: 	_ Matrix       = <b>Transpose</b>{}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-52" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-52">#L52</a>: 	_ Untransposer = <b>Transpose</b>{}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-57" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-57">#L57</a>: type <b>Transpose</b> struct {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-63" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-63">#L63</a>: func (t <b>Transpose</b>) At(i, j int) float64 {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-70" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-70">#L70</a>: func (t <b>Transpose</b>) Dims() (r, c int) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-76" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-76">#L76</a>: func (t <b>Transpose</b>) T() Matrix {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-81" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-81">#L81</a>: func (t <b>Transpose</b>) Untranspose() Matrix {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-361">svd.go#L361</a>: func (m repVector) T() Matrix { return <b>Transpose</b>{m} }
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-198">triangular.go#L198</a>: 	return <b>Transpose</b>{t}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-250">triband.go#L250</a>: 	return <b>Transpose</b>{t}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-88">tridiag.go#L88</a>: 	return <b>Transpose</b>{a}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-175">vector.go#L175</a>: 	return <b>Transpose</b>{v}
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

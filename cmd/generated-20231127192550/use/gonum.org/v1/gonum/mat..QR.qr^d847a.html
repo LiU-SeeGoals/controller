@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/mat.QR.qr</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-19">QR</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-20">qr</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">25 uses</span>
+
+	gonum.org/v1/gonum/mat (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-20">qr.go#L20</a>: 	<b>qr</b>   *Dense
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-33" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-33">#L33</a>: 	n := qr.<b>qr</b>.mat.Cols
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-36" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-36">#L36</a>: 	r := qr.<b>qr</b>.asTriDense(n, blas.NonUnit, blas.Upper)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-59" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-59">#L59</a>: 	if qr.<b>qr</b> == nil {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-60" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-60">#L60</a>: 		qr.<b>qr</b> = &amp;Dense{}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-62" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-62">#L62</a>: 	qr.<b>qr</b>.CloneFrom(a)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-65" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-65">#L65</a>: 	lapack64.Geqrf(qr.<b>qr</b>.mat, qr.tau, work, -1)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-67" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-67">#L67</a>: 	lapack64.Geqrf(qr.<b>qr</b>.mat, qr.tau, work, len(work))
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-74" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-74">#L74</a>: 	return qr.<b>qr</b> != nil &amp;&amp; !qr.<b>qr</b>.IsEmpty()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-99" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-99">#L99</a>: 	r, c := qr.<b>qr</b>.Dims()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-113" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-113">#L113</a>: 			Stride: qr.<b>qr</b>.mat.Stride,
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-114" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-114">#L114</a>: 			Data:   qr.<b>qr</b>.mat.Data,
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-118" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-118">#L118</a>: 		cap: qr.<b>qr</b>.capCols,
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-138" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-138">#L138</a>: 	r, _ := qr.<b>qr</b>.Dims()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-156" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-156">#L156</a>: 	lapack64.Ormqr(blas.Left, blas.NoTrans, qr.<b>qr</b>.mat, qr.tau, dst.mat, work, -1)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-158" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-158">#L158</a>: 	lapack64.Ormqr(blas.Left, blas.NoTrans, qr.<b>qr</b>.mat, qr.tau, dst.mat, work, len(work))
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-179" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-179">#L179</a>: 	r, c := qr.<b>qr</b>.Dims()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-201" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-201">#L201</a>: 	t := qr.<b>qr</b>.asTriDense(qr.<b>qr</b>.mat.Cols, blas.NonUnit, blas.Upper).mat
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-211" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-211">#L211</a>: 		lapack64.Ormqr(blas.Left, blas.NoTrans, qr.<b>qr</b>.mat, qr.tau, w.mat, work, -1)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-213" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-213">#L213</a>: 		lapack64.Ormqr(blas.Left, blas.NoTrans, qr.<b>qr</b>.mat, qr.tau, w.mat, work, len(work))
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-217" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-217">#L217</a>: 		lapack64.Ormqr(blas.Left, blas.Trans, qr.<b>qr</b>.mat, qr.tau, w.mat, work, -1)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-219" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-219">#L219</a>: 		lapack64.Ormqr(blas.Left, blas.Trans, qr.<b>qr</b>.mat, qr.tau, w.mat, work, len(work))
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-247" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-247">#L247</a>: 	r, c := qr.<b>qr</b>.Dims()
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

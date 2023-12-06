@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/lapack.RowWise</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">const <b><a href="../../../../pkg/gonum.org/v1/gonum/lapack.html">gonum.org/v1/gonum/lapack</a>.<a href="../../../../src/gonum.org/v1/gonum/lapack/lapack.go.html#line-67">RowWise</a></b></span>
+
+<span class="title">20 uses</span>
+
+	gonum.org/v1/gonum/lapack (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/lapack.go.html#line-67">lapack.go#L67</a>: 	<b>RowWise</b>    StoreV = 'R' // Reflector stored in a row of the matrix.
+
+	<a href="../../../../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgelqf.go.html#line-79">dgelqf.go#L79</a>: 				impl.Dlarft(lapack.Forward, lapack.<b>RowWise</b>, n-i, ib,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgelqf.go.html#line-83" class="path-duplicate">dgelqf.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgelqf.go.html#line-83">#L83</a>: 				impl.Dlarfb(blas.Right, blas.NoTrans, lapack.Forward, lapack.<b>RowWise</b>,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgerqf.go.html#line-111">dgerqf.go#L111</a>: 				impl.Dlarft(lapack.Backward, lapack.<b>RowWise</b>,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgerqf.go.html#line-116" class="path-duplicate">dgerqf.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgerqf.go.html#line-116">#L116</a>: 				impl.Dlarfb(blas.Right, blas.NoTrans, lapack.Backward, lapack.<b>RowWise</b>,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-82">dlarfb.go#L82</a>: 	case store != lapack.ColumnWise &amp;&amp; store != lapack.<b>RowWise</b>:
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-92" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-92">#L92</a>: 	case store == lapack.<b>RowWise</b> &amp;&amp; ldv &lt; max(1, nv):
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-113" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-113">#L113</a>: 	case store == lapack.<b>RowWise</b> &amp;&amp; len(v) &lt; (k-1)*ldv+nv:
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarft.go.html#line-36">dlarft.go#L36</a>: 	if store == lapack.<b>RowWise</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarft.go.html#line-42" class="path-duplicate">dlarft.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarft.go.html#line-42">#L42</a>: 	case store != lapack.<b>RowWise</b> &amp;&amp; store != lapack.ColumnWise:
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dorglq.go.html#line-103">dorglq.go#L103</a>: 				impl.Dlarft(lapack.Forward, lapack.<b>RowWise</b>,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dorglq.go.html#line-109" class="path-duplicate">dorglq.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dorglq.go.html#line-109">#L109</a>: 				impl.Dlarfb(blas.Right, blas.Trans, lapack.Forward, lapack.<b>RowWise</b>,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dormlq.go.html#line-122">dormlq.go#L122</a>: 			impl.Dlarft(lapack.Forward, lapack.<b>RowWise</b>, m-i, ib,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dormlq.go.html#line-126" class="path-duplicate">dormlq.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dormlq.go.html#line-126">#L126</a>: 			impl.Dlarfb(side, transt, lapack.Forward, lapack.<b>RowWise</b>, m-i, n, ib,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dormlq.go.html#line-136" class="path-duplicate">dormlq.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dormlq.go.html#line-136">#L136</a>: 			impl.Dlarft(lapack.Forward, lapack.<b>RowWise</b>, m-i, ib,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dormlq.go.html#line-140" class="path-duplicate">dormlq.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dormlq.go.html#line-140">#L140</a>: 			impl.Dlarfb(side, transt, lapack.Forward, lapack.<b>RowWise</b>, m-i, n, ib,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dormlq.go.html#line-150" class="path-duplicate">dormlq.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dormlq.go.html#line-150">#L150</a>: 			impl.Dlarft(lapack.Forward, lapack.<b>RowWise</b>, n-i, ib,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dormlq.go.html#line-154" class="path-duplicate">dormlq.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dormlq.go.html#line-154">#L154</a>: 			impl.Dlarfb(side, transt, lapack.Forward, lapack.<b>RowWise</b>, m, n-i, ib,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dormlq.go.html#line-164" class="path-duplicate">dormlq.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dormlq.go.html#line-164">#L164</a>: 			impl.Dlarft(lapack.Forward, lapack.<b>RowWise</b>, n-i, ib,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dormlq.go.html#line-168" class="path-duplicate">dormlq.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dormlq.go.html#line-168">#L168</a>: 			impl.Dlarfb(side, transt, lapack.Forward, lapack.<b>RowWise</b>, m, n-i, ib,
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

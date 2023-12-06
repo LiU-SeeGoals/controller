@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/lapack.General</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">const <b><a href="../../../../pkg/gonum.org/v1/gonum/lapack.html">gonum.org/v1/gonum/lapack</a>.<a href="../../../../src/gonum.org/v1/gonum/lapack/lapack.go.html#line-84">General</a></b></span>
+
+<span class="title">43 uses</span>
+
+	gonum.org/v1/gonum/lapack (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/lapack.go.html#line-84">lapack.go#L84</a>: 	<b>General</b>  MatrixType = 'G' // A general dense matrix.
+
+	<a href="../../../../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-160">dgeev.go#L160</a>: 		impl.Dlascl(lapack.<b>General</b>, 0, 0, anrm, cscale, n, n, a, lda)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-209" class="path-duplicate">dgeev.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-209">#L209</a>: 			impl.Dlascl(lapack.<b>General</b>, 0, 0, cscale, anrm, n-first, 1, wr[first:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-210" class="path-duplicate">dgeev.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-210">#L210</a>: 			impl.Dlascl(lapack.<b>General</b>, 0, 0, cscale, anrm, n-first, 1, wi[first:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-211" class="path-duplicate">dgeev.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-211">#L211</a>: 			impl.Dlascl(lapack.<b>General</b>, 0, 0, cscale, anrm, ilo, 1, wr, 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-212" class="path-duplicate">dgeev.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-212">#L212</a>: 			impl.Dlascl(lapack.<b>General</b>, 0, 0, cscale, anrm, ilo, 1, wi, 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-281" class="path-duplicate">dgeev.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-281">#L281</a>: 		impl.Dlascl(lapack.<b>General</b>, 0, 0, cscale, anrm, n-first, 1, wr[first:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-282" class="path-duplicate">dgeev.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-282">#L282</a>: 		impl.Dlascl(lapack.<b>General</b>, 0, 0, cscale, anrm, n-first, 1, wi[first:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgels.go.html#line-108">dgels.go#L108</a>: 		impl.Dlascl(lapack.<b>General</b>, 0, 0, anrm, smlnum, m, n, a, lda)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgels.go.html#line-111" class="path-duplicate">dgels.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgels.go.html#line-111">#L111</a>: 		impl.Dlascl(lapack.<b>General</b>, 0, 0, anrm, bignum, m, n, a, lda)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgels.go.html#line-124" class="path-duplicate">dgels.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgels.go.html#line-124">#L124</a>: 		impl.Dlascl(lapack.<b>General</b>, 0, 0, bnrm, smlnum, brow, nrhs, b, ldb)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgels.go.html#line-127" class="path-duplicate">dgels.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgels.go.html#line-127">#L127</a>: 		impl.Dlascl(lapack.<b>General</b>, 0, 0, bnrm, bignum, brow, nrhs, b, ldb)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgels.go.html#line-206" class="path-duplicate">dgels.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgels.go.html#line-206">#L206</a>: 		impl.Dlascl(lapack.<b>General</b>, 0, 0, anrm, smlnum, scllen, nrhs, b, ldb)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgels.go.html#line-209" class="path-duplicate">dgels.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgels.go.html#line-209">#L209</a>: 		impl.Dlascl(lapack.<b>General</b>, 0, 0, anrm, bignum, scllen, nrhs, b, ldb)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgels.go.html#line-212" class="path-duplicate">dgels.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgels.go.html#line-212">#L212</a>: 		impl.Dlascl(lapack.<b>General</b>, 0, 0, smlnum, bnrm, scllen, nrhs, b, ldb)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgels.go.html#line-215" class="path-duplicate">dgels.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgels.go.html#line-215">#L215</a>: 		impl.Dlascl(lapack.<b>General</b>, 0, 0, bignum, bnrm, scllen, nrhs, b, ldb)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-391">dgesvd.go#L391</a>: 		impl.Dlascl(lapack.<b>General</b>, 0, 0, anrm, smlnum, m, n, a, lda)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-394" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-394">#L394</a>: 		impl.Dlascl(lapack.<b>General</b>, 0, 0, anrm, bignum, m, n, a, lda)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-1364" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-1364">#L1364</a>: 			impl.Dlascl(lapack.<b>General</b>, 0, 0, bignum, anrm, 1, minmn, s, minmn)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-1367" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-1367">#L1367</a>: 			impl.Dlascl(lapack.<b>General</b>, 0, 0, bignum, anrm, 1, minmn-1, work[1:], minmn)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-1370" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-1370">#L1370</a>: 			impl.Dlascl(lapack.<b>General</b>, 0, 0, smlnum, anrm, 1, minmn, s, minmn)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-1373" class="path-duplicate">dgesvd.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-1373">#L1373</a>: 			impl.Dlascl(lapack.<b>General</b>, 0, 0, smlnum, anrm, 1, minmn-1, work[1:], minmn)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlascl.go.html#line-25">dlascl.go#L25</a>: 	case lapack.<b>General</b>, lapack.UpperTri, lapack.LowerTri:
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlascl.go.html#line-48" class="path-duplicate">dlascl.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlascl.go.html#line-48">#L48</a>: 	case lapack.<b>General</b>, lapack.UpperTri, lapack.LowerTri:
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlascl.go.html#line-88" class="path-duplicate">dlascl.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlascl.go.html#line-88">#L88</a>: 		case lapack.<b>General</b>:
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlasq1.go.html#line-75">dlasq1.go#L75</a>: 	impl.Dlascl(lapack.<b>General</b>, 0, 0, sigmx, scale, 2*n-1, 1, work, 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlasq1.go.html#line-88" class="path-duplicate">dlasq1.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlasq1.go.html#line-88">#L88</a>: 		impl.Dlascl(lapack.<b>General</b>, 0, 0, scale, sigmx, n, 1, d, 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlasq1.go.html#line-96" class="path-duplicate">dlasq1.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlasq1.go.html#line-96">#L96</a>: 		impl.Dlascl(lapack.<b>General</b>, 0, 0, scale, sigmx, n, 1, d, 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlasq1.go.html#line-97" class="path-duplicate">dlasq1.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlasq1.go.html#line-97">#L97</a>: 		impl.Dlascl(lapack.<b>General</b>, 0, 0, scale, sigmx, n, 1, e, 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-168">dsteqr.go#L168</a>: 			impl.Dlascl(lapack.<b>General</b>, 0, 0, anorm, ssfmax, lend-l+1, 1, d[l:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-169" class="path-duplicate">dsteqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-169">#L169</a>: 			impl.Dlascl(lapack.<b>General</b>, 0, 0, anorm, ssfmax, lend-l, 1, e[l:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-172" class="path-duplicate">dsteqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-172">#L172</a>: 			impl.Dlascl(lapack.<b>General</b>, 0, 0, anorm, ssfmin, lend-l+1, 1, d[l:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-173" class="path-duplicate">dsteqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-173">#L173</a>: 			impl.Dlascl(lapack.<b>General</b>, 0, 0, anorm, ssfmin, lend-l, 1, e[l:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-358" class="path-duplicate">dsteqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-358">#L358</a>: 			impl.Dlascl(lapack.<b>General</b>, 0, 0, ssfmax, anorm, lendsv-lsv+1, 1, d[lsv:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-359" class="path-duplicate">dsteqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-359">#L359</a>: 			impl.Dlascl(lapack.<b>General</b>, 0, 0, ssfmax, anorm, lendsv-lsv, 1, e[lsv:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-361" class="path-duplicate">dsteqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-361">#L361</a>: 			impl.Dlascl(lapack.<b>General</b>, 0, 0, ssfmin, anorm, lendsv-lsv+1, 1, d[lsv:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-362" class="path-duplicate">dsteqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-362">#L362</a>: 			impl.Dlascl(lapack.<b>General</b>, 0, 0, ssfmin, anorm, lendsv-lsv, 1, e[lsv:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsterf.go.html#line-100">dsterf.go#L100</a>: 			impl.Dlascl(lapack.<b>General</b>, 0, 0, anorm, ssfmax, lend-l+1, 1, d[l:], n)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsterf.go.html#line-101" class="path-duplicate">dsterf.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsterf.go.html#line-101">#L101</a>: 			impl.Dlascl(lapack.<b>General</b>, 0, 0, anorm, ssfmax, lend-l, 1, e[l:], n)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsterf.go.html#line-104" class="path-duplicate">dsterf.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsterf.go.html#line-104">#L104</a>: 			impl.Dlascl(lapack.<b>General</b>, 0, 0, anorm, ssfmin, lend-l+1, 1, d[l:], n)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsterf.go.html#line-105" class="path-duplicate">dsterf.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsterf.go.html#line-105">#L105</a>: 			impl.Dlascl(lapack.<b>General</b>, 0, 0, anorm, ssfmin, lend-l, 1, e[l:], n)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsterf.go.html#line-268" class="path-duplicate">dsterf.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsterf.go.html#line-268">#L268</a>: 			impl.Dlascl(lapack.<b>General</b>, 0, 0, ssfmax, anorm, lendsv-lsv+1, 1, d[lsv:], n)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsterf.go.html#line-270" class="path-duplicate">dsterf.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsterf.go.html#line-270">#L270</a>: 			impl.Dlascl(lapack.<b>General</b>, 0, 0, ssfmin, anorm, lendsv-lsv+1, 1, d[lsv:], n)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

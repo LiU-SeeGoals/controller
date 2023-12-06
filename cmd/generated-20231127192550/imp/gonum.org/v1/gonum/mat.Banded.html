@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Method Implmentations: gonum.org/v1/gonum/mat.Banded</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+<pre><code><span style="font-size:x-large;">type <a href="../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-33">Banded</a></b></span><span style="font-size:large;"> <b><i>(interface)</i></b></span>
+
+<code><span class="title">Method Implmentations<span class="title-stat"><i></i></span></span>
+
+<div class="anchor" id="name-At">	<a href="../../../../use/gonum.org/v1/gonum/mat..Banded.At.html">At</a>(i, j <a href="../../../../pkg/builtin.html#name-int">int</a>) <a href="../../../../pkg/builtin.html#name-float64">float64</a>
+		(*<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-BandCholesky">BandCholesky</a>).<b><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-856">At</a></b>
+		(*<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-BandDense">BandDense</a>).<b><a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-186">At</a></b>
+		(*<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-DiagDense">DiagDense</a>).<b><a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-323">At</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-Diagonal">Diagonal</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-23">At</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-MutableBanded">MutableBanded</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-23">At</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-MutableDiagonal">MutableDiagonal</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-23">At</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-MutableSymBanded">MutableSymBanded</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-23">At</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-MutableTriBanded">MutableTriBanded</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-23">At</a></b>
+		(*<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-SymBandDense">SymBandDense</a>).<b><a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-226">At</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-SymBanded">SymBanded</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-23">At</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-TransposeBand">TransposeBand</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-75">At</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-TransposeTriBand">TransposeTriBand</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-86">At</a></b>
+		(*<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-TriBandDense">TriBandDense</a>).<b><a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-270">At</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-TriBanded">TriBanded</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-23">At</a></b>
+		(*<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-Tridiag">Tridiag</a>).<b><a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-354">At</a></b></div>
+<div class="anchor" id="name-Bandwidth">	<a href="../../../../use/gonum.org/v1/gonum/mat..Banded.Bandwidth.html">Bandwidth</a>() (kl, ku <a href="../../../../pkg/builtin.html#name-int">int</a>)
+		(*<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-BandCholesky">BandCholesky</a>).<b><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-900">Bandwidth</a></b>
+		(*<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-BandDense">BandDense</a>).<b><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-181">Bandwidth</a></b>
+		(*<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-DiagDense">DiagDense</a>).<b><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-123">Bandwidth</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-Diagonal">Diagonal</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-37">Bandwidth</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-MutableBanded">MutableBanded</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-37">Bandwidth</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-MutableDiagonal">MutableDiagonal</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-37">Bandwidth</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-MutableSymBanded">MutableSymBanded</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-37">Bandwidth</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-MutableTriBanded">MutableTriBanded</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-37">Bandwidth</a></b>
+		(*<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-SymBandDense">SymBandDense</a>).<b><a href="../../../../src/gonum.org/v1/gonum/mat/symband.go.html#line-128">Bandwidth</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-SymBanded">SymBanded</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-37">Bandwidth</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-TransposeBand">TransposeBand</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-92">Bandwidth</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-TransposeTriBand">TransposeTriBand</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-114">Bandwidth</a></b>
+		(*<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-TriBandDense">TriBandDense</a>).<b><a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-469">Bandwidth</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-TriBanded">TriBanded</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-37">Bandwidth</a></b>
+		(*<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-Tridiag">Tridiag</a>).<b><a href="../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-78">Bandwidth</a></b></div>
+<div class="anchor" id="name-Dims">	<a href="../../../../use/gonum.org/v1/gonum/mat..Banded.Dims.html">Dims</a>() (r, c <a href="../../../../pkg/builtin.html#name-int">int</a>)
+		(*<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-BandCholesky">BandCholesky</a>).<b><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-847">Dims</a></b>
+		(*<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-BandDense">BandDense</a>).<b><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-176">Dims</a></b>
+		(*<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-DiagDense">DiagDense</a>).<b><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-94">Dims</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-Diagonal">Diagonal</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-19">Dims</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-MutableBanded">MutableBanded</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-19">Dims</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-MutableDiagonal">MutableDiagonal</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-19">Dims</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-MutableSymBanded">MutableSymBanded</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-19">Dims</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-MutableTriBanded">MutableTriBanded</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-19">Dims</a></b>
+		(*<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-SymBandDense">SymBandDense</a>).<b><a href="../../../../src/gonum.org/v1/gonum/mat/symband.go.html#line-118">Dims</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-SymBanded">SymBanded</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-19">Dims</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-TransposeBand">TransposeBand</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-80">Dims</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-TransposeTriBand">TransposeTriBand</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-92">Dims</a></b>
+		(*<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-TriBandDense">TriBandDense</a>).<b><a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-244">Dims</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-TriBanded">TriBanded</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-19">Dims</a></b>
+		(*<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-Tridiag">Tridiag</a>).<b><a href="../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-73">Dims</a></b></div>
+<div class="anchor" id="name-T">	<a href="../../../../use/gonum.org/v1/gonum/mat..Banded.T.html">T</a>() <a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-Matrix">Matrix</a>
+		(*<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-BandCholesky">BandCholesky</a>).<b><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-882">T</a></b>
+		(*<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-BandDense">BandDense</a>).<b><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-186">T</a></b>
+		(*<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-DiagDense">DiagDense</a>).<b><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-99">T</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-Diagonal">Diagonal</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-29">T</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-MutableBanded">MutableBanded</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-29">T</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-MutableDiagonal">MutableDiagonal</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-29">T</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-MutableSymBanded">MutableSymBanded</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-29">T</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-MutableTriBanded">MutableTriBanded</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-29">T</a></b>
+		(*<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-SymBandDense">SymBandDense</a>).<b><a href="../../../../src/gonum.org/v1/gonum/mat/symband.go.html#line-140">T</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-SymBanded">SymBanded</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-29">T</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-TransposeBand">TransposeBand</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-86">T</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-TransposeTriBand">TransposeTriBand</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-98">T</a></b>
+		(*<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-TriBandDense">TriBandDense</a>).<b><a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-249">T</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-TriBanded">TriBanded</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-29">T</a></b>
+		(*<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-Tridiag">Tridiag</a>).<b><a href="../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-83">T</a></b></div>
+<div class="anchor" id="name-TBand">	<a href="../../../../use/gonum.org/v1/gonum/mat..Banded.TBand.html">TBand</a>() <a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-Banded">Banded</a>
+		(*<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-BandCholesky">BandCholesky</a>).<b><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-887">TBand</a></b>
+		(*<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-BandDense">BandDense</a>).<b><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-191">TBand</a></b>
+		(*<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-DiagDense">DiagDense</a>).<b><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-111">TBand</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-Diagonal">Diagonal</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-41">TBand</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-MutableBanded">MutableBanded</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-41">TBand</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-MutableDiagonal">MutableDiagonal</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-41">TBand</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-MutableSymBanded">MutableSymBanded</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-41">TBand</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-MutableTriBanded">MutableTriBanded</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-41">TBand</a></b>
+		(*<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-SymBandDense">SymBandDense</a>).<b><a href="../../../../src/gonum.org/v1/gonum/mat/symband.go.html#line-145">TBand</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-SymBanded">SymBanded</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-41">TBand</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-TransposeBand">TransposeBand</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-98">TBand</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-TransposeTriBand">TransposeTriBand</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-120">TBand</a></b>
+		(*<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-TriBandDense">TriBandDense</a>).<b><a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-477">TBand</a></b>
+		<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-TriBanded">TriBanded</a>.<b><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-41">TBand</a></b>
+		(*<a href="../../../../pkg/gonum.org/v1/gonum/mat.html#name-Tridiag">Tridiag</a>).<b><a href="../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-93">TBand</a></b></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

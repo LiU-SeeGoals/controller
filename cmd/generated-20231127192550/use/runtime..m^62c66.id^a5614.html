@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.m.id</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/runtime2.go.html#line-533">m</a>.<a href="../src/runtime/runtime2.go.html#line-551">id</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">13 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/heapdump.go.html#line-557">heapdump.go#L557</a>: 		dumpint(uint64(mp.<b>id</b>))
+		<a href="../src/runtime/os_linux.go.html#line-172">os_linux.go#L172</a>: 		print("newosproc stk=", stk, " m=", mp, " g=", mp.g0, " clone=", abi.FuncPCABI0(clone), " id=", mp.<b>id</b>, " ostk=", &amp;mp, "\n")
+		<a href="../src/runtime/proc.go.html#line-834">proc.go#L834</a>: 		mp.<b>id</b> = id
+		<a href="../src/runtime/proc.go.html#line-836" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-836">#L836</a>: 		mp.<b>id</b> = mReserveID()
+		<a href="../src/runtime/proc.go.html#line-839" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-839">#L839</a>: 	lo := uint32(int64Hash(uint64(mp.<b>id</b>), fastrandseed))
+		<a href="../src/runtime/proc.go.html#line-5356" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5356">#L5356</a>: 			id = pp.m.ptr().<b>id</b>
+		<a href="../src/runtime/proc.go.html#line-5819" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5819">#L5819</a>: 				print(mp.<b>id</b>)
+		<a href="../src/runtime/proc.go.html#line-5845" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5845">#L5845</a>: 		print("  M", mp.<b>id</b>, ": p=")
+		<a href="../src/runtime/proc.go.html#line-5869" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5869">#L5869</a>: 			print(gp.m.<b>id</b>)
+		<a href="../src/runtime/proc.go.html#line-5875" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5875">#L5875</a>: 			print(lockedm.<b>id</b>)
+		<a href="../src/runtime/runtime2.go.html#line-551">runtime2.go#L551</a>: 	<b>id</b>            int64
+		<a href="../src/runtime/signal_unix.go.html#line-790">signal_unix.go#L790</a>: 	print("PC=", hex(c.sigpc()), " m=", mp.<b>id</b>, " sigcode=", c.sigcode(), "\n")
+		<a href="../src/runtime/trace.go.html#line-1484">trace.go#L1484</a>: 	traceEvent(traceEvProcStart, -1, uint64(getg().m.<b>id</b>))
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

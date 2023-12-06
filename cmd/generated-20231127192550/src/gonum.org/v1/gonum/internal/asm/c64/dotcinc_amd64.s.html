@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: dotcinc_amd64.s in package gonum.org/v1/gonum/internal/asm/c64</title>
+<link href="../../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	dotcinc_amd64.s
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/gonum.org/v1/gonum/internal/asm/c64.html">gonum.org/v1/gonum/internal/asm/c64</a>
+</code></pre>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code>// Copyright ©2016 The Gonum Authors. All rights reserved.</code></span>
+<span class="codeline" id="line-2"><code>// Use of this source code is governed by a BSD-style</code></span>
+<span class="codeline" id="line-3"><code>// license that can be found in the LICENSE file.</code></span>
+<span class="codeline" id="line-4"><code></code></span>
+<span class="codeline" id="line-5"><code>// +build !noasm,!gccgo,!safe</code></span>
+<span class="codeline" id="line-6"><code></code></span>
+<span class="codeline" id="line-7"><code>#include "textflag.h"</code></span>
+<span class="codeline" id="line-8"><code></code></span>
+<span class="codeline" id="line-9"><code>#define MOVSHDUP_X3_X2    LONG $0xD3160FF3 // MOVSHDUP X3, X2</code></span>
+<span class="codeline" id="line-10"><code>#define MOVSHDUP_X5_X4    LONG $0xE5160FF3 // MOVSHDUP X5, X4</code></span>
+<span class="codeline" id="line-11"><code>#define MOVSHDUP_X7_X6    LONG $0xF7160FF3 // MOVSHDUP X7, X6</code></span>
+<span class="codeline" id="line-12"><code>#define MOVSHDUP_X9_X8    LONG $0x160F45F3; BYTE $0xC1 // MOVSHDUP X9, X8</code></span>
+<span class="codeline" id="line-13"><code></code></span>
+<span class="codeline" id="line-14"><code>#define MOVSLDUP_X3_X3    LONG $0xDB120FF3 // MOVSLDUP X3, X3</code></span>
+<span class="codeline" id="line-15"><code>#define MOVSLDUP_X5_X5    LONG $0xED120FF3 // MOVSLDUP X5, X5</code></span>
+<span class="codeline" id="line-16"><code>#define MOVSLDUP_X7_X7    LONG $0xFF120FF3 // MOVSLDUP X7, X7</code></span>
+<span class="codeline" id="line-17"><code>#define MOVSLDUP_X9_X9    LONG $0x120F45F3; BYTE $0xC9 // MOVSLDUP X9, X9</code></span>
+<span class="codeline" id="line-18"><code></code></span>
+<span class="codeline" id="line-19"><code>#define ADDSUBPS_X2_X3    LONG $0xDAD00FF2 // ADDSUBPS X2, X3</code></span>
+<span class="codeline" id="line-20"><code>#define ADDSUBPS_X4_X5    LONG $0xECD00FF2 // ADDSUBPS X4, X5</code></span>
+<span class="codeline" id="line-21"><code>#define ADDSUBPS_X6_X7    LONG $0xFED00FF2 // ADDSUBPS X6, X7</code></span>
+<span class="codeline" id="line-22"><code>#define ADDSUBPS_X8_X9    LONG $0xD00F45F2; BYTE $0xC8 // ADDSUBPS X8, X9</code></span>
+<span class="codeline" id="line-23"><code></code></span>
+<span class="codeline" id="line-24"><code>#define X_PTR SI</code></span>
+<span class="codeline" id="line-25"><code>#define Y_PTR DI</code></span>
+<span class="codeline" id="line-26"><code>#define LEN CX</code></span>
+<span class="codeline" id="line-27"><code>#define TAIL BX</code></span>
+<span class="codeline" id="line-28"><code>#define SUM X0</code></span>
+<span class="codeline" id="line-29"><code>#define P_SUM X1</code></span>
+<span class="codeline" id="line-30"><code>#define INC_X R8</code></span>
+<span class="codeline" id="line-31"><code>#define INCx3_X R9</code></span>
+<span class="codeline" id="line-32"><code>#define INC_Y R10</code></span>
+<span class="codeline" id="line-33"><code>#define INCx3_Y R11</code></span>
+<span class="codeline" id="line-34"><code>#define NEG1 X15</code></span>
+<span class="codeline" id="line-35"><code>#define P_NEG1 X14</code></span>
+<span class="codeline" id="line-36"><code></code></span>
+<span class="codeline" id="line-37"><code>// func DotcInc(x, y []complex64, n, incX, incY, ix, iy uintptr) (sum complex64)</code></span>
+<span class="codeline" id="line-38"><code>TEXT ·DotcInc(SB), NOSPLIT, $0</code></span>
+<span class="codeline" id="line-39"><code>	MOVQ   x_base+0(FP), X_PTR     // X_PTR = &amp;x</code></span>
+<span class="codeline" id="line-40"><code>	MOVQ   y_base+24(FP), Y_PTR    // Y_PTR = &amp;y</code></span>
+<span class="codeline" id="line-41"><code>	PXOR   SUM, SUM                // SUM = 0</code></span>
+<span class="codeline" id="line-42"><code>	PXOR   P_SUM, P_SUM            // P_SUM = 0</code></span>
+<span class="codeline" id="line-43"><code>	MOVQ   n+48(FP), LEN           // LEN = n</code></span>
+<span class="codeline" id="line-44"><code>	CMPQ   LEN, $0                 // if LEN == 0 { return }</code></span>
+<span class="codeline" id="line-45"><code>	JE     dotc_end</code></span>
+<span class="codeline" id="line-46"><code>	MOVQ   ix+72(FP), INC_X</code></span>
+<span class="codeline" id="line-47"><code>	MOVQ   iy+80(FP), INC_Y</code></span>
+<span class="codeline" id="line-48"><code>	LEAQ   (X_PTR)(INC_X*8), X_PTR // X_PTR = &amp;(X_PTR[ix])</code></span>
+<span class="codeline" id="line-49"><code>	LEAQ   (Y_PTR)(INC_Y*8), Y_PTR // Y_PTR = &amp;(Y_PTR[iy])</code></span>
+<span class="codeline" id="line-50"><code>	MOVQ   incX+56(FP), INC_X      // INC_X = incX * sizeof(complex64)</code></span>
+<span class="codeline" id="line-51"><code>	SHLQ   $3, INC_X</code></span>
+<span class="codeline" id="line-52"><code>	MOVQ   incY+64(FP), INC_Y      // INC_Y = incY * sizeof(complex64)</code></span>
+<span class="codeline" id="line-53"><code>	SHLQ   $3, INC_Y</code></span>
+<span class="codeline" id="line-54"><code>	MOVSS  $(-1.0), NEG1</code></span>
+<span class="codeline" id="line-55"><code>	SHUFPS $0, NEG1, NEG1          // { -1, -1, -1, -1 }</code></span>
+<span class="codeline" id="line-56"><code></code></span>
+<span class="codeline" id="line-57"><code>	MOVQ LEN, TAIL</code></span>
+<span class="codeline" id="line-58"><code>	ANDQ $3, TAIL  // TAIL = LEN % 4</code></span>
+<span class="codeline" id="line-59"><code>	SHRQ $2, LEN   // LEN = floor( LEN / 4 )</code></span>
+<span class="codeline" id="line-60"><code>	JZ   dotc_tail // if LEN == 0 { goto dotc_tail }</code></span>
+<span class="codeline" id="line-61"><code></code></span>
+<span class="codeline" id="line-62"><code>	MOVUPS NEG1, P_NEG1              // Copy NEG1 for pipelining</code></span>
+<span class="codeline" id="line-63"><code>	LEAQ   (INC_X)(INC_X*2), INCx3_X // INCx3_X = INC_X * 3</code></span>
+<span class="codeline" id="line-64"><code>	LEAQ   (INC_Y)(INC_Y*2), INCx3_Y // INCx3_Y = INC_Y * 3</code></span>
+<span class="codeline" id="line-65"><code></code></span>
+<span class="codeline" id="line-66"><code>dotc_loop: // do {</code></span>
+<span class="codeline" id="line-67"><code>	MOVSD (X_PTR), X3            // X_i = { imag(x[i]), real(x[i]) }</code></span>
+<span class="codeline" id="line-68"><code>	MOVSD (X_PTR)(INC_X*1), X5</code></span>
+<span class="codeline" id="line-69"><code>	MOVSD (X_PTR)(INC_X*2), X7</code></span>
+<span class="codeline" id="line-70"><code>	MOVSD (X_PTR)(INCx3_X*1), X9</code></span>
+<span class="codeline" id="line-71"><code></code></span>
+<span class="codeline" id="line-72"><code>	// X_(i-1) = { imag(x[i]), imag(x[i]) }</code></span>
+<span class="codeline" id="line-73"><code>	MOVSHDUP_X3_X2</code></span>
+<span class="codeline" id="line-74"><code>	MOVSHDUP_X5_X4</code></span>
+<span class="codeline" id="line-75"><code>	MOVSHDUP_X7_X6</code></span>
+<span class="codeline" id="line-76"><code>	MOVSHDUP_X9_X8</code></span>
+<span class="codeline" id="line-77"><code></code></span>
+<span class="codeline" id="line-78"><code>	// X_i = { real(x[i]), real(x[i]) }</code></span>
+<span class="codeline" id="line-79"><code>	MOVSLDUP_X3_X3</code></span>
+<span class="codeline" id="line-80"><code>	MOVSLDUP_X5_X5</code></span>
+<span class="codeline" id="line-81"><code>	MOVSLDUP_X7_X7</code></span>
+<span class="codeline" id="line-82"><code>	MOVSLDUP_X9_X9</code></span>
+<span class="codeline" id="line-83"><code></code></span>
+<span class="codeline" id="line-84"><code>	// X_(i-1) = { -imag(x[i]), -imag(x[i]) }</code></span>
+<span class="codeline" id="line-85"><code>	MULPS NEG1, X2</code></span>
+<span class="codeline" id="line-86"><code>	MULPS P_NEG1, X4</code></span>
+<span class="codeline" id="line-87"><code>	MULPS NEG1, X6</code></span>
+<span class="codeline" id="line-88"><code>	MULPS P_NEG1, X8</code></span>
+<span class="codeline" id="line-89"><code></code></span>
+<span class="codeline" id="line-90"><code>	// X_j = { imag(y[i]), real(y[i]) }</code></span>
+<span class="codeline" id="line-91"><code>	MOVSD (Y_PTR), X10</code></span>
+<span class="codeline" id="line-92"><code>	MOVSD (Y_PTR)(INC_Y*1), X11</code></span>
+<span class="codeline" id="line-93"><code>	MOVSD (Y_PTR)(INC_Y*2), X12</code></span>
+<span class="codeline" id="line-94"><code>	MOVSD (Y_PTR)(INCx3_Y*1), X13</code></span>
+<span class="codeline" id="line-95"><code></code></span>
+<span class="codeline" id="line-96"><code>	// X_i     = { imag(y[i]) * real(x[i]), real(y[i]) * real(x[i]) }</code></span>
+<span class="codeline" id="line-97"><code>	MULPS X10, X3</code></span>
+<span class="codeline" id="line-98"><code>	MULPS X11, X5</code></span>
+<span class="codeline" id="line-99"><code>	MULPS X12, X7</code></span>
+<span class="codeline" id="line-100"><code>	MULPS X13, X9</code></span>
+<span class="codeline" id="line-101"><code></code></span>
+<span class="codeline" id="line-102"><code>	// X_j = { real(y[i]), imag(y[i]) }</code></span>
+<span class="codeline" id="line-103"><code>	SHUFPS $0xB1, X10, X10</code></span>
+<span class="codeline" id="line-104"><code>	SHUFPS $0xB1, X11, X11</code></span>
+<span class="codeline" id="line-105"><code>	SHUFPS $0xB1, X12, X12</code></span>
+<span class="codeline" id="line-106"><code>	SHUFPS $0xB1, X13, X13</code></span>
+<span class="codeline" id="line-107"><code></code></span>
+<span class="codeline" id="line-108"><code>	// X_(i-1) = { real(y[i]) * imag(x[i]), imag(y[i]) * imag(x[i]) }</code></span>
+<span class="codeline" id="line-109"><code>	MULPS X10, X2</code></span>
+<span class="codeline" id="line-110"><code>	MULPS X11, X4</code></span>
+<span class="codeline" id="line-111"><code>	MULPS X12, X6</code></span>
+<span class="codeline" id="line-112"><code>	MULPS X13, X8</code></span>
+<span class="codeline" id="line-113"><code></code></span>
+<span class="codeline" id="line-114"><code>	// X_i = {</code></span>
+<span class="codeline" id="line-115"><code>	//	imag(result[i]):  imag(y[i]) * real(x[i]) + real(y[i]) * imag(x[i]),</code></span>
+<span class="codeline" id="line-116"><code>	//	real(result[i]):  real(y[i]) * real(x[i]) - imag(y[i]) * imag(x[i])  }</code></span>
+<span class="codeline" id="line-117"><code>	ADDSUBPS_X2_X3</code></span>
+<span class="codeline" id="line-118"><code>	ADDSUBPS_X4_X5</code></span>
+<span class="codeline" id="line-119"><code>	ADDSUBPS_X6_X7</code></span>
+<span class="codeline" id="line-120"><code>	ADDSUBPS_X8_X9</code></span>
+<span class="codeline" id="line-121"><code></code></span>
+<span class="codeline" id="line-122"><code>	// SUM += X_i</code></span>
+<span class="codeline" id="line-123"><code>	ADDPS X3, SUM</code></span>
+<span class="codeline" id="line-124"><code>	ADDPS X5, P_SUM</code></span>
+<span class="codeline" id="line-125"><code>	ADDPS X7, SUM</code></span>
+<span class="codeline" id="line-126"><code>	ADDPS X9, P_SUM</code></span>
+<span class="codeline" id="line-127"><code></code></span>
+<span class="codeline" id="line-128"><code>	LEAQ (X_PTR)(INC_X*4), X_PTR // X_PTR = &amp;(X_PTR[INC_X*4])</code></span>
+<span class="codeline" id="line-129"><code>	LEAQ (Y_PTR)(INC_Y*4), Y_PTR // Y_PTR = &amp;(Y_PTR[INC_Y*4])</code></span>
+<span class="codeline" id="line-130"><code></code></span>
+<span class="codeline" id="line-131"><code>	DECQ LEN</code></span>
+<span class="codeline" id="line-132"><code>	JNZ  dotc_loop // } while --LEN &gt; 0</code></span>
+<span class="codeline" id="line-133"><code></code></span>
+<span class="codeline" id="line-134"><code>	ADDPS P_SUM, SUM // SUM = { P_SUM + SUM }</code></span>
+<span class="codeline" id="line-135"><code>	CMPQ  TAIL, $0   // if TAIL == 0 { return }</code></span>
+<span class="codeline" id="line-136"><code>	JE    dotc_end</code></span>
+<span class="codeline" id="line-137"><code></code></span>
+<span class="codeline" id="line-138"><code>dotc_tail: // do {</code></span>
+<span class="codeline" id="line-139"><code>	MOVSD  (X_PTR), X3    // X_i = { imag(x[i]), real(x[i]) }</code></span>
+<span class="codeline" id="line-140"><code>	MOVSHDUP_X3_X2        // X_(i-1) = { imag(x[i]), imag(x[i]) }</code></span>
+<span class="codeline" id="line-141"><code>	MOVSLDUP_X3_X3        // X_i = { real(x[i]), real(x[i]) }</code></span>
+<span class="codeline" id="line-142"><code>	MULPS  NEG1, X2       // X_(i-1) = { -imag(x[i]), imag(x[i]) }</code></span>
+<span class="codeline" id="line-143"><code>	MOVUPS (Y_PTR), X10   // X_j = { imag(y[i]), real(y[i]) }</code></span>
+<span class="codeline" id="line-144"><code>	MULPS  X10, X3        // X_i = { imag(y[i]) * real(x[i]), real(y[i]) * real(x[i]) }</code></span>
+<span class="codeline" id="line-145"><code>	SHUFPS $0x1, X10, X10 // X_j = { real(y[i]), imag(y[i]) }</code></span>
+<span class="codeline" id="line-146"><code>	MULPS  X10, X2        // X_(i-1) = { real(y[i]) * imag(x[i]), imag(y[i]) * imag(x[i]) }</code></span>
+<span class="codeline" id="line-147"><code></code></span>
+<span class="codeline" id="line-148"><code>	// X_i = {</code></span>
+<span class="codeline" id="line-149"><code>	//	imag(result[i]):  imag(y[i])*real(x[i]) + real(y[i])*imag(x[i]),</code></span>
+<span class="codeline" id="line-150"><code>	//	real(result[i]):  real(y[i])*real(x[i]) - imag(y[i])*imag(x[i]) }</code></span>
+<span class="codeline" id="line-151"><code>	ADDSUBPS_X2_X3</code></span>
+<span class="codeline" id="line-152"><code>	ADDPS X3, SUM      // SUM += X_i</code></span>
+<span class="codeline" id="line-153"><code>	ADDQ  INC_X, X_PTR // X_PTR += INC_X</code></span>
+<span class="codeline" id="line-154"><code>	ADDQ  INC_Y, Y_PTR // Y_PTR += INC_Y</code></span>
+<span class="codeline" id="line-155"><code>	DECQ  TAIL</code></span>
+<span class="codeline" id="line-156"><code>	JNZ   dotc_tail    // } while --TAIL &gt; 0</code></span>
+<span class="codeline" id="line-157"><code></code></span>
+<span class="codeline" id="line-158"><code>dotc_end:</code></span>
+<span class="codeline" id="line-159"><code>	MOVSD SUM, sum+88(FP) // return SUM</code></span>
+<span class="codeline" id="line-160"><code>	RET</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

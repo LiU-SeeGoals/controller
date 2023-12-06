@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/blas/blas64.TriangularBand</title>
+<link href="../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html">gonum.org/v1/gonum/blas/blas64</a>.<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-61">TriangularBand</a></b></span>
+
+<span class="title">17 uses</span>
+
+	gonum.org/v1/gonum/blas/blas64 (current package)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-61">blas64.go#L61</a>: type <b>TriangularBand</b> struct {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-290" class="path-duplicate">blas64.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-290">#L290</a>: func Tbmv(t blas.Transpose, a <b>TriangularBand</b>, x Vector) {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-332" class="path-duplicate">blas64.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-332">#L332</a>: func Tbsv(t blas.Transpose, a <b>TriangularBand</b>, x Vector) {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-173">conv.go#L173</a>: type TriangularBandCols <b>TriangularBand</b>
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-178" class="path-duplicate">conv.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-178">#L178</a>: func (t TriangularBandCols) From(a <b>TriangularBand</b>) {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-223" class="path-duplicate">conv.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-223">#L223</a>: func (t <b>TriangularBand</b>) From(a TriangularBandCols) {
+
+	<a href="../../../../../pkg/gonum.org/v1/gonum/lapack/lapack64.html">gonum.org/v1/gonum/lapack/lapack64</a>
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-115">lapack64.go#L115</a>: func Pbtrf(a blas64.SymmetricBand) (t blas64.<b>TriangularBand</b>, ok bool) {
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-136" class="path-duplicate">lapack64.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-136">#L136</a>: func Pbtrs(t blas64.<b>TriangularBand</b>, b blas64.General) {
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-594" class="path-duplicate">lapack64.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-594">#L594</a>: func Lantb(norm lapack.MatrixNorm, a blas64.<b>TriangularBand</b>, work []float64) float64 {
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-729" class="path-duplicate">lapack64.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-729">#L729</a>: func Tbtrs(trans blas.Transpose, a blas64.<b>TriangularBand</b>, b blas64.General) (ok bool) {
+
+	<a href="../../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-57">triband.go#L57</a>: 	RawTriBand() blas64.<b>TriangularBand</b>
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-158" class="path-duplicate">triband.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-158">#L158</a>: 	mat blas64.<b>TriangularBand</b>
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-232" class="path-duplicate">triband.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-232">#L232</a>: 		mat: blas64.<b>TriangularBand</b>{
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-311" class="path-duplicate">triband.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-311">#L311</a>: 		t.mat = blas64.<b>TriangularBand</b>{
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-346" class="path-duplicate">triband.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-346">#L346</a>: 		t.mat = blas64.<b>TriangularBand</b>{
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-495" class="path-duplicate">triband.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-495">#L495</a>: func (t *TriBandDense) RawTriBand() blas64.<b>TriangularBand</b> {
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-504" class="path-duplicate">triband.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-504">#L504</a>: func (t *TriBandDense) SetRawTriBand(mat blas64.<b>TriangularBand</b>) {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

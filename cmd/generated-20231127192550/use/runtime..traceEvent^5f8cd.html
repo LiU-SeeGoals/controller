@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.traceEvent</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/trace.go.html#line-747">traceEvent</a></b></span>
+
+<span class="title">35 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/trace.go.html#line-337">trace.go#L337</a>: 			<b>traceEvent</b>(traceEvGoCreate, -1, gp.goid, uint64(id), stackID)
+		<a href="../src/runtime/trace.go.html#line-342" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-342">#L342</a>: 			<b>traceEvent</b>(traceEvGoWaiting, -1, gp.goid)
+		<a href="../src/runtime/trace.go.html#line-347" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-347">#L347</a>: 			<b>traceEvent</b>(traceEvGoInSyscall, -1, gp.goid)
+		<a href="../src/runtime/trace.go.html#line-356" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-356">#L356</a>: 			<b>traceEvent</b>(traceEvGoCreate, -1, gp.goid, uint64(id), stackID)
+		<a href="../src/runtime/trace.go.html#line-359" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-359">#L359</a>: 			<b>traceEvent</b>(traceEvGoInSyscall, -1, gp.goid)
+		<a href="../src/runtime/trace.go.html#line-747" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-747">#L747</a>: func <b>traceEvent</b>(ev byte, skip int, args ...uint64) {
+		<a href="../src/runtime/trace.go.html#line-1480" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1480">#L1480</a>: 	<b>traceEvent</b>(traceEvGomaxprocs, 1, uint64(procs))
+		<a href="../src/runtime/trace.go.html#line-1484" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1484">#L1484</a>: 	<b>traceEvent</b>(traceEvProcStart, -1, uint64(getg().m.id))
+		<a href="../src/runtime/trace.go.html#line-1493" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1493">#L1493</a>: 	<b>traceEvent</b>(traceEvProcStop, -1)
+		<a href="../src/runtime/trace.go.html#line-1499" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1499">#L1499</a>: 	<b>traceEvent</b>(traceEvGCStart, 3, trace.seqGC)
+		<a href="../src/runtime/trace.go.html#line-1504" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1504">#L1504</a>: 	<b>traceEvent</b>(traceEvGCDone, -1)
+		<a href="../src/runtime/trace.go.html#line-1514" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1514">#L1514</a>: 	<b>traceEvent</b>(traceEvSTWStart, -1, uint64(reason))
+		<a href="../src/runtime/trace.go.html#line-1523" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1523">#L1523</a>: 	<b>traceEvent</b>(traceEvSTWDone, -1)
+		<a href="../src/runtime/trace.go.html#line-1549" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1549">#L1549</a>: 			<b>traceEvent</b>(traceEvGCSweepStart, 1)
+		<a href="../src/runtime/trace.go.html#line-1561" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1561">#L1561</a>: 		<b>traceEvent</b>(traceEvGCSweepDone, -1, uint64(pp.trace.swept), uint64(pp.trace.reclaimed))
+		<a href="../src/runtime/trace.go.html#line-1567" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1567">#L1567</a>: 	<b>traceEvent</b>(traceEvGCMarkAssistStart, 1)
+		<a href="../src/runtime/trace.go.html#line-1571" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1571">#L1571</a>: 	<b>traceEvent</b>(traceEvGCMarkAssistDone, -1)
+		<a href="../src/runtime/trace.go.html#line-1579" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1579">#L1579</a>: 	<b>traceEvent</b>(traceEvGoCreate, 2, newg.goid, uint64(id))
+		<a href="../src/runtime/trace.go.html#line-1587" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1587">#L1587</a>: 		<b>traceEvent</b>(traceEvGoStartLabel, -1, gp.goid, gp.trace.seq, trace.markWorkerLabels[pp.ptr().gcMarkWorkerMode])
+		<a href="../src/runtime/trace.go.html#line-1589" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1589">#L1589</a>: 		<b>traceEvent</b>(traceEvGoStartLocal, -1, gp.goid)
+		<a href="../src/runtime/trace.go.html#line-1592" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1592">#L1592</a>: 		<b>traceEvent</b>(traceEvGoStart, -1, gp.goid, gp.trace.seq)
+		<a href="../src/runtime/trace.go.html#line-1597" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1597">#L1597</a>: 	<b>traceEvent</b>(traceEvGoEnd, -1)
+		<a href="../src/runtime/trace.go.html#line-1603" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1603">#L1603</a>: 	<b>traceEvent</b>(traceEvGoSched, 1)
+		<a href="../src/runtime/trace.go.html#line-1609" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1609">#L1609</a>: 	<b>traceEvent</b>(traceEvGoPreempt, 1)
+		<a href="../src/runtime/trace.go.html#line-1615" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1615">#L1615</a>: 	<b>traceEvent</b>(byte(reason), skip)
+		<a href="../src/runtime/trace.go.html#line-1622" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1622">#L1622</a>: 		<b>traceEvent</b>(traceEvGoUnblockLocal, skip, gp.goid)
+		<a href="../src/runtime/trace.go.html#line-1625" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1625">#L1625</a>: 		<b>traceEvent</b>(traceEvGoUnblock, skip, gp.goid, gp.trace.seq)
+		<a href="../src/runtime/trace.go.html#line-1647" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1647">#L1647</a>: 	<b>traceEvent</b>(traceEvGoSysCall, skip)
+		<a href="../src/runtime/trace.go.html#line-1674" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1674">#L1674</a>: 	<b>traceEvent</b>(traceEvGoSysExit, -1, gp.goid, gp.trace.seq, uint64(ts))
+		<a href="../src/runtime/trace.go.html#line-1683" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1683">#L1683</a>: 	<b>traceEvent</b>(traceEvGoSysBlock, -1)
+		<a href="../src/runtime/trace.go.html#line-1689" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1689">#L1689</a>: 	<b>traceEvent</b>(traceEvHeapAlloc, -1, live)
+		<a href="../src/runtime/trace.go.html#line-1696" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1696">#L1696</a>: 		<b>traceEvent</b>(traceEvHeapGoal, -1, 0)
+		<a href="../src/runtime/trace.go.html#line-1698" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1698">#L1698</a>: 		<b>traceEvent</b>(traceEvHeapGoal, -1, heapGoal)
+		<a href="../src/runtime/trace.go.html#line-1725" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1725">#L1725</a>: 	<b>traceEvent</b>(traceEvUserTaskEnd, 2, id)
+		<a href="../src/runtime/trace.go.html#line-1803" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1803">#L1803</a>: 	<b>traceEvent</b>(traceEvGoInSyscall, -1, gp.goid)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

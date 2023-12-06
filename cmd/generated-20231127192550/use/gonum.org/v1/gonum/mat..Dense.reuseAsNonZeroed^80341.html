@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/mat.Dense.reuseAsNonZeroed</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-35">Dense</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-98">reuseAsNonZeroed</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">34 uses</span>
+
+	gonum.org/v1/gonum/mat (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-243">cholesky.go#L243</a>: 	dst.<b>reuseAsNonZeroed</b>(bm, bn)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-792" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-792">#L792</a>: 	dst.<b>reuseAsNonZeroed</b>(br, bc)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-1090" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-1090">#L1090</a>: 	dst.<b>reuseAsNonZeroed</b>(bm, bn)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-98">dense.go#L98</a>: func (m *Dense) <b>reuseAsNonZeroed</b>(r, c int) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-551" class="path-duplicate">dense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-551">#L551</a>: 	m.<b>reuseAsNonZeroed</b>(ar+br, ac)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-569" class="path-duplicate">dense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-569">#L569</a>: 	m.<b>reuseAsNonZeroed</b>(ar, ac+bc)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-26">dense_arithmetic.go#L26</a>: 	m.<b>reuseAsNonZeroed</b>(ar, ac)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-75" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-75">#L75</a>: 	m.<b>reuseAsNonZeroed</b>(ar, ac)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-125" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-125">#L125</a>: 	m.<b>reuseAsNonZeroed</b>(ar, ac)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-175" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-175">#L175</a>: 	m.<b>reuseAsNonZeroed</b>(ar, ac)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-223" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-223">#L223</a>: 	m.<b>reuseAsNonZeroed</b>(a.Dims())
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-288" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-288">#L288</a>: 	m.<b>reuseAsNonZeroed</b>(ar, bc)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-481" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-481">#L481</a>: 	m.<b>reuseAsNonZeroed</b>(r, r)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-643" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-643">#L643</a>: 	m.<b>reuseAsNonZeroed</b>(r, c)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-689" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-689">#L689</a>: 	m.<b>reuseAsNonZeroed</b>(ra*rb, ca*cb)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-703" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-703">#L703</a>: 	m.<b>reuseAsNonZeroed</b>(ar, ac)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-743" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-743">#L743</a>: 	m.<b>reuseAsNonZeroed</b>(ar, ac)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-819" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-819">#L819</a>: 			m.<b>reuseAsNonZeroed</b>(ar, ac)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-826" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-826">#L826</a>: 	m.<b>reuseAsNonZeroed</b>(ar, ac)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/io.go.html#line-180">io.go#L180</a>: 	m.<b>reuseAsNonZeroed</b>(int(rows), int(cols))
+		<a href="../../../../src/gonum.org/v1/gonum/mat/io.go.html#line-232" class="path-duplicate">io.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/io.go.html#line-232">#L232</a>: 	m.<b>reuseAsNonZeroed</b>(int(rows), int(cols))
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-195">lq.go#L195</a>: 		dst.<b>reuseAsNonZeroed</b>(r, bc)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-200" class="path-duplicate">lq.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-200">#L200</a>: 		dst.<b>reuseAsNonZeroed</b>(c, bc)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-75">lu.go#L75</a>: 		lu.lu.<b>reuseAsNonZeroed</b>(r, r)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-208" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-208">#L208</a>: 				lu.lu.<b>reuseAsNonZeroed</b>(n, n)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-324" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-324">#L324</a>: 	m.<b>reuseAsNonZeroed</b>(r, r)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-363" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-363">#L363</a>: 	dst.<b>reuseAsNonZeroed</b>(n, bc)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/product.go.html#line-34">product.go#L34</a>: 		m.<b>reuseAsNonZeroed</b>(factors[0].Dims())
+		<a href="../../../../src/gonum.org/v1/gonum/mat/product.go.html#line-46" class="path-duplicate">product.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/product.go.html#line-46">#L46</a>: 	m.<b>reuseAsNonZeroed</b>(result.Dims())
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-190">qr.go#L190</a>: 		dst.<b>reuseAsNonZeroed</b>(r, bc)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-195" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-195">#L195</a>: 		dst.<b>reuseAsNonZeroed</b>(c, bc)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/solve.go.html#line-41">solve.go#L41</a>: 	m.<b>reuseAsNonZeroed</b>(ac, bc)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-583">triband.go#L583</a>: 	dst.<b>reuseAsNonZeroed</b>(n, nrhs)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-240">tridiag.go#L240</a>: 	dst.<b>reuseAsNonZeroed</b>(n, nrhs)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

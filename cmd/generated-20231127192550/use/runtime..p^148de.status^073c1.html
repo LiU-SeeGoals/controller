@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.p.status</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/runtime2.go.html#line-621">p</a>.<a href="../src/runtime/runtime2.go.html#line-623">status</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">33 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/mgc.go.html#line-1116">mgc.go#L1116</a>: 			if pp.<b>status</b> == _Pidle {
+		<a href="../src/runtime/mgcpacer.go.html#line-720">mgcpacer.go#L720</a>: 		if p.<b>status</b> != _Prunning {
+		<a href="../src/runtime/preempt.go.html#line-287">preempt.go#L287</a>: 	return mp.locks == 0 &amp;&amp; mp.mallocing == 0 &amp;&amp; mp.preemptoff == "" &amp;&amp; mp.p.ptr().<b>status</b> == _Prunning
+		<a href="../src/runtime/proc.go.html#line-1368">proc.go#L1368</a>: 	gp.m.p.ptr().<b>status</b> = _Pgcstop // Pgcstop is only diagnostic.
+		<a href="../src/runtime/proc.go.html#line-1372" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1372">#L1372</a>: 		s := pp.<b>status</b>
+		<a href="../src/runtime/proc.go.html#line-1373" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1373">#L1373</a>: 		if s == _Psyscall &amp;&amp; atomic.Cas(&amp;pp.<b>status</b>, s, _Pgcstop) {
+		<a href="../src/runtime/proc.go.html#line-1389" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1389">#L1389</a>: 		pp.<b>status</b> = _Pgcstop
+		<a href="../src/runtime/proc.go.html#line-1413" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1413">#L1413</a>: 			if pp.<b>status</b> != _Pgcstop {
+		<a href="../src/runtime/proc.go.html#line-1801" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1801">#L1801</a>: 		s := p2.<b>status</b>
+		<a href="../src/runtime/proc.go.html#line-1802" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1802">#L1802</a>: 		if s == _Psyscall &amp;&amp; p2.runSafePointFn == 1 &amp;&amp; atomic.Cas(&amp;p2.<b>status</b>, s, _Pidle) {
+		<a href="../src/runtime/proc.go.html#line-2687" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-2687">#L2687</a>: 		pp.<b>status</b> = _Pgcstop
+		<a href="../src/runtime/proc.go.html#line-2829" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-2829">#L2829</a>: 	pp.<b>status</b> = _Pgcstop
+		<a href="../src/runtime/proc.go.html#line-4048" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4048">#L4048</a>: 	atomic.Store(&amp;pp.<b>status</b>, _Psyscall)
+		<a href="../src/runtime/proc.go.html#line-4081" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4081">#L4081</a>: 	if sched.stopwait &gt; 0 &amp;&amp; atomic.Cas(&amp;pp.<b>status</b>, _Psyscall, _Pgcstop) {
+		<a href="../src/runtime/proc.go.html#line-4249" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4249">#L4249</a>: 	if oldp != nil &amp;&amp; oldp.<b>status</b> == _Psyscall &amp;&amp; atomic.Cas(&amp;oldp.<b>status</b>, _Psyscall, _Pidle) {
+		<a href="../src/runtime/proc.go.html#line-5054" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5054">#L5054</a>: 	pp.<b>status</b> = _Pgcstop
+		<a href="../src/runtime/proc.go.html#line-5172" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5172">#L5172</a>: 	pp.<b>status</b> = _Pdead
+		<a href="../src/runtime/proc.go.html#line-5248" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5248">#L5248</a>: 		gp.m.p.ptr().<b>status</b> = _Prunning
+		<a href="../src/runtime/proc.go.html#line-5269" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5269">#L5269</a>: 		pp.<b>status</b> = _Pidle
+		<a href="../src/runtime/proc.go.html#line-5301" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5301">#L5301</a>: 		pp.<b>status</b> = _Pidle
+		<a href="../src/runtime/proc.go.html#line-5353" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5353">#L5353</a>: 	if pp.m != 0 || pp.<b>status</b> != _Pidle {
+		<a href="../src/runtime/proc.go.html#line-5358" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5358">#L5358</a>: 		print("wirep: p-&gt;m=", pp.m, "(", id, ") p-&gt;status=", pp.<b>status</b>, "\n")
+		<a href="../src/runtime/proc.go.html#line-5363" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5363">#L5363</a>: 	pp.<b>status</b> = _Prunning
+		<a href="../src/runtime/proc.go.html#line-5374" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5374">#L5374</a>: 	if pp.m.ptr() != gp.m || pp.<b>status</b> != _Prunning {
+		<a href="../src/runtime/proc.go.html#line-5375" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5375">#L5375</a>: 		print("releasep: m=", gp.m, " m-&gt;p=", gp.m.p.ptr(), " p-&gt;m=", hex(pp.m), " p-&gt;status=", pp.<b>status</b>, "\n")
+		<a href="../src/runtime/proc.go.html#line-5383" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5383">#L5383</a>: 	pp.<b>status</b> = _Pidle
+		<a href="../src/runtime/proc.go.html#line-5688" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5688">#L5688</a>: 		s := pp.<b>status</b>
+		<a href="../src/runtime/proc.go.html#line-5724" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5724">#L5724</a>: 			if atomic.Cas(&amp;pp.<b>status</b>, s, _Pidle) {
+		<a href="../src/runtime/proc.go.html#line-5749" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5749">#L5749</a>: 		if pp.<b>status</b> != _Prunning {
+		<a href="../src/runtime/proc.go.html#line-5817" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5817">#L5817</a>: 			print("  P", i, ": status=", pp.<b>status</b>, " schedtick=", pp.schedtick, " syscalltick=", pp.syscalltick, " m=")
+		<a href="../src/runtime/proc.go.html#line-6387" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-6387">#L6387</a>: 					if pp.<b>status</b> == _Prunning {
+		<a href="../src/runtime/runtime2.go.html#line-623">runtime2.go#L623</a>: 	<b>status</b>      uint32 // one of pidle/prunning/...
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

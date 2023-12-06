@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.unwinder.calleeFuncID</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/traceback.go.html#line-94">unwinder</a>.<a href="../src/runtime/traceback.go.html#line-110">calleeFuncID</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">8 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/traceback.go.html#line-110">traceback.go#L110</a>: 	<b>calleeFuncID</b> abi.FuncID
+		<a href="../src/runtime/traceback.go.html#line-221" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-221">#L221</a>: 		<b>calleeFuncID</b>: abi.FuncIDNormal,
+		<a href="../src/runtime/traceback.go.html#line-427" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-427">#L427</a>: 	if u.<b>calleeFuncID</b> == abi.FuncID_sigpanic {
+		<a href="../src/runtime/traceback.go.html#line-497" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-497">#L497</a>: 	u.<b>calleeFuncID</b> = f.funcID
+		<a href="../src/runtime/traceback.go.html#line-635" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-635">#L635</a>: 			if sf.funcID == abi.FuncIDWrapper &amp;&amp; elideWrapperCalling(u.<b>calleeFuncID</b>) {
+		<a href="../src/runtime/traceback.go.html#line-646" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-646">#L646</a>: 			u.<b>calleeFuncID</b> = sf.funcID
+		<a href="../src/runtime/traceback.go.html#line-992" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-992">#L992</a>: 			callee := u.<b>calleeFuncID</b>
+		<a href="../src/runtime/traceback.go.html#line-993" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-993">#L993</a>: 			u.<b>calleeFuncID</b> = sf.funcID
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

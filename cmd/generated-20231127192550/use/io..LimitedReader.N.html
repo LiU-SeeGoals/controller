@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: io.LimitedReader.N</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/io.html">io</a>.<a href="../src/io/io.go.html#line-468">LimitedReader</a>.<a href="../src/io/io.go.html#line-470">N</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">15 uses</span>
+
+	io (current package)
+		<a href="../src/io/io.go.html#line-420">io.go#L420</a>: 		if l, ok := src.(*LimitedReader); ok &amp;&amp; int64(size) &gt; l.<b>N</b> {
+		<a href="../src/io/io.go.html#line-421" class="path-duplicate">io.go</a><a href="../src/io/io.go.html#line-421">#L421</a>: 			if l.<b>N</b> &lt; 1 {
+		<a href="../src/io/io.go.html#line-424" class="path-duplicate">io.go</a><a href="../src/io/io.go.html#line-424">#L424</a>: 				size = int(l.<b>N</b>)
+		<a href="../src/io/io.go.html#line-470" class="path-duplicate">io.go</a><a href="../src/io/io.go.html#line-470">#L470</a>: 	<b>N</b> int64  // max bytes remaining
+		<a href="../src/io/io.go.html#line-474" class="path-duplicate">io.go</a><a href="../src/io/io.go.html#line-474">#L474</a>: 	if l.<b>N</b> &lt;= 0 {
+		<a href="../src/io/io.go.html#line-477" class="path-duplicate">io.go</a><a href="../src/io/io.go.html#line-477">#L477</a>: 	if int64(len(p)) &gt; l.<b>N</b> {
+		<a href="../src/io/io.go.html#line-478" class="path-duplicate">io.go</a><a href="../src/io/io.go.html#line-478">#L478</a>: 		p = p[0:l.<b>N</b>]
+		<a href="../src/io/io.go.html#line-481" class="path-duplicate">io.go</a><a href="../src/io/io.go.html#line-481">#L481</a>: 	l.<b>N</b> -= int64(n)
+
+	<a href="../pkg/net.html">net</a>
+		<a href="../src/net/sendfile_linux.go.html#line-25">sendfile_linux.go#L25</a>: 		remain, r = lr.<b>N</b>, lr.R
+		<a href="../src/net/sendfile_linux.go.html#line-50" class="path-duplicate">sendfile_linux.go</a><a href="../src/net/sendfile_linux.go.html#line-50">#L50</a>: 		lr.<b>N</b> = remain - written
+		<a href="../src/net/splice_linux.go.html#line-21">splice_linux.go#L21</a>: 		remain, r = lr.<b>N</b>, lr.R
+		<a href="../src/net/splice_linux.go.html#line-41" class="path-duplicate">splice_linux.go</a><a href="../src/net/splice_linux.go.html#line-41">#L41</a>: 		lr.<b>N</b> -= written
+
+	<a href="../pkg/os.html">os</a>
+		<a href="../src/os/readfrom_linux.go.html#line-60">readfrom_linux.go#L60</a>: 		lr.<b>N</b> = remain - written
+		<a href="../src/os/readfrom_linux.go.html#line-106" class="path-duplicate">readfrom_linux.go</a><a href="../src/os/readfrom_linux.go.html#line-106">#L106</a>: 		lr.<b>N</b> -= written
+		<a href="../src/os/readfrom_linux.go.html#line-122" class="path-duplicate">readfrom_linux.go</a><a href="../src/os/readfrom_linux.go.html#line-122">#L122</a>: 	remain = lr.<b>N</b>
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

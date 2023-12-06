@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.userArenaChunkBytes</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">const <b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/arena.go.html#line-191">userArenaChunkBytes</a></b></span>
+
+<span class="title">33 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/arena.go.html#line-191">arena.go#L191</a>: 	<b>userArenaChunkBytes</b>    = uintptr(int64(userArenaChunkBytesMax-heapArenaBytes)&amp;(int64(userArenaChunkBytesMax-heapArenaBytes)&gt;&gt;63) + heapArenaBytes) // min(userArenaChunkBytesMax, heapArenaBytes)
+		<a href="../src/runtime/arena.go.html#line-194" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-194">#L194</a>: 	userArenaChunkPages = <b>userArenaChunkBytes</b> / pageSize
+		<a href="../src/runtime/arena.go.html#line-200" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-200">#L200</a>: 	userArenaChunkMaxAllocBytes = <b>userArenaChunkBytes</b> / 4
+		<a href="../src/runtime/arena.go.html#line-204" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-204">#L204</a>: 	if userArenaChunkPages*pageSize != <b>userArenaChunkBytes</b> {
+		<a href="../src/runtime/arena.go.html#line-207" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-207">#L207</a>: 	if <b>userArenaChunkBytes</b>%physPageSize != 0 {
+		<a href="../src/runtime/arena.go.html#line-210" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-210">#L210</a>: 	if <b>userArenaChunkBytes</b> &lt; heapArenaBytes {
+		<a href="../src/runtime/arena.go.html#line-211" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-211">#L211</a>: 		if heapArenaBytes%<b>userArenaChunkBytes</b> != 0 {
+		<a href="../src/runtime/arena.go.html#line-215" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-215">#L215</a>: 		if <b>userArenaChunkBytes</b>%heapArenaBytes != 0 {
+		<a href="../src/runtime/arena.go.html#line-646" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-646">#L646</a>: 	deductAssistCredit(<b>userArenaChunkBytes</b>)
+		<a href="../src/runtime/arena.go.html#line-702" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-702">#L702</a>: 		if rate != 1 &amp;&amp; <b>userArenaChunkBytes</b> &lt; c.nextSample {
+		<a href="../src/runtime/arena.go.html#line-703" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-703">#L703</a>: 			c.nextSample -= <b>userArenaChunkBytes</b>
+		<a href="../src/runtime/arena.go.html#line-705" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-705">#L705</a>: 			profilealloc(mp, unsafe.Pointer(span.base()), <b>userArenaChunkBytes</b>)
+		<a href="../src/runtime/arena.go.html#line-718" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-718">#L718</a>: 			tracealloc(unsafe.Pointer(span.base()), <b>userArenaChunkBytes</b>, nil)
+		<a href="../src/runtime/arena.go.html#line-723" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-723">#L723</a>: 			inittrace.bytes += uint64(<b>userArenaChunkBytes</b>)
+		<a href="../src/runtime/arena.go.html#line-761" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-761">#L761</a>: 	if s.npages*pageSize != <b>userArenaChunkBytes</b> {
+		<a href="../src/runtime/arena.go.html#line-842" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-842">#L842</a>: 	if s.npages*pageSize != <b>userArenaChunkBytes</b> {
+		<a href="../src/runtime/arena.go.html#line-915" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-915">#L915</a>: 		v, size := h.sysAlloc(<b>userArenaChunkBytes</b>, hintList, false)
+		<a href="../src/runtime/arena.go.html#line-916" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-916">#L916</a>: 		if size%<b>userArenaChunkBytes</b> != 0 {
+		<a href="../src/runtime/arena.go.html#line-919" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-919">#L919</a>: 		if size &gt; <b>userArenaChunkBytes</b> {
+		<a href="../src/runtime/arena.go.html#line-925" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-925">#L925</a>: 			for i := uintptr(<b>userArenaChunkBytes</b>); i &lt; size; i += <b>userArenaChunkBytes</b> {
+		<a href="../src/runtime/arena.go.html#line-930" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-930">#L930</a>: 			size = <b>userArenaChunkBytes</b>
+		<a href="../src/runtime/arena.go.html#line-948" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-948">#L948</a>: 	sysMap(unsafe.Pointer(base), <b>userArenaChunkBytes</b>, &amp;gcController.heapReleased)
+		<a href="../src/runtime/arena.go.html#line-949" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-949">#L949</a>: 	sysUsed(unsafe.Pointer(base), <b>userArenaChunkBytes</b>, <b>userArenaChunkBytes</b>)
+		<a href="../src/runtime/arena.go.html#line-957" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-957">#L957</a>: 	gcController.heapInUse.add(int64(<b>userArenaChunkBytes</b>))
+		<a href="../src/runtime/arena.go.html#line-958" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-958">#L958</a>: 	gcController.heapReleased.add(-int64(<b>userArenaChunkBytes</b>))
+		<a href="../src/runtime/arena.go.html#line-961" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-961">#L961</a>: 	atomic.Xaddint64(&amp;stats.inHeap, int64(<b>userArenaChunkBytes</b>))
+		<a href="../src/runtime/arena.go.html#line-962" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-962">#L962</a>: 	atomic.Xaddint64(&amp;stats.committed, int64(<b>userArenaChunkBytes</b>))
+		<a href="../src/runtime/arena.go.html#line-965" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-965">#L965</a>: 	atomic.Xadd64(&amp;stats.largeAlloc, int64(<b>userArenaChunkBytes</b>))
+		<a href="../src/runtime/arena.go.html#line-970" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-970">#L970</a>: 	gcController.totalAlloc.Add(int64(<b>userArenaChunkBytes</b>))
+		<a href="../src/runtime/arena.go.html#line-973" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-973">#L973</a>: 	gcController.update(int64(<b>userArenaChunkBytes</b>), 0)
+		<a href="../src/runtime/arena.go.html#line-978" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-978">#L978</a>: 	s.limit = s.base() + <b>userArenaChunkBytes</b>
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

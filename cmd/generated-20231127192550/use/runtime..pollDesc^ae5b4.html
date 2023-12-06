@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.pollDesc</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/netpoll.go.html#line-73">pollDesc</a></b></span>
+
+<span class="title">31 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/netpoll.go.html#line-73">netpoll.go#L73</a>: type <b>pollDesc</b> struct {
+		<a href="../src/runtime/netpoll.go.html#line-75" class="path-duplicate">netpoll.go</a><a href="../src/runtime/netpoll.go.html#line-75">#L75</a>: 	link  *<b>pollDesc</b>      // in pollcache, protected by pollcache.lock
+		<a href="../src/runtime/netpoll.go.html#line-110" class="path-duplicate">netpoll.go</a><a href="../src/runtime/netpoll.go.html#line-110">#L110</a>: 	self    *<b>pollDesc</b> // storage for indirect interface. See (*pollDesc).makeArg.
+		<a href="../src/runtime/netpoll.go.html#line-138" class="path-duplicate">netpoll.go</a><a href="../src/runtime/netpoll.go.html#line-138">#L138</a>: func (pd *<b>pollDesc</b>) info() pollInfo {
+		<a href="../src/runtime/netpoll.go.html#line-149" class="path-duplicate">netpoll.go</a><a href="../src/runtime/netpoll.go.html#line-149">#L149</a>: func (pd *<b>pollDesc</b>) publishInfo() {
+		<a href="../src/runtime/netpoll.go.html#line-172" class="path-duplicate">netpoll.go</a><a href="../src/runtime/netpoll.go.html#line-172">#L172</a>: func (pd *<b>pollDesc</b>) setEventErr(b bool, seq uintptr) {
+		<a href="../src/runtime/netpoll.go.html#line-190" class="path-duplicate">netpoll.go</a><a href="../src/runtime/netpoll.go.html#line-190">#L190</a>: 	first *<b>pollDesc</b>
+		<a href="../src/runtime/netpoll.go.html#line-236" class="path-duplicate">netpoll.go</a><a href="../src/runtime/netpoll.go.html#line-236">#L236</a>: func poll_runtime_pollOpen(fd uintptr) (*<b>pollDesc</b>, int) {
+		<a href="../src/runtime/netpoll.go.html#line-273" class="path-duplicate">netpoll.go</a><a href="../src/runtime/netpoll.go.html#line-273">#L273</a>: func poll_runtime_pollClose(pd *<b>pollDesc</b>) {
+		<a href="../src/runtime/netpoll.go.html#line-289" class="path-duplicate">netpoll.go</a><a href="../src/runtime/netpoll.go.html#line-289">#L289</a>: func (c *pollCache) free(pd *<b>pollDesc</b>) {
+		<a href="../src/runtime/netpoll.go.html#line-315" class="path-duplicate">netpoll.go</a><a href="../src/runtime/netpoll.go.html#line-315">#L315</a>: func poll_runtime_pollReset(pd *<b>pollDesc</b>, mode int) int {
+		<a href="../src/runtime/netpoll.go.html#line-334" class="path-duplicate">netpoll.go</a><a href="../src/runtime/netpoll.go.html#line-334">#L334</a>: func poll_runtime_pollWait(pd *<b>pollDesc</b>, mode int) int {
+		<a href="../src/runtime/netpoll.go.html#line-356" class="path-duplicate">netpoll.go</a><a href="../src/runtime/netpoll.go.html#line-356">#L356</a>: func poll_runtime_pollWaitCanceled(pd *<b>pollDesc</b>, mode int) {
+		<a href="../src/runtime/netpoll.go.html#line-364" class="path-duplicate">netpoll.go</a><a href="../src/runtime/netpoll.go.html#line-364">#L364</a>: func poll_runtime_pollSetDeadline(pd *<b>pollDesc</b>, d int64, mode int) {
+		<a href="../src/runtime/netpoll.go.html#line-446" class="path-duplicate">netpoll.go</a><a href="../src/runtime/netpoll.go.html#line-446">#L446</a>: func poll_runtime_pollUnblock(pd *<b>pollDesc</b>) {
+		<a href="../src/runtime/netpoll.go.html#line-484" class="path-duplicate">netpoll.go</a><a href="../src/runtime/netpoll.go.html#line-484">#L484</a>: func netpollready(toRun *gList, pd *<b>pollDesc</b>, mode int32) {
+		<a href="../src/runtime/netpoll.go.html#line-500" class="path-duplicate">netpoll.go</a><a href="../src/runtime/netpoll.go.html#line-500">#L500</a>: func netpollcheckerr(pd *<b>pollDesc</b>, mode int32) int {
+		<a href="../src/runtime/netpoll.go.html#line-537" class="path-duplicate">netpoll.go</a><a href="../src/runtime/netpoll.go.html#line-537">#L537</a>: func netpollblock(pd *<b>pollDesc</b>, mode int32, waitio bool) bool {
+		<a href="../src/runtime/netpoll.go.html#line-574" class="path-duplicate">netpoll.go</a><a href="../src/runtime/netpoll.go.html#line-574">#L574</a>: func netpollunblock(pd *<b>pollDesc</b>, mode int32, ioready bool) *g {
+		<a href="../src/runtime/netpoll.go.html#line-603" class="path-duplicate">netpoll.go</a><a href="../src/runtime/netpoll.go.html#line-603">#L603</a>: func netpolldeadlineimpl(pd *<b>pollDesc</b>, seq uintptr, read, write bool) {
+		<a href="../src/runtime/netpoll.go.html#line-644" class="path-duplicate">netpoll.go</a><a href="../src/runtime/netpoll.go.html#line-644">#L644</a>: 	netpolldeadlineimpl(arg.(*<b>pollDesc</b>), seq, true, true)
+		<a href="../src/runtime/netpoll.go.html#line-648" class="path-duplicate">netpoll.go</a><a href="../src/runtime/netpoll.go.html#line-648">#L648</a>: 	netpolldeadlineimpl(arg.(*<b>pollDesc</b>), seq, true, false)
+		<a href="../src/runtime/netpoll.go.html#line-652" class="path-duplicate">netpoll.go</a><a href="../src/runtime/netpoll.go.html#line-652">#L652</a>: 	netpolldeadlineimpl(arg.(*<b>pollDesc</b>), seq, false, true)
+		<a href="../src/runtime/netpoll.go.html#line-655" class="path-duplicate">netpoll.go</a><a href="../src/runtime/netpoll.go.html#line-655">#L655</a>: func (c *pollCache) alloc() *<b>pollDesc</b> {
+		<a href="../src/runtime/netpoll.go.html#line-658" class="path-duplicate">netpoll.go</a><a href="../src/runtime/netpoll.go.html#line-658">#L658</a>: 		const pdSize = unsafe.Sizeof(<b>pollDesc</b>{})
+		<a href="../src/runtime/netpoll.go.html#line-667" class="path-duplicate">netpoll.go</a><a href="../src/runtime/netpoll.go.html#line-667">#L667</a>: 			pd := (*<b>pollDesc</b>)(add(mem, i*pdSize))
+		<a href="../src/runtime/netpoll.go.html#line-684" class="path-duplicate">netpoll.go</a><a href="../src/runtime/netpoll.go.html#line-684">#L684</a>: func (pd *<b>pollDesc</b>) makeArg() (i any) {
+		<a href="../src/runtime/netpoll.go.html#line-692" class="path-duplicate">netpoll.go</a><a href="../src/runtime/netpoll.go.html#line-692">#L692</a>: 	pdEface any    = (*<b>pollDesc</b>)(nil)
+		<a href="../src/runtime/netpoll_epoll.go.html#line-52">netpoll_epoll.go#L52</a>: func netpollopen(fd uintptr, pd *<b>pollDesc</b>) uintptr {
+		<a href="../src/runtime/netpoll_epoll.go.html#line-65" class="path-duplicate">netpoll_epoll.go</a><a href="../src/runtime/netpoll_epoll.go.html#line-65">#L65</a>: func netpollarm(pd *<b>pollDesc</b>, mode int) {
+		<a href="../src/runtime/netpoll_epoll.go.html#line-163" class="path-duplicate">netpoll_epoll.go</a><a href="../src/runtime/netpoll_epoll.go.html#line-163">#L163</a>: 			pd := (*<b>pollDesc</b>)(tp.pointer())
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

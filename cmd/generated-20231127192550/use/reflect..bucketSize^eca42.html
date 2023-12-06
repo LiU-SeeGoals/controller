@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: reflect.bucketSize</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">const <b><a href="../pkg/reflect.html">reflect</a>.<a href="../src/reflect/type.go.html#line-1953">bucketSize</a></b></span>
+
+<span class="title">8 uses</span>
+
+	reflect (current package)
+		<a href="../src/reflect/type.go.html#line-1953">type.go#L1953</a>: 	<b>bucketSize</b> uintptr = abi.MapBucketCount
+		<a href="../src/reflect/type.go.html#line-1974" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1974">#L1974</a>: 	size := <b>bucketSize</b>*(1+ktyp.Size_+etyp.Size_) + goarch.PtrSize
+		<a href="../src/reflect/type.go.html#line-1980" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1980">#L1980</a>: 		nptr := (<b>bucketSize</b>*(1+ktyp.Size_+etyp.Size_) + goarch.PtrSize) / goarch.PtrSize
+		<a href="../src/reflect/type.go.html#line-1986" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1986">#L1986</a>: 		base := <b>bucketSize</b> / goarch.PtrSize
+		<a href="../src/reflect/type.go.html#line-1989" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1989">#L1989</a>: 			emitGCMask(mask, base, ktyp, <b>bucketSize</b>)
+		<a href="../src/reflect/type.go.html#line-1991" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1991">#L1991</a>: 		base += <b>bucketSize</b> * ktyp.Size_ / goarch.PtrSize
+		<a href="../src/reflect/type.go.html#line-1994" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1994">#L1994</a>: 			emitGCMask(mask, base, etyp, <b>bucketSize</b>)
+		<a href="../src/reflect/type.go.html#line-1996" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1996">#L1996</a>: 		base += <b>bucketSize</b> * etyp.Size_ / goarch.PtrSize
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

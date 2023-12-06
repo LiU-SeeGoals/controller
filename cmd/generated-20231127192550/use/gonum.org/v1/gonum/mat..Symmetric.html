@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/mat.Symmetric</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-38">Symmetric</a></b></span>
+
+<span class="title">25 uses</span>
+
+	gonum.org/v1/gonum/mat (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-22">cholesky.go#L22</a>: 	_ <b>Symmetric</b> = (*Cholesky)(nil)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-25" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-25">#L25</a>: 	_ <b>Symmetric</b> = (*BandCholesky)(nil)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-30" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-30">#L30</a>: 	_ <b>Symmetric</b> = (*PivotedCholesky)(nil)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-134" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-134">#L134</a>: func (c *Cholesky) Factorize(a <b>Symmetric</b>) (ok bool) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-973" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-973">#L973</a>: func (c *PivotedCholesky) Factorize(a <b>Symmetric</b>, tol float64) (ok bool) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-23">diagonal.go#L23</a>: 	_         <b>Symmetric</b>       = diagDense
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-34" class="path-duplicate">diagonal.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-34">#L34</a>: 	_    <b>Symmetric</b>  = diag
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-51" class="path-duplicate">diagonal.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-51">#L51</a>: 	<b>Symmetric</b>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/eigen.go.html#line-38">eigen.go#L38</a>: func (e *EigenSym) Factorize(a <b>Symmetric</b>, vectors bool) (ok bool) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symband.go.html#line-19">symband.go#L19</a>: 	_            <b>Symmetric</b>        = symBandDense
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-22">symmetric.go#L22</a>: 	_ <b>Symmetric</b>        = symDense
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-38" class="path-duplicate">symmetric.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-38">#L38</a>: type <b>Symmetric</b> interface {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-51" class="path-duplicate">symmetric.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-51">#L51</a>: 	<b>Symmetric</b>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-236" class="path-duplicate">symmetric.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-236">#L236</a>: func (s *SymDense) isolatedWorkspace(a <b>Symmetric</b>) (w *SymDense, restore func()) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-260" class="path-duplicate">symmetric.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-260">#L260</a>: func (s *SymDense) AddSym(a, b <b>Symmetric</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-297" class="path-duplicate">symmetric.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-297">#L297</a>: func (s *SymDense) CopySym(a <b>Symmetric</b>) int {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-327" class="path-duplicate">symmetric.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-327">#L327</a>: func (s *SymDense) SymRankOne(a <b>Symmetric</b>, alpha float64, x Vector) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-361" class="path-duplicate">symmetric.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-361">#L361</a>: func (s *SymDense) SymRankK(a <b>Symmetric</b>, alpha float64, x Matrix) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-442" class="path-duplicate">symmetric.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-442">#L442</a>: func (s *SymDense) RankTwo(a <b>Symmetric</b>, alpha float64, x, y Vector) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-502" class="path-duplicate">symmetric.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-502">#L502</a>: func (s *SymDense) ScaleSym(f float64, a <b>Symmetric</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-529" class="path-duplicate">symmetric.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-529">#L529</a>: func (s *SymDense) SubsetSym(a <b>Symmetric</b>, set []int) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-571" class="path-duplicate">symmetric.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-571">#L571</a>: func (s *SymDense) SliceSym(i, k int) <b>Symmetric</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-627" class="path-duplicate">symmetric.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-627">#L627</a>: func (s *SymDense) GrowSym(n int) <b>Symmetric</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-671" class="path-duplicate">symmetric.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-671">#L671</a>: func (s *SymDense) PowPSD(a <b>Symmetric</b>, pow float64) error {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-661">triangular.go#L661</a>: func copySymIntoTriangle(t *TriDense, s <b>Symmetric</b>) {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

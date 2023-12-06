@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: math.Copysign</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../pkg/math.html">math</a>.<a href="../src/math/copysign.go.html#line-9">Copysign</a></b></span>
+
+<span class="title">81 uses</span>
+
+	math (current package)
+		<a href="../src/math/atan2.go.html#line-44">atan2.go#L44</a>: 			return <b>Copysign</b>(0, y)
+		<a href="../src/math/atan2.go.html#line-46" class="path-duplicate">atan2.go</a><a href="../src/math/atan2.go.html#line-46">#L46</a>: 		return <b>Copysign</b>(Pi, y)
+		<a href="../src/math/atan2.go.html#line-48" class="path-duplicate">atan2.go</a><a href="../src/math/atan2.go.html#line-48">#L48</a>: 		return <b>Copysign</b>(Pi/2, y)
+		<a href="../src/math/atan2.go.html#line-53" class="path-duplicate">atan2.go</a><a href="../src/math/atan2.go.html#line-53">#L53</a>: 				return <b>Copysign</b>(Pi/4, y)
+		<a href="../src/math/atan2.go.html#line-55" class="path-duplicate">atan2.go</a><a href="../src/math/atan2.go.html#line-55">#L55</a>: 				return <b>Copysign</b>(0, y)
+		<a href="../src/math/atan2.go.html#line-60" class="path-duplicate">atan2.go</a><a href="../src/math/atan2.go.html#line-60">#L60</a>: 			return <b>Copysign</b>(3*Pi/4, y)
+		<a href="../src/math/atan2.go.html#line-62" class="path-duplicate">atan2.go</a><a href="../src/math/atan2.go.html#line-62">#L62</a>: 			return <b>Copysign</b>(Pi, y)
+		<a href="../src/math/atan2.go.html#line-65" class="path-duplicate">atan2.go</a><a href="../src/math/atan2.go.html#line-65">#L65</a>: 		return <b>Copysign</b>(Pi/2, y)
+		<a href="../src/math/copysign.go.html#line-9">copysign.go#L9</a>: func <b>Copysign</b>(f, sign float64) float64 {
+		<a href="../src/math/ldexp.go.html#line-35">ldexp.go#L35</a>: 		return <b>Copysign</b>(0, frac) // underflow
+		<a href="../src/math/nextafter.go.html#line-21">nextafter.go#L21</a>: 		r = float32(<b>Copysign</b>(float64(Float32frombits(1)), float64(y)))
+		<a href="../src/math/nextafter.go.html#line-44" class="path-duplicate">nextafter.go</a><a href="../src/math/nextafter.go.html#line-44">#L44</a>: 		r = <b>Copysign</b>(Float64frombits(1), y)
+
+	<a href="../pkg/math/cmplx.html">math/cmplx</a>
+		<a href="../src/math/cmplx/asin.go.html#line-71">asin.go#L71</a>: 			return complex(math.<b>Copysign</b>(math.Pi/4, re), im)
+		<a href="../src/math/cmplx/asin.go.html#line-73" class="path-duplicate">asin.go</a><a href="../src/math/cmplx/asin.go.html#line-73">#L73</a>: 			return complex(math.<b>Copysign</b>(0, re), im)
+		<a href="../src/math/cmplx/asin.go.html#line-76" class="path-duplicate">asin.go</a><a href="../src/math/cmplx/asin.go.html#line-76">#L76</a>: 		return complex(math.<b>Copysign</b>(math.Pi/2, re), math.<b>Copysign</b>(re, im))
+		<a href="../src/math/cmplx/asin.go.html#line-96" class="path-duplicate">asin.go</a><a href="../src/math/cmplx/asin.go.html#line-96">#L96</a>: 			return complex(re, math.<b>Copysign</b>(math.Pi/4, im))
+		<a href="../src/math/cmplx/asin.go.html#line-100" class="path-duplicate">asin.go</a><a href="../src/math/cmplx/asin.go.html#line-100">#L100</a>: 			return complex(re, math.<b>Copysign</b>(0.0, im))
+		<a href="../src/math/cmplx/asin.go.html#line-112" class="path-duplicate">asin.go</a><a href="../src/math/cmplx/asin.go.html#line-112">#L112</a>: 		return complex(math.<b>Copysign</b>(im, re), math.<b>Copysign</b>(math.Pi/2, im))
+		<a href="../src/math/cmplx/asin.go.html#line-141" class="path-duplicate">asin.go</a><a href="../src/math/cmplx/asin.go.html#line-141">#L141</a>: 		return complex(0, math.<b>Copysign</b>(math.Pi/2, imag(x)))
+		<a href="../src/math/cmplx/asin.go.html#line-192" class="path-duplicate">asin.go</a><a href="../src/math/cmplx/asin.go.html#line-192">#L192</a>: 			return complex(math.NaN(), math.<b>Copysign</b>(0, im))
+		<a href="../src/math/cmplx/asin.go.html#line-194" class="path-duplicate">asin.go</a><a href="../src/math/cmplx/asin.go.html#line-194">#L194</a>: 		return complex(math.<b>Copysign</b>(math.Pi/2, re), math.<b>Copysign</b>(0, im))
+		<a href="../src/math/cmplx/exp.go.html#line-59">exp.go#L59</a>: 				return complex(0, math.<b>Copysign</b>(0, im))
+		<a href="../src/math/cmplx/sin.go.html#line-127">sin.go#L127</a>: 		return complex(math.NaN(), -im*math.<b>Copysign</b>(0, re))
+		<a href="../src/math/cmplx/sin.go.html#line-131" class="path-duplicate">sin.go</a><a href="../src/math/cmplx/sin.go.html#line-131">#L131</a>: 			return complex(math.Inf(1), -re*math.<b>Copysign</b>(0, im))
+		<a href="../src/math/cmplx/sin.go.html#line-159" class="path-duplicate">sin.go</a><a href="../src/math/cmplx/sin.go.html#line-159">#L159</a>: 		return complex(math.NaN(), re*math.<b>Copysign</b>(0, im))
+		<a href="../src/math/cmplx/sin.go.html#line-163" class="path-duplicate">sin.go</a><a href="../src/math/cmplx/sin.go.html#line-163">#L163</a>: 			return complex(math.Inf(1), im*math.<b>Copysign</b>(0, re))
+		<a href="../src/math/cmplx/sqrt.go.html#line-65">sqrt.go#L65</a>: 			return complex(0, math.<b>Copysign</b>(math.Sqrt(-real(x)), imag(x)))
+		<a href="../src/math/cmplx/tan.go.html#line-67">tan.go#L67</a>: 			return complex(math.<b>Copysign</b>(0, re), math.<b>Copysign</b>(1, im))
+		<a href="../src/math/cmplx/tan.go.html#line-69" class="path-duplicate">tan.go</a><a href="../src/math/cmplx/tan.go.html#line-69">#L69</a>: 		return complex(math.<b>Copysign</b>(0, math.Sin(2*re)), math.<b>Copysign</b>(1, im))
+		<a href="../src/math/cmplx/tan.go.html#line-101" class="path-duplicate">tan.go</a><a href="../src/math/cmplx/tan.go.html#line-101">#L101</a>: 			return complex(math.<b>Copysign</b>(1, re), math.<b>Copysign</b>(0, im))
+		<a href="../src/math/cmplx/tan.go.html#line-103" class="path-duplicate">tan.go</a><a href="../src/math/cmplx/tan.go.html#line-103">#L103</a>: 		return complex(math.<b>Copysign</b>(1, re), math.<b>Copysign</b>(0, math.Sin(2*im)))
+
+	<a href="../pkg/gonum.org/v1/gonum/blas/gonum.html">gonum.org/v1/gonum/blas/gonum</a>
+		<a href="../src/gonum.org/v1/gonum/blas/gonum/level1float64.go.html#line-306">level1float64.go#L306</a>: 			sigma = math.<b>Copysign</b>(1, a)
+		<a href="../src/gonum.org/v1/gonum/blas/gonum/level1float64.go.html#line-308" class="path-duplicate">level1float64.go</a><a href="../src/gonum.org/v1/gonum/blas/gonum/level1float64.go.html#line-308">#L308</a>: 			sigma = math.<b>Copysign</b>(1, b)
+
+	<a href="../pkg/gonum.org/v1/gonum/floats.html">gonum.org/v1/gonum/floats</a>
+		<a href="../src/gonum.org/v1/gonum/floats/floats.go.html#line-534">floats.go#L534</a>: 			if math.<b>Copysign</b>(1, v) == math.<b>Copysign</b>(1, l) {
+		<a href="../src/gonum.org/v1/gonum/floats/floats.go.html#line-539" class="path-duplicate">floats.go</a><a href="../src/gonum.org/v1/gonum/floats/floats.go.html#line-539">#L539</a>: 		if math.<b>Copysign</b>(1, v) == math.<b>Copysign</b>(1, l) {
+
+	<a href="../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-381">dbdsqr.go#L381</a>: 					f := (math.Abs(d[l2]) - shift) * (math.<b>Copysign</b>(1, d[l2]) + shift/d[l2])
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-422" class="path-duplicate">dbdsqr.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-422">#L422</a>: 					f := (math.Abs(d[m-1]) - shift) * (math.<b>Copysign</b>(1, d[m-1]) + shift/d[m-1])
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlacn2.go.html#line-69">dlacn2.go#L69</a>: 			x[i] = math.<b>Copysign</b>(1, x[i])
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlacn2.go.html#line-91" class="path-duplicate">dlacn2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlacn2.go.html#line-91">#L91</a>: 			if int(math.<b>Copysign</b>(1, x[i])) != isgn[i] {
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlacn2.go.html#line-98" class="path-duplicate">dlacn2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlacn2.go.html#line-98">#L98</a>: 				x[i] = math.<b>Copysign</b>(1, x[i])
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlag2.go.html#line-82">dlag2.go#L82</a>: 		b11 = math.<b>Copysign</b>(bmin, b11)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlag2.go.html#line-85" class="path-duplicate">dlag2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlag2.go.html#line-85">#L85</a>: 		b22 = math.<b>Copysign</b>(bmin, b22)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlag2.go.html#line-148" class="path-duplicate">dlag2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlag2.go.html#line-148">#L148</a>: 		sum := pp + math.<b>Copysign</b>(r, pp)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlag2.go.html#line-149" class="path-duplicate">dlag2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlag2.go.html#line-149">#L149</a>: 		diff := pp - math.<b>Copysign</b>(r, pp)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlarfg.go.html#line-51">dlarfg.go#L51</a>: 	beta = -math.<b>Copysign</b>(impl.Dlapy2(alpha, xnorm), alpha)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlarfg.go.html#line-67" class="path-duplicate">dlarfg.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlarfg.go.html#line-67">#L67</a>: 		beta = -math.<b>Copysign</b>(impl.Dlapy2(alpha, xnorm), alpha)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlartg.go.html#line-44">dlartg.go#L44</a>: 		return 0, math.<b>Copysign</b>(1, g), g1
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlartg.go.html#line-57" class="path-duplicate">dlartg.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlartg.go.html#line-57">#L57</a>: 		r = math.<b>Copysign</b>(d, f)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlartg.go.html#line-68" class="path-duplicate">dlartg.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlartg.go.html#line-68">#L68</a>: 	r = math.<b>Copysign</b>(d, f)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq2.go.html#line-149">dlasq2.go#L149</a>: 				z[i4-1] = math.<b>Copysign</b>(0, -1)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq2.go.html#line-162" class="path-duplicate">dlasq2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq2.go.html#line-162">#L162</a>: 				z[i4-1] = math.<b>Copysign</b>(0, -1)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq3.go.html#line-102">dlasq3.go#L102</a>: 			dmin = math.<b>Copysign</b>(0, -1) // Fortran code has -zero, but -0 in go is 0
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasv2.go.html#line-80">dlasv2.go#L80</a>: 					t = math.<b>Copysign</b>(2, ft) * math.<b>Copysign</b>(1, gt)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasv2.go.html#line-82" class="path-duplicate">dlasv2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasv2.go.html#line-82">#L82</a>: 					t = gt/math.<b>Copysign</b>(d, ft) + m/t
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasv2.go.html#line-108" class="path-duplicate">dlasv2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasv2.go.html#line-108">#L108</a>: 		tsign = math.<b>Copysign</b>(1, csr) * math.<b>Copysign</b>(1, csl) * math.<b>Copysign</b>(1, f)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasv2.go.html#line-110" class="path-duplicate">dlasv2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasv2.go.html#line-110">#L110</a>: 		tsign = math.<b>Copysign</b>(1, snr) * math.<b>Copysign</b>(1, csl) * math.<b>Copysign</b>(1, g)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasv2.go.html#line-112" class="path-duplicate">dlasv2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasv2.go.html#line-112">#L112</a>: 		tsign = math.<b>Copysign</b>(1, snr) * math.<b>Copysign</b>(1, snl) * math.<b>Copysign</b>(1, h)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasv2.go.html#line-114" class="path-duplicate">dlasv2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasv2.go.html#line-114">#L114</a>: 	ssmax = math.<b>Copysign</b>(ssmax, tsign)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasv2.go.html#line-115" class="path-duplicate">dlasv2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasv2.go.html#line-115">#L115</a>: 	ssmin = math.<b>Copysign</b>(ssmin, tsign*math.<b>Copysign</b>(1, f)*math.<b>Copysign</b>(1, h))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-232">dsteqr.go#L232</a>: 				g = d[m] - p + e[l]/(g+math.<b>Copysign</b>(r, g))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-317" class="path-duplicate">dsteqr.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-317">#L317</a>: 				g = d[m] - p + (e[l-1])/(g+math.<b>Copysign</b>(r, g))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dsterf.go.html#line-162">dsterf.go#L162</a>: 				sigma = p - (rte / (sigma + math.<b>Copysign</b>(r, sigma)))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dsterf.go.html#line-233" class="path-duplicate">dsterf.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dsterf.go.html#line-233">#L233</a>: 				sigma = p - (rte / (sigma + math.<b>Copysign</b>(r, sigma)))
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.mspan.spanclass</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/mheap.go.html#line-410">mspan</a>.<a href="../src/runtime/mheap.go.html#line-486">spanclass</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">14 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/arena.go.html#line-749">arena.go#L749</a>: 	return s.isUserArenaChunk &amp;&amp; s.<b>spanclass</b> == makeSpanClass(0, true)
+		<a href="../src/runtime/arena.go.html#line-777" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-777">#L777</a>: 	s.<b>spanclass</b> = makeSpanClass(0, true)
+		<a href="../src/runtime/mbitmap.go.html#line-727">mbitmap.go#L727</a>: 	if forceClear || s.<b>spanclass</b>.noscan() {
+		<a href="../src/runtime/mbitmap.go.html#line-1451" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-1451">#L1451</a>: 		if s.<b>spanclass</b>.noscan() {
+		<a href="../src/runtime/mgcmark.go.html#line-390">mgcmark.go#L390</a>: 				if !s.<b>spanclass</b>.noscan() {
+		<a href="../src/runtime/mgcmark.go.html#line-1273" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-1273">#L1273</a>: 	if s.<b>spanclass</b>.noscan() {
+		<a href="../src/runtime/mgcmark.go.html#line-1493" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-1493">#L1493</a>: 		if span.<b>spanclass</b>.noscan() {
+		<a href="../src/runtime/mgcmark.go.html#line-1519" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-1519">#L1519</a>: 	print(" s.base()=", hex(s.base()), " s.limit=", hex(s.limit), " s.spanclass=", s.<b>spanclass</b>, " s.elemsize=", s.elemsize, " s.state=")
+		<a href="../src/runtime/mgcsweep.go.html#line-529">mgcsweep.go#L529</a>: 	spc := s.<b>spanclass</b>
+		<a href="../src/runtime/mheap.go.html#line-486">mheap.go#L486</a>: 	<b>spanclass</b>             spanClass     // size class and noscan (uint8)
+		<a href="../src/runtime/mheap.go.html#line-1397" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1397">#L1397</a>: 		s.<b>spanclass</b> = spanclass
+		<a href="../src/runtime/mheap.go.html#line-1685" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1685">#L1685</a>: 	span.<b>spanclass</b> = 0
+		<a href="../src/runtime/mheap.go.html#line-1962" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1962">#L1962</a>: 			if !span.<b>spanclass</b>.noscan() {
+		<a href="../src/runtime/mwbbuf.go.html#line-258">mwbbuf.go#L258</a>: 		if span.<b>spanclass</b>.noscan() {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

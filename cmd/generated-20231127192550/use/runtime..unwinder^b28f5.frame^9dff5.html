@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.unwinder.frame</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/traceback.go.html#line-94">unwinder</a>.<a href="../src/runtime/traceback.go.html#line-97">frame</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">29 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/heapdump.go.html#line-375">heapdump.go#L375</a>: 		dumpframe(&amp;u.<b>frame</b>, &amp;child)
+		<a href="../src/runtime/mbitmap.go.html#line-1476">mbitmap.go#L1476</a>: 			if u.<b>frame</b>.sp &lt;= uintptr(p) &amp;&amp; uintptr(p) &lt; u.<b>frame</b>.varp {
+		<a href="../src/runtime/mbitmap.go.html#line-1482" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-1482">#L1482</a>: 			locals, _, _ := u.<b>frame</b>.getStackMap(nil, false)
+		<a href="../src/runtime/mbitmap.go.html#line-1490" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-1490">#L1490</a>: 				off := (uintptr(p) + i - u.<b>frame</b>.varp + size) / goarch.PtrSize
+		<a href="../src/runtime/mgcmark.go.html#line-803">mgcmark.go#L803</a>: 		scanframeworker(&amp;u.<b>frame</b>, &amp;state, gcw)
+		<a href="../src/runtime/panic.go.html#line-649">panic.go#L649</a>: 			frame := &amp;u.<b>frame</b>
+		<a href="../src/runtime/stack.go.html#line-935">stack.go#L935</a>: 		adjustframe(&amp;u.<b>frame</b>, &amp;adjinfo)
+		<a href="../src/runtime/traceback.go.html#line-97">traceback.go#L97</a>: 	<b>frame</b> stkframe
+		<a href="../src/runtime/traceback.go.html#line-218" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-218">#L218</a>: 		<b>frame</b>:        frame,
+		<a href="../src/runtime/traceback.go.html#line-230" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-230">#L230</a>: 	return u.<b>frame</b>.pc != 0
+		<a href="../src/runtime/traceback.go.html#line-255" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-255">#L255</a>: 	frame := &amp;u.<b>frame</b>
+		<a href="../src/runtime/traceback.go.html#line-446" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-446">#L446</a>: 	frame := &amp;u.<b>frame</b>
+		<a href="../src/runtime/traceback.go.html#line-525" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-525">#L525</a>: 	u.<b>frame</b>.pc = 0
+		<a href="../src/runtime/traceback.go.html#line-568" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-568">#L568</a>: 	if u.flags&amp;(unwindPrintErrors|unwindSilentErrors) == 0 &amp;&amp; u.<b>frame</b>.sp != gp.stktopsp {
+		<a href="../src/runtime/traceback.go.html#line-569" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-569">#L569</a>: 		print("runtime: g", gp.goid, ": frame.sp=", hex(u.<b>frame</b>.sp), " top=", hex(gp.stktopsp), "\n")
+		<a href="../src/runtime/traceback.go.html#line-586" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-586">#L586</a>: 	if u.flags&amp;unwindTrap == 0 &amp;&amp; u.<b>frame</b>.pc &gt; u.<b>frame</b>.fn.entry() {
+		<a href="../src/runtime/traceback.go.html#line-588" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-588">#L588</a>: 		return u.<b>frame</b>.pc - 1
+		<a href="../src/runtime/traceback.go.html#line-591" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-591">#L591</a>: 	return u.<b>frame</b>.pc
+		<a href="../src/runtime/traceback.go.html#line-599" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-599">#L599</a>: 	if cgoTraceback == nil || u.<b>frame</b>.fn.funcID != abi.FuncID_cgocallback || u.cgoCtxt &lt; 0 {
+		<a href="../src/runtime/traceback.go.html#line-629" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-629">#L629</a>: 		f := u.<b>frame</b>.fn
+		<a href="../src/runtime/traceback.go.html#line-989" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-989">#L989</a>: 		f := u.<b>frame</b>.fn
+		<a href="../src/runtime/traceback.go.html#line-1015" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-1015">#L1015</a>: 				argp := unsafe.Pointer(u.<b>frame</b>.argp)
+		<a href="../src/runtime/traceback.go.html#line-1021" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-1021">#L1021</a>: 				if u.<b>frame</b>.pc &gt; f.entry() {
+		<a href="../src/runtime/traceback.go.html#line-1022" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-1022">#L1022</a>: 					print(" +", hex(u.<b>frame</b>.pc-f.entry()))
+		<a href="../src/runtime/traceback.go.html#line-1025" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-1025">#L1025</a>: 					print(" fp=", hex(u.<b>frame</b>.fp), " sp=", hex(u.<b>frame</b>.sp), " pc=", hex(u.<b>frame</b>.pc))
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

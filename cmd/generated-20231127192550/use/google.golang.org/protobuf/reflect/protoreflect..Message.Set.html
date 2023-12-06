@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: google.golang.org/protobuf/reflect/protoreflect.Message.Set</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../../pkg/google.golang.org/protobuf/reflect/protoreflect.html">google.golang.org/protobuf/reflect/protoreflect</a>.<a href="../../../../src/google.golang.org/protobuf/reflect/protoreflect/value.go.html#line-40">Message</a>.<a href="../../../../src/google.golang.org/protobuf/reflect/protoreflect/value.go.html#line-103">Set</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">18 uses</span>
+
+	google.golang.org/protobuf/reflect/protoreflect (current package)
+		<a href="../../../../src/google.golang.org/protobuf/reflect/protoreflect/value.go.html#line-103">value.go#L103</a>: 	<b>Set</b>(FieldDescriptor, Value)
+
+	<a href="../../../../pkg/google.golang.org/protobuf/encoding/prototext.html">google.golang.org/protobuf/encoding/prototext</a>
+		<a href="../../../../src/google.golang.org/protobuf/encoding/prototext/decode.go.html#line-276">decode.go#L276</a>: 		m.<b>Set</b>(fd, val)
+		<a href="../../../../src/google.golang.org/protobuf/encoding/prototext/decode.go.html#line-689" class="path-duplicate">decode.go</a><a href="../../../../src/google.golang.org/protobuf/encoding/prototext/decode.go.html#line-689">#L689</a>: 		m.<b>Set</b>(fds.ByNumber(genid.Any_TypeUrl_field_number), protoreflect.ValueOfString(typeURL))
+		<a href="../../../../src/google.golang.org/protobuf/encoding/prototext/decode.go.html#line-692" class="path-duplicate">decode.go</a><a href="../../../../src/google.golang.org/protobuf/encoding/prototext/decode.go.html#line-692">#L692</a>: 		m.<b>Set</b>(fds.ByNumber(genid.Any_Value_field_number), protoreflect.ValueOfBytes(bValue))
+
+	<a href="../../../../pkg/google.golang.org/protobuf/internal/impl.html">google.golang.org/protobuf/internal/impl</a>
+		<a href="../../../../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-309">legacy_message.go#L309</a>: 				opts.<b>Set</b>(opts.Descriptor().Fields().ByName("weak"), protoreflect.ValueOfBool(true))
+		<a href="../../../../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-312" class="path-duplicate">legacy_message.go</a><a href="../../../../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-312">#L312</a>: 				opts.<b>Set</b>(opts.Descriptor().Fields().ByName("packed"), protoreflect.ValueOfBool(fd.L1.IsPacked))
+		<a href="../../../../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-346" class="path-duplicate">legacy_message.go</a><a href="../../../../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-346">#L346</a>: 					opts.<b>Set</b>(opts.Descriptor().Fields().ByName("map_entry"), protoreflect.ValueOfBool(true))
+
+	<a href="../../../../pkg/google.golang.org/protobuf/proto.html">google.golang.org/protobuf/proto</a>
+		<a href="../../../../src/google.golang.org/protobuf/proto/decode.go.html#line-204">decode.go#L204</a>: 		m.<b>Set</b>(fd, v)
+		<a href="../../../../src/google.golang.org/protobuf/proto/extension.go.html#line-70">extension.go#L70</a>: 	m.ProtoReflect().<b>Set</b>(xd, pv)
+		<a href="../../../../src/google.golang.org/protobuf/proto/merge.go.html#line-92">merge.go#L92</a>: 			dst.<b>Set</b>(fd, o.cloneBytes(v))
+		<a href="../../../../src/google.golang.org/protobuf/proto/merge.go.html#line-94" class="path-duplicate">merge.go</a><a href="../../../../src/google.golang.org/protobuf/proto/merge.go.html#line-94">#L94</a>: 			dst.<b>Set</b>(fd, v)
+
+	<a href="../../../../pkg/github.com/golang/protobuf/proto.html">github.com/golang/protobuf/proto</a>
+		<a href="../../../../src/github.com/golang/protobuf/proto/defaults.go.html#line-30">defaults.go#L30</a>: 				m.<b>Set</b>(fd, v)
+		<a href="../../../../src/github.com/golang/protobuf/proto/extensions.go.html#line-155">extensions.go#L155</a>: 			mr.<b>Set</b>(xtd, m2.Get(xtd))
+		<a href="../../../../src/github.com/golang/protobuf/proto/extensions.go.html#line-246" class="path-duplicate">extensions.go</a><a href="../../../../src/github.com/golang/protobuf/proto/extensions.go.html#line-246">#L246</a>: 	mr.<b>Set</b>(xtd, xt.ValueOf(v))
+		<a href="../../../../src/github.com/golang/protobuf/proto/text_decode.go.html#line-162">text_decode.go#L162</a>: 		m.<b>Set</b>(fd, v)
+		<a href="../../../../src/github.com/golang/protobuf/proto/text_decode.go.html#line-222" class="path-duplicate">text_decode.go</a><a href="../../../../src/github.com/golang/protobuf/proto/text_decode.go.html#line-222">#L222</a>: 		m.<b>Set</b>(urlFD, protoreflect.ValueOfString(name))
+		<a href="../../../../src/github.com/golang/protobuf/proto/text_decode.go.html#line-223" class="path-duplicate">text_decode.go</a><a href="../../../../src/github.com/golang/protobuf/proto/text_decode.go.html#line-223">#L223</a>: 		m.<b>Set</b>(valFD, protoreflect.ValueOfBytes(b))
+		<a href="../../../../src/github.com/golang/protobuf/proto/text_decode.go.html#line-254" class="path-duplicate">text_decode.go</a><a href="../../../../src/github.com/golang/protobuf/proto/text_decode.go.html#line-254">#L254</a>: 	m.<b>Set</b>(fd, v)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

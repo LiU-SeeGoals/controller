@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: reflect.uncommonType</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../pkg/reflect.html">reflect</a>.<a href="../src/reflect/type.go.html#line-280">uncommonType</a></b></span>
+
+<span class="title">7 uses</span>
+
+	reflect (current package)
+		<a href="../src/reflect/type.go.html#line-222">type.go#L222</a>: 	uncommon() *<b>uncommonType</b>
+		<a href="../src/reflect/type.go.html#line-280" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-280">#L280</a>: type <b>uncommonType</b> = abi.UncommonType
+		<a href="../src/reflect/type.go.html#line-2118" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2118">#L2118</a>: 	u <b>uncommonType</b>
+		<a href="../src/reflect/type.go.html#line-2387" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2387">#L2387</a>: 	var ut *<b>uncommonType</b>
+		<a href="../src/reflect/type.go.html#line-2401" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2401">#L2401</a>: 			{Name: "U", Type: TypeOf(<b>uncommonType</b>{})},
+		<a href="../src/reflect/type.go.html#line-2406" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2406">#L2406</a>: 		ut = (*<b>uncommonType</b>)(tt.Elem().Field(1).Addr().UnsafePointer())
+		<a href="../src/reflect/type.go.html#line-2416" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2416">#L2416</a>: 	ut.Moff = uint32(unsafe.Sizeof(<b>uncommonType</b>{}))
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

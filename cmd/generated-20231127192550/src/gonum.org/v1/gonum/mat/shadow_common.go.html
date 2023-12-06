@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: shadow_common.go in package gonum.org/v1/gonum/mat</title>
+<link href="../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	shadow_common.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7]
+{background: #226; color: #ff8;}
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">// Copyright ©2015 The Gonum Authors. All rights reserved.</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment">// Use of this source code is governed by a BSD-style</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment">// license that can be found in the LICENSE file.</span></code></span>
+<span class="codeline" id="line-4"><code></code></span>
+<span class="codeline" id="line-5"><code><span class="keyword">package</span> mat</code></span>
+<span class="codeline" id="line-6"><code></code></span>
+<span class="codeline" id="line-7"><code><span class="keyword">const</span> (</code></span>
+<span class="codeline" id="line-8"><code>	<span class="comment">// regionOverlap is the panic string used for the general case</span></code></span>
+<span class="codeline" id="line-9"><code><span class="comment">	// of a matrix region overlap between a source and destination.</span></code></span>
+<span class="codeline" id="line-10"><code>	<a href="../../../../../pkg/gonum.org/v1/gonum/mat.html#name-regionOverlap" class="ident">regionOverlap</a> = <span class="lit-string">"mat: bad region: overlap"</span></code></span>
+<span class="codeline" id="line-11"><code></code></span>
+<span class="codeline" id="line-12"><code>	<span class="comment">// regionIdentity is the panic string used for the specific</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment">	// case of complete agreement between a source and a destination.</span></code></span>
+<span class="codeline" id="line-14"><code>	<a href="../../../../../pkg/gonum.org/v1/gonum/mat.html#name-regionIdentity" class="ident">regionIdentity</a> = <span class="lit-string">"mat: bad region: identical"</span></code></span>
+<span class="codeline" id="line-15"><code></code></span>
+<span class="codeline" id="line-16"><code>	<span class="comment">// mismatchedStrides is the panic string used for overlapping</span></code></span>
+<span class="codeline" id="line-17"><code><span class="comment">	// data slices with differing strides.</span></code></span>
+<span class="codeline" id="line-18"><code>	<a href="../../../../../pkg/gonum.org/v1/gonum/mat.html#name-mismatchedStrides" class="ident">mismatchedStrides</a> = <span class="lit-string">"mat: bad region: different strides"</span></code></span>
+<span class="codeline" id="line-19"><code>)</code></span>
+<span class="codeline" id="line-20"><code></code></span>
+<span class="codeline" id="line-21"><code><span class="comment">// rectanglesOverlap returns whether the strided rectangles a and b overlap</span></code></span>
+<span class="codeline" id="line-22"><code><span class="comment">// when b is offset by off elements after a but has at least one element before</span></code></span>
+<span class="codeline" id="line-23"><code><span class="comment">// the end of a. off must be positive. a and b have aCols and bCols respectively.</span></code></span>
+<span class="codeline" id="line-24"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-25"><code><span class="comment">// rectanglesOverlap works by shifting both matrices left such that the left</span></code></span>
+<span class="codeline" id="line-26"><code><span class="comment">// column of a is at 0. The column indexes are flattened by obtaining the shifted</span></code></span>
+<span class="codeline" id="line-27"><code><span class="comment">// relative left and right column positions modulo the common stride. This allows</span></code></span>
+<span class="codeline" id="line-28"><code><span class="comment">// direct comparison of the column offsets when the matrix backing data slices</span></code></span>
+<span class="codeline" id="line-29"><code><span class="comment">// are known to overlap.</span></code></span>
+<span class="codeline" id="line-30"><code><span class="keyword">func</span> <label for="r0" class="ident"><a href="../../../../../pkg/gonum.org/v1/gonum/mat.html#name-rectanglesOverlap" class="ident">rectanglesOverlap</a></label>(<label for="r1" class="ident">off</label>, <label for="r2" class="ident">aCols</label>, <label for="r3" class="ident">bCols</label>, <label for="r4" class="ident">stride</label> <a href="../../../../../pkg/builtin.html#name-int" class="ident">int</a>) <a href="../../../../../pkg/builtin.html#name-bool" class="ident">bool</a> {</code></span>
+<span class="codeline" id="line-31"><code>	<span class="keyword">if</span> <label for="r4" class="ident">stride</label> == <span class="lit-number">1</span> {</code></span>
+<span class="codeline" id="line-32"><code>		<span class="comment">// Unit stride means overlapping data</span></code></span>
+<span class="codeline" id="line-33"><code><span class="comment">		// slices must overlap as matrices.</span></code></span>
+<span class="codeline" id="line-34"><code>		<span class="keyword">return</span> <a href="../../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-35"><code>	}</code></span>
+<span class="codeline" id="line-36"><code></code></span>
+<span class="codeline" id="line-37"><code>	<span class="comment">// Flatten the shifted matrix column positions</span></code></span>
+<span class="codeline" id="line-38"><code><span class="comment">	// so a starts at 0, modulo the common stride.</span></code></span>
+<span class="codeline" id="line-39"><code>	<label for="r5" class="ident">aTo</label> := <label for="r2" class="ident">aCols</label></code></span>
+<span class="codeline" id="line-40"><code>	<span class="comment">// The mod stride operations here make the from</span></code></span>
+<span class="codeline" id="line-41"><code><span class="comment">	// and to indexes comparable between a and b when</span></code></span>
+<span class="codeline" id="line-42"><code><span class="comment">	// the data slices of a and b overlap.</span></code></span>
+<span class="codeline" id="line-43"><code>	<label for="r6" class="ident">bFrom</label> := <label for="r1" class="ident">off</label> % <label for="r4" class="ident">stride</label></code></span>
+<span class="codeline" id="line-44"><code>	<label for="r7" class="ident">bTo</label> := (<label for="r6" class="ident">bFrom</label> + <label for="r3" class="ident">bCols</label>) % <label for="r4" class="ident">stride</label></code></span>
+<span class="codeline" id="line-45"><code></code></span>
+<span class="codeline" id="line-46"><code>	<span class="keyword">if</span> <label for="r7" class="ident">bTo</label> == <span class="lit-number">0</span> || <label for="r6" class="ident">bFrom</label> &lt; <label for="r7" class="ident">bTo</label> {</code></span>
+<span class="codeline" id="line-47"><code>		<span class="comment">// b matrix is not wrapped: compare for</span></code></span>
+<span class="codeline" id="line-48"><code><span class="comment">		// simple overlap.</span></code></span>
+<span class="codeline" id="line-49"><code>		<span class="keyword">return</span> <label for="r6" class="ident">bFrom</label> &lt; <label for="r5" class="ident">aTo</label></code></span>
+<span class="codeline" id="line-50"><code>	}</code></span>
+<span class="codeline" id="line-51"><code></code></span>
+<span class="codeline" id="line-52"><code>	<span class="comment">// b strictly wraps and so must overlap with a.</span></code></span>
+<span class="codeline" id="line-53"><code>	<span class="keyword">return</span> <a href="../../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-54"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

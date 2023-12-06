@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime._defer</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/runtime2.go.html#line-1001">_defer</a></b></span>
+
+<span class="title">18 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/mgc.go.html#line-1671">mgc.go#L1671</a>: 	var d, dlink *<b>_defer</b>
+		<a href="../src/runtime/panic.go.html#line-308">panic.go#L308</a>: func deferprocStack(d *<b>_defer</b>) {
+		<a href="../src/runtime/panic.go.html#line-350" class="path-duplicate">panic.go</a><a href="../src/runtime/panic.go.html#line-350">#L350</a>: func newdefer() *<b>_defer</b> {
+		<a href="../src/runtime/panic.go.html#line-351" class="path-duplicate">panic.go</a><a href="../src/runtime/panic.go.html#line-351">#L351</a>: 	var d *<b>_defer</b>
+		<a href="../src/runtime/panic.go.html#line-374" class="path-duplicate">panic.go</a><a href="../src/runtime/panic.go.html#line-374">#L374</a>: 		d = new(<b>_defer</b>)
+		<a href="../src/runtime/panic.go.html#line-389" class="path-duplicate">panic.go</a><a href="../src/runtime/panic.go.html#line-389">#L389</a>: func freedefer(d *<b>_defer</b>) {
+		<a href="../src/runtime/panic.go.html#line-407" class="path-duplicate">panic.go</a><a href="../src/runtime/panic.go.html#line-407">#L407</a>: 		var first, last *<b>_defer</b>
+		<a href="../src/runtime/panic.go.html#line-426" class="path-duplicate">panic.go</a><a href="../src/runtime/panic.go.html#line-426">#L426</a>: 	*d = <b>_defer</b>{}
+		<a href="../src/runtime/panic.go.html#line-639" class="path-duplicate">panic.go</a><a href="../src/runtime/panic.go.html#line-639">#L639</a>: 	var prevDefer *<b>_defer</b>
+		<a href="../src/runtime/panic.go.html#line-664" class="path-duplicate">panic.go</a><a href="../src/runtime/panic.go.html#line-664">#L664</a>: 			var prev *<b>_defer</b>
+		<a href="../src/runtime/panic.go.html#line-749" class="path-duplicate">panic.go</a><a href="../src/runtime/panic.go.html#line-749">#L749</a>: func runOpenDeferFrame(d *<b>_defer</b>) bool {
+		<a href="../src/runtime/panic.go.html#line-962" class="path-duplicate">panic.go</a><a href="../src/runtime/panic.go.html#line-962">#L962</a>: 			var prev *<b>_defer</b>
+		<a href="../src/runtime/runtime2.go.html#line-427">runtime2.go#L427</a>: 	_defer    *<b>_defer</b> // innermost defer
+		<a href="../src/runtime/runtime2.go.html#line-633" class="path-duplicate">runtime2.go</a><a href="../src/runtime/runtime2.go.html#line-633">#L633</a>: 	deferpool    []*<b>_defer</b> // pool of available defer structs (see panic.go)
+		<a href="../src/runtime/runtime2.go.html#line-634" class="path-duplicate">runtime2.go</a><a href="../src/runtime/runtime2.go.html#line-634">#L634</a>: 	deferpoolbuf [32]*<b>_defer</b>
+		<a href="../src/runtime/runtime2.go.html#line-829" class="path-duplicate">runtime2.go</a><a href="../src/runtime/runtime2.go.html#line-829">#L829</a>: 	deferpool *<b>_defer</b>
+		<a href="../src/runtime/runtime2.go.html#line-1001" class="path-duplicate">runtime2.go</a><a href="../src/runtime/runtime2.go.html#line-1001">#L1001</a>: type <b>_defer</b> struct {
+		<a href="../src/runtime/runtime2.go.html#line-1012" class="path-duplicate">runtime2.go</a><a href="../src/runtime/runtime2.go.html#line-1012">#L1012</a>: 	link      *<b>_defer</b> // next defer on G; can point to either heap or stack!
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/mat.DiagDense</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-63">DiagDense</a></b></span>
+
+<span class="title">38 uses</span>
+
+	gonum.org/v1/gonum/mat (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-232">band.go#L232</a>: 	return &amp;<b>DiagDense</b>{
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-307">dense.go#L307</a>: 	return &amp;<b>DiagDense</b>{
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-15">diagonal.go#L15</a>: 	diagDense *<b>DiagDense</b>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-63" class="path-duplicate">diagonal.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-63">#L63</a>: type <b>DiagDense</b> struct {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-70" class="path-duplicate">diagonal.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-70">#L70</a>: func NewDiagDense(n int, data []float64) *<b>DiagDense</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-83" class="path-duplicate">diagonal.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-83">#L83</a>: 	return &amp;<b>DiagDense</b>{
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-89" class="path-duplicate">diagonal.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-89">#L89</a>: func (d *<b>DiagDense</b>) Diag() int {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-94" class="path-duplicate">diagonal.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-94">#L94</a>: func (d *<b>DiagDense</b>) Dims() (r, c int) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-99" class="path-duplicate">diagonal.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-99">#L99</a>: func (d *<b>DiagDense</b>) T() Matrix {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-105" class="path-duplicate">diagonal.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-105">#L105</a>: func (d *<b>DiagDense</b>) TTri() Triangular {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-111" class="path-duplicate">diagonal.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-111">#L111</a>: func (d *<b>DiagDense</b>) TBand() Banded {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-117" class="path-duplicate">diagonal.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-117">#L117</a>: func (d *<b>DiagDense</b>) TTriBand() TriBanded {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-123" class="path-duplicate">diagonal.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-123">#L123</a>: func (d *<b>DiagDense</b>) Bandwidth() (kl, ku int) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-128" class="path-duplicate">diagonal.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-128">#L128</a>: func (d *<b>DiagDense</b>) SymmetricDim() int {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-134" class="path-duplicate">diagonal.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-134">#L134</a>: func (d *<b>DiagDense</b>) SymBand() (n, k int) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-139" class="path-duplicate">diagonal.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-139">#L139</a>: func (d *<b>DiagDense</b>) Triangle() (int, TriKind) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-146" class="path-duplicate">diagonal.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-146">#L146</a>: func (d *<b>DiagDense</b>) TriBand() (n, k int, kind TriKind) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-155" class="path-duplicate">diagonal.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-155">#L155</a>: func (d *<b>DiagDense</b>) Reset() {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-164" class="path-duplicate">diagonal.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-164">#L164</a>: func (d *<b>DiagDense</b>) Zero() {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-171" class="path-duplicate">diagonal.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-171">#L171</a>: func (d *<b>DiagDense</b>) DiagView() Diagonal {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-177" class="path-duplicate">diagonal.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-177">#L177</a>: func (d *<b>DiagDense</b>) DiagFrom(m Matrix) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-183" class="path-duplicate">diagonal.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-183">#L183</a>: 	case *<b>DiagDense</b>:
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-253" class="path-duplicate">diagonal.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-253">#L253</a>: func (d *<b>DiagDense</b>) RawBand() blas64.Band {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-268" class="path-duplicate">diagonal.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-268">#L268</a>: func (d *<b>DiagDense</b>) RawSymBand() blas64.SymmetricBand {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-280" class="path-duplicate">diagonal.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-280">#L280</a>: func (d *<b>DiagDense</b>) reuseAsNonZeroed(r int) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-300" class="path-duplicate">diagonal.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-300">#L300</a>: func (d *<b>DiagDense</b>) IsEmpty() bool {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-309" class="path-duplicate">diagonal.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-309">#L309</a>: func (d *<b>DiagDense</b>) Trace() float64 {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-329" class="path-duplicate">diagonal.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-329">#L329</a>: func (d *<b>DiagDense</b>) Norm(norm float64) float64 {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-323">index_no_bound_checks.go#L323</a>: func (d *<b>DiagDense</b>) At(i, j int) float64 {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-333" class="path-duplicate">index_no_bound_checks.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-333">#L333</a>: func (d *<b>DiagDense</b>) at(i, j int) float64 {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-342" class="path-duplicate">index_no_bound_checks.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-342">#L342</a>: func (d *<b>DiagDense</b>) SetDiag(i int, v float64) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-349" class="path-duplicate">index_no_bound_checks.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-349">#L349</a>: func (d *<b>DiagDense</b>) setDiag(i int, v float64) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-241">matrix.go#L241</a>: 	case *<b>DiagDense</b>, *SymBandDense, *TriBandDense, *BandDense, *TriDense, *SymDense, *Dense, *VecDense, *Tridiag:
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symband.go.html#line-199">symband.go#L199</a>: 	return &amp;<b>DiagDense</b>{
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-251">symmetric.go#L251</a>: 	return &amp;<b>DiagDense</b>{
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-382">triangular.go#L382</a>: 	return &amp;<b>DiagDense</b>{
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-521">triband.go#L521</a>: 	return &amp;<b>DiagDense</b>{
+		<a href="../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-163">tridiag.go#L163</a>: 	return &amp;<b>DiagDense</b>{
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

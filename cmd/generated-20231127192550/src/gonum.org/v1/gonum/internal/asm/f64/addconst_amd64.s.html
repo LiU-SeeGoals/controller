@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: addconst_amd64.s in package gonum.org/v1/gonum/internal/asm/f64</title>
+<link href="../../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	addconst_amd64.s
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/gonum.org/v1/gonum/internal/asm/f64.html">gonum.org/v1/gonum/internal/asm/f64</a>
+</code></pre>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code>// Copyright ©2016 The Gonum Authors. All rights reserved.</code></span>
+<span class="codeline" id="line-2"><code>// Use of this source code is governed by a BSD-style</code></span>
+<span class="codeline" id="line-3"><code>// license that can be found in the LICENSE file.</code></span>
+<span class="codeline" id="line-4"><code></code></span>
+<span class="codeline" id="line-5"><code>// +build !noasm,!gccgo,!safe</code></span>
+<span class="codeline" id="line-6"><code></code></span>
+<span class="codeline" id="line-7"><code>#include "textflag.h"</code></span>
+<span class="codeline" id="line-8"><code></code></span>
+<span class="codeline" id="line-9"><code>// func Addconst(alpha float64, x []float64)</code></span>
+<span class="codeline" id="line-10"><code>TEXT ·AddConst(SB), NOSPLIT, $0</code></span>
+<span class="codeline" id="line-11"><code>	MOVQ   x_base+8(FP), SI // SI = &amp;x</code></span>
+<span class="codeline" id="line-12"><code>	MOVQ   x_len+16(FP), CX // CX = len(x)</code></span>
+<span class="codeline" id="line-13"><code>	CMPQ   CX, $0           // if len(x) == 0 { return }</code></span>
+<span class="codeline" id="line-14"><code>	JE     ac_end</code></span>
+<span class="codeline" id="line-15"><code>	MOVSD  alpha+0(FP), X4  // X4 = { a, a }</code></span>
+<span class="codeline" id="line-16"><code>	SHUFPD $0, X4, X4</code></span>
+<span class="codeline" id="line-17"><code>	MOVUPS X4, X5           // X5 = X4</code></span>
+<span class="codeline" id="line-18"><code>	XORQ   AX, AX           // i = 0</code></span>
+<span class="codeline" id="line-19"><code>	MOVQ   CX, BX</code></span>
+<span class="codeline" id="line-20"><code>	ANDQ   $7, BX           // BX = len(x) % 8</code></span>
+<span class="codeline" id="line-21"><code>	SHRQ   $3, CX           // CX = floor( len(x) / 8 )</code></span>
+<span class="codeline" id="line-22"><code>	JZ     ac_tail_start    // if CX == 0 { goto ac_tail_start }</code></span>
+<span class="codeline" id="line-23"><code></code></span>
+<span class="codeline" id="line-24"><code>ac_loop: // Loop unrolled 8x   do {</code></span>
+<span class="codeline" id="line-25"><code>	MOVUPS (SI)(AX*8), X0   // X_i = s[i:i+1]</code></span>
+<span class="codeline" id="line-26"><code>	MOVUPS 16(SI)(AX*8), X1</code></span>
+<span class="codeline" id="line-27"><code>	MOVUPS 32(SI)(AX*8), X2</code></span>
+<span class="codeline" id="line-28"><code>	MOVUPS 48(SI)(AX*8), X3</code></span>
+<span class="codeline" id="line-29"><code>	ADDPD  X4, X0           // X_i += a</code></span>
+<span class="codeline" id="line-30"><code>	ADDPD  X5, X1</code></span>
+<span class="codeline" id="line-31"><code>	ADDPD  X4, X2</code></span>
+<span class="codeline" id="line-32"><code>	ADDPD  X5, X3</code></span>
+<span class="codeline" id="line-33"><code>	MOVUPS X0, (SI)(AX*8)   // s[i:i+1] = X_i</code></span>
+<span class="codeline" id="line-34"><code>	MOVUPS X1, 16(SI)(AX*8)</code></span>
+<span class="codeline" id="line-35"><code>	MOVUPS X2, 32(SI)(AX*8)</code></span>
+<span class="codeline" id="line-36"><code>	MOVUPS X3, 48(SI)(AX*8)</code></span>
+<span class="codeline" id="line-37"><code>	ADDQ   $8, AX           // i += 8</code></span>
+<span class="codeline" id="line-38"><code>	LOOP   ac_loop          // } while --CX &gt; 0</code></span>
+<span class="codeline" id="line-39"><code>	CMPQ   BX, $0           // if BX == 0 { return }</code></span>
+<span class="codeline" id="line-40"><code>	JE     ac_end</code></span>
+<span class="codeline" id="line-41"><code></code></span>
+<span class="codeline" id="line-42"><code>ac_tail_start: // Reset loop counters</code></span>
+<span class="codeline" id="line-43"><code>	MOVQ BX, CX // Loop counter: CX = BX</code></span>
+<span class="codeline" id="line-44"><code></code></span>
+<span class="codeline" id="line-45"><code>ac_tail: // do {</code></span>
+<span class="codeline" id="line-46"><code>	MOVSD (SI)(AX*8), X0 // X0 = s[i]</code></span>
+<span class="codeline" id="line-47"><code>	ADDSD X4, X0         // X0 += a</code></span>
+<span class="codeline" id="line-48"><code>	MOVSD X0, (SI)(AX*8) // s[i] = X0</code></span>
+<span class="codeline" id="line-49"><code>	INCQ  AX             // ++i</code></span>
+<span class="codeline" id="line-50"><code>	LOOP  ac_tail        // } while --CX &gt; 0</code></span>
+<span class="codeline" id="line-51"><code></code></span>
+<span class="codeline" id="line-52"><code>ac_end:</code></span>
+<span class="codeline" id="line-53"><code>	RET</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

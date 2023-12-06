@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: math.Pow</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../pkg/math.html">math</a>.<a href="../src/math/pow.go.html#line-48">Pow</a></b></span>
+
+<span class="title">13 uses</span>
+
+	math (current package)
+		<a href="../src/math/gamma.go.html#line-113">gamma.go#L113</a>: 		v := <b>Pow</b>(x, 0.5*x-0.25)
+		<a href="../src/math/gamma.go.html#line-116" class="path-duplicate">gamma.go</a><a href="../src/math/gamma.go.html#line-116">#L116</a>: 		y1 = <b>Pow</b>(x, x-0.5) / y1
+		<a href="../src/math/pow.go.html#line-48">pow.go#L48</a>: func <b>Pow</b>(x, y float64) float64 {
+		<a href="../src/math/pow.go.html#line-87" class="path-duplicate">pow.go</a><a href="../src/math/pow.go.html#line-87">#L87</a>: 			return <b>Pow</b>(1/x, -y) // Pow(-0, -y)
+
+	<a href="../pkg/math/cmplx.html">math/cmplx</a>
+		<a href="../src/math/cmplx/pow.go.html#line-73">pow.go#L73</a>: 	r := math.<b>Pow</b>(modulus, real(y))
+
+	<a href="../pkg/gonum.org/v1/gonum/floats.html">gonum.org/v1/gonum/floats</a>
+		<a href="../src/gonum.org/v1/gonum/floats/floats.go.html#line-204">floats.go#L204</a>: 		norm += math.<b>Pow</b>(math.Abs(t[i]-v), L)
+		<a href="../src/gonum.org/v1/gonum/floats/floats.go.html#line-206" class="path-duplicate">floats.go</a><a href="../src/gonum.org/v1/gonum/floats/floats.go.html#line-206">#L206</a>: 	return math.<b>Pow</b>(norm, 1/L)
+		<a href="../src/gonum.org/v1/gonum/floats/floats.go.html#line-620" class="path-duplicate">floats.go</a><a href="../src/gonum.org/v1/gonum/floats/floats.go.html#line-620">#L620</a>: 		norm += math.<b>Pow</b>(math.Abs(val), L)
+		<a href="../src/gonum.org/v1/gonum/floats/floats.go.html#line-622" class="path-duplicate">floats.go</a><a href="../src/gonum.org/v1/gonum/floats/floats.go.html#line-622">#L622</a>: 	return math.<b>Pow</b>(norm, 1/L)
+
+	<a href="../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-139">dbdsqr.go#L139</a>: 		tolmul := math.Max(10, math.Min(100, math.<b>Pow</b>(eps, -1.0/8)))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlanv2.go.html#line-71">dlanv2.go#L71</a>: 			safmn2 := math.<b>Pow</b>(dlamchB, math.Log(dlamchS/dlamchE)/math.Log(dlamchB)/2)
+
+	<a href="../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>
+		<a href="../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-570">dense_arithmetic.go#L570</a>: 		a1.Scale(1/math.<b>Pow</b>(2, s), a1)
+		<a href="../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-685">symmetric.go#L685</a>: 		values[i] = math.<b>Pow</b>(v, pow)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

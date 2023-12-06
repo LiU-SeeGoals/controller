@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: doc.go in package gonum.org/v1/gonum/blas</title>
+<link href="../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	doc.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../pkg/gonum.org/v1/gonum/blas.html">gonum.org/v1/gonum/blas</a>
+</code></pre>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">// Copyright ©2017 The Gonum Authors. All rights reserved.</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment">// Use of this source code is governed by a BSD-style</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment">// license that can be found in the LICENSE file.</span></code></span>
+<span class="codeline" id="line-4"><code></code></span>
+<div class="anchor" id="doc"><span class="codeline" id="line-5"><code><span class="comment">/*</span></code></span>
+<span class="codeline" id="line-6"><code><span class="comment">Package blas provides interfaces for the BLAS linear algebra standard.</span></code></span>
+<span class="codeline" id="line-7"><code></code></span>
+<span class="codeline" id="line-8"><code><span class="comment">All methods must perform appropriate parameter checking and panic if</span></code></span>
+<span class="codeline" id="line-9"><code><span class="comment">provided parameters that do not conform to the requirements specified</span></code></span>
+<span class="codeline" id="line-10"><code><span class="comment">by the BLAS standard.</span></code></span>
+<span class="codeline" id="line-11"><code></code></span>
+<span class="codeline" id="line-12"><code><span class="comment">Quick Reference Guide to the BLAS from http://www.netlib.org/lapack/lug/node145.html</span></code></span>
+<span class="codeline" id="line-13"><code></code></span>
+<span class="codeline" id="line-14"><code><span class="comment">This version is modified to remove the "order" option. All matrix operations are</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment">on row-order matrices.</span></code></span>
+<span class="codeline" id="line-16"><code></code></span>
+<span class="codeline" id="line-17"><code><span class="comment">Level 1 BLAS</span></code></span>
+<span class="codeline" id="line-18"><code></code></span>
+<span class="codeline" id="line-19"><code><span class="comment">	        dim scalar vector   vector   scalars              5-element prefixes</span></code></span>
+<span class="codeline" id="line-20"><code><span class="comment">	                                                          struct</span></code></span>
+<span class="codeline" id="line-21"><code></code></span>
+<span class="codeline" id="line-22"><code><span class="comment">	_rotg (                                      a, b )                S, D</span></code></span>
+<span class="codeline" id="line-23"><code><span class="comment">	_rotmg(                              d1, d2, a, b )                S, D</span></code></span>
+<span class="codeline" id="line-24"><code><span class="comment">	_rot  ( n,         x, incX, y, incY,               c, s )          S, D</span></code></span>
+<span class="codeline" id="line-25"><code><span class="comment">	_rotm ( n,         x, incX, y, incY,                      param )  S, D</span></code></span>
+<span class="codeline" id="line-26"><code><span class="comment">	_swap ( n,         x, incX, y, incY )                              S, D, C, Z</span></code></span>
+<span class="codeline" id="line-27"><code><span class="comment">	_scal ( n,  alpha, x, incX )                                       S, D, C, Z, Cs, Zd</span></code></span>
+<span class="codeline" id="line-28"><code><span class="comment">	_copy ( n,         x, incX, y, incY )                              S, D, C, Z</span></code></span>
+<span class="codeline" id="line-29"><code><span class="comment">	_axpy ( n,  alpha, x, incX, y, incY )                              S, D, C, Z</span></code></span>
+<span class="codeline" id="line-30"><code><span class="comment">	_dot  ( n,         x, incX, y, incY )                              S, D, Ds</span></code></span>
+<span class="codeline" id="line-31"><code><span class="comment">	_dotu ( n,         x, incX, y, incY )                              C, Z</span></code></span>
+<span class="codeline" id="line-32"><code><span class="comment">	_dotc ( n,         x, incX, y, incY )                              C, Z</span></code></span>
+<span class="codeline" id="line-33"><code><span class="comment">	__dot ( n,  alpha, x, incX, y, incY )                              Sds</span></code></span>
+<span class="codeline" id="line-34"><code><span class="comment">	_nrm2 ( n,         x, incX )                                       S, D, Sc, Dz</span></code></span>
+<span class="codeline" id="line-35"><code><span class="comment">	_asum ( n,         x, incX )                                       S, D, Sc, Dz</span></code></span>
+<span class="codeline" id="line-36"><code><span class="comment">	I_amax( n,         x, incX )                                       s, d, c, z</span></code></span>
+<span class="codeline" id="line-37"><code></code></span>
+<span class="codeline" id="line-38"><code><span class="comment">Level 2 BLAS</span></code></span>
+<span class="codeline" id="line-39"><code></code></span>
+<span class="codeline" id="line-40"><code><span class="comment">	        options                   dim   b-width scalar matrix  vector   scalar vector   prefixes</span></code></span>
+<span class="codeline" id="line-41"><code></code></span>
+<span class="codeline" id="line-42"><code><span class="comment">	_gemv (        trans,      m, n,         alpha, a, lda, x, incX, beta,  y, incY ) S, D, C, Z</span></code></span>
+<span class="codeline" id="line-43"><code><span class="comment">	_gbmv (        trans,      m, n, kL, kU, alpha, a, lda, x, incX, beta,  y, incY ) S, D, C, Z</span></code></span>
+<span class="codeline" id="line-44"><code><span class="comment">	_hemv ( uplo,                 n,         alpha, a, lda, x, incX, beta,  y, incY ) C, Z</span></code></span>
+<span class="codeline" id="line-45"><code><span class="comment">	_hbmv ( uplo,                 n, k,      alpha, a, lda, x, incX, beta,  y, incY ) C, Z</span></code></span>
+<span class="codeline" id="line-46"><code><span class="comment">	_hpmv ( uplo,                 n,         alpha, ap,     x, incX, beta,  y, incY ) C, Z</span></code></span>
+<span class="codeline" id="line-47"><code><span class="comment">	_symv ( uplo,                 n,         alpha, a, lda, x, incX, beta,  y, incY ) S, D</span></code></span>
+<span class="codeline" id="line-48"><code><span class="comment">	_sbmv ( uplo,                 n, k,      alpha, a, lda, x, incX, beta,  y, incY ) S, D</span></code></span>
+<span class="codeline" id="line-49"><code><span class="comment">	_spmv ( uplo,                 n,         alpha, ap,     x, incX, beta,  y, incY ) S, D</span></code></span>
+<span class="codeline" id="line-50"><code><span class="comment">	_trmv ( uplo, trans, diag,    n,                a, lda, x, incX )                 S, D, C, Z</span></code></span>
+<span class="codeline" id="line-51"><code><span class="comment">	_tbmv ( uplo, trans, diag,    n, k,             a, lda, x, incX )                 S, D, C, Z</span></code></span>
+<span class="codeline" id="line-52"><code><span class="comment">	_tpmv ( uplo, trans, diag,    n,                ap,     x, incX )                 S, D, C, Z</span></code></span>
+<span class="codeline" id="line-53"><code><span class="comment">	_trsv ( uplo, trans, diag,    n,                a, lda, x, incX )                 S, D, C, Z</span></code></span>
+<span class="codeline" id="line-54"><code><span class="comment">	_tbsv ( uplo, trans, diag,    n, k,             a, lda, x, incX )                 S, D, C, Z</span></code></span>
+<span class="codeline" id="line-55"><code><span class="comment">	_tpsv ( uplo, trans, diag,    n,                ap,     x, incX )                 S, D, C, Z</span></code></span>
+<span class="codeline" id="line-56"><code></code></span>
+<span class="codeline" id="line-57"><code><span class="comment">	        options                   dim   scalar vector   vector   matrix  prefixes</span></code></span>
+<span class="codeline" id="line-58"><code></code></span>
+<span class="codeline" id="line-59"><code><span class="comment">	_ger  (                    m, n, alpha, x, incX, y, incY, a, lda ) S, D</span></code></span>
+<span class="codeline" id="line-60"><code><span class="comment">	_geru (                    m, n, alpha, x, incX, y, incY, a, lda ) C, Z</span></code></span>
+<span class="codeline" id="line-61"><code><span class="comment">	_gerc (                    m, n, alpha, x, incX, y, incY, a, lda ) C, Z</span></code></span>
+<span class="codeline" id="line-62"><code><span class="comment">	_her  ( uplo,                 n, alpha, x, incX,          a, lda ) C, Z</span></code></span>
+<span class="codeline" id="line-63"><code><span class="comment">	_hpr  ( uplo,                 n, alpha, x, incX,          ap )     C, Z</span></code></span>
+<span class="codeline" id="line-64"><code><span class="comment">	_her2 ( uplo,                 n, alpha, x, incX, y, incY, a, lda ) C, Z</span></code></span>
+<span class="codeline" id="line-65"><code><span class="comment">	_hpr2 ( uplo,                 n, alpha, x, incX, y, incY, ap )     C, Z</span></code></span>
+<span class="codeline" id="line-66"><code><span class="comment">	_syr  ( uplo,                 n, alpha, x, incX,          a, lda ) S, D</span></code></span>
+<span class="codeline" id="line-67"><code><span class="comment">	_spr  ( uplo,                 n, alpha, x, incX,          ap )     S, D</span></code></span>
+<span class="codeline" id="line-68"><code><span class="comment">	_syr2 ( uplo,                 n, alpha, x, incX, y, incY, a, lda ) S, D</span></code></span>
+<span class="codeline" id="line-69"><code><span class="comment">	_spr2 ( uplo,                 n, alpha, x, incX, y, incY, ap )     S, D</span></code></span>
+<span class="codeline" id="line-70"><code></code></span>
+<span class="codeline" id="line-71"><code><span class="comment">Level 3 BLAS</span></code></span>
+<span class="codeline" id="line-72"><code></code></span>
+<span class="codeline" id="line-73"><code><span class="comment">	        options                                 dim      scalar matrix  matrix  scalar matrix  prefixes</span></code></span>
+<span class="codeline" id="line-74"><code></code></span>
+<span class="codeline" id="line-75"><code><span class="comment">	_gemm (             transA, transB,      m, n, k, alpha, a, lda, b, ldb, beta,  c, ldc ) S, D, C, Z</span></code></span>
+<span class="codeline" id="line-76"><code><span class="comment">	_symm ( side, uplo,                      m, n,    alpha, a, lda, b, ldb, beta,  c, ldc ) S, D, C, Z</span></code></span>
+<span class="codeline" id="line-77"><code><span class="comment">	_hemm ( side, uplo,                      m, n,    alpha, a, lda, b, ldb, beta,  c, ldc ) C, Z</span></code></span>
+<span class="codeline" id="line-78"><code><span class="comment">	_syrk (       uplo, trans,                  n, k, alpha, a, lda,         beta,  c, ldc ) S, D, C, Z</span></code></span>
+<span class="codeline" id="line-79"><code><span class="comment">	_herk (       uplo, trans,                  n, k, alpha, a, lda,         beta,  c, ldc ) C, Z</span></code></span>
+<span class="codeline" id="line-80"><code><span class="comment">	_syr2k(       uplo, trans,                  n, k, alpha, a, lda, b, ldb, beta,  c, ldc ) S, D, C, Z</span></code></span>
+<span class="codeline" id="line-81"><code><span class="comment">	_her2k(       uplo, trans,                  n, k, alpha, a, lda, b, ldb, beta,  c, ldc ) C, Z</span></code></span>
+<span class="codeline" id="line-82"><code><span class="comment">	_trmm ( side, uplo, transA,        diag, m, n,    alpha, a, lda, b, ldb )                S, D, C, Z</span></code></span>
+<span class="codeline" id="line-83"><code><span class="comment">	_trsm ( side, uplo, transA,        diag, m, n,    alpha, a, lda, b, ldb )                S, D, C, Z</span></code></span>
+<span class="codeline" id="line-84"><code></code></span>
+<span class="codeline" id="line-85"><code><span class="comment">Meaning of prefixes</span></code></span>
+<span class="codeline" id="line-86"><code></code></span>
+<span class="codeline" id="line-87"><code><span class="comment">	S - float32	C - complex64</span></code></span>
+<span class="codeline" id="line-88"><code><span class="comment">	D - float64	Z - complex128</span></code></span>
+<span class="codeline" id="line-89"><code></code></span>
+<span class="codeline" id="line-90"><code><span class="comment">Matrix types</span></code></span>
+<span class="codeline" id="line-91"><code></code></span>
+<span class="codeline" id="line-92"><code><span class="comment">	GE - GEneral 		GB - General Band</span></code></span>
+<span class="codeline" id="line-93"><code><span class="comment">	SY - SYmmetric 		SB - Symmetric Band 	SP - Symmetric Packed</span></code></span>
+<span class="codeline" id="line-94"><code><span class="comment">	HE - HErmitian 		HB - Hermitian Band 	HP - Hermitian Packed</span></code></span>
+<span class="codeline" id="line-95"><code><span class="comment">	TR - TRiangular 	TB - Triangular Band 	TP - Triangular Packed</span></code></span>
+<span class="codeline" id="line-96"><code></code></span>
+<span class="codeline" id="line-97"><code><span class="comment">Options</span></code></span>
+<span class="codeline" id="line-98"><code></code></span>
+<span class="codeline" id="line-99"><code><span class="comment">	trans 	= NoTrans, Trans, ConjTrans</span></code></span>
+<span class="codeline" id="line-100"><code><span class="comment">	uplo 	= Upper, Lower</span></code></span>
+<span class="codeline" id="line-101"><code><span class="comment">	diag 	= Nonunit, Unit</span></code></span>
+<span class="codeline" id="line-102"><code><span class="comment">	side 	= Left, Right (A or op(A) on the left, or A or op(A) on the right)</span></code></span>
+<span class="codeline" id="line-103"><code></code></span>
+<span class="codeline" id="line-104"><code><span class="comment">For real matrices, Trans and ConjTrans have the same meaning.</span></code></span>
+<span class="codeline" id="line-105"><code><span class="comment">For Hermitian matrices, trans = Trans is not allowed.</span></code></span>
+<span class="codeline" id="line-106"><code><span class="comment">For complex symmetric matrices, trans = ConjTrans is not allowed.</span></code></span>
+<span class="codeline" id="line-107"><code><span class="comment">*/</span></code></span></div><span class="codeline" id="line-108"><code><span class="keyword">package</span> blas <span class="comment">// import "gonum.org/v1/gonum/blas"</span></code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

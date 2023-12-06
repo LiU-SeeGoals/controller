@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/blas/blas64.Band.KU</title>
+<link href="../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html">gonum.org/v1/gonum/blas/blas64</a>.<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-44">Band</a>.<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-46">KU</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">33 uses</span>
+
+	gonum.org/v1/gonum/blas/blas64 (current package)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-46">blas64.go#L46</a>: 	KL, <b>KU</b>     int
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-271" class="path-duplicate">blas64.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-271">#L271</a>: 	blas64.Dgbmv(t, a.Rows, a.Cols, a.KL, a.<b>KU</b>, alpha, a.Data, a.Stride, x.Data, x.Inc, beta, y.Data, y.Inc)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-133">conv.go#L133</a>: 	if t.KL != a.KL || t.<b>KU</b> != a.<b>KU</b> {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-136" class="path-duplicate">conv.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-136">#L136</a>: 	if a.Stride &lt; a.KL+a.<b>KU</b>+1 {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-139" class="path-duplicate">conv.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-139">#L139</a>: 	if t.Stride &lt; t.KL+t.<b>KU</b>+1 {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-143" class="path-duplicate">conv.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-143">#L143</a>: 		for j := max(0, i-a.KL); j &lt; min(i+a.<b>KU</b>+1, a.Cols); j++ {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-144" class="path-duplicate">conv.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-144">#L144</a>: 			t.Data[i+t.<b>KU</b>-j+j*t.Stride] = a.Data[j+a.KL-i+i*a.Stride]
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-156" class="path-duplicate">conv.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-156">#L156</a>: 	if t.KL != a.KL || t.<b>KU</b> != a.<b>KU</b> {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-159" class="path-duplicate">conv.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-159">#L159</a>: 	if a.Stride &lt; a.KL+a.<b>KU</b>+1 {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-162" class="path-duplicate">conv.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-162">#L162</a>: 	if t.Stride &lt; t.KL+t.<b>KU</b>+1 {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-166" class="path-duplicate">conv.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-166">#L166</a>: 		for i := max(0, j-a.<b>KU</b>); i &lt; min(j+a.KL+1, a.Rows); i++ {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-167" class="path-duplicate">conv.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-167">#L167</a>: 			t.Data[j+a.KL-i+i*a.Stride] = a.Data[i+t.<b>KU</b>-j+j*t.Stride]
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-211" class="path-duplicate">conv.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-211">#L211</a>: 		dst.<b>KU</b> = t.K
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-212" class="path-duplicate">conv.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-212">#L212</a>: 		src.<b>KU</b> = a.K
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-256" class="path-duplicate">conv.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-256">#L256</a>: 		dst.<b>KU</b> = t.K
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-257" class="path-duplicate">conv.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-257">#L257</a>: 		src.<b>KU</b> = a.K
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv_symmetric.go.html#line-104">conv_symmetric.go#L104</a>: 		dst.<b>KU</b> = t.K
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv_symmetric.go.html#line-105" class="path-duplicate">conv_symmetric.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv_symmetric.go.html#line-105">#L105</a>: 		src.<b>KU</b> = a.K
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv_symmetric.go.html#line-146" class="path-duplicate">conv_symmetric.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv_symmetric.go.html#line-146">#L146</a>: 		dst.<b>KU</b> = t.K
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv_symmetric.go.html#line-147" class="path-duplicate">conv_symmetric.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv_symmetric.go.html#line-147">#L147</a>: 		src.<b>KU</b> = a.K
+
+	<a href="../../../../../pkg/gonum.org/v1/gonum/lapack/lapack64.html">gonum.org/v1/gonum/lapack/lapack64</a>
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-553">lapack64.go#L553</a>: 	return gonum.Implementation{}.Dlangb(norm, a.Rows, a.Cols, a.KL, a.<b>KU</b>, a.Data, max(1, a.Stride))
+
+	<a href="../../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-162">band.go#L162</a>: 			<b>KU</b>:     ku,
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-182" class="path-duplicate">band.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-182">#L182</a>: 	return b.mat.KL, b.mat.<b>KU</b>
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-224" class="path-duplicate">band.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-224">#L224</a>: 	b.mat.<b>KU</b> = 0
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-245" class="path-duplicate">band.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-245">#L245</a>: 		for j := max(0, i-b.mat.KL); j &lt; min(b.mat.Cols, i+b.mat.<b>KU</b>+1); j++ {
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-260" class="path-duplicate">band.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-260">#L260</a>: 	for j := max(0, i-b.mat.KL); j &lt; min(b.mat.Cols, i+b.mat.<b>KU</b>+1); j++ {
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-275" class="path-duplicate">band.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-275">#L275</a>: 		if i-b.mat.KL &lt;= j &amp;&amp; j &lt; i+b.mat.<b>KU</b>+1 {
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-288" class="path-duplicate">band.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-288">#L288</a>: 	nCol := b.mat.<b>KU</b> + 1 + kL
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-258">diagonal.go#L258</a>: 		<b>KU</b>:     0,
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-198">index_no_bound_checks.go#L198</a>: 	if pj &lt; 0 || b.mat.KL+b.mat.<b>KU</b>+1 &lt;= pj {
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-214" class="path-duplicate">index_no_bound_checks.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-214">#L214</a>: 	if pj &lt; 0 || b.mat.KL+b.mat.<b>KU</b>+1 &lt;= pj {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

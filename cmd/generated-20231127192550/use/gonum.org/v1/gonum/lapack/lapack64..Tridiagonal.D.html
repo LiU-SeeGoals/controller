@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/lapack/lapack64.Tridiagonal.D</title>
+<link href="../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../../../pkg/gonum.org/v1/gonum/lapack/lapack64.html">gonum.org/v1/gonum/lapack/lapack64</a>.<a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-23">Tridiagonal</a>.<a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-26">D</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">29 uses</span>
+
+	gonum.org/v1/gonum/lapack/lapack64 (current package)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-26">lapack64.go#L26</a>: 	<b>D</b>  []float64
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-516" class="path-duplicate">lapack64.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-516">#L516</a>: 	return gonum.Implementation{}.Dgtsv(a.N, b.Cols, a.DL, a.<b>D</b>, a.DU, b.Data, max(1, b.Stride))
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-530" class="path-duplicate">lapack64.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-530">#L530</a>: 	gonum.Implementation{}.Dlagtm(trans, c.Rows, c.Cols, alpha, a.DL, a.<b>D</b>, a.DU, b.Data, max(1, b.Stride), beta, c.Data, max(1, c.Stride))
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-561" class="path-duplicate">lapack64.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-561">#L561</a>: 	return gonum.Implementation{}.Dlangt(norm, a.N, a.DL, a.<b>D</b>, a.DU)
+
+	<a href="../../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-369">index_no_bound_checks.go#L369</a>: 		return a.mat.<b>D</b>[i]
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-394" class="path-duplicate">index_no_bound_checks.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-394">#L394</a>: 		a.mat.<b>D</b>[i] = v
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-66">tridiag.go#L66</a>: 			<b>D</b>:  d,
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-128" class="path-duplicate">tridiag.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-128">#L128</a>: 	a.mat.<b>D</b> = a.mat.<b>D</b>[:0]
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-144" class="path-duplicate">tridiag.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-144">#L144</a>: 			<b>D</b>:  use(a.mat.<b>D</b>, 1),
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-147" class="path-duplicate">tridiag.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-147">#L147</a>: 		a.mat.<b>D</b>[0] = from.mat.<b>D</b>[0]
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-152" class="path-duplicate">tridiag.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-152">#L152</a>: 			<b>D</b>:  use(a.mat.<b>D</b>, n),
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-156" class="path-duplicate">tridiag.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-156">#L156</a>: 		copy(a.mat.<b>D</b>, from.mat.<b>D</b>)
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-166" class="path-duplicate">tridiag.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-166">#L166</a>: 			Data: a.mat.<b>D</b>[:a.mat.N],
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-175" class="path-duplicate">tridiag.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-175">#L175</a>: 	zero(a.mat.<b>D</b>)
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-186" class="path-duplicate">tridiag.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-186">#L186</a>: 	return f64.Sum(a.mat.<b>D</b>)
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-297" class="path-duplicate">tridiag.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-297">#L297</a>: 	for i, aii := range a.mat.<b>D</b> {
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-318" class="path-duplicate">tridiag.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-318">#L318</a>: 		v := a.mat.<b>D</b>[0]
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-326" class="path-duplicate">tridiag.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-326">#L326</a>: 		v := a.mat.<b>D</b>[0]
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-339" class="path-duplicate">tridiag.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-339">#L339</a>: 		v = a.mat.<b>D</b>[n-1]
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-348" class="path-duplicate">tridiag.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-348">#L348</a>: 		v = a.mat.<b>D</b>[i]
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-368" class="path-duplicate">tridiag.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-368">#L368</a>: 		v := a.mat.<b>D</b>[0]
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-376" class="path-duplicate">tridiag.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-376">#L376</a>: 		v := a.mat.<b>D</b>[0]
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-389" class="path-duplicate">tridiag.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-389">#L389</a>: 		v = a.mat.<b>D</b>[n-1]
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-398" class="path-duplicate">tridiag.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-398">#L398</a>: 		v = a.mat.<b>D</b>[j]
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

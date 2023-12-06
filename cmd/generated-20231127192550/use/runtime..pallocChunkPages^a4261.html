@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.pallocChunkPages</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">const <b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/mpagealloc.go.html#line-58">pallocChunkPages</a></b></span>
+
+<span class="title">22 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/mgcscavenge.go.html#line-146">mgcscavenge.go#L146</a>: 	scavChunkHiOccPages = uint16(scavChunkHiOccFrac * <b>pallocChunkPages</b>)
+		<a href="../src/runtime/mgcscavenge.go.html#line-1126" class="path-duplicate">mgcscavenge.go</a><a href="../src/runtime/mgcscavenge.go.html#line-1126">#L1126</a>: 		return i, <b>pallocChunkPages</b> - 1
+		<a href="../src/runtime/mgcscavenge.go.html#line-1160" class="path-duplicate">mgcscavenge.go</a><a href="../src/runtime/mgcscavenge.go.html#line-1160">#L1160</a>: 		if !s.test &amp;&amp; npages &lt; <b>pallocChunkPages</b> {
+		<a href="../src/runtime/mgcscavenge.go.html#line-1376" class="path-duplicate">mgcscavenge.go</a><a href="../src/runtime/mgcscavenge.go.html#line-1376">#L1376</a>: 	if uint(sc.inUse)+npages &gt; <b>pallocChunkPages</b> {
+		<a href="../src/runtime/mgcscavenge.go.html#line-1385" class="path-duplicate">mgcscavenge.go</a><a href="../src/runtime/mgcscavenge.go.html#line-1385">#L1385</a>: 	if sc.inUse == <b>pallocChunkPages</b> {
+		<a href="../src/runtime/mheap.go.html#line-1472">mheap.go#L1472</a>: 	ask := alignUp(npage, <b>pallocChunkPages</b>) * pageSize
+		<a href="../src/runtime/mpagealloc.go.html#line-58">mpagealloc.go#L58</a>: 	<b>pallocChunkPages</b>    = 1 &lt;&lt; logPallocChunkPages
+		<a href="../src/runtime/mpagealloc.go.html#line-59" class="path-duplicate">mpagealloc.go</a><a href="../src/runtime/mpagealloc.go.html#line-59">#L59</a>: 	pallocChunkBytes    = <b>pallocChunkPages</b> * pageSize
+		<a href="../src/runtime/mpagealloc.go.html#line-422" class="path-duplicate">mpagealloc.go</a><a href="../src/runtime/mpagealloc.go.html#line-422">#L422</a>: 		p.chunkOf(c).scavenged.setRange(0, <b>pallocChunkPages</b>)
+		<a href="../src/runtime/mpagealloc.go.html#line-586" class="path-duplicate">mpagealloc.go</a><a href="../src/runtime/mpagealloc.go.html#line-586">#L586</a>: 		scav += chunk.scavenged.popcntRange(si, <b>pallocChunkPages</b>-si)
+		<a href="../src/runtime/mpagealloc.go.html#line-587" class="path-duplicate">mpagealloc.go</a><a href="../src/runtime/mpagealloc.go.html#line-587">#L587</a>: 		chunk.allocRange(si, <b>pallocChunkPages</b>-si)
+		<a href="../src/runtime/mpagealloc.go.html#line-588" class="path-duplicate">mpagealloc.go</a><a href="../src/runtime/mpagealloc.go.html#line-588">#L588</a>: 		p.scav.index.alloc(sc, <b>pallocChunkPages</b>-si)
+		<a href="../src/runtime/mpagealloc.go.html#line-591" class="path-duplicate">mpagealloc.go</a><a href="../src/runtime/mpagealloc.go.html#line-591">#L591</a>: 			scav += chunk.scavenged.popcntRange(0, <b>pallocChunkPages</b>)
+		<a href="../src/runtime/mpagealloc.go.html#line-593" class="path-duplicate">mpagealloc.go</a><a href="../src/runtime/mpagealloc.go.html#line-593">#L593</a>: 			p.scav.index.alloc(c, <b>pallocChunkPages</b>)
+		<a href="../src/runtime/mpagealloc.go.html#line-883" class="path-duplicate">mpagealloc.go</a><a href="../src/runtime/mpagealloc.go.html#line-883">#L883</a>: 	if <b>pallocChunkPages</b>-chunkPageIndex(p.searchAddr.addr()) &gt;= uint(npages) {
+		<a href="../src/runtime/mpagealloc.go.html#line-958" class="path-duplicate">mpagealloc.go</a><a href="../src/runtime/mpagealloc.go.html#line-958">#L958</a>: 			p.chunkOf(sc).free(si, <b>pallocChunkPages</b>-si)
+		<a href="../src/runtime/mpagealloc.go.html#line-959" class="path-duplicate">mpagealloc.go</a><a href="../src/runtime/mpagealloc.go.html#line-959">#L959</a>: 			p.scav.index.free(sc, si, <b>pallocChunkPages</b>-si)
+		<a href="../src/runtime/mpagealloc.go.html#line-962" class="path-duplicate">mpagealloc.go</a><a href="../src/runtime/mpagealloc.go.html#line-962">#L962</a>: 				p.scav.index.free(c, 0, <b>pallocChunkPages</b>)
+		<a href="../src/runtime/mpagealloc.go.html#line-979" class="path-duplicate">mpagealloc.go</a><a href="../src/runtime/mpagealloc.go.html#line-979">#L979</a>: 	freeChunkSum = pallocSum(uint64(<b>pallocChunkPages</b>) |
+		<a href="../src/runtime/mpagealloc.go.html#line-980" class="path-duplicate">mpagealloc.go</a><a href="../src/runtime/mpagealloc.go.html#line-980">#L980</a>: 		uint64(<b>pallocChunkPages</b>&lt;&lt;logMaxPackedValue) |
+		<a href="../src/runtime/mpagealloc.go.html#line-981" class="path-duplicate">mpagealloc.go</a><a href="../src/runtime/mpagealloc.go.html#line-981">#L981</a>: 		uint64(<b>pallocChunkPages</b>&lt;&lt;(2*logMaxPackedValue)))
+		<a href="../src/runtime/mpallocbits.go.html#line-12">mpallocbits.go#L12</a>: type pageBits [<b>pallocChunkPages</b> / 64]uint64
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: encoding/json.encoderFunc</title>
+<link href="../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../../pkg/encoding/json.html">encoding/json</a>.<a href="../../src/encoding/json/encode.go.html#line-333">encoderFunc</a></b></span>
+
+<span class="title">21 uses</span>
+
+	encoding/json (current package)
+		<a href="../../src/encoding/json/encode.go.html#line-333">encode.go#L333</a>: type <b>encoderFunc</b> func(e *encodeState, v reflect.Value, opts encOpts)
+		<a href="../../src/encoding/json/encode.go.html#line-337" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-337">#L337</a>: func valueEncoder(v reflect.Value) <b>encoderFunc</b> {
+		<a href="../../src/encoding/json/encode.go.html#line-344" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-344">#L344</a>: func typeEncoder(t reflect.Type) <b>encoderFunc</b> {
+		<a href="../../src/encoding/json/encode.go.html#line-346" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-346">#L346</a>: 		return fi.(<b>encoderFunc</b>)
+		<a href="../../src/encoding/json/encode.go.html#line-355" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-355">#L355</a>: 		f  <b>encoderFunc</b>
+		<a href="../../src/encoding/json/encode.go.html#line-358" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-358">#L358</a>: 	fi, loaded := encoderCache.LoadOrStore(t, <b>encoderFunc</b>(func(e *encodeState, v reflect.Value, opts encOpts) {
+		<a href="../../src/encoding/json/encode.go.html#line-363" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-363">#L363</a>: 		return fi.(<b>encoderFunc</b>)
+		<a href="../../src/encoding/json/encode.go.html#line-380" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-380">#L380</a>: func newTypeEncoder(t reflect.Type, allowAddr bool) <b>encoderFunc</b> {
+		<a href="../../src/encoding/json/encode.go.html#line-715" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-715">#L715</a>: func newStructEncoder(t reflect.Type) <b>encoderFunc</b> {
+		<a href="../../src/encoding/json/encode.go.html#line-721" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-721">#L721</a>: 	elemEnc <b>encoderFunc</b>
+		<a href="../../src/encoding/json/encode.go.html#line-765" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-765">#L765</a>: func newMapEncoder(t reflect.Type) <b>encoderFunc</b> {
+		<a href="../../src/encoding/json/encode.go.html#line-799" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-799">#L799</a>: 	arrayEnc <b>encoderFunc</b>
+		<a href="../../src/encoding/json/encode.go.html#line-826" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-826">#L826</a>: func newSliceEncoder(t reflect.Type) <b>encoderFunc</b> {
+		<a href="../../src/encoding/json/encode.go.html#line-839" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-839">#L839</a>: 	elemEnc <b>encoderFunc</b>
+		<a href="../../src/encoding/json/encode.go.html#line-854" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-854">#L854</a>: func newArrayEncoder(t reflect.Type) <b>encoderFunc</b> {
+		<a href="../../src/encoding/json/encode.go.html#line-860" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-860">#L860</a>: 	elemEnc <b>encoderFunc</b>
+		<a href="../../src/encoding/json/encode.go.html#line-882" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-882">#L882</a>: func newPtrEncoder(t reflect.Type) <b>encoderFunc</b> {
+		<a href="../../src/encoding/json/encode.go.html#line-888" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-888">#L888</a>: 	canAddrEnc, elseEnc <b>encoderFunc</b>
+		<a href="../../src/encoding/json/encode.go.html#line-901" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-901">#L901</a>: func newCondAddrEncoder(canAddrEnc, elseEnc <b>encoderFunc</b>) <b>encoderFunc</b> {
+		<a href="../../src/encoding/json/encode.go.html#line-1045" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-1045">#L1045</a>: 	encoder <b>encoderFunc</b>
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

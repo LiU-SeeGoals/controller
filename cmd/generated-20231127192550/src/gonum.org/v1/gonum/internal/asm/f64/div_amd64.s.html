@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: div_amd64.s in package gonum.org/v1/gonum/internal/asm/f64</title>
+<link href="../../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	div_amd64.s
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/gonum.org/v1/gonum/internal/asm/f64.html">gonum.org/v1/gonum/internal/asm/f64</a>
+</code></pre>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code>// Copyright ©2016 The Gonum Authors. All rights reserved.</code></span>
+<span class="codeline" id="line-2"><code>// Use of this source code is governed by a BSD-style</code></span>
+<span class="codeline" id="line-3"><code>// license that can be found in the LICENSE file.</code></span>
+<span class="codeline" id="line-4"><code></code></span>
+<span class="codeline" id="line-5"><code>// +build !noasm,!gccgo,!safe</code></span>
+<span class="codeline" id="line-6"><code></code></span>
+<span class="codeline" id="line-7"><code>#include "textflag.h"</code></span>
+<span class="codeline" id="line-8"><code></code></span>
+<span class="codeline" id="line-9"><code>// func Div(dst, s []float64)</code></span>
+<span class="codeline" id="line-10"><code>TEXT ·Div(SB), NOSPLIT, $0</code></span>
+<span class="codeline" id="line-11"><code>	MOVQ    dst_base+0(FP), DI // DI = &amp;dst</code></span>
+<span class="codeline" id="line-12"><code>	MOVQ    dst_len+8(FP), CX  // CX = len(dst)</code></span>
+<span class="codeline" id="line-13"><code>	MOVQ    s_base+24(FP), SI  // SI = &amp;s</code></span>
+<span class="codeline" id="line-14"><code>	CMPQ    s_len+32(FP), CX   // CX = max( CX, len(s) )</code></span>
+<span class="codeline" id="line-15"><code>	CMOVQLE s_len+32(FP), CX</code></span>
+<span class="codeline" id="line-16"><code>	CMPQ    CX, $0             // if CX == 0 { return }</code></span>
+<span class="codeline" id="line-17"><code>	JE      div_end</code></span>
+<span class="codeline" id="line-18"><code>	XORQ    AX, AX             // i = 0</code></span>
+<span class="codeline" id="line-19"><code>	MOVQ    SI, BX</code></span>
+<span class="codeline" id="line-20"><code>	ANDQ    $15, BX            // BX = &amp;s &amp; 15</code></span>
+<span class="codeline" id="line-21"><code>	JZ      div_no_trim        // if BX == 0 { goto div_no_trim }</code></span>
+<span class="codeline" id="line-22"><code></code></span>
+<span class="codeline" id="line-23"><code>	// Align on 16-bit boundary</code></span>
+<span class="codeline" id="line-24"><code>	MOVSD (DI)(AX*8), X0 // X0 = dst[i]</code></span>
+<span class="codeline" id="line-25"><code>	DIVSD (SI)(AX*8), X0 // X0 /= s[i]</code></span>
+<span class="codeline" id="line-26"><code>	MOVSD X0, (DI)(AX*8) // dst[i] = X0</code></span>
+<span class="codeline" id="line-27"><code>	INCQ  AX             // ++i</code></span>
+<span class="codeline" id="line-28"><code>	DECQ  CX             // --CX</code></span>
+<span class="codeline" id="line-29"><code>	JZ    div_end        // if CX == 0 { return }</code></span>
+<span class="codeline" id="line-30"><code></code></span>
+<span class="codeline" id="line-31"><code>div_no_trim:</code></span>
+<span class="codeline" id="line-32"><code>	MOVQ CX, BX</code></span>
+<span class="codeline" id="line-33"><code>	ANDQ $7, BX         // BX = len(dst) % 8</code></span>
+<span class="codeline" id="line-34"><code>	SHRQ $3, CX         // CX = floor( len(dst) / 8 )</code></span>
+<span class="codeline" id="line-35"><code>	JZ   div_tail_start // if CX == 0 { goto div_tail_start }</code></span>
+<span class="codeline" id="line-36"><code></code></span>
+<span class="codeline" id="line-37"><code>div_loop: // Loop unrolled 8x   do {</code></span>
+<span class="codeline" id="line-38"><code>	MOVUPS (DI)(AX*8), X0   // X0 = dst[i:i+1]</code></span>
+<span class="codeline" id="line-39"><code>	MOVUPS 16(DI)(AX*8), X1</code></span>
+<span class="codeline" id="line-40"><code>	MOVUPS 32(DI)(AX*8), X2</code></span>
+<span class="codeline" id="line-41"><code>	MOVUPS 48(DI)(AX*8), X3</code></span>
+<span class="codeline" id="line-42"><code>	DIVPD  (SI)(AX*8), X0   // X0 /= s[i:i+1]</code></span>
+<span class="codeline" id="line-43"><code>	DIVPD  16(SI)(AX*8), X1</code></span>
+<span class="codeline" id="line-44"><code>	DIVPD  32(SI)(AX*8), X2</code></span>
+<span class="codeline" id="line-45"><code>	DIVPD  48(SI)(AX*8), X3</code></span>
+<span class="codeline" id="line-46"><code>	MOVUPS X0, (DI)(AX*8)   // dst[i] = X0</code></span>
+<span class="codeline" id="line-47"><code>	MOVUPS X1, 16(DI)(AX*8)</code></span>
+<span class="codeline" id="line-48"><code>	MOVUPS X2, 32(DI)(AX*8)</code></span>
+<span class="codeline" id="line-49"><code>	MOVUPS X3, 48(DI)(AX*8)</code></span>
+<span class="codeline" id="line-50"><code>	ADDQ   $8, AX           // i += 8</code></span>
+<span class="codeline" id="line-51"><code>	LOOP   div_loop         // } while --CX &gt; 0</code></span>
+<span class="codeline" id="line-52"><code>	CMPQ   BX, $0           // if BX == 0 { return }</code></span>
+<span class="codeline" id="line-53"><code>	JE     div_end</code></span>
+<span class="codeline" id="line-54"><code></code></span>
+<span class="codeline" id="line-55"><code>div_tail_start: // Reset loop registers</code></span>
+<span class="codeline" id="line-56"><code>	MOVQ BX, CX // Loop counter: CX = BX</code></span>
+<span class="codeline" id="line-57"><code></code></span>
+<span class="codeline" id="line-58"><code>div_tail: // do {</code></span>
+<span class="codeline" id="line-59"><code>	MOVSD (DI)(AX*8), X0 // X0 = dst[i]</code></span>
+<span class="codeline" id="line-60"><code>	DIVSD (SI)(AX*8), X0 // X0 /= s[i]</code></span>
+<span class="codeline" id="line-61"><code>	MOVSD X0, (DI)(AX*8) // dst[i] = X0</code></span>
+<span class="codeline" id="line-62"><code>	INCQ  AX             // ++i</code></span>
+<span class="codeline" id="line-63"><code>	LOOP  div_tail       // } while --CX &gt; 0</code></span>
+<span class="codeline" id="line-64"><code></code></span>
+<span class="codeline" id="line-65"><code>div_end:</code></span>
+<span class="codeline" id="line-66"><code>	RET</code></span>
+<span class="codeline" id="line-67"><code></code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

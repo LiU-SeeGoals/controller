@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/blas/blas64.SymmetricBand.Data</title>
+<link href="../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html">gonum.org/v1/gonum/blas/blas64</a>.<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-86">SymmetricBand</a>.<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-89">Data</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">23 uses</span>
+
+	gonum.org/v1/gonum/blas/blas64 (current package)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-89">blas64.go#L89</a>: 	<b>Data</b>   []float64
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-370" class="path-duplicate">blas64.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-370">#L370</a>: 	blas64.Dsbmv(a.Uplo, a.N, a.K, alpha, a.<b>Data</b>, a.Stride, x.Data, x.Inc, beta, y.Data, y.Inc)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv_symmetric.go.html#line-93">conv_symmetric.go#L93</a>: 		Data:   t.<b>Data</b>,
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv_symmetric.go.html#line-98" class="path-duplicate">conv_symmetric.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv_symmetric.go.html#line-98">#L98</a>: 		Data:   a.<b>Data</b>,
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv_symmetric.go.html#line-135" class="path-duplicate">conv_symmetric.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv_symmetric.go.html#line-135">#L135</a>: 		Data:   t.<b>Data</b>,
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv_symmetric.go.html#line-140" class="path-duplicate">conv_symmetric.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv_symmetric.go.html#line-140">#L140</a>: 		Data:   a.<b>Data</b>,
+
+	<a href="../../../../../pkg/gonum.org/v1/gonum/lapack/lapack64.html">gonum.org/v1/gonum/lapack/lapack64</a>
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-101">lapack64.go#L101</a>: 	return lapack64.Dpbcon(a.Uplo, a.N, a.K, a.<b>Data</b>, a.Stride, anorm, work, iwork)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-116" class="path-duplicate">lapack64.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-116">#L116</a>: 	ok = lapack64.Dpbtrf(a.Uplo, a.N, a.K, a.<b>Data</b>, max(1, a.Stride))
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-121" class="path-duplicate">lapack64.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-121">#L121</a>: 	t.Data = a.<b>Data</b>
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-572" class="path-duplicate">lapack64.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-572">#L572</a>: 	return gonum.Implementation{}.Dlansb(norm, a.Uplo, a.N, a.K, a.<b>Data</b>, max(1, a.Stride), work)
+
+	<a href="../../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-763">cholesky.go#L763</a>: 		<b>Data</b>:   ch.chol.RawTriBand().Data,
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-204">diagonal.go#L204</a>: 			Data: mat.<b>Data</b>[:(n-1)*mat.Stride+1],
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-274" class="path-duplicate">diagonal.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-274">#L274</a>: 		<b>Data</b>:   d.mat.Data,
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-244">index_no_bound_checks.go#L244</a>: 	return s.mat.<b>Data</b>[i*s.mat.Stride+pj]
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-267" class="path-duplicate">index_no_bound_checks.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-267">#L267</a>: 	s.mat.<b>Data</b>[i*s.mat.Stride+pj] = v
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/shadow.go.html#line-240">shadow.go#L240</a>: 		Data:   a.<b>Data</b>,
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/symband.go.html#line-112">symband.go#L112</a>: 			<b>Data</b>:   data,
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/symband.go.html#line-185" class="path-duplicate">symband.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/symband.go.html#line-185">#L185</a>: 	s.mat.<b>Data</b> = s.mat.<b>Data</b>[:0]
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/symband.go.html#line-192" class="path-duplicate">symband.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/symband.go.html#line-192">#L192</a>: 		zero(s.mat.<b>Data</b>[i*s.mat.Stride : i*s.mat.Stride+u])
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/symband.go.html#line-203" class="path-duplicate">symband.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/symband.go.html#line-203">#L203</a>: 			Data: s.mat.<b>Data</b>[:(n-1)*s.mat.Stride+1],
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/symband.go.html#line-282" class="path-duplicate">symband.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/symband.go.html#line-282">#L282</a>: 		tr += rb.<b>Data</b>[i*rb.Stride]
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-648">triband.go#L648</a>: 					copy(t.Data[i*t.Stride:i*t.Stride+ilen], s.<b>Data</b>[i*s.Stride:i*s.Stride+ilen])
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

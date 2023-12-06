@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: gonum.org/v1/gonum/floats</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>floats</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../../index.html#pkg-gonum.org/v1/gonum/floats">gonum.org/v1/gonum/floats</a><i> (on <a href="https://pkg.go.dev/gonum.org/v1/gonum/floats" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../../dep/gonum.org/v1/gonum/floats.html">5 packages</a>, and imported by <a href="../../../../dep/gonum.org/v1/gonum/floats.html#imported-by">one package</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<input type='checkbox' checked class="fold" id="file-0-fold-content"><label for="file-0-fold-content">  <a href="../../../../src/gonum.org/v1/gonum/floats/doc.go.html#doc">d</a> <a href="../../../../src/gonum.org/v1/gonum/floats/doc.go.html">doc.go</a></label><span id='file-0-fold-content-items' class="fold-items">
+<span class="md-text">		Package floats provides a set of helper routines for dealing with slices
+		of float64. The functions avoid allocations to allow for use within tight
+		loops without garbage collection overhead.
+		
+		The convention used is that when a slice is being modified in place, it has
+		the name dst.</span>
+</span>
+	<span class="nodocs">    <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html">floats.go</a></span></div>
+<div id="exported-types"><span class="title">Package-Level Type Names<span class="title-stat"><i> (only one, which is unexported)</i></span></span>
+
+<div id="exported-types-buttons" class="js-on">	/* sort exporteds by: <label id="sort-types-by-alphabet" class="button">alphabet</label> | <label id="sort-types-by-popularity" class="button">popularity</label> */</div></div><div>	<input type='checkbox' class="showhide" id="unexported-typenames-showhide"><i><label for="unexported-typenames-showhide" class="show-inline">/* one unexported ... */</label><label for="unexported-typenames-showhide" class="hide-inline">/* one unexported: */</label></i><div class="anchor type-res hidden" id="name-argsort" data-popularity="200">	<input type='checkbox' class="fold" id="argsort-fold-content"><label for="argsort-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..argsort^52af7.html">type</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-78">argsort</a> <i>(struct)</i></label><span id='argsort-fold-content-docs' class="fold-docs">
+<span class="md-text">		argsort is a helper that implements sort.Interface, as used by
+		Argsort and ArgsortStable.</span>
+
+		<input type='checkbox' class="fold" id="argsort-fold-fields"><label for="argsort-fold-fields">Fields (<i>total 2, neither is exported</i>)</label><span id='argsort-fold-fields-items' class="fold-items">
+			<input type='checkbox' checked class="showhide" id="argsort-showhide-fields"><i><label for="argsort-showhide-fields" class="show-inline">/* 2 unexporteds ... */</label><label for="argsort-showhide-fields" class="hide-inline">/* 2 unexporteds: */</label></i><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-80">inds</a> <i>[]<a href="../../../builtin.html#name-int">int</a></i></span></i></span><span class="hidden"><i>
+			<span class="nodocs"><a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-79">s</a> <i>[]<a href="../../../builtin.html#name-float64">float64</a></i></span></i></span></span>
+		<input type='checkbox' class="fold" id="argsort-fold-methods"><label for="argsort-fold-methods">Methods (<i>total 3, all are exported</i>)</label><span id='argsort-fold-methods-items' class="fold-items"><span>
+			<span class="nodocs">( argsort) <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-83">Len</a>() <a href="../../../builtin.html#name-int">int</a></span></span><span>
+			<span class="nodocs">( argsort) <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-87">Less</a>(i, j <a href="../../../builtin.html#name-int">int</a>) <a href="../../../builtin.html#name-bool">bool</a></span></span><span>
+			<span class="nodocs">( argsort) <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-91">Swap</a>(i, j <a href="../../../builtin.html#name-int">int</a>)</span></span></span>
+		<input type='checkbox' class="fold" id="argsort-fold-impls"><label for="argsort-fold-impls">Implements (<i>at least one exported</i>)</label><span id='argsort-fold-impls-items' class="fold-items"><span>
+			 argsort : sort.<a href="../../../sort.html#name-Interface">Interface</a></span></span>
+
+</span></div></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (total 42, all are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-Add">	<input type='checkbox' class="fold" id="Add-fold-content"><label for="Add-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..Add^9fd72.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-25">Add</a>(dst, s []<a href="../../../builtin.html#name-float64">float64</a>)</label><span id='Add-fold-content-docs' class="fold-docs">
+<span class="md-text">		Add adds, element-wise, the elements of s and dst, and stores the result in dst.
+		It panics if the argument lengths do not match.</span>
+
+</span></div><div class="anchor value-res" id="name-AddConst">	<input type='checkbox' class="fold" id="AddConst-fold-content"><label for="AddConst-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..AddConst.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-47">AddConst</a>(c <a href="../../../builtin.html#name-float64">float64</a>, dst []<a href="../../../builtin.html#name-float64">float64</a>)</label><span id='AddConst-fold-content-docs' class="fold-docs">
+<span class="md-text">		AddConst adds the scalar c to all of the values in dst.</span>
+
+</span></div><div class="anchor value-res" id="name-AddScaled">	<input type='checkbox' class="fold" id="AddScaled-fold-content"><label for="AddScaled-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..AddScaled.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-53">AddScaled</a>(dst []<a href="../../../builtin.html#name-float64">float64</a>, alpha <a href="../../../builtin.html#name-float64">float64</a>, s []<a href="../../../builtin.html#name-float64">float64</a>)</label><span id='AddScaled-fold-content-docs' class="fold-docs">
+<span class="md-text">		AddScaled performs dst = dst + alpha * s.
+		It panics if the slice argument lengths do not match.</span>
+
+</span></div><div class="anchor value-res" id="name-AddScaledTo">	<input type='checkbox' class="fold" id="AddScaledTo-fold-content"><label for="AddScaledTo-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..AddScaledTo.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-65">AddScaledTo</a>(dst, y []<a href="../../../builtin.html#name-float64">float64</a>, alpha <a href="../../../builtin.html#name-float64">float64</a>, s []<a href="../../../builtin.html#name-float64">float64</a>) []<a href="../../../builtin.html#name-float64">float64</a></label><span id='AddScaledTo-fold-content-docs' class="fold-docs">
+<span class="md-text">		AddScaledTo performs dst = y + alpha * s, where alpha is a scalar,
+		and dst, y and s are all slices.
+		It panics if the slice argument lengths do not match.
+		
+		At the return of the function, dst[i] = y[i] + alpha * s[i]</span>
+
+</span></div><div class="anchor value-res" id="name-AddTo">	<input type='checkbox' class="fold" id="AddTo-fold-content"><label for="AddTo-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..AddTo.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-35">AddTo</a>(dst, s, t []<a href="../../../builtin.html#name-float64">float64</a>) []<a href="../../../builtin.html#name-float64">float64</a></label><span id='AddTo-fold-content-docs' class="fold-docs">
+<span class="md-text">		AddTo adds, element-wise, the elements of s and t and
+		stores the result in dst.
+		It panics if the argument lengths do not match.</span>
+
+</span></div><div class="anchor value-res" id="name-Argsort">	<input type='checkbox' class="fold" id="Argsort-fold-content"><label for="Argsort-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..Argsort.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-101">Argsort</a>(dst []<a href="../../../builtin.html#name-float64">float64</a>, inds []<a href="../../../builtin.html#name-int">int</a>)</label><span id='Argsort-fold-content-docs' class="fold-docs">
+<span class="md-text">		Argsort sorts the elements of dst while tracking their original order.
+		At the conclusion of Argsort, dst will contain the original elements of dst
+		but sorted in increasing order, and inds will contain the original position
+		of the elements in the slice such that dst[i] = origDst[inds[i]].
+		It panics if the argument lengths do not match.</span>
+
+</span></div><div class="anchor value-res" id="name-ArgsortStable">	<input type='checkbox' class="fold" id="ArgsortStable-fold-content"><label for="ArgsortStable-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..ArgsortStable.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-119">ArgsortStable</a>(dst []<a href="../../../builtin.html#name-float64">float64</a>, inds []<a href="../../../builtin.html#name-int">int</a>)</label><span id='ArgsortStable-fold-content-docs' class="fold-docs">
+<span class="md-text">		ArgsortStable sorts the elements of dst while tracking their original order and
+		keeping the original order of equal elements. At the conclusion of ArgsortStable,
+		dst will contain the original elements of dst but sorted in increasing order,
+		and inds will contain the original position of the elements in the slice such
+		that dst[i] = origDst[inds[i]].
+		It panics if the argument lengths do not match.</span>
+
+</span></div><div class="anchor value-res" id="name-Count">	<input type='checkbox' class="fold" id="Count-fold-content"><label for="Count-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..Count.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-133">Count</a>(f func(<a href="../../../builtin.html#name-float64">float64</a>) <a href="../../../builtin.html#name-bool">bool</a>, s []<a href="../../../builtin.html#name-float64">float64</a>) <a href="../../../builtin.html#name-int">int</a></label><span id='Count-fold-content-docs' class="fold-docs">
+<span class="md-text">		Count applies the function f to every element of s and returns the number
+		of times the function returned true.</span>
+
+</span></div><div class="anchor value-res" id="name-CumProd">	<input type='checkbox' class="fold" id="CumProd-fold-content"><label for="CumProd-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..CumProd.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-149">CumProd</a>(dst, s []<a href="../../../builtin.html#name-float64">float64</a>) []<a href="../../../builtin.html#name-float64">float64</a></label><span id='CumProd-fold-content-docs' class="fold-docs">
+<span class="md-text">		CumProd finds the cumulative product of the first i elements in
+		s and puts them in place into the ith element of the
+		destination dst.
+		It panics if the argument lengths do not match.
+		
+		At the return of the function, dst[i] = s[i] * s[i-1] * s[i-2] * ...</span>
+
+</span></div><div class="anchor value-res" id="name-CumSum">	<input type='checkbox' class="fold" id="CumSum-fold-content"><label for="CumSum-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..CumSum.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-165">CumSum</a>(dst, s []<a href="../../../builtin.html#name-float64">float64</a>) []<a href="../../../builtin.html#name-float64">float64</a></label><span id='CumSum-fold-content-docs' class="fold-docs">
+<span class="md-text">		CumSum finds the cumulative sum of the first i elements in
+		s and puts them in place into the ith element of the
+		destination dst.
+		It panics if the argument lengths do not match.
+		
+		At the return of the function, dst[i] = s[i] + s[i-1] + s[i-2] + ...</span>
+
+</span></div><div class="anchor value-res" id="name-Distance">	<input type='checkbox' class="fold" id="Distance-fold-content"><label for="Distance-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..Distance.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-177">Distance</a>(s, t []<a href="../../../builtin.html#name-float64">float64</a>, L <a href="../../../builtin.html#name-float64">float64</a>) <a href="../../../builtin.html#name-float64">float64</a></label><span id='Distance-fold-content-docs' class="fold-docs">
+<span class="md-text">		Distance computes the L-norm of s - t. See Norm for special cases.
+		It panics if the slice argument lengths do not match.</span>
+
+</span></div><div class="anchor value-res" id="name-Div">	<input type='checkbox' class="fold" id="Div-fold-content"><label for="Div-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..Div.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-212">Div</a>(dst, s []<a href="../../../builtin.html#name-float64">float64</a>)</label><span id='Div-fold-content-docs' class="fold-docs">
+<span class="md-text">		Div performs element-wise division dst / s
+		and stores the value in dst.
+		It panics if the argument lengths do not match.</span>
+
+</span></div><div class="anchor value-res" id="name-DivTo">	<input type='checkbox' class="fold" id="DivTo-fold-content"><label for="DivTo-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..DivTo.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-222">DivTo</a>(dst, s, t []<a href="../../../builtin.html#name-float64">float64</a>) []<a href="../../../builtin.html#name-float64">float64</a></label><span id='DivTo-fold-content-docs' class="fold-docs">
+<span class="md-text">		DivTo performs element-wise division s / t
+		and stores the value in dst.
+		It panics if the argument lengths do not match.</span>
+
+</span></div><div class="anchor value-res" id="name-Dot">	<input type='checkbox' class="fold" id="Dot-fold-content"><label for="Dot-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..Dot.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-235">Dot</a>(s1, s2 []<a href="../../../builtin.html#name-float64">float64</a>) <a href="../../../builtin.html#name-float64">float64</a></label><span id='Dot-fold-content-docs' class="fold-docs">
+<span class="md-text">		Dot computes the dot product of s1 and s2, i.e.
+		sum_{i = 1}^N s1[i]*s2[i].
+		It panics if the argument lengths do not match.</span>
+
+</span></div><div class="anchor value-res" id="name-Equal">	<input type='checkbox' class="fold" id="Equal-fold-content"><label for="Equal-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..Equal.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-244">Equal</a>(s1, s2 []<a href="../../../builtin.html#name-float64">float64</a>) <a href="../../../builtin.html#name-bool">bool</a></label><span id='Equal-fold-content-docs' class="fold-docs">
+<span class="md-text">		Equal returns true when the slices have equal lengths and
+		all elements are numerically identical.</span>
+
+</span></div><div class="anchor value-res" id="name-EqualApprox">	<input type='checkbox' class="fold" id="EqualApprox-fold-content"><label for="EqualApprox-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..EqualApprox.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-259">EqualApprox</a>(s1, s2 []<a href="../../../builtin.html#name-float64">float64</a>, tol <a href="../../../builtin.html#name-float64">float64</a>) <a href="../../../builtin.html#name-bool">bool</a></label><span id='EqualApprox-fold-content-docs' class="fold-docs">
+<span class="md-text">		EqualApprox returns true when the slices have equal lengths and
+		all element pairs have an absolute tolerance less than tol or a
+		relative tolerance less than tol.</span>
+
+</span></div><div class="anchor value-res" id="name-EqualFunc">	<input type='checkbox' class="fold" id="EqualFunc-fold-content"><label for="EqualFunc-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..EqualFunc.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-273">EqualFunc</a>(s1, s2 []<a href="../../../builtin.html#name-float64">float64</a>, f func(<a href="../../../builtin.html#name-float64">float64</a>, <a href="../../../builtin.html#name-float64">float64</a>) <a href="../../../builtin.html#name-bool">bool</a>) <a href="../../../builtin.html#name-bool">bool</a></label><span id='EqualFunc-fold-content-docs' class="fold-docs">
+<span class="md-text">		EqualFunc returns true when the slices have the same lengths
+		and the function returns true for all element pairs.</span>
+
+</span></div><div class="anchor value-res" id="name-EqualLengths">	<input type='checkbox' class="fold" id="EqualLengths-fold-content"><label for="EqualLengths-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..EqualLengths.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-287">EqualLengths</a>(slices ...[]<a href="../../../builtin.html#name-float64">float64</a>) <a href="../../../builtin.html#name-bool">bool</a></label><span id='EqualLengths-fold-content-docs' class="fold-docs">
+<span class="md-text">		EqualLengths returns true when all of the slices have equal length,
+		and false otherwise. It also returns true when there are no input slices.</span>
+
+</span></div><div class="anchor value-res" id="name-Find">	<input type='checkbox' class="fold" id="Find-fold-content"><label for="Find-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..Find.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-309">Find</a>(inds []<a href="../../../builtin.html#name-int">int</a>, f func(<a href="../../../builtin.html#name-float64">float64</a>) <a href="../../../builtin.html#name-bool">bool</a>, s []<a href="../../../builtin.html#name-float64">float64</a>, k <a href="../../../builtin.html#name-int">int</a>) ([]<a href="../../../builtin.html#name-int">int</a>, <a href="../../../builtin.html#name-error">error</a>)</label><span id='Find-fold-content-docs' class="fold-docs">
+<span class="md-text">		Find applies f to every element of s and returns the indices of the first
+		k elements for which the f returns true, or all such elements
+		if k &lt; 0.
+		Find will reslice inds to have 0 length, and will append
+		found indices to inds.
+		If k &gt; 0 and there are fewer than k elements in s satisfying f,
+		all of the found elements will be returned along with an error.
+		At the return of the function, the input inds will be in an undetermined state.</span>
+
+</span></div><div class="anchor value-res" id="name-HasNaN">	<input type='checkbox' class="fold" id="HasNaN-fold-content"><label for="HasNaN-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..HasNaN.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-347">HasNaN</a>(s []<a href="../../../builtin.html#name-float64">float64</a>) <a href="../../../builtin.html#name-bool">bool</a></label><span id='HasNaN-fold-content-docs' class="fold-docs">
+<span class="md-text">		HasNaN returns true when the slice s has any values that are NaN and false
+		otherwise.</span>
+
+</span></div><div class="anchor value-res" id="name-LogSpan">	<input type='checkbox' class="fold" id="LogSpan-fold-content"><label for="LogSpan-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..LogSpan.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-365">LogSpan</a>(dst []<a href="../../../builtin.html#name-float64">float64</a>, l, u <a href="../../../builtin.html#name-float64">float64</a>) []<a href="../../../builtin.html#name-float64">float64</a></label><span id='LogSpan-fold-content-docs' class="fold-docs">
+<span class="md-text">		LogSpan returns a set of n equally spaced points in log space between,
+		l and u where N is equal to len(dst). The first element of the
+		resulting dst will be l and the final element of dst will be u.
+		It panics if the length of dst is less than 2.
+		Note that this call will return NaNs if either l or u are negative, and
+		will return all zeros if l or u is zero.
+		Also returns the mutated slice dst, so that it can be used in range, like:
+		
+			for i, x := range LogSpan(dst, l, u) { ... }</span>
+
+</span></div><div class="anchor value-res" id="name-LogSumExp">	<input type='checkbox' class="fold" id="LogSumExp-fold-content"><label for="LogSumExp-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..LogSumExp.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-375">LogSumExp</a>(s []<a href="../../../builtin.html#name-float64">float64</a>) <a href="../../../builtin.html#name-float64">float64</a></label><span id='LogSumExp-fold-content-docs' class="fold-docs">
+<span class="md-text">		LogSumExp returns the log of the sum of the exponentials of the values in s.
+		Panics if s is an empty slice.</span>
+
+</span></div><div class="anchor value-res" id="name-Max">	<input type='checkbox' class="fold" id="Max-fold-content"><label for="Max-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..Max.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-395">Max</a>(s []<a href="../../../builtin.html#name-float64">float64</a>) <a href="../../../builtin.html#name-float64">float64</a></label><span id='Max-fold-content-docs' class="fold-docs">
+<span class="md-text">		Max returns the maximum value in the input slice. If the slice is empty, Max will panic.</span>
+
+</span></div><div class="anchor value-res" id="name-MaxIdx">	<input type='checkbox' class="fold" id="MaxIdx-fold-content"><label for="MaxIdx-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..MaxIdx.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-402">MaxIdx</a>(s []<a href="../../../builtin.html#name-float64">float64</a>) <a href="../../../builtin.html#name-int">int</a></label><span id='MaxIdx-fold-content-docs' class="fold-docs">
+<span class="md-text">		MaxIdx returns the index of the maximum value in the input slice. If several
+		entries have the maximum value, the first such index is returned.
+		It panics if s is zero length.</span>
+
+</span></div><div class="anchor value-res" id="name-Min">	<input type='checkbox' class="fold" id="Min-fold-content"><label for="Min-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..Min.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-422">Min</a>(s []<a href="../../../builtin.html#name-float64">float64</a>) <a href="../../../builtin.html#name-float64">float64</a></label><span id='Min-fold-content-docs' class="fold-docs">
+<span class="md-text">		Min returns the minimum value in the input slice.
+		It panics if s is zero length.</span>
+
+</span></div><div class="anchor value-res" id="name-MinIdx">	<input type='checkbox' class="fold" id="MinIdx-fold-content"><label for="MinIdx-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..MinIdx.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-429">MinIdx</a>(s []<a href="../../../builtin.html#name-float64">float64</a>) <a href="../../../builtin.html#name-int">int</a></label><span id='MinIdx-fold-content-docs' class="fold-docs">
+<span class="md-text">		MinIdx returns the index of the minimum value in the input slice. If several
+		entries have the minimum value, the first such index is returned.
+		It panics if s is zero length.</span>
+
+</span></div><div class="anchor value-res" id="name-Mul">	<input type='checkbox' class="fold" id="Mul-fold-content"><label for="Mul-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..Mul^082ac.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-450">Mul</a>(dst, s []<a href="../../../builtin.html#name-float64">float64</a>)</label><span id='Mul-fold-content-docs' class="fold-docs">
+<span class="md-text">		Mul performs element-wise multiplication between dst
+		and s and stores the value in dst.
+		It panics if the argument lengths do not match.</span>
+
+</span></div><div class="anchor value-res" id="name-MulTo">	<input type='checkbox' class="fold" id="MulTo-fold-content"><label for="MulTo-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..MulTo.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-462">MulTo</a>(dst, s, t []<a href="../../../builtin.html#name-float64">float64</a>) []<a href="../../../builtin.html#name-float64">float64</a></label><span id='MulTo-fold-content-docs' class="fold-docs">
+<span class="md-text">		MulTo performs element-wise multiplication between s
+		and t and stores the value in dst.
+		It panics if the argument lengths do not match.</span>
+
+</span></div><div class="anchor value-res" id="name-NearestIdx">	<input type='checkbox' class="fold" id="NearestIdx-fold-content"><label for="NearestIdx-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..NearestIdx.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-479">NearestIdx</a>(s []<a href="../../../builtin.html#name-float64">float64</a>, v <a href="../../../builtin.html#name-float64">float64</a>) <a href="../../../builtin.html#name-int">int</a></label><span id='NearestIdx-fold-content-docs' class="fold-docs">
+<span class="md-text">		NearestIdx returns the index of the element in s
+		whose value is nearest to v. If several such
+		elements exist, the lowest index is returned.
+		It panics if s is zero length.</span>
+
+</span></div><div class="anchor value-res" id="name-NearestIdxForSpan">	<input type='checkbox' class="fold" id="NearestIdxForSpan-fold-content"><label for="NearestIdxForSpan-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..NearestIdxForSpan.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-512">NearestIdxForSpan</a>(n <a href="../../../builtin.html#name-int">int</a>, l, u <a href="../../../builtin.html#name-float64">float64</a>, v <a href="../../../builtin.html#name-float64">float64</a>) <a href="../../../builtin.html#name-int">int</a></label><span id='NearestIdxForSpan-fold-content-docs' class="fold-docs">
+<span class="md-text">		NearestIdxForSpan return the index of a hypothetical vector created
+		by Span with length n and bounds l and u whose value is closest
+		to v. That is, NearestIdxForSpan(n, l, u, v) is equivalent to
+		Nearest(Span(make([]float64, n),l,u),v) without an allocation.
+		It panics if n is less than two.</span>
+
+</span></div><div class="anchor value-res" id="name-Norm">	<input type='checkbox' class="fold" id="Norm-fold-content"><label for="Norm-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..Norm.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-595">Norm</a>(s []<a href="../../../builtin.html#name-float64">float64</a>, L <a href="../../../builtin.html#name-float64">float64</a>) <a href="../../../builtin.html#name-float64">float64</a></label><span id='Norm-fold-content-docs' class="fold-docs">
+<span class="md-text">		Norm returns the L norm of the slice S, defined as
+		(sum_{i=1}^N s[i]^L)^{1/L}
+		Special cases:
+		L = math.Inf(1) gives the maximum absolute value.
+		Does not correctly compute the zero norm (use Count).</span>
+
+</span></div><div class="anchor value-res" id="name-Prod">	<input type='checkbox' class="fold" id="Prod-fold-content"><label for="Prod-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..Prod.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-627">Prod</a>(s []<a href="../../../builtin.html#name-float64">float64</a>) <a href="../../../builtin.html#name-float64">float64</a></label><span id='Prod-fold-content-docs' class="fold-docs">
+<span class="md-text">		Prod returns the product of the elements of the slice.
+		Returns 1 if len(s) = 0.</span>
+
+</span></div><div class="anchor value-res" id="name-Reverse">	<input type='checkbox' class="fold" id="Reverse-fold-content"><label for="Reverse-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..Reverse.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-636">Reverse</a>(s []<a href="../../../builtin.html#name-float64">float64</a>)</label><span id='Reverse-fold-content-docs' class="fold-docs">
+<span class="md-text">		Reverse reverses the order of elements in the slice.</span>
+
+</span></div><div class="anchor value-res" id="name-Same">	<input type='checkbox' class="fold" id="Same-fold-content"><label for="Same-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..Same.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-644">Same</a>(s, t []<a href="../../../builtin.html#name-float64">float64</a>) <a href="../../../builtin.html#name-bool">bool</a></label><span id='Same-fold-content-docs' class="fold-docs">
+<span class="md-text">		Same returns true when the input slices have the same length and all
+		elements have the same value with NaN treated as the same.</span>
+
+</span></div><div class="anchor value-res" id="name-Scale">	<input type='checkbox' class="fold" id="Scale-fold-content"><label for="Scale-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..Scale.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-658">Scale</a>(c <a href="../../../builtin.html#name-float64">float64</a>, dst []<a href="../../../builtin.html#name-float64">float64</a>)</label><span id='Scale-fold-content-docs' class="fold-docs">
+<span class="md-text">		Scale multiplies every element in dst by the scalar c.</span>
+
+</span></div><div class="anchor value-res" id="name-ScaleTo">	<input type='checkbox' class="fold" id="ScaleTo-fold-content"><label for="ScaleTo-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..ScaleTo.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-666">ScaleTo</a>(dst []<a href="../../../builtin.html#name-float64">float64</a>, c <a href="../../../builtin.html#name-float64">float64</a>, s []<a href="../../../builtin.html#name-float64">float64</a>) []<a href="../../../builtin.html#name-float64">float64</a></label><span id='ScaleTo-fold-content-docs' class="fold-docs">
+<span class="md-text">		ScaleTo multiplies the elements in s by c and stores the result in dst.
+		It panics if the slice argument lengths do not match.</span>
+
+</span></div><div class="anchor value-res" id="name-Span">	<input type='checkbox' class="fold" id="Span-fold-content"><label for="Span-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..Span.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-685">Span</a>(dst []<a href="../../../builtin.html#name-float64">float64</a>, l, u <a href="../../../builtin.html#name-float64">float64</a>) []<a href="../../../builtin.html#name-float64">float64</a></label><span id='Span-fold-content-docs' class="fold-docs">
+<span class="md-text">		Span returns a set of N equally spaced points between l and u, where N
+		is equal to the length of the destination. The first element of the destination
+		is l, the final element of the destination is u.
+		It panics if the length of dst is less than 2.
+		
+		Span also returns the mutated slice dst, so that it can be used in range expressions,
+		like:
+		
+			for i, x := range Span(dst, l, u) { ... }</span>
+
+</span></div><div class="anchor value-res" id="name-Sub">	<input type='checkbox' class="fold" id="Sub-fold-content"><label for="Sub-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..Sub^21c1e.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-741">Sub</a>(dst, s []<a href="../../../builtin.html#name-float64">float64</a>)</label><span id='Sub-fold-content-docs' class="fold-docs">
+<span class="md-text">		Sub subtracts, element-wise, the elements of s from dst.
+		It panics if the argument lengths do not match.</span>
+
+</span></div><div class="anchor value-res" id="name-SubTo">	<input type='checkbox' class="fold" id="SubTo-fold-content"><label for="SubTo-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..SubTo.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-751">SubTo</a>(dst, s, t []<a href="../../../builtin.html#name-float64">float64</a>) []<a href="../../../builtin.html#name-float64">float64</a></label><span id='SubTo-fold-content-docs' class="fold-docs">
+<span class="md-text">		SubTo subtracts, element-wise, the elements of t from s and
+		stores the result in dst.
+		It panics if the argument lengths do not match.</span>
+
+</span></div><div class="anchor value-res" id="name-Sum">	<input type='checkbox' class="fold" id="Sum-fold-content"><label for="Sum-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..Sum.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-763">Sum</a>(s []<a href="../../../builtin.html#name-float64">float64</a>) <a href="../../../builtin.html#name-float64">float64</a></label><span id='Sum-fold-content-docs' class="fold-docs">
+<span class="md-text">		Sum returns the sum of the elements of the slice.</span>
+
+</span></div><div class="anchor value-res" id="name-SumCompensated">	<input type='checkbox' class="fold" id="SumCompensated-fold-content"><label for="SumCompensated-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..SumCompensated.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-790">SumCompensated</a>(s []<a href="../../../builtin.html#name-float64">float64</a>) <a href="../../../builtin.html#name-float64">float64</a></label><span id='SumCompensated-fold-content-docs' class="fold-docs">
+<span class="md-text">		SumCompensated returns the sum of the elements of the slice calculated with greater
+		accuracy than Sum at the expense of additional computation.</span>
+
+</span></div><div class="anchor value-res" id="name-Within">	<input type='checkbox' class="fold" id="Within-fold-content"><label for="Within-fold-content"> <a href="../../../../use/gonum.org/v1/gonum/floats..Within.html">func</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-770">Within</a>(s []<a href="../../../builtin.html#name-float64">float64</a>, v <a href="../../../builtin.html#name-float64">float64</a>) <a href="../../../builtin.html#name-int">int</a></label><span id='Within-fold-content-docs' class="fold-docs">
+<span class="md-text">		Within returns the first index i where s[i] &lt;= v &lt; s[i+1]. Within panics if:
+		  - len(s) &lt; 2
+		  - s is not sorted</span>
+
+</span></div></div>
+<div id="exported-constants"><span class="title">Package-Level Constants<span class="title-stat"><i> (total 4, none are exported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-constants-showhide"><i><label for="unexported-constants-showhide" class="show-inline">/* 4 unexporteds ... */</label><label for="unexported-constants-showhide" class="hide-inline">/* 4 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-badDstLength"><i>	<span class="nodocs"><a href="../../../../use/gonum.org/v1/gonum/floats..badDstLength^30109.html">const</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-20">badDstLength</a> = "floats: destination slice length does not match input"</span></i></div><div class="anchor value-res hidden" id="name-badLength"><i>	<span class="nodocs"><a href="../../../../use/gonum.org/v1/gonum/floats..badLength^499a7.html">const</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-19">badLength</a> = "floats: slice lengths do not match"</span></i></div><div class="anchor value-res hidden" id="name-shortSpan"><i>	<span class="nodocs"><a href="../../../../use/gonum.org/v1/gonum/floats..shortSpan^ca509.html">const</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-18">shortSpan</a> = "floats: slice length less than 2"</span></i></div><div class="anchor value-res hidden" id="name-zeroLength"><i>	<span class="nodocs"><a href="../../../../use/gonum.org/v1/gonum/floats..zeroLength^57c1e.html">const</a> <a href="../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-17">zeroLength</a> = "floats: zero length slice"</span></i></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

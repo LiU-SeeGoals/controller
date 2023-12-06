@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.slice.array</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/slice.go.html#line-15">slice</a>.<a href="../src/runtime/slice.go.html#line-16">array</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">20 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/alg.go.html#line-283">alg.go#L283</a>: 	return memhash(s.<b>array</b>, seed, uintptr(s.len))
+		<a href="../src/runtime/arena.go.html#line-150">arena.go#L150</a>: 		v = (*slice)(e.data).<b>array</b>
+		<a href="../src/runtime/arena.go.html#line-173" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-173">#L173</a>: 		*sl = slice{makeslicecopy(et, len, len, (*slice)(e.data).<b>array</b>), len, len}
+		<a href="../src/runtime/cgocall.go.html#line-290">cgocall.go#L290</a>: 		atomicstorep(unsafe.Pointer(&amp;p.<b>array</b>), unsafe.Pointer(&amp;s[0]))
+		<a href="../src/runtime/cgocall.go.html#line-518" class="path-duplicate">cgocall.go</a><a href="../src/runtime/cgocall.go.html#line-518">#L518</a>: 		p = s.<b>array</b>
+		<a href="../src/runtime/debuglog.go.html#line-311">debuglog.go#L311</a>: 		bb.<b>array</b> = unsafe.Pointer(strData)
+		<a href="../src/runtime/iface.go.html#line-401">iface.go#L401</a>: 	if (*slice)(unsafe.Pointer(&amp;val)).<b>array</b> == nil {
+		<a href="../src/runtime/map.go.html#line-1654">map.go#L1654</a>: 			typedmemmove(t.Key, add(s.<b>array</b>, uintptr(s.len)*uintptr(t.KeySize)), k)
+		<a href="../src/runtime/map.go.html#line-1719" class="path-duplicate">map.go</a><a href="../src/runtime/map.go.html#line-1719">#L1719</a>: 			typedmemmove(t.Elem, add(s.<b>array</b>, uintptr(s.len)*uintptr(t.ValueSize)), ele)
+		<a href="../src/runtime/mbarrier.go.html#line-293">mbarrier.go#L293</a>: 		return slicecopy(dst.<b>array</b>, dst.len, src.<b>array</b>, src.len, elemType.Size_)
+		<a href="../src/runtime/mbarrier.go.html#line-295" class="path-duplicate">mbarrier.go</a><a href="../src/runtime/mbarrier.go.html#line-295">#L295</a>: 	return typedslicecopy(elemType, dst.<b>array</b>, dst.len, src.<b>array</b>, src.len)
+		<a href="../src/runtime/mheap.go.html#line-545">mheap.go#L545</a>: 		sp.<b>array</b> = sysAlloc(uintptr(n)*goarch.PtrSize, &amp;memstats.other_sys)
+		<a href="../src/runtime/mheap.go.html#line-546" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-546">#L546</a>: 		if sp.<b>array</b> == nil {
+		<a href="../src/runtime/print.go.html#line-19">print.go#L19</a>: 	rp.<b>array</b> = sp.str
+		<a href="../src/runtime/print.go.html#line-252" class="path-duplicate">print.go</a><a href="../src/runtime/print.go.html#line-252">#L252</a>: 	printpointer(sp.<b>array</b>)
+		<a href="../src/runtime/slice.go.html#line-16">slice.go#L16</a>: 	<b>array</b> unsafe.Pointer
+		<a href="../src/runtime/slice.go.html#line-291" class="path-duplicate">slice.go</a><a href="../src/runtime/slice.go.html#line-291">#L291</a>: 	new := growslice(old.<b>array</b>, old.cap+num, old.cap, num, et)
+		<a href="../src/runtime/slice.go.html#line-299" class="path-duplicate">slice.go</a><a href="../src/runtime/slice.go.html#line-299">#L299</a>: 		memclrNoHeapPointers(add(new.<b>array</b>, oldcapmem), newlenmem-oldcapmem)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

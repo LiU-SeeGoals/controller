@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/internal/asm/f32.ScalUnitary</title>
+<link href="../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../../../../../../pkg/gonum.org/v1/gonum/internal/asm/f32.html">gonum.org/v1/gonum/internal/asm/f32</a>.<a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f32/scal.go.html#line-12">ScalUnitary</a></b></span>
+
+<span class="title">21 uses</span>
+
+	gonum.org/v1/gonum/internal/asm/f32 (current package)
+		<a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f32/gemv.go.html#line-76">gemv.go#L76</a>: 		<b>ScalUnitary</b>(beta, y[:n])
+		<a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f32/scal.go.html#line-12">scal.go#L12</a>: func <b>ScalUnitary</b>(alpha float32, x []float32) {
+
+	<a href="../../../../../../pkg/gonum.org/v1/gonum/blas/gonum.html">gonum.org/v1/gonum/blas/gonum</a>
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level1float32.go.html#line-649">level1float32.go#L649</a>: 		f32.<b>ScalUnitary</b>(alpha, x[:n])
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2float32.go.html#line-145">level2float32.go#L145</a>: 				f32.<b>ScalUnitary</b>(beta, y[:lenY])
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2float32.go.html#line-714" class="path-duplicate">level2float32.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2float32.go.html#line-714">#L714</a>: 				f32.<b>ScalUnitary</b>(beta, y[:n])
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2float32.go.html#line-1513" class="path-duplicate">level2float32.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2float32.go.html#line-1513">#L1513</a>: 				f32.<b>ScalUnitary</b>(beta, y[:n])
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2float32.go.html#line-2080" class="path-duplicate">level2float32.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2float32.go.html#line-2080">#L2080</a>: 				f32.<b>ScalUnitary</b>(beta, y[:n])
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float32.go.html#line-91">level3float32.go#L91</a>: 						f32.<b>ScalUnitary</b>(alpha, btmp)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float32.go.html#line-101" class="path-duplicate">level3float32.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float32.go.html#line-101">#L101</a>: 						f32.<b>ScalUnitary</b>(tmp, btmp)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float32.go.html#line-109" class="path-duplicate">level3float32.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float32.go.html#line-109">#L109</a>: 					f32.<b>ScalUnitary</b>(alpha, btmp)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float32.go.html#line-118" class="path-duplicate">level3float32.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float32.go.html#line-118">#L118</a>: 					f32.<b>ScalUnitary</b>(tmp, btmp)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float32.go.html#line-129" class="path-duplicate">level3float32.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float32.go.html#line-129">#L129</a>: 					f32.<b>ScalUnitary</b>(tmp, btmpk)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float32.go.html#line-138" class="path-duplicate">level3float32.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float32.go.html#line-138">#L138</a>: 					f32.<b>ScalUnitary</b>(alpha, btmpk)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float32.go.html#line-147" class="path-duplicate">level3float32.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float32.go.html#line-147">#L147</a>: 				f32.<b>ScalUnitary</b>(tmp, btmpk)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float32.go.html#line-155" class="path-duplicate">level3float32.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float32.go.html#line-155">#L155</a>: 				f32.<b>ScalUnitary</b>(alpha, btmpk)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float32.go.html#line-166" class="path-duplicate">level3float32.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float32.go.html#line-166">#L166</a>: 					f32.<b>ScalUnitary</b>(alpha, btmp)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float32.go.html#line-183" class="path-duplicate">level3float32.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float32.go.html#line-183">#L183</a>: 				f32.<b>ScalUnitary</b>(alpha, btmp)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float32.go.html#line-800" class="path-duplicate">level3float32.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float32.go.html#line-800">#L800</a>: 					f32.<b>ScalUnitary</b>(tmp, btmp)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float32.go.html#line-816" class="path-duplicate">level3float32.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float32.go.html#line-816">#L816</a>: 				f32.<b>ScalUnitary</b>(tmp, btmp)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float32.go.html#line-841" class="path-duplicate">level3float32.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float32.go.html#line-841">#L841</a>: 					f32.<b>ScalUnitary</b>(tmp, btmpk)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float32.go.html#line-859" class="path-duplicate">level3float32.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float32.go.html#line-859">#L859</a>: 				f32.<b>ScalUnitary</b>(tmp, btmpk)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

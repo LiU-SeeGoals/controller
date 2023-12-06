@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: reflect.Type.In</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/reflect.html">reflect</a>.<a href="../src/reflect/type.go.html#line-39">Type</a>.<a href="../src/reflect/type.go.html#line-194">In</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">7 uses</span>
+
+	reflect (current package)
+		<a href="../src/reflect/type.go.html#line-194">type.go#L194</a>: 	<b>In</b>(i int) Type
+
+	<a href="../pkg/github.com/golang/protobuf/proto.html">github.com/golang/protobuf/proto</a>
+		<a href="../src/github.com/golang/protobuf/proto/properties.go.html#line-264">properties.go#L264</a>: 			oneofWrappers = fn.Func.Call([]reflect.Value{reflect.Zero(fn.Type.<b>In</b>(0))})[3].Interface().([]interface{})
+		<a href="../src/github.com/golang/protobuf/proto/properties.go.html#line-267" class="path-duplicate">properties.go</a><a href="../src/github.com/golang/protobuf/proto/properties.go.html#line-267">#L267</a>: 			oneofWrappers = fn.Func.Call([]reflect.Value{reflect.Zero(fn.Type.<b>In</b>(0))})[0].Interface().([]interface{})
+
+	<a href="../pkg/google.golang.org/protobuf/internal/descfmt.html">google.golang.org/protobuf/internal/descfmt</a>
+		<a href="../src/google.golang.org/protobuf/internal/descfmt/stringer.go.html#line-124">stringer.go#L124</a>: 	rt := rv.MethodByName("ProtoType").Type().<b>In</b>(0)
+
+	<a href="../pkg/google.golang.org/protobuf/internal/impl.html">google.golang.org/protobuf/internal/impl</a>
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-211">legacy_message.go#L211</a>: 			for _, v := range fn.Func.Call([]reflect.Value{reflect.Zero(fn.Type.<b>In</b>(0))}) {
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-223" class="path-duplicate">legacy_message.go</a><a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-223">#L223</a>: 		vs := fn.Func.Call([]reflect.Value{reflect.Zero(fn.Type.<b>In</b>(0))})[0]
+		<a href="../src/google.golang.org/protobuf/internal/impl/message.go.html#line-197">message.go#L197</a>: 			for _, v := range fn.Func.Call([]reflect.Value{reflect.Zero(fn.Type.<b>In</b>(0))}) {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

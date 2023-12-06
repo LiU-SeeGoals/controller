@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime/internal/atomic.Bool.Load</title>
+<link href="../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../pkg/runtime/internal/atomic.html">runtime/internal/atomic</a>.<a href="../../../src/runtime/internal/atomic/types.go.html#line-159">Bool</a>.<a href="../../../src/runtime/internal/atomic/types.go.html#line-167">Load</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">28 uses</span>
+
+	runtime/internal/atomic (current package)
+		<a href="../../../src/runtime/internal/atomic/types.go.html#line-167">types.go#L167</a>: func (b *Bool) <b>Load</b>() bool {
+
+	<a href="../../../pkg/runtime.html">runtime</a>
+		<a href="../../../src/runtime/arena.go.html#line-305">arena.go#L305</a>: 	if a.defunct.<b>Load</b>() {
+		<a href="../../../src/runtime/mgclimit.go.html#line-90">mgclimit.go#L90</a>: 	return l.enabled.<b>Load</b>()
+		<a href="../../../src/runtime/mgcmark.go.html#line-1064">mgcmark.go#L1064</a>: 		for !(gp.preempt &amp;&amp; (preemptible || sched.gcwaiting.<b>Load</b>())) {
+		<a href="../../../src/runtime/mgcmark.go.html#line-1078" class="path-duplicate">mgcmark.go</a><a href="../../../src/runtime/mgcmark.go.html#line-1078">#L1078</a>: 	for !(gp.preempt &amp;&amp; (preemptible || sched.gcwaiting.<b>Load</b>())) {
+		<a href="../../../src/runtime/os_linux.go.html#line-616">os_linux.go#L616</a>: 	if mp.profileTimerValid.<b>Load</b>() {
+		<a href="../../../src/runtime/os_linux.go.html#line-638" class="path-duplicate">os_linux.go</a><a href="../../../src/runtime/os_linux.go.html#line-638">#L638</a>: 	if mp.profileTimerValid.<b>Load</b>() {
+		<a href="../../../src/runtime/proc.go.html#line-318">proc.go#L318</a>: 		if forcegc.idle.<b>Load</b>() {
+		<a href="../../../src/runtime/proc.go.html#line-1418" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-1418">#L1418</a>: 	if freezing.<b>Load</b>() {
+		<a href="../../../src/runtime/proc.go.html#line-1450" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-1450">#L1450</a>: 	if sched.sysmonwait.<b>Load</b>() {
+		<a href="../../../src/runtime/proc.go.html#line-2686" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-2686">#L2686</a>: 	if sched.gcwaiting.<b>Load</b>() {
+		<a href="../../../src/runtime/proc.go.html#line-2816" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-2816">#L2816</a>: 	if !sched.gcwaiting.<b>Load</b>() {
+		<a href="../../../src/runtime/proc.go.html#line-2900" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-2900">#L2900</a>: 	if sched.gcwaiting.<b>Load</b>() {
+		<a href="../../../src/runtime/proc.go.html#line-3063" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-3063">#L3063</a>: 	if sched.gcwaiting.<b>Load</b>() || pp.runSafePointFn != 0 {
+		<a href="../../../src/runtime/proc.go.html#line-3270" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-3270">#L3270</a>: 			if sched.gcwaiting.<b>Load</b>() {
+		<a href="../../../src/runtime/proc.go.html#line-3584" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-3584">#L3584</a>: 	if debug.dontfreezetheworld &gt; 0 &amp;&amp; freezing.<b>Load</b>() {
+		<a href="../../../src/runtime/proc.go.html#line-4032" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-4032">#L4032</a>: 	if sched.sysmonwait.<b>Load</b>() {
+		<a href="../../../src/runtime/proc.go.html#line-4049" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-4049">#L4049</a>: 	if sched.gcwaiting.<b>Load</b>() {
+		<a href="../../../src/runtime/proc.go.html#line-4069" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-4069">#L4069</a>: 	if sched.sysmonwait.<b>Load</b>() {
+		<a href="../../../src/runtime/proc.go.html#line-4305" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-4305">#L4305</a>: 	if pp != nil &amp;&amp; sched.sysmonwait.<b>Load</b>() {
+		<a href="../../../src/runtime/proc.go.html#line-4341" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-4341">#L4341</a>: 	} else if sched.sysmonwait.<b>Load</b>() {
+		<a href="../../../src/runtime/proc.go.html#line-5552" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-5552">#L5552</a>: 		if debug.schedtrace &lt;= 0 &amp;&amp; (sched.gcwaiting.<b>Load</b>() || sched.npidle.Load() == gomaxprocs) {
+		<a href="../../../src/runtime/proc.go.html#line-5554" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-5554">#L5554</a>: 			if sched.gcwaiting.<b>Load</b>() || sched.npidle.Load() == gomaxprocs {
+		<a href="../../../src/runtime/proc.go.html#line-5645" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-5645">#L5645</a>: 		if t := (gcTrigger{kind: gcTriggerTime, now: now}); t.test() &amp;&amp; forcegc.idle.<b>Load</b>() {
+		<a href="../../../src/runtime/proc.go.html#line-5807" class="path-duplicate">proc.go</a><a href="../../../src/runtime/proc.go.html#line-5807">#L5807</a>: 		print(" gcwaiting=", sched.gcwaiting.<b>Load</b>(), " nmidlelocked=", sched.nmidlelocked, " stopwait=", sched.stopwait, " sysmonwait=", sched.sysmonwait.<b>Load</b>(), "\n")
+		<a href="../../../src/runtime/stack.go.html#line-890">stack.go#L890</a>: 		if newsize &lt; old.hi-old.lo &amp;&amp; gp.parkingOnChan.<b>Load</b>() {
+		<a href="../../../src/runtime/stack.go.html#line-1157" class="path-duplicate">stack.go</a><a href="../../../src/runtime/stack.go.html#line-1157">#L1157</a>: 	return gp.syscallsp == 0 &amp;&amp; !gp.asyncSafePoint &amp;&amp; !gp.parkingOnChan.<b>Load</b>()
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

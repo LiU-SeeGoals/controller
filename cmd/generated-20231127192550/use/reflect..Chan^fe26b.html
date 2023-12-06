@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: reflect.Chan</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">const <b><a href="../pkg/reflect.html">reflect</a>.<a href="../src/reflect/type.go.html#line-262">Chan</a></b></span>
+
+<span class="title">31 uses</span>
+
+	reflect (current package)
+		<a href="../src/reflect/abi.go.html#line-200">abi.go#L200</a>: 	case UnsafePointer, Pointer, <b>Chan</b>, Map, Func:
+		<a href="../src/reflect/type.go.html#line-262">type.go#L262</a>: 	<b>Chan</b>
+		<a href="../src/reflect/type.go.html#line-467" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-467">#L467</a>: 	<b>Chan</b>:          "chan",
+		<a href="../src/reflect/type.go.html#line-689" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-689">#L689</a>: 	if t.Kind() != <b>Chan</b> {
+		<a href="../src/reflect/type.go.html#line-1422" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1422">#L1422</a>: 	case <b>Chan</b>:
+		<a href="../src/reflect/type.go.html#line-1590" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1590">#L1590</a>: 	ckey := cacheKey{<b>Chan</b>, typ, nil, uintptr(dir)}
+		<a href="../src/reflect/type.go.html#line-1879" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1879">#L1879</a>: 	case Bool, Int, Int8, Int16, Int32, Int64, Uint, Uint8, Uint16, Uint32, Uint64, Uintptr, <b>Chan</b>, Pointer, String, UnsafePointer:
+		<a href="../src/reflect/type.go.html#line-1903" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1903">#L1903</a>: 	case Bool, Int, Int8, Int16, Int32, Int64, Uint, Uint8, Uint16, Uint32, Uint64, Uintptr, <b>Chan</b>, Pointer, UnsafePointer:
+		<a href="../src/reflect/type.go.html#line-2881" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2881">#L2881</a>: 	case <b>Chan</b>, Func, Map, Pointer, Slice, String, UnsafePointer:
+		<a href="../src/reflect/value.go.html#line-1178">value.go#L1178</a>: 	case <b>Chan</b>:
+		<a href="../src/reflect/value.go.html#line-1192" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1192">#L1192</a>: 	v.mustBe(<b>Chan</b>)
+		<a href="../src/reflect/value.go.html#line-1554" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1554">#L1554</a>: 	case <b>Chan</b>, Func, Map, Pointer, UnsafePointer:
+		<a href="../src/reflect/value.go.html#line-1614" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1614">#L1614</a>: 	case <b>Chan</b>, Func, Interface, Map, Pointer, Slice, UnsafePointer:
+		<a href="../src/reflect/value.go.html#line-1685" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1685">#L1685</a>: 	case <b>Chan</b>, Func, Map, Pointer, UnsafePointer:
+		<a href="../src/reflect/value.go.html#line-1717" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1717">#L1717</a>: 	case <b>Chan</b>:
+		<a href="../src/reflect/value.go.html#line-2161" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2161">#L2161</a>: 	case <b>Chan</b>, Map, UnsafePointer:
+		<a href="../src/reflect/value.go.html#line-2193" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2193">#L2193</a>: 	v.mustBe(<b>Chan</b>)
+		<a href="../src/reflect/value.go.html#line-2226" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2226">#L2226</a>: 	v.mustBe(<b>Chan</b>)
+		<a href="../src/reflect/value.go.html#line-2609" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2609">#L2609</a>: 	v.mustBe(<b>Chan</b>)
+		<a href="../src/reflect/value.go.html#line-2619" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2619">#L2619</a>: 	v.mustBe(<b>Chan</b>)
+		<a href="../src/reflect/value.go.html#line-2740" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2740">#L2740</a>: 	case <b>Chan</b>, Map, UnsafePointer:
+		<a href="../src/reflect/value.go.html#line-3061" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3061">#L3061</a>: 			ch.mustBe(<b>Chan</b>)
+		<a href="../src/reflect/value.go.html#line-3092" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3092">#L3092</a>: 			ch.mustBe(<b>Chan</b>)
+		<a href="../src/reflect/value.go.html#line-3153" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3153">#L3153</a>: 	if typ.Kind() != <b>Chan</b> {
+		<a href="../src/reflect/value.go.html#line-3164" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3164">#L3164</a>: 	return Value{t, ch, flag(<b>Chan</b>)}
+		<a href="../src/reflect/value.go.html#line-3426" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3426">#L3426</a>: 	case <b>Chan</b>, Pointer, UnsafePointer:
+		<a href="../src/reflect/value.go.html#line-3529" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3529">#L3529</a>: 	case <b>Chan</b>:
+
+	<a href="../pkg/fmt.html">fmt</a>
+		<a href="../src/fmt/print.go.html#line-552">print.go#L552</a>: 	case reflect.<b>Chan</b>, reflect.Func, reflect.Map, reflect.Pointer, reflect.Slice, reflect.UnsafePointer:
+		<a href="../src/fmt/print.go.html#line-928" class="path-duplicate">print.go</a><a href="../src/fmt/print.go.html#line-928">#L928</a>: 	case reflect.<b>Chan</b>, reflect.Func, reflect.UnsafePointer:
+
+	<a href="../pkg/google.golang.org/protobuf/internal/impl.html">google.golang.org/protobuf/internal/impl</a>
+		<a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-529">message_reflect_field.go#L529</a>: 	case reflect.<b>Chan</b>, reflect.Func, reflect.Interface, reflect.Map, reflect.Ptr, reflect.Slice, reflect.UnsafePointer:
+
+	<a href="../pkg/internal/fmtsort.html">internal/fmtsort</a>
+		<a href="../src/internal/fmtsort/sort.go.html#line-142">sort.go#L142</a>: 	case reflect.<b>Chan</b>:
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

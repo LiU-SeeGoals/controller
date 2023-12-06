@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: context.Background</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../pkg/context.html">context</a>.<a href="../src/context/context.go.html#line-211">Background</a></b></span>
+
+<span class="title">28 uses</span>
+
+	context (current package)
+		<a href="../src/context/context.go.html#line-211">context.go#L211</a>: func <b>Background</b>() Context {
+
+	<a href="../pkg/net.html">net</a>
+		<a href="../src/net/dial.go.html#line-433">dial.go#L433</a>: 	return d.DialContext(context.<b>Background</b>(), network, address)
+		<a href="../src/net/dial.go.html#line-806" class="path-duplicate">dial.go</a><a href="../src/net/dial.go.html#line-806">#L806</a>: 	return lc.Listen(context.<b>Background</b>(), network, address)
+		<a href="../src/net/dial.go.html#line-836" class="path-duplicate">dial.go</a><a href="../src/net/dial.go.html#line-836">#L836</a>: 	return lc.ListenPacket(context.<b>Background</b>(), network, address)
+		<a href="../src/net/iprawsock.go.html#line-81">iprawsock.go#L81</a>: 	afnet, _, err := parseNetwork(context.<b>Background</b>(), network, false)
+		<a href="../src/net/iprawsock.go.html#line-90" class="path-duplicate">iprawsock.go</a><a href="../src/net/iprawsock.go.html#line-90">#L90</a>: 	addrs, err := DefaultResolver.internetAddrList(context.<b>Background</b>(), afnet, address)
+		<a href="../src/net/iprawsock.go.html#line-216" class="path-duplicate">iprawsock.go</a><a href="../src/net/iprawsock.go.html#line-216">#L216</a>: 	c, err := sd.dialIP(context.<b>Background</b>(), laddr, raddr)
+		<a href="../src/net/iprawsock.go.html#line-235" class="path-duplicate">iprawsock.go</a><a href="../src/net/iprawsock.go.html#line-235">#L235</a>: 	c, err := sl.listenIP(context.<b>Background</b>(), laddr)
+		<a href="../src/net/lookup.go.html#line-177">lookup.go#L177</a>: 	return DefaultResolver.LookupHost(context.<b>Background</b>(), host)
+		<a href="../src/net/lookup.go.html#line-196" class="path-duplicate">lookup.go</a><a href="../src/net/lookup.go.html#line-196">#L196</a>: 	addrs, err := DefaultResolver.LookupIPAddr(context.<b>Background</b>(), host)
+		<a href="../src/net/lookup.go.html#line-289" class="path-duplicate">lookup.go</a><a href="../src/net/lookup.go.html#line-289">#L289</a>: 	return &amp;onlyValuesCtx{Context: context.<b>Background</b>(), lookupValues: lookupCtx}
+		<a href="../src/net/lookup.go.html#line-413" class="path-duplicate">lookup.go</a><a href="../src/net/lookup.go.html#line-413">#L413</a>: 	return DefaultResolver.LookupPort(context.<b>Background</b>(), network, service)
+		<a href="../src/net/lookup.go.html#line-455" class="path-duplicate">lookup.go</a><a href="../src/net/lookup.go.html#line-455">#L455</a>: 	return DefaultResolver.LookupCNAME(context.<b>Background</b>(), host)
+		<a href="../src/net/lookup.go.html#line-497" class="path-duplicate">lookup.go</a><a href="../src/net/lookup.go.html#line-497">#L497</a>: 	return DefaultResolver.LookupSRV(context.<b>Background</b>(), service, proto, name)
+		<a href="../src/net/lookup.go.html#line-548" class="path-duplicate">lookup.go</a><a href="../src/net/lookup.go.html#line-548">#L548</a>: 	return DefaultResolver.LookupMX(context.<b>Background</b>(), name)
+		<a href="../src/net/lookup.go.html#line-588" class="path-duplicate">lookup.go</a><a href="../src/net/lookup.go.html#line-588">#L588</a>: 	return DefaultResolver.LookupNS(context.<b>Background</b>(), name)
+		<a href="../src/net/lookup.go.html#line-623" class="path-duplicate">lookup.go</a><a href="../src/net/lookup.go.html#line-623">#L623</a>: 	return DefaultResolver.lookupTXT(context.<b>Background</b>(), name)
+		<a href="../src/net/lookup.go.html#line-644" class="path-duplicate">lookup.go</a><a href="../src/net/lookup.go.html#line-644">#L644</a>: 	return DefaultResolver.LookupAddr(context.<b>Background</b>(), addr)
+		<a href="../src/net/tcpsock.go.html#line-92">tcpsock.go#L92</a>: 	addrs, err := DefaultResolver.internetAddrList(context.<b>Background</b>(), network, address)
+		<a href="../src/net/tcpsock.go.html#line-270" class="path-duplicate">tcpsock.go</a><a href="../src/net/tcpsock.go.html#line-270">#L270</a>: 	c, err := sd.dialTCP(context.<b>Background</b>(), laddr, raddr)
+		<a href="../src/net/tcpsock.go.html#line-388" class="path-duplicate">tcpsock.go</a><a href="../src/net/tcpsock.go.html#line-388">#L388</a>: 	ln, err := sl.listenTCP(context.<b>Background</b>(), laddr)
+		<a href="../src/net/udpsock.go.html#line-95">udpsock.go#L95</a>: 	addrs, err := DefaultResolver.internetAddrList(context.<b>Background</b>(), network, address)
+		<a href="../src/net/udpsock.go.html#line-300" class="path-duplicate">udpsock.go</a><a href="../src/net/udpsock.go.html#line-300">#L300</a>: 	c, err := sd.dialUDP(context.<b>Background</b>(), laddr, raddr)
+		<a href="../src/net/udpsock.go.html#line-326" class="path-duplicate">udpsock.go</a><a href="../src/net/udpsock.go.html#line-326">#L326</a>: 	c, err := sl.listenUDP(context.<b>Background</b>(), laddr)
+		<a href="../src/net/udpsock.go.html#line-363" class="path-duplicate">udpsock.go</a><a href="../src/net/udpsock.go.html#line-363">#L363</a>: 	c, err := sl.listenMulticastUDP(context.<b>Background</b>(), ifi, gaddr)
+		<a href="../src/net/unixsock.go.html#line-210">unixsock.go#L210</a>: 	c, err := sd.dialUnix(context.<b>Background</b>(), laddr, raddr)
+		<a href="../src/net/unixsock.go.html#line-327" class="path-duplicate">unixsock.go</a><a href="../src/net/unixsock.go.html#line-327">#L327</a>: 	ln, err := sl.listenUnix(context.<b>Background</b>(), laddr)
+		<a href="../src/net/unixsock.go.html#line-347" class="path-duplicate">unixsock.go</a><a href="../src/net/unixsock.go.html#line-347">#L347</a>: 	c, err := sl.listenUnixgram(context.<b>Background</b>(), laddr)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

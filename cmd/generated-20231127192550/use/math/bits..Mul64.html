@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: math/bits.Mul64</title>
+<link href="../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../../pkg/math/bits.html">math/bits</a>.<a href="../../src/math/bits/bits.go.html#line-470">Mul64</a></b></span>
+
+<span class="title">17 uses</span>
+
+	math/bits (current package)
+		<a href="../../src/math/bits/bits.go.html#line-450">bits.go#L450</a>: 	h, l := <b>Mul64</b>(uint64(x), uint64(y))
+		<a href="../../src/math/bits/bits.go.html#line-470" class="path-duplicate">bits.go</a><a href="../../src/math/bits/bits.go.html#line-470">#L470</a>: func <b>Mul64</b>(x, y uint64) (hi, lo uint64) {
+
+	<a href="../../pkg/math.html">math</a>
+		<a href="../../src/math/fma.go.html#line-121">fma.go#L121</a>: 	pm1, pm2 := bits.<b>Mul64</b>(xm&lt;&lt;10, ym&lt;&lt;11)
+		<a href="../../src/math/trig_reduce.go.html#line-50">trig_reduce.go#L50</a>: 	z2hi, _ := bits.<b>Mul64</b>(z2, ix)
+		<a href="../../src/math/trig_reduce.go.html#line-51" class="path-duplicate">trig_reduce.go</a><a href="../../src/math/trig_reduce.go.html#line-51">#L51</a>: 	z1hi, z1lo := bits.<b>Mul64</b>(z1, ix)
+
+	<a href="../../pkg/math/cmplx.html">math/cmplx</a>
+		<a href="../../src/math/cmplx/tan.go.html#line-199">tan.go#L199</a>: 	z2hi, _ := bits.<b>Mul64</b>(z2, ix)
+		<a href="../../src/math/cmplx/tan.go.html#line-200" class="path-duplicate">tan.go</a><a href="../../src/math/cmplx/tan.go.html#line-200">#L200</a>: 	z1hi, z1lo := bits.<b>Mul64</b>(z1, ix)
+
+	<a href="../../pkg/hash/fnv.html">hash/fnv</a>
+		<a href="../../src/hash/fnv/fnv.go.html#line-142">fnv.go#L142</a>: 		s0, s1 := bits.<b>Mul64</b>(prime128Lower, s[1])
+		<a href="../../src/hash/fnv/fnv.go.html#line-156" class="path-duplicate">fnv.go</a><a href="../../src/hash/fnv/fnv.go.html#line-156">#L156</a>: 		s0, s1 := bits.<b>Mul64</b>(prime128Lower, s[1])
+
+	<a href="../../pkg/strconv.html">strconv</a>
+		<a href="../../src/strconv/eisel_lemire.go.html#line-47">eisel_lemire.go#L47</a>: 	xHi, xLo := bits.<b>Mul64</b>(man, detailedPowersOfTen[exp10-detailedPowersOfTenMinExp10][1])
+		<a href="../../src/strconv/eisel_lemire.go.html#line-51" class="path-duplicate">eisel_lemire.go</a><a href="../../src/strconv/eisel_lemire.go.html#line-51">#L51</a>: 		yHi, yLo := bits.<b>Mul64</b>(man, detailedPowersOfTen[exp10-detailedPowersOfTenMinExp10][0])
+		<a href="../../src/strconv/eisel_lemire.go.html#line-122" class="path-duplicate">eisel_lemire.go</a><a href="../../src/strconv/eisel_lemire.go.html#line-122">#L122</a>: 	xHi, xLo := bits.<b>Mul64</b>(man, detailedPowersOfTen[exp10-detailedPowersOfTenMinExp10][1])
+		<a href="../../src/strconv/eisel_lemire.go.html#line-126" class="path-duplicate">eisel_lemire.go</a><a href="../../src/strconv/eisel_lemire.go.html#line-126">#L126</a>: 		yHi, yLo := bits.<b>Mul64</b>(man, detailedPowersOfTen[exp10-detailedPowersOfTenMinExp10][0])
+		<a href="../../src/strconv/ftoaryu.go.html#line-507">ftoaryu.go#L507</a>: 	hi, lo := bits.<b>Mul64</b>(uint64(m), pow)
+		<a href="../../src/strconv/ftoaryu.go.html#line-539" class="path-duplicate">ftoaryu.go</a><a href="../../src/strconv/ftoaryu.go.html#line-539">#L539</a>: 	l1, l0 := bits.<b>Mul64</b>(m, pow[0])
+		<a href="../../src/strconv/ftoaryu.go.html#line-540" class="path-duplicate">ftoaryu.go</a><a href="../../src/strconv/ftoaryu.go.html#line-540">#L540</a>: 	h1, h0 := bits.<b>Mul64</b>(m, pow[1])
+		<a href="../../src/strconv/ftoaryu.go.html#line-566" class="path-duplicate">ftoaryu.go</a><a href="../../src/strconv/ftoaryu.go.html#line-566">#L566</a>: 	hi, _ := bits.<b>Mul64</b>(x&gt;&gt;1, 0x89705f4136b4a598) // binary digits of 1e-9
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

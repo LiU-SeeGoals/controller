@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.schedt.gFree</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/runtime2.go.html#line-774">schedt</a>.<a href="../src/runtime/runtime2.go.html#line-816">gFree</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">26 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/mgcmark.go.html#line-295">mgcmark.go#L295</a>: 	lock(&amp;sched.<b>gFree</b>.lock)
+		<a href="../src/runtime/mgcmark.go.html#line-296" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-296">#L296</a>: 	list := sched.<b>gFree</b>.stack
+		<a href="../src/runtime/mgcmark.go.html#line-297" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-297">#L297</a>: 	sched.<b>gFree</b>.stack = gList{}
+		<a href="../src/runtime/mgcmark.go.html#line-298" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-298">#L298</a>: 	unlock(&amp;sched.<b>gFree</b>.lock)
+		<a href="../src/runtime/mgcmark.go.html#line-315" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-315">#L315</a>: 	lock(&amp;sched.<b>gFree</b>.lock)
+		<a href="../src/runtime/mgcmark.go.html#line-316" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-316">#L316</a>: 	sched.<b>gFree</b>.noStack.pushAll(q)
+		<a href="../src/runtime/mgcmark.go.html#line-317" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-317">#L317</a>: 	unlock(&amp;sched.<b>gFree</b>.lock)
+		<a href="../src/runtime/proc.go.html#line-4657">proc.go#L4657</a>: 		lock(&amp;sched.<b>gFree</b>.lock)
+		<a href="../src/runtime/proc.go.html#line-4658" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4658">#L4658</a>: 		sched.<b>gFree</b>.noStack.pushAll(noStackQ)
+		<a href="../src/runtime/proc.go.html#line-4659" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4659">#L4659</a>: 		sched.<b>gFree</b>.stack.pushAll(stackQ)
+		<a href="../src/runtime/proc.go.html#line-4660" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4660">#L4660</a>: 		sched.<b>gFree</b>.n += inc
+		<a href="../src/runtime/proc.go.html#line-4661" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4661">#L4661</a>: 		unlock(&amp;sched.<b>gFree</b>.lock)
+		<a href="../src/runtime/proc.go.html#line-4669" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4669">#L4669</a>: 	if pp.gFree.empty() &amp;&amp; (!sched.<b>gFree</b>.stack.empty() || !sched.<b>gFree</b>.noStack.empty()) {
+		<a href="../src/runtime/proc.go.html#line-4670" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4670">#L4670</a>: 		lock(&amp;sched.<b>gFree</b>.lock)
+		<a href="../src/runtime/proc.go.html#line-4674" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4674">#L4674</a>: 			gp := sched.<b>gFree</b>.stack.pop()
+		<a href="../src/runtime/proc.go.html#line-4676" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4676">#L4676</a>: 				gp = sched.<b>gFree</b>.noStack.pop()
+		<a href="../src/runtime/proc.go.html#line-4681" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4681">#L4681</a>: 			sched.<b>gFree</b>.n--
+		<a href="../src/runtime/proc.go.html#line-4685" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4685">#L4685</a>: 		unlock(&amp;sched.<b>gFree</b>.lock)
+		<a href="../src/runtime/proc.go.html#line-4741" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4741">#L4741</a>: 	lock(&amp;sched.<b>gFree</b>.lock)
+		<a href="../src/runtime/proc.go.html#line-4742" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4742">#L4742</a>: 	sched.<b>gFree</b>.noStack.pushAll(noStackQ)
+		<a href="../src/runtime/proc.go.html#line-4743" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4743">#L4743</a>: 	sched.<b>gFree</b>.stack.pushAll(stackQ)
+		<a href="../src/runtime/proc.go.html#line-4744" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4744">#L4744</a>: 	sched.<b>gFree</b>.n += inc
+		<a href="../src/runtime/proc.go.html#line-4745" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4745">#L4745</a>: 	unlock(&amp;sched.<b>gFree</b>.lock)
+		<a href="../src/runtime/proc.go.html#line-4860" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4860">#L4860</a>: 	n := int32(atomic.Loaduintptr(&amp;allglen)) - sched.<b>gFree</b>.n - sched.ngsys.Load()
+		<a href="../src/runtime/runtime2.go.html#line-816">runtime2.go#L816</a>: 	<b>gFree</b> struct {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

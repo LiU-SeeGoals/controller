@@ -1,4 +1,4 @@
-package action
+package gamestate
 
 import (
 	"gonum.org/v1/gonum/mat"

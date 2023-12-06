@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: bufio.Reader.buf</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/bufio.html">bufio</a>.<a href="../src/bufio/bufio.go.html#line-32">Reader</a>.<a href="../src/bufio/bufio.go.html#line-33">buf</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">33 uses</span>
+
+	bufio (current package)
+		<a href="../src/bufio/bufio.go.html#line-33">bufio.go#L33</a>: 	<b>buf</b>          []byte
+		<a href="../src/bufio/bufio.go.html#line-50" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-50">#L50</a>: 	if ok &amp;&amp; len(b.<b>buf</b>) &gt;= size {
+		<a href="../src/bufio/bufio.go.html#line-67" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-67">#L67</a>: func (b *Reader) Size() int { return len(b.<b>buf</b>) }
+		<a href="../src/bufio/bufio.go.html#line-81" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-81">#L81</a>: 	if b.<b>buf</b> == nil {
+		<a href="../src/bufio/bufio.go.html#line-82" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-82">#L82</a>: 		b.<b>buf</b> = make([]byte, defaultBufSize)
+		<a href="../src/bufio/bufio.go.html#line-84" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-84">#L84</a>: 	b.reset(b.<b>buf</b>, r)
+		<a href="../src/bufio/bufio.go.html#line-89" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-89">#L89</a>: 		<b>buf</b>:          buf,
+		<a href="../src/bufio/bufio.go.html#line-102" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-102">#L102</a>: 		copy(b.<b>buf</b>, b.<b>buf</b>[b.r:b.w])
+		<a href="../src/bufio/bufio.go.html#line-107" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-107">#L107</a>: 	if b.w &gt;= len(b.<b>buf</b>) {
+		<a href="../src/bufio/bufio.go.html#line-113" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-113">#L113</a>: 		n, err := b.rd.Read(b.<b>buf</b>[b.w:])
+		<a href="../src/bufio/bufio.go.html#line-150" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-150">#L150</a>: 	for b.w-b.r &lt; n &amp;&amp; b.w-b.r &lt; len(b.<b>buf</b>) &amp;&amp; b.err == nil {
+		<a href="../src/bufio/bufio.go.html#line-154" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-154">#L154</a>: 	if n &gt; len(b.<b>buf</b>) {
+		<a href="../src/bufio/bufio.go.html#line-155" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-155">#L155</a>: 		return b.<b>buf</b>[b.r:b.w], ErrBufferFull
+		<a href="../src/bufio/bufio.go.html#line-168" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-168">#L168</a>: 	return b.<b>buf</b>[b.r : b.r+n], err
+		<a href="../src/bufio/bufio.go.html#line-227" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-227">#L227</a>: 		if len(p) &gt;= len(b.<b>buf</b>) {
+		<a href="../src/bufio/bufio.go.html#line-244" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-244">#L244</a>: 		n, b.err = b.rd.Read(b.<b>buf</b>)
+		<a href="../src/bufio/bufio.go.html#line-257" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-257">#L257</a>: 	n = copy(p, b.<b>buf</b>[b.r:b.w])
+		<a href="../src/bufio/bufio.go.html#line-259" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-259">#L259</a>: 	b.lastByte = int(b.<b>buf</b>[b.r-1])
+		<a href="../src/bufio/bufio.go.html#line-274" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-274">#L274</a>: 	c := b.<b>buf</b>[b.r]
+		<a href="../src/bufio/bufio.go.html#line-296" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-296">#L296</a>: 	b.<b>buf</b>[b.r] = byte(b.lastByte)
+		<a href="../src/bufio/bufio.go.html#line-306" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-306">#L306</a>: 	for b.r+utf8.UTFMax &gt; b.w &amp;&amp; !utf8.FullRune(b.<b>buf</b>[b.r:b.w]) &amp;&amp; b.err == nil &amp;&amp; b.w-b.r &lt; len(b.<b>buf</b>) {
+		<a href="../src/bufio/bufio.go.html#line-313" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-313">#L313</a>: 	r, size = rune(b.<b>buf</b>[b.r]), 1
+		<a href="../src/bufio/bufio.go.html#line-315" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-315">#L315</a>: 		r, size = utf8.DecodeRune(b.<b>buf</b>[b.r:b.w])
+		<a href="../src/bufio/bufio.go.html#line-318" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-318">#L318</a>: 	b.lastByte = int(b.<b>buf</b>[b.r-1])
+		<a href="../src/bufio/bufio.go.html#line-354" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-354">#L354</a>: 		if i := bytes.IndexByte(b.<b>buf</b>[b.r+s:b.w], delim); i &gt;= 0 {
+		<a href="../src/bufio/bufio.go.html#line-356" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-356">#L356</a>: 			line = b.<b>buf</b>[b.r : b.r+i+1]
+		<a href="../src/bufio/bufio.go.html#line-363" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-363">#L363</a>: 			line = b.<b>buf</b>[b.r:b.w]
+		<a href="../src/bufio/bufio.go.html#line-370" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-370">#L370</a>: 		if b.Buffered() &gt;= len(b.<b>buf</b>) {
+		<a href="../src/bufio/bufio.go.html#line-372" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-372">#L372</a>: 			line = b.<b>buf</b>
+		<a href="../src/bufio/bufio.go.html#line-538" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-538">#L538</a>: 	if b.w-b.r &lt; len(b.<b>buf</b>) {
+		<a href="../src/bufio/bufio.go.html#line-563" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-563">#L563</a>: 	n, err := w.Write(b.<b>buf</b>[b.r:b.w])
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

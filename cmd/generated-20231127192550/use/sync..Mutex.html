@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: sync.Mutex</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../pkg/sync.html">sync</a>.<a href="../src/sync/mutex.go.html#line-34">Mutex</a></b></span>
+
+<span class="title">36 uses</span>
+
+	sync (current package)
+		<a href="../src/sync/map.go.html#line-36">map.go#L36</a>: 	mu <b>Mutex</b>
+		<a href="../src/sync/mutex.go.html#line-34">mutex.go#L34</a>: type <b>Mutex</b> struct {
+		<a href="../src/sync/mutex.go.html#line-81" class="path-duplicate">mutex.go</a><a href="../src/sync/mutex.go.html#line-81">#L81</a>: func (m *<b>Mutex</b>) Lock() {
+		<a href="../src/sync/mutex.go.html#line-98" class="path-duplicate">mutex.go</a><a href="../src/sync/mutex.go.html#line-98">#L98</a>: func (m *<b>Mutex</b>) TryLock() bool {
+		<a href="../src/sync/mutex.go.html#line-117" class="path-duplicate">mutex.go</a><a href="../src/sync/mutex.go.html#line-117">#L117</a>: func (m *<b>Mutex</b>) lockSlow() {
+		<a href="../src/sync/mutex.go.html#line-212" class="path-duplicate">mutex.go</a><a href="../src/sync/mutex.go.html#line-212">#L212</a>: func (m *<b>Mutex</b>) Unlock() {
+		<a href="../src/sync/mutex.go.html#line-227" class="path-duplicate">mutex.go</a><a href="../src/sync/mutex.go.html#line-227">#L227</a>: func (m *<b>Mutex</b>) unlockSlow(new int32) {
+		<a href="../src/sync/once.go.html#line-25">once.go#L25</a>: 	m    <b>Mutex</b>
+		<a href="../src/sync/pool.go.html#line-263">pool.go#L263</a>: 	allPoolsMu <b>Mutex</b>
+		<a href="../src/sync/rwmutex.go.html#line-37">rwmutex.go#L37</a>: 	w           <b>Mutex</b>        // held if there are pending writers
+
+	<a href="../pkg/context.html">context</a>
+		<a href="../src/context/context.go.html#line-419">context.go#L419</a>: 	mu       sync.<b>Mutex</b>            // protects following fields
+
+	<a href="../pkg/go/token.html">go/token</a>
+		<a href="../src/go/token/position.go.html#line-102">position.go#L102</a>: 	mutex sync.<b>Mutex</b>
+
+	<a href="../pkg/google.golang.org/protobuf/internal/filedesc.html">google.golang.org/protobuf/internal/filedesc</a>
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc.go.html#line-42">desc.go#L42</a>: 		mu   sync.<b>Mutex</b> // protects L2
+
+	<a href="../pkg/google.golang.org/protobuf/internal/impl.html">google.golang.org/protobuf/internal/impl</a>
+		<a href="../src/google.golang.org/protobuf/internal/impl/checkinit.go.html#line-86">checkinit.go#L86</a>: 	needsInitCheckMu  sync.<b>Mutex</b>
+		<a href="../src/google.golang.org/protobuf/internal/impl/codec_extension.go.html#line-74">codec_extension.go#L74</a>: 	mu         sync.<b>Mutex</b>
+		<a href="../src/google.golang.org/protobuf/internal/impl/extension.go.html#line-36">extension.go#L36</a>: 	mu   sync.<b>Mutex</b>
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-156">legacy_message.go#L156</a>: 	aberrantMessageDescLock  sync.<b>Mutex</b>
+		<a href="../src/google.golang.org/protobuf/internal/impl/message.go.html#line-40">message.go#L40</a>: 	initMu   sync.<b>Mutex</b> // protects all unexported fields
+
+	<a href="../pkg/google.golang.org/protobuf/internal/pragma.html">google.golang.org/protobuf/internal/pragma</a>
+		<a href="../src/google.golang.org/protobuf/internal/pragma/pragma.go.html#line-29">pragma.go#L29</a>: type DoNotCopy [0]sync.<b>Mutex</b>
+
+	<a href="../pkg/internal/bisect.html">internal/bisect</a>
+		<a href="../src/internal/bisect/bisect.go.html#line-759">bisect.go#L759</a>: 	mu sync.<b>Mutex</b>
+
+	<a href="../pkg/internal/godebug.html">internal/godebug</a>
+		<a href="../src/internal/godebug/godebug.go.html#line-208">godebug.go#L208</a>: var updateMu sync.<b>Mutex</b>
+
+	<a href="../pkg/internal/intern.html">internal/intern</a>
+		<a href="../src/internal/intern/intern.go.html#line-64">intern.go#L64</a>: 	mu      sync.<b>Mutex</b>
+
+	<a href="../pkg/internal/singleflight.html">internal/singleflight</a>
+		<a href="../src/internal/singleflight/singleflight.go.html#line-30">singleflight.go#L30</a>: 	mu sync.<b>Mutex</b>       // protects m
+
+	<a href="../pkg/internal/testlog.html">internal/testlog</a>
+		<a href="../src/internal/testlog/exit.go.html#line-24">exit.go#L24</a>: 	mu  sync.<b>Mutex</b>
+
+	<a href="../pkg/io.html">io</a>
+		<a href="../src/io/pipe.go.html#line-17">pipe.go#L17</a>: 	sync.<b>Mutex</b> // guards following
+		<a href="../src/io/pipe.go.html#line-40" class="path-duplicate">pipe.go</a><a href="../src/io/pipe.go.html#line-40">#L40</a>: 	wrMu sync.<b>Mutex</b> // Serializes Write operations
+
+	<a href="../pkg/net.html">net</a>
+		<a href="../src/net/hosts.go.html#line-33">hosts.go#L33</a>: 	sync.<b>Mutex</b>
+		<a href="../src/net/nss.go.html#line-29">nss.go#L29</a>: 	mu      sync.<b>Mutex</b> // protects nssConf
+		<a href="../src/net/pipe.go.html#line-16">pipe.go#L16</a>: 	mu     sync.<b>Mutex</b> // Guards timer and cancel
+		<a href="../src/net/pipe.go.html#line-88" class="path-duplicate">pipe.go</a><a href="../src/net/pipe.go.html#line-88">#L88</a>: 	wrMu sync.<b>Mutex</b> // Serialize Write operations
+
+	<a href="../pkg/os.html">os</a>
+		<a href="../src/os/getwd.go.html#line-14">getwd.go#L14</a>: 	sync.<b>Mutex</b>
+
+	<a href="../pkg/reflect.html">reflect</a>
+		<a href="../src/reflect/type.go.html#line-1574">type.go#L1574</a>: 	sync.<b>Mutex</b> // Guards stores (but not loads) on m.
+		<a href="../src/reflect/type.go.html#line-1717" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1717">#L1717</a>: var funcTypesMutex sync.<b>Mutex</b>
+		<a href="../src/reflect/type.go.html#line-2109" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2109">#L2109</a>: 	sync.<b>Mutex</b> // Guards stores (but not loads) on m.
+
+	<a href="../pkg/syscall.html">syscall</a>
+		<a href="../src/syscall/forkpipe2.go.html#line-19">forkpipe2.go#L19</a>: 	forkingLock sync.<b>Mutex</b>
+		<a href="../src/syscall/syscall_unix.go.html#line-42">syscall_unix.go#L42</a>: 	sync.<b>Mutex</b>
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: sync.Mutex.Lock</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/sync.html">sync</a>.<a href="../src/sync/mutex.go.html#line-34">Mutex</a>.<a href="../src/sync/mutex.go.html#line-81">Lock</a></b></span><span style="font-size: large;"><i> (method, <a href="../imp/sync.Mutex.html#name-Lock">view implemented interface methods</a>)</i></span>
+
+<span class="title">66 uses</span>
+
+	sync (current package)
+		<a href="../src/sync/map.go.html#line-124">map.go#L124</a>: 		m.mu.<b>Lock</b>()
+		<a href="../src/sync/map.go.html#line-213" class="path-duplicate">map.go</a><a href="../src/sync/map.go.html#line-213">#L213</a>: 	m.mu.<b>Lock</b>()
+		<a href="../src/sync/map.go.html#line-276" class="path-duplicate">map.go</a><a href="../src/sync/map.go.html#line-276">#L276</a>: 		m.mu.<b>Lock</b>()
+		<a href="../src/sync/map.go.html#line-341" class="path-duplicate">map.go</a><a href="../src/sync/map.go.html#line-341">#L341</a>: 	m.mu.<b>Lock</b>()
+		<a href="../src/sync/map.go.html#line-382" class="path-duplicate">map.go</a><a href="../src/sync/map.go.html#line-382">#L382</a>: 	m.mu.<b>Lock</b>()
+		<a href="../src/sync/map.go.html#line-410" class="path-duplicate">map.go</a><a href="../src/sync/map.go.html#line-410">#L410</a>: 		m.mu.<b>Lock</b>()
+		<a href="../src/sync/map.go.html#line-460" class="path-duplicate">map.go</a><a href="../src/sync/map.go.html#line-460">#L460</a>: 		m.mu.<b>Lock</b>()
+		<a href="../src/sync/mutex.go.html#line-81">mutex.go#L81</a>: func (m *Mutex) <b>Lock</b>() {
+		<a href="../src/sync/once.go.html#line-70">once.go#L70</a>: 	o.m.<b>Lock</b>()
+		<a href="../src/sync/pool.go.html#line-216">pool.go#L216</a>: 	allPoolsMu.<b>Lock</b>()
+		<a href="../src/sync/rwmutex.go.html#line-147">rwmutex.go#L147</a>: 	rw.w.<b>Lock</b>()
+
+	<a href="../pkg/context.html">context</a>
+		<a href="../src/context/context.go.html#line-285">context.go#L285</a>: 		cc.mu.<b>Lock</b>()
+		<a href="../src/context/context.go.html#line-393" class="path-duplicate">context.go</a><a href="../src/context/context.go.html#line-393">#L393</a>: 	p.mu.<b>Lock</b>()
+		<a href="../src/context/context.go.html#line-438" class="path-duplicate">context.go</a><a href="../src/context/context.go.html#line-438">#L438</a>: 	c.mu.<b>Lock</b>()
+		<a href="../src/context/context.go.html#line-449" class="path-duplicate">context.go</a><a href="../src/context/context.go.html#line-449">#L449</a>: 	c.mu.<b>Lock</b>()
+		<a href="../src/context/context.go.html#line-475" class="path-duplicate">context.go</a><a href="../src/context/context.go.html#line-475">#L475</a>: 		p.mu.<b>Lock</b>()
+		<a href="../src/context/context.go.html#line-491" class="path-duplicate">context.go</a><a href="../src/context/context.go.html#line-491">#L491</a>: 		c.mu.<b>Lock</b>()
+		<a href="../src/context/context.go.html#line-538" class="path-duplicate">context.go</a><a href="../src/context/context.go.html#line-538">#L538</a>: 	c.mu.<b>Lock</b>()
+		<a href="../src/context/context.go.html#line-630" class="path-duplicate">context.go</a><a href="../src/context/context.go.html#line-630">#L630</a>: 	c.mu.<b>Lock</b>()
+		<a href="../src/context/context.go.html#line-666" class="path-duplicate">context.go</a><a href="../src/context/context.go.html#line-666">#L666</a>: 	c.mu.<b>Lock</b>()
+
+	<a href="../pkg/go/token.html">go/token</a>
+		<a href="../src/go/token/position.go.html#line-124">position.go#L124</a>: 	f.mutex.<b>Lock</b>()
+		<a href="../src/go/token/position.go.html#line-134" class="path-duplicate">position.go</a><a href="../src/go/token/position.go.html#line-134">#L134</a>: 	f.mutex.<b>Lock</b>()
+		<a href="../src/go/token/position.go.html#line-149" class="path-duplicate">position.go</a><a href="../src/go/token/position.go.html#line-149">#L149</a>: 	f.mutex.<b>Lock</b>()
+		<a href="../src/go/token/position.go.html#line-166" class="path-duplicate">position.go</a><a href="../src/go/token/position.go.html#line-166">#L166</a>: 	f.mutex.<b>Lock</b>()
+		<a href="../src/go/token/position.go.html#line-190" class="path-duplicate">position.go</a><a href="../src/go/token/position.go.html#line-190">#L190</a>: 	f.mutex.<b>Lock</b>()
+		<a href="../src/go/token/position.go.html#line-212" class="path-duplicate">position.go</a><a href="../src/go/token/position.go.html#line-212">#L212</a>: 	f.mutex.<b>Lock</b>()
+		<a href="../src/go/token/position.go.html#line-224" class="path-duplicate">position.go</a><a href="../src/go/token/position.go.html#line-224">#L224</a>: 	f.mutex.<b>Lock</b>()
+		<a href="../src/go/token/position.go.html#line-257" class="path-duplicate">position.go</a><a href="../src/go/token/position.go.html#line-257">#L257</a>: 	f.mutex.<b>Lock</b>()
+		<a href="../src/go/token/position.go.html#line-298" class="path-duplicate">position.go</a><a href="../src/go/token/position.go.html#line-298">#L298</a>: 	f.mutex.<b>Lock</b>()
+		<a href="../src/go/token/serialize.go.html#line-56">serialize.go#L56</a>: 		f.mutex.<b>Lock</b>()
+
+	<a href="../pkg/google.golang.org/protobuf/internal/filedesc.html">google.golang.org/protobuf/internal/filedesc</a>
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc.go.html#line-95">desc.go#L95</a>: 	fd.mu.<b>Lock</b>()
+
+	<a href="../pkg/google.golang.org/protobuf/internal/impl.html">google.golang.org/protobuf/internal/impl</a>
+		<a href="../src/google.golang.org/protobuf/internal/impl/checkinit.go.html#line-99">checkinit.go#L99</a>: 	needsInitCheckMu.<b>Lock</b>()
+		<a href="../src/google.golang.org/protobuf/internal/impl/codec_extension.go.html#line-111">codec_extension.go#L111</a>: 	f.lazy.mu.<b>Lock</b>()
+		<a href="../src/google.golang.org/protobuf/internal/impl/extension.go.html#line-125">extension.go#L125</a>: 	xi.mu.<b>Lock</b>()
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-166">legacy_message.go#L166</a>: 	aberrantMessageDescLock.<b>Lock</b>()
+		<a href="../src/google.golang.org/protobuf/internal/impl/message.go.html#line-77">message.go#L77</a>: 	mi.initMu.<b>Lock</b>()
+
+	<a href="../pkg/internal/bisect.html">internal/bisect</a>
+		<a href="../src/internal/bisect/bisect.go.html#line-766">bisect.go#L766</a>: 	d.mu.<b>Lock</b>()
+
+	<a href="../pkg/internal/godebug.html">internal/godebug</a>
+		<a href="../src/internal/godebug/godebug.go.html#line-214">godebug.go#L214</a>: 	updateMu.<b>Lock</b>()
+
+	<a href="../pkg/internal/intern.html">internal/intern</a>
+		<a href="../src/internal/intern/intern.go.html#line-101">intern.go#L101</a>: 	mu.<b>Lock</b>()
+		<a href="../src/internal/intern/intern.go.html#line-127" class="path-duplicate">intern.go</a><a href="../src/internal/intern/intern.go.html#line-127">#L127</a>: 	mu.<b>Lock</b>()
+
+	<a href="../pkg/internal/singleflight.html">internal/singleflight</a>
+		<a href="../src/internal/singleflight/singleflight.go.html#line-48">singleflight.go#L48</a>: 	g.mu.<b>Lock</b>()
+		<a href="../src/internal/singleflight/singleflight.go.html#line-71" class="path-duplicate">singleflight.go</a><a href="../src/internal/singleflight/singleflight.go.html#line-71">#L71</a>: 	g.mu.<b>Lock</b>()
+		<a href="../src/internal/singleflight/singleflight.go.html#line-95" class="path-duplicate">singleflight.go</a><a href="../src/internal/singleflight/singleflight.go.html#line-95">#L95</a>: 	g.mu.<b>Lock</b>()
+		<a href="../src/internal/singleflight/singleflight.go.html#line-112" class="path-duplicate">singleflight.go</a><a href="../src/internal/singleflight/singleflight.go.html#line-112">#L112</a>: 	g.mu.<b>Lock</b>()
+
+	<a href="../pkg/internal/testlog.html">internal/testlog</a>
+		<a href="../src/internal/testlog/exit.go.html#line-15">exit.go#L15</a>: 	panicOnExit0.mu.<b>Lock</b>()
+		<a href="../src/internal/testlog/exit.go.html#line-30" class="path-duplicate">exit.go</a><a href="../src/internal/testlog/exit.go.html#line-30">#L30</a>: 	panicOnExit0.mu.<b>Lock</b>()
+
+	<a href="../pkg/io.html">io</a>
+		<a href="../src/io/pipe.go.html#line-22">pipe.go#L22</a>: 	a.<b>Lock</b>()
+		<a href="../src/io/pipe.go.html#line-30" class="path-duplicate">pipe.go</a><a href="../src/io/pipe.go.html#line-30">#L30</a>: 	a.<b>Lock</b>()
+		<a href="../src/io/pipe.go.html#line-81" class="path-duplicate">pipe.go</a><a href="../src/io/pipe.go.html#line-81">#L81</a>: 		p.wrMu.<b>Lock</b>()
+
+	<a href="../pkg/net.html">net</a>
+		<a href="../src/net/hosts.go.html#line-130">hosts.go#L130</a>: 	hosts.<b>Lock</b>()
+		<a href="../src/net/hosts.go.html#line-150" class="path-duplicate">hosts.go</a><a href="../src/net/hosts.go.html#line-150">#L150</a>: 	hosts.<b>Lock</b>()
+		<a href="../src/net/nss.go.html#line-35">nss.go#L35</a>: 	nssConfig.mu.<b>Lock</b>()
+		<a href="../src/net/nss.go.html#line-73" class="path-duplicate">nss.go</a><a href="../src/net/nss.go.html#line-73">#L73</a>: 	conf.mu.<b>Lock</b>()
+		<a href="../src/net/pipe.go.html#line-32">pipe.go#L32</a>: 	d.mu.<b>Lock</b>()
+		<a href="../src/net/pipe.go.html#line-68" class="path-duplicate">pipe.go</a><a href="../src/net/pipe.go.html#line-68">#L68</a>: 	d.mu.<b>Lock</b>()
+		<a href="../src/net/pipe.go.html#line-191" class="path-duplicate">pipe.go</a><a href="../src/net/pipe.go.html#line-191">#L191</a>: 	p.wrMu.<b>Lock</b>() // Ensure entirety of b is written together
+
+	<a href="../pkg/os.html">os</a>
+		<a href="../src/os/getwd.go.html#line-58">getwd.go#L58</a>: 	getwdCache.<b>Lock</b>()
+		<a href="../src/os/getwd.go.html#line-121" class="path-duplicate">getwd.go</a><a href="../src/os/getwd.go.html#line-121">#L121</a>: 	getwdCache.<b>Lock</b>()
+
+	<a href="../pkg/reflect.html">reflect</a>
+		<a href="../src/reflect/type.go.html#line-1720">type.go#L1720</a>: 	funcTypesMutex.<b>Lock</b>()
+		<a href="../src/reflect/type.go.html#line-1805" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1805">#L1805</a>: 	funcLookupCache.<b>Lock</b>()
+		<a href="../src/reflect/type.go.html#line-2452" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2452">#L2452</a>: 	structLookupCache.<b>Lock</b>()
+
+	<a href="../pkg/syscall.html">syscall</a>
+		<a href="../src/syscall/forkpipe2.go.html#line-40">forkpipe2.go#L40</a>: 	forkingLock.<b>Lock</b>()
+		<a href="../src/syscall/forkpipe2.go.html#line-70" class="path-duplicate">forkpipe2.go</a><a href="../src/syscall/forkpipe2.go.html#line-70">#L70</a>: 		forkingLock.<b>Lock</b>()
+		<a href="../src/syscall/forkpipe2.go.html#line-85" class="path-duplicate">forkpipe2.go</a><a href="../src/syscall/forkpipe2.go.html#line-85">#L85</a>: 	forkingLock.<b>Lock</b>()
+		<a href="../src/syscall/syscall_unix.go.html#line-64">syscall_unix.go#L64</a>: 	m.<b>Lock</b>()
+		<a href="../src/syscall/syscall_unix.go.html#line-77" class="path-duplicate">syscall_unix.go</a><a href="../src/syscall/syscall_unix.go.html#line-77">#L77</a>: 	m.<b>Lock</b>()
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

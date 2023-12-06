@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: dorgbr.go in package gonum.org/v1/gonum/lapack/gonum</title>
+<link href="../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	dorgbr.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10],
+input[id=r11]:checked ~pre label[for=r11],
+input[id=r12]:checked ~pre label[for=r12],
+input[id=r13]:checked ~pre label[for=r13],
+input[id=r14]:checked ~pre label[for=r14],
+input[id=r15]:checked ~pre label[for=r15],
+input[id=r16]:checked ~pre label[for=r16],
+input[id=r17]:checked ~pre label[for=r17],
+input[id=r18]:checked ~pre label[for=r18],
+input[id=r19]:checked ~pre label[for=r19]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="r11" type="radio" name="g"/>
+<input id="r12" type="radio" name="g"/>
+<input id="r13" type="radio" name="g"/>
+<input id="r14" type="radio" name="g"/>
+<input id="r15" type="radio" name="g"/>
+<input id="r16" type="radio" name="g"/>
+<input id="r17" type="radio" name="g"/>
+<input id="r18" type="radio" name="g"/>
+<input id="r19" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">// Copyright ©2015 The Gonum Authors. All rights reserved.</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment">// Use of this source code is governed by a BSD-style</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment">// license that can be found in the LICENSE file.</span></code></span>
+<span class="codeline" id="line-4"><code></code></span>
+<span class="codeline" id="line-5"><code><span class="keyword">package</span> gonum</code></span>
+<span class="codeline" id="line-6"><code></code></span>
+<span class="codeline" id="line-7"><code><span class="keyword">import</span> <label for="i0"><span class="lit-string i0">"gonum.org/v1/gonum/lapack"</span></label></code></span>
+<span class="codeline" id="line-8"><code></code></span>
+<span class="codeline" id="line-9"><code><span class="comment">// Dorgbr generates one of the matrices Q or Pᵀ computed by Dgebrd</span></code></span>
+<span class="codeline" id="line-10"><code><span class="comment">// computed from the decomposition Dgebrd. See Dgebd2 for the description of</span></code></span>
+<span class="codeline" id="line-11"><code><span class="comment">// Q and Pᵀ.</span></code></span>
+<span class="codeline" id="line-12"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment">// If vect == lapack.GenerateQ, then a is assumed to have been an m×k matrix and</span></code></span>
+<span class="codeline" id="line-14"><code><span class="comment">// Q is of order m. If m &gt;= k, then Dorgbr returns the first n columns of Q</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment">// where m &gt;= n &gt;= k. If m &lt; k, then Dorgbr returns Q as an m×m matrix.</span></code></span>
+<span class="codeline" id="line-16"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-17"><code><span class="comment">// If vect == lapack.GeneratePT, then A is assumed to have been a k×n matrix, and</span></code></span>
+<span class="codeline" id="line-18"><code><span class="comment">// Pᵀ is of order n. If k &lt; n, then Dorgbr returns the first m rows of Pᵀ,</span></code></span>
+<span class="codeline" id="line-19"><code><span class="comment">// where n &gt;= m &gt;= k. If k &gt;= n, then Dorgbr returns Pᵀ as an n×n matrix.</span></code></span>
+<span class="codeline" id="line-20"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-21"><code><span class="comment">// Dorgbr is an internal routine. It is exported for testing purposes.</span></code></span>
+<span class="codeline" id="line-22"><code><span class="keyword">func</span> (<label for="r0" class="ident">impl</label> <a href="lapack.go.html#line-12" class="ident">Implementation</a>) <label for="r1" class="ident"><a href="../../../../../../use/gonum.org/v1/gonum/lapack/gonum..Implementation.Dorgbr.html" class="ident">Dorgbr</a></label>(<label for="r2" class="ident">vect</label> <a href="../../../../../../pkg/gonum.org/v1/gonum/lapack.html" class="ident i0">lapack</a>.<a href="../lapack.go.html#line-107" class="ident">GenOrtho</a>, <label for="r3" class="ident">m</label>, <label for="r4" class="ident">n</label>, <label for="r5" class="ident">k</label> <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a>, <label for="r6" class="ident">a</label> []<a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r7" class="ident">lda</label> <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a>, <label for="r8" class="ident">tau</label>, <label for="r9" class="ident">work</label> []<a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r10" class="ident">lwork</label> <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a>) {</code></span>
+<span class="codeline" id="line-23"><code>	<label for="r11" class="ident">wantq</label> := <label for="r2" class="ident">vect</label> == <a href="../../../../../../pkg/gonum.org/v1/gonum/lapack.html" class="ident i0">lapack</a>.<a href="../lapack.go.html#line-111" class="ident">GenerateQ</a></code></span>
+<span class="codeline" id="line-24"><code>	<label for="r12" class="ident">mn</label> := <a href="lapack.go.html#line-16" class="ident">min</a>(<label for="r3" class="ident">m</label>, <label for="r4" class="ident">n</label>)</code></span>
+<span class="codeline" id="line-25"><code>	<span class="keyword">switch</span> {</code></span>
+<span class="codeline" id="line-26"><code>	<span class="keyword">case</span> <label for="r2" class="ident">vect</label> != <a href="../../../../../../pkg/gonum.org/v1/gonum/lapack.html" class="ident i0">lapack</a>.<a href="../lapack.go.html#line-111" class="ident">GenerateQ</a> &amp;&amp; <label for="r2" class="ident">vect</label> != <a href="../../../../../../pkg/gonum.org/v1/gonum/lapack.html" class="ident i0">lapack</a>.<a href="../lapack.go.html#line-110" class="ident">GeneratePT</a>:</code></span>
+<span class="codeline" id="line-27"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-19" class="ident">badGenOrtho</a>)</code></span>
+<span class="codeline" id="line-28"><code>	<span class="keyword">case</span> <label for="r3" class="ident">m</label> &lt; <span class="lit-number">0</span>:</code></span>
+<span class="codeline" id="line-29"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-72" class="ident">mLT0</a>)</code></span>
+<span class="codeline" id="line-30"><code>	<span class="keyword">case</span> <label for="r4" class="ident">n</label> &lt; <span class="lit-number">0</span>:</code></span>
+<span class="codeline" id="line-31"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-76" class="ident">nLT0</a>)</code></span>
+<span class="codeline" id="line-32"><code>	<span class="keyword">case</span> <label for="r5" class="ident">k</label> &lt; <span class="lit-number">0</span>:</code></span>
+<span class="codeline" id="line-33"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-66" class="ident">kLT0</a>)</code></span>
+<span class="codeline" id="line-34"><code>	<span class="keyword">case</span> <label for="r11" class="ident">wantq</label> &amp;&amp; <label for="r4" class="ident">n</label> &gt; <label for="r3" class="ident">m</label>:</code></span>
+<span class="codeline" id="line-35"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-75" class="ident">nGTM</a>)</code></span>
+<span class="codeline" id="line-36"><code>	<span class="keyword">case</span> <label for="r11" class="ident">wantq</label> &amp;&amp; <label for="r4" class="ident">n</label> &lt; <a href="lapack.go.html#line-16" class="ident">min</a>(<label for="r3" class="ident">m</label>, <label for="r5" class="ident">k</label>):</code></span>
+<span class="codeline" id="line-37"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<span class="lit-string">"lapack: n &lt; min(m,k)"</span>)</code></span>
+<span class="codeline" id="line-38"><code>	<span class="keyword">case</span> !<label for="r11" class="ident">wantq</label> &amp;&amp; <label for="r3" class="ident">m</label> &gt; <label for="r4" class="ident">n</label>:</code></span>
+<span class="codeline" id="line-39"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-71" class="ident">mGTN</a>)</code></span>
+<span class="codeline" id="line-40"><code>	<span class="keyword">case</span> !<label for="r11" class="ident">wantq</label> &amp;&amp; <label for="r3" class="ident">m</label> &lt; <a href="lapack.go.html#line-16" class="ident">min</a>(<label for="r4" class="ident">n</label>, <label for="r5" class="ident">k</label>):</code></span>
+<span class="codeline" id="line-41"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<span class="lit-string">"lapack: m &lt; min(n,k)"</span>)</code></span>
+<span class="codeline" id="line-42"><code>	<span class="keyword">case</span> <label for="r7" class="ident">lda</label> &lt; <a href="lapack.go.html#line-23" class="ident">max</a>(<span class="lit-number">1</span>, <label for="r4" class="ident">n</label>) &amp;&amp; <label for="r10" class="ident">lwork</label> != -<span class="lit-number">1</span>:</code></span>
+<span class="codeline" id="line-43"><code>		<span class="comment">// Normally, we follow the reference and require the leading</span></code></span>
+<span class="codeline" id="line-44"><code><span class="comment">		// dimension to be always valid, even in case of workspace</span></code></span>
+<span class="codeline" id="line-45"><code><span class="comment">		// queries. However, if a caller provided a placeholder value</span></code></span>
+<span class="codeline" id="line-46"><code><span class="comment">		// for lda (and a) when doing a workspace query that didn't</span></code></span>
+<span class="codeline" id="line-47"><code><span class="comment">		// fulfill the condition here, it would cause a panic. This is</span></code></span>
+<span class="codeline" id="line-48"><code><span class="comment">		// exactly what Dgesvd does.</span></code></span>
+<span class="codeline" id="line-49"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-157" class="ident">badLdA</a>)</code></span>
+<span class="codeline" id="line-50"><code>	<span class="keyword">case</span> <label for="r10" class="ident">lwork</label> &lt; <a href="lapack.go.html#line-23" class="ident">max</a>(<span class="lit-number">1</span>, <label for="r12" class="ident">mn</label>) &amp;&amp; <label for="r10" class="ident">lwork</label> != -<span class="lit-number">1</span>:</code></span>
+<span class="codeline" id="line-51"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-53" class="ident">badLWork</a>)</code></span>
+<span class="codeline" id="line-52"><code>	<span class="keyword">case</span> <a href="../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r9" class="ident">work</label>) &lt; <a href="lapack.go.html#line-23" class="ident">max</a>(<span class="lit-number">1</span>, <label for="r10" class="ident">lwork</label>):</code></span>
+<span class="codeline" id="line-53"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-150" class="ident">shortWork</a>)</code></span>
+<span class="codeline" id="line-54"><code>	}</code></span>
+<span class="codeline" id="line-55"><code></code></span>
+<span class="codeline" id="line-56"><code>	<span class="comment">// Quick return if possible.</span></code></span>
+<span class="codeline" id="line-57"><code>	<label for="r9" class="ident">work</label>[<span class="lit-number">0</span>] = <span class="lit-number">1</span></code></span>
+<span class="codeline" id="line-58"><code>	<span class="keyword">if</span> <label for="r3" class="ident">m</label> == <span class="lit-number">0</span> || <label for="r4" class="ident">n</label> == <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-59"><code>		<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-60"><code>	}</code></span>
+<span class="codeline" id="line-61"><code></code></span>
+<span class="codeline" id="line-62"><code>	<span class="keyword">if</span> <label for="r11" class="ident">wantq</label> {</code></span>
+<span class="codeline" id="line-63"><code>		<span class="keyword">if</span> <label for="r3" class="ident">m</label> &gt;= <label for="r5" class="ident">k</label> {</code></span>
+<span class="codeline" id="line-64"><code>			<label for="r0" class="ident">impl</label>.<a href="dorgqr.go.html#line-32" class="ident">Dorgqr</a>(<label for="r3" class="ident">m</label>, <label for="r4" class="ident">n</label>, <label for="r5" class="ident">k</label>, <label for="r6" class="ident">a</label>, <label for="r7" class="ident">lda</label>, <label for="r8" class="ident">tau</label>, <label for="r9" class="ident">work</label>, -<span class="lit-number">1</span>)</code></span>
+<span class="codeline" id="line-65"><code>		} <span class="keyword">else</span> <span class="keyword">if</span> <label for="r3" class="ident">m</label> &gt; <span class="lit-number">1</span> {</code></span>
+<span class="codeline" id="line-66"><code>			<label for="r0" class="ident">impl</label>.<a href="dorgqr.go.html#line-32" class="ident">Dorgqr</a>(<label for="r3" class="ident">m</label>-<span class="lit-number">1</span>, <label for="r3" class="ident">m</label>-<span class="lit-number">1</span>, <label for="r3" class="ident">m</label>-<span class="lit-number">1</span>, <label for="r6" class="ident">a</label>[<label for="r7" class="ident">lda</label>+<span class="lit-number">1</span>:], <label for="r7" class="ident">lda</label>, <label for="r8" class="ident">tau</label>, <label for="r9" class="ident">work</label>, -<span class="lit-number">1</span>)</code></span>
+<span class="codeline" id="line-67"><code>		}</code></span>
+<span class="codeline" id="line-68"><code>	} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-69"><code>		<span class="keyword">if</span> <label for="r5" class="ident">k</label> &lt; <label for="r4" class="ident">n</label> {</code></span>
+<span class="codeline" id="line-70"><code>			<label for="r0" class="ident">impl</label>.<a href="dorglq.go.html#line-30" class="ident">Dorglq</a>(<label for="r3" class="ident">m</label>, <label for="r4" class="ident">n</label>, <label for="r5" class="ident">k</label>, <label for="r6" class="ident">a</label>, <label for="r7" class="ident">lda</label>, <label for="r8" class="ident">tau</label>, <label for="r9" class="ident">work</label>, -<span class="lit-number">1</span>)</code></span>
+<span class="codeline" id="line-71"><code>		} <span class="keyword">else</span> <span class="keyword">if</span> <label for="r4" class="ident">n</label> &gt; <span class="lit-number">1</span> {</code></span>
+<span class="codeline" id="line-72"><code>			<label for="r0" class="ident">impl</label>.<a href="dorglq.go.html#line-30" class="ident">Dorglq</a>(<label for="r4" class="ident">n</label>-<span class="lit-number">1</span>, <label for="r4" class="ident">n</label>-<span class="lit-number">1</span>, <label for="r4" class="ident">n</label>-<span class="lit-number">1</span>, <label for="r6" class="ident">a</label>[<label for="r7" class="ident">lda</label>+<span class="lit-number">1</span>:], <label for="r7" class="ident">lda</label>, <label for="r8" class="ident">tau</label>, <label for="r9" class="ident">work</label>, -<span class="lit-number">1</span>)</code></span>
+<span class="codeline" id="line-73"><code>		}</code></span>
+<span class="codeline" id="line-74"><code>	}</code></span>
+<span class="codeline" id="line-75"><code>	<label for="r13" class="ident">lworkopt</label> := <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a>(<label for="r9" class="ident">work</label>[<span class="lit-number">0</span>])</code></span>
+<span class="codeline" id="line-76"><code>	<label for="r13" class="ident">lworkopt</label> = <a href="lapack.go.html#line-23" class="ident">max</a>(<label for="r13" class="ident">lworkopt</label>, <label for="r12" class="ident">mn</label>)</code></span>
+<span class="codeline" id="line-77"><code>	<span class="keyword">if</span> <label for="r10" class="ident">lwork</label> == -<span class="lit-number">1</span> {</code></span>
+<span class="codeline" id="line-78"><code>		<label for="r9" class="ident">work</label>[<span class="lit-number">0</span>] = <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>(<label for="r13" class="ident">lworkopt</label>)</code></span>
+<span class="codeline" id="line-79"><code>		<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-80"><code>	}</code></span>
+<span class="codeline" id="line-81"><code></code></span>
+<span class="codeline" id="line-82"><code>	<span class="keyword">switch</span> {</code></span>
+<span class="codeline" id="line-83"><code>	<span class="keyword">case</span> <a href="../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r6" class="ident">a</label>) &lt; (<label for="r3" class="ident">m</label>-<span class="lit-number">1</span>)*<label for="r7" class="ident">lda</label>+<label for="r4" class="ident">n</label>:</code></span>
+<span class="codeline" id="line-84"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-117" class="ident">shortA</a>)</code></span>
+<span class="codeline" id="line-85"><code>	<span class="keyword">case</span> <label for="r11" class="ident">wantq</label> &amp;&amp; <a href="../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r8" class="ident">tau</label>) &lt; <a href="lapack.go.html#line-16" class="ident">min</a>(<label for="r3" class="ident">m</label>, <label for="r5" class="ident">k</label>):</code></span>
+<span class="codeline" id="line-86"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-136" class="ident">shortTau</a>)</code></span>
+<span class="codeline" id="line-87"><code>	<span class="keyword">case</span> !<label for="r11" class="ident">wantq</label> &amp;&amp; <a href="../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r8" class="ident">tau</label>) &lt; <a href="lapack.go.html#line-16" class="ident">min</a>(<label for="r4" class="ident">n</label>, <label for="r5" class="ident">k</label>):</code></span>
+<span class="codeline" id="line-88"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-136" class="ident">shortTau</a>)</code></span>
+<span class="codeline" id="line-89"><code>	}</code></span>
+<span class="codeline" id="line-90"><code></code></span>
+<span class="codeline" id="line-91"><code>	<span class="keyword">if</span> <label for="r11" class="ident">wantq</label> {</code></span>
+<span class="codeline" id="line-92"><code>		<span class="comment">// Form Q, determined by a call to Dgebrd to reduce an m×k matrix.</span></code></span>
+<span class="codeline" id="line-93"><code>		<span class="keyword">if</span> <label for="r3" class="ident">m</label> &gt;= <label for="r5" class="ident">k</label> {</code></span>
+<span class="codeline" id="line-94"><code>			<label for="r0" class="ident">impl</label>.<a href="dorgqr.go.html#line-32" class="ident">Dorgqr</a>(<label for="r3" class="ident">m</label>, <label for="r4" class="ident">n</label>, <label for="r5" class="ident">k</label>, <label for="r6" class="ident">a</label>, <label for="r7" class="ident">lda</label>, <label for="r8" class="ident">tau</label>, <label for="r9" class="ident">work</label>, <label for="r10" class="ident">lwork</label>)</code></span>
+<span class="codeline" id="line-95"><code>		} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-96"><code>			<span class="comment">// Shift the vectors which define the elementary reflectors one</span></code></span>
+<span class="codeline" id="line-97"><code><span class="comment">			// column to the right, and set the first row and column of Q to</span></code></span>
+<span class="codeline" id="line-98"><code><span class="comment">			// those of the unit matrix.</span></code></span>
+<span class="codeline" id="line-99"><code>			<span class="keyword">for</span> <label for="r14" class="ident">j</label> := <label for="r3" class="ident">m</label> - <span class="lit-number">1</span>; <label for="r14" class="ident">j</label> &gt;= <span class="lit-number">1</span>; <label for="r14" class="ident">j</label>-- {</code></span>
+<span class="codeline" id="line-100"><code>				<label for="r6" class="ident">a</label>[<label for="r14" class="ident">j</label>] = <span class="lit-number">0</span></code></span>
+<span class="codeline" id="line-101"><code>				<span class="keyword">for</span> <label for="r15" class="ident">i</label> := <label for="r14" class="ident">j</label> + <span class="lit-number">1</span>; <label for="r15" class="ident">i</label> &lt; <label for="r3" class="ident">m</label>; <label for="r15" class="ident">i</label>++ {</code></span>
+<span class="codeline" id="line-102"><code>					<label for="r6" class="ident">a</label>[<label for="r15" class="ident">i</label>*<label for="r7" class="ident">lda</label>+<label for="r14" class="ident">j</label>] = <label for="r6" class="ident">a</label>[<label for="r15" class="ident">i</label>*<label for="r7" class="ident">lda</label>+<label for="r14" class="ident">j</label>-<span class="lit-number">1</span>]</code></span>
+<span class="codeline" id="line-103"><code>				}</code></span>
+<span class="codeline" id="line-104"><code>			}</code></span>
+<span class="codeline" id="line-105"><code>			<label for="r6" class="ident">a</label>[<span class="lit-number">0</span>] = <span class="lit-number">1</span></code></span>
+<span class="codeline" id="line-106"><code>			<span class="keyword">for</span> <label for="r16" class="ident">i</label> := <span class="lit-number">1</span>; <label for="r16" class="ident">i</label> &lt; <label for="r3" class="ident">m</label>; <label for="r16" class="ident">i</label>++ {</code></span>
+<span class="codeline" id="line-107"><code>				<label for="r6" class="ident">a</label>[<label for="r16" class="ident">i</label>*<label for="r7" class="ident">lda</label>] = <span class="lit-number">0</span></code></span>
+<span class="codeline" id="line-108"><code>			}</code></span>
+<span class="codeline" id="line-109"><code>			<span class="keyword">if</span> <label for="r3" class="ident">m</label> &gt; <span class="lit-number">1</span> {</code></span>
+<span class="codeline" id="line-110"><code>				<span class="comment">// Form Q[1:m-1, 1:m-1]</span></code></span>
+<span class="codeline" id="line-111"><code>				<label for="r0" class="ident">impl</label>.<a href="dorgqr.go.html#line-32" class="ident">Dorgqr</a>(<label for="r3" class="ident">m</label>-<span class="lit-number">1</span>, <label for="r3" class="ident">m</label>-<span class="lit-number">1</span>, <label for="r3" class="ident">m</label>-<span class="lit-number">1</span>, <label for="r6" class="ident">a</label>[<label for="r7" class="ident">lda</label>+<span class="lit-number">1</span>:], <label for="r7" class="ident">lda</label>, <label for="r8" class="ident">tau</label>, <label for="r9" class="ident">work</label>, <label for="r10" class="ident">lwork</label>)</code></span>
+<span class="codeline" id="line-112"><code>			}</code></span>
+<span class="codeline" id="line-113"><code>		}</code></span>
+<span class="codeline" id="line-114"><code>	} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-115"><code>		<span class="comment">// Form Pᵀ, determined by a call to Dgebrd to reduce a k×n matrix.</span></code></span>
+<span class="codeline" id="line-116"><code>		<span class="keyword">if</span> <label for="r5" class="ident">k</label> &lt; <label for="r4" class="ident">n</label> {</code></span>
+<span class="codeline" id="line-117"><code>			<label for="r0" class="ident">impl</label>.<a href="dorglq.go.html#line-30" class="ident">Dorglq</a>(<label for="r3" class="ident">m</label>, <label for="r4" class="ident">n</label>, <label for="r5" class="ident">k</label>, <label for="r6" class="ident">a</label>, <label for="r7" class="ident">lda</label>, <label for="r8" class="ident">tau</label>, <label for="r9" class="ident">work</label>, <label for="r10" class="ident">lwork</label>)</code></span>
+<span class="codeline" id="line-118"><code>		} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-119"><code>			<span class="comment">// Shift the vectors which define the elementary reflectors one</span></code></span>
+<span class="codeline" id="line-120"><code><span class="comment">			// row downward, and set the first row and column of Pᵀ to</span></code></span>
+<span class="codeline" id="line-121"><code><span class="comment">			// those of the unit matrix.</span></code></span>
+<span class="codeline" id="line-122"><code>			<label for="r6" class="ident">a</label>[<span class="lit-number">0</span>] = <span class="lit-number">1</span></code></span>
+<span class="codeline" id="line-123"><code>			<span class="keyword">for</span> <label for="r17" class="ident">i</label> := <span class="lit-number">1</span>; <label for="r17" class="ident">i</label> &lt; <label for="r4" class="ident">n</label>; <label for="r17" class="ident">i</label>++ {</code></span>
+<span class="codeline" id="line-124"><code>				<label for="r6" class="ident">a</label>[<label for="r17" class="ident">i</label>*<label for="r7" class="ident">lda</label>] = <span class="lit-number">0</span></code></span>
+<span class="codeline" id="line-125"><code>			}</code></span>
+<span class="codeline" id="line-126"><code>			<span class="keyword">for</span> <label for="r18" class="ident">j</label> := <span class="lit-number">1</span>; <label for="r18" class="ident">j</label> &lt; <label for="r4" class="ident">n</label>; <label for="r18" class="ident">j</label>++ {</code></span>
+<span class="codeline" id="line-127"><code>				<span class="keyword">for</span> <label for="r19" class="ident">i</label> := <label for="r18" class="ident">j</label> - <span class="lit-number">1</span>; <label for="r19" class="ident">i</label> &gt;= <span class="lit-number">1</span>; <label for="r19" class="ident">i</label>-- {</code></span>
+<span class="codeline" id="line-128"><code>					<label for="r6" class="ident">a</label>[<label for="r19" class="ident">i</label>*<label for="r7" class="ident">lda</label>+<label for="r18" class="ident">j</label>] = <label for="r6" class="ident">a</label>[(<label for="r19" class="ident">i</label>-<span class="lit-number">1</span>)*<label for="r7" class="ident">lda</label>+<label for="r18" class="ident">j</label>]</code></span>
+<span class="codeline" id="line-129"><code>				}</code></span>
+<span class="codeline" id="line-130"><code>				<label for="r6" class="ident">a</label>[<label for="r18" class="ident">j</label>] = <span class="lit-number">0</span></code></span>
+<span class="codeline" id="line-131"><code>			}</code></span>
+<span class="codeline" id="line-132"><code>			<span class="keyword">if</span> <label for="r4" class="ident">n</label> &gt; <span class="lit-number">1</span> {</code></span>
+<span class="codeline" id="line-133"><code>				<label for="r0" class="ident">impl</label>.<a href="dorglq.go.html#line-30" class="ident">Dorglq</a>(<label for="r4" class="ident">n</label>-<span class="lit-number">1</span>, <label for="r4" class="ident">n</label>-<span class="lit-number">1</span>, <label for="r4" class="ident">n</label>-<span class="lit-number">1</span>, <label for="r6" class="ident">a</label>[<label for="r7" class="ident">lda</label>+<span class="lit-number">1</span>:], <label for="r7" class="ident">lda</label>, <label for="r8" class="ident">tau</label>, <label for="r9" class="ident">work</label>, <label for="r10" class="ident">lwork</label>)</code></span>
+<span class="codeline" id="line-134"><code>			}</code></span>
+<span class="codeline" id="line-135"><code>		}</code></span>
+<span class="codeline" id="line-136"><code>	}</code></span>
+<span class="codeline" id="line-137"><code>	<label for="r9" class="ident">work</label>[<span class="lit-number">0</span>] = <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>(<label for="r13" class="ident">lworkopt</label>)</code></span>
+<span class="codeline" id="line-138"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

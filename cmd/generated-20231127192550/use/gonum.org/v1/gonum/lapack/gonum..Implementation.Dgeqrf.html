@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/lapack/gonum.Implementation.Dgeqrf</title>
+<link href="../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../../../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>.<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/lapack.go.html#line-12">Implementation</a>.<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeqrf.go.html#line-24">Dgeqrf</a></b></span><span style="font-size: large;"><i> (method, <a href="../../../../../imp/gonum.org/v1/gonum/lapack/gonum.Implementation.html#name-Dgeqrf">view implemented interface methods</a>)</i></span>
+
+<span class="title">13 uses</span>
+
+	gonum.org/v1/gonum/lapack/gonum (current package)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgels.go.html#line-134">dgels.go#L134</a>: 		impl.<b>Dgeqrf</b>(m, n, a, lda, work, work[mn:], lwork-mn)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeqp3.go.html#line-121">dgeqp3.go#L121</a>: 		impl.<b>Dgeqrf</b>(m, na, a, lda, tau, work, lwork)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeqrf.go.html#line-24">dgeqrf.go#L24</a>: func (impl Implementation) <b>Dgeqrf</b>(m, n int, a []float64, lda int, tau, work []float64, lwork int) {
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-125">dgesvd.go#L125</a>: 		impl.<b>Dgeqrf</b>(m, n, a, lda, nil, work, -1)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-409" class="path-duplicate">dgesvd.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-409">#L409</a>: 				impl.<b>Dgeqrf</b>(m, n, a, lda, work[itau:], work[iwork:], lwork-iwork)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-458" class="path-duplicate">dgesvd.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-458">#L458</a>: 						impl.<b>Dgeqrf</b>(m, n, a, lda, work[itau:], work[iwork:], lwork-iwork)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-495" class="path-duplicate">dgesvd.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-495">#L495</a>: 						impl.<b>Dgeqrf</b>(m, n, a, lda, work[itau:], work[iwork:], lwork-iwork)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-540" class="path-duplicate">dgesvd.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-540">#L540</a>: 						impl.<b>Dgeqrf</b>(m, n, a, lda, work[itau:], work[iwork:], lwork-iwork)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-583" class="path-duplicate">dgesvd.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-583">#L583</a>: 						impl.<b>Dgeqrf</b>(m, n, a, lda, work[itau:], work[iwork:], lwork-iwork)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-634" class="path-duplicate">dgesvd.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-634">#L634</a>: 						impl.<b>Dgeqrf</b>(m, n, a, lda, work[itau:], work[iwork:], lwork-iwork)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-675" class="path-duplicate">dgesvd.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-675">#L675</a>: 						impl.<b>Dgeqrf</b>(m, n, a, lda, work[itau:], work[iwork:], lwork-iwork)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-720" class="path-duplicate">dgesvd.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-720">#L720</a>: 						impl.<b>Dgeqrf</b>(m, n, a, lda, work[itau:], work[iwork:], lwork-iwork)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-789" class="path-duplicate">dgesvd.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-789">#L789</a>: 						impl.<b>Dgeqrf</b>(m, n, a, lda, work[itau:], work[iwork:], lwork-iwork)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

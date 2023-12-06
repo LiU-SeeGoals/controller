@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.key32</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/lock_futex.go.html#line-43">key32</a></b></span>
+
+<span class="title">18 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/lock_futex.go.html#line-43">lock_futex.go#L43</a>: func <b>key32</b>(p *uintptr) *uint32 {
+		<a href="../src/runtime/lock_futex.go.html#line-60" class="path-duplicate">lock_futex.go</a><a href="../src/runtime/lock_futex.go.html#line-60">#L60</a>: 	v := atomic.Xchg(<b>key32</b>(&amp;l.key), mutex_locked)
+		<a href="../src/runtime/lock_futex.go.html#line-84" class="path-duplicate">lock_futex.go</a><a href="../src/runtime/lock_futex.go.html#line-84">#L84</a>: 				if atomic.Cas(<b>key32</b>(&amp;l.key), mutex_unlocked, wait) {
+		<a href="../src/runtime/lock_futex.go.html#line-94" class="path-duplicate">lock_futex.go</a><a href="../src/runtime/lock_futex.go.html#line-94">#L94</a>: 				if atomic.Cas(<b>key32</b>(&amp;l.key), mutex_unlocked, wait) {
+		<a href="../src/runtime/lock_futex.go.html#line-102" class="path-duplicate">lock_futex.go</a><a href="../src/runtime/lock_futex.go.html#line-102">#L102</a>: 		v = atomic.Xchg(<b>key32</b>(&amp;l.key), mutex_sleeping)
+		<a href="../src/runtime/lock_futex.go.html#line-107" class="path-duplicate">lock_futex.go</a><a href="../src/runtime/lock_futex.go.html#line-107">#L107</a>: 		futexsleep(<b>key32</b>(&amp;l.key), mutex_sleeping, -1)
+		<a href="../src/runtime/lock_futex.go.html#line-116" class="path-duplicate">lock_futex.go</a><a href="../src/runtime/lock_futex.go.html#line-116">#L116</a>: 	v := atomic.Xchg(<b>key32</b>(&amp;l.key), mutex_unlocked)
+		<a href="../src/runtime/lock_futex.go.html#line-121" class="path-duplicate">lock_futex.go</a><a href="../src/runtime/lock_futex.go.html#line-121">#L121</a>: 		futexwakeup(<b>key32</b>(&amp;l.key), 1)
+		<a href="../src/runtime/lock_futex.go.html#line-140" class="path-duplicate">lock_futex.go</a><a href="../src/runtime/lock_futex.go.html#line-140">#L140</a>: 	old := atomic.Xchg(<b>key32</b>(&amp;n.key), 1)
+		<a href="../src/runtime/lock_futex.go.html#line-145" class="path-duplicate">lock_futex.go</a><a href="../src/runtime/lock_futex.go.html#line-145">#L145</a>: 	futexwakeup(<b>key32</b>(&amp;n.key), 1)
+		<a href="../src/runtime/lock_futex.go.html#line-158" class="path-duplicate">lock_futex.go</a><a href="../src/runtime/lock_futex.go.html#line-158">#L158</a>: 	for atomic.Load(<b>key32</b>(&amp;n.key)) == 0 {
+		<a href="../src/runtime/lock_futex.go.html#line-160" class="path-duplicate">lock_futex.go</a><a href="../src/runtime/lock_futex.go.html#line-160">#L160</a>: 		futexsleep(<b>key32</b>(&amp;n.key), 0, ns)
+		<a href="../src/runtime/lock_futex.go.html#line-181" class="path-duplicate">lock_futex.go</a><a href="../src/runtime/lock_futex.go.html#line-181">#L181</a>: 		for atomic.Load(<b>key32</b>(&amp;n.key)) == 0 {
+		<a href="../src/runtime/lock_futex.go.html#line-183" class="path-duplicate">lock_futex.go</a><a href="../src/runtime/lock_futex.go.html#line-183">#L183</a>: 			futexsleep(<b>key32</b>(&amp;n.key), 0, ns)
+		<a href="../src/runtime/lock_futex.go.html#line-192" class="path-duplicate">lock_futex.go</a><a href="../src/runtime/lock_futex.go.html#line-192">#L192</a>: 	if atomic.Load(<b>key32</b>(&amp;n.key)) != 0 {
+		<a href="../src/runtime/lock_futex.go.html#line-202" class="path-duplicate">lock_futex.go</a><a href="../src/runtime/lock_futex.go.html#line-202">#L202</a>: 		futexsleep(<b>key32</b>(&amp;n.key), 0, ns)
+		<a href="../src/runtime/lock_futex.go.html#line-207" class="path-duplicate">lock_futex.go</a><a href="../src/runtime/lock_futex.go.html#line-207">#L207</a>: 		if atomic.Load(<b>key32</b>(&amp;n.key)) != 0 {
+		<a href="../src/runtime/lock_futex.go.html#line-216" class="path-duplicate">lock_futex.go</a><a href="../src/runtime/lock_futex.go.html#line-216">#L216</a>: 	return atomic.Load(<b>key32</b>(&amp;n.key)) != 0
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

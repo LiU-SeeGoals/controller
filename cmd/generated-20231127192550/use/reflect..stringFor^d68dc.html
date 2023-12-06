@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: reflect.stringFor</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../pkg/reflect.html">reflect</a>.<a href="../src/reflect/type.go.html#line-1837">stringFor</a></b></span>
+
+<span class="title">34 uses</span>
+
+	reflect (current package)
+		<a href="../src/reflect/type.go.html#line-705">type.go#L705</a>: 	panic("reflect: Elem of invalid type " + <b>stringFor</b>(t))
+		<a href="../src/reflect/type.go.html#line-1535" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1535">#L1535</a>: 			if !(<b>stringFor</b>(rtypeOff(section, offs[h])) &gt;= s) {
+		<a href="../src/reflect/type.go.html#line-1548" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1548">#L1548</a>: 			if <b>stringFor</b>(typ) != s {
+		<a href="../src/reflect/type.go.html#line-1606" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1606">#L1606</a>: 		s = "chan&lt;- " + <b>stringFor</b>(typ)
+		<a href="../src/reflect/type.go.html#line-1608" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1608">#L1608</a>: 		s = "&lt;-chan " + <b>stringFor</b>(typ)
+		<a href="../src/reflect/type.go.html#line-1610" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1610">#L1610</a>: 		typeStr := <b>stringFor</b>(typ)
+		<a href="../src/reflect/type.go.html#line-1654" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1654">#L1654</a>: 		panic("reflect.MapOf: invalid key type " + <b>stringFor</b>(ktyp))
+		<a href="../src/reflect/type.go.html#line-1664" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1664">#L1664</a>: 	s := "map[" + <b>stringFor</b>(ktyp) + "]" + <b>stringFor</b>(etyp)
+		<a href="../src/reflect/type.go.html#line-1837" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1837">#L1837</a>: func <b>stringFor</b>(t *abi.Type) string {
+		<a href="../src/reflect/type.go.html#line-1851" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1851">#L1851</a>: 			repr = append(repr, <b>stringFor</b>((*sliceType)(unsafe.Pointer(t)).Elem)...)
+		<a href="../src/reflect/type.go.html#line-1853" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1853">#L1853</a>: 			repr = append(repr, <b>stringFor</b>(t)...)
+		<a href="../src/reflect/type.go.html#line-1867" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1867">#L1867</a>: 		repr = append(repr, <b>stringFor</b>(t)...)
+		<a href="../src/reflect/type.go.html#line-1896" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1896">#L1896</a>: 		panic("isReflexive called on non-key type " + <b>stringFor</b>(t))
+		<a href="../src/reflect/type.go.html#line-1923" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1923">#L1923</a>: 		panic("needKeyUpdate called on non-key type " + <b>stringFor</b>(t))
+		<a href="../src/reflect/type.go.html#line-2016" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2016">#L2016</a>: 	s := "bucket(" + <b>stringFor</b>(ktyp) + "," + <b>stringFor</b>(etyp) + ")"
+		<a href="../src/reflect/type.go.html#line-2082" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2082">#L2082</a>: 	s := "[]" + <b>stringFor</b>(typ)
+		<a href="../src/reflect/type.go.html#line-2204" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2204">#L2204</a>: 					panic("reflect.StructOf: illegal embedded field type " + <b>stringFor</b>(ft))
+		<a href="../src/reflect/type.go.html#line-2343" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2343">#L2343</a>: 		repr = append(repr, (" " + <b>stringFor</b>(ft))...)
+		<a href="../src/reflect/type.go.html#line-2612" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2612">#L2612</a>: 		panic("reflect.typeptrdata: unexpected type, " + <b>stringFor</b>(t))
+		<a href="../src/reflect/type.go.html#line-2638" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2638">#L2638</a>: 	s := "[" + strconv.Itoa(length) + "]" + <b>stringFor</b>(typ)
+		<a href="../src/reflect/type.go.html#line-2801" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2801">#L2801</a>: 		panic("reflect: funcLayout of non-func type " + <b>stringFor</b>(&amp;t.Type))
+		<a href="../src/reflect/type.go.html#line-2804" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2804">#L2804</a>: 		panic("reflect: funcLayout with interface receiver " + <b>stringFor</b>(rcvr))
+		<a href="../src/reflect/type.go.html#line-2831" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2831">#L2831</a>: 		s = "methodargs(" + <b>stringFor</b>(rcvr) + ")(" + <b>stringFor</b>(&amp;t.Type) + ")"
+		<a href="../src/reflect/type.go.html#line-2833" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2833">#L2833</a>: 		s = "funcargs(" + <b>stringFor</b>(&amp;t.Type) + ")"
+		<a href="../src/reflect/value.go.html#line-452">value.go#L452</a>: 			panic("reflect: " + op + " using " + xt.String() + " as type " + <b>stringFor</b>(targ))
+		<a href="../src/reflect/value.go.html#line-499" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-499">#L499</a>: 		println("reflect.call", <b>stringFor</b>(&amp;t.Type))
+		<a href="../src/reflect/value.go.html#line-646" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-646">#L646</a>: 					print("kind=", steps[0].kind, ", type=", <b>stringFor</b>(tv), "\n")
+		<a href="../src/reflect/value.go.html#line-772" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-772">#L772</a>: 					print("kind=", steps[0].kind, ", type=", <b>stringFor</b>(typ), "\n")
+		<a href="../src/reflect/value.go.html#line-3307" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3307">#L3307</a>: 	panic(context + ": value of type " + <b>stringFor</b>(v.typ()) + " is not assignable to type " + <b>stringFor</b>(dst))
+		<a href="../src/reflect/value.go.html#line-3319" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3319">#L3319</a>: 		panic("reflect.Value.Convert: value of type " + <b>stringFor</b>(v.typ()) + " cannot be converted to type " + t.String())
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

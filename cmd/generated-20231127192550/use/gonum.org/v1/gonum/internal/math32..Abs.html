@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/internal/math32.Abs</title>
+<link href="../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../../../../../pkg/gonum.org/v1/gonum/internal/math32.html">gonum.org/v1/gonum/internal/math32</a>.<a href="../../../../../src/gonum.org/v1/gonum/internal/math32/math.go.html#line-30">Abs</a></b></span>
+
+<span class="title">26 uses</span>
+
+	gonum.org/v1/gonum/internal/math32 (current package)
+		<a href="../../../../../src/gonum.org/v1/gonum/internal/math32/math.go.html#line-30">math.go#L30</a>: func <b>Abs</b>(x float32) float32 {
+
+	<a href="../../../../../pkg/gonum.org/v1/gonum/internal/asm/f32.html">gonum.org/v1/gonum/internal/asm/f32</a>
+		<a href="../../../../../src/gonum.org/v1/gonum/internal/asm/f32/l2norm.go.html#line-17">l2norm.go#L17</a>: 		absxi := math32.<b>Abs</b>(v)
+		<a href="../../../../../src/gonum.org/v1/gonum/internal/asm/f32/l2norm.go.html#line-45" class="path-duplicate">l2norm.go</a><a href="../../../../../src/gonum.org/v1/gonum/internal/asm/f32/l2norm.go.html#line-45">#L45</a>: 		absxi := math32.<b>Abs</b>(val)
+		<a href="../../../../../src/gonum.org/v1/gonum/internal/asm/f32/l2norm.go.html#line-73" class="path-duplicate">l2norm.go</a><a href="../../../../../src/gonum.org/v1/gonum/internal/asm/f32/l2norm.go.html#line-73">#L73</a>: 		absxi := math32.<b>Abs</b>(v)
+
+	<a href="../../../../../pkg/gonum.org/v1/gonum/internal/cmplx64.html">gonum.org/v1/gonum/internal/cmplx64</a>
+		<a href="../../../../../src/gonum.org/v1/gonum/internal/cmplx64/sqrt.go.html#line-84">sqrt.go#L84</a>: 	if math.<b>Abs</b>(a) &gt; 4 || math.<b>Abs</b>(b) &gt; 4 {
+		<a href="../../../../../src/gonum.org/v1/gonum/internal/cmplx64/sqrt.go.html#line-97" class="path-duplicate">sqrt.go</a><a href="../../../../../src/gonum.org/v1/gonum/internal/cmplx64/sqrt.go.html#line-97">#L97</a>: 		r = scale * math.<b>Abs</b>((0.5*b)/t)
+		<a href="../../../../../src/gonum.org/v1/gonum/internal/cmplx64/sqrt.go.html#line-101" class="path-duplicate">sqrt.go</a><a href="../../../../../src/gonum.org/v1/gonum/internal/cmplx64/sqrt.go.html#line-101">#L101</a>: 		t = scale * math.<b>Abs</b>((0.5*b)/r)
+
+	<a href="../../../../../pkg/gonum.org/v1/gonum/blas/gonum.html">gonum.org/v1/gonum/blas/gonum</a>
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/gonum/gonum.go.html#line-51">gonum.go#L51</a>: 	return math32.<b>Abs</b>(real(z)) + math32.<b>Abs</b>(imag(z))
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/gonum/level1cmplx64.go.html#line-84">level1cmplx64.go#L84</a>: 			re, im := math.<b>Abs</b>(real(v)), math.<b>Abs</b>(imag(v))
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/gonum/level1cmplx64.go.html#line-108" class="path-duplicate">level1cmplx64.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/gonum/level1cmplx64.go.html#line-108">#L108</a>: 		re, im := math.<b>Abs</b>(real(x[ix])), math.<b>Abs</b>(imag(x[ix]))
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/gonum/level1float32.go.html#line-37">level1float32.go#L37</a>: 			return math.<b>Abs</b>(x[0])
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/gonum/level1float32.go.html#line-74" class="path-duplicate">level1float32.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/gonum/level1float32.go.html#line-74">#L74</a>: 			sum += math.<b>Abs</b>(v)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/gonum/level1float32.go.html#line-79" class="path-duplicate">level1float32.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/gonum/level1float32.go.html#line-79">#L79</a>: 		sum += math.<b>Abs</b>(x[i*incX])
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/gonum/level1float32.go.html#line-109" class="path-duplicate">level1float32.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/gonum/level1float32.go.html#line-109">#L109</a>: 	max := math.<b>Abs</b>(x[0])
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/gonum/level1float32.go.html#line-112" class="path-duplicate">level1float32.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/gonum/level1float32.go.html#line-112">#L112</a>: 			absV := math.<b>Abs</b>(v)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/gonum/level1float32.go.html#line-123" class="path-duplicate">level1float32.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/gonum/level1float32.go.html#line-123">#L123</a>: 		absV := math.<b>Abs</b>(v)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/gonum/level1float32.go.html#line-304" class="path-duplicate">level1float32.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/gonum/level1float32.go.html#line-304">#L304</a>: 	anorm := math.<b>Abs</b>(a)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/gonum/level1float32.go.html#line-305" class="path-duplicate">level1float32.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/gonum/level1float32.go.html#line-305">#L305</a>: 	bnorm := math.<b>Abs</b>(b)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/gonum/level1float32.go.html#line-381" class="path-duplicate">level1float32.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/gonum/level1float32.go.html#line-381">#L381</a>: 		if math.<b>Abs</b>(q1) &gt; math.<b>Abs</b>(q2) {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/gonum/level1float32.go.html#line-428" class="path-duplicate">level1float32.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/gonum/level1float32.go.html#line-428">#L428</a>: 	for math.<b>Abs</b>(d2) &lt;= rgamsq &amp;&amp; d2 != 0 {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/gonum/level1float32.go.html#line-434" class="path-duplicate">level1float32.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/gonum/level1float32.go.html#line-434">#L434</a>: 	for math.<b>Abs</b>(d2) &gt; gamsq {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

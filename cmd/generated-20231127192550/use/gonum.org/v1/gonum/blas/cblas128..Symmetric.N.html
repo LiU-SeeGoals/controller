@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/blas/cblas128.Symmetric.N</title>
+<link href="../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../../../pkg/gonum.org/v1/gonum/blas/cblas128.html">gonum.org/v1/gonum/blas/cblas128</a>.<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-78">Symmetric</a>.<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-79">N</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">28 uses</span>
+
+	gonum.org/v1/gonum/blas/cblas128 (current package)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-79">cblas128.go#L79</a>: 	<b>N</b>      int
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-363" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-363">#L363</a>: 	cblas128.Zhemv(a.Uplo, a.<b>N</b>, alpha, a.Data, a.Stride, x.Data, x.Inc, beta, y.Data, y.Inc)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-410" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-410">#L410</a>: 	cblas128.Zher(a.Uplo, a.<b>N</b>, alpha, x.Data, x.Inc, a.Data, a.Stride)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-429" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-429">#L429</a>: 	cblas128.Zher2(a.Uplo, a.<b>N</b>, alpha, x.Data, x.Inc, y.Data, y.Inc, a.Data, a.Stride)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-475" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-475">#L475</a>: 		m, n = a.<b>N</b>, b.Cols
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-477" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-477">#L477</a>: 		m, n = b.Rows, a.<b>N</b>
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-561" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-561">#L561</a>: 		m, n = a.<b>N</b>, b.Cols
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-563" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-563">#L563</a>: 		m, n = b.Rows, a.<b>N</b>
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_hermitian.go.html#line-18">conv_hermitian.go#L18</a>: 	if t.<b>N</b> != a.<b>N</b> {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_hermitian.go.html#line-28" class="path-duplicate">conv_hermitian.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_hermitian.go.html#line-28">#L28</a>: 		for i := 0; i &lt; a.<b>N</b>; i++ {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_hermitian.go.html#line-29" class="path-duplicate">conv_hermitian.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_hermitian.go.html#line-29">#L29</a>: 			for j := i; j &lt; a.<b>N</b>; j++ {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_hermitian.go.html#line-34" class="path-duplicate">conv_hermitian.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_hermitian.go.html#line-34">#L34</a>: 		for i := 0; i &lt; a.<b>N</b>; i++ {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_hermitian.go.html#line-46" class="path-duplicate">conv_hermitian.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_hermitian.go.html#line-46">#L46</a>: 	if t.<b>N</b> != a.<b>N</b> {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_hermitian.go.html#line-56" class="path-duplicate">conv_hermitian.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_hermitian.go.html#line-56">#L56</a>: 		for i := 0; i &lt; a.<b>N</b>; i++ {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_hermitian.go.html#line-57" class="path-duplicate">conv_hermitian.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_hermitian.go.html#line-57">#L57</a>: 			for j := i; j &lt; a.<b>N</b>; j++ {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_hermitian.go.html#line-62" class="path-duplicate">conv_hermitian.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_hermitian.go.html#line-62">#L62</a>: 		for i := 0; i &lt; a.<b>N</b>; i++ {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_symmetric.go.html#line-18">conv_symmetric.go#L18</a>: 	if t.<b>N</b> != a.<b>N</b> {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_symmetric.go.html#line-28" class="path-duplicate">conv_symmetric.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_symmetric.go.html#line-28">#L28</a>: 		for i := 0; i &lt; a.<b>N</b>; i++ {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_symmetric.go.html#line-29" class="path-duplicate">conv_symmetric.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_symmetric.go.html#line-29">#L29</a>: 			for j := i; j &lt; a.<b>N</b>; j++ {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_symmetric.go.html#line-34" class="path-duplicate">conv_symmetric.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_symmetric.go.html#line-34">#L34</a>: 		for i := 0; i &lt; a.<b>N</b>; i++ {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_symmetric.go.html#line-46" class="path-duplicate">conv_symmetric.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_symmetric.go.html#line-46">#L46</a>: 	if t.<b>N</b> != a.<b>N</b> {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_symmetric.go.html#line-56" class="path-duplicate">conv_symmetric.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_symmetric.go.html#line-56">#L56</a>: 		for i := 0; i &lt; a.<b>N</b>; i++ {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_symmetric.go.html#line-57" class="path-duplicate">conv_symmetric.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_symmetric.go.html#line-57">#L57</a>: 			for j := i; j &lt; a.<b>N</b>; j++ {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_symmetric.go.html#line-62" class="path-duplicate">conv_symmetric.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_symmetric.go.html#line-62">#L62</a>: 		for i := 0; i &lt; a.<b>N</b>; i++ {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

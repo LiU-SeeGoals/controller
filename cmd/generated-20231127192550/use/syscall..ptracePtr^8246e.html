@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: syscall.ptracePtr</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../pkg/syscall.html">syscall</a>.<a href="../src/syscall/zsyscall_linux_amd64.go.html#line-213">ptracePtr</a></b></span>
+
+<span class="title">8 uses</span>
+
+	syscall (current package)
+		<a href="../src/syscall/syscall_linux.go.html#line-848">syscall_linux.go#L848</a>: 		err = <b>ptracePtr</b>(req, pid, addr-addr%sizeofPtr, unsafe.Pointer(&amp;buf[0]))
+		<a href="../src/syscall/syscall_linux.go.html#line-860" class="path-duplicate">syscall_linux.go</a><a href="../src/syscall/syscall_linux.go.html#line-860">#L860</a>: 		err = <b>ptracePtr</b>(req, pid, addr+uintptr(n), unsafe.Pointer(&amp;buf[0]))
+		<a href="../src/syscall/syscall_linux.go.html#line-888" class="path-duplicate">syscall_linux.go</a><a href="../src/syscall/syscall_linux.go.html#line-888">#L888</a>: 		err = <b>ptracePtr</b>(peekReq, pid, addr-addr%sizeofPtr, unsafe.Pointer(&amp;buf[0]))
+		<a href="../src/syscall/syscall_linux.go.html#line-915" class="path-duplicate">syscall_linux.go</a><a href="../src/syscall/syscall_linux.go.html#line-915">#L915</a>: 		err = <b>ptracePtr</b>(peekReq, pid, addr+uintptr(n), unsafe.Pointer(&amp;buf[0]))
+		<a href="../src/syscall/syscall_linux.go.html#line-947" class="path-duplicate">syscall_linux.go</a><a href="../src/syscall/syscall_linux.go.html#line-947">#L947</a>: 	return <b>ptracePtr</b>(PTRACE_GETREGSET, pid, uintptr(_NT_PRSTATUS), unsafe.Pointer(&amp;iov))
+		<a href="../src/syscall/syscall_linux.go.html#line-954" class="path-duplicate">syscall_linux.go</a><a href="../src/syscall/syscall_linux.go.html#line-954">#L954</a>: 	return <b>ptracePtr</b>(PTRACE_SETREGSET, pid, uintptr(_NT_PRSTATUS), unsafe.Pointer(&amp;iov))
+		<a href="../src/syscall/syscall_linux.go.html#line-963" class="path-duplicate">syscall_linux.go</a><a href="../src/syscall/syscall_linux.go.html#line-963">#L963</a>: 	err = <b>ptracePtr</b>(PTRACE_GETEVENTMSG, pid, 0, unsafe.Pointer(&amp;data))
+		<a href="../src/syscall/zsyscall_linux_amd64.go.html#line-213">zsyscall_linux_amd64.go#L213</a>: func <b>ptracePtr</b>(request int, pid int, addr uintptr, data unsafe.Pointer) (err error) {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: gsvd.go in package gonum.org/v1/gonum/mat</title>
+<link href="../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	gsvd.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10],
+input[id=r11]:checked ~pre label[for=r11],
+input[id=r12]:checked ~pre label[for=r12],
+input[id=r13]:checked ~pre label[for=r13],
+input[id=r14]:checked ~pre label[for=r14],
+input[id=r15]:checked ~pre label[for=r15],
+input[id=r16]:checked ~pre label[for=r16],
+input[id=r17]:checked ~pre label[for=r17],
+input[id=r18]:checked ~pre label[for=r18],
+input[id=r19]:checked ~pre label[for=r19],
+input[id=r20]:checked ~pre label[for=r20],
+input[id=r21]:checked ~pre label[for=r21],
+input[id=r22]:checked ~pre label[for=r22],
+input[id=r23]:checked ~pre label[for=r23],
+input[id=r24]:checked ~pre label[for=r24],
+input[id=r25]:checked ~pre label[for=r25],
+input[id=r26]:checked ~pre label[for=r26],
+input[id=r27]:checked ~pre label[for=r27],
+input[id=r28]:checked ~pre label[for=r28],
+input[id=r29]:checked ~pre label[for=r29],
+input[id=r30]:checked ~pre label[for=r30],
+input[id=r31]:checked ~pre label[for=r31],
+input[id=r32]:checked ~pre label[for=r32],
+input[id=r33]:checked ~pre label[for=r33],
+input[id=r34]:checked ~pre label[for=r34],
+input[id=r35]:checked ~pre label[for=r35],
+input[id=r36]:checked ~pre label[for=r36],
+input[id=r37]:checked ~pre label[for=r37],
+input[id=r38]:checked ~pre label[for=r38],
+input[id=r39]:checked ~pre label[for=r39],
+input[id=r40]:checked ~pre label[for=r40],
+input[id=r41]:checked ~pre label[for=r41],
+input[id=r42]:checked ~pre label[for=r42],
+input[id=r43]:checked ~pre label[for=r43],
+input[id=r44]:checked ~pre label[for=r44],
+input[id=r45]:checked ~pre label[for=r45],
+input[id=r46]:checked ~pre label[for=r46],
+input[id=r47]:checked ~pre label[for=r47],
+input[id=r48]:checked ~pre label[for=r48],
+input[id=r49]:checked ~pre label[for=r49],
+input[id=r50]:checked ~pre label[for=r50],
+input[id=r51]:checked ~pre label[for=r51],
+input[id=r52]:checked ~pre label[for=r52],
+input[id=r53]:checked ~pre label[for=r53],
+input[id=r54]:checked ~pre label[for=r54],
+input[id=r55]:checked ~pre label[for=r55],
+input[id=r56]:checked ~pre label[for=r56],
+input[id=r57]:checked ~pre label[for=r57],
+input[id=r58]:checked ~pre label[for=r58],
+input[id=r59]:checked ~pre label[for=r59],
+input[id=r60]:checked ~pre label[for=r60],
+input[id=r61]:checked ~pre label[for=r61],
+input[id=r62]:checked ~pre label[for=r62],
+input[id=r63]:checked ~pre label[for=r63],
+input[id=r64]:checked ~pre label[for=r64],
+input[id=r65]:checked ~pre label[for=r65],
+input[id=r66]:checked ~pre label[for=r66],
+input[id=r67]:checked ~pre label[for=r67],
+input[id=r68]:checked ~pre label[for=r68],
+input[id=r69]:checked ~pre label[for=r69],
+input[id=r70]:checked ~pre label[for=r70],
+input[id=r71]:checked ~pre label[for=r71],
+input[id=r72]:checked ~pre label[for=r72],
+input[id=r73]:checked ~pre label[for=r73],
+input[id=r74]:checked ~pre label[for=r74],
+input[id=r75]:checked ~pre label[for=r75],
+input[id=r76]:checked ~pre label[for=r76],
+input[id=r77]:checked ~pre label[for=r77],
+input[id=r78]:checked ~pre label[for=r78],
+input[id=r79]:checked ~pre label[for=r79],
+input[id=r80]:checked ~pre label[for=r80],
+input[id=r81]:checked ~pre label[for=r81],
+input[id=r82]:checked ~pre label[for=r82],
+input[id=r83]:checked ~pre label[for=r83],
+input[id=r84]:checked ~pre label[for=r84],
+input[id=r85]:checked ~pre label[for=r85],
+input[id=r86]:checked ~pre label[for=r86],
+input[id=r87]:checked ~pre label[for=r87],
+input[id=r88]:checked ~pre label[for=r88],
+input[id=r89]:checked ~pre label[for=r89],
+input[id=r90]:checked ~pre label[for=r90],
+input[id=r91]:checked ~pre label[for=r91],
+input[id=r92]:checked ~pre label[for=r92],
+input[id=r93]:checked ~pre label[for=r93],
+input[id=r94]:checked ~pre label[for=r94],
+input[id=r95]:checked ~pre label[for=r95],
+input[id=r96]:checked ~pre label[for=r96],
+input[id=r97]:checked ~pre label[for=r97],
+input[id=r98]:checked ~pre label[for=r98],
+input[id=r99]:checked ~pre label[for=r99]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1,
+input[id=i2]:checked ~pre .i2,
+input[id=i3]:checked ~pre .i3
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="r11" type="radio" name="g"/>
+<input id="r12" type="radio" name="g"/>
+<input id="r13" type="radio" name="g"/>
+<input id="r14" type="radio" name="g"/>
+<input id="r15" type="radio" name="g"/>
+<input id="r16" type="radio" name="g"/>
+<input id="r17" type="radio" name="g"/>
+<input id="r18" type="radio" name="g"/>
+<input id="r19" type="radio" name="g"/>
+<input id="r20" type="radio" name="g"/>
+<input id="r21" type="radio" name="g"/>
+<input id="r22" type="radio" name="g"/>
+<input id="r23" type="radio" name="g"/>
+<input id="r24" type="radio" name="g"/>
+<input id="r25" type="radio" name="g"/>
+<input id="r26" type="radio" name="g"/>
+<input id="r27" type="radio" name="g"/>
+<input id="r28" type="radio" name="g"/>
+<input id="r29" type="radio" name="g"/>
+<input id="r30" type="radio" name="g"/>
+<input id="r31" type="radio" name="g"/>
+<input id="r32" type="radio" name="g"/>
+<input id="r33" type="radio" name="g"/>
+<input id="r34" type="radio" name="g"/>
+<input id="r35" type="radio" name="g"/>
+<input id="r36" type="radio" name="g"/>
+<input id="r37" type="radio" name="g"/>
+<input id="r38" type="radio" name="g"/>
+<input id="r39" type="radio" name="g"/>
+<input id="r40" type="radio" name="g"/>
+<input id="r41" type="radio" name="g"/>
+<input id="r42" type="radio" name="g"/>
+<input id="r43" type="radio" name="g"/>
+<input id="r44" type="radio" name="g"/>
+<input id="r45" type="radio" name="g"/>
+<input id="r46" type="radio" name="g"/>
+<input id="r47" type="radio" name="g"/>
+<input id="r48" type="radio" name="g"/>
+<input id="r49" type="radio" name="g"/>
+<input id="r50" type="radio" name="g"/>
+<input id="r51" type="radio" name="g"/>
+<input id="r52" type="radio" name="g"/>
+<input id="r53" type="radio" name="g"/>
+<input id="r54" type="radio" name="g"/>
+<input id="r55" type="radio" name="g"/>
+<input id="r56" type="radio" name="g"/>
+<input id="r57" type="radio" name="g"/>
+<input id="r58" type="radio" name="g"/>
+<input id="r59" type="radio" name="g"/>
+<input id="r60" type="radio" name="g"/>
+<input id="r61" type="radio" name="g"/>
+<input id="r62" type="radio" name="g"/>
+<input id="r63" type="radio" name="g"/>
+<input id="r64" type="radio" name="g"/>
+<input id="r65" type="radio" name="g"/>
+<input id="r66" type="radio" name="g"/>
+<input id="r67" type="radio" name="g"/>
+<input id="r68" type="radio" name="g"/>
+<input id="r69" type="radio" name="g"/>
+<input id="r70" type="radio" name="g"/>
+<input id="r71" type="radio" name="g"/>
+<input id="r72" type="radio" name="g"/>
+<input id="r73" type="radio" name="g"/>
+<input id="r74" type="radio" name="g"/>
+<input id="r75" type="radio" name="g"/>
+<input id="r76" type="radio" name="g"/>
+<input id="r77" type="radio" name="g"/>
+<input id="r78" type="radio" name="g"/>
+<input id="r79" type="radio" name="g"/>
+<input id="r80" type="radio" name="g"/>
+<input id="r81" type="radio" name="g"/>
+<input id="r82" type="radio" name="g"/>
+<input id="r83" type="radio" name="g"/>
+<input id="r84" type="radio" name="g"/>
+<input id="r85" type="radio" name="g"/>
+<input id="r86" type="radio" name="g"/>
+<input id="r87" type="radio" name="g"/>
+<input id="r88" type="radio" name="g"/>
+<input id="r89" type="radio" name="g"/>
+<input id="r90" type="radio" name="g"/>
+<input id="r91" type="radio" name="g"/>
+<input id="r92" type="radio" name="g"/>
+<input id="r93" type="radio" name="g"/>
+<input id="r94" type="radio" name="g"/>
+<input id="r95" type="radio" name="g"/>
+<input id="r96" type="radio" name="g"/>
+<input id="r97" type="radio" name="g"/>
+<input id="r98" type="radio" name="g"/>
+<input id="r99" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+<input id="i2" type="radio" name="i"/>
+<input id="i3" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">// Copyright ©2017 The Gonum Authors. All rights reserved.</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment">// Use of this source code is governed by a BSD-style</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment">// license that can be found in the LICENSE file.</span></code></span>
+<span class="codeline" id="line-4"><code></code></span>
+<span class="codeline" id="line-5"><code><span class="keyword">package</span> mat</code></span>
+<span class="codeline" id="line-6"><code></code></span>
+<span class="codeline" id="line-7"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-8"><code>	<label for="i0"><span class="lit-string i0">"gonum.org/v1/gonum/blas/blas64"</span></label></code></span>
+<span class="codeline" id="line-9"><code>	<label for="i1"><span class="lit-string i1">"gonum.org/v1/gonum/floats"</span></label></code></span>
+<span class="codeline" id="line-10"><code>	<label for="i2"><span class="lit-string i2">"gonum.org/v1/gonum/lapack"</span></label></code></span>
+<span class="codeline" id="line-11"><code>	<label for="i3"><span class="lit-string i3">"gonum.org/v1/gonum/lapack/lapack64"</span></label></code></span>
+<span class="codeline" id="line-12"><code>)</code></span>
+<span class="codeline" id="line-13"><code></code></span>
+<span class="codeline" id="line-14"><code><span class="comment">// GSVDKind specifies the treatment of singular vectors during a GSVD</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment">// factorization.</span></code></span>
+<span class="codeline" id="line-16"><code><span class="keyword">type</span> <a href="../../../../../pkg/gonum.org/v1/gonum/mat.html#name-GSVDKind" class="ident">GSVDKind</a> <a href="../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-17"><code></code></span>
+<span class="codeline" id="line-18"><code><span class="keyword">const</span> (</code></span>
+<span class="codeline" id="line-19"><code>	<span class="comment">// GSVDNone specifies that no singular vectors should be computed during</span></code></span>
+<span class="codeline" id="line-20"><code><span class="comment">	// the decomposition.</span></code></span>
+<span class="codeline" id="line-21"><code>	<a href="../../../../../pkg/gonum.org/v1/gonum/mat.html#name-GSVDNone" class="ident">GSVDNone</a> <a href="#line-16" class="ident">GSVDKind</a> = <span class="lit-number">0</span></code></span>
+<span class="codeline" id="line-22"><code></code></span>
+<span class="codeline" id="line-23"><code>	<span class="comment">// GSVDU specifies that the U singular vectors should be computed during</span></code></span>
+<span class="codeline" id="line-24"><code><span class="comment">	// the decomposition.</span></code></span>
+<span class="codeline" id="line-25"><code>	<a href="../../../../../pkg/gonum.org/v1/gonum/mat.html#name-GSVDU" class="ident">GSVDU</a> <a href="#line-16" class="ident">GSVDKind</a> = <span class="lit-number">1</span> &lt;&lt; <a href="../../../../../pkg/builtin.html#name-iota" class="ident">iota</a></code></span>
+<span class="codeline" id="line-26"><code>	<span class="comment">// GSVDV specifies that the V singular vectors should be computed during</span></code></span>
+<span class="codeline" id="line-27"><code><span class="comment">	// the decomposition.</span></code></span>
+<span class="codeline" id="line-28"><code>	<a href="../../../../../pkg/gonum.org/v1/gonum/mat.html#name-GSVDV" class="ident">GSVDV</a></code></span>
+<span class="codeline" id="line-29"><code>	<span class="comment">// GSVDQ specifies that the Q singular vectors should be computed during</span></code></span>
+<span class="codeline" id="line-30"><code><span class="comment">	// the decomposition.</span></code></span>
+<span class="codeline" id="line-31"><code>	<a href="../../../../../pkg/gonum.org/v1/gonum/mat.html#name-GSVDQ" class="ident">GSVDQ</a></code></span>
+<span class="codeline" id="line-32"><code></code></span>
+<span class="codeline" id="line-33"><code>	<span class="comment">// GSVDAll is a convenience value for computing all of the singular vectors.</span></code></span>
+<span class="codeline" id="line-34"><code>	<a href="../../../../../pkg/gonum.org/v1/gonum/mat.html#name-GSVDAll" class="ident">GSVDAll</a> = <a href="#line-25" class="ident">GSVDU</a> | <a href="#line-28" class="ident">GSVDV</a> | <a href="#line-31" class="ident">GSVDQ</a></code></span>
+<span class="codeline" id="line-35"><code>)</code></span>
+<span class="codeline" id="line-36"><code></code></span>
+<span class="codeline" id="line-37"><code><span class="comment">// GSVD is a type for creating and using the Generalized Singular Value Decomposition</span></code></span>
+<span class="codeline" id="line-38"><code><span class="comment">// (GSVD) of a matrix.</span></code></span>
+<span class="codeline" id="line-39"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-40"><code><span class="comment">// The factorization is a linear transformation of the data sets from the given</span></code></span>
+<span class="codeline" id="line-41"><code><span class="comment">// variable×sample spaces to reduced and diagonalized "eigenvariable"×"eigensample"</span></code></span>
+<span class="codeline" id="line-42"><code><span class="comment">// spaces.</span></code></span>
+<span class="codeline" id="line-43"><code><span class="keyword">type</span> <a href="../../../../../pkg/gonum.org/v1/gonum/mat.html#name-GSVD" class="ident">GSVD</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-44"><code>	<a href="../../../../../use/gonum.org/v1/gonum/mat..GSVD.kind^0b27c.html" class="ident">kind</a> <a href="#line-16" class="ident">GSVDKind</a></code></span>
+<span class="codeline" id="line-45"><code></code></span>
+<span class="codeline" id="line-46"><code>	<a href="../../../../../use/gonum.org/v1/gonum/mat..GSVD.r^45434.html" class="ident">r</a>, <a href="../../../../../use/gonum.org/v1/gonum/mat..GSVD.p^148de.html" class="ident">p</a>, <a href="../../../../../use/gonum.org/v1/gonum/mat..GSVD.c^2e7d2.html" class="ident">c</a>, <a href="../../../../../use/gonum.org/v1/gonum/mat..GSVD.k^8254c.html" class="ident">k</a>, <a href="../../../../../use/gonum.org/v1/gonum/mat..GSVD.l^acac8.html" class="ident">l</a> <a href="../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-47"><code>	<a href="../../../../../use/gonum.org/v1/gonum/mat..GSVD.s1^e8bc1.html" class="ident">s1</a>, <a href="../../../../../use/gonum.org/v1/gonum/mat..GSVD.s2^ad328.html" class="ident">s2</a>        []<a href="../../../../../pkg/builtin.html#name-float64" class="ident">float64</a></code></span>
+<span class="codeline" id="line-48"><code>	<a href="../../../../../use/gonum.org/v1/gonum/mat..GSVD.a^ca978.html" class="ident">a</a>, <a href="../../../../../use/gonum.org/v1/gonum/mat..GSVD.b^3e23e.html" class="ident">b</a>, <a href="../../../../../use/gonum.org/v1/gonum/mat..GSVD.u^0bfe9.html" class="ident">u</a>, <a href="../../../../../use/gonum.org/v1/gonum/mat..GSVD.v^4c944.html" class="ident">v</a>, <a href="../../../../../use/gonum.org/v1/gonum/mat..GSVD.q^8e35c.html" class="ident">q</a> <a href="../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html" class="ident i0">blas64</a>.<a href="../blas/blas64/blas64.go.html#line-37" class="ident">General</a></code></span>
+<span class="codeline" id="line-49"><code></code></span>
+<span class="codeline" id="line-50"><code>	<a href="../../../../../use/gonum.org/v1/gonum/mat..GSVD.work^00e13.html" class="ident">work</a>  []<a href="../../../../../pkg/builtin.html#name-float64" class="ident">float64</a></code></span>
+<span class="codeline" id="line-51"><code>	<a href="../../../../../use/gonum.org/v1/gonum/mat..GSVD.iwork^0b618.html" class="ident">iwork</a> []<a href="../../../../../pkg/builtin.html#name-int" class="ident">int</a></code></span>
+<span class="codeline" id="line-52"><code>}</code></span>
+<span class="codeline" id="line-53"><code></code></span>
+<span class="codeline" id="line-54"><code><span class="comment">// succFact returns whether the receiver contains a successful factorization.</span></code></span>
+<span class="codeline" id="line-55"><code><span class="keyword">func</span> (<label for="r0" class="ident">gsvd</label> *<a href="#line-43" class="ident">GSVD</a>) <label for="r1" class="ident"><a href="../../../../../use/gonum.org/v1/gonum/mat..GSVD.succFact^f3864.html" class="ident">succFact</a></label>() <a href="../../../../../pkg/builtin.html#name-bool" class="ident">bool</a> {</code></span>
+<span class="codeline" id="line-56"><code>	<span class="keyword">return</span> <label for="r0" class="ident">gsvd</label>.<a href="#line-46" class="ident">r</a> != <span class="lit-number">0</span></code></span>
+<span class="codeline" id="line-57"><code>}</code></span>
+<span class="codeline" id="line-58"><code></code></span>
+<span class="codeline" id="line-59"><code><span class="comment">// Factorize computes the generalized singular value decomposition (GSVD) of the input</span></code></span>
+<span class="codeline" id="line-60"><code><span class="comment">// the r×c matrix A and the p×c matrix B. The singular values of A and B are computed</span></code></span>
+<span class="codeline" id="line-61"><code><span class="comment">// in all cases, while the singular vectors are optionally computed depending on the</span></code></span>
+<span class="codeline" id="line-62"><code><span class="comment">// input kind.</span></code></span>
+<span class="codeline" id="line-63"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-64"><code><span class="comment">// The full singular value decomposition (kind == GSVDAll) deconstructs A and B as</span></code></span>
+<span class="codeline" id="line-65"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-66"><code><span class="comment">//	A = U * Σ₁ * [ 0 R ] * Qᵀ</span></code></span>
+<span class="codeline" id="line-67"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-68"><code><span class="comment">//	B = V * Σ₂ * [ 0 R ] * Qᵀ</span></code></span>
+<span class="codeline" id="line-69"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-70"><code><span class="comment">// where Σ₁ and Σ₂ are r×(k+l) and p×(k+l) diagonal matrices of singular values, and</span></code></span>
+<span class="codeline" id="line-71"><code><span class="comment">// U, V and Q are r×r, p×p and c×c orthogonal matrices of singular vectors. k+l is the</span></code></span>
+<span class="codeline" id="line-72"><code><span class="comment">// effective numerical rank of the matrix [ Aᵀ Bᵀ ]ᵀ.</span></code></span>
+<span class="codeline" id="line-73"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-74"><code><span class="comment">// It is frequently not necessary to compute the full GSVD. Computation time and</span></code></span>
+<span class="codeline" id="line-75"><code><span class="comment">// storage costs can be reduced using the appropriate kind. Either only the singular</span></code></span>
+<span class="codeline" id="line-76"><code><span class="comment">// values can be computed (kind == SVDNone), or in conjunction with specific singular</span></code></span>
+<span class="codeline" id="line-77"><code><span class="comment">// vectors (kind bit set according to GSVDU, GSVDV and GSVDQ).</span></code></span>
+<span class="codeline" id="line-78"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-79"><code><span class="comment">// Factorize returns whether the decomposition succeeded. If the decomposition</span></code></span>
+<span class="codeline" id="line-80"><code><span class="comment">// failed, routines that require a successful factorization will panic.</span></code></span>
+<span class="codeline" id="line-81"><code><span class="keyword">func</span> (<label for="r2" class="ident">gsvd</label> *<a href="#line-43" class="ident">GSVD</a>) <label for="r3" class="ident"><a href="../../../../../use/gonum.org/v1/gonum/mat..GSVD.Factorize.html" class="ident">Factorize</a></label>(<label for="r4" class="ident">a</label>, <label for="r5" class="ident">b</label> <a href="matrix.go.html#line-17" class="ident">Matrix</a>, <label for="r6" class="ident">kind</label> <a href="#line-16" class="ident">GSVDKind</a>) (<label for="r7" class="ident">ok</label> <a href="../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>) {</code></span>
+<span class="codeline" id="line-82"><code>	<span class="comment">// kill the previous decomposition</span></code></span>
+<span class="codeline" id="line-83"><code>	<label for="r2" class="ident">gsvd</label>.<a href="#line-46" class="ident">r</a> = <span class="lit-number">0</span></code></span>
+<span class="codeline" id="line-84"><code>	<label for="r2" class="ident">gsvd</label>.<a href="#line-44" class="ident">kind</a> = <span class="lit-number">0</span></code></span>
+<span class="codeline" id="line-85"><code></code></span>
+<span class="codeline" id="line-86"><code>	<label for="r8" class="ident">r</label>, <label for="r9" class="ident">c</label> := <label for="r4" class="ident">a</label>.<a href="matrix.go.html#line-19" class="ident">Dims</a>()</code></span>
+<span class="codeline" id="line-87"><code>	<label for="r2" class="ident">gsvd</label>.<a href="#line-46" class="ident">r</a>, <label for="r2" class="ident">gsvd</label>.<a href="#line-46" class="ident">c</a> = <label for="r8" class="ident">r</label>, <label for="r9" class="ident">c</label></code></span>
+<span class="codeline" id="line-88"><code>	<label for="r10" class="ident">p</label>, <label for="r9" class="ident">c</label> := <label for="r5" class="ident">b</label>.<a href="matrix.go.html#line-19" class="ident">Dims</a>()</code></span>
+<span class="codeline" id="line-89"><code>	<label for="r2" class="ident">gsvd</label>.<a href="#line-46" class="ident">p</a> = <label for="r10" class="ident">p</label></code></span>
+<span class="codeline" id="line-90"><code>	<span class="keyword">if</span> <label for="r2" class="ident">gsvd</label>.<a href="#line-46" class="ident">c</a> != <label for="r9" class="ident">c</label> {</code></span>
+<span class="codeline" id="line-91"><code>		<a href="../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-129" class="ident">ErrShape</a>)</code></span>
+<span class="codeline" id="line-92"><code>	}</code></span>
+<span class="codeline" id="line-93"><code>	<span class="keyword">var</span> <label for="r11" class="ident">jobU</label>, <label for="r12" class="ident">jobV</label>, <label for="r13" class="ident">jobQ</label> <a href="../../../../../pkg/gonum.org/v1/gonum/lapack.html" class="ident i2">lapack</a>.<a href="../lapack/lapack.go.html#line-125" class="ident">GSVDJob</a></code></span>
+<span class="codeline" id="line-94"><code>	<span class="keyword">switch</span> {</code></span>
+<span class="codeline" id="line-95"><code>	<span class="keyword">default</span>:</code></span>
+<span class="codeline" id="line-96"><code>		<a href="../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<span class="lit-string">"gsvd: bad input kind"</span>)</code></span>
+<span class="codeline" id="line-97"><code>	<span class="keyword">case</span> <label for="r6" class="ident">kind</label> == <a href="#line-21" class="ident">GSVDNone</a>:</code></span>
+<span class="codeline" id="line-98"><code>		<label for="r11" class="ident">jobU</label> = <a href="../../../../../pkg/gonum.org/v1/gonum/lapack.html" class="ident i2">lapack</a>.<a href="../lapack/lapack.go.html#line-132" class="ident">GSVDNone</a></code></span>
+<span class="codeline" id="line-99"><code>		<label for="r12" class="ident">jobV</label> = <a href="../../../../../pkg/gonum.org/v1/gonum/lapack.html" class="ident i2">lapack</a>.<a href="../lapack/lapack.go.html#line-132" class="ident">GSVDNone</a></code></span>
+<span class="codeline" id="line-100"><code>		<label for="r13" class="ident">jobQ</label> = <a href="../../../../../pkg/gonum.org/v1/gonum/lapack.html" class="ident i2">lapack</a>.<a href="../lapack/lapack.go.html#line-132" class="ident">GSVDNone</a></code></span>
+<span class="codeline" id="line-101"><code>	<span class="keyword">case</span> <a href="#line-34" class="ident">GSVDAll</a>&amp;<label for="r6" class="ident">kind</label> != <span class="lit-number">0</span>:</code></span>
+<span class="codeline" id="line-102"><code>		<span class="keyword">if</span> <a href="#line-25" class="ident">GSVDU</a>&amp;<label for="r6" class="ident">kind</label> != <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-103"><code>			<label for="r11" class="ident">jobU</label> = <a href="../../../../../pkg/gonum.org/v1/gonum/lapack.html" class="ident i2">lapack</a>.<a href="../lapack/lapack.go.html#line-128" class="ident">GSVDU</a></code></span>
+<span class="codeline" id="line-104"><code>			<label for="r2" class="ident">gsvd</label>.<a href="#line-48" class="ident">u</a> = <a href="../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html" class="ident i0">blas64</a>.<a href="../blas/blas64/blas64.go.html#line-37" class="ident">General</a>{</code></span>
+<span class="codeline" id="line-105"><code>				<a href="../blas/blas64/blas64.go.html#line-38" class="ident">Rows</a>:   <label for="r8" class="ident">r</label>,</code></span>
+<span class="codeline" id="line-106"><code>				<a href="../blas/blas64/blas64.go.html#line-38" class="ident">Cols</a>:   <label for="r8" class="ident">r</label>,</code></span>
+<span class="codeline" id="line-107"><code>				<a href="../blas/blas64/blas64.go.html#line-40" class="ident">Stride</a>: <label for="r8" class="ident">r</label>,</code></span>
+<span class="codeline" id="line-108"><code>				<a href="../blas/blas64/blas64.go.html#line-39" class="ident">Data</a>:   <a href="matrix.go.html#line-970" class="ident">use</a>(<label for="r2" class="ident">gsvd</label>.<a href="#line-48" class="ident">u</a>.<a href="../blas/blas64/blas64.go.html#line-39" class="ident">Data</a>, <label for="r8" class="ident">r</label>*<label for="r8" class="ident">r</label>),</code></span>
+<span class="codeline" id="line-109"><code>			}</code></span>
+<span class="codeline" id="line-110"><code>		}</code></span>
+<span class="codeline" id="line-111"><code>		<span class="keyword">if</span> <a href="#line-28" class="ident">GSVDV</a>&amp;<label for="r6" class="ident">kind</label> != <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-112"><code>			<label for="r12" class="ident">jobV</label> = <a href="../../../../../pkg/gonum.org/v1/gonum/lapack.html" class="ident i2">lapack</a>.<a href="../lapack/lapack.go.html#line-129" class="ident">GSVDV</a></code></span>
+<span class="codeline" id="line-113"><code>			<label for="r2" class="ident">gsvd</label>.<a href="#line-48" class="ident">v</a> = <a href="../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html" class="ident i0">blas64</a>.<a href="../blas/blas64/blas64.go.html#line-37" class="ident">General</a>{</code></span>
+<span class="codeline" id="line-114"><code>				<a href="../blas/blas64/blas64.go.html#line-38" class="ident">Rows</a>:   <label for="r10" class="ident">p</label>,</code></span>
+<span class="codeline" id="line-115"><code>				<a href="../blas/blas64/blas64.go.html#line-38" class="ident">Cols</a>:   <label for="r10" class="ident">p</label>,</code></span>
+<span class="codeline" id="line-116"><code>				<a href="../blas/blas64/blas64.go.html#line-40" class="ident">Stride</a>: <label for="r10" class="ident">p</label>,</code></span>
+<span class="codeline" id="line-117"><code>				<a href="../blas/blas64/blas64.go.html#line-39" class="ident">Data</a>:   <a href="matrix.go.html#line-970" class="ident">use</a>(<label for="r2" class="ident">gsvd</label>.<a href="#line-48" class="ident">v</a>.<a href="../blas/blas64/blas64.go.html#line-39" class="ident">Data</a>, <label for="r10" class="ident">p</label>*<label for="r10" class="ident">p</label>),</code></span>
+<span class="codeline" id="line-118"><code>			}</code></span>
+<span class="codeline" id="line-119"><code>		}</code></span>
+<span class="codeline" id="line-120"><code>		<span class="keyword">if</span> <a href="#line-31" class="ident">GSVDQ</a>&amp;<label for="r6" class="ident">kind</label> != <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-121"><code>			<label for="r13" class="ident">jobQ</label> = <a href="../../../../../pkg/gonum.org/v1/gonum/lapack.html" class="ident i2">lapack</a>.<a href="../lapack/lapack.go.html#line-130" class="ident">GSVDQ</a></code></span>
+<span class="codeline" id="line-122"><code>			<label for="r2" class="ident">gsvd</label>.<a href="#line-48" class="ident">q</a> = <a href="../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html" class="ident i0">blas64</a>.<a href="../blas/blas64/blas64.go.html#line-37" class="ident">General</a>{</code></span>
+<span class="codeline" id="line-123"><code>				<a href="../blas/blas64/blas64.go.html#line-38" class="ident">Rows</a>:   <label for="r9" class="ident">c</label>,</code></span>
+<span class="codeline" id="line-124"><code>				<a href="../blas/blas64/blas64.go.html#line-38" class="ident">Cols</a>:   <label for="r9" class="ident">c</label>,</code></span>
+<span class="codeline" id="line-125"><code>				<a href="../blas/blas64/blas64.go.html#line-40" class="ident">Stride</a>: <label for="r9" class="ident">c</label>,</code></span>
+<span class="codeline" id="line-126"><code>				<a href="../blas/blas64/blas64.go.html#line-39" class="ident">Data</a>:   <a href="matrix.go.html#line-970" class="ident">use</a>(<label for="r2" class="ident">gsvd</label>.<a href="#line-48" class="ident">q</a>.<a href="../blas/blas64/blas64.go.html#line-39" class="ident">Data</a>, <label for="r9" class="ident">c</label>*<label for="r9" class="ident">c</label>),</code></span>
+<span class="codeline" id="line-127"><code>			}</code></span>
+<span class="codeline" id="line-128"><code>		}</code></span>
+<span class="codeline" id="line-129"><code>	}</code></span>
+<span class="codeline" id="line-130"><code></code></span>
+<span class="codeline" id="line-131"><code>	<span class="comment">// A and B are destroyed on call, so copy the matrices.</span></code></span>
+<span class="codeline" id="line-132"><code>	<label for="r14" class="ident">aCopy</label> := <a href="dense.go.html#line-213" class="ident">DenseCopyOf</a>(<label for="r4" class="ident">a</label>)</code></span>
+<span class="codeline" id="line-133"><code>	<label for="r15" class="ident">bCopy</label> := <a href="dense.go.html#line-213" class="ident">DenseCopyOf</a>(<label for="r5" class="ident">b</label>)</code></span>
+<span class="codeline" id="line-134"><code></code></span>
+<span class="codeline" id="line-135"><code>	<label for="r2" class="ident">gsvd</label>.<a href="#line-47" class="ident">s1</a> = <a href="matrix.go.html#line-970" class="ident">use</a>(<label for="r2" class="ident">gsvd</label>.<a href="#line-47" class="ident">s1</a>, <label for="r9" class="ident">c</label>)</code></span>
+<span class="codeline" id="line-136"><code>	<label for="r2" class="ident">gsvd</label>.<a href="#line-47" class="ident">s2</a> = <a href="matrix.go.html#line-970" class="ident">use</a>(<label for="r2" class="ident">gsvd</label>.<a href="#line-47" class="ident">s2</a>, <label for="r9" class="ident">c</label>)</code></span>
+<span class="codeline" id="line-137"><code></code></span>
+<span class="codeline" id="line-138"><code>	<label for="r2" class="ident">gsvd</label>.<a href="#line-51" class="ident">iwork</a> = <a href="matrix.go.html#line-998" class="ident">useInt</a>(<label for="r2" class="ident">gsvd</label>.<a href="#line-51" class="ident">iwork</a>, <label for="r9" class="ident">c</label>)</code></span>
+<span class="codeline" id="line-139"><code></code></span>
+<span class="codeline" id="line-140"><code>	<label for="r2" class="ident">gsvd</label>.<a href="#line-50" class="ident">work</a> = <a href="matrix.go.html#line-970" class="ident">use</a>(<label for="r2" class="ident">gsvd</label>.<a href="#line-50" class="ident">work</a>, <span class="lit-number">1</span>)</code></span>
+<span class="codeline" id="line-141"><code>	<a href="../../../../../pkg/gonum.org/v1/gonum/lapack/lapack64.html" class="ident i3">lapack64</a>.<a href="../lapack/lapack64/lapack64.go.html#line-491" class="ident">Ggsvd3</a>(<label for="r11" class="ident">jobU</label>, <label for="r12" class="ident">jobV</label>, <label for="r13" class="ident">jobQ</label>, <label for="r14" class="ident">aCopy</label>.<a href="dense.go.html#line-36" class="ident">mat</a>, <label for="r15" class="ident">bCopy</label>.<a href="dense.go.html#line-36" class="ident">mat</a>, <label for="r2" class="ident">gsvd</label>.<a href="#line-47" class="ident">s1</a>, <label for="r2" class="ident">gsvd</label>.<a href="#line-47" class="ident">s2</a>, <label for="r2" class="ident">gsvd</label>.<a href="#line-48" class="ident">u</a>, <label for="r2" class="ident">gsvd</label>.<a href="#line-48" class="ident">v</a>, <label for="r2" class="ident">gsvd</label>.<a href="#line-48" class="ident">q</a>, <label for="r2" class="ident">gsvd</label>.<a href="#line-50" class="ident">work</a>, -<span class="lit-number">1</span>, <label for="r2" class="ident">gsvd</label>.<a href="#line-51" class="ident">iwork</a>)</code></span>
+<span class="codeline" id="line-142"><code>	<label for="r2" class="ident">gsvd</label>.<a href="#line-50" class="ident">work</a> = <a href="matrix.go.html#line-970" class="ident">use</a>(<label for="r2" class="ident">gsvd</label>.<a href="#line-50" class="ident">work</a>, <a href="../../../../../pkg/builtin.html#name-int" class="ident">int</a>(<label for="r2" class="ident">gsvd</label>.<a href="#line-50" class="ident">work</a>[<span class="lit-number">0</span>]))</code></span>
+<span class="codeline" id="line-143"><code>	<label for="r2" class="ident">gsvd</label>.<a href="#line-46" class="ident">k</a>, <label for="r2" class="ident">gsvd</label>.<a href="#line-46" class="ident">l</a>, <label for="r7" class="ident">ok</label> = <a href="../../../../../pkg/gonum.org/v1/gonum/lapack/lapack64.html" class="ident i3">lapack64</a>.<a href="../lapack/lapack64/lapack64.go.html#line-491" class="ident">Ggsvd3</a>(<label for="r11" class="ident">jobU</label>, <label for="r12" class="ident">jobV</label>, <label for="r13" class="ident">jobQ</label>, <label for="r14" class="ident">aCopy</label>.<a href="dense.go.html#line-36" class="ident">mat</a>, <label for="r15" class="ident">bCopy</label>.<a href="dense.go.html#line-36" class="ident">mat</a>, <label for="r2" class="ident">gsvd</label>.<a href="#line-47" class="ident">s1</a>, <label for="r2" class="ident">gsvd</label>.<a href="#line-47" class="ident">s2</a>, <label for="r2" class="ident">gsvd</label>.<a href="#line-48" class="ident">u</a>, <label for="r2" class="ident">gsvd</label>.<a href="#line-48" class="ident">v</a>, <label for="r2" class="ident">gsvd</label>.<a href="#line-48" class="ident">q</a>, <label for="r2" class="ident">gsvd</label>.<a href="#line-50" class="ident">work</a>, <a href="../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r2" class="ident">gsvd</label>.<a href="#line-50" class="ident">work</a>), <label for="r2" class="ident">gsvd</label>.<a href="#line-51" class="ident">iwork</a>)</code></span>
+<span class="codeline" id="line-144"><code>	<span class="keyword">if</span> <label for="r7" class="ident">ok</label> {</code></span>
+<span class="codeline" id="line-145"><code>		<label for="r2" class="ident">gsvd</label>.<a href="#line-48" class="ident">a</a> = <label for="r14" class="ident">aCopy</label>.<a href="dense.go.html#line-36" class="ident">mat</a></code></span>
+<span class="codeline" id="line-146"><code>		<label for="r2" class="ident">gsvd</label>.<a href="#line-48" class="ident">b</a> = <label for="r15" class="ident">bCopy</label>.<a href="dense.go.html#line-36" class="ident">mat</a></code></span>
+<span class="codeline" id="line-147"><code>		<label for="r2" class="ident">gsvd</label>.<a href="#line-44" class="ident">kind</a> = <label for="r6" class="ident">kind</label></code></span>
+<span class="codeline" id="line-148"><code>	}</code></span>
+<span class="codeline" id="line-149"><code>	<span class="keyword">return</span> <label for="r7" class="ident">ok</label></code></span>
+<span class="codeline" id="line-150"><code>}</code></span>
+<span class="codeline" id="line-151"><code></code></span>
+<span class="codeline" id="line-152"><code><span class="comment">// Kind returns the GSVDKind of the decomposition. If no decomposition has been</span></code></span>
+<span class="codeline" id="line-153"><code><span class="comment">// computed, Kind returns -1.</span></code></span>
+<span class="codeline" id="line-154"><code><span class="keyword">func</span> (<label for="r16" class="ident">gsvd</label> *<a href="#line-43" class="ident">GSVD</a>) <label for="r17" class="ident"><a href="../../../../../use/gonum.org/v1/gonum/mat..GSVD.Kind.html" class="ident">Kind</a></label>() <a href="#line-16" class="ident">GSVDKind</a> {</code></span>
+<span class="codeline" id="line-155"><code>	<span class="keyword">if</span> !<label for="r16" class="ident">gsvd</label>.<a href="#line-55" class="ident">succFact</a>() {</code></span>
+<span class="codeline" id="line-156"><code>		<span class="keyword">return</span> -<span class="lit-number">1</span></code></span>
+<span class="codeline" id="line-157"><code>	}</code></span>
+<span class="codeline" id="line-158"><code>	<span class="keyword">return</span> <label for="r16" class="ident">gsvd</label>.<a href="#line-44" class="ident">kind</a></code></span>
+<span class="codeline" id="line-159"><code>}</code></span>
+<span class="codeline" id="line-160"><code></code></span>
+<span class="codeline" id="line-161"><code><span class="comment">// Rank returns the k and l terms of the rank of [ Aᵀ Bᵀ ]ᵀ.</span></code></span>
+<span class="codeline" id="line-162"><code><span class="keyword">func</span> (<label for="r18" class="ident">gsvd</label> *<a href="#line-43" class="ident">GSVD</a>) <label for="r19" class="ident"><a href="../../../../../use/gonum.org/v1/gonum/mat..GSVD.Rank.html" class="ident">Rank</a></label>() (<label for="r20" class="ident">k</label>, <label for="r21" class="ident">l</label> <a href="../../../../../pkg/builtin.html#name-int" class="ident">int</a>) {</code></span>
+<span class="codeline" id="line-163"><code>	<span class="keyword">return</span> <label for="r18" class="ident">gsvd</label>.<a href="#line-46" class="ident">k</a>, <label for="r18" class="ident">gsvd</label>.<a href="#line-46" class="ident">l</a></code></span>
+<span class="codeline" id="line-164"><code>}</code></span>
+<span class="codeline" id="line-165"><code></code></span>
+<span class="codeline" id="line-166"><code><span class="comment">// GeneralizedValues returns the generalized singular values of the factorized matrices.</span></code></span>
+<span class="codeline" id="line-167"><code><span class="comment">// If the input slice is non-nil, the values will be stored in-place into the slice.</span></code></span>
+<span class="codeline" id="line-168"><code><span class="comment">// In this case, the slice must have length min(r,c)-k, and GeneralizedValues will</span></code></span>
+<span class="codeline" id="line-169"><code><span class="comment">// panic with ErrSliceLengthMismatch otherwise. If the input slice is nil,</span></code></span>
+<span class="codeline" id="line-170"><code><span class="comment">// a new slice of the appropriate length will be allocated and returned.</span></code></span>
+<span class="codeline" id="line-171"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-172"><code><span class="comment">// GeneralizedValues will panic if the receiver does not contain a successful factorization.</span></code></span>
+<span class="codeline" id="line-173"><code><span class="keyword">func</span> (<label for="r22" class="ident">gsvd</label> *<a href="#line-43" class="ident">GSVD</a>) <label for="r23" class="ident"><a href="../../../../../use/gonum.org/v1/gonum/mat..GSVD.GeneralizedValues.html" class="ident">GeneralizedValues</a></label>(<label for="r24" class="ident">v</label> []<a href="../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>) []<a href="../../../../../pkg/builtin.html#name-float64" class="ident">float64</a> {</code></span>
+<span class="codeline" id="line-174"><code>	<span class="keyword">if</span> !<label for="r22" class="ident">gsvd</label>.<a href="#line-55" class="ident">succFact</a>() {</code></span>
+<span class="codeline" id="line-175"><code>		<a href="../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="eigen.go.html#line-13" class="ident">badFact</a>)</code></span>
+<span class="codeline" id="line-176"><code>	}</code></span>
+<span class="codeline" id="line-177"><code>	<label for="r25" class="ident">r</label> := <label for="r22" class="ident">gsvd</label>.<a href="#line-46" class="ident">r</a></code></span>
+<span class="codeline" id="line-178"><code>	<label for="r26" class="ident">c</label> := <label for="r22" class="ident">gsvd</label>.<a href="#line-46" class="ident">c</a></code></span>
+<span class="codeline" id="line-179"><code>	<label for="r27" class="ident">k</label> := <label for="r22" class="ident">gsvd</label>.<a href="#line-46" class="ident">k</a></code></span>
+<span class="codeline" id="line-180"><code>	<label for="r28" class="ident">d</label> := <a href="matrix.go.html#line-954" class="ident">min</a>(<label for="r25" class="ident">r</label>, <label for="r26" class="ident">c</label>)</code></span>
+<span class="codeline" id="line-181"><code>	<span class="keyword">if</span> <label for="r24" class="ident">v</label> == <a href="../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-182"><code>		<label for="r24" class="ident">v</label> = <a href="../../../../../pkg/builtin.html#name-make" class="ident">make</a>([]<a href="../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r28" class="ident">d</label>-<label for="r27" class="ident">k</label>)</code></span>
+<span class="codeline" id="line-183"><code>	}</code></span>
+<span class="codeline" id="line-184"><code>	<span class="keyword">if</span> <a href="../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r24" class="ident">v</label>) != <label for="r28" class="ident">d</label>-<label for="r27" class="ident">k</label> {</code></span>
+<span class="codeline" id="line-185"><code>		<a href="../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-137" class="ident">ErrSliceLengthMismatch</a>)</code></span>
+<span class="codeline" id="line-186"><code>	}</code></span>
+<span class="codeline" id="line-187"><code>	<a href="../../../../../pkg/gonum.org/v1/gonum/floats.html" class="ident i1">floats</a>.<a href="../floats/floats.go.html#line-222" class="ident">DivTo</a>(<label for="r24" class="ident">v</label>, <label for="r22" class="ident">gsvd</label>.<a href="#line-47" class="ident">s1</a>[<label for="r27" class="ident">k</label>:<label for="r28" class="ident">d</label>], <label for="r22" class="ident">gsvd</label>.<a href="#line-47" class="ident">s2</a>[<label for="r27" class="ident">k</label>:<label for="r28" class="ident">d</label>])</code></span>
+<span class="codeline" id="line-188"><code>	<span class="keyword">return</span> <label for="r24" class="ident">v</label></code></span>
+<span class="codeline" id="line-189"><code>}</code></span>
+<span class="codeline" id="line-190"><code></code></span>
+<span class="codeline" id="line-191"><code><span class="comment">// ValuesA returns the singular values of the factorized A matrix.</span></code></span>
+<span class="codeline" id="line-192"><code><span class="comment">// If the input slice is non-nil, the values will be stored in-place into the slice.</span></code></span>
+<span class="codeline" id="line-193"><code><span class="comment">// In this case, the slice must have length min(r,c)-k, and ValuesA will panic with</span></code></span>
+<span class="codeline" id="line-194"><code><span class="comment">// ErrSliceLengthMismatch otherwise. If the input slice is nil,</span></code></span>
+<span class="codeline" id="line-195"><code><span class="comment">// a new slice of the appropriate length will be allocated and returned.</span></code></span>
+<span class="codeline" id="line-196"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-197"><code><span class="comment">// ValuesA will panic if the receiver does not contain a successful factorization.</span></code></span>
+<span class="codeline" id="line-198"><code><span class="keyword">func</span> (<label for="r29" class="ident">gsvd</label> *<a href="#line-43" class="ident">GSVD</a>) <label for="r30" class="ident"><a href="../../../../../use/gonum.org/v1/gonum/mat..GSVD.ValuesA.html" class="ident">ValuesA</a></label>(<label for="r31" class="ident">s</label> []<a href="../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>) []<a href="../../../../../pkg/builtin.html#name-float64" class="ident">float64</a> {</code></span>
+<span class="codeline" id="line-199"><code>	<span class="keyword">if</span> !<label for="r29" class="ident">gsvd</label>.<a href="#line-55" class="ident">succFact</a>() {</code></span>
+<span class="codeline" id="line-200"><code>		<a href="../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="eigen.go.html#line-13" class="ident">badFact</a>)</code></span>
+<span class="codeline" id="line-201"><code>	}</code></span>
+<span class="codeline" id="line-202"><code>	<label for="r32" class="ident">r</label> := <label for="r29" class="ident">gsvd</label>.<a href="#line-46" class="ident">r</a></code></span>
+<span class="codeline" id="line-203"><code>	<label for="r33" class="ident">c</label> := <label for="r29" class="ident">gsvd</label>.<a href="#line-46" class="ident">c</a></code></span>
+<span class="codeline" id="line-204"><code>	<label for="r34" class="ident">k</label> := <label for="r29" class="ident">gsvd</label>.<a href="#line-46" class="ident">k</a></code></span>
+<span class="codeline" id="line-205"><code>	<label for="r35" class="ident">d</label> := <a href="matrix.go.html#line-954" class="ident">min</a>(<label for="r32" class="ident">r</label>, <label for="r33" class="ident">c</label>)</code></span>
+<span class="codeline" id="line-206"><code>	<span class="keyword">if</span> <label for="r31" class="ident">s</label> == <a href="../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-207"><code>		<label for="r31" class="ident">s</label> = <a href="../../../../../pkg/builtin.html#name-make" class="ident">make</a>([]<a href="../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r35" class="ident">d</label>-<label for="r34" class="ident">k</label>)</code></span>
+<span class="codeline" id="line-208"><code>	}</code></span>
+<span class="codeline" id="line-209"><code>	<span class="keyword">if</span> <a href="../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r31" class="ident">s</label>) != <label for="r35" class="ident">d</label>-<label for="r34" class="ident">k</label> {</code></span>
+<span class="codeline" id="line-210"><code>		<a href="../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-137" class="ident">ErrSliceLengthMismatch</a>)</code></span>
+<span class="codeline" id="line-211"><code>	}</code></span>
+<span class="codeline" id="line-212"><code>	<a href="../../../../../pkg/builtin.html#name-copy" class="ident">copy</a>(<label for="r31" class="ident">s</label>, <label for="r29" class="ident">gsvd</label>.<a href="#line-47" class="ident">s1</a>[<label for="r34" class="ident">k</label>:<a href="matrix.go.html#line-954" class="ident">min</a>(<label for="r32" class="ident">r</label>, <label for="r33" class="ident">c</label>)])</code></span>
+<span class="codeline" id="line-213"><code>	<span class="keyword">return</span> <label for="r31" class="ident">s</label></code></span>
+<span class="codeline" id="line-214"><code>}</code></span>
+<span class="codeline" id="line-215"><code></code></span>
+<span class="codeline" id="line-216"><code><span class="comment">// ValuesB returns the singular values of the factorized B matrix.</span></code></span>
+<span class="codeline" id="line-217"><code><span class="comment">// If the input slice is non-nil, the values will be stored in-place into the slice.</span></code></span>
+<span class="codeline" id="line-218"><code><span class="comment">// In this case, the slice must have length min(r,c)-k, and ValuesB will panic with</span></code></span>
+<span class="codeline" id="line-219"><code><span class="comment">// ErrSliceLengthMismatch otherwise. If the input slice is nil,</span></code></span>
+<span class="codeline" id="line-220"><code><span class="comment">// a new slice of the appropriate length will be allocated and returned.</span></code></span>
+<span class="codeline" id="line-221"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-222"><code><span class="comment">// ValuesB will panic if the receiver does not contain a successful factorization.</span></code></span>
+<span class="codeline" id="line-223"><code><span class="keyword">func</span> (<label for="r36" class="ident">gsvd</label> *<a href="#line-43" class="ident">GSVD</a>) <label for="r37" class="ident"><a href="../../../../../use/gonum.org/v1/gonum/mat..GSVD.ValuesB.html" class="ident">ValuesB</a></label>(<label for="r38" class="ident">s</label> []<a href="../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>) []<a href="../../../../../pkg/builtin.html#name-float64" class="ident">float64</a> {</code></span>
+<span class="codeline" id="line-224"><code>	<span class="keyword">if</span> !<label for="r36" class="ident">gsvd</label>.<a href="#line-55" class="ident">succFact</a>() {</code></span>
+<span class="codeline" id="line-225"><code>		<a href="../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="eigen.go.html#line-13" class="ident">badFact</a>)</code></span>
+<span class="codeline" id="line-226"><code>	}</code></span>
+<span class="codeline" id="line-227"><code>	<label for="r39" class="ident">r</label> := <label for="r36" class="ident">gsvd</label>.<a href="#line-46" class="ident">r</a></code></span>
+<span class="codeline" id="line-228"><code>	<label for="r40" class="ident">c</label> := <label for="r36" class="ident">gsvd</label>.<a href="#line-46" class="ident">c</a></code></span>
+<span class="codeline" id="line-229"><code>	<label for="r41" class="ident">k</label> := <label for="r36" class="ident">gsvd</label>.<a href="#line-46" class="ident">k</a></code></span>
+<span class="codeline" id="line-230"><code>	<label for="r42" class="ident">d</label> := <a href="matrix.go.html#line-954" class="ident">min</a>(<label for="r39" class="ident">r</label>, <label for="r40" class="ident">c</label>)</code></span>
+<span class="codeline" id="line-231"><code>	<span class="keyword">if</span> <label for="r38" class="ident">s</label> == <a href="../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-232"><code>		<label for="r38" class="ident">s</label> = <a href="../../../../../pkg/builtin.html#name-make" class="ident">make</a>([]<a href="../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r42" class="ident">d</label>-<label for="r41" class="ident">k</label>)</code></span>
+<span class="codeline" id="line-233"><code>	}</code></span>
+<span class="codeline" id="line-234"><code>	<span class="keyword">if</span> <a href="../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r38" class="ident">s</label>) != <label for="r42" class="ident">d</label>-<label for="r41" class="ident">k</label> {</code></span>
+<span class="codeline" id="line-235"><code>		<a href="../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-137" class="ident">ErrSliceLengthMismatch</a>)</code></span>
+<span class="codeline" id="line-236"><code>	}</code></span>
+<span class="codeline" id="line-237"><code>	<a href="../../../../../pkg/builtin.html#name-copy" class="ident">copy</a>(<label for="r38" class="ident">s</label>, <label for="r36" class="ident">gsvd</label>.<a href="#line-47" class="ident">s2</a>[<label for="r41" class="ident">k</label>:<label for="r42" class="ident">d</label>])</code></span>
+<span class="codeline" id="line-238"><code>	<span class="keyword">return</span> <label for="r38" class="ident">s</label></code></span>
+<span class="codeline" id="line-239"><code>}</code></span>
+<span class="codeline" id="line-240"><code></code></span>
+<span class="codeline" id="line-241"><code><span class="comment">// ZeroRTo extracts the matrix [ 0 R ] from the singular value decomposition,</span></code></span>
+<span class="codeline" id="line-242"><code><span class="comment">// storing the result into dst. [ 0 R ] is of size (k+l)×c.</span></code></span>
+<span class="codeline" id="line-243"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-244"><code><span class="comment">// If dst is empty, ZeroRTo will resize dst to be (k+l)×c. When dst is</span></code></span>
+<span class="codeline" id="line-245"><code><span class="comment">// non-empty, ZeroRTo will panic if dst is not (k+l)×c. ZeroRTo will also panic</span></code></span>
+<span class="codeline" id="line-246"><code><span class="comment">// if the receiver does not contain a successful factorization.</span></code></span>
+<span class="codeline" id="line-247"><code><span class="keyword">func</span> (<label for="r43" class="ident">gsvd</label> *<a href="#line-43" class="ident">GSVD</a>) <label for="r44" class="ident"><a href="../../../../../use/gonum.org/v1/gonum/mat..GSVD.ZeroRTo.html" class="ident">ZeroRTo</a></label>(<label for="r45" class="ident">dst</label> *<a href="dense.go.html#line-35" class="ident">Dense</a>) {</code></span>
+<span class="codeline" id="line-248"><code>	<span class="keyword">if</span> !<label for="r43" class="ident">gsvd</label>.<a href="#line-55" class="ident">succFact</a>() {</code></span>
+<span class="codeline" id="line-249"><code>		<a href="../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="eigen.go.html#line-13" class="ident">badFact</a>)</code></span>
+<span class="codeline" id="line-250"><code>	}</code></span>
+<span class="codeline" id="line-251"><code>	<label for="r46" class="ident">r</label> := <label for="r43" class="ident">gsvd</label>.<a href="#line-46" class="ident">r</a></code></span>
+<span class="codeline" id="line-252"><code>	<label for="r47" class="ident">c</label> := <label for="r43" class="ident">gsvd</label>.<a href="#line-46" class="ident">c</a></code></span>
+<span class="codeline" id="line-253"><code>	<label for="r48" class="ident">k</label> := <label for="r43" class="ident">gsvd</label>.<a href="#line-46" class="ident">k</a></code></span>
+<span class="codeline" id="line-254"><code>	<label for="r49" class="ident">l</label> := <label for="r43" class="ident">gsvd</label>.<a href="#line-46" class="ident">l</a></code></span>
+<span class="codeline" id="line-255"><code>	<label for="r50" class="ident">h</label> := <a href="matrix.go.html#line-954" class="ident">min</a>(<label for="r48" class="ident">k</label>+<label for="r49" class="ident">l</label>, <label for="r46" class="ident">r</label>)</code></span>
+<span class="codeline" id="line-256"><code>	<span class="keyword">if</span> <label for="r45" class="ident">dst</label>.<a href="dense.go.html#line-191" class="ident">IsEmpty</a>() {</code></span>
+<span class="codeline" id="line-257"><code>		<label for="r45" class="ident">dst</label>.<a href="dense.go.html#line-82" class="ident">ReuseAs</a>(<label for="r48" class="ident">k</label>+<label for="r49" class="ident">l</label>, <label for="r47" class="ident">c</label>)</code></span>
+<span class="codeline" id="line-258"><code>	} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-259"><code>		<label for="r51" class="ident">r2</label>, <label for="r52" class="ident">c2</label> := <label for="r45" class="ident">dst</label>.<a href="dense.go.html#line-233" class="ident">Dims</a>()</code></span>
+<span class="codeline" id="line-260"><code>		<span class="keyword">if</span> <label for="r51" class="ident">r2</label> != <label for="r48" class="ident">k</label>+<label for="r49" class="ident">l</label> || <label for="r47" class="ident">c</label> != <label for="r52" class="ident">c2</label> {</code></span>
+<span class="codeline" id="line-261"><code>			<a href="../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-129" class="ident">ErrShape</a>)</code></span>
+<span class="codeline" id="line-262"><code>		}</code></span>
+<span class="codeline" id="line-263"><code>		<label for="r45" class="ident">dst</label>.<a href="dense.go.html#line-153" class="ident">Zero</a>()</code></span>
+<span class="codeline" id="line-264"><code>	}</code></span>
+<span class="codeline" id="line-265"><code>	<label for="r53" class="ident">a</label> := <a href="dense.go.html#line-35" class="ident">Dense</a>{</code></span>
+<span class="codeline" id="line-266"><code>		<a href="dense.go.html#line-36" class="ident">mat</a>:     <label for="r43" class="ident">gsvd</label>.<a href="#line-48" class="ident">a</a>,</code></span>
+<span class="codeline" id="line-267"><code>		<a href="dense.go.html#line-38" class="ident">capRows</a>: <label for="r46" class="ident">r</label>,</code></span>
+<span class="codeline" id="line-268"><code>		<a href="dense.go.html#line-38" class="ident">capCols</a>: <label for="r47" class="ident">c</label>,</code></span>
+<span class="codeline" id="line-269"><code>	}</code></span>
+<span class="codeline" id="line-270"><code>	<label for="r45" class="ident">dst</label>.<a href="dense.go.html#line-326" class="ident">slice</a>(<span class="lit-number">0</span>, <label for="r50" class="ident">h</label>, <label for="r47" class="ident">c</label>-<label for="r48" class="ident">k</label>-<label for="r49" class="ident">l</label>, <label for="r47" class="ident">c</label>).<a href="dense.go.html#line-464" class="ident">Copy</a>(<label for="r53" class="ident">a</label>.<a href="dense.go.html#line-322" class="ident">Slice</a>(<span class="lit-number">0</span>, <label for="r50" class="ident">h</label>, <label for="r47" class="ident">c</label>-<label for="r48" class="ident">k</label>-<label for="r49" class="ident">l</label>, <label for="r47" class="ident">c</label>))</code></span>
+<span class="codeline" id="line-271"><code>	<span class="keyword">if</span> <label for="r46" class="ident">r</label> &lt; <label for="r48" class="ident">k</label>+<label for="r49" class="ident">l</label> {</code></span>
+<span class="codeline" id="line-272"><code>		<label for="r54" class="ident">b</label> := <a href="dense.go.html#line-35" class="ident">Dense</a>{</code></span>
+<span class="codeline" id="line-273"><code>			<a href="dense.go.html#line-36" class="ident">mat</a>:     <label for="r43" class="ident">gsvd</label>.<a href="#line-48" class="ident">b</a>,</code></span>
+<span class="codeline" id="line-274"><code>			<a href="dense.go.html#line-38" class="ident">capRows</a>: <label for="r43" class="ident">gsvd</label>.<a href="#line-46" class="ident">p</a>,</code></span>
+<span class="codeline" id="line-275"><code>			<a href="dense.go.html#line-38" class="ident">capCols</a>: <label for="r47" class="ident">c</label>,</code></span>
+<span class="codeline" id="line-276"><code>		}</code></span>
+<span class="codeline" id="line-277"><code>		<label for="r45" class="ident">dst</label>.<a href="dense.go.html#line-326" class="ident">slice</a>(<label for="r46" class="ident">r</label>, <label for="r48" class="ident">k</label>+<label for="r49" class="ident">l</label>, <label for="r47" class="ident">c</label>+<label for="r46" class="ident">r</label>-<label for="r48" class="ident">k</label>-<label for="r49" class="ident">l</label>, <label for="r47" class="ident">c</label>).<a href="dense.go.html#line-464" class="ident">Copy</a>(<label for="r54" class="ident">b</label>.<a href="dense.go.html#line-322" class="ident">Slice</a>(<label for="r46" class="ident">r</label>-<label for="r48" class="ident">k</label>, <label for="r49" class="ident">l</label>, <label for="r47" class="ident">c</label>+<label for="r46" class="ident">r</label>-<label for="r48" class="ident">k</label>-<label for="r49" class="ident">l</label>, <label for="r47" class="ident">c</label>))</code></span>
+<span class="codeline" id="line-278"><code>	}</code></span>
+<span class="codeline" id="line-279"><code>}</code></span>
+<span class="codeline" id="line-280"><code></code></span>
+<span class="codeline" id="line-281"><code><span class="comment">// SigmaATo extracts the matrix Σ₁ from the singular value decomposition, storing</span></code></span>
+<span class="codeline" id="line-282"><code><span class="comment">// the result into dst. Σ₁ is size r×(k+l).</span></code></span>
+<span class="codeline" id="line-283"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-284"><code><span class="comment">// If dst is empty, SigmaATo will resize dst to be r×(k+l). When dst is</span></code></span>
+<span class="codeline" id="line-285"><code><span class="comment">// non-empty, SigmATo will panic if dst is not r×(k+l). SigmaATo will also</span></code></span>
+<span class="codeline" id="line-286"><code><span class="comment">// panic if the receiver does not contain a successful factorization.</span></code></span>
+<span class="codeline" id="line-287"><code><span class="keyword">func</span> (<label for="r55" class="ident">gsvd</label> *<a href="#line-43" class="ident">GSVD</a>) <label for="r56" class="ident"><a href="../../../../../use/gonum.org/v1/gonum/mat..GSVD.SigmaATo.html" class="ident">SigmaATo</a></label>(<label for="r57" class="ident">dst</label> *<a href="dense.go.html#line-35" class="ident">Dense</a>) {</code></span>
+<span class="codeline" id="line-288"><code>	<span class="keyword">if</span> !<label for="r55" class="ident">gsvd</label>.<a href="#line-55" class="ident">succFact</a>() {</code></span>
+<span class="codeline" id="line-289"><code>		<a href="../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="eigen.go.html#line-13" class="ident">badFact</a>)</code></span>
+<span class="codeline" id="line-290"><code>	}</code></span>
+<span class="codeline" id="line-291"><code>	<label for="r58" class="ident">r</label> := <label for="r55" class="ident">gsvd</label>.<a href="#line-46" class="ident">r</a></code></span>
+<span class="codeline" id="line-292"><code>	<label for="r59" class="ident">k</label> := <label for="r55" class="ident">gsvd</label>.<a href="#line-46" class="ident">k</a></code></span>
+<span class="codeline" id="line-293"><code>	<label for="r60" class="ident">l</label> := <label for="r55" class="ident">gsvd</label>.<a href="#line-46" class="ident">l</a></code></span>
+<span class="codeline" id="line-294"><code>	<span class="keyword">if</span> <label for="r57" class="ident">dst</label>.<a href="dense.go.html#line-191" class="ident">IsEmpty</a>() {</code></span>
+<span class="codeline" id="line-295"><code>		<label for="r57" class="ident">dst</label>.<a href="dense.go.html#line-82" class="ident">ReuseAs</a>(<label for="r58" class="ident">r</label>, <label for="r59" class="ident">k</label>+<label for="r60" class="ident">l</label>)</code></span>
+<span class="codeline" id="line-296"><code>	} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-297"><code>		<label for="r61" class="ident">r2</label>, <label for="r62" class="ident">c</label> := <label for="r57" class="ident">dst</label>.<a href="dense.go.html#line-233" class="ident">Dims</a>()</code></span>
+<span class="codeline" id="line-298"><code>		<span class="keyword">if</span> <label for="r61" class="ident">r2</label> != <label for="r58" class="ident">r</label> || <label for="r62" class="ident">c</label> != <label for="r59" class="ident">k</label>+<label for="r60" class="ident">l</label> {</code></span>
+<span class="codeline" id="line-299"><code>			<a href="../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-129" class="ident">ErrShape</a>)</code></span>
+<span class="codeline" id="line-300"><code>		}</code></span>
+<span class="codeline" id="line-301"><code>		<label for="r57" class="ident">dst</label>.<a href="dense.go.html#line-153" class="ident">Zero</a>()</code></span>
+<span class="codeline" id="line-302"><code>	}</code></span>
+<span class="codeline" id="line-303"><code>	<span class="keyword">for</span> <label for="r63" class="ident">i</label> := <span class="lit-number">0</span>; <label for="r63" class="ident">i</label> &lt; <label for="r59" class="ident">k</label>; <label for="r63" class="ident">i</label>++ {</code></span>
+<span class="codeline" id="line-304"><code>		<label for="r57" class="ident">dst</label>.<a href="index_no_bound_checks.go.html#line-38" class="ident">set</a>(<label for="r63" class="ident">i</label>, <label for="r63" class="ident">i</label>, <span class="lit-number">1</span>)</code></span>
+<span class="codeline" id="line-305"><code>	}</code></span>
+<span class="codeline" id="line-306"><code>	<span class="keyword">for</span> <label for="r64" class="ident">i</label> := <label for="r59" class="ident">k</label>; <label for="r64" class="ident">i</label> &lt; <a href="matrix.go.html#line-954" class="ident">min</a>(<label for="r58" class="ident">r</label>, <label for="r59" class="ident">k</label>+<label for="r60" class="ident">l</label>); <label for="r64" class="ident">i</label>++ {</code></span>
+<span class="codeline" id="line-307"><code>		<label for="r57" class="ident">dst</label>.<a href="index_no_bound_checks.go.html#line-38" class="ident">set</a>(<label for="r64" class="ident">i</label>, <label for="r64" class="ident">i</label>, <label for="r55" class="ident">gsvd</label>.<a href="#line-47" class="ident">s1</a>[<label for="r64" class="ident">i</label>])</code></span>
+<span class="codeline" id="line-308"><code>	}</code></span>
+<span class="codeline" id="line-309"><code>}</code></span>
+<span class="codeline" id="line-310"><code></code></span>
+<span class="codeline" id="line-311"><code><span class="comment">// SigmaBTo extracts the matrix Σ₂ from the singular value decomposition, storing</span></code></span>
+<span class="codeline" id="line-312"><code><span class="comment">// the result into dst. Σ₂ is size p×(k+l).</span></code></span>
+<span class="codeline" id="line-313"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-314"><code><span class="comment">// If dst is empty, SigmaBTo will resize dst to be p×(k+l). When dst is</span></code></span>
+<span class="codeline" id="line-315"><code><span class="comment">// non-empty, SigmBTo will panic if dst is not p×(k+l). SigmaBTo will also</span></code></span>
+<span class="codeline" id="line-316"><code><span class="comment">// panic if the receiver does not contain a successful factorization.</span></code></span>
+<span class="codeline" id="line-317"><code><span class="keyword">func</span> (<label for="r65" class="ident">gsvd</label> *<a href="#line-43" class="ident">GSVD</a>) <label for="r66" class="ident"><a href="../../../../../use/gonum.org/v1/gonum/mat..GSVD.SigmaBTo.html" class="ident">SigmaBTo</a></label>(<label for="r67" class="ident">dst</label> *<a href="dense.go.html#line-35" class="ident">Dense</a>) {</code></span>
+<span class="codeline" id="line-318"><code>	<span class="keyword">if</span> !<label for="r65" class="ident">gsvd</label>.<a href="#line-55" class="ident">succFact</a>() {</code></span>
+<span class="codeline" id="line-319"><code>		<a href="../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="eigen.go.html#line-13" class="ident">badFact</a>)</code></span>
+<span class="codeline" id="line-320"><code>	}</code></span>
+<span class="codeline" id="line-321"><code>	<label for="r68" class="ident">r</label> := <label for="r65" class="ident">gsvd</label>.<a href="#line-46" class="ident">r</a></code></span>
+<span class="codeline" id="line-322"><code>	<label for="r69" class="ident">p</label> := <label for="r65" class="ident">gsvd</label>.<a href="#line-46" class="ident">p</a></code></span>
+<span class="codeline" id="line-323"><code>	<label for="r70" class="ident">k</label> := <label for="r65" class="ident">gsvd</label>.<a href="#line-46" class="ident">k</a></code></span>
+<span class="codeline" id="line-324"><code>	<label for="r71" class="ident">l</label> := <label for="r65" class="ident">gsvd</label>.<a href="#line-46" class="ident">l</a></code></span>
+<span class="codeline" id="line-325"><code>	<span class="keyword">if</span> <label for="r67" class="ident">dst</label>.<a href="dense.go.html#line-191" class="ident">IsEmpty</a>() {</code></span>
+<span class="codeline" id="line-326"><code>		<label for="r67" class="ident">dst</label>.<a href="dense.go.html#line-82" class="ident">ReuseAs</a>(<label for="r69" class="ident">p</label>, <label for="r70" class="ident">k</label>+<label for="r71" class="ident">l</label>)</code></span>
+<span class="codeline" id="line-327"><code>	} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-328"><code>		<label for="r72" class="ident">r</label>, <label for="r73" class="ident">c</label> := <label for="r67" class="ident">dst</label>.<a href="dense.go.html#line-233" class="ident">Dims</a>()</code></span>
+<span class="codeline" id="line-329"><code>		<span class="keyword">if</span> <label for="r72" class="ident">r</label> != <label for="r69" class="ident">p</label> || <label for="r73" class="ident">c</label> != <label for="r70" class="ident">k</label>+<label for="r71" class="ident">l</label> {</code></span>
+<span class="codeline" id="line-330"><code>			<a href="../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-129" class="ident">ErrShape</a>)</code></span>
+<span class="codeline" id="line-331"><code>		}</code></span>
+<span class="codeline" id="line-332"><code>		<label for="r67" class="ident">dst</label>.<a href="dense.go.html#line-153" class="ident">Zero</a>()</code></span>
+<span class="codeline" id="line-333"><code>	}</code></span>
+<span class="codeline" id="line-334"><code>	<span class="keyword">for</span> <label for="r74" class="ident">i</label> := <span class="lit-number">0</span>; <label for="r74" class="ident">i</label> &lt; <a href="matrix.go.html#line-954" class="ident">min</a>(<label for="r71" class="ident">l</label>, <label for="r68" class="ident">r</label>-<label for="r70" class="ident">k</label>); <label for="r74" class="ident">i</label>++ {</code></span>
+<span class="codeline" id="line-335"><code>		<label for="r67" class="ident">dst</label>.<a href="index_no_bound_checks.go.html#line-38" class="ident">set</a>(<label for="r74" class="ident">i</label>, <label for="r74" class="ident">i</label>+<label for="r70" class="ident">k</label>, <label for="r65" class="ident">gsvd</label>.<a href="#line-47" class="ident">s2</a>[<label for="r70" class="ident">k</label>+<label for="r74" class="ident">i</label>])</code></span>
+<span class="codeline" id="line-336"><code>	}</code></span>
+<span class="codeline" id="line-337"><code>	<span class="keyword">for</span> <label for="r75" class="ident">i</label> := <label for="r68" class="ident">r</label> - <label for="r70" class="ident">k</label>; <label for="r75" class="ident">i</label> &lt; <label for="r71" class="ident">l</label>; <label for="r75" class="ident">i</label>++ {</code></span>
+<span class="codeline" id="line-338"><code>		<label for="r67" class="ident">dst</label>.<a href="index_no_bound_checks.go.html#line-38" class="ident">set</a>(<label for="r75" class="ident">i</label>, <label for="r75" class="ident">i</label>+<label for="r70" class="ident">k</label>, <span class="lit-number">1</span>)</code></span>
+<span class="codeline" id="line-339"><code>	}</code></span>
+<span class="codeline" id="line-340"><code>}</code></span>
+<span class="codeline" id="line-341"><code></code></span>
+<span class="codeline" id="line-342"><code><span class="comment">// UTo extracts the matrix U from the singular value decomposition, storing</span></code></span>
+<span class="codeline" id="line-343"><code><span class="comment">// the result into dst. U is size r×r.</span></code></span>
+<span class="codeline" id="line-344"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-345"><code><span class="comment">// If dst is empty, UTo will resize dst to be r×r. When dst is</span></code></span>
+<span class="codeline" id="line-346"><code><span class="comment">// non-empty, UTo will panic if dst is not r×r. UTo will also</span></code></span>
+<span class="codeline" id="line-347"><code><span class="comment">// panic if the receiver does not contain a successful factorization.</span></code></span>
+<span class="codeline" id="line-348"><code><span class="keyword">func</span> (<label for="r76" class="ident">gsvd</label> *<a href="#line-43" class="ident">GSVD</a>) <label for="r77" class="ident"><a href="../../../../../use/gonum.org/v1/gonum/mat..GSVD.UTo.html" class="ident">UTo</a></label>(<label for="r78" class="ident">dst</label> *<a href="dense.go.html#line-35" class="ident">Dense</a>) {</code></span>
+<span class="codeline" id="line-349"><code>	<span class="keyword">if</span> !<label for="r76" class="ident">gsvd</label>.<a href="#line-55" class="ident">succFact</a>() {</code></span>
+<span class="codeline" id="line-350"><code>		<a href="../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="eigen.go.html#line-13" class="ident">badFact</a>)</code></span>
+<span class="codeline" id="line-351"><code>	}</code></span>
+<span class="codeline" id="line-352"><code>	<span class="keyword">if</span> <label for="r76" class="ident">gsvd</label>.<a href="#line-44" class="ident">kind</a>&amp;<a href="#line-25" class="ident">GSVDU</a> == <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-353"><code>		<a href="../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<span class="lit-string">"mat: improper GSVD kind"</span>)</code></span>
+<span class="codeline" id="line-354"><code>	}</code></span>
+<span class="codeline" id="line-355"><code>	<label for="r79" class="ident">r</label> := <label for="r76" class="ident">gsvd</label>.<a href="#line-48" class="ident">u</a>.<a href="../blas/blas64/blas64.go.html#line-38" class="ident">Rows</a></code></span>
+<span class="codeline" id="line-356"><code>	<label for="r80" class="ident">c</label> := <label for="r76" class="ident">gsvd</label>.<a href="#line-48" class="ident">u</a>.<a href="../blas/blas64/blas64.go.html#line-38" class="ident">Cols</a></code></span>
+<span class="codeline" id="line-357"><code>	<span class="keyword">if</span> <label for="r78" class="ident">dst</label>.<a href="dense.go.html#line-191" class="ident">IsEmpty</a>() {</code></span>
+<span class="codeline" id="line-358"><code>		<label for="r78" class="ident">dst</label>.<a href="dense.go.html#line-82" class="ident">ReuseAs</a>(<label for="r79" class="ident">r</label>, <label for="r80" class="ident">c</label>)</code></span>
+<span class="codeline" id="line-359"><code>	} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-360"><code>		<label for="r81" class="ident">r2</label>, <label for="r82" class="ident">c2</label> := <label for="r78" class="ident">dst</label>.<a href="dense.go.html#line-233" class="ident">Dims</a>()</code></span>
+<span class="codeline" id="line-361"><code>		<span class="keyword">if</span> <label for="r79" class="ident">r</label> != <label for="r81" class="ident">r2</label> || <label for="r80" class="ident">c</label> != <label for="r82" class="ident">c2</label> {</code></span>
+<span class="codeline" id="line-362"><code>			<a href="../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-129" class="ident">ErrShape</a>)</code></span>
+<span class="codeline" id="line-363"><code>		}</code></span>
+<span class="codeline" id="line-364"><code>	}</code></span>
+<span class="codeline" id="line-365"><code></code></span>
+<span class="codeline" id="line-366"><code>	<label for="r83" class="ident">tmp</label> := &amp;<a href="dense.go.html#line-35" class="ident">Dense</a>{</code></span>
+<span class="codeline" id="line-367"><code>		<a href="dense.go.html#line-36" class="ident">mat</a>:     <label for="r76" class="ident">gsvd</label>.<a href="#line-48" class="ident">u</a>,</code></span>
+<span class="codeline" id="line-368"><code>		<a href="dense.go.html#line-38" class="ident">capRows</a>: <label for="r79" class="ident">r</label>,</code></span>
+<span class="codeline" id="line-369"><code>		<a href="dense.go.html#line-38" class="ident">capCols</a>: <label for="r80" class="ident">c</label>,</code></span>
+<span class="codeline" id="line-370"><code>	}</code></span>
+<span class="codeline" id="line-371"><code>	<label for="r78" class="ident">dst</label>.<a href="dense.go.html#line-464" class="ident">Copy</a>(<label for="r83" class="ident">tmp</label>)</code></span>
+<span class="codeline" id="line-372"><code>}</code></span>
+<span class="codeline" id="line-373"><code></code></span>
+<span class="codeline" id="line-374"><code><span class="comment">// VTo extracts the matrix V from the singular value decomposition, storing</span></code></span>
+<span class="codeline" id="line-375"><code><span class="comment">// the result into dst. V is size p×p.</span></code></span>
+<span class="codeline" id="line-376"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-377"><code><span class="comment">// If dst is empty, VTo will resize dst to be p×p. When dst is</span></code></span>
+<span class="codeline" id="line-378"><code><span class="comment">// non-empty, VTo will panic if dst is not p×p. VTo will also</span></code></span>
+<span class="codeline" id="line-379"><code><span class="comment">// panic if the receiver does not contain a successful factorization.</span></code></span>
+<span class="codeline" id="line-380"><code><span class="keyword">func</span> (<label for="r84" class="ident">gsvd</label> *<a href="#line-43" class="ident">GSVD</a>) <label for="r85" class="ident"><a href="../../../../../use/gonum.org/v1/gonum/mat..GSVD.VTo.html" class="ident">VTo</a></label>(<label for="r86" class="ident">dst</label> *<a href="dense.go.html#line-35" class="ident">Dense</a>) {</code></span>
+<span class="codeline" id="line-381"><code>	<span class="keyword">if</span> !<label for="r84" class="ident">gsvd</label>.<a href="#line-55" class="ident">succFact</a>() {</code></span>
+<span class="codeline" id="line-382"><code>		<a href="../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="eigen.go.html#line-13" class="ident">badFact</a>)</code></span>
+<span class="codeline" id="line-383"><code>	}</code></span>
+<span class="codeline" id="line-384"><code>	<span class="keyword">if</span> <label for="r84" class="ident">gsvd</label>.<a href="#line-44" class="ident">kind</a>&amp;<a href="#line-28" class="ident">GSVDV</a> == <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-385"><code>		<a href="../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<span class="lit-string">"mat: improper GSVD kind"</span>)</code></span>
+<span class="codeline" id="line-386"><code>	}</code></span>
+<span class="codeline" id="line-387"><code>	<label for="r87" class="ident">r</label> := <label for="r84" class="ident">gsvd</label>.<a href="#line-48" class="ident">v</a>.<a href="../blas/blas64/blas64.go.html#line-38" class="ident">Rows</a></code></span>
+<span class="codeline" id="line-388"><code>	<label for="r88" class="ident">c</label> := <label for="r84" class="ident">gsvd</label>.<a href="#line-48" class="ident">v</a>.<a href="../blas/blas64/blas64.go.html#line-38" class="ident">Cols</a></code></span>
+<span class="codeline" id="line-389"><code>	<span class="keyword">if</span> <label for="r86" class="ident">dst</label>.<a href="dense.go.html#line-191" class="ident">IsEmpty</a>() {</code></span>
+<span class="codeline" id="line-390"><code>		<label for="r86" class="ident">dst</label>.<a href="dense.go.html#line-82" class="ident">ReuseAs</a>(<label for="r87" class="ident">r</label>, <label for="r88" class="ident">c</label>)</code></span>
+<span class="codeline" id="line-391"><code>	} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-392"><code>		<label for="r89" class="ident">r2</label>, <label for="r90" class="ident">c2</label> := <label for="r86" class="ident">dst</label>.<a href="dense.go.html#line-233" class="ident">Dims</a>()</code></span>
+<span class="codeline" id="line-393"><code>		<span class="keyword">if</span> <label for="r87" class="ident">r</label> != <label for="r89" class="ident">r2</label> || <label for="r88" class="ident">c</label> != <label for="r90" class="ident">c2</label> {</code></span>
+<span class="codeline" id="line-394"><code>			<a href="../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-129" class="ident">ErrShape</a>)</code></span>
+<span class="codeline" id="line-395"><code>		}</code></span>
+<span class="codeline" id="line-396"><code>	}</code></span>
+<span class="codeline" id="line-397"><code></code></span>
+<span class="codeline" id="line-398"><code>	<label for="r91" class="ident">tmp</label> := &amp;<a href="dense.go.html#line-35" class="ident">Dense</a>{</code></span>
+<span class="codeline" id="line-399"><code>		<a href="dense.go.html#line-36" class="ident">mat</a>:     <label for="r84" class="ident">gsvd</label>.<a href="#line-48" class="ident">v</a>,</code></span>
+<span class="codeline" id="line-400"><code>		<a href="dense.go.html#line-38" class="ident">capRows</a>: <label for="r87" class="ident">r</label>,</code></span>
+<span class="codeline" id="line-401"><code>		<a href="dense.go.html#line-38" class="ident">capCols</a>: <label for="r88" class="ident">c</label>,</code></span>
+<span class="codeline" id="line-402"><code>	}</code></span>
+<span class="codeline" id="line-403"><code>	<label for="r86" class="ident">dst</label>.<a href="dense.go.html#line-464" class="ident">Copy</a>(<label for="r91" class="ident">tmp</label>)</code></span>
+<span class="codeline" id="line-404"><code>}</code></span>
+<span class="codeline" id="line-405"><code></code></span>
+<span class="codeline" id="line-406"><code><span class="comment">// QTo extracts the matrix Q from the singular value decomposition, storing</span></code></span>
+<span class="codeline" id="line-407"><code><span class="comment">// the result into dst. Q is size c×c.</span></code></span>
+<span class="codeline" id="line-408"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-409"><code><span class="comment">// If dst is empty, QTo will resize dst to be c×c. When dst is</span></code></span>
+<span class="codeline" id="line-410"><code><span class="comment">// non-empty, QTo will panic if dst is not c×c. QTo will also</span></code></span>
+<span class="codeline" id="line-411"><code><span class="comment">// panic if the receiver does not contain a successful factorization.</span></code></span>
+<span class="codeline" id="line-412"><code><span class="keyword">func</span> (<label for="r92" class="ident">gsvd</label> *<a href="#line-43" class="ident">GSVD</a>) <label for="r93" class="ident"><a href="../../../../../use/gonum.org/v1/gonum/mat..GSVD.QTo.html" class="ident">QTo</a></label>(<label for="r94" class="ident">dst</label> *<a href="dense.go.html#line-35" class="ident">Dense</a>) {</code></span>
+<span class="codeline" id="line-413"><code>	<span class="keyword">if</span> !<label for="r92" class="ident">gsvd</label>.<a href="#line-55" class="ident">succFact</a>() {</code></span>
+<span class="codeline" id="line-414"><code>		<a href="../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="eigen.go.html#line-13" class="ident">badFact</a>)</code></span>
+<span class="codeline" id="line-415"><code>	}</code></span>
+<span class="codeline" id="line-416"><code>	<span class="keyword">if</span> <label for="r92" class="ident">gsvd</label>.<a href="#line-44" class="ident">kind</a>&amp;<a href="#line-31" class="ident">GSVDQ</a> == <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-417"><code>		<a href="../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<span class="lit-string">"mat: improper GSVD kind"</span>)</code></span>
+<span class="codeline" id="line-418"><code>	}</code></span>
+<span class="codeline" id="line-419"><code>	<label for="r95" class="ident">r</label> := <label for="r92" class="ident">gsvd</label>.<a href="#line-48" class="ident">q</a>.<a href="../blas/blas64/blas64.go.html#line-38" class="ident">Rows</a></code></span>
+<span class="codeline" id="line-420"><code>	<label for="r96" class="ident">c</label> := <label for="r92" class="ident">gsvd</label>.<a href="#line-48" class="ident">q</a>.<a href="../blas/blas64/blas64.go.html#line-38" class="ident">Cols</a></code></span>
+<span class="codeline" id="line-421"><code>	<span class="keyword">if</span> <label for="r94" class="ident">dst</label>.<a href="dense.go.html#line-191" class="ident">IsEmpty</a>() {</code></span>
+<span class="codeline" id="line-422"><code>		<label for="r94" class="ident">dst</label>.<a href="dense.go.html#line-82" class="ident">ReuseAs</a>(<label for="r95" class="ident">r</label>, <label for="r96" class="ident">c</label>)</code></span>
+<span class="codeline" id="line-423"><code>	} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-424"><code>		<label for="r97" class="ident">r2</label>, <label for="r98" class="ident">c2</label> := <label for="r94" class="ident">dst</label>.<a href="dense.go.html#line-233" class="ident">Dims</a>()</code></span>
+<span class="codeline" id="line-425"><code>		<span class="keyword">if</span> <label for="r95" class="ident">r</label> != <label for="r97" class="ident">r2</label> || <label for="r96" class="ident">c</label> != <label for="r98" class="ident">c2</label> {</code></span>
+<span class="codeline" id="line-426"><code>			<a href="../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-129" class="ident">ErrShape</a>)</code></span>
+<span class="codeline" id="line-427"><code>		}</code></span>
+<span class="codeline" id="line-428"><code>	}</code></span>
+<span class="codeline" id="line-429"><code></code></span>
+<span class="codeline" id="line-430"><code>	<label for="r99" class="ident">tmp</label> := &amp;<a href="dense.go.html#line-35" class="ident">Dense</a>{</code></span>
+<span class="codeline" id="line-431"><code>		<a href="dense.go.html#line-36" class="ident">mat</a>:     <label for="r92" class="ident">gsvd</label>.<a href="#line-48" class="ident">q</a>,</code></span>
+<span class="codeline" id="line-432"><code>		<a href="dense.go.html#line-38" class="ident">capRows</a>: <label for="r95" class="ident">r</label>,</code></span>
+<span class="codeline" id="line-433"><code>		<a href="dense.go.html#line-38" class="ident">capCols</a>: <label for="r96" class="ident">c</label>,</code></span>
+<span class="codeline" id="line-434"><code>	}</code></span>
+<span class="codeline" id="line-435"><code>	<label for="r94" class="ident">dst</label>.<a href="dense.go.html#line-464" class="ident">Copy</a>(<label for="r99" class="ident">tmp</label>)</code></span>
+<span class="codeline" id="line-436"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

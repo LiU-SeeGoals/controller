@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.workType.assistQueue</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/mgc.go.html#line-305">workType</a>.<a href="../src/runtime/mgc.go.html#line-398">assistQueue</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">18 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/mgc.go.html#line-189">mgc.go#L189</a>: 	lockInit(&amp;work.<b>assistQueue</b>.lock, lockRankAssistQueue)
+		<a href="../src/runtime/mgc.go.html#line-398" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-398">#L398</a>: 	<b>assistQueue</b> struct {
+		<a href="../src/runtime/mgcmark.go.html#line-615">mgcmark.go#L615</a>: 	lock(&amp;work.<b>assistQueue</b>.lock)
+		<a href="../src/runtime/mgcmark.go.html#line-616" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-616">#L616</a>: 	list := work.<b>assistQueue</b>.q.popList()
+		<a href="../src/runtime/mgcmark.go.html#line-618" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-618">#L618</a>: 	unlock(&amp;work.<b>assistQueue</b>.lock)
+		<a href="../src/runtime/mgcmark.go.html#line-626" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-626">#L626</a>: 	lock(&amp;work.<b>assistQueue</b>.lock)
+		<a href="../src/runtime/mgcmark.go.html#line-631" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-631">#L631</a>: 		unlock(&amp;work.<b>assistQueue</b>.lock)
+		<a href="../src/runtime/mgcmark.go.html#line-636" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-636">#L636</a>: 	oldList := work.<b>assistQueue</b>.q
+		<a href="../src/runtime/mgcmark.go.html#line-637" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-637">#L637</a>: 	work.<b>assistQueue</b>.q.pushBack(gp)
+		<a href="../src/runtime/mgcmark.go.html#line-644" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-644">#L644</a>: 		work.<b>assistQueue</b>.q = oldList
+		<a href="../src/runtime/mgcmark.go.html#line-648" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-648">#L648</a>: 		unlock(&amp;work.<b>assistQueue</b>.lock)
+		<a href="../src/runtime/mgcmark.go.html#line-652" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-652">#L652</a>: 	goparkunlock(&amp;work.<b>assistQueue</b>.lock, waitReasonGCAssistWait, traceBlockGCMarkAssist, 2)
+		<a href="../src/runtime/mgcmark.go.html#line-667" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-667">#L667</a>: 	if work.<b>assistQueue</b>.q.empty() {
+		<a href="../src/runtime/mgcmark.go.html#line-679" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-679">#L679</a>: 	lock(&amp;work.<b>assistQueue</b>.lock)
+		<a href="../src/runtime/mgcmark.go.html#line-680" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-680">#L680</a>: 	for !work.<b>assistQueue</b>.q.empty() &amp;&amp; scanBytes &gt; 0 {
+		<a href="../src/runtime/mgcmark.go.html#line-681" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-681">#L681</a>: 		gp := work.<b>assistQueue</b>.q.pop()
+		<a href="../src/runtime/mgcmark.go.html#line-703" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-703">#L703</a>: 			work.<b>assistQueue</b>.q.pushBack(gp)
+		<a href="../src/runtime/mgcmark.go.html#line-714" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-714">#L714</a>: 	unlock(&amp;work.<b>assistQueue</b>.lock)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

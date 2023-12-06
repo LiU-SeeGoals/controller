@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/internal/asm/c64.DotuInc</title>
+<link href="../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../../../../../../pkg/gonum.org/v1/gonum/internal/asm/c64.html">gonum.org/v1/gonum/internal/asm/c64</a>.<a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/c64/stubs_amd64.go.html#line-77">DotuInc</a></b></span>
+
+<span class="title">11 uses</span>
+
+	gonum.org/v1/gonum/internal/asm/c64 (current package)
+		<a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/c64/stubs_amd64.go.html#line-77">stubs_amd64.go#L77</a>: func <b>DotuInc</b>(x, y []complex64, n, incX, incY, ix, iy uintptr) (sum complex64)
+
+	<a href="../../../../../../pkg/gonum.org/v1/gonum/blas/gonum.html">gonum.org/v1/gonum/blas/gonum</a>
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level1cmplx64.go.html#line-346">level1cmplx64.go#L346</a>: 	return c64.<b>DotuInc</b>(x, y, uintptr(n), uintptr(incX), uintptr(incY), uintptr(ix), uintptr(iy))
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2cmplx64.go.html#line-329">level2cmplx64.go#L329</a>: 			y[iy] += alpha * c64.<b>DotuInc</b>(a[i*lda:i*lda+n], x, uintptr(n), 1, uintptr(incX), 0, uintptr(kx))
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2cmplx64.go.html#line-2140" class="path-duplicate">level2cmplx64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2cmplx64.go.html#line-2140">#L2140</a>: 						x[ix] += c64.<b>DotuInc</b>(ap[kk+1:kk+n-i], x, uintptr(n-i-1), 1, uintptr(incX), 0, uintptr(ix+incX))
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2cmplx64.go.html#line-2166" class="path-duplicate">level2cmplx64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2cmplx64.go.html#line-2166">#L2166</a>: 						x[ix] += c64.<b>DotuInc</b>(ap[kk:kk+i], x, uintptr(i), 1, uintptr(incX), 0, uintptr(kx))
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2cmplx64.go.html#line-2385" class="path-duplicate">level2cmplx64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2cmplx64.go.html#line-2385">#L2385</a>: 						x[ix] -= c64.<b>DotuInc</b>(x, ap[kk+1:kk+n-i], uintptr(n-i-1), uintptr(incX), 1, uintptr(ix+incX), 0)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2cmplx64.go.html#line-2410" class="path-duplicate">level2cmplx64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2cmplx64.go.html#line-2410">#L2410</a>: 						x[ix] -= c64.<b>DotuInc</b>(x, ap[kk:kk+i], uintptr(i), uintptr(incX), 1, uintptr(kx), 0)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2cmplx64.go.html#line-2620" class="path-duplicate">level2cmplx64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2cmplx64.go.html#line-2620">#L2620</a>: 						x[ix] += c64.<b>DotuInc</b>(a[i*lda+i+1:i*lda+n], x, uintptr(n-i-1), 1, uintptr(incX), 0, uintptr(ix+incX))
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2cmplx64.go.html#line-2642" class="path-duplicate">level2cmplx64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2cmplx64.go.html#line-2642">#L2642</a>: 						x[ix] += c64.<b>DotuInc</b>(a[i*lda:i*lda+i], x, uintptr(i), 1, uintptr(incX), 0, uintptr(kx))
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2cmplx64.go.html#line-2837" class="path-duplicate">level2cmplx64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2cmplx64.go.html#line-2837">#L2837</a>: 						x[ix] -= c64.<b>DotuInc</b>(x, a[i*lda+i+1:i*lda+n], uintptr(n-i-1), uintptr(incX), 1, uintptr(ix+incX), 0)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2cmplx64.go.html#line-2859" class="path-duplicate">level2cmplx64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2cmplx64.go.html#line-2859">#L2859</a>: 						x[ix] -= c64.<b>DotuInc</b>(x, a[i*lda:i*lda+i], uintptr(i), uintptr(incX), 1, uintptr(kx), 0)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

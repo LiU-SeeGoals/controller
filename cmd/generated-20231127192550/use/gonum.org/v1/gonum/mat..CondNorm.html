@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/mat.CondNorm</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">const <b><a href="../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-38">CondNorm</a></b></span>
+
+<span class="title">13 uses</span>
+
+	gonum.org/v1/gonum/mat (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-71">cholesky.go#L71</a>: 		unorm := lapack64.Lantr(<b>CondNorm</b>, c.chol.mat, work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-146" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-146">#L146</a>: 	norm := lapack64.Lansy(<b>CondNorm</b>, sym, work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-773" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-773">#L773</a>: 	aNorm := lapack64.Lansb(<b>CondNorm</b>, cSym, work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-982" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-982">#L982</a>: 	aNorm := lapack64.Lansy(<b>CondNorm</b>, sym, work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-242">dense_arithmetic.go#L242</a>: 	norm := lapack64.Lange(<b>CondNorm</b>, m.mat, work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-254" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-254">#L254</a>: 	rcond := lapack64.Gecon(<b>CondNorm</b>, m.mat, norm, work, iwork)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/errors.go.html#line-38">errors.go#L38</a>: 	<b>CondNorm</b> = lapack.MaxRowSum
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-50">lq.go#L50</a>: 	lq.factorize(a, <b>CondNorm</b>)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-63">lu.go#L63</a>: 	lu.factorize(a, <b>CondNorm</b>)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-249" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-249">#L249</a>: 	lu.updateCond(-1, <b>CondNorm</b>)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-50">qr.go#L50</a>: 	qr.factorize(a, <b>CondNorm</b>)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/solve.go.html#line-82">solve.go#L82</a>: 		cond := lapack64.Trcon(<b>CondNorm</b>, rm, work, iwork)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-464">triangular.go#L464</a>: 	cond := lapack64.Trcon(<b>CondNorm</b>, t.mat, work, iwork)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

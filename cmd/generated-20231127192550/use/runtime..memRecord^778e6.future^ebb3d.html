@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.memRecord.future</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/mprof.go.html#line-73">memRecord</a>.<a href="../src/runtime/mprof.go.html#line-130">future</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">14 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/mprof.go.html#line-27">mprof.go#L27</a>: 	profMemFutureLock [len(memRecord{}.<b>future</b>)]mutex
+		<a href="../src/runtime/mprof.go.html#line-130" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-130">#L130</a>: 	<b>future</b> [3]memRecordCycle
+		<a href="../src/runtime/mprof.go.html#line-165" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-165">#L165</a>: const mProfCycleWrap = uint32(len(memRecord{}.<b>future</b>)) * (2 &lt;&lt; 24)
+		<a href="../src/runtime/mprof.go.html#line-370" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-370">#L370</a>: 	index := cycle % uint32(len(memRecord{}.<b>future</b>))
+		<a href="../src/runtime/mprof.go.html#line-391" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-391">#L391</a>: 		mpc := &amp;mp.<b>future</b>[index]
+		<a href="../src/runtime/mprof.go.html#line-409" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-409">#L409</a>: 	index := cycle % uint32(len(memRecord{}.<b>future</b>))
+		<a href="../src/runtime/mprof.go.html#line-422" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-422">#L422</a>: 	index := (mProfCycle.read() + 2) % uint32(len(memRecord{}.<b>future</b>))
+		<a href="../src/runtime/mprof.go.html#line-426" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-426">#L426</a>: 	mpc := &amp;mp.<b>future</b>[index]
+		<a href="../src/runtime/mprof.go.html#line-444" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-444">#L444</a>: 	index := (mProfCycle.read() + 1) % uint32(len(memRecord{}.<b>future</b>))
+		<a href="../src/runtime/mprof.go.html#line-447" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-447">#L447</a>: 	mpc := &amp;mp.<b>future</b>[index]
+		<a href="../src/runtime/mprof.go.html#line-655" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-655">#L655</a>: 	index := cycle % uint32(len(memRecord{}.<b>future</b>))
+		<a href="../src/runtime/mprof.go.html#line-679" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-679">#L679</a>: 			for c := range mp.<b>future</b> {
+		<a href="../src/runtime/mprof.go.html#line-681" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-681">#L681</a>: 				mp.active.add(&amp;mp.<b>future</b>[c])
+		<a href="../src/runtime/mprof.go.html#line-682" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-682">#L682</a>: 				mp.<b>future</b>[c] = memRecordCycle{}
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>
