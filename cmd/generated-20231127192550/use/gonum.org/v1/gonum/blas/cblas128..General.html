@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/blas/cblas128.General</title>
+<link href="../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../../../../../pkg/gonum.org/v1/gonum/blas/cblas128.html">gonum.org/v1/gonum/blas/cblas128</a>.<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-37">General</a></b></span>
+
+<span class="title">34 uses</span>
+
+	gonum.org/v1/gonum/blas/cblas128 (current package)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-37">cblas128.go#L37</a>: type <b>General</b> struct {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-256" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-256">#L256</a>: func Gemv(t blas.Transpose, alpha complex128, a <b>General</b>, x Vector, beta complex128, y Vector) {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-391" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-391">#L391</a>: func Geru(alpha complex128, x, y Vector, a <b>General</b>) {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-400" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-400">#L400</a>: func Gerc(alpha complex128, x, y Vector, a <b>General</b>) {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-450" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-450">#L450</a>: func Gemm(tA, tB blas.Transpose, alpha complex128, a, b <b>General</b>, beta complex128, c <b>General</b>) {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-472" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-472">#L472</a>: func Symm(s blas.Side, alpha complex128, a Symmetric, b <b>General</b>, beta complex128, c <b>General</b>) {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-489" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-489">#L489</a>: func Syrk(t blas.Transpose, alpha complex128, a <b>General</b>, beta complex128, c Symmetric) {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-506" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-506">#L506</a>: func Syr2k(t blas.Transpose, alpha complex128, a, b <b>General</b>, beta complex128, c Symmetric) {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-527" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-527">#L527</a>: func Trmm(s blas.Side, tA blas.Transpose, alpha complex128, a Triangular, b <b>General</b>) {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-547" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-547">#L547</a>: func Trsm(s blas.Side, tA blas.Transpose, alpha complex128, a Triangular, b <b>General</b>) {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-558" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-558">#L558</a>: func Hemm(s blas.Side, alpha complex128, a Hermitian, b <b>General</b>, beta complex128, c <b>General</b>) {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-575" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-575">#L575</a>: func Herk(t blas.Transpose, alpha float64, a <b>General</b>, beta float64, c Hermitian) {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-592" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-592">#L592</a>: func Her2k(t blas.Transpose, alpha complex128, a, b <b>General</b>, beta float64, c Hermitian) {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv.go.html#line-12">conv.go#L12</a>: type GeneralCols <b>General</b>
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv.go.html#line-17" class="path-duplicate">conv.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv.go.html#line-17">#L17</a>: func (t GeneralCols) From(a <b>General</b>) {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv.go.html#line-34" class="path-duplicate">conv.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv.go.html#line-34">#L34</a>: func (t <b>General</b>) From(a GeneralCols) {
+
+	<a href="../../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-22">cdense.go#L22</a>: 	mat cblas128.<b>General</b>
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-135" class="path-duplicate">cdense.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-135">#L135</a>: 		mat: cblas128.<b>General</b>{
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-180" class="path-duplicate">cdense.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-180">#L180</a>: 		m.mat = cblas128.<b>General</b>{
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-205" class="path-duplicate">cdense.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-205">#L205</a>: 		m.mat = cblas128.<b>General</b>{
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-295" class="path-duplicate">cdense.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-295">#L295</a>: func (m *CDense) SetRawCMatrix(b cblas128.<b>General</b>) {
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-303" class="path-duplicate">cdense.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-303">#L303</a>: func (m *CDense) RawCMatrix() cblas128.<b>General</b> { return m.mat }
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-323" class="path-duplicate">cdense.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-323">#L323</a>: 		t.mat = cblas128.<b>General</b>{
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-335" class="path-duplicate">cdense.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-335">#L335</a>: 		t.mat = cblas128.<b>General</b>{
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-347" class="path-duplicate">cdense.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-347">#L347</a>: 		tmp.mat = cblas128.<b>General</b>{
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-358" class="path-duplicate">cdense.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-358">#L358</a>: 		t.mat = cblas128.<b>General</b>{
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-40">cmatrix.go#L40</a>: 	RawCMatrix() cblas128.<b>General</b>
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-80">pool.go#L80</a>: 			return &amp;CDense{mat: cblas128.<b>General</b>{
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/shadow_complex.go.html#line-16">shadow_complex.go#L16</a>: func checkOverlapComplex(a, b cblas128.<b>General</b>) bool {
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/shadow_complex.go.html#line-56" class="path-duplicate">shadow_complex.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/shadow_complex.go.html#line-56">#L56</a>: func (m *CDense) checkOverlap(a cblas128.<b>General</b>) bool {
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/shadow_complex.go.html#line-64" class="path-duplicate">shadow_complex.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/shadow_complex.go.html#line-64">#L64</a>: 	var amat cblas128.<b>General</b>
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

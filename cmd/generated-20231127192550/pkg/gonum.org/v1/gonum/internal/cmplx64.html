@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: gonum.org/v1/gonum/internal/cmplx64</title>
+<link href="../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>cmplx64</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../../../index.html#pkg-gonum.org/v1/gonum/internal/cmplx64">gonum.org/v1/gonum/internal/cmplx64</a><i> (on <a href="https://pkg.go.dev/gonum.org/v1/gonum/internal/cmplx64" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../../../dep/gonum.org/v1/gonum/internal/cmplx64.html">one package</a>, and imported by <a href="../../../../../dep/gonum.org/v1/gonum/internal/cmplx64.html#imported-by">2 packages</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<span class="nodocs">    <a href="../../../../../src/gonum.org/v1/gonum/internal/cmplx64/abs.go.html">abs.go</a></span>
+	<span class="nodocs">    <a href="../../../../../src/gonum.org/v1/gonum/internal/cmplx64/conj.go.html">conj.go</a></span>
+	<input type='checkbox' checked class="fold" id="file-2-fold-content"><label for="file-2-fold-content">  <a href="../../../../../src/gonum.org/v1/gonum/internal/cmplx64/doc.go.html#doc">d</a> <a href="../../../../../src/gonum.org/v1/gonum/internal/cmplx64/doc.go.html">doc.go</a></label><span id='file-2-fold-content-items' class="fold-items">
+<span class="md-text">		Package cmplx64 provides complex64 versions of standard library math/cmplx
+		package routines used by gonum/blas.</span>
+</span>
+	<span class="nodocs">    <a href="../../../../../src/gonum.org/v1/gonum/internal/cmplx64/isinf.go.html">isinf.go</a></span>
+	<span class="nodocs">    <a href="../../../../../src/gonum.org/v1/gonum/internal/cmplx64/isnan.go.html">isnan.go</a></span>
+	<span class="nodocs">    <a href="../../../../../src/gonum.org/v1/gonum/internal/cmplx64/sqrt.go.html">sqrt.go</a></span></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (total 7, all are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-Abs">	<input type='checkbox' class="fold" id="Abs-fold-content"><label for="Abs-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/internal/cmplx64..Abs.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/internal/cmplx64/abs.go.html#line-14">Abs</a>(x <a href="../../../../builtin.html#name-complex64">complex64</a>) <a href="../../../../builtin.html#name-float32">float32</a></label><span id='Abs-fold-content-docs' class="fold-docs">
+<span class="md-text">		Abs returns the absolute value (also called the modulus) of x.</span>
+
+</span></div><div class="anchor value-res" id="name-Conj">	<input type='checkbox' class="fold" id="Conj-fold-content"><label for="Conj-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/internal/cmplx64..Conj.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/internal/cmplx64/conj.go.html#line-12">Conj</a>(x <a href="../../../../builtin.html#name-complex64">complex64</a>) <a href="../../../../builtin.html#name-complex64">complex64</a></label><span id='Conj-fold-content-docs' class="fold-docs">
+<span class="md-text">		Conj returns the complex conjugate of x.</span>
+
+</span></div><div class="anchor value-res" id="name-Inf">	<input type='checkbox' class="fold" id="Inf-fold-content"><label for="Inf-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/internal/cmplx64..Inf.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/internal/cmplx64/isinf.go.html#line-22">Inf</a>() <a href="../../../../builtin.html#name-complex64">complex64</a></label><span id='Inf-fold-content-docs' class="fold-docs">
+<span class="md-text">		Inf returns a complex infinity, complex(+Inf, +Inf).</span>
+
+</span></div><div class="anchor value-res" id="name-IsInf">	<input type='checkbox' class="fold" id="IsInf-fold-content"><label for="IsInf-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/internal/cmplx64..IsInf.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/internal/cmplx64/isinf.go.html#line-14">IsInf</a>(x <a href="../../../../builtin.html#name-complex64">complex64</a>) <a href="../../../../builtin.html#name-bool">bool</a></label><span id='IsInf-fold-content-docs' class="fold-docs">
+<span class="md-text">		IsInf returns true if either real(x) or imag(x) is an infinity.</span>
+
+</span></div><div class="anchor value-res" id="name-IsNaN">	<input type='checkbox' class="fold" id="IsNaN-fold-content"><label for="IsNaN-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/internal/cmplx64..IsNaN.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/internal/cmplx64/isnan.go.html#line-15">IsNaN</a>(x <a href="../../../../builtin.html#name-complex64">complex64</a>) <a href="../../../../builtin.html#name-bool">bool</a></label><span id='IsNaN-fold-content-docs' class="fold-docs">
+<span class="md-text">		IsNaN returns true if either real(x) or imag(x) is NaN
+		and neither is an infinity.</span>
+
+</span></div><div class="anchor value-res" id="name-NaN">	<input type='checkbox' class="fold" id="NaN-fold-content"><label for="NaN-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/internal/cmplx64..NaN.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/internal/cmplx64/isnan.go.html#line-26">NaN</a>() <a href="../../../../builtin.html#name-complex64">complex64</a></label><span id='NaN-fold-content-docs' class="fold-docs">
+<span class="md-text">		NaN returns a complex “not-a-number” value.</span>
+
+</span></div><div class="anchor value-res" id="name-Sqrt">	<input type='checkbox' class="fold" id="Sqrt-fold-content"><label for="Sqrt-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/internal/cmplx64..Sqrt.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/internal/cmplx64/sqrt.go.html#line-62">Sqrt</a>(x <a href="../../../../builtin.html#name-complex64">complex64</a>) <a href="../../../../builtin.html#name-complex64">complex64</a></label><span id='Sqrt-fold-content-docs' class="fold-docs">
+<span class="md-text">		Sqrt returns the square root of x.
+		The result r is chosen so that real(r) ≥ 0 and imag(r) has the same sign as imag(x).</span>
+
+</span></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

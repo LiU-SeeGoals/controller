@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: dotunitary_amd64.s in package gonum.org/v1/gonum/internal/asm/f32</title>
+<link href="../../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	dotunitary_amd64.s
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/gonum.org/v1/gonum/internal/asm/f32.html">gonum.org/v1/gonum/internal/asm/f32</a>
+</code></pre>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code>// Copyright ©2017 The Gonum Authors. All rights reserved.</code></span>
+<span class="codeline" id="line-2"><code>// Use of this source code is governed by a BSD-style</code></span>
+<span class="codeline" id="line-3"><code>// license that can be found in the LICENSE file.</code></span>
+<span class="codeline" id="line-4"><code></code></span>
+<span class="codeline" id="line-5"><code>// +build !noasm,!gccgo,!safe</code></span>
+<span class="codeline" id="line-6"><code></code></span>
+<span class="codeline" id="line-7"><code>#include "textflag.h"</code></span>
+<span class="codeline" id="line-8"><code></code></span>
+<span class="codeline" id="line-9"><code>#define HADDPS_SUM_SUM    LONG $0xC07C0FF2 // @ HADDPS X0, X0</code></span>
+<span class="codeline" id="line-10"><code></code></span>
+<span class="codeline" id="line-11"><code>#define X_PTR SI</code></span>
+<span class="codeline" id="line-12"><code>#define Y_PTR DI</code></span>
+<span class="codeline" id="line-13"><code>#define LEN CX</code></span>
+<span class="codeline" id="line-14"><code>#define TAIL BX</code></span>
+<span class="codeline" id="line-15"><code>#define IDX AX</code></span>
+<span class="codeline" id="line-16"><code>#define SUM X0</code></span>
+<span class="codeline" id="line-17"><code>#define P_SUM X1</code></span>
+<span class="codeline" id="line-18"><code></code></span>
+<span class="codeline" id="line-19"><code>// func DotUnitary(x, y []float32) (sum float32)</code></span>
+<span class="codeline" id="line-20"><code>TEXT ·DotUnitary(SB), NOSPLIT, $0</code></span>
+<span class="codeline" id="line-21"><code>	MOVQ    x_base+0(FP), X_PTR  // X_PTR = &amp;x</code></span>
+<span class="codeline" id="line-22"><code>	MOVQ    y_base+24(FP), Y_PTR // Y_PTR = &amp;y</code></span>
+<span class="codeline" id="line-23"><code>	PXOR    SUM, SUM             // SUM = 0</code></span>
+<span class="codeline" id="line-24"><code>	MOVQ    x_len+8(FP), LEN     // LEN = min( len(x), len(y) )</code></span>
+<span class="codeline" id="line-25"><code>	CMPQ    y_len+32(FP), LEN</code></span>
+<span class="codeline" id="line-26"><code>	CMOVQLE y_len+32(FP), LEN</code></span>
+<span class="codeline" id="line-27"><code>	CMPQ    LEN, $0</code></span>
+<span class="codeline" id="line-28"><code>	JE      dot_end</code></span>
+<span class="codeline" id="line-29"><code></code></span>
+<span class="codeline" id="line-30"><code>	XORQ IDX, IDX</code></span>
+<span class="codeline" id="line-31"><code>	MOVQ Y_PTR, DX</code></span>
+<span class="codeline" id="line-32"><code>	ANDQ $0xF, DX    // Align on 16-byte boundary for MULPS</code></span>
+<span class="codeline" id="line-33"><code>	JZ   dot_no_trim // if DX == 0 { goto dot_no_trim }</code></span>
+<span class="codeline" id="line-34"><code>	SUBQ $16, DX</code></span>
+<span class="codeline" id="line-35"><code></code></span>
+<span class="codeline" id="line-36"><code>dot_align: // Trim first value(s) in unaligned buffer  do {</code></span>
+<span class="codeline" id="line-37"><code>	MOVSS (X_PTR)(IDX*4), X2 // X2 = x[i]</code></span>
+<span class="codeline" id="line-38"><code>	MULSS (Y_PTR)(IDX*4), X2 // X2 *= y[i]</code></span>
+<span class="codeline" id="line-39"><code>	ADDSS X2, SUM            // SUM += X2</code></span>
+<span class="codeline" id="line-40"><code>	INCQ  IDX                // IDX++</code></span>
+<span class="codeline" id="line-41"><code>	DECQ  LEN</code></span>
+<span class="codeline" id="line-42"><code>	JZ    dot_end            // if --TAIL == 0 { return }</code></span>
+<span class="codeline" id="line-43"><code>	ADDQ  $4, DX</code></span>
+<span class="codeline" id="line-44"><code>	JNZ   dot_align          // } while --DX &gt; 0</code></span>
+<span class="codeline" id="line-45"><code></code></span>
+<span class="codeline" id="line-46"><code>dot_no_trim:</code></span>
+<span class="codeline" id="line-47"><code>	PXOR P_SUM, P_SUM    // P_SUM = 0  for pipelining</code></span>
+<span class="codeline" id="line-48"><code>	MOVQ LEN, TAIL</code></span>
+<span class="codeline" id="line-49"><code>	ANDQ $0xF, TAIL      // TAIL = LEN % 16</code></span>
+<span class="codeline" id="line-50"><code>	SHRQ $4, LEN         // LEN = floor( LEN / 16 )</code></span>
+<span class="codeline" id="line-51"><code>	JZ   dot_tail4_start // if LEN == 0 { goto dot_tail4_start }</code></span>
+<span class="codeline" id="line-52"><code></code></span>
+<span class="codeline" id="line-53"><code>dot_loop: // Loop unrolled 16x  do {</code></span>
+<span class="codeline" id="line-54"><code>	MOVUPS (X_PTR)(IDX*4), X2   // X_i = x[i:i+1]</code></span>
+<span class="codeline" id="line-55"><code>	MOVUPS 16(X_PTR)(IDX*4), X3</code></span>
+<span class="codeline" id="line-56"><code>	MOVUPS 32(X_PTR)(IDX*4), X4</code></span>
+<span class="codeline" id="line-57"><code>	MOVUPS 48(X_PTR)(IDX*4), X5</code></span>
+<span class="codeline" id="line-58"><code></code></span>
+<span class="codeline" id="line-59"><code>	MULPS (Y_PTR)(IDX*4), X2   // X_i *= y[i:i+1]</code></span>
+<span class="codeline" id="line-60"><code>	MULPS 16(Y_PTR)(IDX*4), X3</code></span>
+<span class="codeline" id="line-61"><code>	MULPS 32(Y_PTR)(IDX*4), X4</code></span>
+<span class="codeline" id="line-62"><code>	MULPS 48(Y_PTR)(IDX*4), X5</code></span>
+<span class="codeline" id="line-63"><code></code></span>
+<span class="codeline" id="line-64"><code>	ADDPS X2, SUM   // SUM += X_i</code></span>
+<span class="codeline" id="line-65"><code>	ADDPS X3, P_SUM</code></span>
+<span class="codeline" id="line-66"><code>	ADDPS X4, SUM</code></span>
+<span class="codeline" id="line-67"><code>	ADDPS X5, P_SUM</code></span>
+<span class="codeline" id="line-68"><code></code></span>
+<span class="codeline" id="line-69"><code>	ADDQ $16, IDX // IDX += 16</code></span>
+<span class="codeline" id="line-70"><code>	DECQ LEN</code></span>
+<span class="codeline" id="line-71"><code>	JNZ  dot_loop // } while --LEN &gt; 0</code></span>
+<span class="codeline" id="line-72"><code></code></span>
+<span class="codeline" id="line-73"><code>	ADDPS P_SUM, SUM // SUM += P_SUM</code></span>
+<span class="codeline" id="line-74"><code>	CMPQ  TAIL, $0   // if TAIL == 0 { return }</code></span>
+<span class="codeline" id="line-75"><code>	JE    dot_end</code></span>
+<span class="codeline" id="line-76"><code></code></span>
+<span class="codeline" id="line-77"><code>dot_tail4_start: // Reset loop counter for 4-wide tail loop</code></span>
+<span class="codeline" id="line-78"><code>	MOVQ TAIL, LEN      // LEN = floor( TAIL / 4 )</code></span>
+<span class="codeline" id="line-79"><code>	SHRQ $2, LEN</code></span>
+<span class="codeline" id="line-80"><code>	JZ   dot_tail_start // if LEN == 0 { goto dot_tail_start }</code></span>
+<span class="codeline" id="line-81"><code></code></span>
+<span class="codeline" id="line-82"><code>dot_tail4_loop: // Loop unrolled 4x  do {</code></span>
+<span class="codeline" id="line-83"><code>	MOVUPS (X_PTR)(IDX*4), X2 // X_i = x[i:i+1]</code></span>
+<span class="codeline" id="line-84"><code>	MULPS  (Y_PTR)(IDX*4), X2 // X_i *= y[i:i+1]</code></span>
+<span class="codeline" id="line-85"><code>	ADDPS  X2, SUM            // SUM += X_i</code></span>
+<span class="codeline" id="line-86"><code>	ADDQ   $4, IDX            // i += 4</code></span>
+<span class="codeline" id="line-87"><code>	DECQ   LEN</code></span>
+<span class="codeline" id="line-88"><code>	JNZ    dot_tail4_loop     // } while --LEN &gt; 0</code></span>
+<span class="codeline" id="line-89"><code></code></span>
+<span class="codeline" id="line-90"><code>dot_tail_start: // Reset loop counter for 1-wide tail loop</code></span>
+<span class="codeline" id="line-91"><code>	ANDQ $3, TAIL // TAIL = TAIL % 4</code></span>
+<span class="codeline" id="line-92"><code>	JZ   dot_end  // if TAIL == 0 { return }</code></span>
+<span class="codeline" id="line-93"><code></code></span>
+<span class="codeline" id="line-94"><code>dot_tail: // do {</code></span>
+<span class="codeline" id="line-95"><code>	MOVSS (X_PTR)(IDX*4), X2 // X2 = x[i]</code></span>
+<span class="codeline" id="line-96"><code>	MULSS (Y_PTR)(IDX*4), X2 // X2 *= y[i]</code></span>
+<span class="codeline" id="line-97"><code>	ADDSS X2, SUM            // psum += X2</code></span>
+<span class="codeline" id="line-98"><code>	INCQ  IDX                // IDX++</code></span>
+<span class="codeline" id="line-99"><code>	DECQ  TAIL</code></span>
+<span class="codeline" id="line-100"><code>	JNZ   dot_tail           // } while --TAIL &gt; 0</code></span>
+<span class="codeline" id="line-101"><code></code></span>
+<span class="codeline" id="line-102"><code>dot_end:</code></span>
+<span class="codeline" id="line-103"><code>	HADDPS_SUM_SUM        // SUM = \sum{ SUM[i] }</code></span>
+<span class="codeline" id="line-104"><code>	HADDPS_SUM_SUM</code></span>
+<span class="codeline" id="line-105"><code>	MOVSS SUM, sum+48(FP) // return SUM</code></span>
+<span class="codeline" id="line-106"><code>	RET</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

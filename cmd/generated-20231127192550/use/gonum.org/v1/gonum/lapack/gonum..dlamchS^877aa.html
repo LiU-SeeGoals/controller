@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/lapack/gonum.dlamchS</title>
+<link href="../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">const <b><a href="../../../../../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>.<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/lapack.go.html#line-50">dlamchS</a></b></span>
+
+<span class="title">36 uses</span>
+
+	gonum.org/v1/gonum/lapack/gonum (current package)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-118">dbdsqr.go#L118</a>: 		unfl := <b>dlamchS</b>
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgebal.go.html#line-183">dgebal.go#L183</a>: 	sfmin1 := <b>dlamchS</b> / dlamchP
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgecon.go.html#line-69">dgecon.go#L69</a>: 	smlnum := <b>dlamchS</b>
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-145">dgeev.go#L145</a>: 	smlnum := math.Sqrt(<b>dlamchS</b>) / dlamchP
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgels.go.html#line-103">dgels.go#L103</a>: 	smlnum := <b>dlamchS</b> / dlamchP
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesc2.go.html#line-58">dgesc2.go#L58</a>: 	const smlnum = <b>dlamchS</b> / dlamchP
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-383">dgesvd.go#L383</a>: 	smlnum := math.Sqrt(<b>dlamchS</b>) / eps
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgetc2.go.html#line-59">dgetc2.go#L59</a>: 		smlnum = <b>dlamchS</b> / eps
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgetf2.go.html#line-57">dgetf2.go#L57</a>: 	sfmin := <b>dlamchS</b>
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dggsvd3.go.html#line-203">dggsvd3.go#L203</a>: 	tola := float64(max(m, n)) * math.Max(anorm, <b>dlamchS</b>) * dlamchP
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dggsvd3.go.html#line-204" class="path-duplicate">dggsvd3.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dggsvd3.go.html#line-204">#L204</a>: 	tolb := float64(max(p, n)) * math.Max(bnorm, <b>dlamchS</b>) * dlamchP
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaexc.go.html#line-121">dlaexc.go#L121</a>: 	thresh := math.Max(10*eps*dnorm, <b>dlamchS</b>/eps)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlag2.go.html#line-58">dlag2.go#L58</a>: 		safmin = <b>dlamchS</b>
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlahqr.go.html#line-140">dlahqr.go#L140</a>: 	smlnum := float64(nh) / ulp * <b>dlamchS</b>
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaln2.go.html#line-81">dlaln2.go#L81</a>: 	smlnum := 2 * <b>dlamchS</b>
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlanv2.go.html#line-71">dlanv2.go#L71</a>: 			safmn2 := math.Pow(dlamchB, math.Log(<b>dlamchS</b>/dlamchE)/math.Log(dlamchB)/2)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqr23.go.html#line-184">dlaqr23.go#L184</a>: 	smlnum := float64(n) / ulp * <b>dlamchS</b>
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqr5.go.html#line-170">dlaqr5.go#L170</a>: 	safmin := <b>dlamchS</b>
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfg.go.html#line-52">dlarfg.go#L52</a>: 	safmin := <b>dlamchS</b> / dlamchE
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlartg.go.html#line-47">dlartg.go#L47</a>: 	const safmin = <b>dlamchS</b>
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlascl.go.html#line-54">dlascl.go#L54</a>: 	smlnum := <b>dlamchS</b>
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlasq1.go.html#line-70">dlasq1.go#L70</a>: 	safmin := <b>dlamchS</b>
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlasq2.go.html#line-61">dlasq2.go#L61</a>: 	safmin := <b>dlamchS</b>
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlasq6.go.html#line-31">dlasq6.go#L31</a>: 	safmin := <b>dlamchS</b>
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlasy2.go.html#line-44">dlasy2.go#L44</a>: 	smlnum := <b>dlamchS</b> / eps
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatbs.go.html#line-68">dlatbs.go#L68</a>: 	smlnum := <b>dlamchS</b> / dlamchP
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatrs.go.html#line-64">dlatrs.go#L64</a>: 	smlnum := <b>dlamchS</b> / dlamchP
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dpbcon.go.html#line-61">dpbcon.go#L61</a>: 	const smlnum = <b>dlamchS</b>
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dpocon.go.html#line-56">dpocon.go#L56</a>: 		smlnum = <b>dlamchS</b>
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/drscl.go.html#line-38">drscl.go#L38</a>: 	smlnum := <b>dlamchS</b>
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-83">dsteqr.go#L83</a>: 	safmin := <b>dlamchS</b>
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dsterf.go.html#line-55">dsterf.go#L55</a>: 	safmin := <b>dlamchS</b>
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dsyev.go.html#line-80">dsyev.go#L80</a>: 	safmin := <b>dlamchS</b>
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrcon.go.html#line-51">dtrcon.go#L51</a>: 	smlnum := <b>dlamchS</b> * float64(n)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrevc3.go.html#line-231">dtrevc3.go#L231</a>: 	smlnum := float64(n) / ulp * <b>dlamchS</b>
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/lapack.go.html#line-50">lapack.go#L50</a>: 	<b>dlamchS</b> = 0x1p-1022
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

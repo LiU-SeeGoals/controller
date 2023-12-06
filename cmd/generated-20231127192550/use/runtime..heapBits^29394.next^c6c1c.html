@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.heapBits.next</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/mbitmap.go.html#line-390">heapBits</a>.<a href="../src/runtime/mbitmap.go.html#line-457">next</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">16 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/arena.go.html#line-550">arena.go#L550</a>: 		_, p := r.<b>next</b>()
+		<a href="../src/runtime/arena.go.html#line-607" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-607">#L607</a>: 				h, addr = h.<b>next</b>()
+		<a href="../src/runtime/arena.go.html#line-613" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-613">#L613</a>: 		if _, addr := h.<b>next</b>(); addr != 0 {
+		<a href="../src/runtime/cgocall.go.html#line-589">cgocall.go#L589</a>: 			if hbits, addr = hbits.<b>next</b>(); addr == 0 {
+		<a href="../src/runtime/cgocheck.go.html#line-183">cgocheck.go#L183</a>: 		if hbits, addr = hbits.<b>next</b>(); addr == 0 {
+		<a href="../src/runtime/heapdump.go.html#line-744">heapdump.go#L744</a>: 		hbits, addr = hbits.<b>next</b>()
+		<a href="../src/runtime/mbitmap.go.html#line-457">mbitmap.go#L457</a>: func (h heapBits) <b>next</b>() (heapBits, uintptr) {
+		<a href="../src/runtime/mbitmap.go.html#line-579" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-579">#L579</a>: 			if h, addr = h.<b>next</b>(); addr == 0 {
+		<a href="../src/runtime/mbitmap.go.html#line-589" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-589">#L589</a>: 			if h, addr = h.<b>next</b>(); addr == 0 {
+		<a href="../src/runtime/mbitmap.go.html#line-622" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-622">#L622</a>: 		if h, addr = h.<b>next</b>(); addr == 0 {
+		<a href="../src/runtime/mbitmap.go.html#line-960" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-960">#L960</a>: 			h, addr := heapBitsForAddr(x, size).<b>next</b>()
+		<a href="../src/runtime/mbitmap.go.html#line-964" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-964">#L964</a>: 			_, addr = h.<b>next</b>()
+		<a href="../src/runtime/mbitmap.go.html#line-1102" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-1102">#L1102</a>: 				h, addr = h.<b>next</b>()
+		<a href="../src/runtime/mbitmap.go.html#line-1108" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-1108">#L1108</a>: 		if _, addr := h.<b>next</b>(); addr != 0 {
+		<a href="../src/runtime/mbitmap.go.html#line-1459" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-1459">#L1459</a>: 			if hbits, addr = hbits.<b>next</b>(); addr == 0 {
+		<a href="../src/runtime/mgcmark.go.html#line-1309">mgcmark.go#L1309</a>: 			if hbits, addr = hbits.<b>next</b>(); addr == 0 {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

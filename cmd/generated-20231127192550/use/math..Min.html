@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: math.Min</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../pkg/math.html">math</a>.<a href="../src/math/dim.go.html#line-76">Min</a></b></span>
+
+<span class="title">73 uses</span>
+
+	math (current package)
+		<a href="../src/math/dim.go.html#line-76">dim.go#L76</a>: func <b>Min</b>(x, y float64) float64 {
+
+	<a href="../pkg/gonum.org/v1/gonum/blas/gonum.html">gonum.org/v1/gonum/blas/gonum</a>
+		<a href="../src/gonum.org/v1/gonum/blas/gonum/level1float64.go.html#line-303">level1float64.go#L303</a>: 		scl := math.<b>Min</b>(math.Max(safmin, maxab), safmax)
+
+	<a href="../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-139">dbdsqr.go#L139</a>: 		tolmul := math.Max(10, math.<b>Min</b>(100, math.Pow(eps, -1.0/8)))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-157" class="path-duplicate">dbdsqr.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-157">#L157</a>: 					sminoa = math.<b>Min</b>(sminoa, mu)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-265" class="path-duplicate">dbdsqr.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-265">#L265</a>: 						smin = math.<b>Min</b>(smin, mu)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-285" class="path-duplicate">dbdsqr.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-285">#L285</a>: 						smin = math.<b>Min</b>(smin, mu)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dgebal.go.html#line-207">dgebal.go#L207</a>: 			for c &lt; g &amp;&amp; math.Max(f, math.Max(c, ca)) &lt; sfmax2 &amp;&amp; math.<b>Min</b>(r, math.<b>Min</b>(g, ra)) &gt; sfmin2 {
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dgebal.go.html#line-220" class="path-duplicate">dgebal.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dgebal.go.html#line-220">#L220</a>: 			for r &lt;= g &amp;&amp; math.Max(r, ra) &lt; sfmax2 &amp;&amp; math.<b>Min</b>(math.<b>Min</b>(f, c), math.<b>Min</b>(g, ca)) &gt; sfmin2 {
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlag2.go.html#line-160">dlag2.go#L160</a>: 			wr1 = math.<b>Min</b>(wbig, wsmall)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlag2.go.html#line-164" class="path-duplicate">dlag2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlag2.go.html#line-164">#L164</a>: 			wr2 = math.<b>Min</b>(wbig, wsmall)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlag2.go.html#line-189" class="path-duplicate">dlag2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlag2.go.html#line-189">#L189</a>: 		c5 = math.<b>Min</b>(1, ascale*bsize)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlag2.go.html#line-191" class="path-duplicate">dlag2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlag2.go.html#line-191">#L191</a>: 			c4 = math.<b>Min</b>(1, (ascale/safmin)*bsize)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlag2.go.html#line-198" class="path-duplicate">dlag2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlag2.go.html#line-198">#L198</a>: 		math.<b>Min</b>(c4, 0.5*math.Max(wabs, c5))))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlag2.go.html#line-200" class="path-duplicate">dlag2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlag2.go.html#line-200">#L200</a>: 	minABsize := math.<b>Min</b>(ascale, bsize)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlag2.go.html#line-222" class="path-duplicate">dlag2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlag2.go.html#line-222">#L222</a>: 			math.<b>Min</b>(c4, 0.5*math.Max(math.Abs(wr2), c5))))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlahqr.go.html#line-193">dlahqr.go#L193</a>: 					ba := math.<b>Min</b>(math.Abs(h[k*ldh+k-1]), math.Abs(h[(k-1)*ldh+k]))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlahqr.go.html#line-195" class="path-duplicate">dlahqr.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlahqr.go.html#line-195">#L195</a>: 					bb := math.<b>Min</b>(math.Abs(h[k*ldh+k]), math.Abs(h[(k-1)*ldh+k-1]-h[k*ldh+k]))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlanv2.go.html#line-45">dlanv2.go#L45</a>: 		bcmis := math.<b>Min</b>(math.Abs(b), math.Abs(c))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlaqr5.go.html#line-297">dlaqr5.go#L297</a>: 						h21 := math.<b>Min</b>(math.Abs(h[(k+1)*ldh+k]), math.Abs(h[k*ldh+k+1]))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlaqr5.go.html#line-299" class="path-duplicate">dlaqr5.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlaqr5.go.html#line-299">#L299</a>: 						h22 := math.<b>Min</b>(math.Abs(h[(k+1)*ldh+k+1]), math.Abs(h[k*ldh+k]-h[(k+1)*ldh+k+1]))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlaqr5.go.html#line-447" class="path-duplicate">dlaqr5.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlaqr5.go.html#line-447">#L447</a>: 						h21 := math.<b>Min</b>(math.Abs(h[(k+1)*ldh+k]), math.Abs(h[k*ldh+k+1]))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlaqr5.go.html#line-449" class="path-duplicate">dlaqr5.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlaqr5.go.html#line-449">#L449</a>: 						h22 := math.<b>Min</b>(math.Abs(h[(k+1)*ldh+k+1]), math.Abs(h[k*ldh+k]-h[(k+1)*ldh+k+1]))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlartg.go.html#line-63">dlartg.go#L63</a>: 	u := math.<b>Min</b>(math.Max(safmin, math.Max(f1, g1)), safmax)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlas2.go.html#line-21">dlas2.go#L21</a>: 	fhmin := math.<b>Min</b>(fa, ha)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlas2.go.html#line-27" class="path-duplicate">dlas2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlas2.go.html#line-27">#L27</a>: 		v := math.<b>Min</b>(fhmax, ga) / math.Max(fhmax, ga)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq2.go.html#line-99">dlasq2.go#L99</a>: 		emin = math.<b>Min</b>(emin, z[k+1])
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq2.go.html#line-174" class="path-duplicate">dlasq2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq2.go.html#line-174">#L174</a>: 			emin = math.<b>Min</b>(emin, z[i4-2*pp])
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq2.go.html#line-249" class="path-duplicate">dlasq2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq2.go.html#line-249">#L249</a>: 				qmin = math.<b>Min</b>(qmin, z[i4-3])
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq2.go.html#line-253" class="path-duplicate">dlasq2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq2.go.html#line-253">#L253</a>: 			emin = math.<b>Min</b>(emin, z[i4-5])
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq2.go.html#line-321" class="path-duplicate">dlasq2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq2.go.html#line-321">#L321</a>: 							emin = math.<b>Min</b>(emin, z[i4-1])
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq2.go.html#line-322" class="path-duplicate">dlasq2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq2.go.html#line-322">#L322</a>: 							oldemn = math.<b>Min</b>(oldemn, z[i4])
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq3.go.html#line-98">dlasq3.go#L98</a>: 			dmin2 = math.<b>Min</b>(dmin2, z[4*(i0+1)-pp-2])
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq3.go.html#line-99" class="path-duplicate">dlasq3.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq3.go.html#line-99">#L99</a>: 			z[4*(n0+1)+pp-2] = math.<b>Min</b>(math.<b>Min</b>(z[4*(n0+1)+pp-2], z[4*(i0+1)+pp-2]), z[4*(i0+1)+pp+2])
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq3.go.html#line-100" class="path-duplicate">dlasq3.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq3.go.html#line-100">#L100</a>: 			z[4*(n0+1)-pp-1] = math.<b>Min</b>(math.<b>Min</b>(z[4*(n0+1)-pp-1], z[4*(i0+1)-pp-1]), z[4*(i0+1)-pp+3])
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq4.go.html#line-65">dlasq4.go#L65</a>: 						s = math.<b>Min</b>(s, a2-(b1+b2))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq5.go.html#line-52">dlasq5.go#L52</a>: 				dmin = math.<b>Min</b>(dmin, d)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq5.go.html#line-54" class="path-duplicate">dlasq5.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq5.go.html#line-54">#L54</a>: 				emin = math.<b>Min</b>(z[j4], emin)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq5.go.html#line-62" class="path-duplicate">dlasq5.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq5.go.html#line-62">#L62</a>: 				dmin = math.<b>Min</b>(dmin, d)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq5.go.html#line-64" class="path-duplicate">dlasq5.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq5.go.html#line-64">#L64</a>: 				emin = math.<b>Min</b>(z[j4-1], emin)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq5.go.html#line-75" class="path-duplicate">dlasq5.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq5.go.html#line-75">#L75</a>: 		dmin = math.<b>Min</b>(dmin, dnm1)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq5.go.html#line-83" class="path-duplicate">dlasq5.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq5.go.html#line-83">#L83</a>: 		dmin = math.<b>Min</b>(dmin, dn)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq5.go.html#line-101" class="path-duplicate">dlasq5.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq5.go.html#line-101">#L101</a>: 				dmin = math.<b>Min</b>(dmin, d)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq5.go.html#line-103" class="path-duplicate">dlasq5.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq5.go.html#line-103">#L103</a>: 				emin = math.<b>Min</b>(z[j4], emin)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq5.go.html#line-114" class="path-duplicate">dlasq5.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq5.go.html#line-114">#L114</a>: 				dmin = math.<b>Min</b>(dmin, d)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq5.go.html#line-116" class="path-duplicate">dlasq5.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq5.go.html#line-116">#L116</a>: 				emin = math.<b>Min</b>(z[j4-1], emin)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq5.go.html#line-127" class="path-duplicate">dlasq5.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq5.go.html#line-127">#L127</a>: 		dmin = math.<b>Min</b>(dmin, dnm1)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq5.go.html#line-135" class="path-duplicate">dlasq5.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq5.go.html#line-135">#L135</a>: 		dmin = math.<b>Min</b>(dmin, dn)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq6.go.html#line-53">dlasq6.go#L53</a>: 			dmin = math.<b>Min</b>(dmin, d)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq6.go.html#line-54" class="path-duplicate">dlasq6.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq6.go.html#line-54">#L54</a>: 			emin = math.<b>Min</b>(emin, z[j4])
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq6.go.html#line-73" class="path-duplicate">dlasq6.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq6.go.html#line-73">#L73</a>: 			dmin = math.<b>Min</b>(dmin, d)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq6.go.html#line-74" class="path-duplicate">dlasq6.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq6.go.html#line-74">#L74</a>: 			emin = math.<b>Min</b>(emin, z[j4-1])
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq6.go.html#line-96" class="path-duplicate">dlasq6.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq6.go.html#line-96">#L96</a>: 	dmin = math.<b>Min</b>(dmin, dnm1)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq6.go.html#line-114" class="path-duplicate">dlasq6.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq6.go.html#line-114">#L114</a>: 	dmin = math.<b>Min</b>(dmin, dn)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlatbs.go.html#line-163">dlatbs.go#L163</a>: 				xBnd = math.<b>Min</b>(xBnd, math.<b>Min</b>(1, tjj)*grow)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlatbs.go.html#line-177" class="path-duplicate">dlatbs.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlatbs.go.html#line-177">#L177</a>: 			grow = math.<b>Min</b>(1, 1/math.Max(xBnd, smlnum))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlatbs.go.html#line-203" class="path-duplicate">dlatbs.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlatbs.go.html#line-203">#L203</a>: 				grow = math.<b>Min</b>(grow, xBnd/xj)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlatbs.go.html#line-210" class="path-duplicate">dlatbs.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlatbs.go.html#line-210">#L210</a>: 			grow = math.<b>Min</b>(grow, xBnd)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlatbs.go.html#line-215" class="path-duplicate">dlatbs.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlatbs.go.html#line-215">#L215</a>: 			grow = math.<b>Min</b>(1, 1/math.Max(xBnd, smlnum))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlatbs.go.html#line-358" class="path-duplicate">dlatbs.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlatbs.go.html#line-358">#L358</a>: 					rec = math.<b>Min</b>(1, rec*tjj)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlatrs.go.html#line-171">dlatrs.go#L171</a>: 				xbnd = math.<b>Min</b>(xbnd, math.<b>Min</b>(1, tjj)*grow)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlatrs.go.html#line-180" class="path-duplicate">dlatrs.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlatrs.go.html#line-180">#L180</a>: 			grow = math.<b>Min</b>(1, 1/math.Max(xbnd, smlnum))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlatrs.go.html#line-210" class="path-duplicate">dlatrs.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlatrs.go.html#line-210">#L210</a>: 				grow = math.<b>Min</b>(grow, xbnd/xj)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlatrs.go.html#line-216" class="path-duplicate">dlatrs.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlatrs.go.html#line-216">#L216</a>: 			grow = math.<b>Min</b>(grow, xbnd)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlatrs.go.html#line-218" class="path-duplicate">dlatrs.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlatrs.go.html#line-218">#L218</a>: 			grow = math.<b>Min</b>(1, 1/math.Max(xbnd, smlnum))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlatrs.go.html#line-332" class="path-duplicate">dlatrs.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlatrs.go.html#line-332">#L332</a>: 					rec = math.<b>Min</b>(1, rec*tjj)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dtgsja.go.html#line-249">dtgsja.go#L249</a>: 	minTol := math.<b>Min</b>(tola, tolb)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

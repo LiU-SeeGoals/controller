@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: strconv.ParseUint</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../pkg/strconv.html">strconv</a>.<a href="../src/strconv/atoi.go.html#line-78">ParseUint</a></b></span>
+
+<span class="title">27 uses</span>
+
+	strconv (current package)
+		<a href="../src/strconv/atoi.go.html#line-78">atoi.go#L78</a>: func <b>ParseUint</b>(s string, base int, bitSize int) (uint64, error) {
+		<a href="../src/strconv/atoi.go.html#line-221" class="path-duplicate">atoi.go</a><a href="../src/strconv/atoi.go.html#line-221">#L221</a>: 	un, err = <b>ParseUint</b>(s, base, bitSize)
+
+	<a href="../pkg/encoding/json.html">encoding/json</a>
+		<a href="../src/encoding/json/decode.go.html#line-786">decode.go#L786</a>: 					n, err := strconv.<b>ParseUint</b>(s, 10, 64)
+		<a href="../src/encoding/json/decode.go.html#line-997" class="path-duplicate">decode.go</a><a href="../src/encoding/json/decode.go.html#line-997">#L997</a>: 			n, err := strconv.<b>ParseUint</b>(s, 10, 64)
+
+	<a href="../pkg/fmt.html">fmt</a>
+		<a href="../src/fmt/scan.go.html#line-687">scan.go#L687</a>: 	i, err := strconv.<b>ParseUint</b>(tok, base, 64)
+
+	<a href="../pkg/github.com/golang/protobuf/proto.html">github.com/golang/protobuf/proto</a>
+		<a href="../src/github.com/golang/protobuf/proto/properties.go.html#line-154">properties.go#L154</a>: 			n, _ := strconv.<b>ParseUint</b>(s, 10, 32)
+		<a href="../src/github.com/golang/protobuf/proto/text_decode.go.html#line-394">text_decode.go#L394</a>: 			if x, err := strconv.<b>ParseUint</b>(tok.value, 0, 32); err == nil {
+		<a href="../src/github.com/golang/protobuf/proto/text_decode.go.html#line-407" class="path-duplicate">text_decode.go</a><a href="../src/github.com/golang/protobuf/proto/text_decode.go.html#line-407">#L407</a>: 			if x, err := strconv.<b>ParseUint</b>(tok.value, 0, 64); err == nil {
+		<a href="../src/github.com/golang/protobuf/proto/text_decode.go.html#line-412" class="path-duplicate">text_decode.go</a><a href="../src/github.com/golang/protobuf/proto/text_decode.go.html#line-412">#L412</a>: 		if x, err := strconv.<b>ParseUint</b>(tok.value, 0, 32); err == nil {
+		<a href="../src/github.com/golang/protobuf/proto/text_decode.go.html#line-416" class="path-duplicate">text_decode.go</a><a href="../src/github.com/golang/protobuf/proto/text_decode.go.html#line-416">#L416</a>: 		if x, err := strconv.<b>ParseUint</b>(tok.value, 0, 64); err == nil {
+		<a href="../src/github.com/golang/protobuf/proto/text_decode.go.html#line-738" class="path-duplicate">text_decode.go</a><a href="../src/github.com/golang/protobuf/proto/text_decode.go.html#line-738">#L738</a>: 		i, err := strconv.<b>ParseUint</b>(ss, 8, 8)
+		<a href="../src/github.com/golang/protobuf/proto/text_decode.go.html#line-758" class="path-duplicate">text_decode.go</a><a href="../src/github.com/golang/protobuf/proto/text_decode.go.html#line-758">#L758</a>: 		i, err := strconv.<b>ParseUint</b>(ss, 16, 64)
+
+	<a href="../pkg/google.golang.org/protobuf/internal/encoding/defval.html">google.golang.org/protobuf/internal/encoding/defval</a>
+		<a href="../src/google.golang.org/protobuf/internal/encoding/defval/default.go.html#line-80">default.go#L80</a>: 		if v, err := strconv.<b>ParseUint</b>(s, 10, 32); err == nil {
+		<a href="../src/google.golang.org/protobuf/internal/encoding/defval/default.go.html#line-84" class="path-duplicate">default.go</a><a href="../src/google.golang.org/protobuf/internal/encoding/defval/default.go.html#line-84">#L84</a>: 		if v, err := strconv.<b>ParseUint</b>(s, 10, 64); err == nil {
+
+	<a href="../pkg/google.golang.org/protobuf/internal/encoding/tag.html">google.golang.org/protobuf/internal/encoding/tag</a>
+		<a href="../src/google.golang.org/protobuf/internal/encoding/tag/tag.go.html#line-44">tag.go#L44</a>: 			n, _ := strconv.<b>ParseUint</b>(s, 10, 32)
+
+	<a href="../pkg/google.golang.org/protobuf/internal/encoding/text.html">google.golang.org/protobuf/internal/encoding/text</a>
+		<a href="../src/google.golang.org/protobuf/internal/encoding/text/decode_string.go.html#line-96">decode_string.go#L96</a>: 				v, err := strconv.<b>ParseUint</b>(string(in[1:1+n]), 8, 8)
+		<a href="../src/google.golang.org/protobuf/internal/encoding/text/decode_string.go.html#line-107" class="path-duplicate">decode_string.go</a><a href="../src/google.golang.org/protobuf/internal/encoding/text/decode_string.go.html#line-107">#L107</a>: 				v, err := strconv.<b>ParseUint</b>(string(in[2:2+n]), 16, 8)
+		<a href="../src/google.golang.org/protobuf/internal/encoding/text/decode_string.go.html#line-121" class="path-duplicate">decode_string.go</a><a href="../src/google.golang.org/protobuf/internal/encoding/text/decode_string.go.html#line-121">#L121</a>: 				v, err := strconv.<b>ParseUint</b>(string(in[2:n]), 16, 32)
+		<a href="../src/google.golang.org/protobuf/internal/encoding/text/decode_string.go.html#line-132" class="path-duplicate">decode_string.go</a><a href="../src/google.golang.org/protobuf/internal/encoding/text/decode_string.go.html#line-132">#L132</a>: 					v, err := strconv.<b>ParseUint</b>(string(in[2:6]), 16, 16)
+		<a href="../src/google.golang.org/protobuf/internal/encoding/text/decode_token.go.html#line-223">decode_token.go#L223</a>: 		n, err := strconv.<b>ParseUint</b>(t.str, 0, 64)
+		<a href="../src/google.golang.org/protobuf/internal/encoding/text/decode_token.go.html#line-252" class="path-duplicate">decode_token.go</a><a href="../src/google.golang.org/protobuf/internal/encoding/text/decode_token.go.html#line-252">#L252</a>: 	n, err := strconv.<b>ParseUint</b>(t.str, 0, 64)
+		<a href="../src/google.golang.org/protobuf/internal/encoding/text/decode_token.go.html#line-265" class="path-duplicate">decode_token.go</a><a href="../src/google.golang.org/protobuf/internal/encoding/text/decode_token.go.html#line-265">#L265</a>: 	n, err := strconv.<b>ParseUint</b>(t.str, 0, 32)
+		<a href="../src/google.golang.org/protobuf/internal/encoding/text/decode_token.go.html#line-283" class="path-duplicate">decode_token.go</a><a href="../src/google.golang.org/protobuf/internal/encoding/text/decode_token.go.html#line-283">#L283</a>: 		if n, err := strconv.<b>ParseUint</b>(t.str, 0, 64); err == nil {
+		<a href="../src/google.golang.org/protobuf/internal/encoding/text/decode_token.go.html#line-301" class="path-duplicate">decode_token.go</a><a href="../src/google.golang.org/protobuf/internal/encoding/text/decode_token.go.html#line-301">#L301</a>: 		if n, err := strconv.<b>ParseUint</b>(t.str, 0, 32); err == nil {
+
+	<a href="../pkg/google.golang.org/protobuf/internal/impl.html">google.golang.org/protobuf/internal/impl</a>
+		<a href="../src/google.golang.org/protobuf/internal/impl/message.go.html#line-181">message.go#L181</a>: 					n, _ := strconv.<b>ParseUint</b>(s, 10, 64)
+		<a href="../src/google.golang.org/protobuf/internal/impl/message.go.html#line-209" class="path-duplicate">message.go</a><a href="../src/google.golang.org/protobuf/internal/impl/message.go.html#line-209">#L209</a>: 				n, _ := strconv.<b>ParseUint</b>(s, 10, 64)
+
+	<a href="../pkg/net/netip.html">net/netip</a>
+		<a href="../src/net/netip/netip.go.html#line-1079">netip.go#L1079</a>: 	port16, err := strconv.<b>ParseUint</b>(port, 10, 16)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

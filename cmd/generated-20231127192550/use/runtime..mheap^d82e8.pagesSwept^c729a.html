@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.mheap.pagesSwept</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/mheap.go.html#line-61">mheap</a>.<a href="../src/runtime/mheap.go.html#line-104">pagesSwept</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">6 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/mgc.go.html#line-1554">mgc.go#L1554</a>: 	mheap_.<b>pagesSwept</b>.Store(0)
+		<a href="../src/runtime/mgcsweep.go.html#line-180">mgcsweep.go#L180</a>: 				print("pacer: sweep done at heap size ", live&gt;&gt;20, "MB; allocated ", (live-mheap_.sweepHeapLiveBasis)&gt;&gt;20, "MB during sweep; swept ", mheap_.<b>pagesSwept</b>.Load(), " pages at ", mheap_.sweepPagesPerByte, " pages/byte\n")
+		<a href="../src/runtime/mgcsweep.go.html#line-527" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-527">#L527</a>: 	mheap_.<b>pagesSwept</b>.Add(int64(s.npages))
+		<a href="../src/runtime/mgcsweep.go.html#line-916" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-916">#L916</a>: 	for pagesTarget &gt; int64(mheap_.<b>pagesSwept</b>.Load()-sweptBasis) {
+		<a href="../src/runtime/mgcsweep.go.html#line-968" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-968">#L968</a>: 		pagesSwept := mheap_.<b>pagesSwept</b>.Load()
+		<a href="../src/runtime/mheap.go.html#line-104">mheap.go#L104</a>: 	<b>pagesSwept</b>         atomic.Uint64  // pages swept this cycle
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

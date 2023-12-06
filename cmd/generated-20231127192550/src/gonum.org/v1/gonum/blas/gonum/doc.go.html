@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: doc.go in package gonum.org/v1/gonum/blas/gonum</title>
+<link href="../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	doc.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../pkg/gonum.org/v1/gonum/blas/gonum.html">gonum.org/v1/gonum/blas/gonum</a>
+</code></pre>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">// Copyright ©2015 The Gonum Authors. All rights reserved.</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment">// Use of this source code is governed by a BSD-style</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment">// license that can be found in the LICENSE file.</span></code></span>
+<span class="codeline" id="line-4"><code></code></span>
+<span class="codeline" id="line-5"><code><span class="comment">// Ensure changes made to blas/native are reflected in blas/cgo where relevant.</span></code></span>
+<span class="codeline" id="line-6"><code></code></span>
+<div class="anchor" id="doc"><span class="codeline" id="line-7"><code><span class="comment">/*</span></code></span>
+<span class="codeline" id="line-8"><code><span class="comment">Package gonum is a Go implementation of the BLAS API. This implementation</span></code></span>
+<span class="codeline" id="line-9"><code><span class="comment">panics when the input arguments are invalid as per the standard, for example</span></code></span>
+<span class="codeline" id="line-10"><code><span class="comment">if a vector increment is zero. Note that the treatment of NaN values</span></code></span>
+<span class="codeline" id="line-11"><code><span class="comment">is not specified, and differs among the BLAS implementations.</span></code></span>
+<span class="codeline" id="line-12"><code><span class="comment">gonum.org/v1/gonum/blas/blas64 provides helpful wrapper functions to the BLAS</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment">interface. The rest of this text describes the layout of the data for the input types.</span></code></span>
+<span class="codeline" id="line-14"><code></code></span>
+<span class="codeline" id="line-15"><code><span class="comment">Note that in the function documentation, x[i] refers to the i^th element</span></code></span>
+<span class="codeline" id="line-16"><code><span class="comment">of the vector, which will be different from the i^th element of the slice if</span></code></span>
+<span class="codeline" id="line-17"><code><span class="comment">incX != 1.</span></code></span>
+<span class="codeline" id="line-18"><code></code></span>
+<span class="codeline" id="line-19"><code><span class="comment">See http://www.netlib.org/lapack/explore-html/d4/de1/_l_i_c_e_n_s_e_source.html</span></code></span>
+<span class="codeline" id="line-20"><code><span class="comment">for more license information.</span></code></span>
+<span class="codeline" id="line-21"><code></code></span>
+<span class="codeline" id="line-22"><code><span class="comment">Vector arguments are effectively strided slices. They have two input arguments,</span></code></span>
+<span class="codeline" id="line-23"><code><span class="comment">a number of elements, n, and an increment, incX. The increment specifies the</span></code></span>
+<span class="codeline" id="line-24"><code><span class="comment">distance between elements of the vector. The actual Go slice may be longer</span></code></span>
+<span class="codeline" id="line-25"><code><span class="comment">than necessary.</span></code></span>
+<span class="codeline" id="line-26"><code><span class="comment">The increment may be positive or negative, except in functions with only</span></code></span>
+<span class="codeline" id="line-27"><code><span class="comment">a single vector argument where the increment may only be positive. If the increment</span></code></span>
+<span class="codeline" id="line-28"><code><span class="comment">is negative, s[0] is the last element in the slice. Note that this is not the same</span></code></span>
+<span class="codeline" id="line-29"><code><span class="comment">as counting backward from the end of the slice, as len(s) may be longer than</span></code></span>
+<span class="codeline" id="line-30"><code><span class="comment">necessary. So, for example, if n = 5 and incX = 3, the elements of s are</span></code></span>
+<span class="codeline" id="line-31"><code></code></span>
+<span class="codeline" id="line-32"><code><span class="comment">	[0 * * 1 * * 2 * * 3 * * 4 * * * ...]</span></code></span>
+<span class="codeline" id="line-33"><code></code></span>
+<span class="codeline" id="line-34"><code><span class="comment">where ∗ elements are never accessed. If incX = -3, the same elements are</span></code></span>
+<span class="codeline" id="line-35"><code><span class="comment">accessed, just in reverse order (4, 3, 2, 1, 0).</span></code></span>
+<span class="codeline" id="line-36"><code></code></span>
+<span class="codeline" id="line-37"><code><span class="comment">Dense matrices are specified by a number of rows, a number of columns, and a stride.</span></code></span>
+<span class="codeline" id="line-38"><code><span class="comment">The stride specifies the number of entries in the slice between the first element</span></code></span>
+<span class="codeline" id="line-39"><code><span class="comment">of successive rows. The stride must be at least as large as the number of columns</span></code></span>
+<span class="codeline" id="line-40"><code><span class="comment">but may be longer.</span></code></span>
+<span class="codeline" id="line-41"><code></code></span>
+<span class="codeline" id="line-42"><code><span class="comment">	[a00 ... a0n a0* ... a1stride-1 a21 ... amn am* ... amstride-1]</span></code></span>
+<span class="codeline" id="line-43"><code></code></span>
+<span class="codeline" id="line-44"><code><span class="comment">Thus, dense[i*ld + j] refers to the {i, j}th element of the matrix.</span></code></span>
+<span class="codeline" id="line-45"><code></code></span>
+<span class="codeline" id="line-46"><code><span class="comment">Symmetric and triangular matrices (non-packed) are stored identically to Dense,</span></code></span>
+<span class="codeline" id="line-47"><code><span class="comment">except that only elements in one triangle of the matrix are accessed.</span></code></span>
+<span class="codeline" id="line-48"><code></code></span>
+<span class="codeline" id="line-49"><code><span class="comment">Packed symmetric and packed triangular matrices are laid out with the entries</span></code></span>
+<span class="codeline" id="line-50"><code><span class="comment">condensed such that all of the unreferenced elements are removed. So, the upper triangular</span></code></span>
+<span class="codeline" id="line-51"><code><span class="comment">matrix</span></code></span>
+<span class="codeline" id="line-52"><code></code></span>
+<span class="codeline" id="line-53"><code><span class="comment">	[</span></code></span>
+<span class="codeline" id="line-54"><code><span class="comment">	  1  2  3</span></code></span>
+<span class="codeline" id="line-55"><code><span class="comment">	  0  4  5</span></code></span>
+<span class="codeline" id="line-56"><code><span class="comment">	  0  0  6</span></code></span>
+<span class="codeline" id="line-57"><code><span class="comment">	]</span></code></span>
+<span class="codeline" id="line-58"><code></code></span>
+<span class="codeline" id="line-59"><code><span class="comment">and the lower-triangular matrix</span></code></span>
+<span class="codeline" id="line-60"><code></code></span>
+<span class="codeline" id="line-61"><code><span class="comment">	[</span></code></span>
+<span class="codeline" id="line-62"><code><span class="comment">	  1  0  0</span></code></span>
+<span class="codeline" id="line-63"><code><span class="comment">	  2  3  0</span></code></span>
+<span class="codeline" id="line-64"><code><span class="comment">	  4  5  6</span></code></span>
+<span class="codeline" id="line-65"><code><span class="comment">	]</span></code></span>
+<span class="codeline" id="line-66"><code></code></span>
+<span class="codeline" id="line-67"><code><span class="comment">will both be compacted as [1 2 3 4 5 6]. The (i, j) element of the original</span></code></span>
+<span class="codeline" id="line-68"><code><span class="comment">dense matrix can be found at element i*n - (i-1)*i/2 + j for upper triangular,</span></code></span>
+<span class="codeline" id="line-69"><code><span class="comment">and at element i * (i+1) /2 + j for lower triangular.</span></code></span>
+<span class="codeline" id="line-70"><code></code></span>
+<span class="codeline" id="line-71"><code><span class="comment">Banded matrices are laid out in a compact format, constructed by removing the</span></code></span>
+<span class="codeline" id="line-72"><code><span class="comment">zeros in the rows and aligning the diagonals. For example, the matrix</span></code></span>
+<span class="codeline" id="line-73"><code></code></span>
+<span class="codeline" id="line-74"><code><span class="comment">	[</span></code></span>
+<span class="codeline" id="line-75"><code><span class="comment">	  1  2  3  0  0  0</span></code></span>
+<span class="codeline" id="line-76"><code><span class="comment">	  4  5  6  7  0  0</span></code></span>
+<span class="codeline" id="line-77"><code><span class="comment">	  0  8  9 10 11  0</span></code></span>
+<span class="codeline" id="line-78"><code><span class="comment">	  0  0 12 13 14 15</span></code></span>
+<span class="codeline" id="line-79"><code><span class="comment">	  0  0  0 16 17 18</span></code></span>
+<span class="codeline" id="line-80"><code><span class="comment">	  0  0  0  0 19 20</span></code></span>
+<span class="codeline" id="line-81"><code><span class="comment">	]</span></code></span>
+<span class="codeline" id="line-82"><code></code></span>
+<span class="codeline" id="line-83"><code><span class="comment">implicitly becomes (∗ entries are never accessed)</span></code></span>
+<span class="codeline" id="line-84"><code></code></span>
+<span class="codeline" id="line-85"><code><span class="comment">	[</span></code></span>
+<span class="codeline" id="line-86"><code><span class="comment">	   *  1  2  3</span></code></span>
+<span class="codeline" id="line-87"><code><span class="comment">	   4  5  6  7</span></code></span>
+<span class="codeline" id="line-88"><code><span class="comment">	   8  9 10 11</span></code></span>
+<span class="codeline" id="line-89"><code><span class="comment">	  12 13 14 15</span></code></span>
+<span class="codeline" id="line-90"><code><span class="comment">	  16 17 18  *</span></code></span>
+<span class="codeline" id="line-91"><code><span class="comment">	  19 20  *  *</span></code></span>
+<span class="codeline" id="line-92"><code><span class="comment">	]</span></code></span>
+<span class="codeline" id="line-93"><code></code></span>
+<span class="codeline" id="line-94"><code><span class="comment">which is given to the BLAS routine as [∗ 1 2 3 4 ...].</span></code></span>
+<span class="codeline" id="line-95"><code></code></span>
+<span class="codeline" id="line-96"><code><span class="comment">See http://www.crest.iu.edu/research/mtl/reference/html/banded.html</span></code></span>
+<span class="codeline" id="line-97"><code><span class="comment">for more information</span></code></span>
+<span class="codeline" id="line-98"><code><span class="comment">*/</span></code></span></div><span class="codeline" id="line-99"><code><span class="keyword">package</span> gonum <span class="comment">// import "gonum.org/v1/gonum/blas/gonum"</span></code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

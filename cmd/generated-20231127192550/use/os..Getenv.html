@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: os.Getenv</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../pkg/os.html">os</a>.<a href="../src/os/env.go.html#line-101">Getenv</a></b></span>
+
+<span class="title">20 uses</span>
+
+	os (current package)
+		<a href="../src/os/env.go.html#line-51">env.go#L51</a>: 	return Expand(s, <b>Getenv</b>)
+		<a href="../src/os/env.go.html#line-101" class="path-duplicate">env.go</a><a href="../src/os/env.go.html#line-101">#L101</a>: func <b>Getenv</b>(key string) string {
+		<a href="../src/os/file.go.html#line-414">file.go#L414</a>: 		dir = <b>Getenv</b>("LocalAppData")
+		<a href="../src/os/file.go.html#line-420" class="path-duplicate">file.go</a><a href="../src/os/file.go.html#line-420">#L420</a>: 		dir = <b>Getenv</b>("HOME")
+		<a href="../src/os/file.go.html#line-427" class="path-duplicate">file.go</a><a href="../src/os/file.go.html#line-427">#L427</a>: 		dir = <b>Getenv</b>("home")
+		<a href="../src/os/file.go.html#line-434" class="path-duplicate">file.go</a><a href="../src/os/file.go.html#line-434">#L434</a>: 		dir = <b>Getenv</b>("XDG_CACHE_HOME")
+		<a href="../src/os/file.go.html#line-436" class="path-duplicate">file.go</a><a href="../src/os/file.go.html#line-436">#L436</a>: 			dir = <b>Getenv</b>("HOME")
+		<a href="../src/os/file.go.html#line-465" class="path-duplicate">file.go</a><a href="../src/os/file.go.html#line-465">#L465</a>: 		dir = <b>Getenv</b>("AppData")
+		<a href="../src/os/file.go.html#line-471" class="path-duplicate">file.go</a><a href="../src/os/file.go.html#line-471">#L471</a>: 		dir = <b>Getenv</b>("HOME")
+		<a href="../src/os/file.go.html#line-478" class="path-duplicate">file.go</a><a href="../src/os/file.go.html#line-478">#L478</a>: 		dir = <b>Getenv</b>("home")
+		<a href="../src/os/file.go.html#line-485" class="path-duplicate">file.go</a><a href="../src/os/file.go.html#line-485">#L485</a>: 		dir = <b>Getenv</b>("XDG_CONFIG_HOME")
+		<a href="../src/os/file.go.html#line-487" class="path-duplicate">file.go</a><a href="../src/os/file.go.html#line-487">#L487</a>: 			dir = <b>Getenv</b>("HOME")
+		<a href="../src/os/file.go.html#line-514" class="path-duplicate">file.go</a><a href="../src/os/file.go.html#line-514">#L514</a>: 	if v := <b>Getenv</b>(env); v != "" {
+		<a href="../src/os/file_unix.go.html#line-392">file_unix.go#L392</a>: 	dir := <b>Getenv</b>("TMPDIR")
+		<a href="../src/os/getwd.go.html#line-33">getwd.go#L33</a>: 	dir = <b>Getenv</b>("PWD")
+
+	<a href="../pkg/google.golang.org/protobuf/reflect/protoregistry.html">google.golang.org/protobuf/reflect/protoregistry</a>
+		<a href="../src/google.golang.org/protobuf/reflect/protoregistry/registry.go.html#line-51">registry.go#L51</a>: 	if v := os.<b>Getenv</b>(env); v != "" {
+		<a href="../src/google.golang.org/protobuf/reflect/protoregistry/registry.go.html#line-63" class="path-duplicate">registry.go</a><a href="../src/google.golang.org/protobuf/reflect/protoregistry/registry.go.html#line-63">#L63</a>: 		panic("invalid " + env + " value: " + os.<b>Getenv</b>(env))
+
+	<a href="../pkg/net.html">net</a>
+		<a href="../src/net/conf.go.html#line-143">conf.go#L143</a>: 	if localDomainDefined || os.<b>Getenv</b>("RES_OPTIONS") != "" || os.<b>Getenv</b>("HOSTALIASES") != "" {
+		<a href="../src/net/conf.go.html#line-150" class="path-duplicate">conf.go</a><a href="../src/net/conf.go.html#line-150">#L150</a>: 	if runtime.GOOS == "openbsd" &amp;&amp; os.<b>Getenv</b>("ASR_CONFIG") != "" {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

@@ -12,8 +12,12 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/client"
 )
 
+var(
+	prevChar rune
+)
+
 func main() {
-	port := "127.0.0.1:25565"
+	port := "127.0.0.1:20011"
 	client := askForClient(port)
 	client.Init()
 	robotId := askForRobotId()
@@ -49,43 +53,56 @@ func askForRobotId() int {
 
 func sendCommand(robotId int, char rune, client client.Client) {
 	actions := []action.Action{}
-	switch char {
-	case 'w':
-		fmt.Println("Moving forward")
-		action := &action.SetNavigationDirection{
-			Id: 		robotId,
-			Direction:  mat.NewVecDense(2, []float64{0.0, 1.0}),
+
+	if prevChar == char { // same command as last time -> no need to send it again
+		return
+	} else { // new command
+		switch char {
+		case 'w':
+			fmt.Println("Moving forward")
+			action := &action.SetNavigationDirection{
+				Id: 		robotId,
+				Direction:  mat.NewVecDense(2, []float64{0.0, 1.0}),
+			}
+			actions = append(actions, action)
+		case 'l':
+			fmt.Println("Stopping robot")
+			action := &action.Stop{
+				Id: 		robotId,
+			}
+			actions = append(actions, action)
+		case 'a':
+			fmt.Println("Moving left")
+			action := &action.SetNavigationDirection{
+				Id: 		robotId,
+				Direction:  mat.NewVecDense(2, []float64{1.0, 0.0}),
+			}
+			actions = append(actions, action)
+		case 's':
+			fmt.Println("Moving backward")
+			action := &action.SetNavigationDirection{
+				Id: 		robotId,
+				Direction:  mat.NewVecDense(2, []float64{0.0, -1.0}),
+			}
+			actions = append(actions, action)
+		case 'd':
+			fmt.Println("Moving right")
+			action := &action.SetNavigationDirection{
+				Id: 		robotId,
+				Direction:  mat.NewVecDense(2, []float64{-1.0, 0.0}),
+			}
+			actions = append(actions, action)
+		case 'k':
+			fmt.Println("Kicking")
+			action := &action.Kick{
+				Id: 		robotId,
+			}
+			actions = append(actions, action)
 		}
-		actions = append(actions, action)
-	case 'a':
-		fmt.Println("Moving left")
-		action := &action.SetNavigationDirection{
-			Id: 		robotId,
-			Direction:  mat.NewVecDense(2, []float64{-1.0, 0.0}),
-		}
-		actions = append(actions, action)
-	case 's':
-		fmt.Println("Moving backward")
-		action := &action.SetNavigationDirection{
-			Id: 		robotId,
-			Direction:  mat.NewVecDense(2, []float64{0.0, -1.0}),
-		}
-		actions = append(actions, action)
-	case 'd':
-		fmt.Println("Moving right")
-		action := &action.SetNavigationDirection{
-			Id: 		robotId,
-			Direction:  mat.NewVecDense(2, []float64{1.0, 0.0}),
-		}
-		actions = append(actions, action)
-	case 'k':
-		fmt.Println("Kicking")
-		action := &action.Kick{
-			Id: 		robotId,
-		}
-		actions = append(actions, action)
 	}
-	
+
+
+	prevChar = char
 	client.SendActions(actions)
 }
 
@@ -107,6 +124,7 @@ func listenKeyboard(robotId int, client client.Client){
 		if key == keyboard.KeyEsc {
 			break
 		}
+	
 
 		sendCommand(robotId, char, client)
 		time.Sleep(100 * time.Millisecond)

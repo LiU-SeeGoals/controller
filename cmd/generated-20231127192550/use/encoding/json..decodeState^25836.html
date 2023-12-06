@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: encoding/json.decodeState</title>
+<link href="../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../../pkg/encoding/json.html">encoding/json</a>.<a href="../../src/encoding/json/decode.go.html#line-211">decodeState</a></b></span>
+
+<span class="title">23 uses</span>
+
+	encoding/json (current package)
+		<a href="../../src/encoding/json/decode.go.html#line-101">decode.go#L101</a>: 	var d <b>decodeState</b>
+		<a href="../../src/encoding/json/decode.go.html#line-171" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-171">#L171</a>: func (d *<b>decodeState</b>) unmarshal(v any) error {
+		<a href="../../src/encoding/json/decode.go.html#line-211" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-211">#L211</a>: type <b>decodeState</b> struct {
+		<a href="../../src/encoding/json/decode.go.html#line-223" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-223">#L223</a>: func (d *<b>decodeState</b>) readIndex() int {
+		<a href="../../src/encoding/json/decode.go.html#line-232" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-232">#L232</a>: func (d *<b>decodeState</b>) init(data []byte) *<b>decodeState</b> {
+		<a href="../../src/encoding/json/decode.go.html#line-246" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-246">#L246</a>: func (d *<b>decodeState</b>) saveError(err error) {
+		<a href="../../src/encoding/json/decode.go.html#line-253" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-253">#L253</a>: func (d *<b>decodeState</b>) addErrorContext(err error) error {
+		<a href="../../src/encoding/json/decode.go.html#line-265" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-265">#L265</a>: func (d *<b>decodeState</b>) skip() {
+		<a href="../../src/encoding/json/decode.go.html#line-280" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-280">#L280</a>: func (d *<b>decodeState</b>) scanNext() {
+		<a href="../../src/encoding/json/decode.go.html#line-292" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-292">#L292</a>: func (d *<b>decodeState</b>) scanWhile(op int) {
+		<a href="../../src/encoding/json/decode.go.html#line-316" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-316">#L316</a>: func (d *<b>decodeState</b>) rescanLiteral() {
+		<a href="../../src/encoding/json/decode.go.html#line-357" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-357">#L357</a>: func (d *<b>decodeState</b>) value(v reflect.Value) error {
+		<a href="../../src/encoding/json/decode.go.html#line-402" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-402">#L402</a>: func (d *<b>decodeState</b>) valueQuoted() any {
+		<a href="../../src/encoding/json/decode.go.html#line-501" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-501">#L501</a>: func (d *<b>decodeState</b>) array(v reflect.Value) error {
+		<a href="../../src/encoding/json/decode.go.html#line-598" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-598">#L598</a>: func (d *<b>decodeState</b>) object(v reflect.Value) error {
+		<a href="../../src/encoding/json/decode.go.html#line-824" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-824">#L824</a>: func (d *<b>decodeState</b>) convertNumber(s string) (any, error) {
+		<a href="../../src/encoding/json/decode.go.html#line-842" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-842">#L842</a>: func (d *<b>decodeState</b>) literalStore(item []byte, v reflect.Value, fromQuoted bool) error {
+		<a href="../../src/encoding/json/decode.go.html#line-1021" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-1021">#L1021</a>: func (d *<b>decodeState</b>) valueInterface() (val any) {
+		<a href="../../src/encoding/json/decode.go.html#line-1038" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-1038">#L1038</a>: func (d *<b>decodeState</b>) arrayInterface() []any {
+		<a href="../../src/encoding/json/decode.go.html#line-1064" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-1064">#L1064</a>: func (d *<b>decodeState</b>) objectInterface() map[string]any {
+		<a href="../../src/encoding/json/decode.go.html#line-1115" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-1115">#L1115</a>: func (d *<b>decodeState</b>) literalInterface() any {
+		<a href="../../src/encoding/json/stream.go.html#line-17">stream.go#L17</a>: 	d       <b>decodeState</b>
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

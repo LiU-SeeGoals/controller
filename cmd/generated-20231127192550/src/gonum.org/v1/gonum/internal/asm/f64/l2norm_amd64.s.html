@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: l2norm_amd64.s in package gonum.org/v1/gonum/internal/asm/f64</title>
+<link href="../../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	l2norm_amd64.s
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/gonum.org/v1/gonum/internal/asm/f64.html">gonum.org/v1/gonum/internal/asm/f64</a>
+</code></pre>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code>// Copyright ©2019 The Gonum Authors. All rights reserved.</code></span>
+<span class="codeline" id="line-2"><code>// Use of this source code is governed by a BSD-style</code></span>
+<span class="codeline" id="line-3"><code>// license that can be found in the LICENSE file.</code></span>
+<span class="codeline" id="line-4"><code></code></span>
+<span class="codeline" id="line-5"><code>// +build !noasm,!gccgo,!safe</code></span>
+<span class="codeline" id="line-6"><code></code></span>
+<span class="codeline" id="line-7"><code>#include "textflag.h"</code></span>
+<span class="codeline" id="line-8"><code></code></span>
+<span class="codeline" id="line-9"><code>#define SUMSQ X0</code></span>
+<span class="codeline" id="line-10"><code>#define ABSX X1</code></span>
+<span class="codeline" id="line-11"><code>#define SCALE X2</code></span>
+<span class="codeline" id="line-12"><code>#define ZERO X3</code></span>
+<span class="codeline" id="line-13"><code>#define TMP X4</code></span>
+<span class="codeline" id="line-14"><code>#define ABSMASK X5</code></span>
+<span class="codeline" id="line-15"><code>#define INF X7</code></span>
+<span class="codeline" id="line-16"><code>#define INFMASK X11</code></span>
+<span class="codeline" id="line-17"><code>#define NANMASK X12</code></span>
+<span class="codeline" id="line-18"><code>#define IDX AX</code></span>
+<span class="codeline" id="line-19"><code>#define LEN SI</code></span>
+<span class="codeline" id="line-20"><code>#define X_ DI</code></span>
+<span class="codeline" id="line-21"><code></code></span>
+<span class="codeline" id="line-22"><code>#define ABSMASK_DATA l2nrodata&lt;&gt;+0(SB)</code></span>
+<span class="codeline" id="line-23"><code>#define INF_DATA l2nrodata&lt;&gt;+8(SB)</code></span>
+<span class="codeline" id="line-24"><code>#define NAN_DATA l2nrodata&lt;&gt;+16(SB)</code></span>
+<span class="codeline" id="line-25"><code>// AbsMask</code></span>
+<span class="codeline" id="line-26"><code>DATA l2nrodata&lt;&gt;+0(SB)/8, $0x7FFFFFFFFFFFFFFF</code></span>
+<span class="codeline" id="line-27"><code>// Inf</code></span>
+<span class="codeline" id="line-28"><code>DATA l2nrodata&lt;&gt;+8(SB)/8, $0x7FF0000000000000</code></span>
+<span class="codeline" id="line-29"><code>// NaN</code></span>
+<span class="codeline" id="line-30"><code>DATA l2nrodata&lt;&gt;+16(SB)/8, $0xFFF8000000000000</code></span>
+<span class="codeline" id="line-31"><code>GLOBL l2nrodata&lt;&gt;+0(SB), RODATA, $24</code></span>
+<span class="codeline" id="line-32"><code></code></span>
+<span class="codeline" id="line-33"><code>// L2NormUnitary returns the L2-norm of x.</code></span>
+<span class="codeline" id="line-34"><code>// func L2NormUnitary(x []float64) (norm float64)</code></span>
+<span class="codeline" id="line-35"><code>TEXT ·L2NormUnitary(SB), NOSPLIT, $0</code></span>
+<span class="codeline" id="line-36"><code>	MOVQ x_len+8(FP), LEN // LEN = len(x)</code></span>
+<span class="codeline" id="line-37"><code>	MOVQ x_base+0(FP), X_</code></span>
+<span class="codeline" id="line-38"><code>	PXOR ZERO, ZERO</code></span>
+<span class="codeline" id="line-39"><code>	CMPQ LEN, $0          // if LEN == 0 { return 0 }</code></span>
+<span class="codeline" id="line-40"><code>	JZ   retZero</code></span>
+<span class="codeline" id="line-41"><code></code></span>
+<span class="codeline" id="line-42"><code>	PXOR  INFMASK, INFMASK</code></span>
+<span class="codeline" id="line-43"><code>	PXOR  NANMASK, NANMASK</code></span>
+<span class="codeline" id="line-44"><code>	MOVSD $1.0, SUMSQ           // ssq = 1</code></span>
+<span class="codeline" id="line-45"><code>	XORPS SCALE, SCALE</code></span>
+<span class="codeline" id="line-46"><code>	MOVSD ABSMASK_DATA, ABSMASK</code></span>
+<span class="codeline" id="line-47"><code>	MOVSD INF_DATA, INF</code></span>
+<span class="codeline" id="line-48"><code>	XORQ  IDX, IDX              // idx == 0</code></span>
+<span class="codeline" id="line-49"><code></code></span>
+<span class="codeline" id="line-50"><code>initZero:  // for ;x[i]==0; i++ {}</code></span>
+<span class="codeline" id="line-51"><code>	// Skip all leading zeros, to avoid divide by zero NaN</code></span>
+<span class="codeline" id="line-52"><code>	MOVSD   (X_)(IDX*8), ABSX // absxi = x[i]</code></span>
+<span class="codeline" id="line-53"><code>	UCOMISD ABSX, ZERO</code></span>
+<span class="codeline" id="line-54"><code>	JP      retNaN            // if isNaN(x[i]) { return NaN }</code></span>
+<span class="codeline" id="line-55"><code>	JNE     loop              // if x[i] != 0 { goto loop }</code></span>
+<span class="codeline" id="line-56"><code>	INCQ    IDX               // i++</code></span>
+<span class="codeline" id="line-57"><code>	CMPQ    IDX, LEN</code></span>
+<span class="codeline" id="line-58"><code>	JE      retZero           // if i == LEN { return 0 }</code></span>
+<span class="codeline" id="line-59"><code>	JMP     initZero</code></span>
+<span class="codeline" id="line-60"><code></code></span>
+<span class="codeline" id="line-61"><code>loop:</code></span>
+<span class="codeline" id="line-62"><code>	MOVSD   (X_)(IDX*8), ABSX // absxi = x[i]</code></span>
+<span class="codeline" id="line-63"><code>	MOVUPS  ABSX, TMP</code></span>
+<span class="codeline" id="line-64"><code>	CMPSD   ABSX, TMP, $3</code></span>
+<span class="codeline" id="line-65"><code>	ORPD    TMP, NANMASK      // NANMASK = NANMASK | IsNaN(absxi)</code></span>
+<span class="codeline" id="line-66"><code>	MOVSD   INF, TMP</code></span>
+<span class="codeline" id="line-67"><code>	ANDPD   ABSMASK, ABSX     // absxi == Abs(absxi)</code></span>
+<span class="codeline" id="line-68"><code>	CMPSD   ABSX, TMP, $0</code></span>
+<span class="codeline" id="line-69"><code>	ORPD    TMP, INFMASK      // INFMASK =  INFMASK | IsInf(absxi)</code></span>
+<span class="codeline" id="line-70"><code>	UCOMISD SCALE, ABSX</code></span>
+<span class="codeline" id="line-71"><code>	JA      adjScale          // IF SCALE &gt; ABSXI { goto adjScale }</code></span>
+<span class="codeline" id="line-72"><code></code></span>
+<span class="codeline" id="line-73"><code>	DIVSD SCALE, ABSX // absxi = scale / absxi</code></span>
+<span class="codeline" id="line-74"><code>	MULSD ABSX, ABSX  // absxi *= absxi</code></span>
+<span class="codeline" id="line-75"><code>	ADDSD ABSX, SUMSQ // sumsq += absxi</code></span>
+<span class="codeline" id="line-76"><code>	INCQ  IDX         // i++</code></span>
+<span class="codeline" id="line-77"><code>	CMPQ  IDX, LEN</code></span>
+<span class="codeline" id="line-78"><code>	JNE   loop        // if i &lt; LEN { continue }</code></span>
+<span class="codeline" id="line-79"><code>	JMP   retSum      // if i == LEN { goto retSum }</code></span>
+<span class="codeline" id="line-80"><code></code></span>
+<span class="codeline" id="line-81"><code>adjScale:  // Scale &gt; Absxi</code></span>
+<span class="codeline" id="line-82"><code>	DIVSD  ABSX, SCALE  // tmp = absxi / scale</code></span>
+<span class="codeline" id="line-83"><code>	MULSD  SCALE, SUMSQ // sumsq *= tmp</code></span>
+<span class="codeline" id="line-84"><code>	MULSD  SCALE, SUMSQ // sumsq *= tmp</code></span>
+<span class="codeline" id="line-85"><code>	ADDSD  $1.0, SUMSQ  // sumsq += 1</code></span>
+<span class="codeline" id="line-86"><code>	MOVUPS ABSX, SCALE  // scale = absxi</code></span>
+<span class="codeline" id="line-87"><code>	INCQ   IDX          // i++</code></span>
+<span class="codeline" id="line-88"><code>	CMPQ   IDX, LEN</code></span>
+<span class="codeline" id="line-89"><code>	JNE    loop         // if i &lt; LEN { continue }</code></span>
+<span class="codeline" id="line-90"><code></code></span>
+<span class="codeline" id="line-91"><code>retSum:  // Calculate return value</code></span>
+<span class="codeline" id="line-92"><code>	SQRTSD  SUMSQ, SUMSQ     // sumsq = sqrt(sumsq)</code></span>
+<span class="codeline" id="line-93"><code>	MULSD   SCALE, SUMSQ     // sumsq += scale</code></span>
+<span class="codeline" id="line-94"><code>	MOVQ    SUMSQ, R10       // tmp = sumsq</code></span>
+<span class="codeline" id="line-95"><code>	UCOMISD ZERO, INFMASK</code></span>
+<span class="codeline" id="line-96"><code>	CMOVQPS INF_DATA, R10    // if INFMASK { tmp = INF }</code></span>
+<span class="codeline" id="line-97"><code>	UCOMISD ZERO, NANMASK</code></span>
+<span class="codeline" id="line-98"><code>	CMOVQPS NAN_DATA, R10    // if NANMASK { tmp = NaN }</code></span>
+<span class="codeline" id="line-99"><code>	MOVQ    R10, norm+24(FP) // return tmp</code></span>
+<span class="codeline" id="line-100"><code>	RET</code></span>
+<span class="codeline" id="line-101"><code></code></span>
+<span class="codeline" id="line-102"><code>retZero:</code></span>
+<span class="codeline" id="line-103"><code>	MOVSD ZERO, norm+24(FP) // return 0</code></span>
+<span class="codeline" id="line-104"><code>	RET</code></span>
+<span class="codeline" id="line-105"><code></code></span>
+<span class="codeline" id="line-106"><code>retNaN:</code></span>
+<span class="codeline" id="line-107"><code>	MOVSD NAN_DATA, TMP    // return NaN</code></span>
+<span class="codeline" id="line-108"><code>	MOVSD TMP, norm+24(FP)</code></span>
+<span class="codeline" id="line-109"><code>	RET</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

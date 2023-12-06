@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: google.golang.org/protobuf/reflect/protoreflect.FieldDescriptors.ByNumber</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../../pkg/google.golang.org/protobuf/reflect/protoreflect.html">google.golang.org/protobuf/reflect/protoreflect</a>.<a href="../../../../src/google.golang.org/protobuf/reflect/protoreflect/type.go.html#line-394">FieldDescriptors</a>.<a href="../../../../src/google.golang.org/protobuf/reflect/protoreflect/type.go.html#line-410">ByNumber</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">20 uses</span>
+
+	google.golang.org/protobuf/reflect/protoreflect (current package)
+		<a href="../../../../src/google.golang.org/protobuf/reflect/protoreflect/type.go.html#line-410">type.go#L410</a>: 	<b>ByNumber</b>(n FieldNumber) FieldDescriptor
+
+	<a href="../../../../pkg/google.golang.org/protobuf/reflect/protodesc.html">google.golang.org/protobuf/reflect/protodesc</a>
+		<a href="../../../../src/google.golang.org/protobuf/reflect/protodesc/desc_validate.go.html#line-103">desc_validate.go#L103</a>: 			if f2 := m.Fields().<b>ByNumber</b>(f1.Number()); f1 != f2 {
+
+	<a href="../../../../pkg/google.golang.org/protobuf/encoding/prototext.html">google.golang.org/protobuf/encoding/prototext</a>
+		<a href="../../../../src/google.golang.org/protobuf/encoding/prototext/decode.go.html#line-174">decode.go#L174</a>: 			fd = fieldDescs.<b>ByNumber</b>(num)
+		<a href="../../../../src/google.golang.org/protobuf/encoding/prototext/decode.go.html#line-689" class="path-duplicate">decode.go</a><a href="../../../../src/google.golang.org/protobuf/encoding/prototext/decode.go.html#line-689">#L689</a>: 		m.Set(fds.<b>ByNumber</b>(genid.Any_TypeUrl_field_number), protoreflect.ValueOfString(typeURL))
+		<a href="../../../../src/google.golang.org/protobuf/encoding/prototext/decode.go.html#line-692" class="path-duplicate">decode.go</a><a href="../../../../src/google.golang.org/protobuf/encoding/prototext/decode.go.html#line-692">#L692</a>: 		m.Set(fds.<b>ByNumber</b>(genid.Any_Value_field_number), protoreflect.ValueOfBytes(bValue))
+		<a href="../../../../src/google.golang.org/protobuf/encoding/prototext/encode.go.html#line-345">encode.go#L345</a>: 	fdType := fds.<b>ByNumber</b>(genid.Any_TypeUrl_field_number)
+		<a href="../../../../src/google.golang.org/protobuf/encoding/prototext/encode.go.html#line-354" class="path-duplicate">encode.go</a><a href="../../../../src/google.golang.org/protobuf/encoding/prototext/encode.go.html#line-354">#L354</a>: 	fdValue := fds.<b>ByNumber</b>(genid.Any_Value_field_number)
+
+	<a href="../../../../pkg/google.golang.org/protobuf/internal/filedesc.html">google.golang.org/protobuf/internal/filedesc</a>
+		<a href="../../../../src/google.golang.org/protobuf/internal/filedesc/desc.go.html#line-299">desc.go#L299</a>: 	return fd.Message().Fields().<b>ByNumber</b>(genid.MapEntry_Key_field_number)
+		<a href="../../../../src/google.golang.org/protobuf/internal/filedesc/desc.go.html#line-305" class="path-duplicate">desc.go</a><a href="../../../../src/google.golang.org/protobuf/internal/filedesc/desc.go.html#line-305">#L305</a>: 	return fd.Message().Fields().<b>ByNumber</b>(genid.MapEntry_Value_field_number)
+
+	<a href="../../../../pkg/google.golang.org/protobuf/internal/impl.html">google.golang.org/protobuf/internal/impl</a>
+		<a href="../../../../src/google.golang.org/protobuf/internal/impl/checkinit.go.html#line-33">checkinit.go#L33</a>: 				return errors.RequiredNotSet(string(mi.Desc.Fields().<b>ByNumber</b>(f.num).FullName()))
+		<a href="../../../../src/google.golang.org/protobuf/internal/impl/checkinit.go.html#line-51" class="path-duplicate">checkinit.go</a><a href="../../../../src/google.golang.org/protobuf/internal/impl/checkinit.go.html#line-51">#L51</a>: 				return errors.RequiredNotSet(string(mi.Desc.Fields().<b>ByNumber</b>(f.num).FullName()))
+		<a href="../../../../src/google.golang.org/protobuf/internal/impl/codec_message.go.html#line-170">codec_message.go#L170</a>: 			fi := fields.<b>ByNumber</b>(mi.orderedCoderFields[i].num)
+		<a href="../../../../src/google.golang.org/protobuf/internal/impl/codec_message.go.html#line-171" class="path-duplicate">codec_message.go</a><a href="../../../../src/google.golang.org/protobuf/internal/impl/codec_message.go.html#line-171">#L171</a>: 			fj := fields.<b>ByNumber</b>(mi.orderedCoderFields[j].num)
+		<a href="../../../../src/google.golang.org/protobuf/internal/impl/message_reflect_gen.go.html#line-115">message_reflect_gen.go#L115</a>: 		return od.Fields().<b>ByNumber</b>(oi.which(m.pointer()))
+		<a href="../../../../src/google.golang.org/protobuf/internal/impl/message_reflect_gen.go.html#line-235" class="path-duplicate">message_reflect_gen.go</a><a href="../../../../src/google.golang.org/protobuf/internal/impl/message_reflect_gen.go.html#line-235">#L235</a>: 		return od.Fields().<b>ByNumber</b>(oi.which(m.pointer()))
+		<a href="../../../../src/google.golang.org/protobuf/internal/impl/validate.go.html#line-312">validate.go#L312</a>: 						fd := st.mi.Desc.Fields().<b>ByNumber</b>(num)
+
+	<a href="../../../../pkg/google.golang.org/protobuf/proto.html">google.golang.org/protobuf/proto</a>
+		<a href="../../../../src/google.golang.org/protobuf/proto/checkinit.go.html#line-39">checkinit.go#L39</a>: 		fd := fds.<b>ByNumber</b>(nums.Get(i))
+		<a href="../../../../src/google.golang.org/protobuf/proto/decode.go.html#line-144">decode.go#L144</a>: 		fd := fields.<b>ByNumber</b>(num)
+
+	<a href="../../../../pkg/github.com/golang/protobuf/proto.html">github.com/golang/protobuf/proto</a>
+		<a href="../../../../src/github.com/golang/protobuf/proto/registry.go.html#line-222">registry.go#L222</a>: 			kt := goTypeForField(md.Fields().<b>ByNumber</b>(1))
+		<a href="../../../../src/github.com/golang/protobuf/proto/registry.go.html#line-223" class="path-duplicate">registry.go</a><a href="../../../../src/github.com/golang/protobuf/proto/registry.go.html#line-223">#L223</a>: 			vt := goTypeForField(md.Fields().<b>ByNumber</b>(2))
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

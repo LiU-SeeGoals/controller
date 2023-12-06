@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: unicode/utf8.RuneError</title>
+<link href="../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">const <b><a href="../../pkg/unicode/utf8.html">unicode/utf8</a>.<a href="../../src/unicode/utf8/utf8.go.html#line-16">RuneError</a></b></span>
+
+<span class="title">49 uses</span>
+
+	unicode/utf8 (current package)
+		<a href="../../src/unicode/utf8/utf8.go.html#line-16">utf8.go#L16</a>: 	<b>RuneError</b> = '\uFFFD'     // the "error" Rune or "Unicode replacement character"
+		<a href="../../src/unicode/utf8/utf8.go.html#line-154" class="path-duplicate">utf8.go</a><a href="../../src/unicode/utf8/utf8.go.html#line-154">#L154</a>: 		return <b>RuneError</b>, 0
+		<a href="../../src/unicode/utf8/utf8.go.html#line-163" class="path-duplicate">utf8.go</a><a href="../../src/unicode/utf8/utf8.go.html#line-163">#L163</a>: 		return rune(p[0])&amp;^mask | <b>RuneError</b>&amp;mask, 1
+		<a href="../../src/unicode/utf8/utf8.go.html#line-168" class="path-duplicate">utf8.go</a><a href="../../src/unicode/utf8/utf8.go.html#line-168">#L168</a>: 		return <b>RuneError</b>, 1
+		<a href="../../src/unicode/utf8/utf8.go.html#line-172" class="path-duplicate">utf8.go</a><a href="../../src/unicode/utf8/utf8.go.html#line-172">#L172</a>: 		return <b>RuneError</b>, 1
+		<a href="../../src/unicode/utf8/utf8.go.html#line-179" class="path-duplicate">utf8.go</a><a href="../../src/unicode/utf8/utf8.go.html#line-179">#L179</a>: 		return <b>RuneError</b>, 1
+		<a href="../../src/unicode/utf8/utf8.go.html#line-186" class="path-duplicate">utf8.go</a><a href="../../src/unicode/utf8/utf8.go.html#line-186">#L186</a>: 		return <b>RuneError</b>, 1
+		<a href="../../src/unicode/utf8/utf8.go.html#line-202" class="path-duplicate">utf8.go</a><a href="../../src/unicode/utf8/utf8.go.html#line-202">#L202</a>: 		return <b>RuneError</b>, 0
+		<a href="../../src/unicode/utf8/utf8.go.html#line-211" class="path-duplicate">utf8.go</a><a href="../../src/unicode/utf8/utf8.go.html#line-211">#L211</a>: 		return rune(s[0])&amp;^mask | <b>RuneError</b>&amp;mask, 1
+		<a href="../../src/unicode/utf8/utf8.go.html#line-216" class="path-duplicate">utf8.go</a><a href="../../src/unicode/utf8/utf8.go.html#line-216">#L216</a>: 		return <b>RuneError</b>, 1
+		<a href="../../src/unicode/utf8/utf8.go.html#line-220" class="path-duplicate">utf8.go</a><a href="../../src/unicode/utf8/utf8.go.html#line-220">#L220</a>: 		return <b>RuneError</b>, 1
+		<a href="../../src/unicode/utf8/utf8.go.html#line-227" class="path-duplicate">utf8.go</a><a href="../../src/unicode/utf8/utf8.go.html#line-227">#L227</a>: 		return <b>RuneError</b>, 1
+		<a href="../../src/unicode/utf8/utf8.go.html#line-234" class="path-duplicate">utf8.go</a><a href="../../src/unicode/utf8/utf8.go.html#line-234">#L234</a>: 		return <b>RuneError</b>, 1
+		<a href="../../src/unicode/utf8/utf8.go.html#line-250" class="path-duplicate">utf8.go</a><a href="../../src/unicode/utf8/utf8.go.html#line-250">#L250</a>: 		return <b>RuneError</b>, 0
+		<a href="../../src/unicode/utf8/utf8.go.html#line-274" class="path-duplicate">utf8.go</a><a href="../../src/unicode/utf8/utf8.go.html#line-274">#L274</a>: 		return <b>RuneError</b>, 1
+		<a href="../../src/unicode/utf8/utf8.go.html#line-290" class="path-duplicate">utf8.go</a><a href="../../src/unicode/utf8/utf8.go.html#line-290">#L290</a>: 		return <b>RuneError</b>, 0
+		<a href="../../src/unicode/utf8/utf8.go.html#line-314" class="path-duplicate">utf8.go</a><a href="../../src/unicode/utf8/utf8.go.html#line-314">#L314</a>: 		return <b>RuneError</b>, 1
+		<a href="../../src/unicode/utf8/utf8.go.html#line-354" class="path-duplicate">utf8.go</a><a href="../../src/unicode/utf8/utf8.go.html#line-354">#L354</a>: 		r = <b>RuneError</b>
+		<a href="../../src/unicode/utf8/utf8.go.html#line-389" class="path-duplicate">utf8.go</a><a href="../../src/unicode/utf8/utf8.go.html#line-389">#L389</a>: 		r = <b>RuneError</b>
+
+	<a href="../../pkg/bufio.html">bufio</a>
+		<a href="../../src/bufio/scan.go.html#line-296">scan.go#L296</a>: var errorRune = []byte(string(utf8.<b>RuneError</b>))
+
+	<a href="../../pkg/bytes.html">bytes</a>
+		<a href="../../src/bytes/bytes.go.html#line-164">bytes.go#L164</a>: 	case r == utf8.<b>RuneError</b>:
+		<a href="../../src/bytes/bytes.go.html#line-167" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-167">#L167</a>: 			if r1 == utf8.<b>RuneError</b> {
+		<a href="../../src/bytes/bytes.go.html#line-196" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-196">#L196</a>: 				if r == utf8.<b>RuneError</b> {
+		<a href="../../src/bytes/bytes.go.html#line-210" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-210">#L210</a>: 			r = utf8.<b>RuneError</b>
+		<a href="../../src/bytes/bytes.go.html#line-235" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-235">#L235</a>: 		if r != utf8.<b>RuneError</b> {
+		<a href="../../src/bytes/bytes.go.html#line-283" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-283">#L283</a>: 				if r == utf8.<b>RuneError</b> {
+		<a href="../../src/bytes/bytes.go.html#line-297" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-297">#L297</a>: 			cr = utf8.<b>RuneError</b>
+		<a href="../../src/bytes/bytes.go.html#line-319" class="path-duplicate">bytes.go</a><a href="../../src/bytes/bytes.go.html#line-319">#L319</a>: 		if r != utf8.<b>RuneError</b> {
+
+	<a href="../../pkg/encoding/json.html">encoding/json</a>
+		<a href="../../src/encoding/json/decode.go.html#line-1199">decode.go#L1199</a>: 		if rr == utf8.<b>RuneError</b> &amp;&amp; size == 1 {
+		<a href="../../src/encoding/json/encode.go.html#line-1003">encode.go#L1003</a>: 		if c == utf8.<b>RuneError</b> &amp;&amp; size == 1 {
+
+	<a href="../../pkg/fmt.html">fmt</a>
+		<a href="../../src/fmt/format.go.html#line-468">format.go#L468</a>: 		r = utf8.<b>RuneError</b>
+		<a href="../../src/fmt/format.go.html#line-479" class="path-duplicate">format.go</a><a href="../../src/fmt/format.go.html#line-479">#L479</a>: 		r = utf8.<b>RuneError</b>
+
+	<a href="../../pkg/github.com/golang/protobuf/proto.html">github.com/golang/protobuf/proto</a>
+		<a href="../../src/github.com/golang/protobuf/proto/text_decode.go.html#line-684">text_decode.go#L684</a>: 		if r == utf8.<b>RuneError</b> &amp;&amp; n == 1 {
+		<a href="../../src/github.com/golang/protobuf/proto/text_decode.go.html#line-709" class="path-duplicate">text_decode.go</a><a href="../../src/github.com/golang/protobuf/proto/text_decode.go.html#line-709">#L709</a>: 	if r == utf8.<b>RuneError</b> &amp;&amp; n == 1 {
+
+	<a href="../../pkg/google.golang.org/protobuf/internal/encoding/text.html">google.golang.org/protobuf/internal/encoding/text</a>
+		<a href="../../src/google.golang.org/protobuf/internal/encoding/text/decode_string.go.html#line-61">decode_string.go#L61</a>: 		case r == utf8.<b>RuneError</b> &amp;&amp; n == 1:
+		<a href="../../src/google.golang.org/protobuf/internal/encoding/text/encode.go.html#line-124">encode.go#L124</a>: 		case r == utf8.<b>RuneError</b> &amp;&amp; n == 1:
+
+	<a href="../../pkg/path.html">path</a>
+		<a href="../../src/path/match.go.html#line-222">match.go#L222</a>: 	if r == utf8.<b>RuneError</b> &amp;&amp; n == 1 {
+
+	<a href="../../pkg/strconv.html">strconv</a>
+		<a href="../../src/strconv/quote.go.html#line-46">quote.go#L46</a>: 		if width == 1 &amp;&amp; r == utf8.<b>RuneError</b> {
+		<a href="../../src/strconv/quote.go.html#line-61" class="path-duplicate">quote.go</a><a href="../../src/strconv/quote.go.html#line-61">#L61</a>: 		r = utf8.<b>RuneError</b>
+		<a href="../../src/strconv/quote.go.html#line-225" class="path-duplicate">quote.go</a><a href="../../src/strconv/quote.go.html#line-225">#L225</a>: 		if r == utf8.<b>RuneError</b> {
+		<a href="../../src/strconv/quote.go.html#line-442" class="path-duplicate">quote.go</a><a href="../../src/strconv/quote.go.html#line-442">#L442</a>: 				valid = len("'")+n+len("'") == end &amp;&amp; (r != utf8.<b>RuneError</b> || n != 1)
+
+	<a href="../../pkg/strings.html">strings</a>
+		<a href="../../src/strings/strings.go.html#line-129">strings.go#L129</a>: 	case r == utf8.<b>RuneError</b>:
+		<a href="../../src/strings/strings.go.html#line-131" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-131">#L131</a>: 			if r == utf8.<b>RuneError</b> {
+		<a href="../../src/strings/strings.go.html#line-154" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-154">#L154</a>: 			r = utf8.<b>RuneError</b>
+		<a href="../../src/strings/strings.go.html#line-187" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-187">#L187</a>: 			rc = utf8.<b>RuneError</b>
+		<a href="../../src/strings/strings.go.html#line-207" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-207">#L207</a>: 			rc = utf8.<b>RuneError</b>
+		<a href="../../src/strings/strings.go.html#line-490" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-490">#L490</a>: 		if r == c &amp;&amp; c != utf8.<b>RuneError</b> {
+		<a href="../../src/strings/strings.go.html#line-495" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-495">#L495</a>: 		if c == utf8.<b>RuneError</b> {
+		<a href="../../src/strings/strings.go.html#line-708" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-708">#L708</a>: 		if c != utf8.<b>RuneError</b> {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

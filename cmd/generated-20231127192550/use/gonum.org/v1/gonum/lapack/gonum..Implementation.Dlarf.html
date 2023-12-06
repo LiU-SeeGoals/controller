@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/lapack/gonum.Implementation.Dlarf</title>
+<link href="../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../../../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>.<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/lapack.go.html#line-12">Implementation</a>.<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarf.go.html#line-27">Dlarf</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">33 uses</span>
+
+	gonum.org/v1/gonum/lapack/gonum (current package)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgebd2.go.html#line-55">dgebd2.go#L55</a>: 				impl.<b>Dlarf</b>(blas.Left, m-i, n-i-1, a[i*lda+i:], lda, tauQ[i], a[i*lda+i+1:], lda, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgebd2.go.html#line-62" class="path-duplicate">dgebd2.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgebd2.go.html#line-62">#L62</a>: 				impl.<b>Dlarf</b>(blas.Right, m-i-1, n-i-1, a[i*lda+i+1:], 1, tauP[i], a[(i+1)*lda+i+1:], lda, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgebd2.go.html#line-75" class="path-duplicate">dgebd2.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgebd2.go.html#line-75">#L75</a>: 			impl.<b>Dlarf</b>(blas.Right, m-i-1, n-i, a[i*lda+i:], 1, tauP[i], a[(i+1)*lda+i:], lda, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgebd2.go.html#line-82" class="path-duplicate">dgebd2.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgebd2.go.html#line-82">#L82</a>: 			impl.<b>Dlarf</b>(blas.Left, m-i-1, n-i-1, a[(i+1)*lda+i:], lda, tauQ[i], a[(i+1)*lda+i+1:], lda, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgehd2.go.html#line-99">dgehd2.go#L99</a>: 		impl.<b>Dlarf</b>(blas.Right, ihi+1, ihi-i, a[(i+1)*lda+i:], lda, tau[i], a[i+1:], lda, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgehd2.go.html#line-102" class="path-duplicate">dgehd2.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgehd2.go.html#line-102">#L102</a>: 		impl.<b>Dlarf</b>(blas.Left, ihi-i, n-i-1, a[(i+1)*lda+i:], lda, tau[i], a[(i+1)*lda+i+1:], lda, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgelq2.go.html#line-57">dgelq2.go#L57</a>: 			impl.<b>Dlarf</b>(blas.Right, m-i-1, n-i,
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeql2.go.html#line-64">dgeql2.go#L64</a>: 		impl.<b>Dlarf</b>(blas.Left, m-k+i+1, n-k+i, a[n-k+i:], lda, tau[i], a, lda, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeqr2.go.html#line-70">dgeqr2.go#L70</a>: 			impl.<b>Dlarf</b>(blas.Left, m-i, n-i-1,
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dgerq2.go.html#line-71">dgerq2.go#L71</a>: 		impl.<b>Dlarf</b>(blas.Right, mki, nki+1, a[mki*lda:], 1, tau[i], a, lda, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqp2.go.html#line-99">dlaqp2.go#L99</a>: 			impl.<b>Dlarf</b>(blas.Left, m-offpi, n-i-1, a[offpi*lda+i:], lda, tau[i], a[offpi*lda+i+1:], lda, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqr23.go.html#line-356">dlaqr23.go#L356</a>: 			impl.<b>Dlarf</b>(blas.Left, ns, jw, work[:ns], 1, tau, t, ldt, work[jw:])
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqr23.go.html#line-357" class="path-duplicate">dlaqr23.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqr23.go.html#line-357">#L357</a>: 			impl.<b>Dlarf</b>(blas.Right, ns, ns, work[:ns], 1, tau, t, ldt, work[jw:])
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqr23.go.html#line-358" class="path-duplicate">dlaqr23.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqr23.go.html#line-358">#L358</a>: 			impl.<b>Dlarf</b>(blas.Right, jw, ns, work[:ns], 1, tau, v, ldv, work[jw:])
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarf.go.html#line-27">dlarf.go#L27</a>: func (impl Implementation) <b>Dlarf</b>(side blas.Side, m, n int, v []float64, incv int, tau float64, c []float64, ldc int, work []float64) {
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfx.go.html#line-71">dlarfx.go#L71</a>: 			impl.<b>Dlarf</b>(side, m, n, v, 1, tau, c, ldc, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfx.go.html#line-310" class="path-duplicate">dlarfx.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfx.go.html#line-310">#L310</a>: 		impl.<b>Dlarf</b>(side, m, n, v, 1, tau, c, ldc, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dorg2l.go.html#line-69">dorg2l.go#L69</a>: 		impl.<b>Dlarf</b>(blas.Left, m-n+ii+1, ii, a[ii:], lda, tau[i], a, lda, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dorg2r.go.html#line-67">dorg2r.go#L67</a>: 			impl.<b>Dlarf</b>(blas.Left, m-i, n-i-1, a[i*lda+i:], lda, tau[i], a[i*lda+i+1:], lda, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dorgl2.go.html#line-64">dorgl2.go#L64</a>: 				impl.<b>Dlarf</b>(blas.Right, m-i-1, n-i, a[i*lda+i:], 1, tau[i], a[(i+1)*lda+i:], lda, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dorgr2.go.html#line-74">dorgr2.go#L74</a>: 		impl.<b>Dlarf</b>(blas.Right, ii, n-m+ii+1, a[ii*lda:], 1, tau[i], a, lda, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dorm2r.go.html#line-75">dorm2r.go#L75</a>: 				impl.<b>Dlarf</b>(side, m-i, n, a[i*lda+i:], lda, tau[i], c[i*ldc:], ldc, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dorm2r.go.html#line-83" class="path-duplicate">dorm2r.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dorm2r.go.html#line-83">#L83</a>: 			impl.<b>Dlarf</b>(side, m-i, n, a[i*lda+i:], lda, tau[i], c[i*ldc:], ldc, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dorm2r.go.html#line-92" class="path-duplicate">dorm2r.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dorm2r.go.html#line-92">#L92</a>: 			impl.<b>Dlarf</b>(side, m, n-i, a[i*lda+i:], lda, tau[i], c[i:], ldc, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dorm2r.go.html#line-100" class="path-duplicate">dorm2r.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dorm2r.go.html#line-100">#L100</a>: 		impl.<b>Dlarf</b>(side, m, n-i, a[i*lda+i:], lda, tau[i], c[i:], ldc, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dorml2.go.html#line-76">dorml2.go#L76</a>: 			impl.<b>Dlarf</b>(side, m-i, n, a[i*lda+i:], 1, tau[i], c[i*ldc:], ldc, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dorml2.go.html#line-84" class="path-duplicate">dorml2.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dorml2.go.html#line-84">#L84</a>: 			impl.<b>Dlarf</b>(side, m-i, n, a[i*lda+i:], 1, tau[i], c[i*ldc:], ldc, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dorml2.go.html#line-92" class="path-duplicate">dorml2.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dorml2.go.html#line-92">#L92</a>: 			impl.<b>Dlarf</b>(side, m, n-i, a[i*lda+i:], 1, tau[i], c[i:], ldc, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dorml2.go.html#line-100" class="path-duplicate">dorml2.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dorml2.go.html#line-100">#L100</a>: 			impl.<b>Dlarf</b>(side, m, n-i, a[i*lda+i:], 1, tau[i], c[i:], ldc, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dormr2.go.html#line-77">dormr2.go#L77</a>: 				impl.<b>Dlarf</b>(side, m-k+i+1, n, a[i*lda:], 1, tau[i], c, ldc, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dormr2.go.html#line-85" class="path-duplicate">dormr2.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dormr2.go.html#line-85">#L85</a>: 			impl.<b>Dlarf</b>(side, m-k+i+1, n, a[i*lda:], 1, tau[i], c, ldc, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dormr2.go.html#line-94" class="path-duplicate">dormr2.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dormr2.go.html#line-94">#L94</a>: 			impl.<b>Dlarf</b>(side, m, n-k+i+1, a[i*lda:], 1, tau[i], c, ldc, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dormr2.go.html#line-102" class="path-duplicate">dormr2.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dormr2.go.html#line-102">#L102</a>: 		impl.<b>Dlarf</b>(side, m, n-k+i+1, a[i*lda:], 1, tau[i], c, ldc, work)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

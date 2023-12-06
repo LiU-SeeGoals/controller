@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: math/cmplx.Abs</title>
+<link href="../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../../pkg/math/cmplx.html">math/cmplx</a>.<a href="../../src/math/cmplx/abs.go.html#line-13">Abs</a></b></span>
+
+<span class="title">10 uses</span>
+
+	math/cmplx (current package)
+		<a href="../../src/math/cmplx/abs.go.html#line-13">abs.go#L13</a>: func <b>Abs</b>(x complex128) float64 { return math.Hypot(real(x), imag(x)) }
+		<a href="../../src/math/cmplx/log.go.html#line-58">log.go#L58</a>: 	return complex(math.Log(<b>Abs</b>(x)), Phase(x))
+		<a href="../../src/math/cmplx/polar.go.html#line-11">polar.go#L11</a>: 	return <b>Abs</b>(x), Phase(x)
+		<a href="../../src/math/cmplx/pow.go.html#line-69">pow.go#L69</a>: 	modulus := <b>Abs</b>(x)
+
+	<a href="../../pkg/gonum.org/v1/gonum/internal/asm/c128.html">gonum.org/v1/gonum/internal/asm/c128</a>
+		<a href="../../src/gonum.org/v1/gonum/internal/asm/c128/stubs.go.html#line-122">stubs.go#L122</a>: 		absxi := cmplx.<b>Abs</b>(v)
+		<a href="../../src/gonum.org/v1/gonum/internal/asm/c128/stubs.go.html#line-149" class="path-duplicate">stubs.go</a><a href="../../src/gonum.org/v1/gonum/internal/asm/c128/stubs.go.html#line-149">#L149</a>: 		absxi := cmplx.<b>Abs</b>(v)
+
+	<a href="../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>
+		<a href="../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-273">cmatrix.go#L273</a>: 	return a == b || cmplx.<b>Abs</b>(a-b) &lt;= tol
+		<a href="../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-309" class="path-duplicate">cmatrix.go</a><a href="../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-309">#L309</a>: 	delta := cmplx.<b>Abs</b>(a - b)
+		<a href="../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-313" class="path-duplicate">cmatrix.go</a><a href="../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-313">#L313</a>: 	return delta/math.Max(cmplx.<b>Abs</b>(a), cmplx.<b>Abs</b>(b)) &lt;= tol
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

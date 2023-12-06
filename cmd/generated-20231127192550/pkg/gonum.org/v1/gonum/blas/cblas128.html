@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: gonum.org/v1/gonum/blas/cblas128</title>
+<link href="../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>cblas128</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../../../index.html#pkg-gonum.org/v1/gonum/blas/cblas128">gonum.org/v1/gonum/blas/cblas128</a><i> (on <a href="https://pkg.go.dev/gonum.org/v1/gonum/blas/cblas128" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../../../dep/gonum.org/v1/gonum/blas/cblas128.html">2 packages</a>, and imported by <a href="../../../../../dep/gonum.org/v1/gonum/blas/cblas128.html#imported-by">one package</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<span class="nodocs">    <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html">cblas128.go</a></span>
+	<span class="nodocs">    <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv.go.html">conv.go</a></span>
+	<span class="nodocs">    <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_hermitian.go.html">conv_hermitian.go</a></span>
+	<span class="nodocs">    <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_symmetric.go.html">conv_symmetric.go</a></span>
+	<input type='checkbox' checked class="fold" id="file-4-fold-content"><label for="file-4-fold-content">  <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/doc.go.html#doc">d</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/doc.go.html">doc.go</a></label><span id='file-4-fold-content-items' class="fold-items">
+<span class="md-text">		Package cblas128 provides a simple interface to the complex128 BLAS API.</span></span></div>
+<div id="exported-types"><span class="title">Package-Level Type Names<span class="title-stat"><i> (total 20, all are exported)</i></span></span>
+
+<div id="exported-types-buttons" class="js-on">	/* sort exporteds by: <label id="sort-types-by-alphabet" class="button">alphabet</label> | <label id="sort-types-by-popularity" class="button">popularity</label> */</div><div class="anchor type-res" id="name-Band" data-popularity="120">	<input type='checkbox' class="fold" id="Band-fold-content"><label for="Band-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Band.html">type</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-44">Band</a> <i>(struct)</i></label><span id='Band-fold-content-docs' class="fold-docs">
+<span class="md-text">		Band represents a band matrix using the band storage scheme.</span>
+
+		<input type='checkbox' class="fold" id="Band-fold-fields"><label for="Band-fold-fields">Fields (<i>total 6, all are exported</i>)</label><span id='Band-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-45">Cols</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-48">Data</a> <i>[]<a href="../../../../builtin.html#name-complex128">complex128</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-46">KL</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-46">KU</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-45">Rows</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-47">Stride</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span></span>
+		<input type='checkbox' class="fold" id="Band-fold-methods"><label for="Band-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='Band-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="Band-fold-method-From"><label for="Band-fold-method-From">( Band) <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv.go.html#line-154">From</a>(a <a href="#name-BandCols">BandCols</a>)</label><span id='Band-fold-method-From-docs' class="fold-docs">
+<span class="md-text">				From fills the receiver with elements from a. The receiver
+				must have the same dimensions and bandwidth as a and have
+				adequate backing data storage.</span>
+</span></span></span>
+		<input type='checkbox' class="fold" id="Band-fold-params"><label for="Band-fold-params">As Inputs Of (<i>at least 2, both are exported</i>)</label><span id='Band-fold-params-items' class="fold-items"><span>
+			func <a href="#name-Gbmv">Gbmv</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <b>Band</b>, x <a href="#name-Vector">Vector</a>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, y <a href="#name-Vector">Vector</a>)</span><span>
+			func <a href="#name-BandCols">BandCols</a>.<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv.go.html#line-131">From</a>(a <b>Band</b>)</span></span>
+
+</span></div><div class="anchor type-res" id="name-BandCols" data-popularity="85">	<input type='checkbox' class="fold" id="BandCols-fold-content"><label for="BandCols-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..BandCols.html">type</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv.go.html#line-126">BandCols</a> <a href="#name-Band">Band</a> <i>(struct)</i></label><span id='BandCols-fold-content-docs' class="fold-docs">
+<span class="md-text">		BandCols represents a matrix using the band column-major storage scheme.</span>
+
+		<input type='checkbox' class="fold" id="BandCols-fold-fields"><label for="BandCols-fold-fields">Fields (<i>total 6, all are exported</i>)</label><span id='BandCols-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-45">Cols</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-48">Data</a> <i>[]<a href="../../../../builtin.html#name-complex128">complex128</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-46">KL</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-46">KU</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-45">Rows</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-47">Stride</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span></span>
+		<input type='checkbox' class="fold" id="BandCols-fold-methods"><label for="BandCols-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='BandCols-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="BandCols-fold-method-From"><label for="BandCols-fold-method-From">( BandCols) <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv.go.html#line-131">From</a>(a <a href="#name-Band">Band</a>)</label><span id='BandCols-fold-method-From-docs' class="fold-docs">
+<span class="md-text">				From fills the receiver with elements from a. The receiver
+				must have the same dimensions and bandwidth as a and have
+				adequate backing data storage.</span>
+</span></span></span>
+		<input type='checkbox' class="fold" id="BandCols-fold-params"><label for="BandCols-fold-params">As Inputs Of (<i>at least one exported</i>)</label><span id='BandCols-fold-params-items' class="fold-items"><span>
+			func <a href="#name-Band">Band</a>.<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv.go.html#line-154">From</a>(a <b>BandCols</b>)</span></span>
+
+</span></div><div class="anchor type-res" id="name-General" data-popularity="865">	<input type='checkbox' class="fold" id="General-fold-content"><label for="General-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..General.html">type</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-37">General</a> <i>(struct)</i></label><span id='General-fold-content-docs' class="fold-docs">
+<span class="md-text">		General represents a matrix using the conventional storage scheme.</span>
+
+		<input type='checkbox' class="fold" id="General-fold-fields"><label for="General-fold-fields">Fields (<i>total 4, all are exported</i>)</label><span id='General-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-38">Cols</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-40">Data</a> <i>[]<a href="../../../../builtin.html#name-complex128">complex128</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-38">Rows</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-39">Stride</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span></span>
+		<input type='checkbox' class="fold" id="General-fold-methods"><label for="General-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='General-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="General-fold-method-From"><label for="General-fold-method-From">( General) <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv.go.html#line-34">From</a>(a <a href="#name-GeneralCols">GeneralCols</a>)</label><span id='General-fold-method-From-docs' class="fold-docs">
+<span class="md-text">				From fills the receiver with elements from a. The receiver
+				must have the same dimensions as a and have adequate backing
+				data storage.</span>
+</span></span></span>
+		<input type='checkbox' class="fold" id="General-fold-results"><label for="General-fold-results">As Outputs Of (<i>at least 2, both are exported</i>)</label><span id='General-fold-results-items' class="fold-items"><span>
+			func gonum.org/v1/gonum/mat.(*<a href="../mat.html#name-CDense">CDense</a>).<a href="../../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-303">RawCMatrix</a>() <b>General</b></span><span>
+			func gonum.org/v1/gonum/mat.<a href="../mat.html#name-RawCMatrixer">RawCMatrixer</a>.<a href="../../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-40">RawCMatrix</a>() <b>General</b></span></span>
+		<input type='checkbox' class="fold" id="General-fold-params"><label for="General-fold-params">As Inputs Of (<i>at least 19, in which 17 are exported</i>)</label><span id='General-fold-params-items' class="fold-items"><span>
+			func <a href="#name-Gemm">Gemm</a>(tA, tB <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a, b <b>General</b>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, c <b>General</b>)</span><span>
+			func <a href="#name-Gemm">Gemm</a>(tA, tB <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a, b <b>General</b>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, c <b>General</b>)</span><span>
+			func <a href="#name-Gemv">Gemv</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <b>General</b>, x <a href="#name-Vector">Vector</a>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, y <a href="#name-Vector">Vector</a>)</span><span>
+			func <a href="#name-Gerc">Gerc</a>(alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, x, y <a href="#name-Vector">Vector</a>, a <b>General</b>)</span><span>
+			func <a href="#name-Geru">Geru</a>(alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, x, y <a href="#name-Vector">Vector</a>, a <b>General</b>)</span><span>
+			func <a href="#name-Hemm">Hemm</a>(s <a href="../blas.html">blas</a>.<a href="../blas.html#name-Side">Side</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <a href="#name-Hermitian">Hermitian</a>, b <b>General</b>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, c <b>General</b>)</span><span>
+			func <a href="#name-Hemm">Hemm</a>(s <a href="../blas.html">blas</a>.<a href="../blas.html#name-Side">Side</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <a href="#name-Hermitian">Hermitian</a>, b <b>General</b>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, c <b>General</b>)</span><span>
+			func <a href="#name-Her2k">Her2k</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a, b <b>General</b>, beta <a href="../../../../builtin.html#name-float64">float64</a>, c <a href="#name-Hermitian">Hermitian</a>)</span><span>
+			func <a href="#name-Herk">Herk</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, alpha <a href="../../../../builtin.html#name-float64">float64</a>, a <b>General</b>, beta <a href="../../../../builtin.html#name-float64">float64</a>, c <a href="#name-Hermitian">Hermitian</a>)</span><span>
+			func <a href="#name-Symm">Symm</a>(s <a href="../blas.html">blas</a>.<a href="../blas.html#name-Side">Side</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <a href="#name-Symmetric">Symmetric</a>, b <b>General</b>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, c <b>General</b>)</span><span>
+			func <a href="#name-Symm">Symm</a>(s <a href="../blas.html">blas</a>.<a href="../blas.html#name-Side">Side</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <a href="#name-Symmetric">Symmetric</a>, b <b>General</b>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, c <b>General</b>)</span><span>
+			func <a href="#name-Syr2k">Syr2k</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a, b <b>General</b>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, c <a href="#name-Symmetric">Symmetric</a>)</span><span>
+			func <a href="#name-Syrk">Syrk</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <b>General</b>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, c <a href="#name-Symmetric">Symmetric</a>)</span><span>
+			func <a href="#name-Trmm">Trmm</a>(s <a href="../blas.html">blas</a>.<a href="../blas.html#name-Side">Side</a>, tA <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <a href="#name-Triangular">Triangular</a>, b <b>General</b>)</span><span>
+			func <a href="#name-Trsm">Trsm</a>(s <a href="../blas.html">blas</a>.<a href="../blas.html#name-Side">Side</a>, tA <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <a href="#name-Triangular">Triangular</a>, b <b>General</b>)</span><span>
+			func <a href="#name-GeneralCols">GeneralCols</a>.<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv.go.html#line-17">From</a>(a <b>General</b>)</span><span>
+			func gonum.org/v1/gonum/mat.(*<a href="../mat.html#name-CDense">CDense</a>).<a href="../../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-295">SetRawCMatrix</a>(b <b>General</b>)</span>
+			<input type='checkbox' class="showhide" id="General-showhide-outputofs"><i><label for="General-showhide-outputofs" class="show-inline">/* 2+ unexporteds ... */</label><label for="General-showhide-outputofs" class="hide-inline">/* 2+ unexporteds: */</label></i><span class="hidden"><i>
+			func gonum.org/v1/gonum/mat.<a href="../mat.html#name-checkOverlapComplex">checkOverlapComplex</a>(a, b <b>General</b>) <a href="../../../../builtin.html#name-bool">bool</a></i></span><span class="hidden"><i>
+			func gonum.org/v1/gonum/mat.(*<a href="../mat.html#name-CDense">CDense</a>).<a href="../../../../../src/gonum.org/v1/gonum/mat/shadow_complex.go.html#line-56">checkOverlap</a>(a <b>General</b>) <a href="../../../../builtin.html#name-bool">bool</a></i></span></span>
+
+</span></div><div class="anchor type-res" id="name-GeneralCols" data-popularity="85">	<input type='checkbox' class="fold" id="GeneralCols-fold-content"><label for="GeneralCols-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..GeneralCols.html">type</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv.go.html#line-12">GeneralCols</a> <a href="#name-General">General</a> <i>(struct)</i></label><span id='GeneralCols-fold-content-docs' class="fold-docs">
+<span class="md-text">		GeneralCols represents a matrix using the conventional column-major storage scheme.</span>
+
+		<input type='checkbox' class="fold" id="GeneralCols-fold-fields"><label for="GeneralCols-fold-fields">Fields (<i>total 4, all are exported</i>)</label><span id='GeneralCols-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-38">Cols</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-40">Data</a> <i>[]<a href="../../../../builtin.html#name-complex128">complex128</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-38">Rows</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-39">Stride</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span></span>
+		<input type='checkbox' class="fold" id="GeneralCols-fold-methods"><label for="GeneralCols-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='GeneralCols-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="GeneralCols-fold-method-From"><label for="GeneralCols-fold-method-From">( GeneralCols) <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv.go.html#line-17">From</a>(a <a href="#name-General">General</a>)</label><span id='GeneralCols-fold-method-From-docs' class="fold-docs">
+<span class="md-text">				From fills the receiver with elements from a. The receiver
+				must have the same dimensions as a and have adequate backing
+				data storage.</span>
+</span></span></span>
+		<input type='checkbox' class="fold" id="GeneralCols-fold-params"><label for="GeneralCols-fold-params">As Inputs Of (<i>at least one exported</i>)</label><span id='GeneralCols-fold-params-items' class="fold-items"><span>
+			func <a href="#name-General">General</a>.<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv.go.html#line-34">From</a>(a <b>GeneralCols</b>)</span></span>
+
+</span></div><div class="anchor type-res" id="name-Hermitian" data-popularity="295">	<input type='checkbox' class="fold" id="Hermitian-fold-content"><label for="Hermitian-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Hermitian.html">type</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-101">Hermitian</a> <a href="#name-Symmetric">Symmetric</a> <i>(struct)</i></label><span id='Hermitian-fold-content-docs' class="fold-docs">
+<span class="md-text">		Hermitian represents an Hermitian matrix using the conventional storage scheme.</span>
+
+		<input type='checkbox' class="fold" id="Hermitian-fold-fields"><label for="Hermitian-fold-fields">Fields (<i>total 4, all are exported</i>)</label><span id='Hermitian-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-81">Data</a> <i>[]<a href="../../../../builtin.html#name-complex128">complex128</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-79">N</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-80">Stride</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-82">Uplo</a> <i><a href="../blas.html">blas</a>.<a href="../blas.html#name-Uplo">Uplo</a></i></span></span></span>
+		<input type='checkbox' class="fold" id="Hermitian-fold-methods"><label for="Hermitian-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='Hermitian-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="Hermitian-fold-method-From"><label for="Hermitian-fold-method-From">( Hermitian) <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_hermitian.go.html#line-45">From</a>(a <a href="#name-HermitianCols">HermitianCols</a>)</label><span id='Hermitian-fold-method-From-docs' class="fold-docs">
+<span class="md-text">				From fills the receiver with elements from a. The receiver
+				must have the same dimensions and uplo as a and have adequate
+				backing data storage.</span>
+</span></span></span>
+		<input type='checkbox' class="fold" id="Hermitian-fold-params"><label for="Hermitian-fold-params">As Inputs Of (<i>at least 7, all are exported</i>)</label><span id='Hermitian-fold-params-items' class="fold-items"><span>
+			func <a href="#name-Hemm">Hemm</a>(s <a href="../blas.html">blas</a>.<a href="../blas.html#name-Side">Side</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <b>Hermitian</b>, b <a href="#name-General">General</a>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, c <a href="#name-General">General</a>)</span><span>
+			func <a href="#name-Hemv">Hemv</a>(alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <b>Hermitian</b>, x <a href="#name-Vector">Vector</a>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, y <a href="#name-Vector">Vector</a>)</span><span>
+			func <a href="#name-Her">Her</a>(alpha <a href="../../../../builtin.html#name-float64">float64</a>, x <a href="#name-Vector">Vector</a>, a <b>Hermitian</b>)</span><span>
+			func <a href="#name-Her2">Her2</a>(alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, x, y <a href="#name-Vector">Vector</a>, a <b>Hermitian</b>)</span><span>
+			func <a href="#name-Her2k">Her2k</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a, b <a href="#name-General">General</a>, beta <a href="../../../../builtin.html#name-float64">float64</a>, c <b>Hermitian</b>)</span><span>
+			func <a href="#name-Herk">Herk</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, alpha <a href="../../../../builtin.html#name-float64">float64</a>, a <a href="#name-General">General</a>, beta <a href="../../../../builtin.html#name-float64">float64</a>, c <b>Hermitian</b>)</span><span>
+			func <a href="#name-HermitianCols">HermitianCols</a>.<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_hermitian.go.html#line-17">From</a>(a <b>Hermitian</b>)</span></span>
+
+</span></div><div class="anchor type-res" id="name-HermitianBand" data-popularity="120">	<input type='checkbox' class="fold" id="HermitianBand-fold-content"><label for="HermitianBand-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..HermitianBand.html">type</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-104">HermitianBand</a> <a href="#name-SymmetricBand">SymmetricBand</a> <i>(struct)</i></label><span id='HermitianBand-fold-content-docs' class="fold-docs">
+<span class="md-text">		HermitianBand represents an Hermitian matrix using the band storage scheme.</span>
+
+		<input type='checkbox' class="fold" id="HermitianBand-fold-fields"><label for="HermitianBand-fold-fields">Fields (<i>total 5, all are exported</i>)</label><span id='HermitianBand-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-89">Data</a> <i>[]<a href="../../../../builtin.html#name-complex128">complex128</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-87">K</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-87">N</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-88">Stride</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-90">Uplo</a> <i><a href="../blas.html">blas</a>.<a href="../blas.html#name-Uplo">Uplo</a></i></span></span></span>
+		<input type='checkbox' class="fold" id="HermitianBand-fold-methods"><label for="HermitianBand-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='HermitianBand-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="HermitianBand-fold-method-From"><label for="HermitianBand-fold-method-From">( HermitianBand) <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_hermitian.go.html#line-118">From</a>(a <a href="#name-HermitianBandCols">HermitianBandCols</a>)</label><span id='HermitianBand-fold-method-From-docs' class="fold-docs">
+<span class="md-text">				From fills the receiver with elements from a. The receiver
+				must have the same dimensions, bandwidth and uplo as a and
+				have adequate backing data storage.</span>
+</span></span></span>
+		<input type='checkbox' class="fold" id="HermitianBand-fold-params"><label for="HermitianBand-fold-params">As Inputs Of (<i>at least 2, both are exported</i>)</label><span id='HermitianBand-fold-params-items' class="fold-items"><span>
+			func <a href="#name-Hbmv">Hbmv</a>(alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <b>HermitianBand</b>, x <a href="#name-Vector">Vector</a>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, y <a href="#name-Vector">Vector</a>)</span><span>
+			func <a href="#name-HermitianBandCols">HermitianBandCols</a>.<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_hermitian.go.html#line-76">From</a>(a <b>HermitianBand</b>)</span></span>
+
+</span></div><div class="anchor type-res" id="name-HermitianBandCols" data-popularity="85">	<input type='checkbox' class="fold" id="HermitianBandCols-fold-content"><label for="HermitianBandCols-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..HermitianBandCols.html">type</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_hermitian.go.html#line-71">HermitianBandCols</a> <a href="#name-HermitianBand">HermitianBand</a> <i>(struct)</i></label><span id='HermitianBandCols-fold-content-docs' class="fold-docs">
+<span class="md-text">		HermitianBandCols represents an Hermitian matrix using the band column-major storage scheme.</span>
+
+		<input type='checkbox' class="fold" id="HermitianBandCols-fold-fields"><label for="HermitianBandCols-fold-fields">Fields (<i>total 5, all are exported</i>)</label><span id='HermitianBandCols-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-89">Data</a> <i>[]<a href="../../../../builtin.html#name-complex128">complex128</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-87">K</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-87">N</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-88">Stride</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-90">Uplo</a> <i><a href="../blas.html">blas</a>.<a href="../blas.html#name-Uplo">Uplo</a></i></span></span></span>
+		<input type='checkbox' class="fold" id="HermitianBandCols-fold-methods"><label for="HermitianBandCols-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='HermitianBandCols-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="HermitianBandCols-fold-method-From"><label for="HermitianBandCols-fold-method-From">( HermitianBandCols) <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_hermitian.go.html#line-76">From</a>(a <a href="#name-HermitianBand">HermitianBand</a>)</label><span id='HermitianBandCols-fold-method-From-docs' class="fold-docs">
+<span class="md-text">				From fills the receiver with elements from a. The receiver
+				must have the same dimensions, bandwidth and uplo as a and
+				have adequate backing data storage.</span>
+</span></span></span>
+		<input type='checkbox' class="fold" id="HermitianBandCols-fold-params"><label for="HermitianBandCols-fold-params">As Inputs Of (<i>at least one exported</i>)</label><span id='HermitianBandCols-fold-params-items' class="fold-items"><span>
+			func <a href="#name-HermitianBand">HermitianBand</a>.<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_hermitian.go.html#line-118">From</a>(a <b>HermitianBandCols</b>)</span></span>
+
+</span></div><div class="anchor type-res" id="name-HermitianCols" data-popularity="85">	<input type='checkbox' class="fold" id="HermitianCols-fold-content"><label for="HermitianCols-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..HermitianCols.html">type</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_hermitian.go.html#line-12">HermitianCols</a> <a href="#name-Hermitian">Hermitian</a> <i>(struct)</i></label><span id='HermitianCols-fold-content-docs' class="fold-docs">
+<span class="md-text">		HermitianCols represents a matrix using the conventional column-major storage scheme.</span>
+
+		<input type='checkbox' class="fold" id="HermitianCols-fold-fields"><label for="HermitianCols-fold-fields">Fields (<i>total 4, all are exported</i>)</label><span id='HermitianCols-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-81">Data</a> <i>[]<a href="../../../../builtin.html#name-complex128">complex128</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-79">N</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-80">Stride</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-82">Uplo</a> <i><a href="../blas.html">blas</a>.<a href="../blas.html#name-Uplo">Uplo</a></i></span></span></span>
+		<input type='checkbox' class="fold" id="HermitianCols-fold-methods"><label for="HermitianCols-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='HermitianCols-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="HermitianCols-fold-method-From"><label for="HermitianCols-fold-method-From">( HermitianCols) <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_hermitian.go.html#line-17">From</a>(a <a href="#name-Hermitian">Hermitian</a>)</label><span id='HermitianCols-fold-method-From-docs' class="fold-docs">
+<span class="md-text">				From fills the receiver with elements from a. The receiver
+				must have the same dimensions and uplo as a and have adequate
+				backing data storage.</span>
+</span></span></span>
+		<input type='checkbox' class="fold" id="HermitianCols-fold-params"><label for="HermitianCols-fold-params">As Inputs Of (<i>at least one exported</i>)</label><span id='HermitianCols-fold-params-items' class="fold-items"><span>
+			func <a href="#name-Hermitian">Hermitian</a>.<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_hermitian.go.html#line-45">From</a>(a <b>HermitianCols</b>)</span></span>
+
+</span></div><div class="anchor type-res" id="name-HermitianPacked" data-popularity="105">	<input type='checkbox' class="fold" id="HermitianPacked-fold-content"><label for="HermitianPacked-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..HermitianPacked.html">type</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-107">HermitianPacked</a> <a href="#name-SymmetricPacked">SymmetricPacked</a> <i>(struct)</i></label><span id='HermitianPacked-fold-content-docs' class="fold-docs">
+<span class="md-text">		HermitianPacked represents an Hermitian matrix using the packed storage scheme.</span>
+
+		<input type='checkbox' class="fold" id="HermitianPacked-fold-fields"><label for="HermitianPacked-fold-fields">Fields (<i>total 3, all are exported</i>)</label><span id='HermitianPacked-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-96">Data</a> <i>[]<a href="../../../../builtin.html#name-complex128">complex128</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-95">N</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-97">Uplo</a> <i><a href="../blas.html">blas</a>.<a href="../blas.html#name-Uplo">Uplo</a></i></span></span></span>
+		<input type='checkbox' class="fold" id="HermitianPacked-fold-params"><label for="HermitianPacked-fold-params">As Inputs Of (<i>at least 3, all are exported</i>)</label><span id='HermitianPacked-fold-params-items' class="fold-items"><span>
+			func <a href="#name-Hpmv">Hpmv</a>(alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <b>HermitianPacked</b>, x <a href="#name-Vector">Vector</a>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, y <a href="#name-Vector">Vector</a>)</span><span>
+			func <a href="#name-Hpr">Hpr</a>(alpha <a href="../../../../builtin.html#name-float64">float64</a>, x <a href="#name-Vector">Vector</a>, a <b>HermitianPacked</b>)</span><span>
+			func <a href="#name-Hpr2">Hpr2</a>(alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, x, y <a href="#name-Vector">Vector</a>, a <b>HermitianPacked</b>)</span></span>
+
+</span></div><div class="anchor type-res" id="name-Symmetric" data-popularity="190">	<input type='checkbox' class="fold" id="Symmetric-fold-content"><label for="Symmetric-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Symmetric.html">type</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-78">Symmetric</a> <i>(struct)</i></label><span id='Symmetric-fold-content-docs' class="fold-docs">
+<span class="md-text">		Symmetric represents a symmetric matrix using the conventional storage scheme.</span>
+
+		<input type='checkbox' class="fold" id="Symmetric-fold-fields"><label for="Symmetric-fold-fields">Fields (<i>total 4, all are exported</i>)</label><span id='Symmetric-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-81">Data</a> <i>[]<a href="../../../../builtin.html#name-complex128">complex128</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-79">N</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-80">Stride</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-82">Uplo</a> <i><a href="../blas.html">blas</a>.<a href="../blas.html#name-Uplo">Uplo</a></i></span></span></span>
+		<input type='checkbox' class="fold" id="Symmetric-fold-methods"><label for="Symmetric-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='Symmetric-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="Symmetric-fold-method-From"><label for="Symmetric-fold-method-From">( Symmetric) <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_symmetric.go.html#line-45">From</a>(a <a href="#name-SymmetricCols">SymmetricCols</a>)</label><span id='Symmetric-fold-method-From-docs' class="fold-docs">
+<span class="md-text">				From fills the receiver with elements from a. The receiver
+				must have the same dimensions and uplo as a and have adequate
+				backing data storage.</span>
+</span></span></span>
+		<input type='checkbox' class="fold" id="Symmetric-fold-params"><label for="Symmetric-fold-params">As Inputs Of (<i>at least 4, all are exported</i>)</label><span id='Symmetric-fold-params-items' class="fold-items"><span>
+			func <a href="#name-Symm">Symm</a>(s <a href="../blas.html">blas</a>.<a href="../blas.html#name-Side">Side</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <b>Symmetric</b>, b <a href="#name-General">General</a>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, c <a href="#name-General">General</a>)</span><span>
+			func <a href="#name-Syr2k">Syr2k</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a, b <a href="#name-General">General</a>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, c <b>Symmetric</b>)</span><span>
+			func <a href="#name-Syrk">Syrk</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <a href="#name-General">General</a>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, c <b>Symmetric</b>)</span><span>
+			func <a href="#name-SymmetricCols">SymmetricCols</a>.<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_symmetric.go.html#line-17">From</a>(a <b>Symmetric</b>)</span></span>
+
+</span></div><div class="anchor type-res" id="name-SymmetricBand" data-popularity="85">	<input type='checkbox' class="fold" id="SymmetricBand-fold-content"><label for="SymmetricBand-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..SymmetricBand.html">type</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-86">SymmetricBand</a> <i>(struct)</i></label><span id='SymmetricBand-fold-content-docs' class="fold-docs">
+<span class="md-text">		SymmetricBand represents a symmetric matrix using the band storage scheme.</span>
+
+		<input type='checkbox' class="fold" id="SymmetricBand-fold-fields"><label for="SymmetricBand-fold-fields">Fields (<i>total 5, all are exported</i>)</label><span id='SymmetricBand-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-89">Data</a> <i>[]<a href="../../../../builtin.html#name-complex128">complex128</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-87">K</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-87">N</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-88">Stride</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-90">Uplo</a> <i><a href="../blas.html">blas</a>.<a href="../blas.html#name-Uplo">Uplo</a></i></span></span></span>
+		<input type='checkbox' class="fold" id="SymmetricBand-fold-methods"><label for="SymmetricBand-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='SymmetricBand-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="SymmetricBand-fold-method-From"><label for="SymmetricBand-fold-method-From">( SymmetricBand) <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_symmetric.go.html#line-118">From</a>(a <a href="#name-SymmetricBandCols">SymmetricBandCols</a>)</label><span id='SymmetricBand-fold-method-From-docs' class="fold-docs">
+<span class="md-text">				From fills the receiver with elements from a. The receiver
+				must have the same dimensions, bandwidth and uplo as a and
+				have adequate backing data storage.</span>
+</span></span></span>
+		<input type='checkbox' class="fold" id="SymmetricBand-fold-params"><label for="SymmetricBand-fold-params">As Inputs Of (<i>at least one exported</i>)</label><span id='SymmetricBand-fold-params-items' class="fold-items"><span>
+			func <a href="#name-SymmetricBandCols">SymmetricBandCols</a>.<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_symmetric.go.html#line-76">From</a>(a <b>SymmetricBand</b>)</span></span>
+
+</span></div><div class="anchor type-res" id="name-SymmetricBandCols" data-popularity="85">	<input type='checkbox' class="fold" id="SymmetricBandCols-fold-content"><label for="SymmetricBandCols-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..SymmetricBandCols.html">type</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_symmetric.go.html#line-71">SymmetricBandCols</a> <a href="#name-SymmetricBand">SymmetricBand</a> <i>(struct)</i></label><span id='SymmetricBandCols-fold-content-docs' class="fold-docs">
+<span class="md-text">		SymmetricBandCols represents a symmetric matrix using the band column-major storage scheme.</span>
+
+		<input type='checkbox' class="fold" id="SymmetricBandCols-fold-fields"><label for="SymmetricBandCols-fold-fields">Fields (<i>total 5, all are exported</i>)</label><span id='SymmetricBandCols-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-89">Data</a> <i>[]<a href="../../../../builtin.html#name-complex128">complex128</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-87">K</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-87">N</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-88">Stride</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-90">Uplo</a> <i><a href="../blas.html">blas</a>.<a href="../blas.html#name-Uplo">Uplo</a></i></span></span></span>
+		<input type='checkbox' class="fold" id="SymmetricBandCols-fold-methods"><label for="SymmetricBandCols-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='SymmetricBandCols-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="SymmetricBandCols-fold-method-From"><label for="SymmetricBandCols-fold-method-From">( SymmetricBandCols) <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_symmetric.go.html#line-76">From</a>(a <a href="#name-SymmetricBand">SymmetricBand</a>)</label><span id='SymmetricBandCols-fold-method-From-docs' class="fold-docs">
+<span class="md-text">				From fills the receiver with elements from a. The receiver
+				must have the same dimensions, bandwidth and uplo as a and
+				have adequate backing data storage.</span>
+</span></span></span>
+		<input type='checkbox' class="fold" id="SymmetricBandCols-fold-params"><label for="SymmetricBandCols-fold-params">As Inputs Of (<i>at least one exported</i>)</label><span id='SymmetricBandCols-fold-params-items' class="fold-items"><span>
+			func <a href="#name-SymmetricBand">SymmetricBand</a>.<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_symmetric.go.html#line-118">From</a>(a <b>SymmetricBandCols</b>)</span></span>
+
+</span></div><div class="anchor type-res" id="name-SymmetricCols" data-popularity="85">	<input type='checkbox' class="fold" id="SymmetricCols-fold-content"><label for="SymmetricCols-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..SymmetricCols.html">type</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_symmetric.go.html#line-12">SymmetricCols</a> <a href="#name-Symmetric">Symmetric</a> <i>(struct)</i></label><span id='SymmetricCols-fold-content-docs' class="fold-docs">
+<span class="md-text">		SymmetricCols represents a matrix using the conventional column-major storage scheme.</span>
+
+		<input type='checkbox' class="fold" id="SymmetricCols-fold-fields"><label for="SymmetricCols-fold-fields">Fields (<i>total 4, all are exported</i>)</label><span id='SymmetricCols-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-81">Data</a> <i>[]<a href="../../../../builtin.html#name-complex128">complex128</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-79">N</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-80">Stride</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-82">Uplo</a> <i><a href="../blas.html">blas</a>.<a href="../blas.html#name-Uplo">Uplo</a></i></span></span></span>
+		<input type='checkbox' class="fold" id="SymmetricCols-fold-methods"><label for="SymmetricCols-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='SymmetricCols-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="SymmetricCols-fold-method-From"><label for="SymmetricCols-fold-method-From">( SymmetricCols) <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_symmetric.go.html#line-17">From</a>(a <a href="#name-Symmetric">Symmetric</a>)</label><span id='SymmetricCols-fold-method-From-docs' class="fold-docs">
+<span class="md-text">				From fills the receiver with elements from a. The receiver
+				must have the same dimensions and uplo as a and have adequate
+				backing data storage.</span>
+</span></span></span>
+		<input type='checkbox' class="fold" id="SymmetricCols-fold-params"><label for="SymmetricCols-fold-params">As Inputs Of (<i>at least one exported</i>)</label><span id='SymmetricCols-fold-params-items' class="fold-items"><span>
+			func <a href="#name-Symmetric">Symmetric</a>.<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv_symmetric.go.html#line-45">From</a>(a <b>SymmetricCols</b>)</span></span>
+
+</span></div><div class="anchor type-res" id="name-SymmetricPacked" data-popularity="0">	<input type='checkbox' class="fold" id="SymmetricPacked-fold-content"><label for="SymmetricPacked-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..SymmetricPacked.html">type</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-94">SymmetricPacked</a> <i>(struct)</i></label><span id='SymmetricPacked-fold-content-docs' class="fold-docs">
+<span class="md-text">		SymmetricPacked represents a symmetric matrix using the packed storage scheme.</span>
+
+		<input type='checkbox' class="fold" id="SymmetricPacked-fold-fields"><label for="SymmetricPacked-fold-fields">Fields (<i>total 3, all are exported</i>)</label><span id='SymmetricPacked-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-96">Data</a> <i>[]<a href="../../../../builtin.html#name-complex128">complex128</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-95">N</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-97">Uplo</a> <i><a href="../blas.html">blas</a>.<a href="../blas.html#name-Uplo">Uplo</a></i></span></span></span>
+
+</span></div><div class="anchor type-res" id="name-Triangular" data-popularity="225">	<input type='checkbox' class="fold" id="Triangular-fold-content"><label for="Triangular-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Triangular.html">type</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-52">Triangular</a> <i>(struct)</i></label><span id='Triangular-fold-content-docs' class="fold-docs">
+<span class="md-text">		Triangular represents a triangular matrix using the conventional storage scheme.</span>
+
+		<input type='checkbox' class="fold" id="Triangular-fold-fields"><label for="Triangular-fold-fields">Fields (<i>total 5, all are exported</i>)</label><span id='Triangular-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-55">Data</a> <i>[]<a href="../../../../builtin.html#name-complex128">complex128</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-57">Diag</a> <i><a href="../blas.html">blas</a>.<a href="../blas.html#name-Diag">Diag</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-53">N</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-54">Stride</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-56">Uplo</a> <i><a href="../blas.html">blas</a>.<a href="../blas.html#name-Uplo">Uplo</a></i></span></span></span>
+		<input type='checkbox' class="fold" id="Triangular-fold-methods"><label for="Triangular-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='Triangular-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="Triangular-fold-method-From"><label for="Triangular-fold-method-From">( Triangular) <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv.go.html#line-91">From</a>(a <a href="#name-TriangularCols">TriangularCols</a>)</label><span id='Triangular-fold-method-From-docs' class="fold-docs">
+<span class="md-text">				From fills the receiver with elements from a. The receiver
+				must have the same dimensions, uplo and diag as a and have
+				adequate backing data storage.</span>
+</span></span></span>
+		<input type='checkbox' class="fold" id="Triangular-fold-params"><label for="Triangular-fold-params">As Inputs Of (<i>at least 5, all are exported</i>)</label><span id='Triangular-fold-params-items' class="fold-items"><span>
+			func <a href="#name-Trmm">Trmm</a>(s <a href="../blas.html">blas</a>.<a href="../blas.html#name-Side">Side</a>, tA <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <b>Triangular</b>, b <a href="#name-General">General</a>)</span><span>
+			func <a href="#name-Trmv">Trmv</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, a <b>Triangular</b>, x <a href="#name-Vector">Vector</a>)</span><span>
+			func <a href="#name-Trsm">Trsm</a>(s <a href="../blas.html">blas</a>.<a href="../blas.html#name-Side">Side</a>, tA <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <b>Triangular</b>, b <a href="#name-General">General</a>)</span><span>
+			func <a href="#name-Trsv">Trsv</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, a <b>Triangular</b>, x <a href="#name-Vector">Vector</a>)</span><span>
+			func <a href="#name-TriangularCols">TriangularCols</a>.<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv.go.html#line-54">From</a>(a <b>Triangular</b>)</span></span>
+
+</span></div><div class="anchor type-res" id="name-TriangularBand" data-popularity="155">	<input type='checkbox' class="fold" id="TriangularBand-fold-content"><label for="TriangularBand-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..TriangularBand.html">type</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-61">TriangularBand</a> <i>(struct)</i></label><span id='TriangularBand-fold-content-docs' class="fold-docs">
+<span class="md-text">		TriangularBand represents a triangular matrix using the band storage scheme.</span>
+
+		<input type='checkbox' class="fold" id="TriangularBand-fold-fields"><label for="TriangularBand-fold-fields">Fields (<i>total 6, all are exported</i>)</label><span id='TriangularBand-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-64">Data</a> <i>[]<a href="../../../../builtin.html#name-complex128">complex128</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-66">Diag</a> <i><a href="../blas.html">blas</a>.<a href="../blas.html#name-Diag">Diag</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-62">K</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-62">N</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-63">Stride</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-65">Uplo</a> <i><a href="../blas.html">blas</a>.<a href="../blas.html#name-Uplo">Uplo</a></i></span></span></span>
+		<input type='checkbox' class="fold" id="TriangularBand-fold-methods"><label for="TriangularBand-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='TriangularBand-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="TriangularBand-fold-method-From"><label for="TriangularBand-fold-method-From">( TriangularBand) <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv.go.html#line-225">From</a>(a <a href="#name-TriangularBandCols">TriangularBandCols</a>)</label><span id='TriangularBand-fold-method-From-docs' class="fold-docs">
+<span class="md-text">				From fills the receiver with elements from a. The receiver
+				must have the same dimensions, bandwidth and uplo as a and
+				have adequate backing data storage.</span>
+</span></span></span>
+		<input type='checkbox' class="fold" id="TriangularBand-fold-params"><label for="TriangularBand-fold-params">As Inputs Of (<i>at least 3, all are exported</i>)</label><span id='TriangularBand-fold-params-items' class="fold-items"><span>
+			func <a href="#name-Tbmv">Tbmv</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, a <b>TriangularBand</b>, x <a href="#name-Vector">Vector</a>)</span><span>
+			func <a href="#name-Tbsv">Tbsv</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, a <b>TriangularBand</b>, x <a href="#name-Vector">Vector</a>)</span><span>
+			func <a href="#name-TriangularBandCols">TriangularBandCols</a>.<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv.go.html#line-180">From</a>(a <b>TriangularBand</b>)</span></span>
+
+</span></div><div class="anchor type-res" id="name-TriangularBandCols" data-popularity="85">	<input type='checkbox' class="fold" id="TriangularBandCols-fold-content"><label for="TriangularBandCols-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..TriangularBandCols.html">type</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv.go.html#line-175">TriangularBandCols</a> <a href="#name-TriangularBand">TriangularBand</a> <i>(struct)</i></label><span id='TriangularBandCols-fold-content-docs' class="fold-docs">
+<span class="md-text">		TriangularBandCols represents a triangular matrix using the band column-major storage scheme.</span>
+
+		<input type='checkbox' class="fold" id="TriangularBandCols-fold-fields"><label for="TriangularBandCols-fold-fields">Fields (<i>total 6, all are exported</i>)</label><span id='TriangularBandCols-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-64">Data</a> <i>[]<a href="../../../../builtin.html#name-complex128">complex128</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-66">Diag</a> <i><a href="../blas.html">blas</a>.<a href="../blas.html#name-Diag">Diag</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-62">K</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-62">N</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-63">Stride</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-65">Uplo</a> <i><a href="../blas.html">blas</a>.<a href="../blas.html#name-Uplo">Uplo</a></i></span></span></span>
+		<input type='checkbox' class="fold" id="TriangularBandCols-fold-methods"><label for="TriangularBandCols-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='TriangularBandCols-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="TriangularBandCols-fold-method-From"><label for="TriangularBandCols-fold-method-From">( TriangularBandCols) <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv.go.html#line-180">From</a>(a <a href="#name-TriangularBand">TriangularBand</a>)</label><span id='TriangularBandCols-fold-method-From-docs' class="fold-docs">
+<span class="md-text">				From fills the receiver with elements from a. The receiver
+				must have the same dimensions, bandwidth and uplo as a and
+				have adequate backing data storage.</span>
+</span></span></span>
+		<input type='checkbox' class="fold" id="TriangularBandCols-fold-params"><label for="TriangularBandCols-fold-params">As Inputs Of (<i>at least one exported</i>)</label><span id='TriangularBandCols-fold-params-items' class="fold-items"><span>
+			func <a href="#name-TriangularBand">TriangularBand</a>.<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv.go.html#line-225">From</a>(a <b>TriangularBandCols</b>)</span></span>
+
+</span></div><div class="anchor type-res" id="name-TriangularCols" data-popularity="85">	<input type='checkbox' class="fold" id="TriangularCols-fold-content"><label for="TriangularCols-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..TriangularCols.html">type</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv.go.html#line-49">TriangularCols</a> <a href="#name-Triangular">Triangular</a> <i>(struct)</i></label><span id='TriangularCols-fold-content-docs' class="fold-docs">
+<span class="md-text">		TriangularCols represents a matrix using the conventional column-major storage scheme.</span>
+
+		<input type='checkbox' class="fold" id="TriangularCols-fold-fields"><label for="TriangularCols-fold-fields">Fields (<i>total 5, all are exported</i>)</label><span id='TriangularCols-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-55">Data</a> <i>[]<a href="../../../../builtin.html#name-complex128">complex128</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-57">Diag</a> <i><a href="../blas.html">blas</a>.<a href="../blas.html#name-Diag">Diag</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-53">N</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-54">Stride</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-56">Uplo</a> <i><a href="../blas.html">blas</a>.<a href="../blas.html#name-Uplo">Uplo</a></i></span></span></span>
+		<input type='checkbox' class="fold" id="TriangularCols-fold-methods"><label for="TriangularCols-fold-methods">Methods (<i>only one, which is exported</i>)</label><span id='TriangularCols-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="TriangularCols-fold-method-From"><label for="TriangularCols-fold-method-From">( TriangularCols) <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv.go.html#line-54">From</a>(a <a href="#name-Triangular">Triangular</a>)</label><span id='TriangularCols-fold-method-From-docs' class="fold-docs">
+<span class="md-text">				From fills the receiver with elements from a. The receiver
+				must have the same dimensions, uplo and diag as a and have
+				adequate backing data storage.</span>
+</span></span></span>
+		<input type='checkbox' class="fold" id="TriangularCols-fold-params"><label for="TriangularCols-fold-params">As Inputs Of (<i>at least one exported</i>)</label><span id='TriangularCols-fold-params-items' class="fold-items"><span>
+			func <a href="#name-Triangular">Triangular</a>.<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv.go.html#line-91">From</a>(a <b>TriangularCols</b>)</span></span>
+
+</span></div><div class="anchor type-res" id="name-TriangularPacked" data-popularity="70">	<input type='checkbox' class="fold" id="TriangularPacked-fold-content"><label for="TriangularPacked-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..TriangularPacked.html">type</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-70">TriangularPacked</a> <i>(struct)</i></label><span id='TriangularPacked-fold-content-docs' class="fold-docs">
+<span class="md-text">		TriangularPacked represents a triangular matrix using the packed storage scheme.</span>
+
+		<input type='checkbox' class="fold" id="TriangularPacked-fold-fields"><label for="TriangularPacked-fold-fields">Fields (<i>total 4, all are exported</i>)</label><span id='TriangularPacked-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-72">Data</a> <i>[]<a href="../../../../builtin.html#name-complex128">complex128</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-74">Diag</a> <i><a href="../blas.html">blas</a>.<a href="../blas.html#name-Diag">Diag</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-71">N</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-73">Uplo</a> <i><a href="../blas.html">blas</a>.<a href="../blas.html#name-Uplo">Uplo</a></i></span></span></span>
+		<input type='checkbox' class="fold" id="TriangularPacked-fold-params"><label for="TriangularPacked-fold-params">As Inputs Of (<i>at least 2, both are exported</i>)</label><span id='TriangularPacked-fold-params-items' class="fold-items"><span>
+			func <a href="#name-Tpmv">Tpmv</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, a <b>TriangularPacked</b>, x <a href="#name-Vector">Vector</a>)</span><span>
+			func <a href="#name-Tpsv">Tpsv</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, a <b>TriangularPacked</b>, x <a href="#name-Vector">Vector</a>)</span></span>
+
+</span></div><div class="anchor type-res" id="name-Vector" data-popularity="1120">	<input type='checkbox' class="fold" id="Vector-fold-content"><label for="Vector-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Vector.html">type</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-30">Vector</a> <i>(struct)</i></label><span id='Vector-fold-content-docs' class="fold-docs">
+<span class="md-text">		Vector represents a vector with an associated element increment.</span>
+
+		<input type='checkbox' class="fold" id="Vector-fold-fields"><label for="Vector-fold-fields">Fields (<i>total 3, all are exported</i>)</label><span id='Vector-fold-fields-items' class="fold-items"><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-33">Data</a> <i>[]<a href="../../../../builtin.html#name-complex128">complex128</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-32">Inc</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span><span>
+			<span class="nodocs"><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-31">N</a> <i><a href="../../../../builtin.html#name-int">int</a></i></span></span></span>
+		<input type='checkbox' class="fold" id="Vector-fold-params"><label for="Vector-fold-params">As Inputs Of (<i>at least 32, all are exported</i>)</label><span id='Vector-fold-params-items' class="fold-items"><span>
+			func <a href="#name-Asum">Asum</a>(x <b>Vector</b>) <a href="../../../../builtin.html#name-float64">float64</a></span><span>
+			func <a href="#name-Axpy">Axpy</a>(alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, x, y <b>Vector</b>)</span><span>
+			func <a href="#name-Copy">Copy</a>(x, y <b>Vector</b>)</span><span>
+			func <a href="#name-Dotc">Dotc</a>(x, y <b>Vector</b>) <a href="../../../../builtin.html#name-complex128">complex128</a></span><span>
+			func <a href="#name-Dotu">Dotu</a>(x, y <b>Vector</b>) <a href="../../../../builtin.html#name-complex128">complex128</a></span><span>
+			func <a href="#name-Dscal">Dscal</a>(alpha <a href="../../../../builtin.html#name-float64">float64</a>, x <b>Vector</b>)</span><span>
+			func <a href="#name-Gbmv">Gbmv</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <a href="#name-Band">Band</a>, x <b>Vector</b>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, y <b>Vector</b>)</span><span>
+			func <a href="#name-Gbmv">Gbmv</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <a href="#name-Band">Band</a>, x <b>Vector</b>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, y <b>Vector</b>)</span><span>
+			func <a href="#name-Gemv">Gemv</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <a href="#name-General">General</a>, x <b>Vector</b>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, y <b>Vector</b>)</span><span>
+			func <a href="#name-Gemv">Gemv</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <a href="#name-General">General</a>, x <b>Vector</b>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, y <b>Vector</b>)</span><span>
+			func <a href="#name-Gerc">Gerc</a>(alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, x, y <b>Vector</b>, a <a href="#name-General">General</a>)</span><span>
+			func <a href="#name-Geru">Geru</a>(alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, x, y <b>Vector</b>, a <a href="#name-General">General</a>)</span><span>
+			func <a href="#name-Hbmv">Hbmv</a>(alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <a href="#name-HermitianBand">HermitianBand</a>, x <b>Vector</b>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, y <b>Vector</b>)</span><span>
+			func <a href="#name-Hbmv">Hbmv</a>(alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <a href="#name-HermitianBand">HermitianBand</a>, x <b>Vector</b>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, y <b>Vector</b>)</span><span>
+			func <a href="#name-Hemv">Hemv</a>(alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <a href="#name-Hermitian">Hermitian</a>, x <b>Vector</b>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, y <b>Vector</b>)</span><span>
+			func <a href="#name-Hemv">Hemv</a>(alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <a href="#name-Hermitian">Hermitian</a>, x <b>Vector</b>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, y <b>Vector</b>)</span><span>
+			func <a href="#name-Her">Her</a>(alpha <a href="../../../../builtin.html#name-float64">float64</a>, x <b>Vector</b>, a <a href="#name-Hermitian">Hermitian</a>)</span><span>
+			func <a href="#name-Her2">Her2</a>(alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, x, y <b>Vector</b>, a <a href="#name-Hermitian">Hermitian</a>)</span><span>
+			func <a href="#name-Hpmv">Hpmv</a>(alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <a href="#name-HermitianPacked">HermitianPacked</a>, x <b>Vector</b>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, y <b>Vector</b>)</span><span>
+			func <a href="#name-Hpmv">Hpmv</a>(alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <a href="#name-HermitianPacked">HermitianPacked</a>, x <b>Vector</b>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, y <b>Vector</b>)</span><span>
+			func <a href="#name-Hpr">Hpr</a>(alpha <a href="../../../../builtin.html#name-float64">float64</a>, x <b>Vector</b>, a <a href="#name-HermitianPacked">HermitianPacked</a>)</span><span>
+			func <a href="#name-Hpr2">Hpr2</a>(alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, x, y <b>Vector</b>, a <a href="#name-HermitianPacked">HermitianPacked</a>)</span><span>
+			func <a href="#name-Iamax">Iamax</a>(x <b>Vector</b>) <a href="../../../../builtin.html#name-int">int</a></span><span>
+			func <a href="#name-Nrm2">Nrm2</a>(x <b>Vector</b>) <a href="../../../../builtin.html#name-float64">float64</a></span><span>
+			func <a href="#name-Scal">Scal</a>(alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, x <b>Vector</b>)</span><span>
+			func <a href="#name-Swap">Swap</a>(x, y <b>Vector</b>)</span><span>
+			func <a href="#name-Tbmv">Tbmv</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, a <a href="#name-TriangularBand">TriangularBand</a>, x <b>Vector</b>)</span><span>
+			func <a href="#name-Tbsv">Tbsv</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, a <a href="#name-TriangularBand">TriangularBand</a>, x <b>Vector</b>)</span><span>
+			func <a href="#name-Tpmv">Tpmv</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, a <a href="#name-TriangularPacked">TriangularPacked</a>, x <b>Vector</b>)</span><span>
+			func <a href="#name-Tpsv">Tpsv</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, a <a href="#name-TriangularPacked">TriangularPacked</a>, x <b>Vector</b>)</span><span>
+			func <a href="#name-Trmv">Trmv</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, a <a href="#name-Triangular">Triangular</a>, x <b>Vector</b>)</span><span>
+			func <a href="#name-Trsv">Trsv</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, a <a href="#name-Triangular">Triangular</a>, x <b>Vector</b>)</span></span>
+
+</span></div></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (total 40, in which 38 are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-Asum">	<input type='checkbox' class="fold" id="Asum-fold-content"><label for="Asum-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Asum.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-160">Asum</a>(x <a href="#name-Vector">Vector</a>) <a href="../../../../builtin.html#name-float64">float64</a></label><span id='Asum-fold-content-docs' class="fold-docs">
+<span class="md-text">		Asum computes the sum of magnitudes of the real and imaginary parts of
+		elements of the vector x:
+		
+			\sum_i (|Re x[i]| + |Im x[i]|).
+		
+		Asum will panic if the vector increment is negative.</span>
+
+</span></div><div class="anchor value-res" id="name-Axpy">	<input type='checkbox' class="fold" id="Axpy-fold-content"><label for="Axpy-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Axpy.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-211">Axpy</a>(alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, x, y <a href="#name-Vector">Vector</a>)</label><span id='Axpy-fold-content-docs' class="fold-docs">
+<span class="md-text">		Axpy computes
+		
+			y = alpha * x + y,
+		
+		where x and y are vectors, and alpha is a scalar.
+		Axpy will panic if the lengths of x and y do not match.</span>
+
+</span></div><div class="anchor value-res" id="name-Copy">	<input type='checkbox' class="fold" id="Copy-fold-content"><label for="Copy-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Copy.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-198">Copy</a>(x, y <a href="#name-Vector">Vector</a>)</label><span id='Copy-fold-content-docs' class="fold-docs">
+<span class="md-text">		Copy copies the elements of x into the elements of y:
+		
+			y[i] = x[i] for all i.
+		
+		Copy will panic if the lengths of x and y do not match.</span>
+
+</span></div><div class="anchor value-res" id="name-Dotc">	<input type='checkbox' class="fold" id="Dotc-fold-content"><label for="Dotc-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Dotc.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-135">Dotc</a>(x, y <a href="#name-Vector">Vector</a>) <a href="../../../../builtin.html#name-complex128">complex128</a></label><span id='Dotc-fold-content-docs' class="fold-docs">
+<span class="md-text">		Dotc computes the dot product of the two vectors with
+		complex conjugation:
+		
+			xᴴ * y.
+		
+		Dotc will panic if the lengths of x and y do not match.</span>
+
+</span></div><div class="anchor value-res" id="name-Dotu">	<input type='checkbox' class="fold" id="Dotu-fold-content"><label for="Dotu-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Dotu.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-122">Dotu</a>(x, y <a href="#name-Vector">Vector</a>) <a href="../../../../builtin.html#name-complex128">complex128</a></label><span id='Dotu-fold-content-docs' class="fold-docs">
+<span class="md-text">		Dotu computes the dot product of the two vectors without
+		complex conjugation:
+		
+			xᵀ * y.
+		
+		Dotu will panic if the lengths of x and y do not match.</span>
+
+</span></div><div class="anchor value-res" id="name-Dscal">	<input type='checkbox' class="fold" id="Dscal-fold-content"><label for="Dscal-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Dscal.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-239">Dscal</a>(alpha <a href="../../../../builtin.html#name-float64">float64</a>, x <a href="#name-Vector">Vector</a>)</label><span id='Dscal-fold-content-docs' class="fold-docs">
+<span class="md-text">		Dscal computes
+		
+			x = alpha * x,
+		
+		where x is a vector, and alpha is a real scalar.
+		
+		Dscal will panic if the vector increment is negative.</span>
+
+</span></div><div class="anchor value-res" id="name-Gbmv">	<input type='checkbox' class="fold" id="Gbmv-fold-content"><label for="Gbmv-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Gbmv.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-268">Gbmv</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <a href="#name-Band">Band</a>, x <a href="#name-Vector">Vector</a>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, y <a href="#name-Vector">Vector</a>)</label><span id='Gbmv-fold-content-docs' class="fold-docs">
+<span class="md-text">		Gbmv computes
+		
+			y = alpha * A * x + beta * y   if t == blas.NoTrans,
+			y = alpha * Aᵀ * x + beta * y  if t == blas.Trans,
+			y = alpha * Aᴴ * x + beta * y  if t == blas.ConjTrans,
+		
+		where A is an m×n band matrix, x and y are vectors, and alpha and beta are
+		scalars.</span>
+
+</span></div><div class="anchor value-res" id="name-Gemm">	<input type='checkbox' class="fold" id="Gemm-fold-content"><label for="Gemm-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Gemm.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-450">Gemm</a>(tA, tB <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a, b <a href="#name-General">General</a>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, c <a href="#name-General">General</a>)</label><span id='Gemm-fold-content-docs' class="fold-docs">
+<span class="md-text">		Gemm computes
+		
+			C = alpha * A * B + beta * C,
+		
+		where A, B, and C are dense matrices, and alpha and beta are scalars.
+		tA and tB specify whether A or B are transposed or conjugated.</span>
+
+</span></div><div class="anchor value-res" id="name-Gemv">	<input type='checkbox' class="fold" id="Gemv-fold-content"><label for="Gemv-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Gemv.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-256">Gemv</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <a href="#name-General">General</a>, x <a href="#name-Vector">Vector</a>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, y <a href="#name-Vector">Vector</a>)</label><span id='Gemv-fold-content-docs' class="fold-docs">
+<span class="md-text">		Gemv computes
+		
+			y = alpha * A * x + beta * y   if t == blas.NoTrans,
+			y = alpha * Aᵀ * x + beta * y  if t == blas.Trans,
+			y = alpha * Aᴴ * x + beta * y  if t == blas.ConjTrans,
+		
+		where A is an m×n dense matrix, x and y are vectors, and alpha and beta are
+		scalars.</span>
+
+</span></div><div class="anchor value-res" id="name-Gerc">	<input type='checkbox' class="fold" id="Gerc-fold-content"><label for="Gerc-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Gerc.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-400">Gerc</a>(alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, x, y <a href="#name-Vector">Vector</a>, a <a href="#name-General">General</a>)</label><span id='Gerc-fold-content-docs' class="fold-docs">
+<span class="md-text">		Gerc performs a rank-1 update
+		
+			A += alpha * x * yᴴ,
+		
+		where A is an m×n dense matrix, x and y are vectors, and alpha is a scalar.</span>
+
+</span></div><div class="anchor value-res" id="name-Geru">	<input type='checkbox' class="fold" id="Geru-fold-content"><label for="Geru-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Geru.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-391">Geru</a>(alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, x, y <a href="#name-Vector">Vector</a>, a <a href="#name-General">General</a>)</label><span id='Geru-fold-content-docs' class="fold-docs">
+<span class="md-text">		Geru performs a rank-1 update
+		
+			A += alpha * x * yᵀ,
+		
+		where A is an m×n dense matrix, x and y are vectors, and alpha is a scalar.</span>
+
+</span></div><div class="anchor value-res" id="name-Hbmv">	<input type='checkbox' class="fold" id="Hbmv-fold-content"><label for="Hbmv-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Hbmv.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-372">Hbmv</a>(alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <a href="#name-HermitianBand">HermitianBand</a>, x <a href="#name-Vector">Vector</a>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, y <a href="#name-Vector">Vector</a>)</label><span id='Hbmv-fold-content-docs' class="fold-docs">
+<span class="md-text">		Hbmv performs
+		
+			y = alpha * A * x + beta * y,
+		
+		where A is an n×n Hermitian band matrix, x and y are vectors, and alpha
+		and beta are scalars.</span>
+
+</span></div><div class="anchor value-res" id="name-Hemm">	<input type='checkbox' class="fold" id="Hemm-fold-content"><label for="Hemm-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Hemm.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-558">Hemm</a>(s <a href="../blas.html">blas</a>.<a href="../blas.html#name-Side">Side</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <a href="#name-Hermitian">Hermitian</a>, b <a href="#name-General">General</a>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, c <a href="#name-General">General</a>)</label><span id='Hemm-fold-content-docs' class="fold-docs">
+<span class="md-text">		Hemm performs
+		
+			C = alpha * A * B + beta * C  if s == blas.Left,
+			C = alpha * B * A + beta * C  if s == blas.Right,
+		
+		where A is an n×n or m×m Hermitian matrix, B and C are m×n matrices, and
+		alpha and beta are scalars.</span>
+
+</span></div><div class="anchor value-res" id="name-Hemv">	<input type='checkbox' class="fold" id="Hemv-fold-content"><label for="Hemv-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Hemv.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-362">Hemv</a>(alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <a href="#name-Hermitian">Hermitian</a>, x <a href="#name-Vector">Vector</a>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, y <a href="#name-Vector">Vector</a>)</label><span id='Hemv-fold-content-docs' class="fold-docs">
+<span class="md-text">		Hemv computes
+		
+			y = alpha * A * x + beta * y,
+		
+		where A is an n×n Hermitian matrix, x and y are vectors, and alpha and
+		beta are scalars.</span>
+
+</span></div><div class="anchor value-res" id="name-Her">	<input type='checkbox' class="fold" id="Her-fold-content"><label for="Her-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Her.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-409">Her</a>(alpha <a href="../../../../builtin.html#name-float64">float64</a>, x <a href="#name-Vector">Vector</a>, a <a href="#name-Hermitian">Hermitian</a>)</label><span id='Her-fold-content-docs' class="fold-docs">
+<span class="md-text">		Her performs a rank-1 update
+		
+			A += alpha * x * yᵀ,
+		
+		where A is an m×n Hermitian matrix, x and y are vectors, and alpha is a scalar.</span>
+
+</span></div><div class="anchor value-res" id="name-Her2">	<input type='checkbox' class="fold" id="Her2-fold-content"><label for="Her2-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Her2.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-428">Her2</a>(alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, x, y <a href="#name-Vector">Vector</a>, a <a href="#name-Hermitian">Hermitian</a>)</label><span id='Her2-fold-content-docs' class="fold-docs">
+<span class="md-text">		Her2 performs a rank-2 update
+		
+			A += alpha * x * yᴴ + conj(alpha) * y * xᴴ,
+		
+		where A is an n×n Hermitian matrix, x and y are vectors, and alpha is a scalar.</span>
+
+</span></div><div class="anchor value-res" id="name-Her2k">	<input type='checkbox' class="fold" id="Her2k-fold-content"><label for="Her2k-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Her2k.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-592">Her2k</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a, b <a href="#name-General">General</a>, beta <a href="../../../../builtin.html#name-float64">float64</a>, c <a href="#name-Hermitian">Hermitian</a>)</label><span id='Her2k-fold-content-docs' class="fold-docs">
+<span class="md-text">		Her2k performs the Hermitian rank-2k update
+		
+			C = alpha * A * Bᴴ + conj(alpha) * B * Aᴴ + beta * C  if t == blas.NoTrans,
+			C = alpha * Aᴴ * B + conj(alpha) * Bᴴ * A + beta * C  if t == blas.ConjTrans,
+		
+		where C is an n×n Hermitian matrix, A and B are n×k matrices if t == NoTrans
+		and k×n matrices otherwise, and alpha and beta are scalars.</span>
+
+</span></div><div class="anchor value-res" id="name-Herk">	<input type='checkbox' class="fold" id="Herk-fold-content"><label for="Herk-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Herk.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-575">Herk</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, alpha <a href="../../../../builtin.html#name-float64">float64</a>, a <a href="#name-General">General</a>, beta <a href="../../../../builtin.html#name-float64">float64</a>, c <a href="#name-Hermitian">Hermitian</a>)</label><span id='Herk-fold-content-docs' class="fold-docs">
+<span class="md-text">		Herk performs the Hermitian rank-k update
+		
+			C = alpha * A * Aᴴ + beta*C  if t == blas.NoTrans,
+			C = alpha * Aᴴ * A + beta*C  if t == blas.ConjTrans,
+		
+		where C is an n×n Hermitian matrix, A is an n×k matrix if t == blas.NoTrans
+		and a k×n matrix otherwise, and alpha and beta are scalars.</span>
+
+</span></div><div class="anchor value-res" id="name-Hpmv">	<input type='checkbox' class="fold" id="Hpmv-fold-content"><label for="Hpmv-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Hpmv.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-382">Hpmv</a>(alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <a href="#name-HermitianPacked">HermitianPacked</a>, x <a href="#name-Vector">Vector</a>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, y <a href="#name-Vector">Vector</a>)</label><span id='Hpmv-fold-content-docs' class="fold-docs">
+<span class="md-text">		Hpmv performs
+		
+			y = alpha * A * x + beta * y,
+		
+		where A is an n×n Hermitian matrix in packed format, x and y are vectors,
+		and alpha and beta are scalars.</span>
+
+</span></div><div class="anchor value-res" id="name-Hpr">	<input type='checkbox' class="fold" id="Hpr-fold-content"><label for="Hpr-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Hpr.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-419">Hpr</a>(alpha <a href="../../../../builtin.html#name-float64">float64</a>, x <a href="#name-Vector">Vector</a>, a <a href="#name-HermitianPacked">HermitianPacked</a>)</label><span id='Hpr-fold-content-docs' class="fold-docs">
+<span class="md-text">		Hpr performs a rank-1 update
+		
+			A += alpha * x * xᴴ,
+		
+		where A is an n×n Hermitian matrix in packed format, x is a vector, and
+		alpha is a scalar.</span>
+
+</span></div><div class="anchor value-res" id="name-Hpr2">	<input type='checkbox' class="fold" id="Hpr2-fold-content"><label for="Hpr2-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Hpr2.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-438">Hpr2</a>(alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, x, y <a href="#name-Vector">Vector</a>, a <a href="#name-HermitianPacked">HermitianPacked</a>)</label><span id='Hpr2-fold-content-docs' class="fold-docs">
+<span class="md-text">		Hpr2 performs a rank-2 update
+		
+			A += alpha * x * yᴴ + conj(alpha) * y * xᴴ,
+		
+		where A is an n×n Hermitian matrix in packed format, x and y are vectors,
+		and alpha is a scalar.</span>
+
+</span></div><div class="anchor value-res" id="name-Iamax">	<input type='checkbox' class="fold" id="Iamax-fold-content"><label for="Iamax-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Iamax.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-174">Iamax</a>(x <a href="#name-Vector">Vector</a>) <a href="../../../../builtin.html#name-int">int</a></label><span id='Iamax-fold-content-docs' class="fold-docs">
+<span class="md-text">		Iamax returns the index of an element of x with the largest sum of
+		magnitudes of the real and imaginary parts (|Re x[i]|+|Im x[i]|).
+		If there are multiple such indices, the earliest is returned.
+		
+		Iamax returns -1 if n == 0.
+		
+		Iamax will panic if the vector increment is negative.</span>
+
+</span></div><div class="anchor value-res" id="name-Implementation">	<input type='checkbox' class="fold" id="Implementation-fold-content"><label for="Implementation-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Implementation.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-25">Implementation</a>() <a href="../blas.html">blas</a>.<a href="../blas.html#name-Complex128">Complex128</a></label><span id='Implementation-fold-content-docs' class="fold-docs">
+<span class="md-text">		Implementation returns the current BLAS complex128 implementation.
+		
+		Implementation allows direct calls to the current the BLAS complex128 implementation
+		giving finer control of parameters.</span>
+
+</span></div><div class="anchor value-res" id="name-Nrm2">	<input type='checkbox' class="fold" id="Nrm2-fold-content"><label for="Nrm2-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Nrm2.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-147">Nrm2</a>(x <a href="#name-Vector">Vector</a>) <a href="../../../../builtin.html#name-float64">float64</a></label><span id='Nrm2-fold-content-docs' class="fold-docs">
+<span class="md-text">		Nrm2 computes the Euclidean norm of the vector x:
+		
+			sqrt(\sum_i x[i] * x[i]).
+		
+		Nrm2 will panic if the vector increment is negative.</span>
+
+</span></div><div class="anchor value-res" id="name-Scal">	<input type='checkbox' class="fold" id="Scal-fold-content"><label for="Scal-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Scal.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-225">Scal</a>(alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, x <a href="#name-Vector">Vector</a>)</label><span id='Scal-fold-content-docs' class="fold-docs">
+<span class="md-text">		Scal computes
+		
+			x = alpha * x,
+		
+		where x is a vector, and alpha is a scalar.
+		
+		Scal will panic if the vector increment is negative.</span>
+
+</span></div><div class="anchor value-res" id="name-Swap">	<input type='checkbox' class="fold" id="Swap-fold-content"><label for="Swap-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Swap.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-186">Swap</a>(x, y <a href="#name-Vector">Vector</a>)</label><span id='Swap-fold-content-docs' class="fold-docs">
+<span class="md-text">		Swap exchanges the elements of two vectors:
+		
+			x[i], y[i] = y[i], x[i] for all i.
+		
+		Swap will panic if the lengths of x and y do not match.</span>
+
+</span></div><div class="anchor value-res" id="name-Symm">	<input type='checkbox' class="fold" id="Symm-fold-content"><label for="Symm-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Symm.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-472">Symm</a>(s <a href="../blas.html">blas</a>.<a href="../blas.html#name-Side">Side</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <a href="#name-Symmetric">Symmetric</a>, b <a href="#name-General">General</a>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, c <a href="#name-General">General</a>)</label><span id='Symm-fold-content-docs' class="fold-docs">
+<span class="md-text">		Symm performs
+		
+			C = alpha * A * B + beta * C  if s == blas.Left,
+			C = alpha * B * A + beta * C  if s == blas.Right,
+		
+		where A is an n×n or m×m symmetric matrix, B and C are m×n matrices, and
+		alpha and beta are scalars.</span>
+
+</span></div><div class="anchor value-res" id="name-Syr2k">	<input type='checkbox' class="fold" id="Syr2k-fold-content"><label for="Syr2k-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Syr2k.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-506">Syr2k</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a, b <a href="#name-General">General</a>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, c <a href="#name-Symmetric">Symmetric</a>)</label><span id='Syr2k-fold-content-docs' class="fold-docs">
+<span class="md-text">		Syr2k performs a symmetric rank-2k update
+		
+			C = alpha * A * Bᵀ + alpha * B * Aᵀ + beta * C  if t == blas.NoTrans,
+			C = alpha * Aᵀ * B + alpha * Bᵀ * A + beta * C  if t == blas.Trans,
+		
+		where C is an n×n symmetric matrix, A and B are n×k matrices if
+		t == blas.NoTrans and k×n otherwise, and alpha and beta are scalars.</span>
+
+</span></div><div class="anchor value-res" id="name-Syrk">	<input type='checkbox' class="fold" id="Syrk-fold-content"><label for="Syrk-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Syrk.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-489">Syrk</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <a href="#name-General">General</a>, beta <a href="../../../../builtin.html#name-complex128">complex128</a>, c <a href="#name-Symmetric">Symmetric</a>)</label><span id='Syrk-fold-content-docs' class="fold-docs">
+<span class="md-text">		Syrk performs a symmetric rank-k update
+		
+			C = alpha * A * Aᵀ + beta * C  if t == blas.NoTrans,
+			C = alpha * Aᵀ * A + beta * C  if t == blas.Trans,
+		
+		where C is an n×n symmetric matrix, A is an n×k matrix if t == blas.NoTrans
+		and a k×n matrix otherwise, and alpha and beta are scalars.</span>
+
+</span></div><div class="anchor value-res" id="name-Tbmv">	<input type='checkbox' class="fold" id="Tbmv-fold-content"><label for="Tbmv-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Tbmv.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-290">Tbmv</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, a <a href="#name-TriangularBand">TriangularBand</a>, x <a href="#name-Vector">Vector</a>)</label><span id='Tbmv-fold-content-docs' class="fold-docs">
+<span class="md-text">		Tbmv computes
+		
+			x = A * x   if t == blas.NoTrans,
+			x = Aᵀ * x  if t == blas.Trans,
+			x = Aᴴ * x  if t == blas.ConjTrans,
+		
+		where A is an n×n triangular band matrix, and x is a vector.</span>
+
+</span></div><div class="anchor value-res" id="name-Tbsv">	<input type='checkbox' class="fold" id="Tbsv-fold-content"><label for="Tbsv-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Tbsv.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-335">Tbsv</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, a <a href="#name-TriangularBand">TriangularBand</a>, x <a href="#name-Vector">Vector</a>)</label><span id='Tbsv-fold-content-docs' class="fold-docs">
+<span class="md-text">		Tbsv solves
+		
+			A * x = b   if t == blas.NoTrans,
+			Aᵀ * x = b  if t == blas.Trans,
+			Aᴴ * x = b  if t == blas.ConjTrans,
+		
+		where A is an n×n triangular band matrix, and x is a vector.
+		
+		At entry to the function, x contains the values of b, and the result is
+		stored in-place into x.
+		
+		No test for singularity or near-singularity is included in this
+		routine. Such tests must be performed before calling this routine.</span>
+
+</span></div><div class="anchor value-res" id="name-Tpmv">	<input type='checkbox' class="fold" id="Tpmv-fold-content"><label for="Tpmv-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Tpmv.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-301">Tpmv</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, a <a href="#name-TriangularPacked">TriangularPacked</a>, x <a href="#name-Vector">Vector</a>)</label><span id='Tpmv-fold-content-docs' class="fold-docs">
+<span class="md-text">		Tpmv computes
+		
+			x = A * x   if t == blas.NoTrans,
+			x = Aᵀ * x  if t == blas.Trans,
+			x = Aᴴ * x  if t == blas.ConjTrans,
+		
+		where A is an n×n triangular matrix in packed format, and x is a vector.</span>
+
+</span></div><div class="anchor value-res" id="name-Tpsv">	<input type='checkbox' class="fold" id="Tpsv-fold-content"><label for="Tpsv-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Tpsv.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-352">Tpsv</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, a <a href="#name-TriangularPacked">TriangularPacked</a>, x <a href="#name-Vector">Vector</a>)</label><span id='Tpsv-fold-content-docs' class="fold-docs">
+<span class="md-text">		Tpsv solves
+		
+			A * x = b   if t == blas.NoTrans,
+			Aᵀ * x = b  if t == blas.Trans,
+			Aᴴ * x = b  if t == blas.ConjTrans,
+		
+		where A is an n×n triangular matrix in packed format and x is a vector.
+		
+		At entry to the function, x contains the values of b, and the result is
+		stored in-place into x.
+		
+		No test for singularity or near-singularity is included in this
+		routine. Such tests must be performed before calling this routine.</span>
+
+</span></div><div class="anchor value-res" id="name-Trmm">	<input type='checkbox' class="fold" id="Trmm-fold-content"><label for="Trmm-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Trmm.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-527">Trmm</a>(s <a href="../blas.html">blas</a>.<a href="../blas.html#name-Side">Side</a>, tA <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <a href="#name-Triangular">Triangular</a>, b <a href="#name-General">General</a>)</label><span id='Trmm-fold-content-docs' class="fold-docs">
+<span class="md-text">		Trmm performs
+		
+			B = alpha * A * B   if tA == blas.NoTrans and s == blas.Left,
+			B = alpha * Aᵀ * B  if tA == blas.Trans and s == blas.Left,
+			B = alpha * Aᴴ * B  if tA == blas.ConjTrans and s == blas.Left,
+			B = alpha * B * A   if tA == blas.NoTrans and s == blas.Right,
+			B = alpha * B * Aᵀ  if tA == blas.Trans and s == blas.Right,
+			B = alpha * B * Aᴴ  if tA == blas.ConjTrans and s == blas.Right,
+		
+		where A is an n×n or m×m triangular matrix, B is an m×n matrix, and alpha is
+		a scalar.</span>
+
+</span></div><div class="anchor value-res" id="name-Trmv">	<input type='checkbox' class="fold" id="Trmv-fold-content"><label for="Trmv-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Trmv.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-279">Trmv</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, a <a href="#name-Triangular">Triangular</a>, x <a href="#name-Vector">Vector</a>)</label><span id='Trmv-fold-content-docs' class="fold-docs">
+<span class="md-text">		Trmv computes
+		
+			x = A * x   if t == blas.NoTrans,
+			x = Aᵀ * x  if t == blas.Trans,
+			x = Aᴴ * x  if t == blas.ConjTrans,
+		
+		where A is an n×n triangular matrix, and x is a vector.</span>
+
+</span></div><div class="anchor value-res" id="name-Trsm">	<input type='checkbox' class="fold" id="Trsm-fold-content"><label for="Trsm-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Trsm.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-547">Trsm</a>(s <a href="../blas.html">blas</a>.<a href="../blas.html#name-Side">Side</a>, tA <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, alpha <a href="../../../../builtin.html#name-complex128">complex128</a>, a <a href="#name-Triangular">Triangular</a>, b <a href="#name-General">General</a>)</label><span id='Trsm-fold-content-docs' class="fold-docs">
+<span class="md-text">		Trsm solves
+		
+			A * X = alpha * B   if tA == blas.NoTrans and s == blas.Left,
+			Aᵀ * X = alpha * B  if tA == blas.Trans and s == blas.Left,
+			Aᴴ * X = alpha * B  if tA == blas.ConjTrans and s == blas.Left,
+			X * A = alpha * B   if tA == blas.NoTrans and s == blas.Right,
+			X * Aᵀ = alpha * B  if tA == blas.Trans and s == blas.Right,
+			X * Aᴴ = alpha * B  if tA == blas.ConjTrans and s == blas.Right,
+		
+		where A is an n×n or m×m triangular matrix, X and B are m×n matrices, and
+		alpha is a scalar.
+		
+		At entry to the function, b contains the values of B, and the result is
+		stored in-place into b.
+		
+		No check is made that A is invertible.</span>
+
+</span></div><div class="anchor value-res" id="name-Trsv">	<input type='checkbox' class="fold" id="Trsv-fold-content"><label for="Trsv-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Trsv.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-318">Trsv</a>(t <a href="../blas.html">blas</a>.<a href="../blas.html#name-Transpose">Transpose</a>, a <a href="#name-Triangular">Triangular</a>, x <a href="#name-Vector">Vector</a>)</label><span id='Trsv-fold-content-docs' class="fold-docs">
+<span class="md-text">		Trsv solves
+		
+			A * x = b   if t == blas.NoTrans,
+			Aᵀ * x = b  if t == blas.Trans,
+			Aᴴ * x = b  if t == blas.ConjTrans,
+		
+		where A is an n×n triangular matrix and x is a vector.
+		
+		At entry to the function, x contains the values of b, and the result is
+		stored in-place into x.
+		
+		No test for singularity or near-singularity is included in this
+		routine. Such tests must be performed before calling this routine.</span>
+
+</span></div><div class="anchor value-res" id="name-Use">	<input type='checkbox' class="fold" id="Use-fold-content"><label for="Use-fold-content"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..Use.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-17">Use</a>(b <a href="../blas.html">blas</a>.<a href="../blas.html#name-Complex128">Complex128</a>)</label><span id='Use-fold-content-docs' class="fold-docs">
+<span class="md-text">		Use sets the BLAS complex128 implementation to be used by subsequent BLAS calls.
+		The default implementation is
+		gonum.org/v1/gonum/blas/gonum.Implementation.</span>
+
+</span></div>	<input type='checkbox' class="showhide" id="unexported-functions-showhide"><i><label for="unexported-functions-showhide" class="show-inline">/* 2 unexporteds ... */</label><label for="unexported-functions-showhide" class="hide-inline">/* 2 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-max"><i>	<span class="nodocs"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..max^9baf3.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv.go.html#line-274">max</a>(a, b <a href="../../../../builtin.html#name-int">int</a>) <a href="../../../../builtin.html#name-int">int</a></span></i></div><div class="anchor value-res hidden" id="name-min"><i>	<span class="nodocs"> <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..min^1f6fa.html">func</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/conv.go.html#line-267">min</a>(a, b <a href="../../../../builtin.html#name-int">int</a>) <a href="../../../../builtin.html#name-int">int</a></span></i></div></div>
+<div id="exported-variables"><span class="title">Package-Level Variables<span class="title-stat"><i> (only one, which is unexported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-variables-showhide"><i><label for="unexported-variables-showhide" class="show-inline">/* one unexported ... */</label><label for="unexported-variables-showhide" class="hide-inline">/* one unexported: */</label></i><div class="anchor value-res hidden" id="name-cblas128"><i>	<span class="nodocs">  <a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..cblas128^f5873.html">var</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-12">cblas128</a> <a href="../blas.html">blas</a>.<a href="../blas.html#name-Complex128">Complex128</a></span></i></div></div>
+<div id="exported-constants"><span class="title">Package-Level Constants<span class="title-stat"><i> (total 2, neither is exported)</i></span></span>
+
+	<input type='checkbox' class="showhide" id="unexported-constants-showhide"><i><label for="unexported-constants-showhide" class="show-inline">/* 2 unexporteds ... */</label><label for="unexported-constants-showhide" class="hide-inline">/* 2 unexporteds: */</label></i><div class="anchor value-res hidden" id="name-badLength"><i>	<span class="nodocs"><a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..badLength^499a7.html">const</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-113">badLength</a> = "cblas128: vector length mismatch"</span></i></div><div class="anchor value-res hidden" id="name-negInc"><i>	<span class="nodocs"><a href="../../../../../use/gonum.org/v1/gonum/blas/cblas128..negInc^a054c.html">const</a> <a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-112">negInc</a> = "cblas128: negative vector increment"</span></i></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

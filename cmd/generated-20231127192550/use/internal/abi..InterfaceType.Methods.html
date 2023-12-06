@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: internal/abi.InterfaceType.Methods</title>
+<link href="../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../pkg/internal/abi.html">internal/abi</a>.<a href="../../src/internal/abi/type.go.html#line-415">InterfaceType</a>.<a href="../../src/internal/abi/type.go.html#line-418">Methods</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">43 uses</span>
+
+	internal/abi (current package)
+		<a href="../../src/internal/abi/type.go.html#line-418">type.go#L418</a>: 	<b>Methods</b> []Imethod // sorted by hash
+		<a href="../../src/internal/abi/type.go.html#line-438" class="path-duplicate">type.go</a><a href="../../src/internal/abi/type.go.html#line-438">#L438</a>: func (t *InterfaceType) NumMethod() int { return len(t.<b>Methods</b>) }
+
+	<a href="../../pkg/internal/reflectlite.html">internal/reflectlite</a>
+		<a href="../../src/internal/reflectlite/type.go.html#line-430">type.go#L430</a>: 	if len(t.<b>Methods</b>) == 0 {
+		<a href="../../src/internal/reflectlite/type.go.html#line-451" class="path-duplicate">type.go</a><a href="../../src/internal/reflectlite/type.go.html#line-451">#L451</a>: 		for j := 0; j &lt; len(v.<b>Methods</b>); j++ {
+		<a href="../../src/internal/reflectlite/type.go.html#line-452" class="path-duplicate">type.go</a><a href="../../src/internal/reflectlite/type.go.html#line-452">#L452</a>: 			tm := &amp;t.<b>Methods</b>[i]
+		<a href="../../src/internal/reflectlite/type.go.html#line-454" class="path-duplicate">type.go</a><a href="../../src/internal/reflectlite/type.go.html#line-454">#L454</a>: 			vm := &amp;v.<b>Methods</b>[j]
+		<a href="../../src/internal/reflectlite/type.go.html#line-470" class="path-duplicate">type.go</a><a href="../../src/internal/reflectlite/type.go.html#line-470">#L470</a>: 				if i++; i &gt;= len(t.<b>Methods</b>) {
+		<a href="../../src/internal/reflectlite/type.go.html#line-485" class="path-duplicate">type.go</a><a href="../../src/internal/reflectlite/type.go.html#line-485">#L485</a>: 		tm := &amp;t.<b>Methods</b>[i]
+		<a href="../../src/internal/reflectlite/type.go.html#line-503" class="path-duplicate">type.go</a><a href="../../src/internal/reflectlite/type.go.html#line-503">#L503</a>: 			if i++; i &gt;= len(t.<b>Methods</b>) {
+		<a href="../../src/internal/reflectlite/type.go.html#line-597" class="path-duplicate">type.go</a><a href="../../src/internal/reflectlite/type.go.html#line-597">#L597</a>: 		if len(t.<b>Methods</b>) == 0 &amp;&amp; len(v.<b>Methods</b>) == 0 {
+
+	<a href="../../pkg/reflect.html">reflect</a>
+		<a href="../../src/reflect/type.go.html#line-833">type.go#L833</a>: 	if i &lt; 0 || i &gt;= len(t.<b>Methods</b>) {
+		<a href="../../src/reflect/type.go.html#line-836" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-836">#L836</a>: 	p := &amp;t.<b>Methods</b>[i]
+		<a href="../../src/reflect/type.go.html#line-851" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-851">#L851</a>: func (t *interfaceType) NumMethod() int { return len(t.<b>Methods</b>) }
+		<a href="../../src/reflect/type.go.html#line-859" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-859">#L859</a>: 	for i := range t.<b>Methods</b> {
+		<a href="../../src/reflect/type.go.html#line-860" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-860">#L860</a>: 		p = &amp;t.<b>Methods</b>[i]
+		<a href="../../src/reflect/type.go.html#line-1273" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-1273">#L1273</a>: 	if len(t.<b>Methods</b>) == 0 {
+		<a href="../../src/reflect/type.go.html#line-1292" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-1292">#L1292</a>: 		for j := 0; j &lt; len(v.<b>Methods</b>); j++ {
+		<a href="../../src/reflect/type.go.html#line-1293" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-1293">#L1293</a>: 			tm := &amp;t.<b>Methods</b>[i]
+		<a href="../../src/reflect/type.go.html#line-1295" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-1295">#L1295</a>: 			vm := &amp;v.<b>Methods</b>[j]
+		<a href="../../src/reflect/type.go.html#line-1311" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-1311">#L1311</a>: 				if i++; i &gt;= len(t.<b>Methods</b>) {
+		<a href="../../src/reflect/type.go.html#line-1326" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-1326">#L1326</a>: 		tm := &amp;t.<b>Methods</b>[i]
+		<a href="../../src/reflect/type.go.html#line-1344" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-1344">#L1344</a>: 			if i++; i &gt;= len(t.<b>Methods</b>) {
+		<a href="../../src/reflect/type.go.html#line-1446" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-1446">#L1446</a>: 		if len(t.<b>Methods</b>) == 0 &amp;&amp; len(v.<b>Methods</b>) == 0 {
+		<a href="../../src/reflect/type.go.html#line-2211" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2211">#L2211</a>: 				for im, m := range ift.<b>Methods</b> {
+		<a href="../../src/reflect/value.go.html#line-891">value.go#L891</a>: 		if uint(i) &gt;= uint(len(tt.<b>Methods</b>)) {
+		<a href="../../src/reflect/value.go.html#line-894" class="path-duplicate">value.go</a><a href="../../src/reflect/value.go.html#line-894">#L894</a>: 		m := &amp;tt.<b>Methods</b>[i]
+		<a href="../../src/reflect/value.go.html#line-2648" class="path-duplicate">value.go</a><a href="../../src/reflect/value.go.html#line-2648">#L2648</a>: 		if uint(i) &gt;= uint(len(tt.<b>Methods</b>)) {
+		<a href="../../src/reflect/value.go.html#line-2651" class="path-duplicate">value.go</a><a href="../../src/reflect/value.go.html#line-2651">#L2651</a>: 		m := &amp;tt.<b>Methods</b>[i]
+
+	<a href="../../pkg/runtime.html">runtime</a>
+		<a href="../../src/runtime/alg.go.html#line-170">alg.go#L170</a>: 		if len(i.<b>Methods</b>) == 0 {
+		<a href="../../src/runtime/iface.go.html#line-35">iface.go#L35</a>: 	if len(inter.<b>Methods</b>) == 0 {
+		<a href="../../src/runtime/iface.go.html#line-44" class="path-duplicate">iface.go</a><a href="../../src/runtime/iface.go.html#line-44">#L44</a>: 		name := toRType(&amp;inter.Type).nameOff(inter.<b>Methods</b>[0].Name)
+		<a href="../../src/runtime/iface.go.html#line-67" class="path-duplicate">iface.go</a><a href="../../src/runtime/iface.go.html#line-67">#L67</a>: 	m = (*itab)(persistentalloc(unsafe.Sizeof(itab{})+uintptr(len(inter.<b>Methods</b>)-1)*goarch.PtrSize, 0, &amp;memstats.other_sys))
+		<a href="../../src/runtime/iface.go.html#line-201" class="path-duplicate">iface.go</a><a href="../../src/runtime/iface.go.html#line-201">#L201</a>: 	ni := len(inter.<b>Methods</b>)
+		<a href="../../src/runtime/iface.go.html#line-209" class="path-duplicate">iface.go</a><a href="../../src/runtime/iface.go.html#line-209">#L209</a>: 		i := &amp;inter.<b>Methods</b>[k]
+		<a href="../../src/runtime/mfinal.go.html#line-246">mfinal.go#L246</a>: 					if len(ityp.<b>Methods</b>) != 0 {
+		<a href="../../src/runtime/mfinal.go.html#line-463" class="path-duplicate">mfinal.go</a><a href="../../src/runtime/mfinal.go.html#line-463">#L463</a>: 		if len(ityp.<b>Methods</b>) == 0 {
+		<a href="../../src/runtime/type.go.html#line-400">type.go#L400</a>: 		if len(it.<b>Methods</b>) != len(iv.<b>Methods</b>) {
+		<a href="../../src/runtime/type.go.html#line-403" class="path-duplicate">type.go</a><a href="../../src/runtime/type.go.html#line-403">#L403</a>: 		for i := range it.<b>Methods</b> {
+		<a href="../../src/runtime/type.go.html#line-404" class="path-duplicate">type.go</a><a href="../../src/runtime/type.go.html#line-404">#L404</a>: 			tm := &amp;it.<b>Methods</b>[i]
+		<a href="../../src/runtime/type.go.html#line-405" class="path-duplicate">type.go</a><a href="../../src/runtime/type.go.html#line-405">#L405</a>: 			vm := &amp;iv.<b>Methods</b>[i]
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

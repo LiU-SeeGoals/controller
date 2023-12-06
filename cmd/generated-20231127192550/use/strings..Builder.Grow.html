@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: strings.Builder.Grow</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/strings.html">strings</a>.<a href="../src/strings/builder.go.html#line-16">Builder</a>.<a href="../src/strings/builder.go.html#line-77">Grow</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">10 uses</span>
+
+	strings (current package)
+		<a href="../src/strings/builder.go.html#line-77">builder.go#L77</a>: func (b *Builder) <b>Grow</b>(n int) {
+		<a href="../src/strings/replace.go.html#line-398">replace.go#L398</a>: 		buf.<b>Grow</b>(match + len(r.value))
+		<a href="../src/strings/strings.go.html#line-457">strings.go#L457</a>: 	b.<b>Grow</b>(n)
+		<a href="../src/strings/strings.go.html#line-504" class="path-duplicate">strings.go</a><a href="../src/strings/strings.go.html#line-504">#L504</a>: 		b.<b>Grow</b>(len(s) + utf8.UTFMax)
+		<a href="../src/strings/strings.go.html#line-585" class="path-duplicate">strings.go</a><a href="../src/strings/strings.go.html#line-585">#L585</a>: 	b.<b>Grow</b>(n)
+		<a href="../src/strings/strings.go.html#line-620" class="path-duplicate">strings.go</a><a href="../src/strings/strings.go.html#line-620">#L620</a>: 		b.<b>Grow</b>(len(s))
+		<a href="../src/strings/strings.go.html#line-660" class="path-duplicate">strings.go</a><a href="../src/strings/strings.go.html#line-660">#L660</a>: 		b.<b>Grow</b>(len(s))
+		<a href="../src/strings/strings.go.html#line-714" class="path-duplicate">strings.go</a><a href="../src/strings/strings.go.html#line-714">#L714</a>: 			b.<b>Grow</b>(len(s) + len(replacement))
+		<a href="../src/strings/strings.go.html#line-1079" class="path-duplicate">strings.go</a><a href="../src/strings/strings.go.html#line-1079">#L1079</a>: 	b.<b>Grow</b>(len(s) + n*(len(new)-len(old)))
+
+	<a href="../pkg/bufio.html">bufio</a>
+		<a href="../src/bufio/bufio.go.html#line-504">bufio.go#L504</a>: 	buf.<b>Grow</b>(n)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

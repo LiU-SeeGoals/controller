@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/internal/asm/f64.DotUnitary</title>
+<link href="../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../../../../../../pkg/gonum.org/v1/gonum/internal/asm/f64.html">gonum.org/v1/gonum/internal/asm/f64</a>.<a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html#line-118">DotUnitary</a></b></span>
+
+<span class="title">18 uses</span>
+
+	gonum.org/v1/gonum/internal/asm/f64 (current package)
+		<a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html#line-118">stubs_amd64.go#L118</a>: func <b>DotUnitary</b>(x, y []float64) (sum float64)
+
+	<a href="../../../../../../pkg/gonum.org/v1/gonum/blas/gonum.html">gonum.org/v1/gonum/blas/gonum</a>
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/dgemm.go.html#line-275">dgemm.go#L275</a>: 			ctmp[j] += alpha * f64.<b>DotUnitary</b>(atmp, b[j*ldb:j*ldb+k])
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level1float64_ddot.go.html#line-34">level1float64_ddot.go#L34</a>: 		return f64.<b>DotUnitary</b>(x[:n], y[:n])
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2float64.go.html#line-363">level2float64.go#L363</a>: 					x[i] = tmp + f64.<b>DotUnitary</b>(a[ilda+i+1:ilda+n], x[i+1:n])
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2float64.go.html#line-390" class="path-duplicate">level2float64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2float64.go.html#line-390">#L390</a>: 				x[i] = tmp + f64.<b>DotUnitary</b>(a[ilda:ilda+i], x[:i])
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-198">level3float64.go#L198</a>: 				tmp := alpha*btmp[j] - f64.<b>DotUnitary</b>(a[j*lda+j+1:j*lda+n], btmp[j+1:])
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-210" class="path-duplicate">level3float64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-210">#L210</a>: 			tmp := alpha*btmp[j] - f64.<b>DotUnitary</b>(a[j*lda:j*lda+j], btmp[:j])
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-452" class="path-duplicate">level3float64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-452">#L452</a>: 						ctmp[jc] = alpha * f64.<b>DotUnitary</b>(atmp, a[j*lda:j*lda+k])
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-457" class="path-duplicate">level3float64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-457">#L457</a>: 						ctmp[jc] = vc*beta + alpha*f64.<b>DotUnitary</b>(atmp, a[j*lda:j*lda+k])
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-468" class="path-duplicate">level3float64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-468">#L468</a>: 					ctmp[j] = alpha * f64.<b>DotUnitary</b>(a[j*lda:j*lda+k], atmp)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-472" class="path-duplicate">level3float64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-472">#L472</a>: 					ctmp[j] = vc*beta + alpha*f64.<b>DotUnitary</b>(a[j*lda:j*lda+k], atmp)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-896" class="path-duplicate">level3float64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-896">#L896</a>: 				tmp += f64.<b>DotUnitary</b>(a[j*lda+j+1:j*lda+n], btmp[j+1:n])
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-909" class="path-duplicate">level3float64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-909">#L909</a>: 			tmp += f64.<b>DotUnitary</b>(a[j*lda:j*lda+j], btmp[:j])
+
+	<a href="../../../../../../pkg/gonum.org/v1/gonum/floats.html">gonum.org/v1/gonum/floats</a>
+		<a href="../../../../../../src/gonum.org/v1/gonum/floats/floats.go.html#line-239">floats.go#L239</a>: 	return f64.<b>DotUnitary</b>(s1, s2)
+
+	<a href="../../../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>
+		<a href="../../../../../../src/gonum.org/v1/gonum/mat/inner.go.html#line-60">inner.go#L60</a>: 					sum += xi * f64.<b>DotUnitary</b>(
+		<a href="../../../../../../src/gonum.org/v1/gonum/mat/inner.go.html#line-76" class="path-duplicate">inner.go</a><a href="../../../../../../src/gonum.org/v1/gonum/mat/inner.go.html#line-76">#L76</a>: 					sum += yi * f64.<b>DotUnitary</b>(
+		<a href="../../../../../../src/gonum.org/v1/gonum/mat/inner.go.html#line-103" class="path-duplicate">inner.go</a><a href="../../../../../../src/gonum.org/v1/gonum/mat/inner.go.html#line-103">#L103</a>: 					sum += xi * f64.<b>DotUnitary</b>(
+		<a href="../../../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-632">vector.go#L632</a>: 					v.setVec(0, f64.<b>DotUnitary</b>(amat.Data, bmat.Data))
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

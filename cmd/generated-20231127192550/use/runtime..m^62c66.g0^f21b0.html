@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.m.g0</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/runtime2.go.html#line-533">m</a>.<a href="../src/runtime/runtime2.go.html#line-534">g0</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">42 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/cgocall.go.html#line-345">cgocall.go#L345</a>: 		sched := &amp;mp.<b>g0</b>.sched
+		<a href="../src/runtime/cgocheck.go.html#line-42">cgocheck.go#L42</a>: 	if gp == gp.m.<b>g0</b> || gp == gp.m.gsignal {
+		<a href="../src/runtime/debug.go.html#line-89">debug.go#L89</a>: 	if gp == gp.m.<b>g0</b> || gp == gp.m.gsignal {
+		<a href="../src/runtime/debug.go.html#line-108" class="path-duplicate">debug.go</a><a href="../src/runtime/debug.go.html#line-108">#L108</a>: 	if gp == gp.m.<b>g0</b> || gp == gp.m.gsignal {
+		<a href="../src/runtime/lock_futex.go.html#line-150">lock_futex.go#L150</a>: 	if gp != gp.m.<b>g0</b> {
+		<a href="../src/runtime/lock_futex.go.html#line-221" class="path-duplicate">lock_futex.go</a><a href="../src/runtime/lock_futex.go.html#line-221">#L221</a>: 	if gp != gp.m.<b>g0</b> &amp;&amp; gp.m.preemptoff != "" {
+		<a href="../src/runtime/lock_futex.go.html#line-232" class="path-duplicate">lock_futex.go</a><a href="../src/runtime/lock_futex.go.html#line-232">#L232</a>: 	if gp == gp.m.<b>g0</b> {
+		<a href="../src/runtime/mgc.go.html#line-606">mgc.go#L606</a>: 	if gp := getg(); gp == mp.<b>g0</b> || mp.locks &gt; 1 || mp.preemptoff != "" {
+		<a href="../src/runtime/mgcmark.go.html#line-409">mgcmark.go#L409</a>: 	if getg() == gp.m.<b>g0</b> {
+		<a href="../src/runtime/mgcsweep.go.html#line-467">mgcsweep.go#L467</a>: 	if gp.m.locks == 0 &amp;&amp; gp.m.mallocing == 0 &amp;&amp; gp != gp.m.<b>g0</b> {
+		<a href="../src/runtime/mgcsweep.go.html#line-506" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-506">#L506</a>: 	if gp.m.locks == 0 &amp;&amp; gp.m.mallocing == 0 &amp;&amp; gp != gp.m.<b>g0</b> {
+		<a href="../src/runtime/os_linux.go.html#line-167">os_linux.go#L167</a>: 	stk := unsafe.Pointer(mp.<b>g0</b>.stack.hi)
+		<a href="../src/runtime/os_linux.go.html#line-172" class="path-duplicate">os_linux.go</a><a href="../src/runtime/os_linux.go.html#line-172">#L172</a>: 		print("newosproc stk=", stk, " m=", mp, " g=", mp.<b>g0</b>, " clone=", abi.FuncPCABI0(clone), " id=", mp.id, " ostk=", &amp;mp, "\n")
+		<a href="../src/runtime/os_linux.go.html#line-180" class="path-duplicate">os_linux.go</a><a href="../src/runtime/os_linux.go.html#line-180">#L180</a>: 		r := clone(cloneFlags, stk, unsafe.Pointer(mp), unsafe.Pointer(mp.<b>g0</b>), unsafe.Pointer(abi.FuncPCABI0(mstart)))
+		<a href="../src/runtime/panic.go.html#line-1306">panic.go#L1306</a>: 		if gp != gp.m.<b>g0</b> {
+		<a href="../src/runtime/proc.go.html#line-149">proc.go#L149</a>: 	mp.<b>g0</b>.racectx = 0
+		<a href="../src/runtime/proc.go.html#line-827" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-827">#L827</a>: 	if gp != gp.m.<b>g0</b> {
+		<a href="../src/runtime/proc.go.html#line-1576" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1576">#L1576</a>: 	if gp != gp.m.<b>g0</b> {
+		<a href="../src/runtime/proc.go.html#line-1924" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1924">#L1924</a>: 					stackfree(freem.<b>g0</b>.stack)
+		<a href="../src/runtime/proc.go.html#line-1940" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1940">#L1940</a>: 		mp.<b>g0</b> = malg(-1)
+		<a href="../src/runtime/proc.go.html#line-1942" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1942">#L1942</a>: 		mp.<b>g0</b> = malg(16384 * sys.StackGuardMultiplier)
+		<a href="../src/runtime/proc.go.html#line-1944" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1944">#L1944</a>: 	mp.<b>g0</b>.m = mp
+		<a href="../src/runtime/proc.go.html#line-2045" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-2045">#L2045</a>: 	setg(mp.<b>g0</b>)
+		<a href="../src/runtime/proc.go.html#line-2234" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-2234">#L2234</a>: 	if g.m.<b>g0</b> != g {
+		<a href="../src/runtime/proc.go.html#line-2440" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-2440">#L2440</a>: 		ts.g.set(mp.<b>g0</b>)
+		<a href="../src/runtime/proc.go.html#line-3914" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-3914">#L3914</a>: 			gogo(&amp;mp.<b>g0</b>.sched)
+		<a href="../src/runtime/proc.go.html#line-3935" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-3935">#L3935</a>: 	if gp == gp.m.<b>g0</b> || gp == gp.m.gsignal {
+		<a href="../src/runtime/proc.go.html#line-5775" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5775">#L5775</a>: 	if gp == nil || gp == mp.<b>g0</b> {
+		<a href="../src/runtime/runtime2.go.html#line-534">runtime2.go#L534</a>: 	<b>g0</b>      *g     // goroutine with scheduling stack
+		<a href="../src/runtime/signal_unix.go.html#line-569">signal_unix.go#L569</a>: 	if sp &gt;= mp.<b>g0</b>.stack.lo &amp;&amp; sp &lt; mp.<b>g0</b>.stack.hi {
+		<a href="../src/runtime/signal_unix.go.html#line-580" class="path-duplicate">signal_unix.go</a><a href="../src/runtime/signal_unix.go.html#line-580">#L580</a>: 		st := stackt{ss_size: mp.<b>g0</b>.stack.hi - mp.<b>g0</b>.stack.lo}
+		<a href="../src/runtime/signal_unix.go.html#line-581" class="path-duplicate">signal_unix.go</a><a href="../src/runtime/signal_unix.go.html#line-581">#L581</a>: 		setSignalstackSP(&amp;st, mp.<b>g0</b>.stack.lo)
+		<a href="../src/runtime/signal_unix.go.html#line-636" class="path-duplicate">signal_unix.go</a><a href="../src/runtime/signal_unix.go.html#line-636">#L636</a>: 	delayedSignal := *cgo_yield != nil &amp;&amp; mp != nil &amp;&amp; gsignal.stack == mp.<b>g0</b>.stack
+		<a href="../src/runtime/signal_unix.go.html#line-791" class="path-duplicate">signal_unix.go</a><a href="../src/runtime/signal_unix.go.html#line-791">#L791</a>: 	if mp.incgo &amp;&amp; gp == mp.<b>g0</b> &amp;&amp; mp.curg != nil {
+		<a href="../src/runtime/signal_unix.go.html#line-1044" class="path-duplicate">signal_unix.go</a><a href="../src/runtime/signal_unix.go.html#line-1044">#L1044</a>: 	print("mp.g0 stack [", hex(mp.<b>g0</b>.stack.lo), " ", hex(mp.<b>g0</b>.stack.hi), "], sp=", hex(sp), "\n")
+		<a href="../src/runtime/stack.go.html#line-341">stack.go#L341</a>: 	if thisg != thisg.m.<b>g0</b> {
+		<a href="../src/runtime/stack.go.html#line-973" class="path-duplicate">stack.go</a><a href="../src/runtime/stack.go.html#line-973">#L973</a>: 		print("runtime: newstack called from g=", hex(thisg.m.morebuf.g), "\n"+"\tm=", thisg.m, " m-&gt;curg=", thisg.m.curg, " m-&gt;g0=", thisg.m.<b>g0</b>, " m-&gt;gsignal=", thisg.m.gsignal, "\n")
+		<a href="../src/runtime/stack.go.html#line-1055" class="path-duplicate">stack.go</a><a href="../src/runtime/stack.go.html#line-1055">#L1055</a>: 		if gp == thisg.m.<b>g0</b> {
+		<a href="../src/runtime/traceback.go.html#line-290">traceback.go#L290</a>: 		if u.flags&amp;unwindJumpStack != 0 &amp;&amp; gp == gp.m.<b>g0</b> &amp;&amp; gp.m.curg != nil &amp;&amp; gp.m.curg.m == gp.m {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

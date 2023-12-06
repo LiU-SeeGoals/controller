@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: axpyincto_amd64.s in package gonum.org/v1/gonum/internal/asm/f32</title>
+<link href="../../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	axpyincto_amd64.s
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/gonum.org/v1/gonum/internal/asm/f32.html">gonum.org/v1/gonum/internal/asm/f32</a>
+</code></pre>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code>// Copyright ©2016 The Gonum Authors. All rights reserved.</code></span>
+<span class="codeline" id="line-2"><code>// Use of this source code is governed by a BSD-style</code></span>
+<span class="codeline" id="line-3"><code>// license that can be found in the LICENSE file.</code></span>
+<span class="codeline" id="line-4"><code></code></span>
+<span class="codeline" id="line-5"><code>// +build !noasm,!gccgo,!safe</code></span>
+<span class="codeline" id="line-6"><code></code></span>
+<span class="codeline" id="line-7"><code>#include "textflag.h"</code></span>
+<span class="codeline" id="line-8"><code></code></span>
+<span class="codeline" id="line-9"><code>// func AxpyIncTo(dst []float32, incDst, idst uintptr, alpha float32, x, y []float32, n, incX, incY, ix, iy uintptr)</code></span>
+<span class="codeline" id="line-10"><code>TEXT ·AxpyIncTo(SB), NOSPLIT, $0</code></span>
+<span class="codeline" id="line-11"><code>	MOVQ  n+96(FP), CX       // CX = n</code></span>
+<span class="codeline" id="line-12"><code>	CMPQ  CX, $0             // if n==0 { return }</code></span>
+<span class="codeline" id="line-13"><code>	JLE   axpyi_end</code></span>
+<span class="codeline" id="line-14"><code>	MOVQ  dst_base+0(FP), DI // DI = &amp;dst</code></span>
+<span class="codeline" id="line-15"><code>	MOVQ  x_base+48(FP), SI  // SI = &amp;x</code></span>
+<span class="codeline" id="line-16"><code>	MOVQ  y_base+72(FP), DX  // DX = &amp;y</code></span>
+<span class="codeline" id="line-17"><code>	MOVQ  ix+120(FP), R8     // R8 = ix  // Load the first index</code></span>
+<span class="codeline" id="line-18"><code>	MOVQ  iy+128(FP), R9     // R9 = iy</code></span>
+<span class="codeline" id="line-19"><code>	MOVQ  idst+32(FP), R10   // R10 = idst</code></span>
+<span class="codeline" id="line-20"><code>	LEAQ  (SI)(R8*4), SI     // SI = &amp;(x[ix])</code></span>
+<span class="codeline" id="line-21"><code>	LEAQ  (DX)(R9*4), DX     // DX = &amp;(y[iy])</code></span>
+<span class="codeline" id="line-22"><code>	LEAQ  (DI)(R10*4), DI    // DI = &amp;(dst[idst])</code></span>
+<span class="codeline" id="line-23"><code>	MOVQ  incX+104(FP), R8   // R8 = incX</code></span>
+<span class="codeline" id="line-24"><code>	SHLQ  $2, R8             // R8 *= sizeof(float32)</code></span>
+<span class="codeline" id="line-25"><code>	MOVQ  incY+112(FP), R9   // R9 = incY</code></span>
+<span class="codeline" id="line-26"><code>	SHLQ  $2, R9             // R9 *= sizeof(float32)</code></span>
+<span class="codeline" id="line-27"><code>	MOVQ  incDst+24(FP), R10 // R10 = incDst</code></span>
+<span class="codeline" id="line-28"><code>	SHLQ  $2, R10            // R10 *= sizeof(float32)</code></span>
+<span class="codeline" id="line-29"><code>	MOVSS alpha+40(FP), X0   // X0 = alpha</code></span>
+<span class="codeline" id="line-30"><code>	MOVSS X0, X1             // X1 = X0  // for pipelining</code></span>
+<span class="codeline" id="line-31"><code>	MOVQ  CX, BX</code></span>
+<span class="codeline" id="line-32"><code>	ANDQ  $3, BX             // BX = n % 4</code></span>
+<span class="codeline" id="line-33"><code>	SHRQ  $2, CX             // CX = floor( n / 4 )</code></span>
+<span class="codeline" id="line-34"><code>	JZ    axpyi_tail_start   // if CX == 0 { goto axpyi_tail_start }</code></span>
+<span class="codeline" id="line-35"><code></code></span>
+<span class="codeline" id="line-36"><code>axpyi_loop: // Loop unrolled 4x   do {</code></span>
+<span class="codeline" id="line-37"><code>	MOVSS (SI), X2        // X_i = x[i]</code></span>
+<span class="codeline" id="line-38"><code>	MOVSS (SI)(R8*1), X3</code></span>
+<span class="codeline" id="line-39"><code>	LEAQ  (SI)(R8*2), SI  // SI = &amp;(SI[incX*2])</code></span>
+<span class="codeline" id="line-40"><code>	MOVSS (SI), X4</code></span>
+<span class="codeline" id="line-41"><code>	MOVSS (SI)(R8*1), X5</code></span>
+<span class="codeline" id="line-42"><code>	MULSS X1, X2          // X_i *= a</code></span>
+<span class="codeline" id="line-43"><code>	MULSS X0, X3</code></span>
+<span class="codeline" id="line-44"><code>	MULSS X1, X4</code></span>
+<span class="codeline" id="line-45"><code>	MULSS X0, X5</code></span>
+<span class="codeline" id="line-46"><code>	ADDSS (DX), X2        // X_i += y[i]</code></span>
+<span class="codeline" id="line-47"><code>	ADDSS (DX)(R9*1), X3</code></span>
+<span class="codeline" id="line-48"><code>	LEAQ  (DX)(R9*2), DX  // DX = &amp;(DX[incY*2])</code></span>
+<span class="codeline" id="line-49"><code>	ADDSS (DX), X4</code></span>
+<span class="codeline" id="line-50"><code>	ADDSS (DX)(R9*1), X5</code></span>
+<span class="codeline" id="line-51"><code>	MOVSS X2, (DI)        // dst[i] = X_i</code></span>
+<span class="codeline" id="line-52"><code>	MOVSS X3, (DI)(R10*1)</code></span>
+<span class="codeline" id="line-53"><code>	LEAQ  (DI)(R10*2), DI // DI = &amp;(DI[incDst*2])</code></span>
+<span class="codeline" id="line-54"><code>	MOVSS X4, (DI)</code></span>
+<span class="codeline" id="line-55"><code>	MOVSS X5, (DI)(R10*1)</code></span>
+<span class="codeline" id="line-56"><code>	LEAQ  (SI)(R8*2), SI  // SI = &amp;(SI[incX*2])  // Increment addresses</code></span>
+<span class="codeline" id="line-57"><code>	LEAQ  (DX)(R9*2), DX  // DX = &amp;(DX[incY*2])</code></span>
+<span class="codeline" id="line-58"><code>	LEAQ  (DI)(R10*2), DI // DI = &amp;(DI[incDst*2])</code></span>
+<span class="codeline" id="line-59"><code>	LOOP  axpyi_loop      // } while --CX &gt; 0</code></span>
+<span class="codeline" id="line-60"><code>	CMPQ  BX, $0          // if BX == 0 { return }</code></span>
+<span class="codeline" id="line-61"><code>	JE    axpyi_end</code></span>
+<span class="codeline" id="line-62"><code></code></span>
+<span class="codeline" id="line-63"><code>axpyi_tail_start: // Reset loop registers</code></span>
+<span class="codeline" id="line-64"><code>	MOVQ BX, CX // Loop counter: CX = BX</code></span>
+<span class="codeline" id="line-65"><code></code></span>
+<span class="codeline" id="line-66"><code>axpyi_tail: // do {</code></span>
+<span class="codeline" id="line-67"><code>	MOVSS (SI), X2   // X2 = x[i]</code></span>
+<span class="codeline" id="line-68"><code>	MULSS X1, X2     // X2 *= a</code></span>
+<span class="codeline" id="line-69"><code>	ADDSS (DX), X2   // X2 += y[i]</code></span>
+<span class="codeline" id="line-70"><code>	MOVSS X2, (DI)   // dst[i] = X2</code></span>
+<span class="codeline" id="line-71"><code>	ADDQ  R8, SI     // SI = &amp;(SI[incX])</code></span>
+<span class="codeline" id="line-72"><code>	ADDQ  R9, DX     // DX = &amp;(DX[incY])</code></span>
+<span class="codeline" id="line-73"><code>	ADDQ  R10, DI    // DI = &amp;(DI[incY])</code></span>
+<span class="codeline" id="line-74"><code>	LOOP  axpyi_tail // } while --CX &gt; 0</code></span>
+<span class="codeline" id="line-75"><code></code></span>
+<span class="codeline" id="line-76"><code>axpyi_end:</code></span>
+<span class="codeline" id="line-77"><code>	RET</code></span>
+<span class="codeline" id="line-78"><code></code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

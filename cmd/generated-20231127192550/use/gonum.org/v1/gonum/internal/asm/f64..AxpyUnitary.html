@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/internal/asm/f64.AxpyUnitary</title>
+<link href="../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../../../../../../pkg/gonum.org/v1/gonum/internal/asm/f64.html">gonum.org/v1/gonum/internal/asm/f64</a>.<a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html#line-45">AxpyUnitary</a></b></span>
+
+<span class="title">22 uses</span>
+
+	gonum.org/v1/gonum/internal/asm/f64 (current package)
+		<a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html#line-45">stubs_amd64.go#L45</a>: func <b>AxpyUnitary</b>(alpha float64, x, y []float64)
+
+	<a href="../../../../../../pkg/gonum.org/v1/gonum/blas/gonum.html">gonum.org/v1/gonum/blas/gonum</a>
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/dgemm.go.html#line-245">dgemm.go#L245</a>: 				f64.<b>AxpyUnitary</b>(tmp, b[l*ldb:l*ldb+n], ctmp)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/dgemm.go.html#line-261" class="path-duplicate">dgemm.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/dgemm.go.html#line-261">#L261</a>: 				f64.<b>AxpyUnitary</b>(tmp, btmp, ctmp)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level1float64.go.html#line-234">level1float64.go#L234</a>: 		f64.<b>AxpyUnitary</b>(alpha, x[:n], y[:n])
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2float64.go.html#line-414">level2float64.go#L414</a>: 				f64.<b>AxpyUnitary</b>(xi, a[ilda+i+1:ilda+n], x[i+1:n])
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2float64.go.html#line-437" class="path-duplicate">level2float64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2float64.go.html#line-437">#L437</a>: 			f64.<b>AxpyUnitary</b>(xi, a[ilda:ilda+i], x[:i])
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-92">level3float64.go#L92</a>: 							f64.<b>AxpyUnitary</b>(-va, b[k*ldb:k*ldb+n], btmp)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-109" class="path-duplicate">level3float64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-109">#L109</a>: 						f64.<b>AxpyUnitary</b>(-va, b[k*ldb:k*ldb+n], btmp)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-130" class="path-duplicate">level3float64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-130">#L130</a>: 						f64.<b>AxpyUnitary</b>(-va, btmpk, b[i*ldb:i*ldb+n])
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-147" class="path-duplicate">level3float64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-147">#L147</a>: 					f64.<b>AxpyUnitary</b>(-va, btmpk, b[i*ldb:i*ldb+n])
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-171" class="path-duplicate">level3float64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-171">#L171</a>: 					f64.<b>AxpyUnitary</b>(-btmp[k], a[k*lda+k+1:k*lda+n], btmp[k+1:n])
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-188" class="path-duplicate">level3float64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-188">#L188</a>: 				f64.<b>AxpyUnitary</b>(-btmp[k], a[k*lda:k*lda+k], btmp[:k])
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-314" class="path-duplicate">level3float64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-314">#L314</a>: 				f64.<b>AxpyUnitary</b>(atmp, b[k*ldb:k*ldb+n], ctmp)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-324" class="path-duplicate">level3float64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-324">#L324</a>: 				f64.<b>AxpyUnitary</b>(atmp, b[k*ldb:k*ldb+n], ctmp)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-494" class="path-duplicate">level3float64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-494">#L494</a>: 					f64.<b>AxpyUnitary</b>(tmp, a[l*lda+i:l*lda+n], ctmp)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-510" class="path-duplicate">level3float64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-510">#L510</a>: 				f64.<b>AxpyUnitary</b>(tmp, a[l*lda:l*lda+i+1], ctmp)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-792" class="path-duplicate">level3float64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-792">#L792</a>: 							f64.<b>AxpyUnitary</b>(alpha*va, b[k*ldb:k*ldb+n], btmp)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-807" class="path-duplicate">level3float64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-807">#L807</a>: 						f64.<b>AxpyUnitary</b>(alpha*va, b[k*ldb:k*ldb+n], btmp)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-821" class="path-duplicate">level3float64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-821">#L821</a>: 						f64.<b>AxpyUnitary</b>(alpha*va, btmpk, btmp)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-839" class="path-duplicate">level3float64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-839">#L839</a>: 					f64.<b>AxpyUnitary</b>(alpha*va, btmpk, btmp)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-866" class="path-duplicate">level3float64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-866">#L866</a>: 					f64.<b>AxpyUnitary</b>(tmp, a[k*lda+k+1:k*lda+n], btmp[k+1:n])
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-882" class="path-duplicate">level3float64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3float64.go.html#line-882">#L882</a>: 				f64.<b>AxpyUnitary</b>(tmp, a[k*lda:k*lda+k], btmp[:k])
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

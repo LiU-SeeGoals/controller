@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: google.golang.org/protobuf/encoding/prototext.encoder</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../../../../pkg/google.golang.org/protobuf/encoding/prototext.html">google.golang.org/protobuf/encoding/prototext</a>.<a href="../../../../src/google.golang.org/protobuf/encoding/prototext/encode.go.html#line-152">encoder</a></b></span>
+
+<span class="title">9 uses</span>
+
+	google.golang.org/protobuf/encoding/prototext (current package)
+		<a href="../../../../src/google.golang.org/protobuf/encoding/prototext/encode.go.html#line-137">encode.go#L137</a>: 	enc := <b>encoder</b>{internalEnc, o}
+		<a href="../../../../src/google.golang.org/protobuf/encoding/prototext/encode.go.html#line-152" class="path-duplicate">encode.go</a><a href="../../../../src/google.golang.org/protobuf/encoding/prototext/encode.go.html#line-152">#L152</a>: type <b>encoder</b> struct {
+		<a href="../../../../src/google.golang.org/protobuf/encoding/prototext/encode.go.html#line-158" class="path-duplicate">encode.go</a><a href="../../../../src/google.golang.org/protobuf/encoding/prototext/encode.go.html#line-158">#L158</a>: func (e <b>encoder</b>) marshalMessage(m protoreflect.Message, inclDelims bool) error {
+		<a href="../../../../src/google.golang.org/protobuf/encoding/prototext/encode.go.html#line-198" class="path-duplicate">encode.go</a><a href="../../../../src/google.golang.org/protobuf/encoding/prototext/encode.go.html#line-198">#L198</a>: func (e <b>encoder</b>) marshalField(name string, val protoreflect.Value, fd protoreflect.FieldDescriptor) error {
+		<a href="../../../../src/google.golang.org/protobuf/encoding/prototext/encode.go.html#line-212" class="path-duplicate">encode.go</a><a href="../../../../src/google.golang.org/protobuf/encoding/prototext/encode.go.html#line-212">#L212</a>: func (e <b>encoder</b>) marshalSingular(val protoreflect.Value, fd protoreflect.FieldDescriptor) error {
+		<a href="../../../../src/google.golang.org/protobuf/encoding/prototext/encode.go.html#line-264" class="path-duplicate">encode.go</a><a href="../../../../src/google.golang.org/protobuf/encoding/prototext/encode.go.html#line-264">#L264</a>: func (e <b>encoder</b>) marshalList(name string, list protoreflect.List, fd protoreflect.FieldDescriptor) error {
+		<a href="../../../../src/google.golang.org/protobuf/encoding/prototext/encode.go.html#line-276" class="path-duplicate">encode.go</a><a href="../../../../src/google.golang.org/protobuf/encoding/prototext/encode.go.html#line-276">#L276</a>: func (e <b>encoder</b>) marshalMap(name string, mmap protoreflect.Map, fd protoreflect.FieldDescriptor) error {
+		<a href="../../../../src/google.golang.org/protobuf/encoding/prototext/encode.go.html#line-301" class="path-duplicate">encode.go</a><a href="../../../../src/google.golang.org/protobuf/encoding/prototext/encode.go.html#line-301">#L301</a>: func (e <b>encoder</b>) marshalUnknown(b []byte) {
+		<a href="../../../../src/google.golang.org/protobuf/encoding/prototext/encode.go.html#line-342" class="path-duplicate">encode.go</a><a href="../../../../src/google.golang.org/protobuf/encoding/prototext/encode.go.html#line-342">#L342</a>: func (e <b>encoder</b>) marshalAny(any protoreflect.Message) bool {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

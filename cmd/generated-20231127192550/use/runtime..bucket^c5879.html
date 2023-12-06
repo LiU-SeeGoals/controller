@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.bucket</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/mprof.go.html#line-61">bucket</a></b></span>
+
+<span class="title">25 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/heapdump.go.html#line-600">heapdump.go#L600</a>: func dumpmemprof_callback(b *<b>bucket</b>, nstk uintptr, pstk *uintptr, size, allocs, frees uintptr) {
+		<a href="../src/runtime/mheap.go.html#line-1995">mheap.go#L1995</a>: 	b       *<b>bucket</b>
+		<a href="../src/runtime/mheap.go.html#line-1999" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1999">#L1999</a>: func setprofilebucket(p unsafe.Pointer, b *<b>bucket</b>) {
+		<a href="../src/runtime/mprof.go.html#line-61">mprof.go#L61</a>: type <b>bucket</b> struct {
+		<a href="../src/runtime/mprof.go.html#line-63" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-63">#L63</a>: 	next    *<b>bucket</b>
+		<a href="../src/runtime/mprof.go.html#line-64" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-64">#L64</a>: 	allnext *<b>bucket</b>
+		<a href="../src/runtime/mprof.go.html#line-214" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-214">#L214</a>: func newBucket(typ bucketType, nstk int) *<b>bucket</b> {
+		<a href="../src/runtime/mprof.go.html#line-215" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-215">#L215</a>: 	size := unsafe.Sizeof(<b>bucket</b>{}) + uintptr(nstk)*unsafe.Sizeof(uintptr(0))
+		<a href="../src/runtime/mprof.go.html#line-225" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-225">#L225</a>: 	b := (*<b>bucket</b>)(persistentalloc(size, 0, &amp;memstats.buckhash_sys))
+		<a href="../src/runtime/mprof.go.html#line-232" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-232">#L232</a>: func (b *<b>bucket</b>) stk() []uintptr {
+		<a href="../src/runtime/mprof.go.html#line-238" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-238">#L238</a>: func (b *<b>bucket</b>) mp() *memRecord {
+		<a href="../src/runtime/mprof.go.html#line-247" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-247">#L247</a>: func (b *<b>bucket</b>) bp() *blockRecord {
+		<a href="../src/runtime/mprof.go.html#line-256" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-256">#L256</a>: func stkbucket(typ bucketType, size uintptr, stk []uintptr, alloc bool) *<b>bucket</b> {
+		<a href="../src/runtime/mprof.go.html#line-289" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-289">#L289</a>: 	for b := (*<b>bucket</b>)(bh[i].Load()); b != nil; b = b.next {
+		<a href="../src/runtime/mprof.go.html#line-301" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-301">#L301</a>: 	for b := (*<b>bucket</b>)(bh[i].Load()); b != nil; b = b.next {
+		<a href="../src/runtime/mprof.go.html#line-323" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-323">#L323</a>: 	b.next = (*<b>bucket</b>)(bh[i].Load())
+		<a href="../src/runtime/mprof.go.html#line-324" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-324">#L324</a>: 	b.allnext = (*<b>bucket</b>)(allnext.Load())
+		<a href="../src/runtime/mprof.go.html#line-385" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-385">#L385</a>: 	head := (*<b>bucket</b>)(mbuckets.Load())
+		<a href="../src/runtime/mprof.go.html#line-443" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-443">#L443</a>: func mProf_Free(b *<b>bucket</b>, size uintptr) {
+		<a href="../src/runtime/mprof.go.html#line-661" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-661">#L661</a>: 	head := (*<b>bucket</b>)(mbuckets.Load())
+		<a href="../src/runtime/mprof.go.html#line-706" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-706">#L706</a>: func record(r *MemProfileRecord, b *<b>bucket</b>) {
+		<a href="../src/runtime/mprof.go.html#line-727" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-727">#L727</a>: func iterate_memprof(fn func(*<b>bucket</b>, uintptr, *uintptr, uintptr, uintptr, uintptr)) {
+		<a href="../src/runtime/mprof.go.html#line-729" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-729">#L729</a>: 	head := (*<b>bucket</b>)(mbuckets.Load())
+		<a href="../src/runtime/mprof.go.html#line-754" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-754">#L754</a>: 	head := (*<b>bucket</b>)(bbuckets.Load())
+		<a href="../src/runtime/mprof.go.html#line-798" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-798">#L798</a>: 	head := (*<b>bucket</b>)(xbuckets.Load())
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

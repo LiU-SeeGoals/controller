@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/mat.TriKind</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/consts.go.html#line-8">TriKind</a></b></span>
+
+<span class="title">28 uses</span>
+
+	gonum.org/v1/gonum/mat (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/consts.go.html#line-8">consts.go#L8</a>: type <b>TriKind</b> bool
+		<a href="../../../../src/gonum.org/v1/gonum/mat/consts.go.html#line-12" class="path-duplicate">consts.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/consts.go.html#line-12">#L12</a>: 	Upper <b>TriKind</b> = true
+		<a href="../../../../src/gonum.org/v1/gonum/mat/consts.go.html#line-14" class="path-duplicate">consts.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/consts.go.html#line-14">#L14</a>: 	Lower <b>TriKind</b> = false
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-139">diagonal.go#L139</a>: func (d *DiagDense) Triangle() (int, <b>TriKind</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-146" class="path-duplicate">diagonal.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-146">#L146</a>: func (d *DiagDense) TriBand() (n, k int, kind <b>TriKind</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-149">pool.go#L149</a>: func getTriDenseWorkspace(n int, kind <b>TriKind</b>, clear bool) *TriDense {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-42">triangular.go#L42</a>: 	Triangle() (n int, kind <b>TriKind</b>)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-94" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-94">#L94</a>: func (t TransposeTri) Triangle() (int, <b>TriKind</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-122" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-122">#L122</a>: func NewTriDense(n int, kind <b>TriKind</b>, data []float64) *TriDense {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-157" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-157">#L157</a>: func (t *TriDense) Triangle() (n int, kind <b>TriKind</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-165" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-165">#L165</a>: func (t *TriDense) triKind() <b>TriKind</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-166" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-166">#L166</a>: 	return <b>TriKind</b>(isUpperUplo(t.mat.Uplo))
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-277" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-277">#L277</a>: func (t *TriDense) ReuseAsTri(n int, kind <b>TriKind</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-293" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-293">#L293</a>: func (t *TriDense) reuseAsNonZeroed(n int, kind <b>TriKind</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-328" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-328">#L328</a>: func (t *TriDense) reuseAsZeroed(n int, kind <b>TriKind</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-38">triband.go#L38</a>: 	Triangle() (n int, kind <b>TriKind</b>)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-46" class="path-duplicate">triband.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-46">#L46</a>: 	TriBand() (n, k int, kind <b>TriKind</b>)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-103" class="path-duplicate">triband.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-103">#L103</a>: func (t TransposeTriBand) Triangle() (int, <b>TriKind</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-126" class="path-duplicate">triband.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-126">#L126</a>: func (t TransposeTriBand) TriBand() (n, k int, kind <b>TriKind</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-210" class="path-duplicate">triband.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-210">#L210</a>: func NewTriBandDense(n, k int, kind <b>TriKind</b>, data []float64) *TriBandDense {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-281" class="path-duplicate">triband.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-281">#L281</a>: func (t *TriBandDense) ReuseAsTriBand(n, k int, kind <b>TriKind</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-301" class="path-duplicate">triband.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-301">#L301</a>: func (t *TriBandDense) reuseAsZeroed(n, k int, kind <b>TriKind</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-336" class="path-duplicate">triband.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-336">#L336</a>: func (t *TriBandDense) reuseAsNonZeroed(n, k int, kind <b>TriKind</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-453" class="path-duplicate">triband.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-453">#L453</a>: func (t *TriBandDense) triKind() <b>TriKind</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-454" class="path-duplicate">triband.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-454">#L454</a>: 	return <b>TriKind</b>(isUpperUplo(t.mat.Uplo))
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-459" class="path-duplicate">triband.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-459">#L459</a>: func (t *TriBandDense) Triangle() (n int, kind <b>TriKind</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-483" class="path-duplicate">triband.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-483">#L483</a>: func (t *TriBandDense) TriBand() (n, k int, kind <b>TriKind</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-484" class="path-duplicate">triband.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-484">#L484</a>: 	return t.mat.N, t.mat.K, <b>TriKind</b>(!t.IsEmpty()) &amp;&amp; t.triKind()
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

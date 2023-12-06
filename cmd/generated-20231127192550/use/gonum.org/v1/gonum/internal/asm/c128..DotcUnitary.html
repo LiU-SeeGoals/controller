@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/internal/asm/c128.DotcUnitary</title>
+<link href="../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../../../../../../pkg/gonum.org/v1/gonum/internal/asm/c128.html">gonum.org/v1/gonum/internal/asm/c128</a>.<a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/c128/stubs_amd64.go.html#line-81">DotcUnitary</a></b></span>
+
+<span class="title">34 uses</span>
+
+	gonum.org/v1/gonum/internal/asm/c128 (current package)
+		<a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/c128/stubs_amd64.go.html#line-81">stubs_amd64.go#L81</a>: func <b>DotcUnitary</b>(x, y []complex128) (sum complex128)
+
+	<a href="../../../../../../pkg/gonum.org/v1/gonum/blas/gonum.html">gonum.org/v1/gonum/blas/gonum</a>
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level1cmplx128.go.html#line-272">level1cmplx128.go#L272</a>: 		return c128.<b>DotcUnitary</b>(x[:n], y[:n])
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-514">level3cmplx128.go#L514</a>: 					ci[0] = complex(alpha*real(c128.<b>DotcUnitary</b>(ai, ai)), 0)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-518" class="path-duplicate">level3cmplx128.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-518">#L518</a>: 						ci[jc+1] = calpha * c128.<b>DotcUnitary</b>(a[j*lda:j*lda+k], ai)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-521" class="path-duplicate">level3cmplx128.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-521">#L521</a>: 					cii := calpha*c128.<b>DotcUnitary</b>(ai, ai) + cbeta*ci[0]
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-525" class="path-duplicate">level3cmplx128.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-525">#L525</a>: 						ci[jc+1] = calpha*c128.<b>DotcUnitary</b>(a[j*lda:j*lda+k], ai) + cbeta*cij
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-528" class="path-duplicate">level3cmplx128.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-528">#L528</a>: 					cii := calpha*c128.<b>DotcUnitary</b>(ai, ai) + ci[0]
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-532" class="path-duplicate">level3cmplx128.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-532">#L532</a>: 						ci[jc+1] = calpha*c128.<b>DotcUnitary</b>(a[j*lda:j*lda+k], ai) + cij
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-544" class="path-duplicate">level3cmplx128.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-544">#L544</a>: 						ci[j] = calpha * c128.<b>DotcUnitary</b>(a[j*lda:j*lda+k], ai)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-547" class="path-duplicate">level3cmplx128.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-547">#L547</a>: 					ci[i] = complex(alpha*real(c128.<b>DotcUnitary</b>(ai, ai)), 0)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-550" class="path-duplicate">level3cmplx128.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-550">#L550</a>: 						ci[j] = calpha*c128.<b>DotcUnitary</b>(a[j*lda:j*lda+k], ai) + cbeta*cij
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-552" class="path-duplicate">level3cmplx128.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-552">#L552</a>: 					cii := calpha*c128.<b>DotcUnitary</b>(ai, ai) + cbeta*ci[i]
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-556" class="path-duplicate">level3cmplx128.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-556">#L556</a>: 						ci[j] = calpha*c128.<b>DotcUnitary</b>(a[j*lda:j*lda+k], ai) + cij
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-558" class="path-duplicate">level3cmplx128.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-558">#L558</a>: 					cii := calpha*c128.<b>DotcUnitary</b>(ai, ai) + ci[i]
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-718" class="path-duplicate">level3cmplx128.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-718">#L718</a>: 					cii := alpha*c128.<b>DotcUnitary</b>(bi, ai) + conjalpha*c128.<b>DotcUnitary</b>(ai, bi)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-722" class="path-duplicate">level3cmplx128.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-722">#L722</a>: 						ci[jc] = alpha*c128.<b>DotcUnitary</b>(b[j*ldb:j*ldb+k], ai) + conjalpha*c128.<b>DotcUnitary</b>(a[j*lda:j*lda+k], bi)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-725" class="path-duplicate">level3cmplx128.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-725">#L725</a>: 					cii := alpha*c128.<b>DotcUnitary</b>(bi, ai) + conjalpha*c128.<b>DotcUnitary</b>(ai, bi) + cbeta*c[i*ldc+i]
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-729" class="path-duplicate">level3cmplx128.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-729">#L729</a>: 						ci[jc] = alpha*c128.<b>DotcUnitary</b>(b[j*ldb:j*ldb+k], ai) + conjalpha*c128.<b>DotcUnitary</b>(a[j*lda:j*lda+k], bi) + cbeta*cij
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-740" class="path-duplicate">level3cmplx128.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-740">#L740</a>: 						ci[j] = alpha*c128.<b>DotcUnitary</b>(b[j*ldb:j*ldb+k], ai) + conjalpha*c128.<b>DotcUnitary</b>(a[j*lda:j*lda+k], bi)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-742" class="path-duplicate">level3cmplx128.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-742">#L742</a>: 					cii := alpha*c128.<b>DotcUnitary</b>(bi, ai) + conjalpha*c128.<b>DotcUnitary</b>(ai, bi)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-746" class="path-duplicate">level3cmplx128.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-746">#L746</a>: 						ci[j] = alpha*c128.<b>DotcUnitary</b>(b[j*ldb:j*ldb+k], ai) + conjalpha*c128.<b>DotcUnitary</b>(a[j*lda:j*lda+k], bi) + cbeta*cij
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-748" class="path-duplicate">level3cmplx128.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-748">#L748</a>: 					cii := alpha*c128.<b>DotcUnitary</b>(bi, ai) + conjalpha*c128.<b>DotcUnitary</b>(ai, bi) + cbeta*c[i*ldc+i]
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-1494" class="path-duplicate">level3cmplx128.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-1494">#L1494</a>: 							bij += c128.<b>DotcUnitary</b>(a[j*lda+j+1:j*lda+n], bi[j+1:n])
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-1513" class="path-duplicate">level3cmplx128.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-1513">#L1513</a>: 							bij += c128.<b>DotcUnitary</b>(a[j*lda:j*lda+j], bi[:j])
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-1721" class="path-duplicate">level3cmplx128.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-1721">#L1721</a>: 							bij -= c128.<b>DotcUnitary</b>(a[j*lda+j+1:j*lda+n], bi[j+1:n])
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-1740" class="path-duplicate">level3cmplx128.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx128.go.html#line-1740">#L1740</a>: 							bij -= c128.<b>DotcUnitary</b>(a[j*lda:j*lda+j], bi[:j])
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

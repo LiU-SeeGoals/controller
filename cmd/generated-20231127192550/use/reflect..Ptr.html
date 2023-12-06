@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: reflect.Ptr</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">const <b><a href="../pkg/reflect.html">reflect</a>.<a href="../src/reflect/type.go.html#line-274">Ptr</a></b></span>
+
+<span class="title">34 uses</span>
+
+	reflect (current package)
+		<a href="../src/reflect/type.go.html#line-274">type.go#L274</a>: const <b>Ptr</b> = Pointer
+		<a href="../src/reflect/value.go.html#line-1180">value.go#L1180</a>: 	case <b>Ptr</b>:
+		<a href="../src/reflect/value.go.html#line-1339" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1339">#L1339</a>: 			if v.Kind() == <b>Ptr</b> &amp;&amp; v.typ().Elem().Kind() == abi.Struct {
+		<a href="../src/reflect/value.go.html#line-1724" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1724">#L1724</a>: 	case <b>Ptr</b>:
+
+	<a href="../pkg/github.com/golang/protobuf/proto.html">github.com/golang/protobuf/proto</a>
+		<a href="../src/github.com/golang/protobuf/proto/extensions.go.html#line-233">extensions.go#L233</a>: 	if rv.Kind() == reflect.<b>Ptr</b> {
+		<a href="../src/github.com/golang/protobuf/proto/text_decode.go.html#line-135">text_decode.go#L135</a>: 				if t.Kind() == reflect.<b>Ptr</b> {
+
+	<a href="../pkg/google.golang.org/protobuf/internal/impl.html">google.golang.org/protobuf/internal/impl</a>
+		<a href="../src/google.golang.org/protobuf/internal/impl/codec_message.go.html#line-60">codec_message.go#L60</a>: 		mi.unknownPtrKind = si.unknownType.Kind() == reflect.<b>Ptr</b>
+		<a href="../src/google.golang.org/protobuf/internal/impl/codec_tables.go.html#line-281">codec_tables.go#L281</a>: 	case ft.Kind() == reflect.<b>Ptr</b>:
+		<a href="../src/google.golang.org/protobuf/internal/impl/convert.go.html#line-494">convert.go#L494</a>: 	return c.goType.Kind() != reflect.<b>Ptr</b>
+		<a href="../src/google.golang.org/protobuf/internal/impl/convert_list.go.html#line-16">convert_list.go#L16</a>: 	case t.Kind() == reflect.<b>Ptr</b> &amp;&amp; t.Elem().Kind() == reflect.Slice:
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_extension.go.html#line-91">legacy_extension.go#L91</a>: 	isOptional := t.Kind() == reflect.<b>Ptr</b> &amp;&amp; t.Elem().Kind() != reflect.Struct
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-26">legacy_message.go#L26</a>: 	if t.Kind() != reflect.<b>Ptr</b> || t.Elem().Kind() != reflect.Struct {
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-37" class="path-duplicate">legacy_message.go</a><a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-37">#L37</a>: 	if t.Kind() != reflect.<b>Ptr</b> || t.Elem().Kind() != reflect.Struct {
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-187" class="path-duplicate">legacy_message.go</a><a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-187">#L187</a>: 	if t.Kind() != reflect.<b>Ptr</b> || t.Elem().Kind() != reflect.Struct {
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-281" class="path-duplicate">legacy_message.go</a><a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-281">#L281</a>: 	if t.Kind() == reflect.<b>Ptr</b> {
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-289" class="path-duplicate">legacy_message.go</a><a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-289">#L289</a>: 	isOptional := t.Kind() == reflect.<b>Ptr</b> &amp;&amp; t.Elem().Kind() != reflect.Struct
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-465" class="path-duplicate">legacy_message.go</a><a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-465">#L465</a>: 	if mt.t.Kind() == reflect.<b>Ptr</b> {
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-495" class="path-duplicate">legacy_message.go</a><a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-495">#L495</a>: 	if m.v.Kind() == reflect.<b>Ptr</b> &amp;&amp; !m.v.IsNil() {
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-511" class="path-duplicate">legacy_message.go</a><a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-511">#L511</a>: 	if m.v.Type().Kind() == reflect.<b>Ptr</b> {
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-553" class="path-duplicate">legacy_message.go</a><a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-553">#L553</a>: 	if m.v.Kind() == reflect.<b>Ptr</b> {
+		<a href="../src/google.golang.org/protobuf/internal/impl/message.go.html#line-84">message.go#L84</a>: 	if t.Kind() != reflect.<b>Ptr</b> &amp;&amp; t.Elem().Kind() != reflect.Struct {
+		<a href="../src/google.golang.org/protobuf/internal/impl/message_reflect.go.html#line-212">message_reflect.go#L212</a>: 			if fd.HasPresence() &amp;&amp; ft.Kind() == reflect.<b>Ptr</b> {
+		<a href="../src/google.golang.org/protobuf/internal/impl/message_reflect.go.html#line-222" class="path-duplicate">message_reflect.go</a><a href="../src/google.golang.org/protobuf/internal/impl/message_reflect.go.html#line-222">#L222</a>: 		if isMessage &amp;&amp; ft != nil &amp;&amp; ft.Kind() != reflect.<b>Ptr</b> {
+		<a href="../src/google.golang.org/protobuf/internal/impl/message_reflect.go.html#line-418" class="path-duplicate">message_reflect.go</a><a href="../src/google.golang.org/protobuf/internal/impl/message_reflect.go.html#line-418">#L418</a>: 	if rv.Kind() == reflect.<b>Ptr</b> &amp;&amp; !rv.IsNil() {
+		<a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-133">message_reflect_field.go#L133</a>: 			if rv.Kind() == reflect.<b>Ptr</b> &amp;&amp; rv.IsNil() {
+		<a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-260" class="path-duplicate">message_reflect_field.go</a><a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-260">#L260</a>: 		if ft.Kind() != reflect.<b>Ptr</b> &amp;&amp; ft.Kind() != reflect.Slice {
+		<a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-266" class="path-duplicate">message_reflect_field.go</a><a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-266">#L266</a>: 		if ft.Kind() == reflect.<b>Ptr</b> {
+		<a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-312" class="path-duplicate">message_reflect_field.go</a><a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-312">#L312</a>: 				if rv.Kind() == reflect.<b>Ptr</b> {
+		<a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-320" class="path-duplicate">message_reflect_field.go</a><a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-320">#L320</a>: 			if nullable &amp;&amp; rv.Kind() == reflect.<b>Ptr</b> {
+		<a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-427" class="path-duplicate">message_reflect_field.go</a><a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-427">#L427</a>: 			if fs.Type.Kind() != reflect.<b>Ptr</b> {
+		<a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-446" class="path-duplicate">message_reflect_field.go</a><a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-446">#L446</a>: 			if fs.Type.Kind() == reflect.<b>Ptr</b> &amp;&amp; rv.IsNil() {
+		<a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-452" class="path-duplicate">message_reflect_field.go</a><a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-452">#L452</a>: 			if fs.Type.Kind() == reflect.<b>Ptr</b> &amp;&amp; rv.IsNil() {
+		<a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-529" class="path-duplicate">message_reflect_field.go</a><a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-529">#L529</a>: 	case reflect.Chan, reflect.Func, reflect.Interface, reflect.Map, reflect.<b>Ptr</b>, reflect.Slice, reflect.UnsafePointer:
+
+	<a href="../pkg/google.golang.org/protobuf/proto.html">google.golang.org/protobuf/proto</a>
+		<a href="../src/google.golang.org/protobuf/proto/equal.go.html#line-45">equal.go#L45</a>: 	if reflect.TypeOf(x).Kind() == reflect.<b>Ptr</b> &amp;&amp; x == y {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

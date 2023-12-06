@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.schedt.runqsize</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/runtime2.go.html#line-774">schedt</a>.<a href="../src/runtime/runtime2.go.html#line-801">runqsize</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">16 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/proc.go.html#line-2664">proc.go#L2664</a>: 	if !runqempty(pp) || sched.<b>runqsize</b> != 0 {
+		<a href="../src/runtime/proc.go.html#line-2702" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-2702">#L2702</a>: 	if sched.<b>runqsize</b> != 0 {
+		<a href="../src/runtime/proc.go.html#line-2936" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-2936">#L2936</a>: 	if pp.schedtick%61 == 0 &amp;&amp; sched.<b>runqsize</b> &gt; 0 {
+		<a href="../src/runtime/proc.go.html#line-2961" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-2961">#L2961</a>: 	if sched.<b>runqsize</b> != 0 {
+		<a href="../src/runtime/proc.go.html#line-3067" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-3067">#L3067</a>: 	if sched.<b>runqsize</b> != 0 {
+		<a href="../src/runtime/proc.go.html#line-3238" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-3238">#L3238</a>: 	if sched.<b>runqsize</b> != 0 {
+		<a href="../src/runtime/proc.go.html#line-5805" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5805">#L5805</a>: 	print("SCHED ", (now-starttime)/1e6, "ms: gomaxprocs=", gomaxprocs, " idleprocs=", sched.npidle.Load(), " threads=", mcount(), " spinningthreads=", sched.nmspinning.Load(), " needspinning=", sched.needspinning.Load(), " idlethreads=", sched.nmidle, " runqueue=", sched.<b>runqsize</b>)
+		<a href="../src/runtime/proc.go.html#line-5961" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5961">#L5961</a>: 	sched.<b>runqsize</b>++
+		<a href="../src/runtime/proc.go.html#line-5973" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5973">#L5973</a>: 	sched.<b>runqsize</b>++
+		<a href="../src/runtime/proc.go.html#line-5986" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5986">#L5986</a>: 	sched.<b>runqsize</b> += n
+		<a href="../src/runtime/proc.go.html#line-5995" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5995">#L5995</a>: 	if sched.<b>runqsize</b> == 0 {
+		<a href="../src/runtime/proc.go.html#line-5999" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5999">#L5999</a>: 	n := sched.<b>runqsize</b>/gomaxprocs + 1
+		<a href="../src/runtime/proc.go.html#line-6000" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-6000">#L6000</a>: 	if n &gt; sched.<b>runqsize</b> {
+		<a href="../src/runtime/proc.go.html#line-6001" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-6001">#L6001</a>: 		n = sched.<b>runqsize</b>
+		<a href="../src/runtime/proc.go.html#line-6010" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-6010">#L6010</a>: 	sched.<b>runqsize</b> -= n
+		<a href="../src/runtime/runtime2.go.html#line-801">runtime2.go#L801</a>: 	<b>runqsize</b> int32
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: time.Duration</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../pkg/time.html">time</a>.<a href="../src/time/time.go.html#line-612">Duration</a></b></span>
+
+<span class="title">73 uses</span>
+
+	time (current package)
+		<a href="../src/time/format.go.html#line-1589">format.go#L1589</a>: func ParseDuration(s string) (<b>Duration</b>, error) {
+		<a href="../src/time/format.go.html#line-1680" class="path-duplicate">format.go</a><a href="../src/time/format.go.html#line-1680">#L1680</a>: 		return -<b>Duration</b>(d), nil
+		<a href="../src/time/format.go.html#line-1685" class="path-duplicate">format.go</a><a href="../src/time/format.go.html#line-1685">#L1685</a>: 	return <b>Duration</b>(d), nil
+		<a href="../src/time/sleep.go.html#line-9">sleep.go#L9</a>: func Sleep(d <b>Duration</b>)
+		<a href="../src/time/sleep.go.html#line-28" class="path-duplicate">sleep.go</a><a href="../src/time/sleep.go.html#line-28">#L28</a>: func when(d <b>Duration</b>) int64 {
+		<a href="../src/time/sleep.go.html#line-86" class="path-duplicate">sleep.go</a><a href="../src/time/sleep.go.html#line-86">#L86</a>: func NewTimer(d <b>Duration</b>) *Timer {
+		<a href="../src/time/sleep.go.html#line-134" class="path-duplicate">sleep.go</a><a href="../src/time/sleep.go.html#line-134">#L134</a>: func (t *Timer) Reset(d <b>Duration</b>) bool {
+		<a href="../src/time/sleep.go.html#line-156" class="path-duplicate">sleep.go</a><a href="../src/time/sleep.go.html#line-156">#L156</a>: func After(d <b>Duration</b>) &lt;-chan Time {
+		<a href="../src/time/sleep.go.html#line-163" class="path-duplicate">sleep.go</a><a href="../src/time/sleep.go.html#line-163">#L163</a>: func AfterFunc(d <b>Duration</b>, f func()) *Timer {
+		<a href="../src/time/tick.go.html#line-20">tick.go#L20</a>: func NewTicker(d <b>Duration</b>) *Ticker {
+		<a href="../src/time/tick.go.html#line-51" class="path-duplicate">tick.go</a><a href="../src/time/tick.go.html#line-51">#L51</a>: func (t *Ticker) Reset(d <b>Duration</b>) {
+		<a href="../src/time/tick.go.html#line-66" class="path-duplicate">tick.go</a><a href="../src/time/tick.go.html#line-66">#L66</a>: func Tick(d <b>Duration</b>) &lt;-chan Time {
+		<a href="../src/time/time.go.html#line-612">time.go#L612</a>: type <b>Duration</b> int64
+		<a href="../src/time/time.go.html#line-615" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-615">#L615</a>: 	minDuration <b>Duration</b> = -1 &lt;&lt; 63
+		<a href="../src/time/time.go.html#line-616" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-616">#L616</a>: 	maxDuration <b>Duration</b> = 1&lt;&lt;63 - 1
+		<a href="../src/time/time.go.html#line-632" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-632">#L632</a>: 	Nanosecond  <b>Duration</b> = 1
+		<a href="../src/time/time.go.html#line-644" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-644">#L644</a>: func (d <b>Duration</b>) String() string {
+		<a href="../src/time/time.go.html#line-759" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-759">#L759</a>: func (d <b>Duration</b>) Nanoseconds() int64 { return int64(d) }
+		<a href="../src/time/time.go.html#line-762" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-762">#L762</a>: func (d <b>Duration</b>) Microseconds() int64 { return int64(d) / 1e3 }
+		<a href="../src/time/time.go.html#line-765" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-765">#L765</a>: func (d <b>Duration</b>) Milliseconds() int64 { return int64(d) / 1e6 }
+		<a href="../src/time/time.go.html#line-777" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-777">#L777</a>: func (d <b>Duration</b>) Seconds() float64 {
+		<a href="../src/time/time.go.html#line-784" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-784">#L784</a>: func (d <b>Duration</b>) Minutes() float64 {
+		<a href="../src/time/time.go.html#line-791" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-791">#L791</a>: func (d <b>Duration</b>) Hours() float64 {
+		<a href="../src/time/time.go.html#line-799" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-799">#L799</a>: func (d <b>Duration</b>) Truncate(m <b>Duration</b>) <b>Duration</b> {
+		<a href="../src/time/time.go.html#line-808" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-808">#L808</a>: func lessThanHalf(x, y <b>Duration</b>) bool {
+		<a href="../src/time/time.go.html#line-818" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-818">#L818</a>: func (d <b>Duration</b>) Round(m <b>Duration</b>) <b>Duration</b> {
+		<a href="../src/time/time.go.html#line-844" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-844">#L844</a>: func (d <b>Duration</b>) Abs() <b>Duration</b> {
+		<a href="../src/time/time.go.html#line-856" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-856">#L856</a>: func (t Time) Add(d <b>Duration</b>) Time {
+		<a href="../src/time/time.go.html#line-884" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-884">#L884</a>: func (t Time) Sub(u Time) <b>Duration</b> {
+		<a href="../src/time/time.go.html#line-888" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-888">#L888</a>: 		d := <b>Duration</b>(te - ue)
+		<a href="../src/time/time.go.html#line-897" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-897">#L897</a>: 	d := <b>Duration</b>(t.sec()-u.sec())*Second + <b>Duration</b>(t.nsec()-u.nsec())
+		<a href="../src/time/time.go.html#line-911" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-911">#L911</a>: func Since(t Time) <b>Duration</b> {
+		<a href="../src/time/time.go.html#line-924" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-924">#L924</a>: func Until(t Time) <b>Duration</b> {
+		<a href="../src/time/time.go.html#line-1528" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-1528">#L1528</a>: func (t Time) Truncate(d <b>Duration</b>) Time {
+		<a href="../src/time/time.go.html#line-1545" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-1545">#L1545</a>: func (t Time) Round(d <b>Duration</b>) Time {
+		<a href="../src/time/time.go.html#line-1560" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-1560">#L1560</a>: func div(t Time, d <b>Duration</b>) (qmod2 int, r <b>Duration</b>) {
+		<a href="../src/time/time.go.html#line-1579" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-1579">#L1579</a>: 		r = <b>Duration</b>(nsec % int32(d))
+		<a href="../src/time/time.go.html#line-1585" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-1585">#L1585</a>: 		r = <b>Duration</b>(sec%d1)*Second + <b>Duration</b>(nsec)
+		<a href="../src/time/time.go.html#line-1632" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-1632">#L1632</a>: 		r = <b>Duration</b>(u0)
+
+	<a href="../pkg/context.html">context</a>
+		<a href="../src/context/context.go.html#line-684">context.go#L684</a>: func WithTimeout(parent Context, timeout time.<b>Duration</b>) (Context, CancelFunc) {
+		<a href="../src/context/context.go.html#line-691" class="path-duplicate">context.go</a><a href="../src/context/context.go.html#line-691">#L691</a>: func WithTimeoutCause(parent Context, timeout time.<b>Duration</b>, cause error) (Context, CancelFunc) {
+
+	<a href="../pkg/net.html">net</a>
+		<a href="../src/net/dial.go.html#line-83">dial.go#L83</a>: 	Timeout time.<b>Duration</b>
+		<a href="../src/net/dial.go.html#line-114" class="path-duplicate">dial.go</a><a href="../src/net/dial.go.html#line-114">#L114</a>: 	FallbackDelay time.<b>Duration</b>
+		<a href="../src/net/dial.go.html#line-123" class="path-duplicate">dial.go</a><a href="../src/net/dial.go.html#line-123">#L123</a>: 	KeepAlive time.<b>Duration</b>
+		<a href="../src/net/dial.go.html#line-207" class="path-duplicate">dial.go</a><a href="../src/net/dial.go.html#line-207">#L207</a>: 	timeout := timeRemaining / time.<b>Duration</b>(addrsRemaining)
+		<a href="../src/net/dial.go.html#line-220" class="path-duplicate">dial.go</a><a href="../src/net/dial.go.html#line-220">#L220</a>: func (d *Dialer) fallbackDelay() time.<b>Duration</b> {
+		<a href="../src/net/dial.go.html#line-413" class="path-duplicate">dial.go</a><a href="../src/net/dial.go.html#line-413">#L413</a>: func DialTimeout(network, address string, timeout time.<b>Duration</b>) (Conn, error) {
+		<a href="../src/net/dial.go.html#line-685" class="path-duplicate">dial.go</a><a href="../src/net/dial.go.html#line-685">#L685</a>: 	KeepAlive time.<b>Duration</b>
+		<a href="../src/net/dnsclient_unix.go.html#line-161">dnsclient_unix.go#L161</a>: func (r *Resolver) exchange(ctx context.Context, server string, q dnsmessage.Question, timeout time.<b>Duration</b>, useTCP, ad bool) (dnsmessage.Parser, dnsmessage.Header, error) {
+		<a href="../src/net/dnsconfig.go.html#line-22">dnsconfig.go#L22</a>: 	timeout       time.<b>Duration</b> // wait before giving up on a query, including retries
+		<a href="../src/net/dnsconfig_unix.go.html#line-91">dnsconfig_unix.go#L91</a>: 					conf.timeout = time.<b>Duration</b>(n) * time.Second
+		<a href="../src/net/hook.go.html#line-25">hook.go#L25</a>: 	testHookSetKeepAlive = func(time.<b>Duration</b>) {}
+		<a href="../src/net/tcpsock.go.html#line-198">tcpsock.go#L198</a>: func (c *TCPConn) SetKeepAlivePeriod(d time.<b>Duration</b>) error {
+		<a href="../src/net/tcpsock.go.html#line-238" class="path-duplicate">tcpsock.go</a><a href="../src/net/tcpsock.go.html#line-238">#L238</a>: func newTCPConn(fd *netFD, keepAlive time.<b>Duration</b>, keepAliveHook func(time.<b>Duration</b>)) *TCPConn {
+		<a href="../src/net/tcpsock.go.html#line-396" class="path-duplicate">tcpsock.go</a><a href="../src/net/tcpsock.go.html#line-396">#L396</a>: func roundDurationUp(d time.<b>Duration</b>, to time.<b>Duration</b>) time.<b>Duration</b> {
+		<a href="../src/net/tcpsockopt_unix.go.html#line-15">tcpsockopt_unix.go#L15</a>: func setKeepAlivePeriod(fd *netFD, d time.<b>Duration</b>) error {
+
+	<a href="../pkg/os.html">os</a>
+		<a href="../src/os/exec.go.html#line-144">exec.go#L144</a>: func (p *ProcessState) UserTime() time.<b>Duration</b> {
+		<a href="../src/os/exec.go.html#line-149" class="path-duplicate">exec.go</a><a href="../src/os/exec.go.html#line-149">#L149</a>: func (p *ProcessState) SystemTime() time.<b>Duration</b> {
+		<a href="../src/os/exec_unix.go.html#line-100">exec_unix.go#L100</a>: func (p *ProcessState) userTime() time.<b>Duration</b> {
+		<a href="../src/os/exec_unix.go.html#line-101" class="path-duplicate">exec_unix.go</a><a href="../src/os/exec_unix.go.html#line-101">#L101</a>: 	return time.<b>Duration</b>(p.rusage.Utime.Nano()) * time.Nanosecond
+		<a href="../src/os/exec_unix.go.html#line-104" class="path-duplicate">exec_unix.go</a><a href="../src/os/exec_unix.go.html#line-104">#L104</a>: func (p *ProcessState) systemTime() time.<b>Duration</b> {
+		<a href="../src/os/exec_unix.go.html#line-105" class="path-duplicate">exec_unix.go</a><a href="../src/os/exec_unix.go.html#line-105">#L105</a>: 	return time.<b>Duration</b>(p.rusage.Stime.Nano()) * time.Nanosecond
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

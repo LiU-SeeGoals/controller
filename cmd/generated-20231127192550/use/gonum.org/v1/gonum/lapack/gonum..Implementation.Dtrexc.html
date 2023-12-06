@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/lapack/gonum.Implementation.Dtrexc</title>
+<link href="../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../../../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>.<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/lapack.go.html#line-12">Implementation</a>.<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrexc.go.html#line-52">Dtrexc</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">4 uses</span>
+
+	gonum.org/v1/gonum/lapack/gonum (current package)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqr23.go.html#line-257">dlaqr23.go#L257</a>: 				_, ilst, _ = impl.<b>Dtrexc</b>(lapack.UpdateSchur, jw, t, ldt, v, ldv, ns-1, ilst, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqr23.go.html#line-274" class="path-duplicate">dlaqr23.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqr23.go.html#line-274">#L274</a>: 			_, ilst, _ = impl.<b>Dtrexc</b>(lapack.UpdateSchur, jw, t, ldt, v, ldv, ns-1, ilst, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqr23.go.html#line-317" class="path-duplicate">dlaqr23.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqr23.go.html#line-317">#L317</a>: 					_, ilst, ok := impl.<b>Dtrexc</b>(lapack.UpdateSchur, jw, t, ldt, v, ldv, i, k, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrexc.go.html#line-52">dtrexc.go#L52</a>: func (impl Implementation) <b>Dtrexc</b>(compq lapack.UpdateSchurComp, n int, t []float64, ldt int, q []float64, ldq int, ifst, ilst int, work []float64) (ifstOut, ilstOut int, ok bool) {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

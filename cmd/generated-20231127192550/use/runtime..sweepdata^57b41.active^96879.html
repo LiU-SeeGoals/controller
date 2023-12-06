@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.sweepdata.active</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/mgcsweep.go.html#line-35">sweepdata</a>.<a href="../src/runtime/mgcsweep.go.html#line-45">active</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">19 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/mcentral.go.html#line-115">mcentral.go#L115</a>: 	sl = sweep.<b>active</b>.begin()
+		<a href="../src/runtime/mcentral.go.html#line-126" class="path-duplicate">mcentral.go</a><a href="../src/runtime/mcentral.go.html#line-126">#L126</a>: 				sweep.<b>active</b>.end(sl)
+		<a href="../src/runtime/mcentral.go.html#line-150" class="path-duplicate">mcentral.go</a><a href="../src/runtime/mcentral.go.html#line-150">#L150</a>: 					sweep.<b>active</b>.end(sl)
+		<a href="../src/runtime/mcentral.go.html#line-158" class="path-duplicate">mcentral.go</a><a href="../src/runtime/mcentral.go.html#line-158">#L158</a>: 		sweep.<b>active</b>.end(sl)
+		<a href="../src/runtime/mgc.go.html#line-179">mgc.go#L179</a>: 	sweep.<b>active</b>.state.Store(sweepDrainedMask)
+		<a href="../src/runtime/mgc.go.html#line-1082" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1082">#L1082</a>: 	sl := sweep.<b>active</b>.begin()
+		<a href="../src/runtime/mgc.go.html#line-1128" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1128">#L1128</a>: 	sweep.<b>active</b>.end(sl)
+		<a href="../src/runtime/mgc.go.html#line-1553" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1553">#L1553</a>: 	sweep.<b>active</b>.reset()
+		<a href="../src/runtime/mgcsweep.go.html#line-45">mgcsweep.go#L45</a>: 	<b>active</b> activeSweep
+		<a href="../src/runtime/mgcsweep.go.html#line-248" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-248">#L248</a>: 	if sweep.<b>active</b>.sweepers() != 0 {
+		<a href="../src/runtime/mgcsweep.go.html#line-365" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-365">#L365</a>: 	sl := sweep.<b>active</b>.begin()
+		<a href="../src/runtime/mgcsweep.go.html#line-377" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-377">#L377</a>: 			noMoreWork = sweep.<b>active</b>.markDrained()
+		<a href="../src/runtime/mgcsweep.go.html#line-407" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-407">#L407</a>: 	sweep.<b>active</b>.end(sl)
+		<a href="../src/runtime/mgcsweep.go.html#line-456" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-456">#L456</a>: 	return sweep.<b>active</b>.isDone()
+		<a href="../src/runtime/mgcsweep.go.html#line-474" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-474">#L474</a>: 	sl := sweep.<b>active</b>.begin()
+		<a href="../src/runtime/mgcsweep.go.html#line-479" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-479">#L479</a>: 			sweep.<b>active</b>.end(sl)
+		<a href="../src/runtime/mgcsweep.go.html#line-482" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-482">#L482</a>: 		sweep.<b>active</b>.end(sl)
+		<a href="../src/runtime/mheap.go.html#line-874">mheap.go#L874</a>: 	sl := sweep.<b>active</b>.begin()
+		<a href="../src/runtime/mheap.go.html#line-923" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-923">#L923</a>: 	sweep.<b>active</b>.end(sl)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

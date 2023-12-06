@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: encoding/json.decodeState.off</title>
+<link href="../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../pkg/encoding/json.html">encoding/json</a>.<a href="../../src/encoding/json/decode.go.html#line-211">decodeState</a>.<a href="../../src/encoding/json/decode.go.html#line-213">off</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">22 uses</span>
+
+	encoding/json (current package)
+		<a href="../../src/encoding/json/decode.go.html#line-213">decode.go#L213</a>: 	<b>off</b>                   int // next read offset in data
+		<a href="../../src/encoding/json/decode.go.html#line-224" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-224">#L224</a>: 	return d.<b>off</b> - 1
+		<a href="../../src/encoding/json/decode.go.html#line-234" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-234">#L234</a>: 	d.<b>off</b> = 0
+		<a href="../../src/encoding/json/decode.go.html#line-266" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-266">#L266</a>: 	s, data, i := &amp;d.scan, d.data, d.<b>off</b>
+		<a href="../../src/encoding/json/decode.go.html#line-272" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-272">#L272</a>: 			d.<b>off</b> = i
+		<a href="../../src/encoding/json/decode.go.html#line-281" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-281">#L281</a>: 	if d.<b>off</b> &lt; len(d.data) {
+		<a href="../../src/encoding/json/decode.go.html#line-282" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-282">#L282</a>: 		d.opcode = d.scan.step(&amp;d.scan, d.data[d.<b>off</b>])
+		<a href="../../src/encoding/json/decode.go.html#line-283" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-283">#L283</a>: 		d.<b>off</b>++
+		<a href="../../src/encoding/json/decode.go.html#line-286" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-286">#L286</a>: 		d.<b>off</b> = len(d.data) + 1 // mark processed EOF with len+1
+		<a href="../../src/encoding/json/decode.go.html#line-293" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-293">#L293</a>: 	s, data, i := &amp;d.scan, d.data, d.<b>off</b>
+		<a href="../../src/encoding/json/decode.go.html#line-299" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-299">#L299</a>: 			d.<b>off</b> = i
+		<a href="../../src/encoding/json/decode.go.html#line-304" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-304">#L304</a>: 	d.<b>off</b> = len(data) + 1 // mark processed EOF with len+1
+		<a href="../../src/encoding/json/decode.go.html#line-317" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-317">#L317</a>: 	data, i := d.data, d.<b>off</b>
+		<a href="../../src/encoding/json/decode.go.html#line-351" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-351">#L351</a>: 	d.<b>off</b> = i + 1
+		<a href="../../src/encoding/json/decode.go.html#line-507" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-507">#L507</a>: 		return u.UnmarshalJSON(d.data[start:d.<b>off</b>])
+		<a href="../../src/encoding/json/decode.go.html#line-510" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-510">#L510</a>: 		d.saveError(&amp;UnmarshalTypeError{Value: "array", Type: v.Type(), Offset: int64(d.<b>off</b>)})
+		<a href="../../src/encoding/json/decode.go.html#line-528" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-528">#L528</a>: 		d.saveError(&amp;UnmarshalTypeError{Value: "array", Type: v.Type(), Offset: int64(d.<b>off</b>)})
+		<a href="../../src/encoding/json/decode.go.html#line-604" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-604">#L604</a>: 		return u.UnmarshalJSON(d.data[start:d.<b>off</b>])
+		<a href="../../src/encoding/json/decode.go.html#line-607" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-607">#L607</a>: 		d.saveError(&amp;UnmarshalTypeError{Value: "object", Type: v.Type(), Offset: int64(d.<b>off</b>)})
+		<a href="../../src/encoding/json/decode.go.html#line-637" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-637">#L637</a>: 				d.saveError(&amp;UnmarshalTypeError{Value: "object", Type: t, Offset: int64(d.<b>off</b>)})
+		<a href="../../src/encoding/json/decode.go.html#line-649" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-649">#L649</a>: 		d.saveError(&amp;UnmarshalTypeError{Value: "object", Type: t, Offset: int64(d.<b>off</b>)})
+		<a href="../../src/encoding/json/decode.go.html#line-830" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-830">#L830</a>: 		return nil, &amp;UnmarshalTypeError{Value: "number " + s, Type: reflect.TypeOf(0.0), Offset: int64(d.<b>off</b>)}
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

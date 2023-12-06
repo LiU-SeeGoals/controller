@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.raceenabled</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">const <b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/race0.go.html#line-15">raceenabled</a></b></span>
+
+<span class="title">105 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/arena.go.html#line-336">arena.go#L336</a>: 		if <b>raceenabled</b> || msanenabled || asanenabled {
+		<a href="../src/runtime/arena.go.html#line-676" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-676">#L676</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/arena.go.html#line-810" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-810">#L810</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/arena.go.html#line-848" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-848">#L848</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/arena.go.html#line-909" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-909">#L909</a>: 		if <b>raceenabled</b> {
+		<a href="../src/runtime/cgocall.go.html#line-133">cgocall.go#L133</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/cgocall.go.html#line-188" class="path-duplicate">cgocall.go</a><a href="../src/runtime/cgocall.go.html#line-188">#L188</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/cgocall.go.html#line-320" class="path-duplicate">cgocall.go</a><a href="../src/runtime/cgocall.go.html#line-320">#L320</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/cgocall.go.html#line-331" class="path-duplicate">cgocall.go</a><a href="../src/runtime/cgocall.go.html#line-331">#L331</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/chan.go.html#line-173">chan.go#L173</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/chan.go.html#line-219" class="path-duplicate">chan.go</a><a href="../src/runtime/chan.go.html#line-219">#L219</a>: 		if <b>raceenabled</b> {
+		<a href="../src/runtime/chan.go.html#line-295" class="path-duplicate">chan.go</a><a href="../src/runtime/chan.go.html#line-295">#L295</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/chan.go.html#line-368" class="path-duplicate">chan.go</a><a href="../src/runtime/chan.go.html#line-368">#L368</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/chan.go.html#line-394" class="path-duplicate">chan.go</a><a href="../src/runtime/chan.go.html#line-394">#L394</a>: 		if <b>raceenabled</b> {
+		<a href="../src/runtime/chan.go.html#line-413" class="path-duplicate">chan.go</a><a href="../src/runtime/chan.go.html#line-413">#L413</a>: 		if <b>raceenabled</b> {
+		<a href="../src/runtime/chan.go.html#line-496" class="path-duplicate">chan.go</a><a href="../src/runtime/chan.go.html#line-496">#L496</a>: 			if <b>raceenabled</b> {
+		<a href="../src/runtime/chan.go.html#line-515" class="path-duplicate">chan.go</a><a href="../src/runtime/chan.go.html#line-515">#L515</a>: 			if <b>raceenabled</b> {
+		<a href="../src/runtime/chan.go.html#line-540" class="path-duplicate">chan.go</a><a href="../src/runtime/chan.go.html#line-540">#L540</a>: 		if <b>raceenabled</b> {
+		<a href="../src/runtime/chan.go.html#line-617" class="path-duplicate">chan.go</a><a href="../src/runtime/chan.go.html#line-617">#L617</a>: 		if <b>raceenabled</b> {
+		<a href="../src/runtime/chan.go.html#line-630" class="path-duplicate">chan.go</a><a href="../src/runtime/chan.go.html#line-630">#L630</a>: 		if <b>raceenabled</b> {
+		<a href="../src/runtime/iface.go.html#line-323">iface.go#L323</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/iface.go.html#line-338" class="path-duplicate">iface.go</a><a href="../src/runtime/iface.go.html#line-338">#L338</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/malloc.go.html#line-492">malloc.go#L492</a>: 			case <b>raceenabled</b>:
+		<a href="../src/runtime/malloc.go.html#line-518" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-518">#L518</a>: 			if (!<b>raceenabled</b> &amp;&amp; i &gt; 0x3f) || (<b>raceenabled</b> &amp;&amp; i &gt; 0x5f) {
+		<a href="../src/runtime/malloc.go.html#line-678" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-678">#L678</a>: 		if <b>raceenabled</b> {
+		<a href="../src/runtime/malloc.go.html#line-794" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-794">#L794</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/malloc.go.html#line-1094" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-1094">#L1094</a>: 			if !<b>raceenabled</b> &amp;&amp; (size &lt; c.tinyoffset || c.tiny == 0) {
+		<a href="../src/runtime/malloc.go.html#line-1184" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-1184">#L1184</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/malloc.go.html#line-1246" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-1246">#L1246</a>: 	if <b>raceenabled</b> &amp;&amp; noscan &amp;&amp; dataSize &lt; maxTinySize {
+		<a href="../src/runtime/map.go.html#line-397">map.go#L397</a>: 	if <b>raceenabled</b> &amp;&amp; h != nil {
+		<a href="../src/runtime/map.go.html#line-458" class="path-duplicate">map.go</a><a href="../src/runtime/map.go.html#line-458">#L458</a>: 	if <b>raceenabled</b> &amp;&amp; h != nil {
+		<a href="../src/runtime/map.go.html#line-583" class="path-duplicate">map.go</a><a href="../src/runtime/map.go.html#line-583">#L583</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/map.go.html#line-697" class="path-duplicate">map.go</a><a href="../src/runtime/map.go.html#line-697">#L697</a>: 	if <b>raceenabled</b> &amp;&amp; h != nil {
+		<a href="../src/runtime/map.go.html#line-817" class="path-duplicate">map.go</a><a href="../src/runtime/map.go.html#line-817">#L817</a>: 	if <b>raceenabled</b> &amp;&amp; h != nil {
+		<a href="../src/runtime/map.go.html#line-869" class="path-duplicate">map.go</a><a href="../src/runtime/map.go.html#line-869">#L869</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/map.go.html#line-995" class="path-duplicate">map.go</a><a href="../src/runtime/map.go.html#line-995">#L995</a>: 	if <b>raceenabled</b> &amp;&amp; h != nil {
+		<a href="../src/runtime/map.go.html#line-1415" class="path-duplicate">map.go</a><a href="../src/runtime/map.go.html#line-1415">#L1415</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/map.go.html#line-1432" class="path-duplicate">map.go</a><a href="../src/runtime/map.go.html#line-1432">#L1432</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/map_fast32.go.html#line-14">map_fast32.go#L14</a>: 	if <b>raceenabled</b> &amp;&amp; h != nil {
+		<a href="../src/runtime/map_fast32.go.html#line-54" class="path-duplicate">map_fast32.go</a><a href="../src/runtime/map_fast32.go.html#line-54">#L54</a>: 	if <b>raceenabled</b> &amp;&amp; h != nil {
+		<a href="../src/runtime/map_fast32.go.html#line-97" class="path-duplicate">map_fast32.go</a><a href="../src/runtime/map_fast32.go.html#line-97">#L97</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/map_fast32.go.html#line-187" class="path-duplicate">map_fast32.go</a><a href="../src/runtime/map_fast32.go.html#line-187">#L187</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/map_fast32.go.html#line-274" class="path-duplicate">map_fast32.go</a><a href="../src/runtime/map_fast32.go.html#line-274">#L274</a>: 	if <b>raceenabled</b> &amp;&amp; h != nil {
+		<a href="../src/runtime/map_fast64.go.html#line-14">map_fast64.go#L14</a>: 	if <b>raceenabled</b> &amp;&amp; h != nil {
+		<a href="../src/runtime/map_fast64.go.html#line-54" class="path-duplicate">map_fast64.go</a><a href="../src/runtime/map_fast64.go.html#line-54">#L54</a>: 	if <b>raceenabled</b> &amp;&amp; h != nil {
+		<a href="../src/runtime/map_fast64.go.html#line-97" class="path-duplicate">map_fast64.go</a><a href="../src/runtime/map_fast64.go.html#line-97">#L97</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/map_fast64.go.html#line-187" class="path-duplicate">map_fast64.go</a><a href="../src/runtime/map_fast64.go.html#line-187">#L187</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/map_fast64.go.html#line-274" class="path-duplicate">map_fast64.go</a><a href="../src/runtime/map_fast64.go.html#line-274">#L274</a>: 	if <b>raceenabled</b> &amp;&amp; h != nil {
+		<a href="../src/runtime/map_faststr.go.html#line-14">map_faststr.go#L14</a>: 	if <b>raceenabled</b> &amp;&amp; h != nil {
+		<a href="../src/runtime/map_faststr.go.html#line-109" class="path-duplicate">map_faststr.go</a><a href="../src/runtime/map_faststr.go.html#line-109">#L109</a>: 	if <b>raceenabled</b> &amp;&amp; h != nil {
+		<a href="../src/runtime/map_faststr.go.html#line-207" class="path-duplicate">map_faststr.go</a><a href="../src/runtime/map_faststr.go.html#line-207">#L207</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/map_faststr.go.html#line-302" class="path-duplicate">map_faststr.go</a><a href="../src/runtime/map_faststr.go.html#line-302">#L302</a>: 	if <b>raceenabled</b> &amp;&amp; h != nil {
+		<a href="../src/runtime/mbarrier.go.html#line-194">mbarrier.go#L194</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/mbarrier.go.html#line-252" class="path-duplicate">mbarrier.go</a><a href="../src/runtime/mbarrier.go.html#line-252">#L252</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/metrics.go.html#line-45">metrics.go#L45</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/metrics.go.html#line-51" class="path-duplicate">metrics.go</a><a href="../src/runtime/metrics.go.html#line-51">#L51</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/mfinal.go.html#line-198">mfinal.go#L198</a>: 		if <b>raceenabled</b> {
+		<a href="../src/runtime/mgcsweep.go.html#line-600">mgcsweep.go#L600</a>: 	if debug.allocfreetrace != 0 || debug.clobberfree != 0 || <b>raceenabled</b> || msanenabled || asanenabled {
+		<a href="../src/runtime/mgcsweep.go.html#line-615" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-615">#L615</a>: 				if <b>raceenabled</b> &amp;&amp; !s.isUserArenaChunk {
+		<a href="../src/runtime/mprof.go.html#line-712">mprof.go#L712</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/mprof.go.html#line-770" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-770">#L770</a>: 			if <b>raceenabled</b> {
+		<a href="../src/runtime/mprof.go.html#line-982" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-982">#L982</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/mprof.go.html#line-1156" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-1156">#L1156</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/proc.go.html#line-268">proc.go#L268</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/proc.go.html#line-303" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-303">#L303</a>: 	if exitCode == 0 &amp;&amp; <b>raceenabled</b> {
+		<a href="../src/runtime/proc.go.html#line-715" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-715">#L715</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/proc.go.html#line-2136" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-2136">#L2136</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/proc.go.html#line-3851" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-3851">#L3851</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/proc.go.html#line-4571" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4571">#L4571</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/proc.go.html#line-4711" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4711">#L4711</a>: 		if <b>raceenabled</b> {
+		<a href="../src/runtime/proc.go.html#line-5070" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5070">#L5070</a>: 	if <b>raceenabled</b> &amp;&amp; pp.raceprocctx == 0 {
+		<a href="../src/runtime/proc.go.html#line-5152" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5152">#L5152</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/proc.go.html#line-6192" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-6192">#L6192</a>: const randomizeScheduler = <b>raceenabled</b>
+		<a href="../src/runtime/profbuf.go.html#line-547">profbuf.go#L547</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/proflabel.go.html#line-31">proflabel.go#L31</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/race0.go.html#line-15">race0.go#L15</a>: const <b>raceenabled</b> = false
+		<a href="../src/runtime/select.go.html#line-141">select.go#L141</a>: 	if <b>raceenabled</b> &amp;&amp; pc0 != nil {
+		<a href="../src/runtime/select.go.html#line-266" class="path-duplicate">select.go</a><a href="../src/runtime/select.go.html#line-266">#L266</a>: 			if <b>raceenabled</b> {
+		<a href="../src/runtime/select.go.html#line-394" class="path-duplicate">select.go</a><a href="../src/runtime/select.go.html#line-394">#L394</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/select.go.html#line-421" class="path-duplicate">select.go</a><a href="../src/runtime/select.go.html#line-421">#L421</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/select.go.html#line-449" class="path-duplicate">select.go</a><a href="../src/runtime/select.go.html#line-449">#L449</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/select.go.html#line-484" class="path-duplicate">select.go</a><a href="../src/runtime/select.go.html#line-484">#L484</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/select.go.html#line-491" class="path-duplicate">select.go</a><a href="../src/runtime/select.go.html#line-491">#L491</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/select.go.html#line-581" class="path-duplicate">select.go</a><a href="../src/runtime/select.go.html#line-581">#L581</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/slice.go.html#line-71">slice.go#L71</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/slice.go.html#line-159" class="path-duplicate">slice.go</a><a href="../src/runtime/slice.go.html#line-159">#L159</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/slice.go.html#line-325" class="path-duplicate">slice.go</a><a href="../src/runtime/slice.go.html#line-325">#L325</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/stack.go.html#line-418">stack.go#L418</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/string.go.html#line-88">string.go#L88</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/string.go.html#line-151" class="path-duplicate">string.go</a><a href="../src/runtime/string.go.html#line-151">#L151</a>: 	if <b>raceenabled</b> &amp;&amp; n &gt; 0 {
+		<a href="../src/runtime/string.go.html#line-203" class="path-duplicate">string.go</a><a href="../src/runtime/string.go.html#line-203">#L203</a>: 	if <b>raceenabled</b> &amp;&amp; len(a) &gt; 0 {
+		<a href="../src/runtime/time.go.html#line-212">time.go#L212</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/time.go.html#line-232" class="path-duplicate">time.go</a><a href="../src/runtime/time.go.html#line-232">#L232</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/time.go.html#line-842" class="path-duplicate">time.go</a><a href="../src/runtime/time.go.html#line-842">#L842</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/time.go.html#line-874" class="path-duplicate">time.go</a><a href="../src/runtime/time.go.html#line-874">#L874</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/time.go.html#line-889" class="path-duplicate">time.go</a><a href="../src/runtime/time.go.html#line-889">#L889</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/trace.go.html#line-487">trace.go#L487</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/trace.go.html#line-564" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-564">#L564</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/trace.go.html#line-654" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-654">#L654</a>: 		if <b>raceenabled</b> {
+		<a href="../src/runtime/trace.go.html#line-1098" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1098">#L1098</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/trace.go.html#line-1105" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1105">#L1105</a>: 		if <b>raceenabled</b> {
+		<a href="../src/runtime/trace.go.html#line-1117" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1117">#L1117</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/type.go.html#line-97">type.go#L97</a>: 	if <b>raceenabled</b> {
+		<a href="../src/runtime/type.go.html#line-103" class="path-duplicate">type.go</a><a href="../src/runtime/type.go.html#line-103">#L103</a>: 	if <b>raceenabled</b> {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

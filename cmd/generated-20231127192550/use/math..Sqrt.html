@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: math.Sqrt</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../pkg/math.html">math</a>.<a href="../src/math/sqrt.go.html#line-93">Sqrt</a></b></span>
+
+<span class="title">140 uses</span>
+
+	math (current package)
+		<a href="../src/math/acosh.go.html#line-61">acosh.go#L61</a>: 		return Log(2*x - 1/(x+<b>Sqrt</b>(x*x-1))) // 2**28 &gt; x &gt; 2
+		<a href="../src/math/acosh.go.html#line-64" class="path-duplicate">acosh.go</a><a href="../src/math/acosh.go.html#line-64">#L64</a>: 	return Log1p(t + <b>Sqrt</b>(2*t+t*t)) // 2 &gt;= x &gt; 1
+		<a href="../src/math/asin.go.html#line-40">asin.go#L40</a>: 	temp := <b>Sqrt</b>(1 - x*x)
+		<a href="../src/math/asinh.go.html#line-67">asinh.go#L67</a>: 		temp = Log(2*x + 1/(<b>Sqrt</b>(x*x+1)+x)) // 2**28 &gt; |x| &gt; 2.0
+		<a href="../src/math/asinh.go.html#line-71" class="path-duplicate">asinh.go</a><a href="../src/math/asinh.go.html#line-71">#L71</a>: 		temp = Log1p(x + x*x/(1+<b>Sqrt</b>(1+x*x))) // 2.0 &gt; |x| &gt; 2**-28
+		<a href="../src/math/erfinv.go.html#line-100">erfinv.go#L100</a>: 		r := <b>Sqrt</b>(Ln2 - Log(1.0-x))
+		<a href="../src/math/hypot.go.html#line-43">hypot.go#L43</a>: 	return p * <b>Sqrt</b>(1+q*q)
+		<a href="../src/math/j0.go.html#line-124">j0.go#L124</a>: 			z = (1 / SqrtPi) * cc / <b>Sqrt</b>(x)
+		<a href="../src/math/j0.go.html#line-128" class="path-duplicate">j0.go</a><a href="../src/math/j0.go.html#line-128">#L128</a>: 			z = (1 / SqrtPi) * (u*cc - v*ss) / <b>Sqrt</b>(x)
+		<a href="../src/math/j0.go.html#line-213" class="path-duplicate">j0.go</a><a href="../src/math/j0.go.html#line-213">#L213</a>: 			z = (1 / SqrtPi) * ss / <b>Sqrt</b>(x)
+		<a href="../src/math/j0.go.html#line-217" class="path-duplicate">j0.go</a><a href="../src/math/j0.go.html#line-217">#L217</a>: 			z = (1 / SqrtPi) * (u*ss + v*cc) / <b>Sqrt</b>(x)
+		<a href="../src/math/j1.go.html#line-123">j1.go#L123</a>: 			z = (1 / SqrtPi) * cc / <b>Sqrt</b>(x)
+		<a href="../src/math/j1.go.html#line-127" class="path-duplicate">j1.go</a><a href="../src/math/j1.go.html#line-127">#L127</a>: 			z = (1 / SqrtPi) * (u*cc - v*ss) / <b>Sqrt</b>(x)
+		<a href="../src/math/j1.go.html#line-208" class="path-duplicate">j1.go</a><a href="../src/math/j1.go.html#line-208">#L208</a>: 			z = (1 / SqrtPi) * ss / <b>Sqrt</b>(x)
+		<a href="../src/math/j1.go.html#line-212" class="path-duplicate">j1.go</a><a href="../src/math/j1.go.html#line-212">#L212</a>: 			z = (1 / SqrtPi) * (u*ss + v*cc) / <b>Sqrt</b>(x)
+		<a href="../src/math/jn.go.html#line-117">jn.go#L117</a>: 			b = (1 / SqrtPi) * temp / <b>Sqrt</b>(x)
+		<a href="../src/math/jn.go.html#line-293" class="path-duplicate">jn.go</a><a href="../src/math/jn.go.html#line-293">#L293</a>: 		b = (1 / SqrtPi) * temp / <b>Sqrt</b>(x)
+		<a href="../src/math/pow.go.html#line-96">pow.go#L96</a>: 		return <b>Sqrt</b>(x)
+		<a href="../src/math/pow.go.html#line-98" class="path-duplicate">pow.go</a><a href="../src/math/pow.go.html#line-98">#L98</a>: 		return 1 / <b>Sqrt</b>(x)
+		<a href="../src/math/sqrt.go.html#line-93">sqrt.go#L93</a>: func <b>Sqrt</b>(x float64) float64 {
+
+	<a href="../pkg/math/cmplx.html">math/cmplx</a>
+		<a href="../src/math/cmplx/sqrt.go.html#line-65">sqrt.go#L65</a>: 			return complex(0, math.Copysign(math.<b>Sqrt</b>(-real(x)), imag(x)))
+		<a href="../src/math/cmplx/sqrt.go.html#line-67" class="path-duplicate">sqrt.go</a><a href="../src/math/cmplx/sqrt.go.html#line-67">#L67</a>: 		return complex(math.<b>Sqrt</b>(real(x)), imag(x))
+		<a href="../src/math/cmplx/sqrt.go.html#line-73" class="path-duplicate">sqrt.go</a><a href="../src/math/cmplx/sqrt.go.html#line-73">#L73</a>: 			r := math.<b>Sqrt</b>(-0.5 * imag(x))
+		<a href="../src/math/cmplx/sqrt.go.html#line-76" class="path-duplicate">sqrt.go</a><a href="../src/math/cmplx/sqrt.go.html#line-76">#L76</a>: 		r := math.<b>Sqrt</b>(0.5 * imag(x))
+		<a href="../src/math/cmplx/sqrt.go.html#line-95" class="path-duplicate">sqrt.go</a><a href="../src/math/cmplx/sqrt.go.html#line-95">#L95</a>: 		t = math.<b>Sqrt</b>(0.5*r + 0.5*a)
+		<a href="../src/math/cmplx/sqrt.go.html#line-99" class="path-duplicate">sqrt.go</a><a href="../src/math/cmplx/sqrt.go.html#line-99">#L99</a>: 		r = math.<b>Sqrt</b>(0.5*r - 0.5*a)
+
+	<a href="../pkg/gonum.org/v1/gonum/blas/gonum.html">gonum.org/v1/gonum/blas/gonum</a>
+		<a href="../src/gonum.org/v1/gonum/blas/gonum/level1cmplx128.go.html#line-99">level1cmplx128.go#L99</a>: 		return scale * math.<b>Sqrt</b>(ssq)
+		<a href="../src/gonum.org/v1/gonum/blas/gonum/level1cmplx128.go.html#line-123" class="path-duplicate">level1cmplx128.go</a><a href="../src/gonum.org/v1/gonum/blas/gonum/level1cmplx128.go.html#line-123">#L123</a>: 	return scale * math.<b>Sqrt</b>(ssq)
+		<a href="../src/gonum.org/v1/gonum/blas/gonum/level1float64.go.html#line-312">level1float64.go#L312</a>: 		r = sigma * (scl * math.<b>Sqrt</b>(ascl*ascl+bscl*bscl))
+
+	<a href="../pkg/gonum.org/v1/gonum/internal/asm/c128.html">gonum.org/v1/gonum/internal/asm/c128</a>
+		<a href="../src/gonum.org/v1/gonum/internal/asm/c128/stubs.go.html#line-138">stubs.go#L138</a>: 	return scale * math.<b>Sqrt</b>(sumSquares)
+		<a href="../src/gonum.org/v1/gonum/internal/asm/c128/stubs.go.html#line-165" class="path-duplicate">stubs.go</a><a href="../src/gonum.org/v1/gonum/internal/asm/c128/stubs.go.html#line-165">#L165</a>: 	return scale * math.<b>Sqrt</b>(sumSquares)
+
+	<a href="../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-163">dbdsqr.go#L163</a>: 			sminoa = sminoa / math.<b>Sqrt</b>(float64(n))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-145">dgeev.go#L145</a>: 	smlnum := math.<b>Sqrt</b>(dlamchS) / dlamchP
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dgesvd.go.html#line-383">dgesvd.go#L383</a>: 	smlnum := math.<b>Sqrt</b>(dlamchS) / eps
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlae2.go.html#line-32">dlae2.go#L32</a>: 		rt = adf * math.<b>Sqrt</b>(1+(ab/adf)*(ab/adf))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlae2.go.html#line-34" class="path-duplicate">dlae2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlae2.go.html#line-34">#L34</a>: 		rt = ab * math.<b>Sqrt</b>(1+(adf/ab)*(adf/ab))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlaev2.go.html#line-36">dlaev2.go#L36</a>: 		rt = adf * math.<b>Sqrt</b>(1+(ab/adf)*(ab/adf))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlaev2.go.html#line-38" class="path-duplicate">dlaev2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlaev2.go.html#line-38">#L38</a>: 		rt = ab * math.<b>Sqrt</b>(1+(adf/ab)*(adf/ab))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlaev2.go.html#line-40" class="path-duplicate">dlaev2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlaev2.go.html#line-40">#L40</a>: 		rt = ab * math.<b>Sqrt</b>(2)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlaev2.go.html#line-67" class="path-duplicate">dlaev2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlaev2.go.html#line-67">#L67</a>: 		sn1 = 1 / math.<b>Sqrt</b>(1+ct*ct)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlaev2.go.html#line-75" class="path-duplicate">dlaev2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlaev2.go.html#line-75">#L75</a>: 			cs1 = 1 / math.<b>Sqrt</b>(1+tn*tn)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlag2.go.html#line-62">dlag2.go#L62</a>: 	rtmin := math.<b>Sqrt</b>(safmin)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlag2.go.html#line-127" class="path-duplicate">dlag2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlag2.go.html#line-127">#L127</a>: 		r = math.<b>Sqrt</b>(math.Abs(discr)) * rtmax
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlag2.go.html#line-133" class="path-duplicate">dlag2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlag2.go.html#line-133">#L133</a>: 			r = math.<b>Sqrt</b>(math.Abs(discr)) * rtmin
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlag2.go.html#line-136" class="path-duplicate">dlag2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlag2.go.html#line-136">#L136</a>: 			r = math.<b>Sqrt</b>(math.Abs(discr))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlahqr.go.html#line-261">dlahqr.go#L261</a>: 				rtdisc := math.<b>Sqrt</b>(math.Abs(det))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlangb.go.html#line-84">dlangb.go#L84</a>: 		value = scale * math.<b>Sqrt</b>(sum)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlange.go.html#line-87">dlange.go#L87</a>: 		return scale * math.<b>Sqrt</b>(sum)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlangt.go.html#line-112">dlangt.go#L112</a>: 		anorm = scale * math.<b>Sqrt</b>(ssq)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlansb.go.html#line-127">dlansb.go#L127</a>: 		value = scale * math.<b>Sqrt</b>(sum)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlanst.go.html#line-73">dlanst.go#L73</a>: 		return scale * math.<b>Sqrt</b>(sum)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlansy.go.html#line-123">dlansy.go#L123</a>: 		return scale * math.<b>Sqrt</b>(sum)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlantb.go.html#line-206">dlantb.go#L206</a>: 		value = scale * math.<b>Sqrt</b>(sum)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlantr.go.html#line-250">dlantr.go#L250</a>: 		return scale * math.<b>Sqrt</b>(sum)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlanv2.go.html#line-56">dlanv2.go#L56</a>: 				z = p + math.<b>Sqrt</b>(scale)*math.<b>Sqrt</b>(z)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlanv2.go.html#line-58" class="path-duplicate">dlanv2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlanv2.go.html#line-58">#L58</a>: 				z = p - math.<b>Sqrt</b>(scale)*math.<b>Sqrt</b>(z)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlanv2.go.html#line-90" class="path-duplicate">dlanv2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlanv2.go.html#line-90">#L90</a>: 			cs = math.<b>Sqrt</b>((1 + math.Abs(sigma)/tau) / 2)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlanv2.go.html#line-119" class="path-duplicate">dlanv2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlanv2.go.html#line-119">#L119</a>: 						sab := math.<b>Sqrt</b>(math.Abs(bb))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlanv2.go.html#line-120" class="path-duplicate">dlanv2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlanv2.go.html#line-120">#L120</a>: 						sac := math.<b>Sqrt</b>(math.Abs(cc))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlanv2.go.html#line-125" class="path-duplicate">dlanv2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlanv2.go.html#line-125">#L125</a>: 						tau = 1 / math.<b>Sqrt</b>(math.Abs(bb+cc))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlanv2.go.html#line-147" class="path-duplicate">dlanv2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlanv2.go.html#line-147">#L147</a>: 		rt1i = math.<b>Sqrt</b>(math.Abs(bb)) * math.<b>Sqrt</b>(math.Abs(cc))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlaqp2.go.html#line-71">dlaqp2.go#L71</a>: 	tol3z := math.<b>Sqrt</b>(dlamchE)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlaqp2.go.html#line-123" class="path-duplicate">dlaqp2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlaqp2.go.html#line-123">#L123</a>: 				vn1[j] *= math.<b>Sqrt</b>(temp) // *
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlaqps.go.html#line-105">dlaqps.go#L105</a>: 	tol3z := math.<b>Sqrt</b>(dlamchE)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlaqps.go.html#line-207" class="path-duplicate">dlaqps.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlaqps.go.html#line-207">#L207</a>: 					vn1[j] *= math.<b>Sqrt</b>(temp) // *
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlaqr23.go.html#line-263">dlaqr23.go#L263</a>: 		abst := math.Abs(t[(ns-1)*ldt+ns-1]) + math.<b>Sqrt</b>(math.Abs(t[(ns-1)*ldt+ns-2]))*math.<b>Sqrt</b>(math.Abs(t[(ns-2)*ldt+ns-1]))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlaqr23.go.html#line-303" class="path-duplicate">dlaqr23.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlaqr23.go.html#line-303">#L303</a>: 					evi = math.Abs(t[i*ldt+i]) + math.<b>Sqrt</b>(math.Abs(t[(i+1)*ldt+i]))*math.<b>Sqrt</b>(math.Abs(t[i*ldt+i+1]))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlaqr23.go.html#line-310" class="path-duplicate">dlaqr23.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlaqr23.go.html#line-310">#L310</a>: 					evk = math.Abs(t[k*ldt+k]) + math.<b>Sqrt</b>(math.Abs(t[(k+1)*ldt+k]))*math.<b>Sqrt</b>(math.Abs(t[k*ldt+k+1]))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlartg.go.html#line-49">dlartg.go#L49</a>: 	rtmin := math.<b>Sqrt</b>(safmin)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlartg.go.html#line-50" class="path-duplicate">dlartg.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlartg.go.html#line-50">#L50</a>: 	rtmax := math.<b>Sqrt</b>(safmax / 2)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlartg.go.html#line-55" class="path-duplicate">dlartg.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlartg.go.html#line-55">#L55</a>: 		d := math.<b>Sqrt</b>(f*f + g*g)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlartg.go.html#line-66" class="path-duplicate">dlartg.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlartg.go.html#line-66">#L66</a>: 	d := math.<b>Sqrt</b>(fs*fs + gs*gs)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlas2.go.html#line-28">dlas2.go#L28</a>: 		return 0, math.Max(fhmax, ga) * math.<b>Sqrt</b>(1+v*v)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlas2.go.html#line-34" class="path-duplicate">dlas2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlas2.go.html#line-34">#L34</a>: 		c := 2 / (math.<b>Sqrt</b>(as*as+au) + math.<b>Sqrt</b>(at*at+au))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlas2.go.html#line-43" class="path-duplicate">dlas2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlas2.go.html#line-43">#L43</a>: 	c := 1 / (math.<b>Sqrt</b>(1+(as*au)*(as*au)) + math.<b>Sqrt</b>(1+(at*au)*(at*au)))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq1.go.html#line-71">dlasq1.go#L71</a>: 	scale := math.<b>Sqrt</b>(eps / safmin)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq1.go.html#line-86" class="path-duplicate">dlasq1.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq1.go.html#line-86">#L86</a>: 			d[i] = math.<b>Sqrt</b>(work[i])
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq1.go.html#line-93" class="path-duplicate">dlasq1.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq1.go.html#line-93">#L93</a>: 			d[i] = math.<b>Sqrt</b>(work[2*i])
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq1.go.html#line-94" class="path-duplicate">dlasq1.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq1.go.html#line-94">#L94</a>: 			e[i] = math.<b>Sqrt</b>(work[2*i+1])
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq2.go.html#line-75">dlasq2.go#L75</a>: 				s = z[2] * (z[1] / (t * (1 + math.<b>Sqrt</b>(1+s/t))))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq2.go.html#line-77" class="path-duplicate">dlasq2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq2.go.html#line-77">#L77</a>: 				s = z[2] * (z[1] / (t + math.<b>Sqrt</b>(t)*math.<b>Sqrt</b>(t+s)))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq2.go.html#line-286" class="path-duplicate">dlasq2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq2.go.html#line-286">#L286</a>: 		dmin := -math.Max(0, qmin-2*math.<b>Sqrt</b>(qmin)*math.<b>Sqrt</b>(emax))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq3.go.html#line-65">dlasq3.go#L65</a>: 				s = z[nn-3] * (z[nn-5] / (t * (1 + math.<b>Sqrt</b>(1+s/t))))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq3.go.html#line-67" class="path-duplicate">dlasq3.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq3.go.html#line-67">#L67</a>: 				s = z[nn-3] * (z[nn-5] / (t + math.<b>Sqrt</b>(t)*math.<b>Sqrt</b>(t+s)))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq4.go.html#line-45">dlasq4.go#L45</a>: 			b1 := math.<b>Sqrt</b>(z[nn-3]) * math.<b>Sqrt</b>(z[nn-5])
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq4.go.html#line-46" class="path-duplicate">dlasq4.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq4.go.html#line-46">#L46</a>: 			b2 := math.<b>Sqrt</b>(z[nn-7]) * math.<b>Sqrt</b>(z[nn-9])
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq4.go.html#line-116" class="path-duplicate">dlasq4.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq4.go.html#line-116">#L116</a>: 					s = gam * (1 - math.<b>Sqrt</b>(a2)) / (1 + a2)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq4.go.html#line-153" class="path-duplicate">dlasq4.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq4.go.html#line-153">#L153</a>: 				s = gam * (1 - math.<b>Sqrt</b>(a2)) / (1 + a2)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq4.go.html#line-191" class="path-duplicate">dlasq4.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq4.go.html#line-191">#L191</a>: 			b2 = math.<b>Sqrt</b>(cnst3 * b2)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq4.go.html#line-230" class="path-duplicate">dlasq4.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq4.go.html#line-230">#L230</a>: 			b2 = math.<b>Sqrt</b>(cnst3 * b2)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq4.go.html#line-232" class="path-duplicate">dlasq4.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlasq4.go.html#line-232">#L232</a>: 			gap2 := z[nn-7] + z[nn-9] - math.<b>Sqrt</b>(z[nn-11])*math.<b>Sqrt</b>(z[nn-9]) - a2
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlassq.go.html#line-77">dlassq.go#L77</a>: 		ax := scale * math.<b>Sqrt</b>(sumsq)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlassq.go.html#line-110" class="path-duplicate">dlassq.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlassq.go.html#line-110">#L110</a>: 			amed = math.<b>Sqrt</b>(amed)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dlassq.go.html#line-111" class="path-duplicate">dlassq.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dlassq.go.html#line-111">#L111</a>: 			asml = math.<b>Sqrt</b>(asml) / dssml
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dpbtf2.go.html#line-84">dpbtf2.go#L84</a>: 			ajj = math.<b>Sqrt</b>(ajj)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dpbtf2.go.html#line-103" class="path-duplicate">dpbtf2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dpbtf2.go.html#line-103">#L103</a>: 		ajj = math.<b>Sqrt</b>(ajj)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dpotf2.go.html#line-52">dpotf2.go#L52</a>: 			ajj = math.<b>Sqrt</b>(ajj)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dpotf2.go.html#line-72" class="path-duplicate">dpotf2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dpotf2.go.html#line-72">#L72</a>: 		ajj = math.<b>Sqrt</b>(ajj)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dpstf2.go.html#line-139">dpstf2.go#L139</a>: 			ajj = math.<b>Sqrt</b>(ajj)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dpstf2.go.html#line-190" class="path-duplicate">dpstf2.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dpstf2.go.html#line-190">#L190</a>: 			ajj = math.<b>Sqrt</b>(ajj)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dpstrf.go.html#line-149">dpstrf.go#L149</a>: 				ajj = math.<b>Sqrt</b>(ajj)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dpstrf.go.html#line-214" class="path-duplicate">dpstrf.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dpstrf.go.html#line-214">#L214</a>: 				ajj = math.<b>Sqrt</b>(ajj)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-85">dsteqr.go#L85</a>: 	ssfmax := math.<b>Sqrt</b>(safmax) / 3
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-86" class="path-duplicate">dsteqr.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-86">#L86</a>: 	ssfmin := math.<b>Sqrt</b>(safmin) / eps2
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-145" class="path-duplicate">dsteqr.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-145">#L145</a>: 				if test &lt;= (math.<b>Sqrt</b>(math.Abs(d[m]))*math.<b>Sqrt</b>(math.Abs(d[m+1])))*eps {
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dsterf.go.html#line-57">dsterf.go#L57</a>: 	ssfmax := math.<b>Sqrt</b>(safmax) / 3
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dsterf.go.html#line-58" class="path-duplicate">dsterf.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dsterf.go.html#line-58">#L58</a>: 	ssfmin := math.<b>Sqrt</b>(safmin) / eps2
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dsterf.go.html#line-77" class="path-duplicate">dsterf.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dsterf.go.html#line-77">#L77</a>: 			if math.Abs(e[m]) &lt;= math.<b>Sqrt</b>(math.Abs(d[m]))*math.<b>Sqrt</b>(math.Abs(d[m+1]))*eps {
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dsterf.go.html#line-145" class="path-duplicate">dsterf.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dsterf.go.html#line-145">#L145</a>: 					d[l], d[l+1] = impl.Dlae2(d[l], math.<b>Sqrt</b>(e[l]), d[l+1])
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dsterf.go.html#line-159" class="path-duplicate">dsterf.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dsterf.go.html#line-159">#L159</a>: 				rte := math.<b>Sqrt</b>(e[l])
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dsterf.go.html#line-216" class="path-duplicate">dsterf.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dsterf.go.html#line-216">#L216</a>: 					d[l], d[l-1] = impl.Dlae2(d[l], math.<b>Sqrt</b>(e[l-1]), d[l-1])
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dsterf.go.html#line-230" class="path-duplicate">dsterf.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dsterf.go.html#line-230">#L230</a>: 				rte := math.<b>Sqrt</b>(e[l-1])
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dsyev.go.html#line-84">dsyev.go#L84</a>: 	rmin := math.<b>Sqrt</b>(smlnum)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dsyev.go.html#line-85" class="path-duplicate">dsyev.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dsyev.go.html#line-85">#L85</a>: 	rmax := math.<b>Sqrt</b>(bignum)
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dtrevc3.go.html#line-311">dtrevc3.go#L311</a>: 			wi = math.<b>Sqrt</b>(math.Abs(t[ki*ldt+ki-1])) * math.<b>Sqrt</b>(math.Abs(t[(ki-1)*ldt+ki]))
+		<a href="../src/gonum.org/v1/gonum/lapack/gonum/dtrevc3.go.html#line-613" class="path-duplicate">dtrevc3.go</a><a href="../src/gonum.org/v1/gonum/lapack/gonum/dtrevc3.go.html#line-613">#L613</a>: 			wi = math.<b>Sqrt</b>(math.Abs(t[ki*ldt+ki+1])) * math.<b>Sqrt</b>(math.Abs(t[(ki+1)*ldt+ki]))
+
+	<a href="../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>
+		<a href="../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-478">cholesky.go#L478</a>: 	c.chol.ScaleTri(math.<b>Sqrt</b>(f), orig.chol)
+		<a href="../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-533" class="path-duplicate">cholesky.go</a><a href="../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-533">#L533</a>: 	d := math.<b>Sqrt</b>(k - dot)
+		<a href="../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-626" class="path-duplicate">cholesky.go</a><a href="../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-626">#L626</a>: 			blas64.Scal(math.<b>Sqrt</b>(alpha), blas64.Vector{N: n, Data: work, Inc: 1})
+		<a href="../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-657" class="path-duplicate">cholesky.go</a><a href="../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-657">#L657</a>: 	alpha = math.<b>Sqrt</b>(-alpha)
+		<a href="../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-678" class="path-duplicate">cholesky.go</a><a href="../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-678">#L678</a>: 	norm = math.<b>Sqrt</b>((1 + norm) * (1 - norm))
+		<a href="../src/gonum.org/v1/gonum/mat/matrix.go.html#line-818">matrix.go#L818</a>: 		return math.<b>Sqrt</b>(sum)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

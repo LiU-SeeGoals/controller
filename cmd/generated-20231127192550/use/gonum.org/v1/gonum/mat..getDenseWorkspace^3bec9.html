@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/mat.getDenseWorkspace</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-100">getDenseWorkspace</a></b></span>
+
+<span class="title">27 uses</span>
+
+	gonum.org/v1/gonum/mat (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-169">dense.go#L169</a>: 	w = <b>getDenseWorkspace</b>(r, c, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-229">dense_arithmetic.go#L229</a>: 				tmp := <b>getDenseWorkspace</b>(r, c, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-324" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-324">#L324</a>: 				c := <b>getDenseWorkspace</b>(ac, ar, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-336" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-336">#L336</a>: 				c := <b>getDenseWorkspace</b>(ac, ar, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-383" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-383">#L383</a>: 				c := <b>getDenseWorkspace</b>(bc, br, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-395" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-395">#L395</a>: 				c := <b>getDenseWorkspace</b>(bc, br, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-507" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-507">#L507</a>: 	v := <b>getDenseWorkspace</b>(r, r, true)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-513" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-513">#L513</a>: 	u := <b>getDenseWorkspace</b>(r, r, true)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-518" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-518">#L518</a>: 	a2 := <b>getDenseWorkspace</b>(r, r, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-529" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-529">#L529</a>: 		p := <b>getDenseWorkspace</b>(r, r, true)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-574" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-574">#L574</a>: 	i := <b>getDenseWorkspace</b>(r, r, true)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-585" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-585">#L585</a>: 	a4 := <b>getDenseWorkspace</b>(r, r, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-591" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-591">#L591</a>: 	a6 := <b>getDenseWorkspace</b>(r, r, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-662" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-662">#L662</a>: 	w := <b>getDenseWorkspace</b>(r, r, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-664" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-664">#L664</a>: 	s := <b>getDenseWorkspace</b>(r, r, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-666" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-666">#L666</a>: 	x := <b>getDenseWorkspace</b>(r, r, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/hogsvd.go.html#line-82">hogsvd.go#L82</a>: 	s := <b>getDenseWorkspace</b>(c, c, true)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/hogsvd.go.html#line-84" class="path-duplicate">hogsvd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/hogsvd.go.html#line-84">#L84</a>: 	sij := <b>getDenseWorkspace</b>(c, c, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/hogsvd.go.html#line-129" class="path-duplicate">hogsvd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/hogsvd.go.html#line-129">#L129</a>: 	biT := <b>getDenseWorkspace</b>(c, r, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-204">lq.go#L204</a>: 	w := <b>getDenseWorkspace</b>(max(r, c), bc, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-100">pool.go#L100</a>: func <b>getDenseWorkspace</b>(r, c int, clear bool) *Dense {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/product.go.html#line-157">product.go#L157</a>: 	r := <b>getDenseWorkspace</b>(ar, bc, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-199">qr.go#L199</a>: 	w := <b>getDenseWorkspace</b>(max(r, c), bc, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/solve.go.html#line-58">solve.go#L58</a>: 					tmp := <b>getDenseWorkspace</b>(br, bc, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/solve.go.html#line-71" class="path-duplicate">solve.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/solve.go.html#line-71">#L71</a>: 				tmp := <b>getDenseWorkspace</b>(br, bc, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-329">svd.go#L329</a>: 	c := <b>getDenseWorkspace</b>(svd.u.Cols, bc, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-333" class="path-duplicate">svd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-333">#L333</a>: 	y := <b>getDenseWorkspace</b>(rank, bc, false)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: cumprod_amd64.s in package gonum.org/v1/gonum/internal/asm/f64</title>
+<link href="../../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	cumprod_amd64.s
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/gonum.org/v1/gonum/internal/asm/f64.html">gonum.org/v1/gonum/internal/asm/f64</a>
+</code></pre>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code>// Copyright ©2016 The Gonum Authors. All rights reserved.</code></span>
+<span class="codeline" id="line-2"><code>// Use of this source code is governed by a BSD-style</code></span>
+<span class="codeline" id="line-3"><code>// license that can be found in the LICENSE file.</code></span>
+<span class="codeline" id="line-4"><code></code></span>
+<span class="codeline" id="line-5"><code>// +build !noasm,!gccgo,!safe</code></span>
+<span class="codeline" id="line-6"><code></code></span>
+<span class="codeline" id="line-7"><code>#include "textflag.h"</code></span>
+<span class="codeline" id="line-8"><code></code></span>
+<span class="codeline" id="line-9"><code>TEXT ·CumProd(SB), NOSPLIT, $0</code></span>
+<span class="codeline" id="line-10"><code>	MOVQ    dst_base+0(FP), DI // DI = &amp;dst</code></span>
+<span class="codeline" id="line-11"><code>	MOVQ    dst_len+8(FP), CX  // CX = len(dst)</code></span>
+<span class="codeline" id="line-12"><code>	MOVQ    s_base+24(FP), SI  // SI = &amp;s</code></span>
+<span class="codeline" id="line-13"><code>	CMPQ    s_len+32(FP), CX   // CX = max( CX, len(s) )</code></span>
+<span class="codeline" id="line-14"><code>	CMOVQLE s_len+32(FP), CX</code></span>
+<span class="codeline" id="line-15"><code>	MOVQ    CX, ret_len+56(FP) // len(ret) = CX</code></span>
+<span class="codeline" id="line-16"><code>	CMPQ    CX, $0             // if CX == 0 { return }</code></span>
+<span class="codeline" id="line-17"><code>	JE      cp_end</code></span>
+<span class="codeline" id="line-18"><code>	XORQ    AX, AX             // i = 0</code></span>
+<span class="codeline" id="line-19"><code></code></span>
+<span class="codeline" id="line-20"><code>	MOVSD  (SI), X5   // p_prod = { s[0], s[0] }</code></span>
+<span class="codeline" id="line-21"><code>	SHUFPD $0, X5, X5</code></span>
+<span class="codeline" id="line-22"><code>	MOVSD  X5, (DI)   // dst[0] = s[0]</code></span>
+<span class="codeline" id="line-23"><code>	INCQ   AX         // ++i</code></span>
+<span class="codeline" id="line-24"><code>	DECQ   CX         // -- CX</code></span>
+<span class="codeline" id="line-25"><code>	JZ     cp_end     // if CX == 0 { return }</code></span>
+<span class="codeline" id="line-26"><code></code></span>
+<span class="codeline" id="line-27"><code>	MOVQ CX, BX</code></span>
+<span class="codeline" id="line-28"><code>	ANDQ $3, BX        // BX = CX % 4</code></span>
+<span class="codeline" id="line-29"><code>	SHRQ $2, CX        // CX = floor( CX / 4 )</code></span>
+<span class="codeline" id="line-30"><code>	JZ   cp_tail_start // if CX == 0 { goto cp_tail_start }</code></span>
+<span class="codeline" id="line-31"><code></code></span>
+<span class="codeline" id="line-32"><code>cp_loop: // Loop unrolled 4x   do {</code></span>
+<span class="codeline" id="line-33"><code>	MOVUPS (SI)(AX*8), X0   // X0 = s[i:i+1]</code></span>
+<span class="codeline" id="line-34"><code>	MOVUPS 16(SI)(AX*8), X2</code></span>
+<span class="codeline" id="line-35"><code>	MOVAPS X0, X1           // X1 = X0</code></span>
+<span class="codeline" id="line-36"><code>	MOVAPS X2, X3</code></span>
+<span class="codeline" id="line-37"><code>	SHUFPD $1, X1, X1       // { X1[0], X1[1] } = { X1[1], X1[0] }</code></span>
+<span class="codeline" id="line-38"><code>	SHUFPD $1, X3, X3</code></span>
+<span class="codeline" id="line-39"><code>	MULPD  X0, X1           // X1 *= X0</code></span>
+<span class="codeline" id="line-40"><code>	MULPD  X2, X3</code></span>
+<span class="codeline" id="line-41"><code>	SHUFPD $2, X1, X0       // { X0[0], X0[1] } = { X0[0], X1[1] }</code></span>
+<span class="codeline" id="line-42"><code>	SHUFPD $3, X1, X1       // { X1[0], X1[1] } = { X1[1], X1[1] }</code></span>
+<span class="codeline" id="line-43"><code>	SHUFPD $2, X3, X2</code></span>
+<span class="codeline" id="line-44"><code>	SHUFPD $3, X3, X3</code></span>
+<span class="codeline" id="line-45"><code>	MULPD  X5, X0           // X0 *= p_prod</code></span>
+<span class="codeline" id="line-46"><code>	MULPD  X1, X5           // p_prod *= X1</code></span>
+<span class="codeline" id="line-47"><code>	MULPD  X5, X2</code></span>
+<span class="codeline" id="line-48"><code>	MOVUPS X0, (DI)(AX*8)   // dst[i] = X0</code></span>
+<span class="codeline" id="line-49"><code>	MOVUPS X2, 16(DI)(AX*8)</code></span>
+<span class="codeline" id="line-50"><code>	MULPD  X3, X5</code></span>
+<span class="codeline" id="line-51"><code>	ADDQ   $4, AX           // i += 4</code></span>
+<span class="codeline" id="line-52"><code>	LOOP   cp_loop          // } while --CX &gt; 0</code></span>
+<span class="codeline" id="line-53"><code></code></span>
+<span class="codeline" id="line-54"><code>	// if BX == 0 { return }</code></span>
+<span class="codeline" id="line-55"><code>	CMPQ BX, $0</code></span>
+<span class="codeline" id="line-56"><code>	JE   cp_end</code></span>
+<span class="codeline" id="line-57"><code></code></span>
+<span class="codeline" id="line-58"><code>cp_tail_start: // Reset loop registers</code></span>
+<span class="codeline" id="line-59"><code>	MOVQ BX, CX // Loop counter: CX = BX</code></span>
+<span class="codeline" id="line-60"><code></code></span>
+<span class="codeline" id="line-61"><code>cp_tail: // do {</code></span>
+<span class="codeline" id="line-62"><code>	MULSD (SI)(AX*8), X5 // p_prod *= s[i]</code></span>
+<span class="codeline" id="line-63"><code>	MOVSD X5, (DI)(AX*8) // dst[i] = p_prod</code></span>
+<span class="codeline" id="line-64"><code>	INCQ  AX             // ++i</code></span>
+<span class="codeline" id="line-65"><code>	LOOP  cp_tail        // } while --CX &gt; 0</code></span>
+<span class="codeline" id="line-66"><code></code></span>
+<span class="codeline" id="line-67"><code>cp_end:</code></span>
+<span class="codeline" id="line-68"><code>	MOVQ DI, ret_base+48(FP) // &amp;ret = &amp;dst</code></span>
+<span class="codeline" id="line-69"><code>	MOVQ dst_cap+16(FP), SI  // cap(ret) = cap(dst)</code></span>
+<span class="codeline" id="line-70"><code>	MOVQ SI, ret_cap+64(FP)</code></span>
+<span class="codeline" id="line-71"><code>	RET</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/mat.CDense.mat</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-21">CDense</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-22">mat</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">72 uses</span>
+
+	gonum.org/v1/gonum/mat (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-22">cdense.go#L22</a>: 	<b>mat</b> cblas128.General
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-29" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-29">#L29</a>: 	return m.<b>mat</b>.Rows, m.<b>mat</b>.Cols
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-56" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-56">#L56</a>: 		amat := arm.<b>mat</b>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-60" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-60">#L60</a>: 		for ja, jm := 0, 0; ja &lt; ar*amat.Stride; ja, jm = ja+amat.Stride, jm+m.<b>mat</b>.Stride {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-62" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-62">#L62</a>: 				m.<b>mat</b>.Data[i+jm] = cmplx.Conj(v)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-104" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-104">#L104</a>: 	t.<b>mat</b>.Data = t.<b>mat</b>.Data[i*t.<b>mat</b>.Stride+j : (k-1)*t.<b>mat</b>.Stride+l]
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-105" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-105">#L105</a>: 	t.<b>mat</b>.Rows = k - i
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-106" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-106">#L106</a>: 	t.<b>mat</b>.Cols = l - j
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-135" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-135">#L135</a>: 		<b>mat</b>: cblas128.General{
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-172" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-172">#L172</a>: 	if m.<b>mat</b>.Rows &gt; m.capRows || m.<b>mat</b>.Cols &gt; m.capCols {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-180" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-180">#L180</a>: 		m.<b>mat</b> = cblas128.General{
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-184" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-184">#L184</a>: 			Data:   useC(m.<b>mat</b>.Data, r*c),
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-190" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-190">#L190</a>: 	if r != m.<b>mat</b>.Rows || c != m.<b>mat</b>.Cols {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-197" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-197">#L197</a>: 	if m.<b>mat</b>.Rows &gt; m.capRows || m.<b>mat</b>.Cols &gt; m.capCols {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-205" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-205">#L205</a>: 		m.<b>mat</b> = cblas128.General{
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-209" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-209">#L209</a>: 			Data:   useZeroedC(m.<b>mat</b>.Data, r*c),
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-215" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-215">#L215</a>: 	if r != m.<b>mat</b>.Rows || c != m.<b>mat</b>.Cols {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-243" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-243">#L243</a>: 	m.<b>mat</b>.Rows, m.<b>mat</b>.Cols, m.<b>mat</b>.Stride = 0, 0, 0
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-245" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-245">#L245</a>: 	m.<b>mat</b>.Data = m.<b>mat</b>.Data[:0]
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-253" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-253">#L253</a>: 	return m.<b>mat</b>.Stride == 0
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-258" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-258">#L258</a>: 	r := m.<b>mat</b>.Rows
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-259" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-259">#L259</a>: 	c := m.<b>mat</b>.Cols
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-261" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-261">#L261</a>: 		zeroC(m.<b>mat</b>.Data[i*m.<b>mat</b>.Stride : i*m.<b>mat</b>.Stride+c])
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-277" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-277">#L277</a>: 	r = min(r, m.<b>mat</b>.Rows)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-278" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-278">#L278</a>: 	c = min(c, m.<b>mat</b>.Cols)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-297" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-297">#L297</a>: 	m.<b>mat</b> = b
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-303" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-303">#L303</a>: func (m *CDense) RawCMatrix() cblas128.General { return m.<b>mat</b> }
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-317" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-317">#L317</a>: 	r += m.<b>mat</b>.Rows
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-318" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-318">#L318</a>: 	c += m.<b>mat</b>.Cols
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-322" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-322">#L322</a>: 	case m.<b>mat</b>.Rows == 0 || m.<b>mat</b>.Cols == 0:
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-323" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-323">#L323</a>: 		t.<b>mat</b> = cblas128.General{
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-330" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-330">#L330</a>: 			Data: useZeroedC(m.<b>mat</b>.Data, r*c),
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-335" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-335">#L335</a>: 		t.<b>mat</b> = cblas128.General{
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-347" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-347">#L347</a>: 		tmp.<b>mat</b> = cblas128.General{
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-348" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-348">#L348</a>: 			Rows:   m.<b>mat</b>.Rows,
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-349" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-349">#L349</a>: 			Cols:   m.<b>mat</b>.Cols,
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-350" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-350">#L350</a>: 			Stride: m.<b>mat</b>.Stride,
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-351" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-351">#L351</a>: 			Data:   m.<b>mat</b>.Data,
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-358" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-358">#L358</a>: 		t.<b>mat</b> = cblas128.General{
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-359" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-359">#L359</a>: 			Data:   m.<b>mat</b>.Data[:(r-1)*m.<b>mat</b>.Stride+c],
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-362" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-362">#L362</a>: 			Stride: m.<b>mat</b>.Stride,
+		<a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-44">index_no_bound_checks.go#L44</a>: 	if uint(i) &gt;= uint(m.<b>mat</b>.Rows) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-47" class="path-duplicate">index_no_bound_checks.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-47">#L47</a>: 	if uint(j) &gt;= uint(m.<b>mat</b>.Cols) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-54" class="path-duplicate">index_no_bound_checks.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-54">#L54</a>: 	return m.<b>mat</b>.Data[i*m.<b>mat</b>.Stride+j]
+		<a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-59" class="path-duplicate">index_no_bound_checks.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-59">#L59</a>: 	if uint(i) &gt;= uint(m.<b>mat</b>.Rows) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-62" class="path-duplicate">index_no_bound_checks.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-62">#L62</a>: 	if uint(j) &gt;= uint(m.<b>mat</b>.Cols) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-69" class="path-duplicate">index_no_bound_checks.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-69">#L69</a>: 	m.<b>mat</b>.Data[i*m.<b>mat</b>.Stride+j] = v
+		<a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-80">pool.go#L80</a>: 			return &amp;CDense{<b>mat</b>: cblas128.General{
+		<a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-205" class="path-duplicate">pool.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-205">#L205</a>: 	w.<b>mat</b>.Data = w.<b>mat</b>.Data[:l]
+		<a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-207" class="path-duplicate">pool.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-207">#L207</a>: 		zeroC(w.<b>mat</b>.Data)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-209" class="path-duplicate">pool.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-209">#L209</a>: 	w.<b>mat</b>.Rows = r
+		<a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-210" class="path-duplicate">pool.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-210">#L210</a>: 	w.<b>mat</b>.Cols = c
+		<a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-211" class="path-duplicate">pool.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-211">#L211</a>: 	w.<b>mat</b>.Stride = c
+		<a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-221" class="path-duplicate">pool.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-221">#L221</a>: 	poolCDense[poolFor(uint(cap(w.<b>mat</b>.Data)))].Put(w)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/lapack/lapack64.Lantr</title>
+<link href="../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../../../../../pkg/gonum.org/v1/gonum/lapack/lapack64.html">gonum.org/v1/gonum/lapack/lapack64</a>.<a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-586">Lantr</a></b></span>
+
+<span class="title">7 uses</span>
+
+	gonum.org/v1/gonum/lapack/lapack64 (current package)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-586">lapack64.go#L586</a>: func <b>Lantr</b>(norm lapack.MatrixNorm, a blas64.Triangular, work []float64) float64 {
+
+	<a href="../../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-71">cholesky.go#L71</a>: 		unorm := lapack64.<b>Lantr</b>(CondNorm, c.chol.mat, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-72" class="path-duplicate">cholesky.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-72">#L72</a>: 		lnorm := lapack64.<b>Lantr</b>(CondNormTrans, c.chol.mat, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-47">lu.go#L47</a>: 		unorm := lapack64.<b>Lantr</b>(norm, u.mat, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-48" class="path-duplicate">lu.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-48">#L48</a>: 		lnorm := lapack64.<b>Lantr</b>(norm, l.mat, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-640">triangular.go#L640</a>: 		return lapack64.<b>Lantr</b>(lnorm, t.mat, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-642" class="path-duplicate">triangular.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-642">#L642</a>: 	return lapack64.<b>Lantr</b>(lnorm, t.mat, nil)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

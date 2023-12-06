@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: reflect.Kind</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../pkg/reflect.html">reflect</a>.<a href="../src/reflect/type.go.html#line-241">Kind</a></b></span>
+
+<span class="title">29 uses</span>
+
+	reflect (current package)
+		<a href="../src/reflect/abi.go.html#line-199">abi.go#L199</a>: 	switch <b>Kind</b>(t.Kind()) {
+		<a href="../src/reflect/type.go.html#line-103">type.go#L103</a>: 	Kind() <b>Kind</b>
+		<a href="../src/reflect/type.go.html#line-241" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-241">#L241</a>: type <b>Kind</b> uint
+		<a href="../src/reflect/type.go.html#line-244" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-244">#L244</a>: 	Invalid <b>Kind</b> = iota
+		<a href="../src/reflect/type.go.html#line-441" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-441">#L441</a>: func (k <b>Kind</b>) String() string {
+		<a href="../src/reflect/type.go.html#line-566" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-566">#L566</a>: func (t *rtype) Kind() <b>Kind</b> { return <b>Kind</b>(t.t.Kind()) }
+		<a href="../src/reflect/type.go.html#line-1406" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1406">#L1406</a>: 	kind := <b>Kind</b>(T.Kind())
+		<a href="../src/reflect/type.go.html#line-1407" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1407">#L1407</a>: 	if kind != <b>Kind</b>(V.Kind()) {
+		<a href="../src/reflect/type.go.html#line-1564" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1564">#L1564</a>: 	kind  <b>Kind</b>
+		<a href="../src/reflect/type.go.html#line-1878" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1878">#L1878</a>: 	switch <b>Kind</b>(t.Kind()) {
+		<a href="../src/reflect/type.go.html#line-1902" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1902">#L1902</a>: 	switch <b>Kind</b>(t.Kind()) {
+		<a href="../src/reflect/type.go.html#line-1929" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1929">#L1929</a>: 	switch <b>Kind</b>(t.Kind()) {
+		<a href="../src/reflect/type.go.html#line-2208" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2208">#L2208</a>: 			switch <b>Kind</b>(f.Typ.Kind()) {
+		<a href="../src/reflect/type.go.html#line-2880" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2880">#L2880</a>: 	switch <b>Kind</b>(t.Kind_ &amp; kindMask) {
+		<a href="../src/reflect/value.go.html#line-85">value.go#L85</a>: func (f flag) kind() <b>Kind</b> {
+		<a href="../src/reflect/value.go.html#line-86" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-86">#L86</a>: 	return <b>Kind</b>(f &amp; flagKindMask)
+		<a href="../src/reflect/value.go.html#line-175" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-175">#L175</a>: 	Kind   <b>Kind</b>
+		<a href="../src/reflect/value.go.html#line-230" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-230">#L230</a>: func (f flag) mustBe(expected <b>Kind</b>) {
+		<a href="../src/reflect/value.go.html#line-232" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-232">#L232</a>: 	if <b>Kind</b>(f&amp;flagKindMask) != expected {
+		<a href="../src/reflect/value.go.html#line-1698" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1698">#L1698</a>: func (v Value) Kind() <b>Kind</b> {
+		<a href="../src/reflect/value.go.html#line-3462" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3462">#L3462</a>: 	switch <b>Kind</b>(src.Kind()) {
+		<a href="../src/reflect/value.go.html#line-3464" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3464">#L3464</a>: 		switch <b>Kind</b>(dst.Kind()) {
+		<a href="../src/reflect/value.go.html#line-3474" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3474">#L3474</a>: 		switch <b>Kind</b>(dst.Kind()) {
+		<a href="../src/reflect/value.go.html#line-3484" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3484">#L3484</a>: 		switch <b>Kind</b>(dst.Kind()) {
+		<a href="../src/reflect/value.go.html#line-3494" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3494">#L3494</a>: 		switch <b>Kind</b>(dst.Kind()) {
+		<a href="../src/reflect/value.go.html#line-3501" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3501">#L3501</a>: 			switch <b>Kind</b>(dst.Elem().Kind()) {
+		<a href="../src/reflect/value.go.html#line-3511" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3511">#L3511</a>: 			switch <b>Kind</b>(src.Elem().Kind()) {
+
+	<a href="../pkg/github.com/golang/protobuf/proto.html">github.com/golang/protobuf/proto</a>
+		<a href="../src/github.com/golang/protobuf/proto/extensions.go.html#line-326">extensions.go#L326</a>: func isScalarKind(k reflect.<b>Kind</b>) bool {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

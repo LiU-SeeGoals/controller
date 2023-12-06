@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.traceBuf.varint</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/trace.go.html#line-238">traceBuf</a>.<a href="../src/runtime/trace.go.html#line-1153">varint</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">19 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/trace.go.html#line-639">trace.go#L639</a>: 		buf.<b>varint</b>(uint64(freq))
+		<a href="../src/runtime/trace.go.html#line-822" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-822">#L822</a>: 		buf.<b>varint</b>(0)
+		<a href="../src/runtime/trace.go.html#line-825" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-825">#L825</a>: 	buf.<b>varint</b>(tsDiff)
+		<a href="../src/runtime/trace.go.html#line-827" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-827">#L827</a>: 		buf.<b>varint</b>(a)
+		<a href="../src/runtime/trace.go.html#line-830" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-830">#L830</a>: 		buf.<b>varint</b>(uint64(stackID))
+		<a href="../src/runtime/trace.go.html#line-832" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-832">#L832</a>: 		buf.<b>varint</b>(0)
+		<a href="../src/runtime/trace.go.html#line-834" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-834">#L834</a>: 		buf.<b>varint</b>(traceStackID(mp, buf.stk[:], skip))
+		<a href="../src/runtime/trace.go.html#line-1084" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1084">#L1084</a>: 	bufp.<b>varint</b>(uint64(pid))
+		<a href="../src/runtime/trace.go.html#line-1085" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1085">#L1085</a>: 	bufp.<b>varint</b>(uint64(ts))
+		<a href="../src/runtime/trace.go.html#line-1136" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1136">#L1136</a>: 	buf.<b>varint</b>(id)
+		<a href="../src/runtime/trace.go.html#line-1145" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1145">#L1145</a>: 	buf.<b>varint</b>(uint64(slen))
+		<a href="../src/runtime/trace.go.html#line-1153" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1153">#L1153</a>: func (buf *traceBuf) <b>varint</b>(v uint64) {
+		<a href="../src/runtime/trace.go.html#line-1318" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1318">#L1318</a>: 			buf.<b>varint</b>(uint64(stk.id))
+		<a href="../src/runtime/trace.go.html#line-1319" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1319">#L1319</a>: 			buf.<b>varint</b>(uint64(len(frames)))
+		<a href="../src/runtime/trace.go.html#line-1321" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1321">#L1321</a>: 				buf.<b>varint</b>(uint64(frame.PC))
+		<a href="../src/runtime/trace.go.html#line-1322" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1322">#L1322</a>: 				buf.<b>varint</b>(frame.funcID)
+		<a href="../src/runtime/trace.go.html#line-1323" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1323">#L1323</a>: 				buf.<b>varint</b>(frame.fileID)
+		<a href="../src/runtime/trace.go.html#line-1324" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1324">#L1324</a>: 				buf.<b>varint</b>(frame.line)
+		<a href="../src/runtime/trace.go.html#line-1773" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1773">#L1773</a>: 	buf.<b>varint</b>(uint64(slen))
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

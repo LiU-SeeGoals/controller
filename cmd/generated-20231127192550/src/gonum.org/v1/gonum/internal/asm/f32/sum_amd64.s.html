@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: sum_amd64.s in package gonum.org/v1/gonum/internal/asm/f32</title>
+<link href="../../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	sum_amd64.s
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/gonum.org/v1/gonum/internal/asm/f32.html">gonum.org/v1/gonum/internal/asm/f32</a>
+</code></pre>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code>// Copyright ©2021 The Gonum Authors. All rights reserved.</code></span>
+<span class="codeline" id="line-2"><code>// Use of this source code is governed by a BSD-style</code></span>
+<span class="codeline" id="line-3"><code>// license that can be found in the LICENSE file.</code></span>
+<span class="codeline" id="line-4"><code></code></span>
+<span class="codeline" id="line-5"><code>// +build !noasm,!gccgo,!safe</code></span>
+<span class="codeline" id="line-6"><code></code></span>
+<span class="codeline" id="line-7"><code>#include "textflag.h"</code></span>
+<span class="codeline" id="line-8"><code></code></span>
+<span class="codeline" id="line-9"><code>#define X_PTR SI</code></span>
+<span class="codeline" id="line-10"><code>#define IDX AX</code></span>
+<span class="codeline" id="line-11"><code>#define LEN CX</code></span>
+<span class="codeline" id="line-12"><code>#define TAIL BX</code></span>
+<span class="codeline" id="line-13"><code>#define SUM X0</code></span>
+<span class="codeline" id="line-14"><code>#define SUM_1 X1</code></span>
+<span class="codeline" id="line-15"><code>#define SUM_2 X2</code></span>
+<span class="codeline" id="line-16"><code>#define SUM_3 X3</code></span>
+<span class="codeline" id="line-17"><code></code></span>
+<span class="codeline" id="line-18"><code>// func Sum(x []float32) float32</code></span>
+<span class="codeline" id="line-19"><code>TEXT ·Sum(SB), NOSPLIT, $0</code></span>
+<span class="codeline" id="line-20"><code>	MOVQ x_base+0(FP), X_PTR // X_PTR = &amp;x</code></span>
+<span class="codeline" id="line-21"><code>	MOVQ x_len+8(FP), LEN    // LEN = len(x)</code></span>
+<span class="codeline" id="line-22"><code>	XORQ IDX, IDX            // i = 0</code></span>
+<span class="codeline" id="line-23"><code>	PXOR SUM, SUM            // p_sum_i = 0</code></span>
+<span class="codeline" id="line-24"><code>	CMPQ LEN, $0             // if LEN == 0 { return 0 }</code></span>
+<span class="codeline" id="line-25"><code>	JE   sum_end</code></span>
+<span class="codeline" id="line-26"><code></code></span>
+<span class="codeline" id="line-27"><code>	PXOR SUM_1, SUM_1</code></span>
+<span class="codeline" id="line-28"><code>	PXOR SUM_2, SUM_2</code></span>
+<span class="codeline" id="line-29"><code>	PXOR SUM_3, SUM_3</code></span>
+<span class="codeline" id="line-30"><code></code></span>
+<span class="codeline" id="line-31"><code>	MOVQ X_PTR, TAIL // Check memory alignment</code></span>
+<span class="codeline" id="line-32"><code>	ANDQ $15, TAIL   // TAIL = &amp;x % 16</code></span>
+<span class="codeline" id="line-33"><code>	JZ   no_trim     // if TAIL == 0 { goto no_trim }</code></span>
+<span class="codeline" id="line-34"><code>	SUBQ $16, TAIL   // TAIL -= 16</code></span>
+<span class="codeline" id="line-35"><code></code></span>
+<span class="codeline" id="line-36"><code>sum_align: // Align on 16-byte boundary do {</code></span>
+<span class="codeline" id="line-37"><code>	ADDSS (X_PTR)(IDX*4), SUM // SUM += x[0]</code></span>
+<span class="codeline" id="line-38"><code>	INCQ  IDX                 // i++</code></span>
+<span class="codeline" id="line-39"><code>	DECQ  LEN                 // LEN--</code></span>
+<span class="codeline" id="line-40"><code>	JZ    sum_end             // if LEN == 0 { return }</code></span>
+<span class="codeline" id="line-41"><code>	ADDQ  $4, TAIL            // TAIL += 4</code></span>
+<span class="codeline" id="line-42"><code>	JNZ   sum_align           // } while TAIL &lt; 0</code></span>
+<span class="codeline" id="line-43"><code></code></span>
+<span class="codeline" id="line-44"><code>no_trim:</code></span>
+<span class="codeline" id="line-45"><code>	MOVQ LEN, TAIL</code></span>
+<span class="codeline" id="line-46"><code>	SHRQ $4, LEN   // LEN = floor( n / 16 )</code></span>
+<span class="codeline" id="line-47"><code>	JZ   sum_tail8 // if LEN == 0 { goto sum_tail8 }</code></span>
+<span class="codeline" id="line-48"><code></code></span>
+<span class="codeline" id="line-49"><code></code></span>
+<span class="codeline" id="line-50"><code>sum_loop: // sum 16x wide do {</code></span>
+<span class="codeline" id="line-51"><code>	ADDPS (X_PTR)(IDX*4), SUM     // sum_i += x[i:i+4]</code></span>
+<span class="codeline" id="line-52"><code>	ADDPS 16(X_PTR)(IDX*4), SUM_1</code></span>
+<span class="codeline" id="line-53"><code>	ADDPS 32(X_PTR)(IDX*4), SUM_2</code></span>
+<span class="codeline" id="line-54"><code>	ADDPS 48(X_PTR)(IDX*4), SUM_3</code></span>
+<span class="codeline" id="line-55"><code></code></span>
+<span class="codeline" id="line-56"><code>	ADDQ  $16, IDX                // i += 16</code></span>
+<span class="codeline" id="line-57"><code>	DECQ  LEN</code></span>
+<span class="codeline" id="line-58"><code>	JNZ   sum_loop                // } while --LEN &gt; 0</code></span>
+<span class="codeline" id="line-59"><code></code></span>
+<span class="codeline" id="line-60"><code>sum_tail8:</code></span>
+<span class="codeline" id="line-61"><code>	ADDPS SUM_3, SUM</code></span>
+<span class="codeline" id="line-62"><code>	ADDPS SUM_2, SUM_1</code></span>
+<span class="codeline" id="line-63"><code></code></span>
+<span class="codeline" id="line-64"><code>	TESTQ $8, TAIL</code></span>
+<span class="codeline" id="line-65"><code>	JZ    sum_tail4</code></span>
+<span class="codeline" id="line-66"><code></code></span>
+<span class="codeline" id="line-67"><code>	ADDPS (X_PTR)(IDX*4), SUM // sum_i += x[i:i+4]</code></span>
+<span class="codeline" id="line-68"><code>	ADDPS 16(X_PTR)(IDX*4), SUM_1</code></span>
+<span class="codeline" id="line-69"><code>	ADDQ  $8, IDX</code></span>
+<span class="codeline" id="line-70"><code></code></span>
+<span class="codeline" id="line-71"><code>sum_tail4:</code></span>
+<span class="codeline" id="line-72"><code>	ADDPS SUM_1, SUM</code></span>
+<span class="codeline" id="line-73"><code></code></span>
+<span class="codeline" id="line-74"><code>	TESTQ $4, TAIL</code></span>
+<span class="codeline" id="line-75"><code>	JZ    sum_tail2</code></span>
+<span class="codeline" id="line-76"><code></code></span>
+<span class="codeline" id="line-77"><code>	ADDPS (X_PTR)(IDX*4), SUM // sum_i += x[i:i+4]</code></span>
+<span class="codeline" id="line-78"><code>	ADDQ  $4, IDX</code></span>
+<span class="codeline" id="line-79"><code></code></span>
+<span class="codeline" id="line-80"><code>sum_tail2:</code></span>
+<span class="codeline" id="line-81"><code>	HADDPS SUM, SUM            // sum_i[:2] += sum_i[2:4]</code></span>
+<span class="codeline" id="line-82"><code></code></span>
+<span class="codeline" id="line-83"><code>	TESTQ $2, TAIL</code></span>
+<span class="codeline" id="line-84"><code>	JZ    sum_tail1</code></span>
+<span class="codeline" id="line-85"><code></code></span>
+<span class="codeline" id="line-86"><code>	MOVSD (X_PTR)(IDX*4), SUM_1 // reuse SUM_1</code></span>
+<span class="codeline" id="line-87"><code>	ADDPS SUM_1, SUM            // sum_i += x[i:i+2]</code></span>
+<span class="codeline" id="line-88"><code>	ADDQ  $2, IDX</code></span>
+<span class="codeline" id="line-89"><code></code></span>
+<span class="codeline" id="line-90"><code>sum_tail1:</code></span>
+<span class="codeline" id="line-91"><code>	HADDPS SUM, SUM // sum_i[0] += sum_i[1]</code></span>
+<span class="codeline" id="line-92"><code></code></span>
+<span class="codeline" id="line-93"><code>	TESTQ $1, TAIL</code></span>
+<span class="codeline" id="line-94"><code>	JZ    sum_end</code></span>
+<span class="codeline" id="line-95"><code></code></span>
+<span class="codeline" id="line-96"><code>	ADDSS (X_PTR)(IDX*4), SUM</code></span>
+<span class="codeline" id="line-97"><code></code></span>
+<span class="codeline" id="line-98"><code>sum_end: // return sum</code></span>
+<span class="codeline" id="line-99"><code>	MOVSS SUM, ret+24(FP)</code></span>
+<span class="codeline" id="line-100"><code>	RET</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

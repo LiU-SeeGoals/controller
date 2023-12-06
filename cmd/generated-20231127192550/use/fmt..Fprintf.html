@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: fmt.Fprintf</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../pkg/fmt.html">fmt</a>.<a href="../src/fmt/print.go.html#line-222">Fprintf</a></b></span>
+
+<span class="title">17 uses</span>
+
+	fmt (current package)
+		<a href="../src/fmt/print.go.html#line-222">print.go#L222</a>: func <b>Fprintf</b>(w io.Writer, format string, a ...any) (n int, err error) {
+		<a href="../src/fmt/print.go.html#line-233" class="path-duplicate">print.go</a><a href="../src/fmt/print.go.html#line-233">#L233</a>: 	return <b>Fprintf</b>(os.Stdout, format, a...)
+
+	<a href="../pkg/github.com/golang/protobuf/proto.html">github.com/golang/protobuf/proto</a>
+		<a href="../src/github.com/golang/protobuf/proto/text_encode.go.html#line-434">text_encode.go#L434</a>: 		fmt.<b>Fprintf</b>(w, "/* %d unknown bytes */\n", len(b))
+		<a href="../src/github.com/golang/protobuf/proto/text_encode.go.html#line-484" class="path-duplicate">text_encode.go</a><a href="../src/github.com/golang/protobuf/proto/text_encode.go.html#line-484">#L484</a>: 			fmt.<b>Fprintf</b>(w, "%q", v)
+		<a href="../src/github.com/golang/protobuf/proto/text_encode.go.html#line-489" class="path-duplicate">text_encode.go</a><a href="../src/github.com/golang/protobuf/proto/text_encode.go.html#line-489">#L489</a>: 			fmt.<b>Fprintf</b>(w, "/* unknown wire type %d */", wtyp)
+		<a href="../src/github.com/golang/protobuf/proto/text_encode.go.html#line-541" class="path-duplicate">text_encode.go</a><a href="../src/github.com/golang/protobuf/proto/text_encode.go.html#line-541">#L541</a>: 	fmt.<b>Fprintf</b>(w, "[%s]:", name)
+
+	<a href="../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>
+		<a href="../src/gonum.org/v1/gonum/mat/format.go.html#line-79">format.go#L79</a>: 		fmt.<b>Fprintf</b>(fs, "%#v", f.matrix)
+		<a href="../src/gonum.org/v1/gonum/mat/format.go.html#line-133" class="path-duplicate">format.go</a><a href="../src/gonum.org/v1/gonum/mat/format.go.html#line-133">#L133</a>: 		fmt.<b>Fprintf</b>(fs, "%%!%c(%T=Dims(%d, %d))", c, m, rows, cols)
+		<a href="../src/gonum.org/v1/gonum/mat/format.go.html#line-146" class="path-duplicate">format.go</a><a href="../src/gonum.org/v1/gonum/mat/format.go.html#line-146">#L146</a>: 		fmt.<b>Fprintf</b>(fs, "Dims(%d, %d)\n", rows, cols)
+		<a href="../src/gonum.org/v1/gonum/mat/format.go.html#line-210" class="path-duplicate">format.go</a><a href="../src/gonum.org/v1/gonum/mat/format.go.html#line-210">#L210</a>: 			fmt.<b>Fprintf</b>(fs, "%s .\n%[1]s .\n%[1]s .\n", prefix)
+		<a href="../src/gonum.org/v1/gonum/mat/format.go.html#line-232" class="path-duplicate">format.go</a><a href="../src/gonum.org/v1/gonum/mat/format.go.html#line-232">#L232</a>: 			fmt.<b>Fprintf</b>(fs, "%%!%c(%T=Dims(%d, %d))", c, m, rows, cols)
+		<a href="../src/gonum.org/v1/gonum/mat/format.go.html#line-245" class="path-duplicate">format.go</a><a href="../src/gonum.org/v1/gonum/mat/format.go.html#line-245">#L245</a>: 				fmt.<b>Fprintf</b>(fs, format, m.At(i, j))
+		<a href="../src/gonum.org/v1/gonum/mat/format.go.html#line-279" class="path-duplicate">format.go</a><a href="../src/gonum.org/v1/gonum/mat/format.go.html#line-279">#L279</a>: 		fmt.<b>Fprintf</b>(fs, "%%!%c(%T=Dims(%d, %d))", c, m, rows, cols)
+		<a href="../src/gonum.org/v1/gonum/mat/format.go.html#line-345" class="path-duplicate">format.go</a><a href="../src/gonum.org/v1/gonum/mat/format.go.html#line-345">#L345</a>: 			fmt.<b>Fprintf</b>(fs, "%%!%c(%T=Dims(%d, %d))", c, m, rows, cols)
+		<a href="../src/gonum.org/v1/gonum/mat/format.go.html#line-361" class="path-duplicate">format.go</a><a href="../src/gonum.org/v1/gonum/mat/format.go.html#line-361">#L361</a>: 				fmt.<b>Fprintf</b>(fs, format, m.At(i, j))
+		<a href="../src/gonum.org/v1/gonum/mat/format.go.html#line-398" class="path-duplicate">format.go</a><a href="../src/gonum.org/v1/gonum/mat/format.go.html#line-398">#L398</a>: 		fmt.<b>Fprintf</b>(fs, "%%!%c(%T=Dims(%d, %d))", c, m, rows, cols)
+
+	<a href="../pkg/google.golang.org/protobuf/reflect/protoregistry.html">google.golang.org/protobuf/reflect/protoregistry</a>
+		<a href="../src/google.golang.org/protobuf/reflect/protoregistry/registry.go.html#line-58">registry.go#L58</a>: 		fmt.<b>Fprintf</b>(os.Stderr, "WARNING: %v\nSee %v\n\n", err, faq)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

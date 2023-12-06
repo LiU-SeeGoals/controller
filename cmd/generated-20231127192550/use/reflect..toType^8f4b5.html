@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: reflect.toType</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../pkg/reflect.html">reflect</a>.<a href="../src/reflect/type.go.html#line-2772">toType</a></b></span>
+
+<span class="title">16 uses</span>
+
+	reflect (current package)
+		<a href="../src/reflect/type.go.html#line-709">type.go#L709</a>: 	return <b>toType</b>(elem(t.common()))
+		<a href="../src/reflect/type.go.html#line-749" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-749">#L749</a>: 	return <b>toType</b>(tt.Key)
+		<a href="../src/reflect/type.go.html#line-773" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-773">#L773</a>: 	return <b>toType</b>(tt.InSlice()[i])
+		<a href="../src/reflect/type.go.html#line-797" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-797">#L797</a>: 	return <b>toType</b>(tt.OutSlice()[i])
+		<a href="../src/reflect/type.go.html#line-845" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-845">#L845</a>: 	m.Type = <b>toType</b>(t.typeOff(p.Typ))
+		<a href="../src/reflect/type.go.html#line-976" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-976">#L976</a>: 	f.Type = <b>toType</b>(p.Typ)
+		<a href="../src/reflect/type.go.html#line-1003" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1003">#L1003</a>: 	f.Type = <b>toType</b>(&amp;t.Type)
+		<a href="../src/reflect/type.go.html#line-1157" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1157">#L1157</a>: 	return <b>toType</b>((*abi.Type)(noescape(unsafe.Pointer(eface.typ))))
+		<a href="../src/reflect/type.go.html#line-1821" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1821">#L1821</a>: 		return <b>toType</b>(tt)
+		<a href="../src/reflect/type.go.html#line-2446" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2446">#L2446</a>: 				return <b>toType</b>(t)
+		<a href="../src/reflect/type.go.html#line-2458" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2458">#L2458</a>: 				return <b>toType</b>(t)
+		<a href="../src/reflect/type.go.html#line-2478" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2478">#L2478</a>: 			return addToCache(<b>toType</b>(t))
+		<a href="../src/reflect/type.go.html#line-2561" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2561">#L2561</a>: 	return addToCache(<b>toType</b>(&amp;typ.Type))
+		<a href="../src/reflect/type.go.html#line-2772" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2772">#L2772</a>: func <b>toType</b>(t *abi.Type) Type {
+		<a href="../src/reflect/value.go.html#line-2929">value.go#L2929</a>: 		typesMustMatch("reflect.Copy", <b>toType</b>(de), <b>toType</b>(se))
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

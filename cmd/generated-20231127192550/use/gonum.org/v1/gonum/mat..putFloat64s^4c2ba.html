@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/mat.putFloat64s</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-238">putFloat64s</a></b></span>
+
+<span class="title">38 uses</span>
+
+	gonum.org/v1/gonum/mat (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-62">cholesky.go#L62</a>: 	defer <b>putFloat64s</b>(work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-147" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-147">#L147</a>: 	<b>putFloat64s</b>(work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-612" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-612">#L612</a>: 	defer <b>putFloat64s</b>(work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-680" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-680">#L680</a>: 	defer <b>putFloat64s</b>(cos)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-682" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-682">#L682</a>: 	defer <b>putFloat64s</b>(sin)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-776" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-776">#L776</a>: 	<b>putFloat64s</b>(work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-979" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-979">#L979</a>: 	defer <b>putFloat64s</b>(work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-611">dense.go#L611</a>: 		defer <b>putFloat64s</b>(work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-259">dense_arithmetic.go#L259</a>: 		<b>putFloat64s</b>(work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-262" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-262">#L262</a>: 	defer <b>putFloat64s</b>(work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-445" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-445">#L445</a>: 	defer <b>putFloat64s</b>(row)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/eigen.go.html#line-57">eigen.go#L57</a>: 	<b>putFloat64s</b>(work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/eigen.go.html#line-204" class="path-duplicate">eigen.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/eigen.go.html#line-204">#L204</a>: 	defer <b>putFloat64s</b>(wr)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/eigen.go.html#line-206" class="path-duplicate">eigen.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/eigen.go.html#line-206">#L206</a>: 	defer <b>putFloat64s</b>(wi)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/eigen.go.html#line-212" class="path-duplicate">eigen.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/eigen.go.html#line-212">#L212</a>: 	<b>putFloat64s</b>(work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-39">lq.go#L39</a>: 	<b>putFloat64s</b>(work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-68" class="path-duplicate">lq.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-68">#L68</a>: 	<b>putFloat64s</b>(work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-164" class="path-duplicate">lq.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-164">#L164</a>: 	<b>putFloat64s</b>(work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-212" class="path-duplicate">lq.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-212">#L212</a>: 		<b>putFloat64s</b>(work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-230" class="path-duplicate">lq.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-230">#L230</a>: 		<b>putFloat64s</b>(work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-34">lu.go#L34</a>: 	defer <b>putFloat64s</b>(work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-84" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-84">#L84</a>: 	<b>putFloat64s</b>(work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-135" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-135">#L135</a>: 	defer <b>putFloat64s</b>(logDiag)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-218" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-218">#L218</a>: 	defer <b>putFloat64s</b>(xs)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-220" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-220">#L220</a>: 	defer <b>putFloat64s</b>(ys)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-238">pool.go#L238</a>: func <b>putFloat64s</b>(w []float64) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-38">qr.go#L38</a>: 	<b>putFloat64s</b>(work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-68" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-68">#L68</a>: 	<b>putFloat64s</b>(work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-159" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-159">#L159</a>: 	<b>putFloat64s</b>(work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-214" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-214">#L214</a>: 		<b>putFloat64s</b>(work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-220" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-220">#L220</a>: 		<b>putFloat64s</b>(work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/solve.go.html#line-83">solve.go#L83</a>: 		<b>putFloat64s</b>(work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-140">svd.go#L140</a>: 	<b>putFloat64s</b>(work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symband.go.html#line-266">symband.go#L266</a>: 		defer <b>putFloat64s</b>(work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-602">symmetric.go#L602</a>: 		defer <b>putFloat64s</b>(work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-465">triangular.go#L465</a>: 	<b>putFloat64s</b>(work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-639" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-639">#L639</a>: 		defer <b>putFloat64s</b>(work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-545">triband.go#L545</a>: 		defer <b>putFloat64s</b>(work)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

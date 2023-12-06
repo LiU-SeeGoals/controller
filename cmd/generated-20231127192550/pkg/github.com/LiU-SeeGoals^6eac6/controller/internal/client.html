@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: github.com/LiU-SeeGoals/controller/internal/client</title>
+<link href="../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>client</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../../../index.html#pkg-github.com/LiU-SeeGoals/controller/internal/client">github.com/LiU-SeeGoals/controller/internal/client</a><i> (on <a href="https://pkg.go.dev/github.com/LiU-SeeGoals/controller/internal/client" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports <a href="../../../../../dep/github.com/LiU-SeeGoals^6eac6/controller/internal/client.html">4 packages</a>, and imported by <a href="../../../../../dep/github.com/LiU-SeeGoals^6eac6/controller/internal/client.html#imported-by">one package</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<span class="nodocs">    <a href="../../../../../src/github.com/LiU-SeeGoals^6eac6/controller/internal/client/grsim_client.go.html">grsim_client.go</a></span></div>
+<div id="exported-types"><span class="title">Package-Level Type Names<span class="title-stat"><i> (only one, which is exported)</i></span></span>
+
+<div id="exported-types-buttons" class="js-on">	/* sort exporteds by: <label id="sort-types-by-alphabet" class="button">alphabet</label> | <label id="sort-types-by-popularity" class="button">popularity</label> */</div><div class="anchor type-res" id="name-GrsimClient" data-popularity="275">	<input type='checkbox' class="fold" id="GrsimClient-fold-content"><label for="GrsimClient-fold-content"> <a href="../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/client..GrsimClient.html">type</a> <a href="../../../../../src/github.com/LiU-SeeGoals^6eac6/controller/internal/client/grsim_client.go.html#line-12">GrsimClient</a> <i>(struct)</i></label><span id='GrsimClient-fold-content-docs' class="fold-docs">
+<span class="md-text">		SSL Vision receiver</span>
+
+		<input type='checkbox' class="fold" id="GrsimClient-fold-fields"><label for="GrsimClient-fold-fields">Fields (<i>total 5, none are exported</i>)</label><span id='GrsimClient-fold-fields-items' class="fold-items">
+			<input type='checkbox' class="showhide" id="GrsimClient-showhide-fields"><i><label for="GrsimClient-showhide-fields" class="show-inline">/* 5 unexporteds ... */</label><label for="GrsimClient-showhide-fields" class="hide-inline">/* 5 unexporteds: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="GrsimClient-fold-field-addr"><label for="GrsimClient-fold-field-addr"><a href="../../../../../src/github.com/LiU-SeeGoals^6eac6/controller/internal/client/grsim_client.go.html#line-17">addr</a> <i>*<a href="../../../../net.html">net</a>.<a href="../../../../net.html#name-UDPAddr">UDPAddr</a></i></label><span id='GrsimClient-fold-field-addr-docs' class="fold-docs">
+<span class="md-text">				UDP address</span>
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="GrsimClient-fold-field-buffBlue"><label for="GrsimClient-fold-field-buffBlue"><a href="../../../../../src/github.com/LiU-SeeGoals^6eac6/controller/internal/client/grsim_client.go.html#line-23">buffBlue</a> <i>[]*<a href="proto/grsim.html">grsim</a>.<a href="proto/grsim.html#name-GrSim_Robot_Command">GrSim_Robot_Command</a></i></label><span id='GrsimClient-fold-field-buffBlue-docs' class="fold-docs">
+<span class="md-text">				Blue team robot command buffer</span>
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="GrsimClient-fold-field-buffYellow"><label for="GrsimClient-fold-field-buffYellow"><a href="../../../../../src/github.com/LiU-SeeGoals^6eac6/controller/internal/client/grsim_client.go.html#line-20">buffYellow</a> <i>[]*<a href="proto/grsim.html">grsim</a>.<a href="proto/grsim.html#name-GrSim_Robot_Command">GrSim_Robot_Command</a></i></label><span id='GrsimClient-fold-field-buffYellow-docs' class="fold-docs">
+<span class="md-text">				Yellow team robot command buffer</span>
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="GrsimClient-fold-field-conn"><label for="GrsimClient-fold-field-conn"><a href="../../../../../src/github.com/LiU-SeeGoals^6eac6/controller/internal/client/grsim_client.go.html#line-14">conn</a> <i>*<a href="../../../../net.html">net</a>.<a href="../../../../net.html#name-UDPConn">UDPConn</a></i></label><span id='GrsimClient-fold-field-conn-docs' class="fold-docs">
+<span class="md-text">				Connection</span>
+</span></i></span><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="GrsimClient-fold-field-time"><label for="GrsimClient-fold-field-time"><a href="../../../../../src/github.com/LiU-SeeGoals^6eac6/controller/internal/client/grsim_client.go.html#line-29">time</a> <i><a href="../../../../builtin.html#name-float64">float64</a></i></label><span id='GrsimClient-fold-field-time-docs' class="fold-docs">
+<span class="md-text">				Local time
+				Note: grsim requires us to send a "timestamp",
+				but it's really unclear what this timestamp is.
+				For now, it's implemented as a local counter.</span>
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="GrsimClient-fold-methods"><label for="GrsimClient-fold-methods">Methods (<i>total 4, in which 3 are exported</i>)</label><span id='GrsimClient-fold-methods-items' class="fold-items"><span>
+			<input type='checkbox' class="fold" id="GrsimClient-fold-method-AddRobotCommand"><label for="GrsimClient-fold-method-AddRobotCommand">(*GrsimClient) <a href="../../../../../src/github.com/LiU-SeeGoals^6eac6/controller/internal/client/grsim_client.go.html#line-58">AddRobotCommand</a>(yellowTeam <a href="../../../../builtin.html#name-bool">bool</a>, robotId <a href="../../../../builtin.html#name-uint32">uint32</a>, velTangent <a href="../../../../builtin.html#name-float32">float32</a>, velNormal <a href="../../../../builtin.html#name-float32">float32</a>, velAngular <a href="../../../../builtin.html#name-float32">float32</a>, kickSpeedX <a href="../../../../builtin.html#name-float32">float32</a>, kickSpeedZ <a href="../../../../builtin.html#name-float32">float32</a>, spinner <a href="../../../../builtin.html#name-bool">bool</a>, wheelsSpeed <a href="../../../../builtin.html#name-bool">bool</a>)</label><span id='GrsimClient-fold-method-AddRobotCommand-docs' class="fold-docs">
+<span class="md-text">				Add a new Robot command to client buffer</span>
+</span></span><span>
+			<input type='checkbox' class="fold" id="GrsimClient-fold-method-Connect"><label for="GrsimClient-fold-method-Connect">(*GrsimClient) <a href="../../../../../src/github.com/LiU-SeeGoals^6eac6/controller/internal/client/grsim_client.go.html#line-48">Connect</a>()</label><span id='GrsimClient-fold-method-Connect-docs' class="fold-docs">
+<span class="md-text">				Connect/subscribe receiver to UDP multicast.
+				Note, this will NOT block.</span>
+</span></span><span>
+			<span class="nodocs">(*GrsimClient) <a href="../../../../../src/github.com/LiU-SeeGoals^6eac6/controller/internal/client/grsim_client.go.html#line-109">Send</a>() (<a href="../../../../builtin.html#name-int">int</a>, <a href="../../../../builtin.html#name-error">error</a>)</span></span>
+			<input type='checkbox' class="showhide" id="GrsimClient-showhide-methods"><i><label for="GrsimClient-showhide-methods" class="show-inline">/* one unexported ... */</label><label for="GrsimClient-showhide-methods" class="hide-inline">/* one unexported: */</label></i><span class="hidden"><i>
+			<input type='checkbox' class="fold" id="GrsimClient-fold-method-clearCommandBuffer"><label for="GrsimClient-fold-method-clearCommandBuffer">(*GrsimClient) <a href="../../../../../src/github.com/LiU-SeeGoals^6eac6/controller/internal/client/grsim_client.go.html#line-104">clearCommandBuffer</a>()</label><span id='GrsimClient-fold-method-clearCommandBuffer-docs' class="fold-docs">
+<span class="md-text">				Helper function clears command buffer</span>
+</span></i></span></span>
+		<input type='checkbox' class="fold" id="GrsimClient-fold-results"><label for="GrsimClient-fold-results">As Outputs Of (<i>at least one exported</i>)</label><span id='GrsimClient-fold-results-items' class="fold-items"><span>
+			func <a href="#name-NewSSLGrsimClient">NewSSLGrsimClient</a>(addr <a href="../../../../builtin.html#name-string">string</a>) *<b>GrsimClient</b></span></span>
+
+</span></div></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (total 2, in which 1 is exported)</i></span></span>
+
+<div class="anchor value-res" id="name-NewSSLGrsimClient">	<input type='checkbox' class="fold" id="NewSSLGrsimClient-fold-content"><label for="NewSSLGrsimClient-fold-content"> <a href="../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/client..NewSSLGrsimClient.html">func</a> <a href="../../../../../src/github.com/LiU-SeeGoals^6eac6/controller/internal/client/grsim_client.go.html#line-34">NewSSLGrsimClient</a>(addr <a href="../../../../builtin.html#name-string">string</a>) *<a href="#name-GrsimClient">GrsimClient</a></label><span id='NewSSLGrsimClient-fold-content-docs' class="fold-docs">
+<span class="md-text">		Create new Grsim client
+		Address should be &lt;ip&gt;:&lt;port&gt;</span>
+
+</span></div>	<input type='checkbox' class="showhide" id="unexported-functions-showhide"><i><label for="unexported-functions-showhide" class="show-inline">/* one unexported ... */</label><label for="unexported-functions-showhide" class="hide-inline">/* one unexported: */</label></i><div class="anchor value-res hidden" id="name-newRobotCommand"><i>	<input type='checkbox' class="fold" id="newRobotCommand-fold-content"><label for="newRobotCommand-fold-content"> <a href="../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/client..newRobotCommand^7a10d.html">func</a> <a href="../../../../../src/github.com/LiU-SeeGoals^6eac6/controller/internal/client/grsim_client.go.html#line-79">newRobotCommand</a>(robotId <a href="../../../../builtin.html#name-uint32">uint32</a>, velTangent <a href="../../../../builtin.html#name-float32">float32</a>, velNormal <a href="../../../../builtin.html#name-float32">float32</a>, velAngular <a href="../../../../builtin.html#name-float32">float32</a>, kickSpeedX <a href="../../../../builtin.html#name-float32">float32</a>, kickSpeedZ <a href="../../../../builtin.html#name-float32">float32</a>, spinner <a href="../../../../builtin.html#name-bool">bool</a>, wheelsSpeed <a href="../../../../builtin.html#name-bool">bool</a>) *<a href="proto/grsim.html">grsim</a>.<a href="proto/grsim.html#name-GrSim_Robot_Command">GrSim_Robot_Command</a></label><span id='newRobotCommand-fold-content-docs' class="fold-docs">
+<span class="md-text">		Helper function creates a new robot command</span>
+
+</span></i></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

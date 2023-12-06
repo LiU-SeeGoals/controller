@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/lapack/gonum.Implementation.Dlaexc</title>
+<link href="../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../../../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>.<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/lapack.go.html#line-12">Implementation</a>.<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaexc.go.html#line-37">Dlaexc</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">13 uses</span>
+
+	gonum.org/v1/gonum/lapack/gonum (current package)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaexc.go.html#line-37">dlaexc.go#L37</a>: func (impl Implementation) <b>Dlaexc</b>(wantq bool, n int, t []float64, ldt int, q []float64, ldq int, j1, n1, n2 int, work []float64) (ok bool) {
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrexc.go.html#line-130">dtrexc.go#L130</a>: 				ok = impl.<b>Dlaexc</b>(wantq, n, t, ldt, q, ldq, here, nbf, nbnext, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrexc.go.html#line-148" class="path-duplicate">dtrexc.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrexc.go.html#line-148">#L148</a>: 			ok = impl.<b>Dlaexc</b>(wantq, n, t, ldt, q, ldq, here+1, 1, nbnext, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrexc.go.html#line-154" class="path-duplicate">dtrexc.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrexc.go.html#line-154">#L154</a>: 				impl.<b>Dlaexc</b>(wantq, n, t, ldt, q, ldq, here, 1, nbnext, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrexc.go.html#line-164" class="path-duplicate">dtrexc.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrexc.go.html#line-164">#L164</a>: 				ok = impl.<b>Dlaexc</b>(wantq, n, t, ldt, q, ldq, here, 1, nbnext, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrexc.go.html#line-170" class="path-duplicate">dtrexc.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrexc.go.html#line-170">#L170</a>: 				impl.<b>Dlaexc</b>(wantq, n, t, ldt, q, ldq, here, 1, 1, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrexc.go.html#line-171" class="path-duplicate">dtrexc.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrexc.go.html#line-171">#L171</a>: 				impl.<b>Dlaexc</b>(wantq, n, t, ldt, q, ldq, here+1, 1, 1, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrexc.go.html#line-187" class="path-duplicate">dtrexc.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrexc.go.html#line-187">#L187</a>: 				ok = impl.<b>Dlaexc</b>(wantq, n, t, ldt, q, ldq, here-nbnext, nbnext, nbf, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrexc.go.html#line-201" class="path-duplicate">dtrexc.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrexc.go.html#line-201">#L201</a>: 			ok = impl.<b>Dlaexc</b>(wantq, n, t, ldt, q, ldq, here-nbnext, nbnext, 1, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrexc.go.html#line-207" class="path-duplicate">dtrexc.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrexc.go.html#line-207">#L207</a>: 				impl.<b>Dlaexc</b>(wantq, n, t, ldt, q, ldq, here, nbnext, 1, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrexc.go.html#line-217" class="path-duplicate">dtrexc.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrexc.go.html#line-217">#L217</a>: 				ok = impl.<b>Dlaexc</b>(wantq, n, t, ldt, q, ldq, here-1, 2, 1, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrexc.go.html#line-223" class="path-duplicate">dtrexc.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrexc.go.html#line-223">#L223</a>: 				impl.<b>Dlaexc</b>(wantq, n, t, ldt, q, ldq, here, 1, 1, work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrexc.go.html#line-224" class="path-duplicate">dtrexc.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrexc.go.html#line-224">#L224</a>: 				impl.<b>Dlaexc</b>(wantq, n, t, ldt, q, ldq, here-1, 1, 1, work)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

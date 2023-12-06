@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.mheap.allspans</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/mheap.go.html#line-61">mheap</a>.<a href="../src/runtime/mheap.go.html#line-83">allspans</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">19 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/heapdump.go.html#line-454">heapdump.go#L454</a>: 	for _, s := range mheap_.<b>allspans</b> {
+		<a href="../src/runtime/heapdump.go.html#line-480" class="path-duplicate">heapdump.go</a><a href="../src/runtime/heapdump.go.html#line-480">#L480</a>: 	for _, s := range mheap_.<b>allspans</b> {
+		<a href="../src/runtime/heapdump.go.html#line-652" class="path-duplicate">heapdump.go</a><a href="../src/runtime/heapdump.go.html#line-652">#L652</a>: 	for _, s := range mheap_.<b>allspans</b> {
+		<a href="../src/runtime/heapdump.go.html#line-675" class="path-duplicate">heapdump.go</a><a href="../src/runtime/heapdump.go.html#line-675">#L675</a>: 	for _, s := range mheap_.<b>allspans</b> {
+		<a href="../src/runtime/mheap.go.html#line-83">mheap.go#L83</a>: 	<b>allspans</b> []*mspan // all spans out there
+		<a href="../src/runtime/mheap.go.html#line-538" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-538">#L538</a>: 	if len(h.<b>allspans</b>) &gt;= cap(h.<b>allspans</b>) {
+		<a href="../src/runtime/mheap.go.html#line-540" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-540">#L540</a>: 		if n &lt; cap(h.<b>allspans</b>)*3/2 {
+		<a href="../src/runtime/mheap.go.html#line-541" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-541">#L541</a>: 			n = cap(h.<b>allspans</b>) * 3 / 2
+		<a href="../src/runtime/mheap.go.html#line-549" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-549">#L549</a>: 		sp.len = len(h.<b>allspans</b>)
+		<a href="../src/runtime/mheap.go.html#line-551" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-551">#L551</a>: 		if len(h.<b>allspans</b>) &gt; 0 {
+		<a href="../src/runtime/mheap.go.html#line-552" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-552">#L552</a>: 			copy(new, h.<b>allspans</b>)
+		<a href="../src/runtime/mheap.go.html#line-554" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-554">#L554</a>: 		oldAllspans := h.<b>allspans</b>
+		<a href="../src/runtime/mheap.go.html#line-555" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-555">#L555</a>: 		*(*notInHeapSlice)(unsafe.Pointer(&amp;h.<b>allspans</b>)) = *(*notInHeapSlice)(unsafe.Pointer(&amp;new))
+		<a href="../src/runtime/mheap.go.html#line-560" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-560">#L560</a>: 	h.<b>allspans</b> = h.<b>allspans</b>[:len(h.<b>allspans</b>)+1]
+		<a href="../src/runtime/mheap.go.html#line-561" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-561">#L561</a>: 	h.<b>allspans</b>[len(h.<b>allspans</b>)-1] = s
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

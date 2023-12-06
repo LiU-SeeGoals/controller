@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: axpyunitaryto_amd64.s in package gonum.org/v1/gonum/internal/asm/c64</title>
+<link href="../../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	axpyunitaryto_amd64.s
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/gonum.org/v1/gonum/internal/asm/c64.html">gonum.org/v1/gonum/internal/asm/c64</a>
+</code></pre>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code>// Copyright ©2016 The Gonum Authors. All rights reserved.</code></span>
+<span class="codeline" id="line-2"><code>// Use of this source code is governed by a BSD-style</code></span>
+<span class="codeline" id="line-3"><code>// license that can be found in the LICENSE file.</code></span>
+<span class="codeline" id="line-4"><code></code></span>
+<span class="codeline" id="line-5"><code>// +build !noasm,!gccgo,!safe</code></span>
+<span class="codeline" id="line-6"><code></code></span>
+<span class="codeline" id="line-7"><code>#include "textflag.h"</code></span>
+<span class="codeline" id="line-8"><code></code></span>
+<span class="codeline" id="line-9"><code>// MOVSHDUP X3, X2</code></span>
+<span class="codeline" id="line-10"><code>#define MOVSHDUP_X3_X2 BYTE $0xF3; BYTE $0x0F; BYTE $0x16; BYTE $0xD3</code></span>
+<span class="codeline" id="line-11"><code>// MOVSLDUP X3, X3</code></span>
+<span class="codeline" id="line-12"><code>#define MOVSLDUP_X3_X3 BYTE $0xF3; BYTE $0x0F; BYTE $0x12; BYTE $0xDB</code></span>
+<span class="codeline" id="line-13"><code>// ADDSUBPS X2, X3</code></span>
+<span class="codeline" id="line-14"><code>#define ADDSUBPS_X2_X3 BYTE $0xF2; BYTE $0x0F; BYTE $0xD0; BYTE $0xDA</code></span>
+<span class="codeline" id="line-15"><code></code></span>
+<span class="codeline" id="line-16"><code>// MOVSHDUP X5, X4</code></span>
+<span class="codeline" id="line-17"><code>#define MOVSHDUP_X5_X4 BYTE $0xF3; BYTE $0x0F; BYTE $0x16; BYTE $0xE5</code></span>
+<span class="codeline" id="line-18"><code>// MOVSLDUP X5, X5</code></span>
+<span class="codeline" id="line-19"><code>#define MOVSLDUP_X5_X5 BYTE $0xF3; BYTE $0x0F; BYTE $0x12; BYTE $0xED</code></span>
+<span class="codeline" id="line-20"><code>// ADDSUBPS X4, X5</code></span>
+<span class="codeline" id="line-21"><code>#define ADDSUBPS_X4_X5 BYTE $0xF2; BYTE $0x0F; BYTE $0xD0; BYTE $0xEC</code></span>
+<span class="codeline" id="line-22"><code></code></span>
+<span class="codeline" id="line-23"><code>// MOVSHDUP X7, X6</code></span>
+<span class="codeline" id="line-24"><code>#define MOVSHDUP_X7_X6 BYTE $0xF3; BYTE $0x0F; BYTE $0x16; BYTE $0xF7</code></span>
+<span class="codeline" id="line-25"><code>// MOVSLDUP X7, X7</code></span>
+<span class="codeline" id="line-26"><code>#define MOVSLDUP_X7_X7 BYTE $0xF3; BYTE $0x0F; BYTE $0x12; BYTE $0xFF</code></span>
+<span class="codeline" id="line-27"><code>// ADDSUBPS X6, X7</code></span>
+<span class="codeline" id="line-28"><code>#define ADDSUBPS_X6_X7 BYTE $0xF2; BYTE $0x0F; BYTE $0xD0; BYTE $0xFE</code></span>
+<span class="codeline" id="line-29"><code></code></span>
+<span class="codeline" id="line-30"><code>// MOVSHDUP X9, X8</code></span>
+<span class="codeline" id="line-31"><code>#define MOVSHDUP_X9_X8 BYTE $0xF3; BYTE $0x45; BYTE $0x0F; BYTE $0x16; BYTE $0xC1</code></span>
+<span class="codeline" id="line-32"><code>// MOVSLDUP X9, X9</code></span>
+<span class="codeline" id="line-33"><code>#define MOVSLDUP_X9_X9 BYTE $0xF3; BYTE $0x45; BYTE $0x0F; BYTE $0x12; BYTE $0xC9</code></span>
+<span class="codeline" id="line-34"><code>// ADDSUBPS X8, X9</code></span>
+<span class="codeline" id="line-35"><code>#define ADDSUBPS_X8_X9 BYTE $0xF2; BYTE $0x45; BYTE $0x0F; BYTE $0xD0; BYTE $0xC8</code></span>
+<span class="codeline" id="line-36"><code></code></span>
+<span class="codeline" id="line-37"><code>// func AxpyUnitaryTo(dst []complex64, alpha complex64, x, y []complex64)</code></span>
+<span class="codeline" id="line-38"><code>TEXT ·AxpyUnitaryTo(SB), NOSPLIT, $0</code></span>
+<span class="codeline" id="line-39"><code>	MOVQ    dst_base+0(FP), DI // DI = &amp;dst</code></span>
+<span class="codeline" id="line-40"><code>	MOVQ    x_base+32(FP), SI  // SI = &amp;x</code></span>
+<span class="codeline" id="line-41"><code>	MOVQ    y_base+56(FP), DX  // DX = &amp;y</code></span>
+<span class="codeline" id="line-42"><code>	MOVQ    x_len+40(FP), CX</code></span>
+<span class="codeline" id="line-43"><code>	CMPQ    y_len+64(FP), CX   // CX = min( len(x), len(y), len(dst) )</code></span>
+<span class="codeline" id="line-44"><code>	CMOVQLE y_len+64(FP), CX</code></span>
+<span class="codeline" id="line-45"><code>	CMPQ    dst_len+8(FP), CX</code></span>
+<span class="codeline" id="line-46"><code>	CMOVQLE dst_len+8(FP), CX</code></span>
+<span class="codeline" id="line-47"><code>	CMPQ    CX, $0             // if CX == 0 { return }</code></span>
+<span class="codeline" id="line-48"><code>	JE      caxy_end</code></span>
+<span class="codeline" id="line-49"><code>	MOVSD   alpha+24(FP), X0   // X0 = { 0, 0, imag(a), real(a) }</code></span>
+<span class="codeline" id="line-50"><code>	SHUFPD  $0, X0, X0         // X0  = { imag(a), real(a), imag(a), real(a) }</code></span>
+<span class="codeline" id="line-51"><code>	MOVAPS  X0, X1</code></span>
+<span class="codeline" id="line-52"><code>	SHUFPS  $0x11, X1, X1      // X1 = { real(a), imag(a), real(a), imag(a) }</code></span>
+<span class="codeline" id="line-53"><code>	XORQ    AX, AX             // i = 0</code></span>
+<span class="codeline" id="line-54"><code>	MOVQ    DX, BX             // Align on 16-byte boundary for ADDPS</code></span>
+<span class="codeline" id="line-55"><code>	ANDQ    $15, BX            // BX = &amp;y &amp; 15</code></span>
+<span class="codeline" id="line-56"><code>	JZ      caxy_no_trim       // if BX == 0 { goto caxy_no_trim }</code></span>
+<span class="codeline" id="line-57"><code></code></span>
+<span class="codeline" id="line-58"><code>	MOVSD (SI)(AX*8), X3 // X3 = { imag(x[i]), real(x[i]) }</code></span>
+<span class="codeline" id="line-59"><code>	MOVSHDUP_X3_X2       // X2 = { imag(x[i]), imag(x[i]) }</code></span>
+<span class="codeline" id="line-60"><code>	MOVSLDUP_X3_X3       // X3 = { real(x[i]), real(x[i]) }</code></span>
+<span class="codeline" id="line-61"><code>	MULPS X1, X2         // X2 = { real(a) * imag(x[i]), imag(a) * imag(x[i]) }</code></span>
+<span class="codeline" id="line-62"><code>	MULPS X0, X3         // X3 = { imag(a) * real(x[i]), real(a) * real(x[i]) }</code></span>
+<span class="codeline" id="line-63"><code></code></span>
+<span class="codeline" id="line-64"><code>	// X3 = { imag(a)*real(x[i]) + real(a)*imag(x[i]), real(a)*real(x[i]) - imag(a)*imag(x[i]) }</code></span>
+<span class="codeline" id="line-65"><code>	ADDSUBPS_X2_X3</code></span>
+<span class="codeline" id="line-66"><code>	MOVSD (DX)(AX*8), X4 // X3 += y[i]</code></span>
+<span class="codeline" id="line-67"><code>	ADDPS X4, X3</code></span>
+<span class="codeline" id="line-68"><code>	MOVSD X3, (DI)(AX*8) // dst[i]  = X3</code></span>
+<span class="codeline" id="line-69"><code>	INCQ  AX             // i++</code></span>
+<span class="codeline" id="line-70"><code>	DECQ  CX             // --CX</code></span>
+<span class="codeline" id="line-71"><code>	JZ    caxy_tail      // if BX == 0 { goto caxy_tail }</code></span>
+<span class="codeline" id="line-72"><code></code></span>
+<span class="codeline" id="line-73"><code>caxy_no_trim:</code></span>
+<span class="codeline" id="line-74"><code>	MOVAPS X0, X10   // Copy X0 and X1 for pipelineing</code></span>
+<span class="codeline" id="line-75"><code>	MOVAPS X1, X11</code></span>
+<span class="codeline" id="line-76"><code>	MOVQ   CX, BX</code></span>
+<span class="codeline" id="line-77"><code>	ANDQ   $7, CX    // CX = n % 8</code></span>
+<span class="codeline" id="line-78"><code>	SHRQ   $3, BX    // BX = floor( n / 8 )</code></span>
+<span class="codeline" id="line-79"><code>	JZ     caxy_tail // if BX == 0 { goto caxy_tail }</code></span>
+<span class="codeline" id="line-80"><code></code></span>
+<span class="codeline" id="line-81"><code>caxy_loop:</code></span>
+<span class="codeline" id="line-82"><code>	// X_i = { imag(x[i]), real(x[i]), imag(x[i+1]), real(x[i+1]) }</code></span>
+<span class="codeline" id="line-83"><code>	MOVUPS (SI)(AX*8), X3</code></span>
+<span class="codeline" id="line-84"><code>	MOVUPS 16(SI)(AX*8), X5</code></span>
+<span class="codeline" id="line-85"><code>	MOVUPS 32(SI)(AX*8), X7</code></span>
+<span class="codeline" id="line-86"><code>	MOVUPS 48(SI)(AX*8), X9</code></span>
+<span class="codeline" id="line-87"><code></code></span>
+<span class="codeline" id="line-88"><code>	// X_(i-1) = { imag(x[i]), imag(x[i]), imag(x[i]+1), imag(x[i]+1) }</code></span>
+<span class="codeline" id="line-89"><code>	MOVSHDUP_X3_X2</code></span>
+<span class="codeline" id="line-90"><code>	MOVSHDUP_X5_X4</code></span>
+<span class="codeline" id="line-91"><code>	MOVSHDUP_X7_X6</code></span>
+<span class="codeline" id="line-92"><code>	MOVSHDUP_X9_X8</code></span>
+<span class="codeline" id="line-93"><code></code></span>
+<span class="codeline" id="line-94"><code>	// X_i = { real(x[i]), real(x[i]), real(x[i+1]), real(x[i+1]) }</code></span>
+<span class="codeline" id="line-95"><code>	MOVSLDUP_X3_X3</code></span>
+<span class="codeline" id="line-96"><code>	MOVSLDUP_X5_X5</code></span>
+<span class="codeline" id="line-97"><code>	MOVSLDUP_X7_X7</code></span>
+<span class="codeline" id="line-98"><code>	MOVSLDUP_X9_X9</code></span>
+<span class="codeline" id="line-99"><code></code></span>
+<span class="codeline" id="line-100"><code>	// X_i     = {  imag(a) * real(x[i]),   real(a) * real(x[i]),</code></span>
+<span class="codeline" id="line-101"><code>	// 		imag(a) * real(x[i+1]), real(a) * real(x[i+1])  }</code></span>
+<span class="codeline" id="line-102"><code>	// X_(i-1) = {  real(a) * imag(x[i]),   imag(a) * imag(x[i]),</code></span>
+<span class="codeline" id="line-103"><code>	//		real(a) * imag(x[i+1]), imag(a) * imag(x[i+1])  }</code></span>
+<span class="codeline" id="line-104"><code>	MULPS X1, X2</code></span>
+<span class="codeline" id="line-105"><code>	MULPS X0, X3</code></span>
+<span class="codeline" id="line-106"><code>	MULPS X11, X4</code></span>
+<span class="codeline" id="line-107"><code>	MULPS X10, X5</code></span>
+<span class="codeline" id="line-108"><code>	MULPS X1, X6</code></span>
+<span class="codeline" id="line-109"><code>	MULPS X0, X7</code></span>
+<span class="codeline" id="line-110"><code>	MULPS X11, X8</code></span>
+<span class="codeline" id="line-111"><code>	MULPS X10, X9</code></span>
+<span class="codeline" id="line-112"><code></code></span>
+<span class="codeline" id="line-113"><code>	// X_i = {</code></span>
+<span class="codeline" id="line-114"><code>	//	imag(result[i]):   imag(a)*real(x[i]) + real(a)*imag(x[i]),</code></span>
+<span class="codeline" id="line-115"><code>	//	real(result[i]):   real(a)*real(x[i]) - imag(a)*imag(x[i]),</code></span>
+<span class="codeline" id="line-116"><code>	//	imag(result[i+1]): imag(a)*real(x[i+1]) + real(a)*imag(x[i+1]),</code></span>
+<span class="codeline" id="line-117"><code>	//	real(result[i+1]): real(a)*real(x[i+1]) - imag(a)*imag(x[i+1]),</code></span>
+<span class="codeline" id="line-118"><code>	//  }</code></span>
+<span class="codeline" id="line-119"><code>	ADDSUBPS_X2_X3</code></span>
+<span class="codeline" id="line-120"><code>	ADDSUBPS_X4_X5</code></span>
+<span class="codeline" id="line-121"><code>	ADDSUBPS_X6_X7</code></span>
+<span class="codeline" id="line-122"><code>	ADDSUBPS_X8_X9</code></span>
+<span class="codeline" id="line-123"><code></code></span>
+<span class="codeline" id="line-124"><code>	// X_i = { imag(result[i])   + imag(y[i]),   real(result[i])   + real(y[i]),</code></span>
+<span class="codeline" id="line-125"><code>	//	   imag(result[i+1]) + imag(y[i+1]), real(result[i+1]) + real(y[i+1])  }</code></span>
+<span class="codeline" id="line-126"><code>	ADDPS  (DX)(AX*8), X3</code></span>
+<span class="codeline" id="line-127"><code>	ADDPS  16(DX)(AX*8), X5</code></span>
+<span class="codeline" id="line-128"><code>	ADDPS  32(DX)(AX*8), X7</code></span>
+<span class="codeline" id="line-129"><code>	ADDPS  48(DX)(AX*8), X9</code></span>
+<span class="codeline" id="line-130"><code>	MOVUPS X3, (DI)(AX*8)   // y[i:i+1] = X_i</code></span>
+<span class="codeline" id="line-131"><code>	MOVUPS X5, 16(DI)(AX*8)</code></span>
+<span class="codeline" id="line-132"><code>	MOVUPS X7, 32(DI)(AX*8)</code></span>
+<span class="codeline" id="line-133"><code>	MOVUPS X9, 48(DI)(AX*8)</code></span>
+<span class="codeline" id="line-134"><code>	ADDQ   $8, AX           // i += 8</code></span>
+<span class="codeline" id="line-135"><code>	DECQ   BX               // --BX</code></span>
+<span class="codeline" id="line-136"><code>	JNZ    caxy_loop        // }  while BX &gt; 0</code></span>
+<span class="codeline" id="line-137"><code>	CMPQ   CX, $0           // if CX == 0  { return }</code></span>
+<span class="codeline" id="line-138"><code>	JE     caxy_end</code></span>
+<span class="codeline" id="line-139"><code></code></span>
+<span class="codeline" id="line-140"><code>caxy_tail: // do {</code></span>
+<span class="codeline" id="line-141"><code>	MOVSD (SI)(AX*8), X3 // X3 = { imag(x[i]), real(x[i]) }</code></span>
+<span class="codeline" id="line-142"><code>	MOVSHDUP_X3_X2       // X2 = { imag(x[i]), imag(x[i]) }</code></span>
+<span class="codeline" id="line-143"><code>	MOVSLDUP_X3_X3       // X3 = { real(x[i]), real(x[i]) }</code></span>
+<span class="codeline" id="line-144"><code>	MULPS X1, X2         // X2 = { real(a) * imag(x[i]), imag(a) * imag(x[i]) }</code></span>
+<span class="codeline" id="line-145"><code>	MULPS X0, X3         // X3 = { imag(a) * real(x[i]), real(a) * real(x[i]) }</code></span>
+<span class="codeline" id="line-146"><code></code></span>
+<span class="codeline" id="line-147"><code>	// X3 = { imag(a)*real(x[i]) + real(a)*imag(x[i]),</code></span>
+<span class="codeline" id="line-148"><code>	//	  real(a)*real(x[i]) - imag(a)*imag(x[i])  }</code></span>
+<span class="codeline" id="line-149"><code>	ADDSUBPS_X2_X3</code></span>
+<span class="codeline" id="line-150"><code>	MOVSD (DX)(AX*8), X4 // X3 += y[i]</code></span>
+<span class="codeline" id="line-151"><code>	ADDPS X4, X3</code></span>
+<span class="codeline" id="line-152"><code>	MOVSD X3, (DI)(AX*8) // y[i]  = X3</code></span>
+<span class="codeline" id="line-153"><code>	INCQ  AX             // ++i</code></span>
+<span class="codeline" id="line-154"><code>	LOOP  caxy_tail      // } while --CX &gt; 0</code></span>
+<span class="codeline" id="line-155"><code></code></span>
+<span class="codeline" id="line-156"><code>caxy_end:</code></span>
+<span class="codeline" id="line-157"><code>	RET</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

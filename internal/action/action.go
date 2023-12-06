@@ -113,7 +113,11 @@ func (k *Kick) TranslateReal() *basestation.Command {
 }
 
 func (s *Stop) TranslateGrsim(params *datatypes.Parameters) {
+
 	params.RobotId = uint32(s.Id)
+	params.VelNormal = float32(0)
+	params.VelTangent = float32(0)
+
 }
 
 func (s *Stop) TranslateReal() *basestation.Command {

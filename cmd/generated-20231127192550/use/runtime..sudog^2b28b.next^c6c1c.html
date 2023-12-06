@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.sudog.next</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/runtime2.go.html#line-355">sudog</a>.<a href="../src/runtime/runtime2.go.html#line-362">next</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">50 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/chan.go.html#line-757">chan.go#L757</a>: 	sgp.<b>next</b> = nil
+		<a href="../src/runtime/chan.go.html#line-766" class="path-duplicate">chan.go</a><a href="../src/runtime/chan.go.html#line-766">#L766</a>: 	x.<b>next</b> = sgp
+		<a href="../src/runtime/chan.go.html#line-776" class="path-duplicate">chan.go</a><a href="../src/runtime/chan.go.html#line-776">#L776</a>: 		y := sgp.<b>next</b>
+		<a href="../src/runtime/chan.go.html#line-783" class="path-duplicate">chan.go</a><a href="../src/runtime/chan.go.html#line-783">#L783</a>: 			sgp.<b>next</b> = nil // mark as removed (see dequeueSudoG)
+		<a href="../src/runtime/mgc.go.html#line-1660">mgc.go#L1660</a>: 		sgnext = sg.<b>next</b>
+		<a href="../src/runtime/mgc.go.html#line-1661" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1661">#L1661</a>: 		sg.<b>next</b> = nil
+		<a href="../src/runtime/proc.go.html#line-430">proc.go#L430</a>: 			sched.sudogcache = s.<b>next</b>
+		<a href="../src/runtime/proc.go.html#line-431" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-431">#L431</a>: 			s.<b>next</b> = nil
+		<a href="../src/runtime/proc.go.html#line-459" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-459">#L459</a>: 	if s.<b>next</b> != nil {
+		<a href="../src/runtime/proc.go.html#line-488" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-488">#L488</a>: 				last.<b>next</b> = p
+		<a href="../src/runtime/proc.go.html#line-493" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-493">#L493</a>: 		last.<b>next</b> = sched.sudogcache
+		<a href="../src/runtime/runtime2.go.html#line-362">runtime2.go#L362</a>: 	<b>next</b> *sudog
+		<a href="../src/runtime/select.go.html#line-602">select.go#L602</a>: 	y := sgp.<b>next</b>
+		<a href="../src/runtime/select.go.html#line-606" class="path-duplicate">select.go</a><a href="../src/runtime/select.go.html#line-606">#L606</a>: 			x.<b>next</b> = y
+		<a href="../src/runtime/select.go.html#line-608" class="path-duplicate">select.go</a><a href="../src/runtime/select.go.html#line-608">#L608</a>: 			sgp.<b>next</b> = nil
+		<a href="../src/runtime/select.go.html#line-613" class="path-duplicate">select.go</a><a href="../src/runtime/select.go.html#line-613">#L613</a>: 		x.<b>next</b> = nil
+		<a href="../src/runtime/select.go.html#line-622" class="path-duplicate">select.go</a><a href="../src/runtime/select.go.html#line-622">#L622</a>: 		sgp.<b>next</b> = nil
+		<a href="../src/runtime/sema.go.html#line-249">sema.go#L249</a>: 	s.<b>next</b> = nil
+		<a href="../src/runtime/sema.go.html#line-264" class="path-duplicate">sema.go</a><a href="../src/runtime/sema.go.html#line-264">#L264</a>: 				s.<b>next</b> = t.<b>next</b>
+		<a href="../src/runtime/sema.go.html#line-268" class="path-duplicate">sema.go</a><a href="../src/runtime/sema.go.html#line-268">#L268</a>: 				if s.<b>next</b> != nil {
+		<a href="../src/runtime/sema.go.html#line-269" class="path-duplicate">sema.go</a><a href="../src/runtime/sema.go.html#line-269">#L269</a>: 					s.<b>next</b>.parent = s
+		<a href="../src/runtime/sema.go.html#line-279" class="path-duplicate">sema.go</a><a href="../src/runtime/sema.go.html#line-279">#L279</a>: 				t.<b>next</b> = nil
+		<a href="../src/runtime/sema.go.html#line-297" class="path-duplicate">sema.go</a><a href="../src/runtime/sema.go.html#line-297">#L297</a>: 			pt = &amp;t.<b>next</b>
+		<a href="../src/runtime/sema.go.html#line-321" class="path-duplicate">sema.go</a><a href="../src/runtime/sema.go.html#line-321">#L321</a>: 			if s.parent.<b>next</b> != s {
+		<a href="../src/runtime/sema.go.html#line-343" class="path-duplicate">sema.go</a><a href="../src/runtime/sema.go.html#line-343">#L343</a>: 			ps = &amp;s.<b>next</b>
+		<a href="../src/runtime/sema.go.html#line-362" class="path-duplicate">sema.go</a><a href="../src/runtime/sema.go.html#line-362">#L362</a>: 		t.<b>next</b> = s.<b>next</b>
+		<a href="../src/runtime/sema.go.html#line-363" class="path-duplicate">sema.go</a><a href="../src/runtime/sema.go.html#line-363">#L363</a>: 		if t.<b>next</b> != nil {
+		<a href="../src/runtime/sema.go.html#line-364" class="path-duplicate">sema.go</a><a href="../src/runtime/sema.go.html#line-364">#L364</a>: 			t.<b>next</b>.parent = t
+		<a href="../src/runtime/sema.go.html#line-376" class="path-duplicate">sema.go</a><a href="../src/runtime/sema.go.html#line-376">#L376</a>: 		for s.<b>next</b> != nil || s.prev != nil {
+		<a href="../src/runtime/sema.go.html#line-377" class="path-duplicate">sema.go</a><a href="../src/runtime/sema.go.html#line-377">#L377</a>: 			if s.<b>next</b> == nil || s.prev != nil &amp;&amp; s.prev.ticket &lt; s.<b>next</b>.ticket {
+		<a href="../src/runtime/sema.go.html#line-388" class="path-duplicate">sema.go</a><a href="../src/runtime/sema.go.html#line-388">#L388</a>: 				s.parent.<b>next</b> = nil
+		<a href="../src/runtime/sema.go.html#line-396" class="path-duplicate">sema.go</a><a href="../src/runtime/sema.go.html#line-396">#L396</a>: 	s.<b>next</b> = nil
+		<a href="../src/runtime/sema.go.html#line-407" class="path-duplicate">sema.go</a><a href="../src/runtime/sema.go.html#line-407">#L407</a>: 	y := x.<b>next</b>
+		<a href="../src/runtime/sema.go.html#line-412" class="path-duplicate">sema.go</a><a href="../src/runtime/sema.go.html#line-412">#L412</a>: 	x.<b>next</b> = b
+		<a href="../src/runtime/sema.go.html#line-423" class="path-duplicate">sema.go</a><a href="../src/runtime/sema.go.html#line-423">#L423</a>: 		if p.<b>next</b> != x {
+		<a href="../src/runtime/sema.go.html#line-426" class="path-duplicate">sema.go</a><a href="../src/runtime/sema.go.html#line-426">#L426</a>: 		p.<b>next</b> = y
+		<a href="../src/runtime/sema.go.html#line-436" class="path-duplicate">sema.go</a><a href="../src/runtime/sema.go.html#line-436">#L436</a>: 	b := x.<b>next</b>
+		<a href="../src/runtime/sema.go.html#line-438" class="path-duplicate">sema.go</a><a href="../src/runtime/sema.go.html#line-438">#L438</a>: 	x.<b>next</b> = y
+		<a href="../src/runtime/sema.go.html#line-451" class="path-duplicate">sema.go</a><a href="../src/runtime/sema.go.html#line-451">#L451</a>: 		if p.<b>next</b> != y {
+		<a href="../src/runtime/sema.go.html#line-454" class="path-duplicate">sema.go</a><a href="../src/runtime/sema.go.html#line-454">#L454</a>: 		p.<b>next</b> = x
+		<a href="../src/runtime/sema.go.html#line-524" class="path-duplicate">sema.go</a><a href="../src/runtime/sema.go.html#line-524">#L524</a>: 		l.tail.<b>next</b> = s
+		<a href="../src/runtime/sema.go.html#line-560" class="path-duplicate">sema.go</a><a href="../src/runtime/sema.go.html#line-560">#L560</a>: 		next := s.<b>next</b>
+		<a href="../src/runtime/sema.go.html#line-561" class="path-duplicate">sema.go</a><a href="../src/runtime/sema.go.html#line-561">#L561</a>: 		s.<b>next</b> = nil
+		<a href="../src/runtime/sema.go.html#line-602" class="path-duplicate">sema.go</a><a href="../src/runtime/sema.go.html#line-602">#L602</a>: 	for p, s := (*sudog)(nil), l.head; s != nil; p, s = s, s.<b>next</b> {
+		<a href="../src/runtime/sema.go.html#line-604" class="path-duplicate">sema.go</a><a href="../src/runtime/sema.go.html#line-604">#L604</a>: 			n := s.<b>next</b>
+		<a href="../src/runtime/sema.go.html#line-606" class="path-duplicate">sema.go</a><a href="../src/runtime/sema.go.html#line-606">#L606</a>: 				p.<b>next</b> = n
+		<a href="../src/runtime/sema.go.html#line-614" class="path-duplicate">sema.go</a><a href="../src/runtime/sema.go.html#line-614">#L614</a>: 			s.<b>next</b> = nil
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

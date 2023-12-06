@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Package: gonum.org/v1/gonum/internal/asm/f64</title>
+<link href="../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="package-details"><code><span style="font-size:xx-large;">package <b>f64</b></span>
+
+<span class="title">Import Path</span>
+	<a href="../../../../../../index.html#pkg-gonum.org/v1/gonum/internal/asm/f64">gonum.org/v1/gonum/internal/asm/f64</a><i> (on <a href="https://pkg.go.dev/gonum.org/v1/gonum/internal/asm/f64" target="_blank">go.dev</a>)</i>
+
+<span class="title">Dependency Relation</span>
+	imports 0 packages, and imported by <a href="../../../../../../dep/gonum.org/v1/gonum/internal/asm/f64.html#imported-by">4 packages</a>
+
+<div id="files"><span class="title">Involved Source Files</span>
+
+	<input type='checkbox' checked class="fold" id="file-0-fold-content"><label for="file-0-fold-content">  <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/doc.go.html#doc">d</a> <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/doc.go.html">doc.go</a></label><span id='file-0-fold-content-items' class="fold-items">
+<span class="md-text">		Package f64 provides float64 vector primitives.</span>
+</span>
+	<span class="nodocs">    <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/ge_amd64.go.html">ge_amd64.go</a></span>
+	<span class="nodocs">    <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html">stubs_amd64.go</a></span>
+	<span class="nodocs">    <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/abssum_amd64.s.html">abssum_amd64.s</a></span>
+	<span class="nodocs">    <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/abssuminc_amd64.s.html">abssuminc_amd64.s</a></span>
+	<span class="nodocs">    <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/add_amd64.s.html">add_amd64.s</a></span>
+	<span class="nodocs">    <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/addconst_amd64.s.html">addconst_amd64.s</a></span>
+	<span class="nodocs">    <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/axpyinc_amd64.s.html">axpyinc_amd64.s</a></span>
+	<span class="nodocs">    <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/axpyincto_amd64.s.html">axpyincto_amd64.s</a></span>
+	<span class="nodocs">    <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/axpyunitary_amd64.s.html">axpyunitary_amd64.s</a></span>
+	<span class="nodocs">    <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/axpyunitaryto_amd64.s.html">axpyunitaryto_amd64.s</a></span>
+	<span class="nodocs">    <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/cumprod_amd64.s.html">cumprod_amd64.s</a></span>
+	<span class="nodocs">    <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/cumsum_amd64.s.html">cumsum_amd64.s</a></span>
+	<span class="nodocs">    <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/div_amd64.s.html">div_amd64.s</a></span>
+	<span class="nodocs">    <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/divto_amd64.s.html">divto_amd64.s</a></span>
+	<span class="nodocs">    <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/dot_amd64.s.html">dot_amd64.s</a></span>
+	<span class="nodocs">    <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/gemvN_amd64.s^fb208.html">gemvN_amd64.s</a></span>
+	<span class="nodocs">    <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/gemvT_amd64.s^96399.html">gemvT_amd64.s</a></span>
+	<span class="nodocs">    <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/ger_amd64.s.html">ger_amd64.s</a></span>
+	<span class="nodocs">    <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/l1norm_amd64.s.html">l1norm_amd64.s</a></span>
+	<span class="nodocs">    <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/l2norm_amd64.s.html">l2norm_amd64.s</a></span>
+	<span class="nodocs">    <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/l2normdist_amd64.s.html">l2normdist_amd64.s</a></span>
+	<span class="nodocs">    <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/l2norminc_amd64.s.html">l2norminc_amd64.s</a></span>
+	<span class="nodocs">    <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/linfnorm_amd64.s.html">linfnorm_amd64.s</a></span>
+	<span class="nodocs">    <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/scalinc_amd64.s.html">scalinc_amd64.s</a></span>
+	<span class="nodocs">    <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/scalincto_amd64.s.html">scalincto_amd64.s</a></span>
+	<span class="nodocs">    <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/scalunitary_amd64.s.html">scalunitary_amd64.s</a></span>
+	<span class="nodocs">    <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/scalunitaryto_amd64.s.html">scalunitaryto_amd64.s</a></span>
+	<span class="nodocs">    <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/sum_amd64.s.html">sum_amd64.s</a></span></div>
+<div id="exported-functions"><span class="title">Package-Level Functions<span class="title-stat"><i> (total 27, all are exported)</i></span></span>
+
+<div class="anchor value-res" id="name-Add">	<input type='checkbox' class="fold" id="Add-fold-content"><label for="Add-fold-content"> <a href="../../../../../../use/gonum.org/v1/gonum/internal/asm/f64..Add^9fd72.html">func</a> <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html#line-38">Add</a>(dst, s []<a href="../../../../../builtin.html#name-float64">float64</a>)</label><span id='Add-fold-content-docs' class="fold-docs">
+<span class="md-text">		Add is
+		
+			for i, v := range s {
+				dst[i] += v
+			}</span>
+
+</span></div><div class="anchor value-res" id="name-AddConst">	<input type='checkbox' class="fold" id="AddConst-fold-content"><label for="AddConst-fold-content"> <a href="../../../../../../use/gonum.org/v1/gonum/internal/asm/f64..AddConst.html">func</a> <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html#line-31">AddConst</a>(alpha <a href="../../../../../builtin.html#name-float64">float64</a>, x []<a href="../../../../../builtin.html#name-float64">float64</a>)</label><span id='AddConst-fold-content-docs' class="fold-docs">
+<span class="md-text">		AddConst is
+		
+			for i := range x {
+				x[i] += alpha
+			}</span>
+
+</span></div><div class="anchor value-res" id="name-AxpyInc">	<input type='checkbox' class="fold" id="AxpyInc-fold-content"><label for="AxpyInc-fold-content"> <a href="../../../../../../use/gonum.org/v1/gonum/internal/asm/f64..AxpyInc.html">func</a> <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html#line-61">AxpyInc</a>(alpha <a href="../../../../../builtin.html#name-float64">float64</a>, x, y []<a href="../../../../../builtin.html#name-float64">float64</a>, n, incX, incY, ix, iy <a href="../../../../../builtin.html#name-uintptr">uintptr</a>)</label><span id='AxpyInc-fold-content-docs' class="fold-docs">
+<span class="md-text">		AxpyInc is
+		
+			for i := 0; i &lt; int(n); i++ {
+				y[iy] += alpha * x[ix]
+				ix += incX
+				iy += incY
+			}</span>
+
+</span></div><div class="anchor value-res" id="name-AxpyIncTo">	<input type='checkbox' class="fold" id="AxpyIncTo-fold-content"><label for="AxpyIncTo-fold-content"> <a href="../../../../../../use/gonum.org/v1/gonum/internal/asm/f64..AxpyIncTo.html">func</a> <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html#line-71">AxpyIncTo</a>(dst []<a href="../../../../../builtin.html#name-float64">float64</a>, incDst, idst <a href="../../../../../builtin.html#name-uintptr">uintptr</a>, alpha <a href="../../../../../builtin.html#name-float64">float64</a>, x, y []<a href="../../../../../builtin.html#name-float64">float64</a>, n, incX, incY, ix, iy <a href="../../../../../builtin.html#name-uintptr">uintptr</a>)</label><span id='AxpyIncTo-fold-content-docs' class="fold-docs">
+<span class="md-text">		AxpyIncTo is
+		
+			for i := 0; i &lt; int(n); i++ {
+				dst[idst] = alpha*x[ix] + y[iy]
+				ix += incX
+				iy += incY
+				idst += incDst
+			}</span>
+
+</span></div><div class="anchor value-res" id="name-AxpyUnitary">	<input type='checkbox' class="fold" id="AxpyUnitary-fold-content"><label for="AxpyUnitary-fold-content"> <a href="../../../../../../use/gonum.org/v1/gonum/internal/asm/f64..AxpyUnitary.html">func</a> <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html#line-45">AxpyUnitary</a>(alpha <a href="../../../../../builtin.html#name-float64">float64</a>, x, y []<a href="../../../../../builtin.html#name-float64">float64</a>)</label><span id='AxpyUnitary-fold-content-docs' class="fold-docs">
+<span class="md-text">		AxpyUnitary is
+		
+			for i, v := range x {
+				y[i] += alpha * v
+			}</span>
+
+</span></div><div class="anchor value-res" id="name-AxpyUnitaryTo">	<input type='checkbox' class="fold" id="AxpyUnitaryTo-fold-content"><label for="AxpyUnitaryTo-fold-content"> <a href="../../../../../../use/gonum.org/v1/gonum/internal/asm/f64..AxpyUnitaryTo.html">func</a> <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html#line-52">AxpyUnitaryTo</a>(dst []<a href="../../../../../builtin.html#name-float64">float64</a>, alpha <a href="../../../../../builtin.html#name-float64">float64</a>, x, y []<a href="../../../../../builtin.html#name-float64">float64</a>)</label><span id='AxpyUnitaryTo-fold-content-docs' class="fold-docs">
+<span class="md-text">		AxpyUnitaryTo is
+		
+			for i, v := range x {
+				dst[i] = alpha*v + y[i]
+			}</span>
+
+</span></div><div class="anchor value-res" id="name-CumProd">	<input type='checkbox' class="fold" id="CumProd-fold-content"><label for="CumProd-fold-content"> <a href="../../../../../../use/gonum.org/v1/gonum/internal/asm/f64..CumProd.html">func</a> <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html#line-95">CumProd</a>(dst, s []<a href="../../../../../builtin.html#name-float64">float64</a>) []<a href="../../../../../builtin.html#name-float64">float64</a></label><span id='CumProd-fold-content-docs' class="fold-docs">
+<span class="md-text">		CumProd is
+		
+			if len(s) == 0 {
+				return dst
+			}
+			dst[0] = s[0]
+			for i, v := range s[1:] {
+				dst[i+1] = dst[i] * v
+			}
+			return dst</span>
+
+</span></div><div class="anchor value-res" id="name-CumSum">	<input type='checkbox' class="fold" id="CumSum-fold-content"><label for="CumSum-fold-content"> <a href="../../../../../../use/gonum.org/v1/gonum/internal/asm/f64..CumSum.html">func</a> <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html#line-83">CumSum</a>(dst, s []<a href="../../../../../builtin.html#name-float64">float64</a>) []<a href="../../../../../builtin.html#name-float64">float64</a></label><span id='CumSum-fold-content-docs' class="fold-docs">
+<span class="md-text">		CumSum is
+		
+			if len(s) == 0 {
+				return dst
+			}
+			dst[0] = s[0]
+			for i, v := range s[1:] {
+				dst[i+1] = dst[i] + v
+			}
+			return dst</span>
+
+</span></div><div class="anchor value-res" id="name-Div">	<input type='checkbox' class="fold" id="Div-fold-content"><label for="Div-fold-content"> <a href="../../../../../../use/gonum.org/v1/gonum/internal/asm/f64..Div.html">func</a> <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html#line-102">Div</a>(dst, s []<a href="../../../../../builtin.html#name-float64">float64</a>)</label><span id='Div-fold-content-docs' class="fold-docs">
+<span class="md-text">		Div is
+		
+			for i, v := range s {
+				dst[i] /= v
+			}</span>
+
+</span></div><div class="anchor value-res" id="name-DivTo">	<input type='checkbox' class="fold" id="DivTo-fold-content"><label for="DivTo-fold-content"> <a href="../../../../../../use/gonum.org/v1/gonum/internal/asm/f64..DivTo.html">func</a> <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html#line-110">DivTo</a>(dst, x, y []<a href="../../../../../builtin.html#name-float64">float64</a>) []<a href="../../../../../builtin.html#name-float64">float64</a></label><span id='DivTo-fold-content-docs' class="fold-docs">
+<span class="md-text">		DivTo is
+		
+			for i, v := range s {
+				dst[i] = v / t[i]
+			}
+			return dst</span>
+
+</span></div><div class="anchor value-res" id="name-DotInc">	<input type='checkbox' class="fold" id="DotInc-fold-content"><label for="DotInc-fold-content"> <a href="../../../../../../use/gonum.org/v1/gonum/internal/asm/f64..DotInc.html">func</a> <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html#line-128">DotInc</a>(x, y []<a href="../../../../../builtin.html#name-float64">float64</a>, n, incX, incY, ix, iy <a href="../../../../../builtin.html#name-uintptr">uintptr</a>) (sum <a href="../../../../../builtin.html#name-float64">float64</a>)</label><span id='DotInc-fold-content-docs' class="fold-docs">
+<span class="md-text">		DotInc is
+		
+			for i := 0; i &lt; int(n); i++ {
+				sum += y[iy] * x[ix]
+				ix += incX
+				iy += incY
+			}
+			return sum</span>
+
+</span></div><div class="anchor value-res" id="name-DotUnitary">	<input type='checkbox' class="fold" id="DotUnitary-fold-content"><label for="DotUnitary-fold-content"> <a href="../../../../../../use/gonum.org/v1/gonum/internal/asm/f64..DotUnitary.html">func</a> <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html#line-118">DotUnitary</a>(x, y []<a href="../../../../../builtin.html#name-float64">float64</a>) (sum <a href="../../../../../builtin.html#name-float64">float64</a>)</label><span id='DotUnitary-fold-content-docs' class="fold-docs">
+<span class="md-text">		DotUnitary is
+		
+			for i, v := range x {
+				sum += y[i] * v
+			}
+			return sum</span>
+
+</span></div><div class="anchor value-res" id="name-GemvN">	<input type='checkbox' class="fold" id="GemvN-fold-content"><label for="GemvN-fold-content"> <a href="../../../../../../use/gonum.org/v1/gonum/internal/asm/f64..GemvN.html">func</a> <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/ge_amd64.go.html#line-22">GemvN</a>(m, n <a href="../../../../../builtin.html#name-uintptr">uintptr</a>, alpha <a href="../../../../../builtin.html#name-float64">float64</a>, a []<a href="../../../../../builtin.html#name-float64">float64</a>, lda <a href="../../../../../builtin.html#name-uintptr">uintptr</a>, x []<a href="../../../../../builtin.html#name-float64">float64</a>, incX <a href="../../../../../builtin.html#name-uintptr">uintptr</a>, beta <a href="../../../../../builtin.html#name-float64">float64</a>, y []<a href="../../../../../builtin.html#name-float64">float64</a>, incY <a href="../../../../../builtin.html#name-uintptr">uintptr</a>)</label><span id='GemvN-fold-content-docs' class="fold-docs">
+<span class="md-text">		GemvN computes
+		
+			y = alpha * A * x + beta * y
+		
+		where A is an m×n dense matrix, x and y are vectors, and alpha and beta are scalars.</span>
+
+</span></div><div class="anchor value-res" id="name-GemvT">	<input type='checkbox' class="fold" id="GemvT-fold-content"><label for="GemvT-fold-content"> <a href="../../../../../../use/gonum.org/v1/gonum/internal/asm/f64..GemvT.html">func</a> <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/ge_amd64.go.html#line-29">GemvT</a>(m, n <a href="../../../../../builtin.html#name-uintptr">uintptr</a>, alpha <a href="../../../../../builtin.html#name-float64">float64</a>, a []<a href="../../../../../builtin.html#name-float64">float64</a>, lda <a href="../../../../../builtin.html#name-uintptr">uintptr</a>, x []<a href="../../../../../builtin.html#name-float64">float64</a>, incX <a href="../../../../../builtin.html#name-uintptr">uintptr</a>, beta <a href="../../../../../builtin.html#name-float64">float64</a>, y []<a href="../../../../../builtin.html#name-float64">float64</a>, incY <a href="../../../../../builtin.html#name-uintptr">uintptr</a>)</label><span id='GemvT-fold-content-docs' class="fold-docs">
+<span class="md-text">		GemvT computes
+		
+			y = alpha * Aᵀ * x + beta * y
+		
+		where A is an m×n dense matrix, x and y are vectors, and alpha and beta are scalars.</span>
+
+</span></div><div class="anchor value-res" id="name-Ger">	<input type='checkbox' class="fold" id="Ger-fold-content"><label for="Ger-fold-content"> <a href="../../../../../../use/gonum.org/v1/gonum/internal/asm/f64..Ger.html">func</a> <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/ge_amd64.go.html#line-15">Ger</a>(m, n <a href="../../../../../builtin.html#name-uintptr">uintptr</a>, alpha <a href="../../../../../builtin.html#name-float64">float64</a>, x []<a href="../../../../../builtin.html#name-float64">float64</a>, incX <a href="../../../../../builtin.html#name-uintptr">uintptr</a>, y []<a href="../../../../../builtin.html#name-float64">float64</a>, incY <a href="../../../../../builtin.html#name-uintptr">uintptr</a>, a []<a href="../../../../../builtin.html#name-float64">float64</a>, lda <a href="../../../../../builtin.html#name-uintptr">uintptr</a>)</label><span id='Ger-fold-content-docs' class="fold-docs">
+<span class="md-text">		Ger performs the rank-one operation
+		
+			A += alpha * x * yᵀ
+		
+		where A is an m×n dense matrix, x and y are vectors, and alpha is a scalar.</span>
+
+</span></div><div class="anchor value-res" id="name-L1Dist">	<input type='checkbox' class="fold" id="L1Dist-fold-content"><label for="L1Dist-fold-content"> <a href="../../../../../../use/gonum.org/v1/gonum/internal/asm/f64..L1Dist.html">func</a> <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html#line-137">L1Dist</a>(s, t []<a href="../../../../../builtin.html#name-float64">float64</a>) <a href="../../../../../builtin.html#name-float64">float64</a></label><span id='L1Dist-fold-content-docs' class="fold-docs">
+<span class="md-text">		L1Dist is
+		
+			var norm float64
+			for i, v := range s {
+				norm += math.Abs(t[i] - v)
+			}
+			return norm</span>
+
+</span></div><div class="anchor value-res" id="name-L1Norm">	<input type='checkbox' class="fold" id="L1Norm-fold-content"><label for="L1Norm-fold-content"> <a href="../../../../../../use/gonum.org/v1/gonum/internal/asm/f64..L1Norm.html">func</a> <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html#line-16">L1Norm</a>(x []<a href="../../../../../builtin.html#name-float64">float64</a>) (sum <a href="../../../../../builtin.html#name-float64">float64</a>)</label><span id='L1Norm-fold-content-docs' class="fold-docs">
+<span class="md-text">		L1Norm is
+		
+			for _, v := range x {
+				sum += math.Abs(v)
+			}
+			return sum</span>
+
+</span></div><div class="anchor value-res" id="name-L1NormInc">	<input type='checkbox' class="fold" id="L1NormInc-fold-content"><label for="L1NormInc-fold-content"> <a href="../../../../../../use/gonum.org/v1/gonum/internal/asm/f64..L1NormInc.html">func</a> <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html#line-24">L1NormInc</a>(x []<a href="../../../../../builtin.html#name-float64">float64</a>, n, incX <a href="../../../../../builtin.html#name-int">int</a>) (sum <a href="../../../../../builtin.html#name-float64">float64</a>)</label><span id='L1NormInc-fold-content-docs' class="fold-docs">
+<span class="md-text">		L1NormInc is
+		
+			for i := 0; i &lt; n*incX; i += incX {
+				sum += math.Abs(x[i])
+			}
+			return sum</span>
+
+</span></div><div class="anchor value-res" id="name-L2DistanceUnitary">	<input type='checkbox' class="fold" id="L2DistanceUnitary-fold-content"><label for="L2DistanceUnitary-fold-content"> <a href="../../../../../../use/gonum.org/v1/gonum/internal/asm/f64..L2DistanceUnitary.html">func</a> <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html#line-277">L2DistanceUnitary</a>(x, y []<a href="../../../../../builtin.html#name-float64">float64</a>) (norm <a href="../../../../../builtin.html#name-float64">float64</a>)</label><span id='L2DistanceUnitary-fold-content-docs' class="fold-docs">
+<span class="md-text">		L2DistanceUnitary returns the L2-norm of x-y.
+		
+			var scale float64
+			sumSquares := 1.0
+			for i, v := range x {
+				v -= y[i]
+				if v == 0 {
+					continue
+				}
+				absxi := math.Abs(v)
+				if math.IsNaN(absxi) {
+					return math.NaN()
+				}
+				if scale &lt; absxi {
+					s := scale / absxi
+					sumSquares = 1 + sumSquares*s*s
+					scale = absxi
+				} else {
+					s := absxi / scale
+					sumSquares += s * s
+				}
+			}
+			if math.IsInf(scale, 1) {
+				return math.Inf(1)
+			}
+			return scale * math.Sqrt(sumSquares)</span>
+
+</span></div><div class="anchor value-res" id="name-L2NormInc">	<input type='checkbox' class="fold" id="L2NormInc-fold-content"><label for="L2NormInc-fold-content"> <a href="../../../../../../use/gonum.org/v1/gonum/internal/asm/f64..L2NormInc.html">func</a> <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html#line-249">L2NormInc</a>(x []<a href="../../../../../builtin.html#name-float64">float64</a>, n, incX <a href="../../../../../builtin.html#name-uintptr">uintptr</a>) (norm <a href="../../../../../builtin.html#name-float64">float64</a>)</label><span id='L2NormInc-fold-content-docs' class="fold-docs">
+<span class="md-text">		L2NormInc returns the L2-norm of x.
+		
+			var scale float64
+			sumSquares := 1.0
+			for ix := uintptr(0); ix &lt; n*incX; ix += incX {
+				val := x[ix]
+				if val == 0 {
+					continue
+				}
+				absxi := math.Abs(val)
+				if math.IsNaN(absxi) {
+					return math.NaN()
+				}
+				if scale &lt; absxi {
+					s := scale / absxi
+					sumSquares = 1 + sumSquares*s*s
+					scale = absxi
+				} else {
+					s := absxi / scale
+					sumSquares += s * s
+				}
+			}
+			if math.IsInf(scale, 1) {
+				return math.Inf(1)
+			}
+			return scale * math.Sqrt(sumSquares)</span>
+
+</span></div><div class="anchor value-res" id="name-L2NormUnitary">	<input type='checkbox' class="fold" id="L2NormUnitary-fold-content"><label for="L2NormUnitary-fold-content"> <a href="../../../../../../use/gonum.org/v1/gonum/internal/asm/f64..L2NormUnitary.html">func</a> <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html#line-221">L2NormUnitary</a>(x []<a href="../../../../../builtin.html#name-float64">float64</a>) (norm <a href="../../../../../builtin.html#name-float64">float64</a>)</label><span id='L2NormUnitary-fold-content-docs' class="fold-docs">
+<span class="md-text">		L2NormUnitary returns the L2-norm of x.
+		
+			  var scale float64
+			  sumSquares := 1.0
+			  for _, v := range x {
+			  	if v == 0 {
+			  		continue
+			  	}
+			  	absxi := math.Abs(v)
+			  	if math.IsNaN(absxi) {
+			  		return math.NaN()
+			  	}
+			  	if scale &lt; absxi {
+			  		s := scale / absxi
+			  		sumSquares = 1 + sumSquares*s*s
+			  		scale = absxi
+			  	} else {
+			  		s := absxi / scale
+			  		sumSquares += s * s
+			  	}
+				  	if math.IsInf(scale, 1) {
+					  	return math.Inf(1)
+				  	}
+			  }
+			  return scale * math.Sqrt(sumSquares)</span>
+
+</span></div><div class="anchor value-res" id="name-LinfDist">	<input type='checkbox' class="fold" id="LinfDist-fold-content"><label for="LinfDist-fold-content"> <a href="../../../../../../use/gonum.org/v1/gonum/internal/asm/f64..LinfDist.html">func</a> <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html#line-153">LinfDist</a>(s, t []<a href="../../../../../builtin.html#name-float64">float64</a>) <a href="../../../../../builtin.html#name-float64">float64</a></label><span id='LinfDist-fold-content-docs' class="fold-docs">
+<span class="md-text">		LinfDist is
+		
+			var norm float64
+			if len(s) == 0 {
+				return 0
+			}
+			norm = math.Abs(t[0] - s[0])
+			for i, v := range s[1:] {
+				absDiff := math.Abs(t[i+1] - v)
+				if absDiff &gt; norm || math.IsNaN(norm) {
+					norm = absDiff
+				}
+			}
+			return norm</span>
+
+</span></div><div class="anchor value-res" id="name-ScalInc">	<input type='checkbox' class="fold" id="ScalInc-fold-content"><label for="ScalInc-fold-content"> <a href="../../../../../../use/gonum.org/v1/gonum/internal/asm/f64..ScalInc.html">func</a> <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html#line-176">ScalInc</a>(alpha <a href="../../../../../builtin.html#name-float64">float64</a>, x []<a href="../../../../../builtin.html#name-float64">float64</a>, n, incX <a href="../../../../../builtin.html#name-uintptr">uintptr</a>)</label><span id='ScalInc-fold-content-docs' class="fold-docs">
+<span class="md-text">		ScalInc is
+		
+			var ix uintptr
+			for i := 0; i &lt; int(n); i++ {
+				x[ix] *= alpha
+				ix += incX
+			}</span>
+
+</span></div><div class="anchor value-res" id="name-ScalIncTo">	<input type='checkbox' class="fold" id="ScalIncTo-fold-content"><label for="ScalIncTo-fold-content"> <a href="../../../../../../use/gonum.org/v1/gonum/internal/asm/f64..ScalIncTo.html">func</a> <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html#line-186">ScalIncTo</a>(dst []<a href="../../../../../builtin.html#name-float64">float64</a>, incDst <a href="../../../../../builtin.html#name-uintptr">uintptr</a>, alpha <a href="../../../../../builtin.html#name-float64">float64</a>, x []<a href="../../../../../builtin.html#name-float64">float64</a>, n, incX <a href="../../../../../builtin.html#name-uintptr">uintptr</a>)</label><span id='ScalIncTo-fold-content-docs' class="fold-docs">
+<span class="md-text">		ScalIncTo is
+		
+			var idst, ix uintptr
+			for i := 0; i &lt; int(n); i++ {
+				dst[idst] = alpha * x[ix]
+				ix += incX
+				idst += incDst
+			}</span>
+
+</span></div><div class="anchor value-res" id="name-ScalUnitary">	<input type='checkbox' class="fold" id="ScalUnitary-fold-content"><label for="ScalUnitary-fold-content"> <a href="../../../../../../use/gonum.org/v1/gonum/internal/asm/f64..ScalUnitary.html">func</a> <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html#line-160">ScalUnitary</a>(alpha <a href="../../../../../builtin.html#name-float64">float64</a>, x []<a href="../../../../../builtin.html#name-float64">float64</a>)</label><span id='ScalUnitary-fold-content-docs' class="fold-docs">
+<span class="md-text">		ScalUnitary is
+		
+			for i := range x {
+				x[i] *= alpha
+			}</span>
+
+</span></div><div class="anchor value-res" id="name-ScalUnitaryTo">	<input type='checkbox' class="fold" id="ScalUnitaryTo-fold-content"><label for="ScalUnitaryTo-fold-content"> <a href="../../../../../../use/gonum.org/v1/gonum/internal/asm/f64..ScalUnitaryTo.html">func</a> <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html#line-167">ScalUnitaryTo</a>(dst []<a href="../../../../../builtin.html#name-float64">float64</a>, alpha <a href="../../../../../builtin.html#name-float64">float64</a>, x []<a href="../../../../../builtin.html#name-float64">float64</a>)</label><span id='ScalUnitaryTo-fold-content-docs' class="fold-docs">
+<span class="md-text">		ScalUnitaryTo is
+		
+			for i, v := range x {
+				dst[i] = alpha * v
+			}</span>
+
+</span></div><div class="anchor value-res" id="name-Sum">	<input type='checkbox' class="fold" id="Sum-fold-content"><label for="Sum-fold-content"> <a href="../../../../../../use/gonum.org/v1/gonum/internal/asm/f64..Sum.html">func</a> <a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/f64/stubs_amd64.go.html#line-194">Sum</a>(x []<a href="../../../../../builtin.html#name-float64">float64</a>) <a href="../../../../../builtin.html#name-float64">float64</a></label><span id='Sum-fold-content-docs' class="fold-docs">
+<span class="md-text">		Sum is
+		
+			var sum float64
+			for i := range x {
+			    sum += x[i]
+			}</span>
+
+</span></div></div></code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: reflect.Zero</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../pkg/reflect.html">reflect</a>.<a href="../src/reflect/value.go.html#line-3220">Zero</a></b></span>
+
+<span class="title">42 uses</span>
+
+	reflect (current package)
+		<a href="../src/reflect/value.go.html#line-624">value.go#L624</a>: 				ret[i] = <b>Zero</b>(toRType(tv))
+		<a href="../src/reflect/value.go.html#line-726" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-726">#L726</a>: 			in = append(in, <b>Zero</b>(toRType(typ)))
+		<a href="../src/reflect/value.go.html#line-3220" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3220">#L3220</a>: func <b>Zero</b>(typ Type) Value {
+		<a href="../src/reflect/value.go.html#line-3777" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3777">#L3777</a>: 		ret := <b>Zero</b>(typ)
+
+	<a href="../pkg/encoding/json.html">encoding/json</a>
+		<a href="../src/encoding/json/decode.go.html#line-779">decode.go#L779</a>: 					if err != nil || reflect.<b>Zero</b>(kt).OverflowInt(n) {
+		<a href="../src/encoding/json/decode.go.html#line-787" class="path-duplicate">decode.go</a><a href="../src/encoding/json/decode.go.html#line-787">#L787</a>: 					if err != nil || reflect.<b>Zero</b>(kt).OverflowUint(n) {
+
+	<a href="../pkg/github.com/golang/protobuf/proto.html">github.com/golang/protobuf/proto</a>
+		<a href="../src/github.com/golang/protobuf/proto/properties.go.html#line-264">properties.go#L264</a>: 			oneofWrappers = fn.Func.Call([]reflect.Value{reflect.<b>Zero</b>(fn.Type.In(0))})[3].Interface().([]interface{})
+		<a href="../src/github.com/golang/protobuf/proto/properties.go.html#line-267" class="path-duplicate">properties.go</a><a href="../src/github.com/golang/protobuf/proto/properties.go.html#line-267">#L267</a>: 			oneofWrappers = fn.Func.Call([]reflect.Value{reflect.<b>Zero</b>(fn.Type.In(0))})[0].Interface().([]interface{})
+		<a href="../src/github.com/golang/protobuf/proto/properties.go.html#line-269" class="path-duplicate">properties.go</a><a href="../src/github.com/golang/protobuf/proto/properties.go.html#line-269">#L269</a>: 		if m, ok := reflect.<b>Zero</b>(reflect.PtrTo(t)).Interface().(protoreflect.ProtoMessage); ok {
+
+	<a href="../pkg/google.golang.org/protobuf/internal/impl.html">google.golang.org/protobuf/internal/impl</a>
+		<a href="../src/google.golang.org/protobuf/internal/impl/convert.go.html#line-329">convert.go#L329</a>: 		return reflect.<b>Zero</b>(c.goType) // ensure empty string is []byte(nil)
+		<a href="../src/google.golang.org/protobuf/internal/impl/convert.go.html#line-429" class="path-duplicate">convert.go</a><a href="../src/google.golang.org/protobuf/internal/impl/convert.go.html#line-429">#L429</a>: 			v = reflect.<b>Zero</b>(reflect.PtrTo(v.Type()))
+		<a href="../src/google.golang.org/protobuf/internal/impl/convert.go.html#line-453" class="path-duplicate">convert.go</a><a href="../src/google.golang.org/protobuf/internal/impl/convert.go.html#line-453">#L453</a>: 			rv = reflect.<b>Zero</b>(rv.Type().Elem())
+		<a href="../src/google.golang.org/protobuf/internal/impl/convert.go.html#line-488" class="path-duplicate">convert.go</a><a href="../src/google.golang.org/protobuf/internal/impl/convert.go.html#line-488">#L488</a>: 	return c.PBValueOf(reflect.<b>Zero</b>(c.goType))
+		<a href="../src/google.golang.org/protobuf/internal/impl/convert_list.go.html#line-41">convert_list.go#L41</a>: 		return reflect.<b>Zero</b>(c.goType)
+		<a href="../src/google.golang.org/protobuf/internal/impl/convert_list.go.html#line-63" class="path-duplicate">convert_list.go</a><a href="../src/google.golang.org/protobuf/internal/impl/convert_list.go.html#line-63">#L63</a>: 	return protoreflect.ValueOfList(&amp;listReflect{reflect.<b>Zero</b>(reflect.PtrTo(c.goType)), c.c})
+		<a href="../src/google.golang.org/protobuf/internal/impl/convert_list.go.html#line-99" class="path-duplicate">convert_list.go</a><a href="../src/google.golang.org/protobuf/internal/impl/convert_list.go.html#line-99">#L99</a>: 	return c.PBValueOf(reflect.<b>Zero</b>(c.goType))
+		<a href="../src/google.golang.org/protobuf/internal/impl/convert_map.go.html#line-58">convert_map.go#L58</a>: 	return c.PBValueOf(reflect.<b>Zero</b>(c.goType))
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_enum.go.html#line-124">legacy_enum.go#L124</a>: 	ev := reflect.<b>Zero</b>(t).Interface()
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_extension.go.html#line-33">legacy_extension.go#L33</a>: 		mz := reflect.<b>Zero</b>(t).Interface()
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_extension.go.html#line-66" class="path-duplicate">legacy_extension.go</a><a href="../src/google.golang.org/protobuf/internal/impl/legacy_extension.go.html#line-66">#L66</a>: 	xi.ExtensionType = reflect.<b>Zero</b>(extType).Interface()
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_extension.go.html#line-96" class="path-duplicate">legacy_extension.go</a><a href="../src/google.golang.org/protobuf/internal/impl/legacy_extension.go.html#line-96">#L96</a>: 	switch v := reflect.<b>Zero</b>(t).Interface().(type) {
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-61">legacy_message.go#L61</a>: 	v := reflect.<b>Zero</b>(t).Interface()
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-100" class="path-duplicate">legacy_message.go</a><a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-100">#L100</a>: 	mv := reflect.<b>Zero</b>(t).Interface()
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-211" class="path-duplicate">legacy_message.go</a><a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-211">#L211</a>: 			for _, v := range fn.Func.Call([]reflect.Value{reflect.<b>Zero</b>(fn.Type.In(0))}) {
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-223" class="path-duplicate">legacy_message.go</a><a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-223">#L223</a>: 		vs := fn.Func.Call([]reflect.Value{reflect.<b>Zero</b>(fn.Type.In(0))})[0]
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-274" class="path-duplicate">legacy_message.go</a><a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-274">#L274</a>: 		if m, ok := reflect.<b>Zero</b>(t).Interface().(interface{ XXX_MessageName() string }); ok {
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-320" class="path-duplicate">legacy_message.go</a><a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-320">#L320</a>: 		switch v := reflect.<b>Zero</b>(t).Interface().(type) {
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-328" class="path-duplicate">legacy_message.go</a><a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-328">#L328</a>: 		switch v := reflect.<b>Zero</b>(t).Interface().(type) {
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-468" class="path-duplicate">legacy_message.go</a><a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-468">#L468</a>: 	return aberrantMessage{reflect.<b>Zero</b>(mt.t)}
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-471" class="path-duplicate">legacy_message.go</a><a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-471">#L471</a>: 	return aberrantMessage{reflect.<b>Zero</b>(mt.t)}
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-496" class="path-duplicate">legacy_message.go</a><a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-496">#L496</a>: 		m.v.Elem().Set(reflect.<b>Zero</b>(m.v.Type().Elem()))
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-514" class="path-duplicate">legacy_message.go</a><a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-514">#L514</a>: 	return aberrantMessage{reflect.<b>Zero</b>(m.v.Type())}
+		<a href="../src/google.golang.org/protobuf/internal/impl/message.go.html#line-56">message.go#L56</a>: 	m, ok := reflect.<b>Zero</b>(mt).Interface().(protoreflect.ProtoMessage)
+		<a href="../src/google.golang.org/protobuf/internal/impl/message.go.html#line-197" class="path-duplicate">message.go</a><a href="../src/google.golang.org/protobuf/internal/impl/message.go.html#line-197">#L197</a>: 			for _, v := range fn.Func.Call([]reflect.Value{reflect.<b>Zero</b>(fn.Type.In(0))}) {
+		<a href="../src/google.golang.org/protobuf/internal/impl/message.go.html#line-228" class="path-duplicate">message.go</a><a href="../src/google.golang.org/protobuf/internal/impl/message.go.html#line-228">#L228</a>: 	return mi.MessageOf(reflect.<b>Zero</b>(mi.GoReflectType).Interface())
+		<a href="../src/google.golang.org/protobuf/internal/impl/message_reflect.go.html#line-229">message_reflect.go#L229</a>: 			mi.fieldTypes[fd.Number()] = reflect.<b>Zero</b>(ft).Interface()
+		<a href="../src/google.golang.org/protobuf/internal/impl/message_reflect.go.html#line-419" class="path-duplicate">message_reflect.go</a><a href="../src/google.golang.org/protobuf/internal/impl/message_reflect.go.html#line-419">#L419</a>: 		rv.Elem().Set(reflect.<b>Zero</b>(rv.Type().Elem()))
+		<a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-103">message_reflect_field.go#L103</a>: 			rv.Set(reflect.<b>Zero</b>(rv.Type()))
+		<a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-167" class="path-duplicate">message_reflect_field.go</a><a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-167">#L167</a>: 			rv.Set(reflect.<b>Zero</b>(rv.Type()))
+		<a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-220" class="path-duplicate">message_reflect_field.go</a><a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-220">#L220</a>: 			rv.Set(reflect.<b>Zero</b>(rv.Type()))
+		<a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-301" class="path-duplicate">message_reflect_field.go</a><a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-301">#L301</a>: 			rv.Set(reflect.<b>Zero</b>(rv.Type()))
+		<a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-434" class="path-duplicate">message_reflect_field.go</a><a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-434">#L434</a>: 			rv.Set(reflect.<b>Zero</b>(rv.Type()))
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

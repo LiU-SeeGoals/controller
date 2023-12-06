@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: axpyinc_amd64.s in package gonum.org/v1/gonum/internal/asm/f64</title>
+<link href="../../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	axpyinc_amd64.s
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/gonum.org/v1/gonum/internal/asm/f64.html">gonum.org/v1/gonum/internal/asm/f64</a>
+</code></pre>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code>// Copyright ©2015 The Gonum Authors. All rights reserved.</code></span>
+<span class="codeline" id="line-2"><code>// Use of this source code is governed by a BSD-style</code></span>
+<span class="codeline" id="line-3"><code>// license that can be found in the LICENSE file.</code></span>
+<span class="codeline" id="line-4"><code>//</code></span>
+<span class="codeline" id="line-5"><code>// Some of the loop unrolling code is copied from:</code></span>
+<span class="codeline" id="line-6"><code>// http://golang.org/src/math/big/arith_amd64.s</code></span>
+<span class="codeline" id="line-7"><code>// which is distributed under these terms:</code></span>
+<span class="codeline" id="line-8"><code>//</code></span>
+<span class="codeline" id="line-9"><code>// Copyright (c) 2012 The Go Authors. All rights reserved.</code></span>
+<span class="codeline" id="line-10"><code>//</code></span>
+<span class="codeline" id="line-11"><code>// Redistribution and use in source and binary forms, with or without</code></span>
+<span class="codeline" id="line-12"><code>// modification, are permitted provided that the following conditions are</code></span>
+<span class="codeline" id="line-13"><code>// met:</code></span>
+<span class="codeline" id="line-14"><code>//</code></span>
+<span class="codeline" id="line-15"><code>//    * Redistributions of source code must retain the above copyright</code></span>
+<span class="codeline" id="line-16"><code>// notice, this list of conditions and the following disclaimer.</code></span>
+<span class="codeline" id="line-17"><code>//    * Redistributions in binary form must reproduce the above</code></span>
+<span class="codeline" id="line-18"><code>// copyright notice, this list of conditions and the following disclaimer</code></span>
+<span class="codeline" id="line-19"><code>// in the documentation and/or other materials provided with the</code></span>
+<span class="codeline" id="line-20"><code>// distribution.</code></span>
+<span class="codeline" id="line-21"><code>//    * Neither the name of Google Inc. nor the names of its</code></span>
+<span class="codeline" id="line-22"><code>// contributors may be used to endorse or promote products derived from</code></span>
+<span class="codeline" id="line-23"><code>// this software without specific prior written permission.</code></span>
+<span class="codeline" id="line-24"><code>//</code></span>
+<span class="codeline" id="line-25"><code>// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS</code></span>
+<span class="codeline" id="line-26"><code>// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT</code></span>
+<span class="codeline" id="line-27"><code>// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR</code></span>
+<span class="codeline" id="line-28"><code>// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT</code></span>
+<span class="codeline" id="line-29"><code>// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,</code></span>
+<span class="codeline" id="line-30"><code>// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT</code></span>
+<span class="codeline" id="line-31"><code>// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,</code></span>
+<span class="codeline" id="line-32"><code>// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY</code></span>
+<span class="codeline" id="line-33"><code>// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</code></span>
+<span class="codeline" id="line-34"><code>// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</code></span>
+<span class="codeline" id="line-35"><code>// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</code></span>
+<span class="codeline" id="line-36"><code></code></span>
+<span class="codeline" id="line-37"><code>// +build !noasm,!gccgo,!safe</code></span>
+<span class="codeline" id="line-38"><code></code></span>
+<span class="codeline" id="line-39"><code>#include "textflag.h"</code></span>
+<span class="codeline" id="line-40"><code></code></span>
+<span class="codeline" id="line-41"><code>#define X_PTR SI</code></span>
+<span class="codeline" id="line-42"><code>#define Y_PTR DI</code></span>
+<span class="codeline" id="line-43"><code>#define DST_PTR DI</code></span>
+<span class="codeline" id="line-44"><code>#define IDX AX</code></span>
+<span class="codeline" id="line-45"><code>#define LEN CX</code></span>
+<span class="codeline" id="line-46"><code>#define TAIL BX</code></span>
+<span class="codeline" id="line-47"><code>#define INC_X R8</code></span>
+<span class="codeline" id="line-48"><code>#define INCx3_X R11</code></span>
+<span class="codeline" id="line-49"><code>#define INC_Y R9</code></span>
+<span class="codeline" id="line-50"><code>#define INCx3_Y R12</code></span>
+<span class="codeline" id="line-51"><code>#define INC_DST R9</code></span>
+<span class="codeline" id="line-52"><code>#define INCx3_DST R12</code></span>
+<span class="codeline" id="line-53"><code>#define ALPHA X0</code></span>
+<span class="codeline" id="line-54"><code>#define ALPHA_2 X1</code></span>
+<span class="codeline" id="line-55"><code></code></span>
+<span class="codeline" id="line-56"><code>// func AxpyInc(alpha float64, x, y []float64, n, incX, incY, ix, iy uintptr)</code></span>
+<span class="codeline" id="line-57"><code>TEXT ·AxpyInc(SB), NOSPLIT, $0</code></span>
+<span class="codeline" id="line-58"><code>	MOVQ x_base+8(FP), X_PTR  // X_PTR = &amp;x</code></span>
+<span class="codeline" id="line-59"><code>	MOVQ y_base+32(FP), Y_PTR // Y_PTR = &amp;y</code></span>
+<span class="codeline" id="line-60"><code>	MOVQ n+56(FP), LEN        // LEN = n</code></span>
+<span class="codeline" id="line-61"><code>	CMPQ LEN, $0              // if LEN == 0 { return }</code></span>
+<span class="codeline" id="line-62"><code>	JE   end</code></span>
+<span class="codeline" id="line-63"><code></code></span>
+<span class="codeline" id="line-64"><code>	MOVQ ix+80(FP), INC_X</code></span>
+<span class="codeline" id="line-65"><code>	MOVQ iy+88(FP), INC_Y</code></span>
+<span class="codeline" id="line-66"><code>	LEAQ (X_PTR)(INC_X*8), X_PTR // X_PTR = &amp;(x[ix])</code></span>
+<span class="codeline" id="line-67"><code>	LEAQ (Y_PTR)(INC_Y*8), Y_PTR // Y_PTR = &amp;(y[iy])</code></span>
+<span class="codeline" id="line-68"><code>	MOVQ Y_PTR, DST_PTR          // DST_PTR = Y_PTR  // Write pointer</code></span>
+<span class="codeline" id="line-69"><code></code></span>
+<span class="codeline" id="line-70"><code>	MOVQ incX+64(FP), INC_X // INC_X = incX * sizeof(float64)</code></span>
+<span class="codeline" id="line-71"><code>	SHLQ $3, INC_X</code></span>
+<span class="codeline" id="line-72"><code>	MOVQ incY+72(FP), INC_Y // INC_Y = incY * sizeof(float64)</code></span>
+<span class="codeline" id="line-73"><code>	SHLQ $3, INC_Y</code></span>
+<span class="codeline" id="line-74"><code></code></span>
+<span class="codeline" id="line-75"><code>	MOVSD alpha+0(FP), ALPHA // ALPHA = alpha</code></span>
+<span class="codeline" id="line-76"><code>	MOVQ  LEN, TAIL</code></span>
+<span class="codeline" id="line-77"><code>	ANDQ  $3, TAIL           // TAIL = n % 4</code></span>
+<span class="codeline" id="line-78"><code>	SHRQ  $2, LEN            // LEN = floor( n / 4 )</code></span>
+<span class="codeline" id="line-79"><code>	JZ    tail_start         // if LEN == 0 { goto tail_start }</code></span>
+<span class="codeline" id="line-80"><code></code></span>
+<span class="codeline" id="line-81"><code>	MOVAPS ALPHA, ALPHA_2            // ALPHA_2 = ALPHA  for pipelining</code></span>
+<span class="codeline" id="line-82"><code>	LEAQ   (INC_X)(INC_X*2), INCx3_X // INCx3_X = INC_X * 3</code></span>
+<span class="codeline" id="line-83"><code>	LEAQ   (INC_Y)(INC_Y*2), INCx3_Y // INCx3_Y = INC_Y * 3</code></span>
+<span class="codeline" id="line-84"><code></code></span>
+<span class="codeline" id="line-85"><code>loop:  // do {  // y[i] += alpha * x[i] unrolled 4x.</code></span>
+<span class="codeline" id="line-86"><code>	MOVSD (X_PTR), X2            // X_i = x[i]</code></span>
+<span class="codeline" id="line-87"><code>	MOVSD (X_PTR)(INC_X*1), X3</code></span>
+<span class="codeline" id="line-88"><code>	MOVSD (X_PTR)(INC_X*2), X4</code></span>
+<span class="codeline" id="line-89"><code>	MOVSD (X_PTR)(INCx3_X*1), X5</code></span>
+<span class="codeline" id="line-90"><code></code></span>
+<span class="codeline" id="line-91"><code>	MULSD ALPHA, X2   // X_i *= a</code></span>
+<span class="codeline" id="line-92"><code>	MULSD ALPHA_2, X3</code></span>
+<span class="codeline" id="line-93"><code>	MULSD ALPHA, X4</code></span>
+<span class="codeline" id="line-94"><code>	MULSD ALPHA_2, X5</code></span>
+<span class="codeline" id="line-95"><code></code></span>
+<span class="codeline" id="line-96"><code>	ADDSD (Y_PTR), X2            // X_i += y[i]</code></span>
+<span class="codeline" id="line-97"><code>	ADDSD (Y_PTR)(INC_Y*1), X3</code></span>
+<span class="codeline" id="line-98"><code>	ADDSD (Y_PTR)(INC_Y*2), X4</code></span>
+<span class="codeline" id="line-99"><code>	ADDSD (Y_PTR)(INCx3_Y*1), X5</code></span>
+<span class="codeline" id="line-100"><code></code></span>
+<span class="codeline" id="line-101"><code>	MOVSD X2, (DST_PTR)              // y[i] = X_i</code></span>
+<span class="codeline" id="line-102"><code>	MOVSD X3, (DST_PTR)(INC_DST*1)</code></span>
+<span class="codeline" id="line-103"><code>	MOVSD X4, (DST_PTR)(INC_DST*2)</code></span>
+<span class="codeline" id="line-104"><code>	MOVSD X5, (DST_PTR)(INCx3_DST*1)</code></span>
+<span class="codeline" id="line-105"><code></code></span>
+<span class="codeline" id="line-106"><code>	LEAQ (X_PTR)(INC_X*4), X_PTR // X_PTR = &amp;(X_PTR[incX*4])</code></span>
+<span class="codeline" id="line-107"><code>	LEAQ (Y_PTR)(INC_Y*4), Y_PTR // Y_PTR = &amp;(Y_PTR[incY*4])</code></span>
+<span class="codeline" id="line-108"><code>	DECQ LEN</code></span>
+<span class="codeline" id="line-109"><code>	JNZ  loop                    // } while --LEN &gt; 0</code></span>
+<span class="codeline" id="line-110"><code>	CMPQ TAIL, $0                // if TAIL == 0 { return }</code></span>
+<span class="codeline" id="line-111"><code>	JE   end</code></span>
+<span class="codeline" id="line-112"><code></code></span>
+<span class="codeline" id="line-113"><code>tail_start: // Reset Loop registers</code></span>
+<span class="codeline" id="line-114"><code>	MOVQ TAIL, LEN // Loop counter: LEN = TAIL</code></span>
+<span class="codeline" id="line-115"><code>	SHRQ $1, LEN   // LEN = floor( LEN / 2 )</code></span>
+<span class="codeline" id="line-116"><code>	JZ   tail_one</code></span>
+<span class="codeline" id="line-117"><code></code></span>
+<span class="codeline" id="line-118"><code>tail_two:</code></span>
+<span class="codeline" id="line-119"><code>	MOVSD (X_PTR), X2              // X_i = x[i]</code></span>
+<span class="codeline" id="line-120"><code>	MOVSD (X_PTR)(INC_X*1), X3</code></span>
+<span class="codeline" id="line-121"><code>	MULSD ALPHA, X2                // X_i *= a</code></span>
+<span class="codeline" id="line-122"><code>	MULSD ALPHA, X3</code></span>
+<span class="codeline" id="line-123"><code>	ADDSD (Y_PTR), X2              // X_i += y[i]</code></span>
+<span class="codeline" id="line-124"><code>	ADDSD (Y_PTR)(INC_Y*1), X3</code></span>
+<span class="codeline" id="line-125"><code>	MOVSD X2, (DST_PTR)            // y[i] = X_i</code></span>
+<span class="codeline" id="line-126"><code>	MOVSD X3, (DST_PTR)(INC_DST*1)</code></span>
+<span class="codeline" id="line-127"><code></code></span>
+<span class="codeline" id="line-128"><code>	LEAQ (X_PTR)(INC_X*2), X_PTR // X_PTR = &amp;(X_PTR[incX*2])</code></span>
+<span class="codeline" id="line-129"><code>	LEAQ (Y_PTR)(INC_Y*2), Y_PTR // Y_PTR = &amp;(Y_PTR[incY*2])</code></span>
+<span class="codeline" id="line-130"><code></code></span>
+<span class="codeline" id="line-131"><code>	ANDQ $1, TAIL</code></span>
+<span class="codeline" id="line-132"><code>	JZ   end      // if TAIL == 0 { goto end }</code></span>
+<span class="codeline" id="line-133"><code></code></span>
+<span class="codeline" id="line-134"><code>tail_one:</code></span>
+<span class="codeline" id="line-135"><code>	// y[i] += alpha * x[i] for the last n % 4 iterations.</code></span>
+<span class="codeline" id="line-136"><code>	MOVSD (X_PTR), X2   // X2 = x[i]</code></span>
+<span class="codeline" id="line-137"><code>	MULSD ALPHA, X2     // X2 *= a</code></span>
+<span class="codeline" id="line-138"><code>	ADDSD (Y_PTR), X2   // X2 += y[i]</code></span>
+<span class="codeline" id="line-139"><code>	MOVSD X2, (DST_PTR) // y[i] = X2</code></span>
+<span class="codeline" id="line-140"><code></code></span>
+<span class="codeline" id="line-141"><code>end:</code></span>
+<span class="codeline" id="line-142"><code>	RET</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

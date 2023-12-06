@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/lapack.Backward</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">const <b><a href="../../../../pkg/gonum.org/v1/gonum/lapack.html">gonum.org/v1/gonum/lapack</a>.<a href="../../../../src/gonum.org/v1/gonum/lapack/lapack.go.html#line-51">Backward</a></b></span>
+
+<span class="title">16 uses</span>
+
+	gonum.org/v1/gonum/lapack (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/lapack.go.html#line-51">lapack.go#L51</a>: 	<b>Backward</b> Direct = 'B' // Reflectors are left-multiplied, H_{k-1} * ... * H_1 * H_0.
+
+	<a href="../../../../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-364">dbdsqr.go#L364</a>: 						impl.Dlasr(blas.Left, lapack.Variable, lapack.<b>Backward</b>, m-l2, ncvt, work[nm12:], work[nm13:], vt[l2*ldvt:], ldvt)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-367" class="path-duplicate">dbdsqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-367">#L367</a>: 						impl.Dlasr(blas.Right, lapack.Variable, lapack.<b>Backward</b>, nru, m-l2, work, work[n-1:], u[l2:], ldu)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-370" class="path-duplicate">dbdsqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-370">#L370</a>: 						impl.Dlasr(blas.Left, lapack.Variable, lapack.<b>Backward</b>, m-l2, ncc, work, work[n-1:], c[l2*ldc:], ldc)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-451" class="path-duplicate">dbdsqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-451">#L451</a>: 						impl.Dlasr(blas.Left, lapack.Variable, lapack.<b>Backward</b>, m-l2, ncvt, work[nm12:], work[nm13:], vt[l2*ldvt:], ldvt)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-454" class="path-duplicate">dbdsqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-454">#L454</a>: 						impl.Dlasr(blas.Right, lapack.Variable, lapack.<b>Backward</b>, nru, m-l2, work, work[n-1:], u[l2:], ldu)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-457" class="path-duplicate">dbdsqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-457">#L457</a>: 						impl.Dlasr(blas.Left, lapack.Variable, lapack.<b>Backward</b>, m-l2, ncc, work, work[n-1:], c[l2*ldc:], ldc)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgerqf.go.html#line-111">dgerqf.go#L111</a>: 				impl.Dlarft(lapack.<b>Backward</b>, lapack.RowWise,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgerqf.go.html#line-116" class="path-duplicate">dgerqf.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgerqf.go.html#line-116">#L116</a>: 				impl.Dlarfb(blas.Right, blas.NoTrans, lapack.<b>Backward</b>, lapack.RowWise,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-80">dlarfb.go#L80</a>: 	case direct != lapack.Forward &amp;&amp; direct != lapack.<b>Backward</b>:
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarft.go.html#line-40">dlarft.go#L40</a>: 	case direct != lapack.Forward &amp;&amp; direct != lapack.<b>Backward</b>:
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlasr.go.html#line-71">dlasr.go#L71</a>: 	case direct != lapack.Forward &amp;&amp; direct != lapack.<b>Backward</b>:
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dorgql.go.html#line-118">dorgql.go#L118</a>: 				impl.Dlarft(lapack.<b>Backward</b>, lapack.ColumnWise, m-k+i+ib, ib,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dorgql.go.html#line-122" class="path-duplicate">dorgql.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dorgql.go.html#line-122">#L122</a>: 				impl.Dlarfb(blas.Left, blas.NoTrans, lapack.<b>Backward</b>, lapack.ColumnWise,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-211">dsteqr.go#L211</a>: 						impl.Dlasr(blas.Right, lapack.Variable, lapack.<b>Backward</b>,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-260" class="path-duplicate">dsteqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-260">#L260</a>: 					impl.Dlasr(blas.Right, lapack.Variable, lapack.<b>Backward</b>,
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

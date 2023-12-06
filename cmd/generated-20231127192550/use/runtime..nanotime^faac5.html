@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.nanotime</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/time_nofake.go.html#line-18">nanotime</a></b></span>
+
+<span class="title">58 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/cpuprof.go.html#line-88">cpuprof.go#L88</a>: 		cpuprof.log.write(nil, <b>nanotime</b>(), hdr[:], nil)
+		<a href="../src/runtime/cpuprof.go.html#line-122" class="path-duplicate">cpuprof.go</a><a href="../src/runtime/cpuprof.go.html#line-122">#L122</a>: 		cpuprof.log.write(tagPtr, <b>nanotime</b>(), hdr[:], stk)
+		<a href="../src/runtime/debuglog.go.html#line-56">debuglog.go#L56</a>: 	tick, nano := uint64(cputicks()), uint64(<b>nanotime</b>())
+		<a href="../src/runtime/lock_futex.go.html#line-196">lock_futex.go#L196</a>: 	deadline := <b>nanotime</b>() + ns
+		<a href="../src/runtime/lock_futex.go.html#line-210" class="path-duplicate">lock_futex.go</a><a href="../src/runtime/lock_futex.go.html#line-210">#L210</a>: 		now := <b>nanotime</b>()
+		<a href="../src/runtime/mgc.go.html#line-291">mgc.go#L291</a>: 	now := <b>nanotime</b>()
+		<a href="../src/runtime/mgc.go.html#line-681" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-681">#L681</a>: 	now := <b>nanotime</b>()
+		<a href="../src/runtime/mgc.go.html#line-871" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-871">#L871</a>: 	now := <b>nanotime</b>()
+		<a href="../src/runtime/mgc.go.html#line-948" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-948">#L948</a>: 	startTime := <b>nanotime</b>()
+		<a href="../src/runtime/mgc.go.html#line-1015" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1015">#L1015</a>: 	now := <b>nanotime</b>()
+		<a href="../src/runtime/mgc.go.html#line-1340" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1340">#L1340</a>: 		startTime := <b>nanotime</b>()
+		<a href="../src/runtime/mgc.go.html#line-1391" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1391">#L1391</a>: 		now := <b>nanotime</b>()
+		<a href="../src/runtime/mgcmark.go.html#line-553">mgcmark.go#L553</a>: 	startTime := <b>nanotime</b>()
+		<a href="../src/runtime/mgcmark.go.html#line-597" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-597">#L597</a>: 	now := <b>nanotime</b>()
+		<a href="../src/runtime/mgcpacer.go.html#line-741">mgcpacer.go#L741</a>: 		now = <b>nanotime</b>()
+		<a href="../src/runtime/mgcscavenge.go.html#line-394">mgcscavenge.go#L394</a>: 			start := <b>nanotime</b>()
+		<a href="../src/runtime/mgcscavenge.go.html#line-396" class="path-duplicate">mgcscavenge.go</a><a href="../src/runtime/mgcscavenge.go.html#line-396">#L396</a>: 			end := <b>nanotime</b>()
+		<a href="../src/runtime/mgcscavenge.go.html#line-499" class="path-duplicate">mgcscavenge.go</a><a href="../src/runtime/mgcscavenge.go.html#line-499">#L499</a>: 		start := <b>nanotime</b>()
+		<a href="../src/runtime/mgcscavenge.go.html#line-507" class="path-duplicate">mgcscavenge.go</a><a href="../src/runtime/mgcscavenge.go.html#line-507">#L507</a>: 		slept = <b>nanotime</b>() - start
+		<a href="../src/runtime/mheap.go.html#line-1325">mheap.go#L1325</a>: 		start := <b>nanotime</b>()
+		<a href="../src/runtime/mheap.go.html#line-1336" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1336">#L1336</a>: 		now = <b>nanotime</b>()
+		<a href="../src/runtime/netpoll.go.html#line-373">netpoll.go#L373</a>: 		d += <b>nanotime</b>()
+		<a href="../src/runtime/preempt.go.html#line-228">preempt.go#L228</a>: 				now := <b>nanotime</b>()
+		<a href="../src/runtime/preempt.go.html#line-244" class="path-duplicate">preempt.go</a><a href="../src/runtime/preempt.go.html#line-244">#L244</a>: 			nextYield = <b>nanotime</b>() + yieldDelay
+		<a href="../src/runtime/preempt.go.html#line-246" class="path-duplicate">preempt.go</a><a href="../src/runtime/preempt.go.html#line-246">#L246</a>: 		if <b>nanotime</b>() &lt; nextYield {
+		<a href="../src/runtime/preempt.go.html#line-250" class="path-duplicate">preempt.go</a><a href="../src/runtime/preempt.go.html#line-250">#L250</a>: 			nextYield = <b>nanotime</b>() + yieldDelay/2
+		<a href="../src/runtime/proc.go.html#line-188">proc.go#L188</a>: 	runtimeInitTime = <b>nanotime</b>()
+		<a href="../src/runtime/proc.go.html#line-328" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-328">#L328</a>: 		gcStart(gcTrigger{kind: gcTriggerTime, now: <b>nanotime</b>()})
+		<a href="../src/runtime/proc.go.html#line-756" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-756">#L756</a>: 	sched.lastpoll.Store(<b>nanotime</b>())
+		<a href="../src/runtime/proc.go.html#line-1064" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1064">#L1064</a>: 			nextYield = <b>nanotime</b>() + yieldDelay
+		<a href="../src/runtime/proc.go.html#line-1066" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1066">#L1066</a>: 		if <b>nanotime</b>() &lt; nextYield {
+		<a href="../src/runtime/proc.go.html#line-1072" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1072">#L1072</a>: 			nextYield = <b>nanotime</b>() + yieldDelay/2
+		<a href="../src/runtime/proc.go.html#line-1097" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1097">#L1097</a>: 		now := <b>nanotime</b>()
+		<a href="../src/runtime/proc.go.html#line-1110" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1110">#L1110</a>: 		now := <b>nanotime</b>()
+		<a href="../src/runtime/proc.go.html#line-1121" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1121">#L1121</a>: 		now := <b>nanotime</b>()
+		<a href="../src/runtime/proc.go.html#line-1126" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1126">#L1126</a>: 		now := <b>nanotime</b>()
+		<a href="../src/runtime/proc.go.html#line-1383" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1383">#L1383</a>: 	now := <b>nanotime</b>()
+		<a href="../src/runtime/proc.go.html#line-1476" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1476">#L1476</a>: 	startTime := <b>nanotime</b>()
+		<a href="../src/runtime/proc.go.html#line-3180" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-3180">#L3180</a>: 				now = <b>nanotime</b>()
+		<a href="../src/runtime/proc.go.html#line-3193" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-3193">#L3193</a>: 		now = <b>nanotime</b>()
+		<a href="../src/runtime/proc.go.html#line-3674" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-3674">#L3674</a>: 		now = <b>nanotime</b>()
+		<a href="../src/runtime/proc.go.html#line-5196" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5196">#L5196</a>: 	now := <b>nanotime</b>()
+		<a href="../src/runtime/proc.go.html#line-5551" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5551">#L5551</a>: 		now := <b>nanotime</b>()
+		<a href="../src/runtime/proc.go.html#line-5589" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5589">#L5589</a>: 		now = <b>nanotime</b>()
+		<a href="../src/runtime/proc.go.html#line-5799" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5799">#L5799</a>: 	now := <b>nanotime</b>()
+		<a href="../src/runtime/proc.go.html#line-6103" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-6103">#L6103</a>: 		now = <b>nanotime</b>()
+		<a href="../src/runtime/proc.go.html#line-6130" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-6130">#L6130</a>: 			now = <b>nanotime</b>()
+		<a href="../src/runtime/proc.go.html#line-6726" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-6726">#L6726</a>: 			start = <b>nanotime</b>()
+		<a href="../src/runtime/proc.go.html#line-6744" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-6744">#L6744</a>: 			end := <b>nanotime</b>()
+		<a href="../src/runtime/runtime.go.html#line-33">runtime.go#L33</a>: 		t0 := <b>nanotime</b>()
+		<a href="../src/runtime/runtime.go.html#line-36" class="path-duplicate">runtime.go</a><a href="../src/runtime/runtime.go.html#line-36">#L36</a>: 		t1 := <b>nanotime</b>()
+		<a href="../src/runtime/runtime2.go.html#line-984">runtime2.go#L984</a>: 		h := memhash(unsafe.Pointer(&amp;r[n-w]), uintptr(<b>nanotime</b>()), uintptr(w))
+		<a href="../src/runtime/sema.go.html#line-632">sema.go#L632</a>: 	return <b>nanotime</b>()
+		<a href="../src/runtime/time.go.html#line-191">time.go#L191</a>: 	t.nextwhen = <b>nanotime</b>() + ns
+		<a href="../src/runtime/time_nofake.go.html#line-18">time_nofake.go#L18</a>: func <b>nanotime</b>() int64 {
+		<a href="../src/runtime/trace.go.html#line-378">trace.go#L378</a>: 	trace.startNanotime = <b>nanotime</b>()
+		<a href="../src/runtime/trace.go.html#line-468" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-468">#L468</a>: 		trace.endNanotime = <b>nanotime</b>()
+		<a href="../src/runtime/traceback.go.html#line-1207">traceback.go#L1207</a>: 		waitfor = (<b>nanotime</b>() - gp.waitsince) / 60e9
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

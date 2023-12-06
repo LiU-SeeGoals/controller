@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: reflect.StructField</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../pkg/reflect.html">reflect</a>.<a href="../src/reflect/type.go.html#line-869">StructField</a></b></span>
+
+<span class="title">34 uses</span>
+
+	reflect (current package)
+		<a href="../src/reflect/type.go.html#line-165">type.go#L165</a>: 	Field(i int) <b>StructField</b>
+		<a href="../src/reflect/type.go.html#line-171" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-171">#L171</a>: 	FieldByIndex(index []int) <b>StructField</b>
+		<a href="../src/reflect/type.go.html#line-175" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-175">#L175</a>: 	FieldByName(name string) (<b>StructField</b>, bool)
+		<a href="../src/reflect/type.go.html#line-189" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-189">#L189</a>: 	FieldByNameFunc(match func(string) bool) (<b>StructField</b>, bool)
+		<a href="../src/reflect/type.go.html#line-712" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-712">#L712</a>: func (t *rtype) Field(i int) <b>StructField</b> {
+		<a href="../src/reflect/type.go.html#line-720" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-720">#L720</a>: func (t *rtype) FieldByIndex(index []int) <b>StructField</b> {
+		<a href="../src/reflect/type.go.html#line-728" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-728">#L728</a>: func (t *rtype) FieldByName(name string) (<b>StructField</b>, bool) {
+		<a href="../src/reflect/type.go.html#line-736" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-736">#L736</a>: func (t *rtype) FieldByNameFunc(match func(string) bool) (<b>StructField</b>, bool) {
+		<a href="../src/reflect/type.go.html#line-869" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-869">#L869</a>: type <b>StructField</b> struct {
+		<a href="../src/reflect/type.go.html#line-886" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-886">#L886</a>: func (f <b>StructField</b>) IsExported() bool {
+		<a href="../src/reflect/type.go.html#line-971" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-971">#L971</a>: func (t *structType) Field(i int) (f <b>StructField</b>) {
+		<a href="../src/reflect/type.go.html#line-1002" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1002">#L1002</a>: func (t *structType) FieldByIndex(index []int) (f <b>StructField</b>) {
+		<a href="../src/reflect/type.go.html#line-1025" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1025">#L1025</a>: func (t *structType) FieldByNameFunc(match func(string) bool) (result <b>StructField</b>, ok bool) {
+		<a href="../src/reflect/type.go.html#line-1088" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1088">#L1088</a>: 						return <b>StructField</b>{}, false
+		<a href="../src/reflect/type.go.html#line-1131" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1131">#L1131</a>: func (t *structType) FieldByName(name string) (f <b>StructField</b>, present bool) {
+		<a href="../src/reflect/type.go.html#line-1731" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1731">#L1731</a>: 	funcTypes[n] = StructOf([]<b>StructField</b>{
+		<a href="../src/reflect/type.go.html#line-2153" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2153">#L2153</a>: func StructOf(fields []<b>StructField</b>) Type {
+		<a href="../src/reflect/type.go.html#line-2399" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2399">#L2399</a>: 		tt := New(StructOf([]<b>StructField</b>{
+		<a href="../src/reflect/type.go.html#line-2567" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-2567">#L2567</a>: func runtimeStructField(field <b>StructField</b>) (structField, string) {
+		<a href="../src/reflect/visiblefields.go.html#line-16">visiblefields.go#L16</a>: func VisibleFields(t Type) []<b>StructField</b> {
+		<a href="../src/reflect/visiblefields.go.html#line-26" class="path-duplicate">visiblefields.go</a><a href="../src/reflect/visiblefields.go.html#line-26">#L26</a>: 		fields:   make([]<b>StructField</b>, 0, t.NumField()),
+		<a href="../src/reflect/visiblefields.go.html#line-52" class="path-duplicate">visiblefields.go</a><a href="../src/reflect/visiblefields.go.html#line-52">#L52</a>: 	fields   []<b>StructField</b>
+
+	<a href="../pkg/encoding/json.html">encoding/json</a>
+		<a href="../src/encoding/json/decode.go.html#line-147">decode.go#L147</a>: 	Field reflect.<b>StructField</b>
+
+	<a href="../pkg/github.com/golang/protobuf/proto.html">github.com/golang/protobuf/proto</a>
+		<a href="../src/github.com/golang/protobuf/proto/properties.go.html#line-196">properties.go#L196</a>: func (p *Properties) Init(typ reflect.Type, name, tag string, f *reflect.<b>StructField</b>) {
+
+	<a href="../pkg/google.golang.org/protobuf/internal/impl.html">google.golang.org/protobuf/internal/impl</a>
+		<a href="../src/google.golang.org/protobuf/internal/impl/message.go.html#line-136">message.go#L136</a>: 	fieldsByNumber        map[protoreflect.FieldNumber]reflect.<b>StructField</b>
+		<a href="../src/google.golang.org/protobuf/internal/impl/message.go.html#line-137" class="path-duplicate">message.go</a><a href="../src/google.golang.org/protobuf/internal/impl/message.go.html#line-137">#L137</a>: 	oneofsByName          map[protoreflect.Name]reflect.<b>StructField</b>
+		<a href="../src/google.golang.org/protobuf/internal/impl/message.go.html#line-149" class="path-duplicate">message.go</a><a href="../src/google.golang.org/protobuf/internal/impl/message.go.html#line-149">#L149</a>: 		fieldsByNumber:        map[protoreflect.FieldNumber]reflect.<b>StructField</b>{},
+		<a href="../src/google.golang.org/protobuf/internal/impl/message.go.html#line-150" class="path-duplicate">message.go</a><a href="../src/google.golang.org/protobuf/internal/impl/message.go.html#line-150">#L150</a>: 		oneofsByName:          map[protoreflect.Name]reflect.<b>StructField</b>{},
+		<a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-64">message_reflect_field.go#L64</a>: func fieldInfoForOneof(fd protoreflect.FieldDescriptor, fs reflect.<b>StructField</b>, x exporter, ot reflect.Type) fieldInfo {
+		<a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-147" class="path-duplicate">message_reflect_field.go</a><a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-147">#L147</a>: func fieldInfoForMap(fd protoreflect.FieldDescriptor, fs reflect.<b>StructField</b>, x exporter) fieldInfo {
+		<a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-200" class="path-duplicate">message_reflect_field.go</a><a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-200">#L200</a>: func fieldInfoForList(fd protoreflect.FieldDescriptor, fs reflect.<b>StructField</b>, x exporter) fieldInfo {
+		<a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-255" class="path-duplicate">message_reflect_field.go</a><a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-255">#L255</a>: func fieldInfoForScalar(fd protoreflect.FieldDescriptor, fs reflect.<b>StructField</b>, x exporter) fieldInfo {
+		<a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-414" class="path-duplicate">message_reflect_field.go</a><a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-414">#L414</a>: func fieldInfoForMessage(fd protoreflect.FieldDescriptor, fs reflect.<b>StructField</b>, x exporter) fieldInfo {
+		<a href="../src/google.golang.org/protobuf/internal/impl/pointer_unsafe.go.html#line-26">pointer_unsafe.go#L26</a>: func offsetOf(f reflect.<b>StructField</b>, x exporter) offset {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

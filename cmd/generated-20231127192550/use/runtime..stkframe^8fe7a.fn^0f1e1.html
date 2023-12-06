@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.stkframe.fn</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/stkframe.go.html#line-15">stkframe</a>.<a href="../src/runtime/stkframe.go.html#line-18">fn</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">31 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/heapdump.go.html#line-255">heapdump.go#L255</a>: 	f := s.<b>fn</b>
+		<a href="../src/runtime/mgcmark.go.html#line-920">mgcmark.go#L920</a>: 		print("scanframe ", funcname(frame.<b>fn</b>), "\n")
+		<a href="../src/runtime/mgcmark.go.html#line-923" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-923">#L923</a>: 	isAsyncPreempt := frame.<b>fn</b>.valid() &amp;&amp; frame.<b>fn</b>.funcID == abi.FuncID_asyncPreempt
+		<a href="../src/runtime/mgcmark.go.html#line-924" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-924">#L924</a>: 	isDebugCall := frame.<b>fn</b>.valid() &amp;&amp; frame.<b>fn</b>.funcID == abi.FuncID_debugCallV2
+		<a href="../src/runtime/mgcmark.go.html#line-927" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-927">#L927</a>: 			println("conservatively scanning function", funcname(frame.<b>fn</b>), "at PC", hex(frame.continpc))
+		<a href="../src/runtime/panic.go.html#line-656">panic.go#L656</a>: 			f := frame.<b>fn</b>
+		<a href="../src/runtime/panic.go.html#line-689" class="path-duplicate">panic.go</a><a href="../src/runtime/panic.go.html#line-689">#L689</a>: 			if frame.<b>fn</b>.deferreturn == 0 {
+		<a href="../src/runtime/panic.go.html#line-702" class="path-duplicate">panic.go</a><a href="../src/runtime/panic.go.html#line-702">#L702</a>: 			d1.pc = frame.<b>fn</b>.entry() + uintptr(frame.<b>fn</b>.deferreturn)
+		<a href="../src/runtime/stack.go.html#line-652">stack.go#L652</a>: 	f := frame.<b>fn</b>
+		<a href="../src/runtime/stkframe.go.html#line-18">stkframe.go#L18</a>: 	<b>fn</b> funcInfo
+		<a href="../src/runtime/stkframe.go.html#line-73" class="path-duplicate">stkframe.go</a><a href="../src/runtime/stkframe.go.html#line-73">#L73</a>: 	if frame.<b>fn</b>.args != abi.ArgsSizeUnknown {
+		<a href="../src/runtime/stkframe.go.html#line-74" class="path-duplicate">stkframe.go</a><a href="../src/runtime/stkframe.go.html#line-74">#L74</a>: 		return uintptr(frame.<b>fn</b>.args)
+		<a href="../src/runtime/stkframe.go.html#line-95" class="path-duplicate">stkframe.go</a><a href="../src/runtime/stkframe.go.html#line-95">#L95</a>: 	f := frame.<b>fn</b>
+		<a href="../src/runtime/stkframe.go.html#line-164" class="path-duplicate">stkframe.go</a><a href="../src/runtime/stkframe.go.html#line-164">#L164</a>: 	f := frame.<b>fn</b>
+		<a href="../src/runtime/traceback.go.html#line-214">traceback.go#L214</a>: 	frame.<b>fn</b> = f
+		<a href="../src/runtime/traceback.go.html#line-258" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-258">#L258</a>: 	f := frame.<b>fn</b>
+		<a href="../src/runtime/traceback.go.html#line-301" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-301">#L301</a>: 				frame.<b>fn</b> = findfunc(frame.pc)
+		<a href="../src/runtime/traceback.go.html#line-302" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-302">#L302</a>: 				f = frame.<b>fn</b>
+		<a href="../src/runtime/traceback.go.html#line-428" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-428">#L428</a>: 		if frame.<b>fn</b>.deferreturn != 0 {
+		<a href="../src/runtime/traceback.go.html#line-429" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-429">#L429</a>: 			frame.continpc = frame.<b>fn</b>.entry() + uintptr(frame.<b>fn</b>.deferreturn) + 1
+		<a href="../src/runtime/traceback.go.html#line-447" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-447">#L447</a>: 	f := frame.<b>fn</b>
+		<a href="../src/runtime/traceback.go.html#line-498" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-498">#L498</a>: 	frame.<b>fn</b> = flr
+		<a href="../src/runtime/traceback.go.html#line-510" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-510">#L510</a>: 		frame.<b>fn</b> = f
+		<a href="../src/runtime/traceback.go.html#line-586" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-586">#L586</a>: 	if u.flags&amp;unwindTrap == 0 &amp;&amp; u.frame.pc &gt; u.frame.<b>fn</b>.entry() {
+		<a href="../src/runtime/traceback.go.html#line-599" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-599">#L599</a>: 	if cgoTraceback == nil || u.frame.<b>fn</b>.funcID != abi.FuncID_cgocallback || u.cgoCtxt &lt; 0 {
+		<a href="../src/runtime/traceback.go.html#line-629" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-629">#L629</a>: 		f := u.frame.<b>fn</b>
+		<a href="../src/runtime/traceback.go.html#line-989" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-989">#L989</a>: 		f := u.frame.<b>fn</b>
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

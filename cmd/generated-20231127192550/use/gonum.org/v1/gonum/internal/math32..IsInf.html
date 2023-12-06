@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/internal/math32.IsInf</title>
+<link href="../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../../../../../pkg/gonum.org/v1/gonum/internal/math32.html">gonum.org/v1/gonum/internal/math32</a>.<a href="../../../../../src/gonum.org/v1/gonum/internal/math32/math.go.html#line-95">IsInf</a></b></span>
+
+<span class="title">18 uses</span>
+
+	gonum.org/v1/gonum/internal/math32 (current package)
+		<a href="../../../../../src/gonum.org/v1/gonum/internal/math32/math.go.html#line-59">math.go#L59</a>: 	case <b>IsInf</b>(p, 0) || <b>IsInf</b>(q, 0):
+		<a href="../../../../../src/gonum.org/v1/gonum/internal/math32/math.go.html#line-95" class="path-duplicate">math.go</a><a href="../../../../../src/gonum.org/v1/gonum/internal/math32/math.go.html#line-95">#L95</a>: func <b>IsInf</b>(f float32, sign int) bool {
+		<a href="../../../../../src/gonum.org/v1/gonum/internal/math32/math.go.html#line-123" class="path-duplicate">math.go</a><a href="../../../../../src/gonum.org/v1/gonum/internal/math32/math.go.html#line-123">#L123</a>: 	case <b>IsInf</b>(x, 1) || <b>IsInf</b>(y, 1):
+		<a href="../../../../../src/gonum.org/v1/gonum/internal/math32/math.go.html#line-149" class="path-duplicate">math.go</a><a href="../../../../../src/gonum.org/v1/gonum/internal/math32/math.go.html#line-149">#L149</a>: 	case <b>IsInf</b>(x, -1) || <b>IsInf</b>(y, -1):
+
+	<a href="../../../../../pkg/gonum.org/v1/gonum/internal/asm/c64.html">gonum.org/v1/gonum/internal/asm/c64</a>
+		<a href="../../../../../src/gonum.org/v1/gonum/internal/asm/c64/stubs.go.html#line-135">stubs.go#L135</a>: 	if math32.<b>IsInf</b>(scale, 1) {
+		<a href="../../../../../src/gonum.org/v1/gonum/internal/asm/c64/stubs.go.html#line-162" class="path-duplicate">stubs.go</a><a href="../../../../../src/gonum.org/v1/gonum/internal/asm/c64/stubs.go.html#line-162">#L162</a>: 	if math32.<b>IsInf</b>(scale, 1) {
+
+	<a href="../../../../../pkg/gonum.org/v1/gonum/internal/asm/f32.html">gonum.org/v1/gonum/internal/asm/f32</a>
+		<a href="../../../../../src/gonum.org/v1/gonum/internal/asm/f32/l2norm.go.html#line-30">l2norm.go#L30</a>: 	if math32.<b>IsInf</b>(scale, 1) {
+		<a href="../../../../../src/gonum.org/v1/gonum/internal/asm/f32/l2norm.go.html#line-58" class="path-duplicate">l2norm.go</a><a href="../../../../../src/gonum.org/v1/gonum/internal/asm/f32/l2norm.go.html#line-58">#L58</a>: 	if math32.<b>IsInf</b>(scale, 1) {
+		<a href="../../../../../src/gonum.org/v1/gonum/internal/asm/f32/l2norm.go.html#line-86" class="path-duplicate">l2norm.go</a><a href="../../../../../src/gonum.org/v1/gonum/internal/asm/f32/l2norm.go.html#line-86">#L86</a>: 	if math32.<b>IsInf</b>(scale, 1) {
+
+	<a href="../../../../../pkg/gonum.org/v1/gonum/internal/cmplx64.html">gonum.org/v1/gonum/internal/cmplx64</a>
+		<a href="../../../../../src/gonum.org/v1/gonum/internal/cmplx64/isinf.go.html#line-15">isinf.go#L15</a>: 	if math.<b>IsInf</b>(real(x), 0) || math.<b>IsInf</b>(imag(x), 0) {
+		<a href="../../../../../src/gonum.org/v1/gonum/internal/cmplx64/isnan.go.html#line-17">isnan.go#L17</a>: 	case math.<b>IsInf</b>(real(x), 0) || math.<b>IsInf</b>(imag(x), 0):
+
+	<a href="../../../../../pkg/gonum.org/v1/gonum/blas/gonum.html">gonum.org/v1/gonum/blas/gonum</a>
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/gonum/level1cmplx64.go.html#line-102">level1cmplx64.go#L102</a>: 		if math.<b>IsInf</b>(scale, 1) {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/gonum/level1cmplx64.go.html#line-126" class="path-duplicate">level1cmplx64.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/gonum/level1cmplx64.go.html#line-126">#L126</a>: 	if math.<b>IsInf</b>(scale, 1) {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

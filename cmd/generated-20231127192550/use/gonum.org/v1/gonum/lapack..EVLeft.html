@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/lapack.EVLeft</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">const <b><a href="../../../../pkg/gonum.org/v1/gonum/lapack.html">gonum.org/v1/gonum/lapack</a>.<a href="../../../../src/gonum.org/v1/gonum/lapack/lapack.go.html#line-208">EVLeft</a></b></span>
+
+<span class="title">7 uses</span>
+
+	gonum.org/v1/gonum/lapack (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/lapack.go.html#line-208">lapack.go#L208</a>: 	<b>EVLeft</b>  EVSide = 'L' // Compute only left eigenvectors.
+
+	<a href="../../../../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgebak.go.html#line-29">dgebak.go#L29</a>: 	case side != lapack.<b>EVLeft</b> &amp;&amp; side != lapack.EVRight:
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-111">dgeev.go#L111</a>: 		side := lapack.<b>EVLeft</b>
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-174" class="path-duplicate">dgeev.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-174">#L174</a>: 		side = lapack.<b>EVLeft</b>
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-226" class="path-duplicate">dgeev.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-226">#L226</a>: 		impl.Dgebak(lapack.PermuteScale, lapack.<b>EVLeft</b>, n, ilo, ihi, workbal, n, vl, ldvl)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrevc3.go.html#line-120">dtrevc3.go#L120</a>: 	leftv := side == lapack.<b>EVLeft</b> || bothv
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrevc3.go.html#line-266" class="path-duplicate">dtrevc3.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrevc3.go.html#line-266">#L266</a>: 	if side == lapack.<b>EVLeft</b> {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/lapack.GSVDJob</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../../../../pkg/gonum.org/v1/gonum/lapack.html">gonum.org/v1/gonum/lapack</a>.<a href="../../../../src/gonum.org/v1/gonum/lapack/lapack.go.html#line-125">GSVDJob</a></b></span>
+
+<span class="title">12 uses</span>
+
+	gonum.org/v1/gonum/lapack (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/lapack.go.html#line-23">lapack.go#L23</a>: 	Dggsvd3(jobU, jobV, jobQ <b>GSVDJob</b>, m, n, p int, a []float64, lda int, b []float64, ldb int, alpha, beta, u []float64, ldu int, v []float64, ldv int, q []float64, ldq int, work []float64, lwork int, iwork []int) (k, l int, ok bool)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/lapack.go.html#line-125" class="path-duplicate">lapack.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/lapack.go.html#line-125">#L125</a>: type <b>GSVDJob</b> byte
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/lapack.go.html#line-128" class="path-duplicate">lapack.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/lapack.go.html#line-128">#L128</a>: 	GSVDU    <b>GSVDJob</b> = 'U' // Compute orthogonal matrix U.
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/lapack.go.html#line-129" class="path-duplicate">lapack.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/lapack.go.html#line-129">#L129</a>: 	GSVDV    <b>GSVDJob</b> = 'V' // Compute orthogonal matrix V.
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/lapack.go.html#line-130" class="path-duplicate">lapack.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/lapack.go.html#line-130">#L130</a>: 	GSVDQ    <b>GSVDJob</b> = 'Q' // Compute orthogonal matrix Q.
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/lapack.go.html#line-131" class="path-duplicate">lapack.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/lapack.go.html#line-131">#L131</a>: 	GSVDUnit <b>GSVDJob</b> = 'I' // Use unit-initialized matrix.
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/lapack.go.html#line-132" class="path-duplicate">lapack.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/lapack.go.html#line-132">#L132</a>: 	GSVDNone <b>GSVDJob</b> = 'N' // Do not compute orthogonal matrix.
+
+	<a href="../../../../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dggsvd3.go.html#line-126">dggsvd3.go#L126</a>: func (impl Implementation) Dggsvd3(jobU, jobV, jobQ lapack.<b>GSVDJob</b>, m, n, p int, a []float64, lda int, b []float64, ldb int, alpha, beta, u []float64, ldu int, v []float64, ldv int, q []float64, ldq int, work []float64, lwork int, iwork []int) (k, l int, ok bool) {
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dggsvp3.go.html#line-60">dggsvp3.go#L60</a>: func (impl Implementation) Dggsvp3(jobU, jobV, jobQ lapack.<b>GSVDJob</b>, m, p, n int, a []float64, lda int, b []float64, ldb int, tola, tolb float64, u []float64, ldu int, v []float64, ldv int, q []float64, ldq int, iwork []int, tau, work []float64, lwork int) (k, l int) {
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtgsja.go.html#line-177">dtgsja.go#L177</a>: func (impl Implementation) Dtgsja(jobU, jobV, jobQ lapack.<b>GSVDJob</b>, m, p, n, k, l int, a []float64, lda int, b []float64, ldb int, tola, tolb float64, alpha, beta, u []float64, ldu int, v []float64, ldv int, q []float64, ldq int, work []float64) (cycles int, ok bool) {
+
+	<a href="../../../../pkg/gonum.org/v1/gonum/lapack/lapack64.html">gonum.org/v1/gonum/lapack/lapack64</a>
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-491">lapack64.go#L491</a>: func Ggsvd3(jobU, jobV, jobQ lapack.<b>GSVDJob</b>, a, b blas64.General, alpha, beta []float64, u, v, q blas64.General, work []float64, lwork int, iwork []int) (k, l int, ok bool) {
+
+	<a href="../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/gsvd.go.html#line-93">gsvd.go#L93</a>: 	var jobU, jobV, jobQ lapack.<b>GSVDJob</b>
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

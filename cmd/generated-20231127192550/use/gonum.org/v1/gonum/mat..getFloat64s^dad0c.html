@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/mat.getFloat64s</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-226">getFloat64s</a></b></span>
+
+<span class="title">38 uses</span>
+
+	gonum.org/v1/gonum/mat (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-61">cholesky.go#L61</a>: 	work := <b>getFloat64s</b>(3*n, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-145" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-145">#L145</a>: 	work := <b>getFloat64s</b>(c.chol.mat.N, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-611" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-611">#L611</a>: 	work := <b>getFloat64s</b>(n, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-679" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-679">#L679</a>: 	cos := <b>getFloat64s</b>(n, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-681" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-681">#L681</a>: 	sin := <b>getFloat64s</b>(n, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-771" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-771">#L771</a>: 	work := <b>getFloat64s</b>(3*n, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-978" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-978">#L978</a>: 	work := <b>getFloat64s</b>(3*c.chol.mat.N, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-610">dense.go#L610</a>: 		work := <b>getFloat64s</b>(m.mat.Cols, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-241">dense_arithmetic.go#L241</a>: 	work := <b>getFloat64s</b>(4*r, false) // Length must be at least 4*r for Gecon.
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-260" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-260">#L260</a>: 		work = <b>getFloat64s</b>(l, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-444" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-444">#L444</a>: 	row := <b>getFloat64s</b>(ac, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/eigen.go.html#line-55">eigen.go#L55</a>: 	work = <b>getFloat64s</b>(int(work[0]), false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/eigen.go.html#line-203" class="path-duplicate">eigen.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/eigen.go.html#line-203">#L203</a>: 	wr := <b>getFloat64s</b>(c, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/eigen.go.html#line-205" class="path-duplicate">eigen.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/eigen.go.html#line-205">#L205</a>: 	wi := <b>getFloat64s</b>(c, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/eigen.go.html#line-210" class="path-duplicate">eigen.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/eigen.go.html#line-210">#L210</a>: 	work = <b>getFloat64s</b>(int(work[0]), false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-34">lq.go#L34</a>: 	work := <b>getFloat64s</b>(3*m, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-66" class="path-duplicate">lq.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-66">#L66</a>: 	work = <b>getFloat64s</b>(int(work[0]), false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-162" class="path-duplicate">lq.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-162">#L162</a>: 	work = <b>getFloat64s</b>(int(work[0]), false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-210" class="path-duplicate">lq.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-210">#L210</a>: 		work = <b>getFloat64s</b>(int(work[0]), false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-228" class="path-duplicate">lq.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-228">#L228</a>: 		work = <b>getFloat64s</b>(int(work[0]), false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-33">lu.go#L33</a>: 	work := <b>getFloat64s</b>(4*n, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-82" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-82">#L82</a>: 	work := <b>getFloat64s</b>(r, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-134" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-134">#L134</a>: 	logDiag := <b>getFloat64s</b>(n, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-217" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-217">#L217</a>: 	xs := <b>getFloat64s</b>(n, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-219" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-219">#L219</a>: 	ys := <b>getFloat64s</b>(n, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-226">pool.go#L226</a>: func <b>getFloat64s</b>(l int, clear bool) []float64 {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-34">qr.go#L34</a>: 	work := <b>getFloat64s</b>(3*n, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-66" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-66">#L66</a>: 	work = <b>getFloat64s</b>(int(work[0]), false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-157" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-157">#L157</a>: 	work = <b>getFloat64s</b>(int(work[0]), false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-212" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-212">#L212</a>: 		work = <b>getFloat64s</b>(int(work[0]), false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-218" class="path-duplicate">qr.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-218">#L218</a>: 		work = <b>getFloat64s</b>(int(work[0]), false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/solve.go.html#line-80">solve.go#L80</a>: 		work := <b>getFloat64s</b>(3*rm.N, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-138">svd.go#L138</a>: 	work = <b>getFloat64s</b>(int(work[0]), false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symband.go.html#line-265">symband.go#L265</a>: 		work := <b>getFloat64s</b>(s.mat.N, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-601">symmetric.go#L601</a>: 		work := <b>getFloat64s</b>(s.mat.N, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-462">triangular.go#L462</a>: 	work := <b>getFloat64s</b>(3*n, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-638" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-638">#L638</a>: 		work := <b>getFloat64s</b>(t.mat.N, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-544">triband.go#L544</a>: 		work := <b>getFloat64s</b>(t.mat.N, false)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

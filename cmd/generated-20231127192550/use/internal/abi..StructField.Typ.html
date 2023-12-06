@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: internal/abi.StructField.Typ</title>
+<link href="../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../pkg/internal/abi.html">internal/abi</a>.<a href="../../src/internal/abi/type.go.html#line-547">StructField</a>.<a href="../../src/internal/abi/type.go.html#line-549">Typ</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">38 uses</span>
+
+	internal/abi (current package)
+		<a href="../../src/internal/abi/type.go.html#line-549">type.go#L549</a>: 	<b>Typ</b>    *Type   // type of field
+
+	<a href="../../pkg/internal/reflectlite.html">internal/reflectlite</a>
+		<a href="../../src/internal/reflectlite/type.go.html#line-625">type.go#L625</a>: 			if !haveIdenticalType(tf.<b>Typ</b>, vf.<b>Typ</b>, cmpTags) {
+
+	<a href="../../pkg/reflect.html">reflect</a>
+		<a href="../../src/reflect/abi.go.html#line-240">abi.go#L240</a>: 			if !a.regAssign(f.<b>Typ</b>, offset+f.Offset) {
+		<a href="../../src/reflect/type.go.html#line-976">type.go#L976</a>: 	f.Type = toType(p.<b>Typ</b>)
+		<a href="../../src/reflect/type.go.html#line-1077" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-1077">#L1077</a>: 					ntyp = f.<b>Typ</b>
+		<a href="../../src/reflect/type.go.html#line-1474" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-1474">#L1474</a>: 			if !haveIdenticalType(tf.<b>Typ</b>, vf.<b>Typ</b>, cmpTags) {
+		<a href="../../src/reflect/type.go.html#line-1889" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-1889">#L1889</a>: 			if !isReflexive(f.<b>Typ</b>) {
+		<a href="../../src/reflect/type.go.html#line-1916" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-1916">#L1916</a>: 			if needKeyUpdate(f.<b>Typ</b>) {
+		<a href="../../src/reflect/type.go.html#line-1938" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-1938">#L1938</a>: 			if hashMightPanic(f.<b>Typ</b>) {
+		<a href="../../src/reflect/type.go.html#line-2182" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2182">#L2182</a>: 		ft := f.<b>Typ</b>
+		<a href="../../src/reflect/type.go.html#line-2200" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2200">#L2200</a>: 			if f.<b>Typ</b>.Kind() == abi.Pointer {
+		<a href="../../src/reflect/type.go.html#line-2208" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2208">#L2208</a>: 			switch Kind(f.<b>Typ</b>.Kind()) {
+		<a href="../../src/reflect/type.go.html#line-2497" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2497">#L2497</a>: 			if ft.<b>Typ</b>.Pointers() {
+		<a href="../../src/reflect/type.go.html#line-2509" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2509">#L2509</a>: 			if !ft.<b>Typ</b>.Pointers() {
+		<a href="../../src/reflect/type.go.html#line-2524" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2524">#L2524</a>: 			prog = appendGCProg(prog, ft.<b>Typ</b>)
+		<a href="../../src/reflect/type.go.html#line-2525" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2525">#L2525</a>: 			off += ft.<b>Typ</b>.PtrBytes
+		<a href="../../src/reflect/type.go.html#line-2545" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2545">#L2545</a>: 				if !ft.<b>Typ</b>.Equal(pi, qi) {
+		<a href="../../src/reflect/type.go.html#line-2554" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2554">#L2554</a>: 	case len(fs) == 1 &amp;&amp; !ifaceIndir(fs[0].<b>Typ</b>):
+		<a href="../../src/reflect/type.go.html#line-2584" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2584">#L2584</a>: 		<b>Typ</b>:    field.Type.common(),
+		<a href="../../src/reflect/type.go.html#line-2600" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2600">#L2600</a>: 			ft := st.Fields[i].<b>Typ</b>
+		<a href="../../src/reflect/type.go.html#line-2609" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2609">#L2609</a>: 		return f.Offset + f.<b>Typ</b>.PtrBytes
+		<a href="../../src/reflect/type.go.html#line-2908" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2908">#L2908</a>: 			addTypeBits(bv, offset+f.Offset, f.<b>Typ</b>)
+		<a href="../../src/reflect/value.go.html#line-1285">value.go#L1285</a>: 	typ := field.<b>Typ</b>
+
+	<a href="../../pkg/runtime.html">runtime</a>
+		<a href="../../src/runtime/alg.go.html#line-186">alg.go#L186</a>: 			h = typehash(f.<b>Typ</b>, add(p, f.Offset), h)
+		<a href="../../src/runtime/cgocall.go.html#line-546">cgocall.go#L546</a>: 			cgoCheckArg(st.Fields[0].<b>Typ</b>, p, st.Fields[0].<b>Typ</b>.Kind_&amp;kindDirectIface == 0, top, msg)
+		<a href="../../src/runtime/cgocall.go.html#line-550" class="path-duplicate">cgocall.go</a><a href="../../src/runtime/cgocall.go.html#line-550">#L550</a>: 			if f.<b>Typ</b>.PtrBytes == 0 {
+		<a href="../../src/runtime/cgocall.go.html#line-553" class="path-duplicate">cgocall.go</a><a href="../../src/runtime/cgocall.go.html#line-553">#L553</a>: 			cgoCheckArg(f.<b>Typ</b>, add(p, f.Offset), true, top, msg)
+		<a href="../../src/runtime/cgocheck.go.html#line-276">cgocheck.go#L276</a>: 			if off &lt; f.<b>Typ</b>.Size_ {
+		<a href="../../src/runtime/cgocheck.go.html#line-277" class="path-duplicate">cgocheck.go</a><a href="../../src/runtime/cgocheck.go.html#line-277">#L277</a>: 				cgoCheckUsingType(f.<b>Typ</b>, src, off, size)
+		<a href="../../src/runtime/cgocheck.go.html#line-279" class="path-duplicate">cgocheck.go</a><a href="../../src/runtime/cgocheck.go.html#line-279">#L279</a>: 			src = add(src, f.<b>Typ</b>.Size_)
+		<a href="../../src/runtime/cgocheck.go.html#line-281" class="path-duplicate">cgocheck.go</a><a href="../../src/runtime/cgocheck.go.html#line-281">#L281</a>: 			if skipped &gt; f.<b>Typ</b>.Size_ {
+		<a href="../../src/runtime/cgocheck.go.html#line-282" class="path-duplicate">cgocheck.go</a><a href="../../src/runtime/cgocheck.go.html#line-282">#L282</a>: 				skipped = f.<b>Typ</b>.Size_
+		<a href="../../src/runtime/cgocheck.go.html#line-284" class="path-duplicate">cgocheck.go</a><a href="../../src/runtime/cgocheck.go.html#line-284">#L284</a>: 			checked := f.<b>Typ</b>.Size_ - skipped
+		<a href="../../src/runtime/type.go.html#line-450">type.go#L450</a>: 			if !typesEqual(tf.<b>Typ</b>, vf.<b>Typ</b>, seen) {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

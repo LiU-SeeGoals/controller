@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.mheap_</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">var <b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/mheap.go.html#line-233">mheap_</a></b></span>
+
+<span class="title">222 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/arena.go.html#line-661">arena.go#L661</a>: 		span = <b>mheap_</b>.allocUserArenaChunk()
+		<a href="../src/runtime/arena.go.html#line-816" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-816">#L816</a>: 		lock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/arena.go.html#line-817" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-817">#L817</a>: 		<b>mheap_</b>.userArena.quarantineList.insert(s)
+		<a href="../src/runtime/arena.go.html#line-818" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-818">#L818</a>: 		unlock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/heapdump.go.html#line-454">heapdump.go#L454</a>: 	for _, s := range <b>mheap_</b>.allspans {
+		<a href="../src/runtime/heapdump.go.html#line-480" class="path-duplicate">heapdump.go</a><a href="../src/runtime/heapdump.go.html#line-480">#L480</a>: 	for _, s := range <b>mheap_</b>.allspans {
+		<a href="../src/runtime/heapdump.go.html#line-517" class="path-duplicate">heapdump.go</a><a href="../src/runtime/heapdump.go.html#line-517">#L517</a>: 	for i1 := range <b>mheap_</b>.arenas {
+		<a href="../src/runtime/heapdump.go.html#line-518" class="path-duplicate">heapdump.go</a><a href="../src/runtime/heapdump.go.html#line-518">#L518</a>: 		if <b>mheap_</b>.arenas[i1] == nil {
+		<a href="../src/runtime/heapdump.go.html#line-521" class="path-duplicate">heapdump.go</a><a href="../src/runtime/heapdump.go.html#line-521">#L521</a>: 		for i, ha := range <b>mheap_</b>.arenas[i1] {
+		<a href="../src/runtime/heapdump.go.html#line-652" class="path-duplicate">heapdump.go</a><a href="../src/runtime/heapdump.go.html#line-652">#L652</a>: 	for _, s := range <b>mheap_</b>.allspans {
+		<a href="../src/runtime/heapdump.go.html#line-675" class="path-duplicate">heapdump.go</a><a href="../src/runtime/heapdump.go.html#line-675">#L675</a>: 	for _, s := range <b>mheap_</b>.allspans {
+		<a href="../src/runtime/malloc.go.html#line-435">malloc.go#L435</a>: 	<b>mheap_</b>.init()
+		<a href="../src/runtime/malloc.go.html#line-517" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-517">#L517</a>: 			hintList := &amp;<b>mheap_</b>.arenaHints
+		<a href="../src/runtime/malloc.go.html#line-519" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-519">#L519</a>: 				hintList = &amp;<b>mheap_</b>.userArena.arenaHints
+		<a href="../src/runtime/malloc.go.html#line-521" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-521">#L521</a>: 			hint := (*arenaHint)(<b>mheap_</b>.arenaHintAlloc.alloc())
+		<a href="../src/runtime/malloc.go.html#line-546" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-546">#L546</a>: 			<b>mheap_</b>.heapArenaAlloc.init(meta, arenaMetaSize, true)
+		<a href="../src/runtime/malloc.go.html#line-569" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-569">#L569</a>: 		if <b>mheap_</b>.heapArenaAlloc.next &lt;= p &amp;&amp; p &lt; <b>mheap_</b>.heapArenaAlloc.end {
+		<a href="../src/runtime/malloc.go.html#line-570" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-570">#L570</a>: 			p = <b>mheap_</b>.heapArenaAlloc.end
+		<a href="../src/runtime/malloc.go.html#line-583" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-583">#L583</a>: 				<b>mheap_</b>.arena.init(uintptr(a), size, false)
+		<a href="../src/runtime/malloc.go.html#line-584" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-584">#L584</a>: 				p = <b>mheap_</b>.arena.end // For hint below
+		<a href="../src/runtime/malloc.go.html#line-588" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-588">#L588</a>: 		hint := (*arenaHint)(<b>mheap_</b>.arenaHintAlloc.alloc())
+		<a href="../src/runtime/malloc.go.html#line-590" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-590">#L590</a>: 		hint.next, <b>mheap_</b>.arenaHints = <b>mheap_</b>.arenaHints, hint
+		<a href="../src/runtime/malloc.go.html#line-596" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-596">#L596</a>: 		userArenaHint := (*arenaHint)(<b>mheap_</b>.arenaHintAlloc.alloc())
+		<a href="../src/runtime/malloc.go.html#line-598" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-598">#L598</a>: 		userArenaHint.next, <b>mheap_</b>.userArena.arenaHints = <b>mheap_</b>.userArena.arenaHints, userArenaHint
+		<a href="../src/runtime/malloc.go.html#line-697" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-697">#L697</a>: 		hint.next, <b>mheap_</b>.arenaHints = <b>mheap_</b>.arenaHints, hint
+		<a href="../src/runtime/malloc.go.html#line-700" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-700">#L700</a>: 		hint.next, <b>mheap_</b>.arenaHints = <b>mheap_</b>.arenaHints, hint
+		<a href="../src/runtime/mbitmap.go.html#line-413">mbitmap.go#L413</a>: 	ha := <b>mheap_</b>.arenas[ai.l1()][ai.l2()]
+		<a href="../src/runtime/mbitmap.go.html#line-812" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-812">#L812</a>: 	ha := <b>mheap_</b>.arenas[ai.l1()][ai.l2()]
+		<a href="../src/runtime/mbitmap.go.html#line-865" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-865">#L865</a>: 	ha := <b>mheap_</b>.arenas[ai.l1()][ai.l2()]
+		<a href="../src/runtime/mbitmap.go.html#line-893" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-893">#L893</a>: 		ha := <b>mheap_</b>.arenas[ai.l1()][ai.l2()]
+		<a href="../src/runtime/mbitmap.go.html#line-1352" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-1352">#L1352</a>: 	s := <b>mheap_</b>.allocManual(pages, spanAllocPtrScalarBits)
+		<a href="../src/runtime/mbitmap.go.html#line-1357" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-1357">#L1357</a>: 	<b>mheap_</b>.freeManual(s, spanAllocPtrScalarBits)
+		<a href="../src/runtime/mcache.go.html#line-88">mcache.go#L88</a>: 		lock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mcache.go.html#line-89" class="path-duplicate">mcache.go</a><a href="../src/runtime/mcache.go.html#line-89">#L89</a>: 		c = (*mcache)(<b>mheap_</b>.cachealloc.alloc())
+		<a href="../src/runtime/mcache.go.html#line-90" class="path-duplicate">mcache.go</a><a href="../src/runtime/mcache.go.html#line-90">#L90</a>: 		c.flushGen.Store(<b>mheap_</b>.sweepgen)
+		<a href="../src/runtime/mcache.go.html#line-91" class="path-duplicate">mcache.go</a><a href="../src/runtime/mcache.go.html#line-91">#L91</a>: 		unlock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mcache.go.html#line-116" class="path-duplicate">mcache.go</a><a href="../src/runtime/mcache.go.html#line-116">#L116</a>: 		lock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mcache.go.html#line-117" class="path-duplicate">mcache.go</a><a href="../src/runtime/mcache.go.html#line-117">#L117</a>: 		<b>mheap_</b>.cachealloc.free(unsafe.Pointer(c))
+		<a href="../src/runtime/mcache.go.html#line-118" class="path-duplicate">mcache.go</a><a href="../src/runtime/mcache.go.html#line-118">#L118</a>: 		unlock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mcache.go.html#line-156" class="path-duplicate">mcache.go</a><a href="../src/runtime/mcache.go.html#line-156">#L156</a>: 		if s.sweepgen != <b>mheap_</b>.sweepgen+3 {
+		<a href="../src/runtime/mcache.go.html#line-159" class="path-duplicate">mcache.go</a><a href="../src/runtime/mcache.go.html#line-159">#L159</a>: 		<b>mheap_</b>.central[spc].mcentral.uncacheSpan(s)
+		<a href="../src/runtime/mcache.go.html#line-182" class="path-duplicate">mcache.go</a><a href="../src/runtime/mcache.go.html#line-182">#L182</a>: 	s = <b>mheap_</b>.central[spc].mcentral.cacheSpan()
+		<a href="../src/runtime/mcache.go.html#line-193" class="path-duplicate">mcache.go</a><a href="../src/runtime/mcache.go.html#line-193">#L193</a>: 	s.sweepgen = <b>mheap_</b>.sweepgen + 3
+		<a href="../src/runtime/mcache.go.html#line-234" class="path-duplicate">mcache.go</a><a href="../src/runtime/mcache.go.html#line-234">#L234</a>: 	s := <b>mheap_</b>.alloc(npages, spc)
+		<a href="../src/runtime/mcache.go.html#line-253" class="path-duplicate">mcache.go</a><a href="../src/runtime/mcache.go.html#line-253">#L253</a>: 	<b>mheap_</b>.central[spc].mcentral.fullSwept(<b>mheap_</b>.sweepgen).push(s)
+		<a href="../src/runtime/mcache.go.html#line-264" class="path-duplicate">mcache.go</a><a href="../src/runtime/mcache.go.html#line-264">#L264</a>: 	sg := <b>mheap_</b>.sweepgen
+		<a href="../src/runtime/mcache.go.html#line-291" class="path-duplicate">mcache.go</a><a href="../src/runtime/mcache.go.html#line-291">#L291</a>: 			<b>mheap_</b>.central[i].mcentral.uncacheSpan(s)
+		<a href="../src/runtime/mcache.go.html#line-320" class="path-duplicate">mcache.go</a><a href="../src/runtime/mcache.go.html#line-320">#L320</a>: 	sg := <b>mheap_</b>.sweepgen
+		<a href="../src/runtime/mcache.go.html#line-330" class="path-duplicate">mcache.go</a><a href="../src/runtime/mcache.go.html#line-330">#L330</a>: 	c.flushGen.Store(<b>mheap_</b>.sweepgen) // Synchronizes with gcStart
+		<a href="../src/runtime/mcentral.go.html#line-110">mcentral.go#L110</a>: 	sg := <b>mheap_</b>.sweepgen
+		<a href="../src/runtime/mcentral.go.html#line-201" class="path-duplicate">mcentral.go</a><a href="../src/runtime/mcentral.go.html#line-201">#L201</a>: 	sg := <b>mheap_</b>.sweepgen
+		<a href="../src/runtime/mcentral.go.html#line-246" class="path-duplicate">mcentral.go</a><a href="../src/runtime/mcentral.go.html#line-246">#L246</a>: 	s := <b>mheap_</b>.alloc(npages, c.spanclass)
+		<a href="../src/runtime/mcheckmark.go.html#line-42">mcheckmark.go#L42</a>: 	for _, ai := range <b>mheap_</b>.allArenas {
+		<a href="../src/runtime/mcheckmark.go.html#line-43" class="path-duplicate">mcheckmark.go</a><a href="../src/runtime/mcheckmark.go.html#line-43">#L43</a>: 		arena := <b>mheap_</b>.arenas[ai.l1()][ai.l2()]
+		<a href="../src/runtime/mcheckmark.go.html#line-92" class="path-duplicate">mcheckmark.go</a><a href="../src/runtime/mcheckmark.go.html#line-92">#L92</a>: 	arena := <b>mheap_</b>.arenas[ai.l1()][ai.l2()]
+		<a href="../src/runtime/metrics.go.html#line-649">metrics.go#L649</a>: 		lock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/metrics.go.html#line-651" class="path-duplicate">metrics.go</a><a href="../src/runtime/metrics.go.html#line-651">#L651</a>: 		a.mSpanInUse = uint64(<b>mheap_</b>.spanalloc.inuse)
+		<a href="../src/runtime/metrics.go.html#line-653" class="path-duplicate">metrics.go</a><a href="../src/runtime/metrics.go.html#line-653">#L653</a>: 		a.mCacheInUse = uint64(<b>mheap_</b>.cachealloc.inuse)
+		<a href="../src/runtime/metrics.go.html#line-654" class="path-duplicate">metrics.go</a><a href="../src/runtime/metrics.go.html#line-654">#L654</a>: 		unlock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mgc.go.html#line-661">mgc.go#L661</a>: 		if fg := p.mcache.flushGen.Load(); fg != <b>mheap_</b>.sweepgen {
+		<a href="../src/runtime/mgc.go.html#line-662" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-662">#L662</a>: 			println("runtime: p", p.id, "flushGen", fg, "!= sweepgen", <b>mheap_</b>.sweepgen)
+		<a href="../src/runtime/mgc.go.html#line-1068" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1068">#L1068</a>: 	<b>mheap_</b>.pages.scav.index.nextGen()
+		<a href="../src/runtime/mgc.go.html#line-1118" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1118">#L1118</a>: 					lock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mgc.go.html#line-1119" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1119">#L1119</a>: 					pp.pcache.flush(&amp;<b>mheap_</b>.pages)
+		<a href="../src/runtime/mgc.go.html#line-1120" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1120">#L1120</a>: 					unlock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mgc.go.html#line-1189" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1189">#L1189</a>: 		<b>mheap_</b>.enableMetadataHugePages()
+		<a href="../src/runtime/mgc.go.html#line-1551" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1551">#L1551</a>: 	lock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mgc.go.html#line-1552" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1552">#L1552</a>: 	<b>mheap_</b>.sweepgen += 2
+		<a href="../src/runtime/mgc.go.html#line-1554" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1554">#L1554</a>: 	<b>mheap_</b>.pagesSwept.Store(0)
+		<a href="../src/runtime/mgc.go.html#line-1555" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1555">#L1555</a>: 	<b>mheap_</b>.sweepArenas = <b>mheap_</b>.allArenas
+		<a href="../src/runtime/mgc.go.html#line-1556" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1556">#L1556</a>: 	<b>mheap_</b>.reclaimIndex.Store(0)
+		<a href="../src/runtime/mgc.go.html#line-1557" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1557">#L1557</a>: 	<b>mheap_</b>.reclaimCredit.Store(0)
+		<a href="../src/runtime/mgc.go.html#line-1558" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1558">#L1558</a>: 	unlock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mgc.go.html#line-1565" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1565">#L1565</a>: 		lock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mgc.go.html#line-1566" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1566">#L1566</a>: 		<b>mheap_</b>.sweepPagesPerByte = 0
+		<a href="../src/runtime/mgc.go.html#line-1567" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1567">#L1567</a>: 		unlock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mgc.go.html#line-1613" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1613">#L1613</a>: 	lock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mgc.go.html#line-1614" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1614">#L1614</a>: 	arenas := <b>mheap_</b>.allArenas
+		<a href="../src/runtime/mgc.go.html#line-1615" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1615">#L1615</a>: 	unlock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mgc.go.html#line-1617" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1617">#L1617</a>: 		ha := <b>mheap_</b>.arenas[ai.l1()][ai.l2()]
+		<a href="../src/runtime/mgc.go.html#line-1754" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1754">#L1754</a>: 		lock(&amp;<b>mheap_</b>.speciallock)
+		<a href="../src/runtime/mgc.go.html#line-1755" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1755">#L1755</a>: 		s := (*specialReachable)(<b>mheap_</b>.specialReachableAlloc.alloc())
+		<a href="../src/runtime/mgc.go.html#line-1756" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1756">#L1756</a>: 		unlock(&amp;<b>mheap_</b>.speciallock)
+		<a href="../src/runtime/mgc.go.html#line-1781" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1781">#L1781</a>: 		lock(&amp;<b>mheap_</b>.speciallock)
+		<a href="../src/runtime/mgc.go.html#line-1782" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1782">#L1782</a>: 		<b>mheap_</b>.specialReachableAlloc.free(unsafe.Pointer(s))
+		<a href="../src/runtime/mgc.go.html#line-1783" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1783">#L1783</a>: 		unlock(&amp;<b>mheap_</b>.speciallock)
+		<a href="../src/runtime/mgcmark.go.html#line-96">mgcmark.go#L96</a>: 	<b>mheap_</b>.markArenas = <b>mheap_</b>.allArenas[:len(<b>mheap_</b>.allArenas):len(<b>mheap_</b>.allArenas)]
+		<a href="../src/runtime/mgcmark.go.html#line-97" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-97">#L97</a>: 	work.nSpanRoots = len(<b>mheap_</b>.markArenas) * (pagesPerArena / pagesPerSpanRoot)
+		<a href="../src/runtime/mgcmark.go.html#line-333" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-333">#L333</a>: 	sg := <b>mheap_</b>.sweepgen
+		<a href="../src/runtime/mgcmark.go.html#line-336" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-336">#L336</a>: 	ai := <b>mheap_</b>.markArenas[shard/(pagesPerArena/pagesPerSpanRoot)]
+		<a href="../src/runtime/mgcmark.go.html#line-337" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-337">#L337</a>: 	ha := <b>mheap_</b>.arenas[ai.l1()][ai.l2()]
+		<a href="../src/runtime/mgcpacer.go.html#line-1185">mgcpacer.go#L1185</a>: 		assertWorldStoppedOrLockHeld(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mgcpacer.go.html#line-1245" class="path-duplicate">mgcpacer.go</a><a href="../src/runtime/mgcpacer.go.html#line-1245">#L1245</a>: 		assertWorldStoppedOrLockHeld(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mgcpacer.go.html#line-1262" class="path-duplicate">mgcpacer.go</a><a href="../src/runtime/mgcpacer.go.html#line-1262">#L1262</a>: 		lock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mgcpacer.go.html#line-1265" class="path-duplicate">mgcpacer.go</a><a href="../src/runtime/mgcpacer.go.html#line-1265">#L1265</a>: 		unlock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mgcpacer.go.html#line-1294" class="path-duplicate">mgcpacer.go</a><a href="../src/runtime/mgcpacer.go.html#line-1294">#L1294</a>: 		assertWorldStoppedOrLockHeld(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mgcpacer.go.html#line-1309" class="path-duplicate">mgcpacer.go</a><a href="../src/runtime/mgcpacer.go.html#line-1309">#L1309</a>: 		lock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mgcpacer.go.html#line-1314" class="path-duplicate">mgcpacer.go</a><a href="../src/runtime/mgcpacer.go.html#line-1314">#L1314</a>: 			unlock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mgcpacer.go.html#line-1318" class="path-duplicate">mgcpacer.go</a><a href="../src/runtime/mgcpacer.go.html#line-1318">#L1318</a>: 		unlock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mgcpacer.go.html#line-1426" class="path-duplicate">mgcpacer.go</a><a href="../src/runtime/mgcpacer.go.html#line-1426">#L1426</a>: 	assertWorldStoppedOrLockHeld(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mgcscavenge.go.html#line-168">mgcscavenge.go#L168</a>: 	assertWorldStoppedOrLockHeld(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mgcscavenge.go.html#line-395" class="path-duplicate">mgcscavenge.go</a><a href="../src/runtime/mgcscavenge.go.html#line-395">#L395</a>: 			r := <b>mheap_</b>.pages.scavenge(n, nil, false)
+		<a href="../src/runtime/mgcscavenge.go.html#line-661" class="path-duplicate">mgcscavenge.go</a><a href="../src/runtime/mgcscavenge.go.html#line-661">#L661</a>: 		<b>mheap_</b>.pages.scav.releasedBg.Add(released)
+		<a href="../src/runtime/mgcsweep.go.html#line-155">mgcsweep.go#L155</a>: 			return sweepLocker{<b>mheap_</b>.sweepgen, false}
+		<a href="../src/runtime/mgcsweep.go.html#line-158" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-158">#L158</a>: 			return sweepLocker{<b>mheap_</b>.sweepgen, true}
+		<a href="../src/runtime/mgcsweep.go.html#line-166" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-166">#L166</a>: 	if sl.sweepGen != <b>mheap_</b>.sweepgen {
+		<a href="../src/runtime/mgcsweep.go.html#line-180" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-180">#L180</a>: 				print("pacer: sweep done at heap size ", live&gt;&gt;20, "MB; allocated ", (live-<b>mheap_</b>.sweepHeapLiveBasis)&gt;&gt;20, "MB during sweep; swept ", <b>mheap_</b>.pagesSwept.Load(), " pages at ", <b>mheap_</b>.sweepPagesPerByte, " pages/byte\n")
+		<a href="../src/runtime/mgcsweep.go.html#line-256" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-256">#L256</a>: 	sg := <b>mheap_</b>.sweepgen
+		<a href="../src/runtime/mgcsweep.go.html#line-257" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-257">#L257</a>: 	for i := range <b>mheap_</b>.central {
+		<a href="../src/runtime/mgcsweep.go.html#line-258" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-258">#L258</a>: 		c := &amp;<b>mheap_</b>.central[i].mcentral
+		<a href="../src/runtime/mgcsweep.go.html#line-375" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-375">#L375</a>: 		s := <b>mheap_</b>.nextSpanForSweep()
+		<a href="../src/runtime/mgcsweep.go.html#line-397" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-397">#L397</a>: 				<b>mheap_</b>.reclaimCredit.Add(npages)
+		<a href="../src/runtime/mgcsweep.go.html#line-427" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-427">#L427</a>: 				lock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mgcsweep.go.html#line-430" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-430">#L430</a>: 				releasedBg := <b>mheap_</b>.pages.scav.releasedBg.Load()
+		<a href="../src/runtime/mgcsweep.go.html#line-431" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-431">#L431</a>: 				releasedEager := <b>mheap_</b>.pages.scav.releasedEager.Load()
+		<a href="../src/runtime/mgcsweep.go.html#line-437" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-437">#L437</a>: 				<b>mheap_</b>.pages.scav.releasedBg.Add(-releasedBg)
+		<a href="../src/runtime/mgcsweep.go.html#line-438" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-438">#L438</a>: 				<b>mheap_</b>.pages.scav.releasedEager.Add(-releasedEager)
+		<a href="../src/runtime/mgcsweep.go.html#line-439" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-439">#L439</a>: 				unlock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mgcsweep.go.html#line-517" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-517">#L517</a>: 	sweepgen := <b>mheap_</b>.sweepgen
+		<a href="../src/runtime/mgcsweep.go.html#line-527" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-527">#L527</a>: 	<b>mheap_</b>.pagesSwept.Add(int64(s.npages))
+		<a href="../src/runtime/mgcsweep.go.html#line-711" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-711">#L711</a>: 			<b>mheap_</b>.central[spc].mcentral.fullSwept(sweepgen).push(s)
+		<a href="../src/runtime/mgcsweep.go.html#line-717" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-717">#L717</a>: 		<b>mheap_</b>.pagesInUse.Add(-s.npages)
+		<a href="../src/runtime/mgcsweep.go.html#line-725" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-725">#L725</a>: 			if s.list != &amp;<b>mheap_</b>.userArena.quarantineList {
+		<a href="../src/runtime/mgcsweep.go.html#line-728" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-728">#L728</a>: 			lock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mgcsweep.go.html#line-729" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-729">#L729</a>: 			<b>mheap_</b>.userArena.quarantineList.remove(s)
+		<a href="../src/runtime/mgcsweep.go.html#line-730" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-730">#L730</a>: 			<b>mheap_</b>.userArena.readyList.insert(s)
+		<a href="../src/runtime/mgcsweep.go.html#line-731" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-731">#L731</a>: 			unlock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mgcsweep.go.html#line-759" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-759">#L759</a>: 				<b>mheap_</b>.freeSpan(s)
+		<a href="../src/runtime/mgcsweep.go.html#line-764" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-764">#L764</a>: 				<b>mheap_</b>.central[spc].mcentral.fullSwept(sweepgen).push(s)
+		<a href="../src/runtime/mgcsweep.go.html#line-766" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-766">#L766</a>: 				<b>mheap_</b>.central[spc].mcentral.partialSwept(sweepgen).push(s)
+		<a href="../src/runtime/mgcsweep.go.html#line-792" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-792">#L792</a>: 				<b>mheap_</b>.freeSpan(s)
+		<a href="../src/runtime/mgcsweep.go.html#line-808" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-808">#L808</a>: 		<b>mheap_</b>.central[spc].mcentral.fullSwept(sweepgen).push(s)
+		<a href="../src/runtime/mgcsweep.go.html#line-882" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-882">#L882</a>: 	if <b>mheap_</b>.sweepPagesPerByte == 0 {
+		<a href="../src/runtime/mgcsweep.go.html#line-893" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-893">#L893</a>: 	sweptBasis := <b>mheap_</b>.pagesSweptBasis.Load()
+		<a href="../src/runtime/mgcsweep.go.html#line-895" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-895">#L895</a>: 	liveBasis := <b>mheap_</b>.sweepHeapLiveBasis
+		<a href="../src/runtime/mgcsweep.go.html#line-915" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-915">#L915</a>: 	pagesTarget := int64(<b>mheap_</b>.sweepPagesPerByte*float64(newHeapLive)) - int64(callerSweepPages)
+		<a href="../src/runtime/mgcsweep.go.html#line-916" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-916">#L916</a>: 	for pagesTarget &gt; int64(<b>mheap_</b>.pagesSwept.Load()-sweptBasis) {
+		<a href="../src/runtime/mgcsweep.go.html#line-918" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-918">#L918</a>: 			<b>mheap_</b>.sweepPagesPerByte = 0
+		<a href="../src/runtime/mgcsweep.go.html#line-921" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-921">#L921</a>: 		if <b>mheap_</b>.pagesSweptBasis.Load() != sweptBasis {
+		<a href="../src/runtime/mgcsweep.go.html#line-947" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-947">#L947</a>: 	assertWorldStoppedOrLockHeld(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mgcsweep.go.html#line-951" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-951">#L951</a>: 		<b>mheap_</b>.sweepPagesPerByte = 0
+		<a href="../src/runtime/mgcsweep.go.html#line-968" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-968">#L968</a>: 		pagesSwept := <b>mheap_</b>.pagesSwept.Load()
+		<a href="../src/runtime/mgcsweep.go.html#line-969" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-969">#L969</a>: 		pagesInUse := <b>mheap_</b>.pagesInUse.Load()
+		<a href="../src/runtime/mgcsweep.go.html#line-972" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-972">#L972</a>: 			<b>mheap_</b>.sweepPagesPerByte = 0
+		<a href="../src/runtime/mgcsweep.go.html#line-974" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-974">#L974</a>: 			<b>mheap_</b>.sweepPagesPerByte = float64(sweepDistancePages) / float64(heapDistance)
+		<a href="../src/runtime/mgcsweep.go.html#line-975" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-975">#L975</a>: 			<b>mheap_</b>.sweepHeapLiveBasis = heapLiveBasis
+		<a href="../src/runtime/mgcsweep.go.html#line-979" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-979">#L979</a>: 			<b>mheap_</b>.pagesSweptBasis.Store(pagesSwept)
+		<a href="../src/runtime/mgcwork.go.html#line-119">mgcwork.go#L119</a>: 	lockWithRankMayAcquire(&amp;<b>mheap_</b>.lock, lockRankMheap)
+		<a href="../src/runtime/mgcwork.go.html#line-363" class="path-duplicate">mgcwork.go</a><a href="../src/runtime/mgcwork.go.html#line-363">#L363</a>: 	lockWithRankMayAcquire(&amp;<b>mheap_</b>.lock, lockRankMheap)
+		<a href="../src/runtime/mgcwork.go.html#line-378" class="path-duplicate">mgcwork.go</a><a href="../src/runtime/mgcwork.go.html#line-378">#L378</a>: 				s = <b>mheap_</b>.allocManual(workbufAlloc/pageSize, spanAllocWorkBuf)
+		<a href="../src/runtime/mgcwork.go.html#line-483" class="path-duplicate">mgcwork.go</a><a href="../src/runtime/mgcwork.go.html#line-483">#L483</a>: 			<b>mheap_</b>.freeManual(span, spanAllocWorkBuf)
+		<a href="../src/runtime/mheap.go.html#line-233">mheap.go#L233</a>: var <b>mheap_</b> mheap
+		<a href="../src/runtime/mheap.go.html#line-691" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-691">#L691</a>: 		if ri.l2() &gt;= uint(len(<b>mheap_</b>.arenas[0])) {
+		<a href="../src/runtime/mheap.go.html#line-696" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-696">#L696</a>: 		if ri.l1() &gt;= uint(len(<b>mheap_</b>.arenas)) {
+		<a href="../src/runtime/mheap.go.html#line-700" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-700">#L700</a>: 	l2 := <b>mheap_</b>.arenas[ri.l1()]
+		<a href="../src/runtime/mheap.go.html#line-719" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-719">#L719</a>: 	return <b>mheap_</b>.arenas[ai.l1()][ai.l2()].spans[(p/pageSize)%pagesPerArena]
+		<a href="../src/runtime/mheap.go.html#line-745" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-745">#L745</a>: 	arena = <b>mheap_</b>.arenas[ai.l1()][ai.l2()]
+		<a href="../src/runtime/mheap.go.html#line-1333" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1333">#L1333</a>: 		<b>mheap_</b>.pages.scav.releasedEager.Add(released)
+		<a href="../src/runtime/mheap.go.html#line-1673" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1673">#L1673</a>: 	systemstack(func() { <b>mheap_</b>.scavengeAll() })
+		<a href="../src/runtime/mheap.go.html#line-1820" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1820">#L1820</a>: 	ha := <b>mheap_</b>.arenas[ai.l1()][ai.l2()]
+		<a href="../src/runtime/mheap.go.html#line-1828" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1828">#L1828</a>: 	ha := <b>mheap_</b>.arenas[ai.l1()][ai.l2()]
+		<a href="../src/runtime/mheap.go.html#line-1943" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1943">#L1943</a>: 	lock(&amp;<b>mheap_</b>.speciallock)
+		<a href="../src/runtime/mheap.go.html#line-1944" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1944">#L1944</a>: 	s := (*specialfinalizer)(<b>mheap_</b>.specialfinalizeralloc.alloc())
+		<a href="../src/runtime/mheap.go.html#line-1945" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1945">#L1945</a>: 	unlock(&amp;<b>mheap_</b>.speciallock)
+		<a href="../src/runtime/mheap.go.html#line-1974" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1974">#L1974</a>: 	lock(&amp;<b>mheap_</b>.speciallock)
+		<a href="../src/runtime/mheap.go.html#line-1975" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1975">#L1975</a>: 	<b>mheap_</b>.specialfinalizeralloc.free(unsafe.Pointer(s))
+		<a href="../src/runtime/mheap.go.html#line-1976" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1976">#L1976</a>: 	unlock(&amp;<b>mheap_</b>.speciallock)
+		<a href="../src/runtime/mheap.go.html#line-1986" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1986">#L1986</a>: 	lock(&amp;<b>mheap_</b>.speciallock)
+		<a href="../src/runtime/mheap.go.html#line-1987" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1987">#L1987</a>: 	<b>mheap_</b>.specialfinalizeralloc.free(unsafe.Pointer(s))
+		<a href="../src/runtime/mheap.go.html#line-1988" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1988">#L1988</a>: 	unlock(&amp;<b>mheap_</b>.speciallock)
+		<a href="../src/runtime/mheap.go.html#line-2000" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-2000">#L2000</a>: 	lock(&amp;<b>mheap_</b>.speciallock)
+		<a href="../src/runtime/mheap.go.html#line-2001" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-2001">#L2001</a>: 	s := (*specialprofile)(<b>mheap_</b>.specialprofilealloc.alloc())
+		<a href="../src/runtime/mheap.go.html#line-2002" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-2002">#L2002</a>: 	unlock(&amp;<b>mheap_</b>.speciallock)
+		<a href="../src/runtime/mheap.go.html#line-2059" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-2059">#L2059</a>: 		lock(&amp;<b>mheap_</b>.speciallock)
+		<a href="../src/runtime/mheap.go.html#line-2060" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-2060">#L2060</a>: 		<b>mheap_</b>.specialfinalizeralloc.free(unsafe.Pointer(sf))
+		<a href="../src/runtime/mheap.go.html#line-2061" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-2061">#L2061</a>: 		unlock(&amp;<b>mheap_</b>.speciallock)
+		<a href="../src/runtime/mheap.go.html#line-2065" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-2065">#L2065</a>: 		lock(&amp;<b>mheap_</b>.speciallock)
+		<a href="../src/runtime/mheap.go.html#line-2066" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-2066">#L2066</a>: 		<b>mheap_</b>.specialprofilealloc.free(unsafe.Pointer(sp))
+		<a href="../src/runtime/mheap.go.html#line-2067" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-2067">#L2067</a>: 		unlock(&amp;<b>mheap_</b>.speciallock)
+		<a href="../src/runtime/mheap.go.html#line-2073" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-2073">#L2073</a>: 		lock(&amp;<b>mheap_</b>.speciallock)
+		<a href="../src/runtime/mheap.go.html#line-2074" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-2074">#L2074</a>: 		<b>mheap_</b>.specialPinCounterAlloc.free(unsafe.Pointer(s))
+		<a href="../src/runtime/mheap.go.html#line-2075" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-2075">#L2075</a>: 		unlock(&amp;<b>mheap_</b>.speciallock)
+		<a href="../src/runtime/mpagealloc.go.html#line-448">mpagealloc.go#L448</a>: 	lock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mpagealloc.go.html#line-450" class="path-duplicate">mpagealloc.go</a><a href="../src/runtime/mpagealloc.go.html#line-450">#L450</a>: 		unlock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mpagealloc.go.html#line-457" class="path-duplicate">mpagealloc.go</a><a href="../src/runtime/mpagealloc.go.html#line-457">#L457</a>: 	unlock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mpagealloc.go.html#line-616" class="path-duplicate">mpagealloc.go</a><a href="../src/runtime/mpagealloc.go.html#line-616">#L616</a>: 	if p.test || <b>mheap_</b>.arenas[ai.l1()] == nil || <b>mheap_</b>.arenas[ai.l1()][ai.l2()] == nil {
+		<a href="../src/runtime/mstats.go.html#line-529">mstats.go#L529</a>: 	stats.MSpanInuse = uint64(<b>mheap_</b>.spanalloc.inuse)
+		<a href="../src/runtime/mstats.go.html#line-531" class="path-duplicate">mstats.go</a><a href="../src/runtime/mstats.go.html#line-531">#L531</a>: 	stats.MCacheInuse = uint64(<b>mheap_</b>.cachealloc.inuse)
+		<a href="../src/runtime/mstats.go.html#line-575" class="path-duplicate">mstats.go</a><a href="../src/runtime/mstats.go.html#line-575">#L575</a>: 	lock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/mstats.go.html#line-596" class="path-duplicate">mstats.go</a><a href="../src/runtime/mstats.go.html#line-596">#L596</a>: 	unlock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/panic.go.html#line-1239">panic.go#L1239</a>: 	if <b>mheap_</b>.cachealloc.size == 0 { // very early
+		<a href="../src/runtime/pinner.go.html#line-327">pinner.go#L327</a>: 		lock(&amp;<b>mheap_</b>.speciallock)
+		<a href="../src/runtime/pinner.go.html#line-328" class="path-duplicate">pinner.go</a><a href="../src/runtime/pinner.go.html#line-328">#L328</a>: 		rec = (*specialPinCounter)(<b>mheap_</b>.specialPinCounterAlloc.alloc())
+		<a href="../src/runtime/pinner.go.html#line-329" class="path-duplicate">pinner.go</a><a href="../src/runtime/pinner.go.html#line-329">#L329</a>: 		unlock(&amp;<b>mheap_</b>.speciallock)
+		<a href="../src/runtime/pinner.go.html#line-356" class="path-duplicate">pinner.go</a><a href="../src/runtime/pinner.go.html#line-356">#L356</a>: 		lock(&amp;<b>mheap_</b>.speciallock)
+		<a href="../src/runtime/pinner.go.html#line-357" class="path-duplicate">pinner.go</a><a href="../src/runtime/pinner.go.html#line-357">#L357</a>: 		<b>mheap_</b>.specialPinCounterAlloc.free(unsafe.Pointer(counter))
+		<a href="../src/runtime/pinner.go.html#line-358" class="path-duplicate">pinner.go</a><a href="../src/runtime/pinner.go.html#line-358">#L358</a>: 		unlock(&amp;<b>mheap_</b>.speciallock)
+		<a href="../src/runtime/proc.go.html#line-5141">proc.go#L5141</a>: 			<b>mheap_</b>.spanalloc.free(unsafe.Pointer(pp.mspancache.buf[i]))
+		<a href="../src/runtime/proc.go.html#line-5144" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5144">#L5144</a>: 		lock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/proc.go.html#line-5145" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5145">#L5145</a>: 		pp.pcache.flush(&amp;<b>mheap_</b>.pages)
+		<a href="../src/runtime/proc.go.html#line-5146" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5146">#L5146</a>: 		unlock(&amp;<b>mheap_</b>.lock)
+		<a href="../src/runtime/stack.go.html#line-196">stack.go#L196</a>: 	lockWithRankMayAcquire(&amp;<b>mheap_</b>.lock, lockRankMheap)
+		<a href="../src/runtime/stack.go.html#line-199" class="path-duplicate">stack.go</a><a href="../src/runtime/stack.go.html#line-199">#L199</a>: 		s = <b>mheap_</b>.allocManual(_StackCacheSize&gt;&gt;_PageShift, spanAllocStack)
+		<a href="../src/runtime/stack.go.html#line-263" class="path-duplicate">stack.go</a><a href="../src/runtime/stack.go.html#line-263">#L263</a>: 		<b>mheap_</b>.freeManual(s, spanAllocStack)
+		<a href="../src/runtime/stack.go.html#line-404" class="path-duplicate">stack.go</a><a href="../src/runtime/stack.go.html#line-404">#L404</a>: 		lockWithRankMayAcquire(&amp;<b>mheap_</b>.lock, lockRankMheap)
+		<a href="../src/runtime/stack.go.html#line-408" class="path-duplicate">stack.go</a><a href="../src/runtime/stack.go.html#line-408">#L408</a>: 			s = <b>mheap_</b>.allocManual(npage, spanAllocStack)
+		<a href="../src/runtime/stack.go.html#line-498" class="path-duplicate">stack.go</a><a href="../src/runtime/stack.go.html#line-498">#L498</a>: 			<b>mheap_</b>.freeManual(s, spanAllocStack)
+		<a href="../src/runtime/stack.go.html#line-1233" class="path-duplicate">stack.go</a><a href="../src/runtime/stack.go.html#line-1233">#L1233</a>: 				<b>mheap_</b>.freeManual(s, spanAllocStack)
+		<a href="../src/runtime/stack.go.html#line-1247" class="path-duplicate">stack.go</a><a href="../src/runtime/stack.go.html#line-1247">#L1247</a>: 			<b>mheap_</b>.freeManual(s, spanAllocStack)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

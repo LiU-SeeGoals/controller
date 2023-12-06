@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/blas.Float64Level2.Dtbsv</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../../pkg/gonum.org/v1/gonum/blas.html">gonum.org/v1/gonum/blas</a>.<a href="../../../../src/gonum.org/v1/gonum/blas/blas.go.html#line-146">Float64Level2</a>.<a href="../../../../src/gonum.org/v1/gonum/blas/blas.go.html#line-153">Dtbsv</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">8 uses</span>
+
+	gonum.org/v1/gonum/blas (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/blas/blas.go.html#line-153">blas.go#L153</a>: 	<b>Dtbsv</b>(ul Uplo, tA Transpose, d Diag, n, k int, a []float64, lda int, x []float64, incX int)
+
+	<a href="../../../../pkg/gonum.org/v1/gonum/blas/blas64.html">gonum.org/v1/gonum/blas/blas64</a>
+		<a href="../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-333">blas64.go#L333</a>: 	blas64.<b>Dtbsv</b>(a.Uplo, t, a.Diag, a.N, a.K, a.Data, a.Stride, x.Data, x.Inc)
+
+	<a href="../../../../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatbs.go.html#line-231">dlatbs.go#L231</a>: 		bi.<b>Dtbsv</b>(uplo, trans, diag, n, kd, ab, ldab, x, 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpbtrs.go.html#line-56">dpbtrs.go#L56</a>: 			bi.<b>Dtbsv</b>(blas.Upper, blas.Trans, blas.NonUnit, n, kd, ab, ldab, b[j:], ldb)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpbtrs.go.html#line-58" class="path-duplicate">dpbtrs.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpbtrs.go.html#line-58">#L58</a>: 			bi.<b>Dtbsv</b>(blas.Upper, blas.NoTrans, blas.NonUnit, n, kd, ab, ldab, b[j:], ldb)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpbtrs.go.html#line-64" class="path-duplicate">dpbtrs.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpbtrs.go.html#line-64">#L64</a>: 			bi.<b>Dtbsv</b>(blas.Lower, blas.NoTrans, blas.NonUnit, n, kd, ab, ldab, b[j:], ldb)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpbtrs.go.html#line-66" class="path-duplicate">dpbtrs.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dpbtrs.go.html#line-66">#L66</a>: 			bi.<b>Dtbsv</b>(blas.Lower, blas.Trans, blas.NonUnit, n, kd, ab, ldab, b[j:], ldb)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtbtrs.go.html#line-74">dtbtrs.go#L74</a>: 		bi.<b>Dtbsv</b>(uplo, trans, diag, n, kd, a, lda, b[j:], ldb)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: scalinc_amd64.s in package gonum.org/v1/gonum/internal/asm/c128</title>
+<link href="../../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	scalinc_amd64.s
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/gonum.org/v1/gonum/internal/asm/c128.html">gonum.org/v1/gonum/internal/asm/c128</a>
+</code></pre>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code>// Copyright ©2016 The Gonum Authors. All rights reserved.</code></span>
+<span class="codeline" id="line-2"><code>// Use of this source code is governed by a BSD-style</code></span>
+<span class="codeline" id="line-3"><code>// license that can be found in the LICENSE file.</code></span>
+<span class="codeline" id="line-4"><code></code></span>
+<span class="codeline" id="line-5"><code>// +build !noasm,!gccgo,!safe</code></span>
+<span class="codeline" id="line-6"><code></code></span>
+<span class="codeline" id="line-7"><code>#include "textflag.h"</code></span>
+<span class="codeline" id="line-8"><code></code></span>
+<span class="codeline" id="line-9"><code>#define SRC SI</code></span>
+<span class="codeline" id="line-10"><code>#define DST SI</code></span>
+<span class="codeline" id="line-11"><code>#define LEN CX</code></span>
+<span class="codeline" id="line-12"><code>#define TAIL BX</code></span>
+<span class="codeline" id="line-13"><code>#define INC R9</code></span>
+<span class="codeline" id="line-14"><code>#define INC3 R10</code></span>
+<span class="codeline" id="line-15"><code>#define ALPHA X0</code></span>
+<span class="codeline" id="line-16"><code>#define ALPHA_C X1</code></span>
+<span class="codeline" id="line-17"><code>#define ALPHA2 X10</code></span>
+<span class="codeline" id="line-18"><code>#define ALPHA_C2 X11</code></span>
+<span class="codeline" id="line-19"><code></code></span>
+<span class="codeline" id="line-20"><code>#define MOVDDUP_X2_X3    LONG $0xDA120FF2 // MOVDDUP X2, X3</code></span>
+<span class="codeline" id="line-21"><code>#define MOVDDUP_X4_X5    LONG $0xEC120FF2 // MOVDDUP X4, X5</code></span>
+<span class="codeline" id="line-22"><code>#define MOVDDUP_X6_X7    LONG $0xFE120FF2 // MOVDDUP X6, X7</code></span>
+<span class="codeline" id="line-23"><code>#define MOVDDUP_X8_X9    LONG $0x120F45F2; BYTE $0xC8 // MOVDDUP X8, X9</code></span>
+<span class="codeline" id="line-24"><code></code></span>
+<span class="codeline" id="line-25"><code>#define ADDSUBPD_X2_X3    LONG $0xDAD00F66 // ADDSUBPD X2, X3</code></span>
+<span class="codeline" id="line-26"><code>#define ADDSUBPD_X4_X5    LONG $0xECD00F66 // ADDSUBPD X4, X5</code></span>
+<span class="codeline" id="line-27"><code>#define ADDSUBPD_X6_X7    LONG $0xFED00F66 // ADDSUBPD X6, X7</code></span>
+<span class="codeline" id="line-28"><code>#define ADDSUBPD_X8_X9    LONG $0xD00F4566; BYTE $0xC8 // ADDSUBPD X8, X9</code></span>
+<span class="codeline" id="line-29"><code></code></span>
+<span class="codeline" id="line-30"><code>// func ScalInc(alpha complex128, x []complex128, n, inc uintptr)</code></span>
+<span class="codeline" id="line-31"><code>TEXT ·ScalInc(SB), NOSPLIT, $0</code></span>
+<span class="codeline" id="line-32"><code>	MOVQ x_base+16(FP), SRC // SRC = &amp;x</code></span>
+<span class="codeline" id="line-33"><code>	MOVQ n+40(FP), LEN      // LEN = len(x)</code></span>
+<span class="codeline" id="line-34"><code>	CMPQ LEN, $0</code></span>
+<span class="codeline" id="line-35"><code>	JE   scal_end           // if LEN == 0 { return }</code></span>
+<span class="codeline" id="line-36"><code></code></span>
+<span class="codeline" id="line-37"><code>	MOVQ inc+48(FP), INC    // INC = inc</code></span>
+<span class="codeline" id="line-38"><code>	SHLQ $4, INC            // INC = INC * sizeof(complex128)</code></span>
+<span class="codeline" id="line-39"><code>	LEAQ (INC)(INC*2), INC3 // INC3 = 3 * INC</code></span>
+<span class="codeline" id="line-40"><code></code></span>
+<span class="codeline" id="line-41"><code>	MOVUPS alpha+0(FP), ALPHA     // ALPHA = { imag(alpha), real(alpha) }</code></span>
+<span class="codeline" id="line-42"><code>	MOVAPS ALPHA, ALPHA_C</code></span>
+<span class="codeline" id="line-43"><code>	SHUFPD $0x1, ALPHA_C, ALPHA_C // ALPHA_C = { real(alpha), imag(alpha) }</code></span>
+<span class="codeline" id="line-44"><code></code></span>
+<span class="codeline" id="line-45"><code>	MOVAPS ALPHA, ALPHA2     // Copy ALPHA and ALPHA_C for pipelining</code></span>
+<span class="codeline" id="line-46"><code>	MOVAPS ALPHA_C, ALPHA_C2</code></span>
+<span class="codeline" id="line-47"><code>	MOVQ   LEN, TAIL</code></span>
+<span class="codeline" id="line-48"><code>	SHRQ   $2, LEN           // LEN = floor( n / 4 )</code></span>
+<span class="codeline" id="line-49"><code>	JZ     scal_tail         // if BX == 0 { goto scal_tail }</code></span>
+<span class="codeline" id="line-50"><code></code></span>
+<span class="codeline" id="line-51"><code>scal_loop: // do {</code></span>
+<span class="codeline" id="line-52"><code>	MOVUPS (SRC), X2         // X_i = { imag(x[i]), real(x[i]) }</code></span>
+<span class="codeline" id="line-53"><code>	MOVUPS (SRC)(INC*1), X4</code></span>
+<span class="codeline" id="line-54"><code>	MOVUPS (SRC)(INC*2), X6</code></span>
+<span class="codeline" id="line-55"><code>	MOVUPS (SRC)(INC3*1), X8</code></span>
+<span class="codeline" id="line-56"><code></code></span>
+<span class="codeline" id="line-57"><code>	// X_(i+1) = { real(x[i], real(x[i]) }</code></span>
+<span class="codeline" id="line-58"><code>	MOVDDUP_X2_X3</code></span>
+<span class="codeline" id="line-59"><code>	MOVDDUP_X4_X5</code></span>
+<span class="codeline" id="line-60"><code>	MOVDDUP_X6_X7</code></span>
+<span class="codeline" id="line-61"><code>	MOVDDUP_X8_X9</code></span>
+<span class="codeline" id="line-62"><code></code></span>
+<span class="codeline" id="line-63"><code>	// X_i = { imag(x[i]), imag(x[i]) }</code></span>
+<span class="codeline" id="line-64"><code>	SHUFPD $0x3, X2, X2</code></span>
+<span class="codeline" id="line-65"><code>	SHUFPD $0x3, X4, X4</code></span>
+<span class="codeline" id="line-66"><code>	SHUFPD $0x3, X6, X6</code></span>
+<span class="codeline" id="line-67"><code>	SHUFPD $0x3, X8, X8</code></span>
+<span class="codeline" id="line-68"><code></code></span>
+<span class="codeline" id="line-69"><code>	// X_i     = { real(ALPHA) * imag(x[i]), imag(ALPHA) * imag(x[i])  }</code></span>
+<span class="codeline" id="line-70"><code>	// X_(i+1) = { imag(ALPHA) * real(x[i]), real(ALPHA) * real(x[i])  }</code></span>
+<span class="codeline" id="line-71"><code>	MULPD ALPHA_C, X2</code></span>
+<span class="codeline" id="line-72"><code>	MULPD ALPHA, X3</code></span>
+<span class="codeline" id="line-73"><code>	MULPD ALPHA_C2, X4</code></span>
+<span class="codeline" id="line-74"><code>	MULPD ALPHA2, X5</code></span>
+<span class="codeline" id="line-75"><code>	MULPD ALPHA_C, X6</code></span>
+<span class="codeline" id="line-76"><code>	MULPD ALPHA, X7</code></span>
+<span class="codeline" id="line-77"><code>	MULPD ALPHA_C2, X8</code></span>
+<span class="codeline" id="line-78"><code>	MULPD ALPHA2, X9</code></span>
+<span class="codeline" id="line-79"><code></code></span>
+<span class="codeline" id="line-80"><code>	// X_(i+1) = {</code></span>
+<span class="codeline" id="line-81"><code>	//	imag(result[i]):  imag(ALPHA)*real(x[i]) + real(ALPHA)*imag(x[i]),</code></span>
+<span class="codeline" id="line-82"><code>	//	real(result[i]):  real(ALPHA)*real(x[i]) - imag(ALPHA)*imag(x[i])</code></span>
+<span class="codeline" id="line-83"><code>	//  }</code></span>
+<span class="codeline" id="line-84"><code>	ADDSUBPD_X2_X3</code></span>
+<span class="codeline" id="line-85"><code>	ADDSUBPD_X4_X5</code></span>
+<span class="codeline" id="line-86"><code>	ADDSUBPD_X6_X7</code></span>
+<span class="codeline" id="line-87"><code>	ADDSUBPD_X8_X9</code></span>
+<span class="codeline" id="line-88"><code></code></span>
+<span class="codeline" id="line-89"><code>	MOVUPS X3, (DST)         // x[i] = X_(i+1)</code></span>
+<span class="codeline" id="line-90"><code>	MOVUPS X5, (DST)(INC*1)</code></span>
+<span class="codeline" id="line-91"><code>	MOVUPS X7, (DST)(INC*2)</code></span>
+<span class="codeline" id="line-92"><code>	MOVUPS X9, (DST)(INC3*1)</code></span>
+<span class="codeline" id="line-93"><code></code></span>
+<span class="codeline" id="line-94"><code>	LEAQ (SRC)(INC*4), SRC // SRC = &amp;(SRC[inc*4])</code></span>
+<span class="codeline" id="line-95"><code>	DECQ LEN</code></span>
+<span class="codeline" id="line-96"><code>	JNZ  scal_loop         // } while --BX &gt; 0</code></span>
+<span class="codeline" id="line-97"><code></code></span>
+<span class="codeline" id="line-98"><code>scal_tail:</code></span>
+<span class="codeline" id="line-99"><code>	ANDQ $3, TAIL // TAIL = TAIL % 4</code></span>
+<span class="codeline" id="line-100"><code>	JE   scal_end // if TAIL == 0 { return }</code></span>
+<span class="codeline" id="line-101"><code></code></span>
+<span class="codeline" id="line-102"><code>scal_tail_loop: // do {</code></span>
+<span class="codeline" id="line-103"><code>	MOVUPS (SRC), X2    // X_i = { imag(x[i]), real(x[i]) }</code></span>
+<span class="codeline" id="line-104"><code>	MOVDDUP_X2_X3       // X_(i+1) = { real(x[i], real(x[i]) }</code></span>
+<span class="codeline" id="line-105"><code>	SHUFPD $0x3, X2, X2 // X_i = { imag(x[i]), imag(x[i]) }</code></span>
+<span class="codeline" id="line-106"><code>	MULPD  ALPHA_C, X2  // X_i     = { real(ALPHA) * imag(x[i]), imag(ALPHA) * imag(x[i])  }</code></span>
+<span class="codeline" id="line-107"><code>	MULPD  ALPHA, X3    // X_(i+1) = { imag(ALPHA) * real(x[i]), real(ALPHA) * real(x[i])  }</code></span>
+<span class="codeline" id="line-108"><code></code></span>
+<span class="codeline" id="line-109"><code>	// X_(i+1) = {</code></span>
+<span class="codeline" id="line-110"><code>	//	imag(result[i]):  imag(ALPHA)*real(x[i]) + real(ALPHA)*imag(x[i]),</code></span>
+<span class="codeline" id="line-111"><code>	//	real(result[i]):  real(ALPHA)*real(x[i]) - imag(ALPHA)*imag(x[i])</code></span>
+<span class="codeline" id="line-112"><code>	//  }</code></span>
+<span class="codeline" id="line-113"><code>	ADDSUBPD_X2_X3</code></span>
+<span class="codeline" id="line-114"><code></code></span>
+<span class="codeline" id="line-115"><code>	MOVUPS X3, (DST)      // x[i] = X_i</code></span>
+<span class="codeline" id="line-116"><code>	ADDQ   INC, SRC       // SRC = &amp;(SRC[incX])</code></span>
+<span class="codeline" id="line-117"><code>	DECQ   TAIL</code></span>
+<span class="codeline" id="line-118"><code>	JNZ    scal_tail_loop // } while --TAIL &gt; 0</code></span>
+<span class="codeline" id="line-119"><code></code></span>
+<span class="codeline" id="line-120"><code>scal_end:</code></span>
+<span class="codeline" id="line-121"><code>	RET</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

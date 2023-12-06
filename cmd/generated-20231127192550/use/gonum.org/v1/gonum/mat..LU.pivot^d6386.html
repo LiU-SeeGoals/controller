@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/mat.LU.pivot</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-23">LU</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-25">pivot</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">21 uses</span>
+
+	gonum.org/v1/gonum/mat (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-25">lu.go#L25</a>: 	<b>pivot</b> []int
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-78" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-78">#L78</a>: 	if cap(lu.<b>pivot</b>) &lt; r {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-79" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-79">#L79</a>: 		lu.<b>pivot</b> = make([]int, r)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-81" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-81">#L81</a>: 	lu.<b>pivot</b> = lu.<b>pivot</b>[:r]
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-85" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-85">#L85</a>: 	lapack64.Getrf(lu.lu.mat, lu.<b>pivot</b>)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-109" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-109">#L109</a>: 	lu.<b>pivot</b> = lu.<b>pivot</b>[:0]
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-113" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-113">#L113</a>: 	return len(lu.<b>pivot</b>) == 0
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-142" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-142">#L142</a>: 		if lu.<b>pivot</b>[i] != i {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-173" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-173">#L173</a>: 		v := lu.<b>pivot</b>[i]
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-201" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-201">#L201</a>: 			if cap(lu.<b>pivot</b>) &lt; n {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-202" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-202">#L202</a>: 				lu.<b>pivot</b> = make([]int, n)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-204" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-204">#L204</a>: 			lu.<b>pivot</b> = lu.<b>pivot</b>[:n]
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-210" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-210">#L210</a>: 		} else if len(lu.<b>pivot</b>) != n {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-213" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-213">#L213</a>: 		copy(lu.<b>pivot</b>, orig.<b>pivot</b>)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-227" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-227">#L227</a>: 	for i, v := range lu.<b>pivot</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-378" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-378">#L378</a>: 	lapack64.Getrs(t, lu.lu.mat, dst.mat, lu.<b>pivot</b>)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-437" class="path-duplicate">lu.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-437">#L437</a>: 		lapack64.Getrs(t, lu.lu.mat, vMat, lu.<b>pivot</b>)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

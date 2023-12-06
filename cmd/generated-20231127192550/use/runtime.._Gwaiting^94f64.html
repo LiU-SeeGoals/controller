@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime._Gwaiting</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">const <b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/runtime2.go.html#line-60">_Gwaiting</a></b></span>
+
+<span class="title">42 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/debugcall.go.html#line-237">debugcall.go#L237</a>: 		casgstatus(callingG, <b>_Gwaiting</b>, _Grunnable)
+		<a href="../src/runtime/heapdump.go.html#line-421">heapdump.go#L421</a>: 			<b>_Gwaiting</b>:
+		<a href="../src/runtime/heapdump.go.html#line-713" class="path-duplicate">heapdump.go</a><a href="../src/runtime/heapdump.go.html#line-713">#L713</a>: 	casgstatus(gp.m.curg, <b>_Gwaiting</b>, _Grunning)
+		<a href="../src/runtime/mgc.go.html#line-854">mgc.go#L854</a>: 		casgstatus(gp, <b>_Gwaiting</b>, _Grunning)
+		<a href="../src/runtime/mgc.go.html#line-994" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-994">#L994</a>: 	casgstatus(curgp, <b>_Gwaiting</b>, _Grunning)
+		<a href="../src/runtime/mgc.go.html#line-1387" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1387">#L1387</a>: 			casgstatus(gp, <b>_Gwaiting</b>, _Grunning)
+		<a href="../src/runtime/mgcmark.go.html#line-208">mgcmark.go#L208</a>: 		if (status == <b>_Gwaiting</b> || status == _Gsyscall) &amp;&amp; gp.waitsince == 0 {
+		<a href="../src/runtime/mgcmark.go.html#line-245" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-245">#L245</a>: 				casgstatus(userG, <b>_Gwaiting</b>, _Grunning)
+		<a href="../src/runtime/mgcmark.go.html#line-570" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-570">#L570</a>: 	casgstatus(gp, <b>_Gwaiting</b>, _Grunning)
+		<a href="../src/runtime/mgcmark.go.html#line-749" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-749">#L749</a>: 	case _Grunnable, _Gsyscall, <b>_Gwaiting</b>:
+		<a href="../src/runtime/mgcpacer.go.html#line-810">mgcpacer.go#L810</a>: 	casgstatus(gp, <b>_Gwaiting</b>, _Grunnable)
+		<a href="../src/runtime/preempt.go.html#line-152">preempt.go#L152</a>: 			if !casGFromPreempted(gp, _Gpreempted, <b>_Gwaiting</b>) {
+		<a href="../src/runtime/preempt.go.html#line-159" class="path-duplicate">preempt.go</a><a href="../src/runtime/preempt.go.html#line-159">#L159</a>: 			s = <b>_Gwaiting</b>
+		<a href="../src/runtime/preempt.go.html#line-162" class="path-duplicate">preempt.go</a><a href="../src/runtime/preempt.go.html#line-162">#L162</a>: 		case _Grunnable, _Gsyscall, <b>_Gwaiting</b>:
+		<a href="../src/runtime/preempt.go.html#line-270" class="path-duplicate">preempt.go</a><a href="../src/runtime/preempt.go.html#line-270">#L270</a>: 		<b>_Gwaiting</b> | _Gscan,
+		<a href="../src/runtime/proc.go.html#line-899">proc.go#L899</a>: 	if status&amp;^_Gscan != <b>_Gwaiting</b> {
+		<a href="../src/runtime/proc.go.html#line-905" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-905">#L905</a>: 	casgstatus(gp, <b>_Gwaiting</b>, _Grunnable)
+		<a href="../src/runtime/proc.go.html#line-1016" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1016">#L1016</a>: 		<b>_Gwaiting</b>,
+		<a href="../src/runtime/proc.go.html#line-1060" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1060">#L1060</a>: 		if oldval == <b>_Gwaiting</b> &amp;&amp; gp.atomicstatus.Load() == _Grunnable {
+		<a href="../src/runtime/proc.go.html#line-1100" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1100">#L1100</a>: 	case <b>_Gwaiting</b>:
+		<a href="../src/runtime/proc.go.html#line-1115" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1115">#L1115</a>: 	case <b>_Gwaiting</b>:
+		<a href="../src/runtime/proc.go.html#line-1144" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1144">#L1144</a>: 	casgstatus(gp, old, <b>_Gwaiting</b>)
+		<a href="../src/runtime/proc.go.html#line-1157" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1157">#L1157</a>: 		if oldstatus != <b>_Gwaiting</b> &amp;&amp; oldstatus != _Grunnable {
+		<a href="../src/runtime/proc.go.html#line-1183" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1183">#L1183</a>: 	if old != _Gpreempted || new != <b>_Gwaiting</b> {
+		<a href="../src/runtime/proc.go.html#line-1187" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1187">#L1187</a>: 	return gp.atomicstatus.CompareAndSwap(_Gpreempted, <b>_Gwaiting</b>)
+		<a href="../src/runtime/proc.go.html#line-1275" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1275">#L1275</a>: 		casgstatus(gp, <b>_Gwaiting</b>, _Grunning)
+		<a href="../src/runtime/proc.go.html#line-2918" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-2918">#L2918</a>: 			casgstatus(gp, <b>_Gwaiting</b>, _Grunnable)
+		<a href="../src/runtime/proc.go.html#line-2981" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-2981">#L2981</a>: 			casgstatus(gp, <b>_Gwaiting</b>, _Grunnable)
+		<a href="../src/runtime/proc.go.html#line-3026" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-3026">#L3026</a>: 			casgstatus(gp, <b>_Gwaiting</b>, _Grunnable)
+		<a href="../src/runtime/proc.go.html#line-3041" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-3041">#L3041</a>: 		casgstatus(gp, <b>_Gwaiting</b>, _Grunnable)
+		<a href="../src/runtime/proc.go.html#line-3152" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-3152">#L3152</a>: 			casgstatus(gp, <b>_Gwaiting</b>, _Grunnable)
+		<a href="../src/runtime/proc.go.html#line-3212" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-3212">#L3212</a>: 				casgstatus(gp, <b>_Gwaiting</b>, _Grunnable)
+		<a href="../src/runtime/proc.go.html#line-3495" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-3495">#L3495</a>: 		casgstatus(gp, <b>_Gwaiting</b>, _Grunnable)
+		<a href="../src/runtime/proc.go.html#line-3730" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-3730">#L3730</a>: 	casgstatus(gp, _Grunning, <b>_Gwaiting</b>)
+		<a href="../src/runtime/proc.go.html#line-3741" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-3741">#L3741</a>: 			casgstatus(gp, <b>_Gwaiting</b>, _Grunnable)
+		<a href="../src/runtime/proc.go.html#line-5443" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5443">#L5443</a>: 		case <b>_Gwaiting</b>,
+		<a href="../src/runtime/runtime2.go.html#line-60">runtime2.go#L60</a>: 	<b>_Gwaiting</b> // 4
+		<a href="../src/runtime/runtime2.go.html#line-104" class="path-duplicate">runtime2.go</a><a href="../src/runtime/runtime2.go.html#line-104">#L104</a>: 	_Gscanwaiting   = _Gscan + <b>_Gwaiting</b>   // 0x1004
+		<a href="../src/runtime/trace.go.html#line-339">trace.go#L339</a>: 		if status == <b>_Gwaiting</b> {
+		<a href="../src/runtime/traceback.go.html#line-1179">traceback.go#L1179</a>: 	<b>_Gwaiting</b>:   "waiting",
+		<a href="../src/runtime/traceback.go.html#line-1200" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-1200">#L1200</a>: 	if gpstatus == <b>_Gwaiting</b> &amp;&amp; gp.waitreason != waitReasonZero {
+		<a href="../src/runtime/traceback.go.html#line-1206" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-1206">#L1206</a>: 	if (gpstatus == <b>_Gwaiting</b> || gpstatus == _Gsyscall) &amp;&amp; gp.waitsince != 0 {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

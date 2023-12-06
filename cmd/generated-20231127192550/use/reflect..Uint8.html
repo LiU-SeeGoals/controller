@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: reflect.Uint8</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">const <b><a href="../pkg/reflect.html">reflect</a>.<a href="../src/reflect/type.go.html#line-252">Uint8</a></b></span>
+
+<span class="title">57 uses</span>
+
+	reflect (current package)
+		<a href="../src/reflect/abi.go.html#line-202">abi.go#L202</a>: 	case Bool, Int, Uint, Int8, <b>Uint8</b>, Int16, Uint16, Int32, Uint32, Uintptr:
+		<a href="../src/reflect/deepequal.go.html#line-109">deepequal.go#L109</a>: 		if v1.Type().Elem().Kind() == <b>Uint8</b> {
+		<a href="../src/reflect/deepequal.go.html#line-161" class="path-duplicate">deepequal.go</a><a href="../src/reflect/deepequal.go.html#line-161">#L161</a>: 	case Uint, <b>Uint8</b>, Uint16, Uint32, Uint64, Uintptr:
+		<a href="../src/reflect/type.go.html#line-252">type.go#L252</a>: 	<b>Uint8</b>
+		<a href="../src/reflect/type.go.html#line-457" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-457">#L457</a>: 	<b>Uint8</b>:         "uint8",
+		<a href="../src/reflect/type.go.html#line-1879" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1879">#L1879</a>: 	case Bool, Int, Int8, Int16, Int32, Int64, Uint, <b>Uint8</b>, Uint16, Uint32, Uint64, Uintptr, Chan, Pointer, String, UnsafePointer:
+		<a href="../src/reflect/type.go.html#line-1903" class="path-duplicate">type.go</a><a href="../src/reflect/type.go.html#line-1903">#L1903</a>: 	case Bool, Int, Int8, Int16, Int32, Int64, Uint, <b>Uint8</b>, Uint16, Uint32, Uint64, Uintptr, Chan, Pointer, UnsafePointer:
+		<a href="../src/reflect/value.go.html#line-1438">value.go#L1438</a>: 		fl := v.flag.ro() | flag(<b>Uint8</b>) | flagIndir
+		<a href="../src/reflect/value.go.html#line-1588" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1588">#L1588</a>: 	case Uint, <b>Uint8</b>, Uint16, Uint32, Uint64, Uintptr:
+		<a href="../src/reflect/value.go.html#line-1661" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1661">#L1661</a>: 	case <b>Uint8</b>:
+		<a href="../src/reflect/value.go.html#line-2118" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2118">#L2118</a>: 	case Uint, Uintptr, <b>Uint8</b>, Uint16, Uint32, Uint64:
+		<a href="../src/reflect/value.go.html#line-2285" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2285">#L2285</a>: 	if toRType(v.typ()).Elem().Kind() != <b>Uint8</b> { // TODO add Elem method, fix mustBe(Slice) to return slice.
+		<a href="../src/reflect/value.go.html#line-2437" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2437">#L2437</a>: 	case <b>Uint8</b>:
+		<a href="../src/reflect/value.go.html#line-2666" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2666">#L2666</a>: 	case Uint, <b>Uint8</b>, Uint16, Uint32, Uint64, Uintptr:
+		<a href="../src/reflect/value.go.html#line-2681" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2681">#L2681</a>: 	case <b>Uint8</b>:
+		<a href="../src/reflect/value.go.html#line-3418" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3418">#L3418</a>: 	case Uint, <b>Uint8</b>, Uint16, Uint32, Uint64, Uintptr:
+		<a href="../src/reflect/value.go.html#line-3465" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3465">#L3465</a>: 		case Int, Int8, Int16, Int32, Int64, Uint, <b>Uint8</b>, Uint16, Uint32, Uint64, Uintptr:
+		<a href="../src/reflect/value.go.html#line-3473" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3473">#L3473</a>: 	case Uint, <b>Uint8</b>, Uint16, Uint32, Uint64, Uintptr:
+		<a href="../src/reflect/value.go.html#line-3475" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3475">#L3475</a>: 		case Int, Int8, Int16, Int32, Int64, Uint, <b>Uint8</b>, Uint16, Uint32, Uint64, Uintptr:
+		<a href="../src/reflect/value.go.html#line-3487" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3487">#L3487</a>: 		case Uint, <b>Uint8</b>, Uint16, Uint32, Uint64, Uintptr:
+		<a href="../src/reflect/value.go.html#line-3502" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3502">#L3502</a>: 			case <b>Uint8</b>:
+		<a href="../src/reflect/value.go.html#line-3512" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3512">#L3512</a>: 			case <b>Uint8</b>:
+
+	<a href="../pkg/encoding/binary.html">encoding/binary</a>
+		<a href="../src/encoding/binary/binary.go.html#line-521">binary.go#L521</a>: 		reflect.<b>Uint8</b>, reflect.Uint16, reflect.Uint32, reflect.Uint64,
+		<a href="../src/encoding/binary/binary.go.html#line-656" class="path-duplicate">binary.go</a><a href="../src/encoding/binary/binary.go.html#line-656">#L656</a>: 	case reflect.<b>Uint8</b>:
+		<a href="../src/encoding/binary/binary.go.html#line-724" class="path-duplicate">binary.go</a><a href="../src/encoding/binary/binary.go.html#line-724">#L724</a>: 	case reflect.Uint, reflect.<b>Uint8</b>, reflect.Uint16, reflect.Uint32, reflect.Uint64, reflect.Uintptr:
+		<a href="../src/encoding/binary/binary.go.html#line-726" class="path-duplicate">binary.go</a><a href="../src/encoding/binary/binary.go.html#line-726">#L726</a>: 		case reflect.<b>Uint8</b>:
+
+	<a href="../pkg/encoding/json.html">encoding/json</a>
+		<a href="../src/encoding/json/decode.go.html#line-634">decode.go#L634</a>: 			reflect.Uint, reflect.<b>Uint8</b>, reflect.Uint16, reflect.Uint32, reflect.Uint64, reflect.Uintptr:
+		<a href="../src/encoding/json/decode.go.html#line-784" class="path-duplicate">decode.go</a><a href="../src/encoding/json/decode.go.html#line-784">#L784</a>: 				case reflect.Uint, reflect.<b>Uint8</b>, reflect.Uint16, reflect.Uint32, reflect.Uint64, reflect.Uintptr:
+		<a href="../src/encoding/json/decode.go.html#line-932" class="path-duplicate">decode.go</a><a href="../src/encoding/json/decode.go.html#line-932">#L932</a>: 			if v.Type().Elem().Kind() != reflect.<b>Uint8</b> {
+		<a href="../src/encoding/json/decode.go.html#line-996" class="path-duplicate">decode.go</a><a href="../src/encoding/json/decode.go.html#line-996">#L996</a>: 		case reflect.Uint, reflect.<b>Uint8</b>, reflect.Uint16, reflect.Uint32, reflect.Uint64, reflect.Uintptr:
+		<a href="../src/encoding/json/encode.go.html#line-312">encode.go#L312</a>: 	case reflect.Uint, reflect.<b>Uint8</b>, reflect.Uint16, reflect.Uint32, reflect.Uint64, reflect.Uintptr:
+		<a href="../src/encoding/json/encode.go.html#line-403" class="path-duplicate">encode.go</a><a href="../src/encoding/json/encode.go.html#line-403">#L403</a>: 	case reflect.Uint, reflect.<b>Uint8</b>, reflect.Uint16, reflect.Uint32, reflect.Uint64, reflect.Uintptr:
+		<a href="../src/encoding/json/encode.go.html#line-769" class="path-duplicate">encode.go</a><a href="../src/encoding/json/encode.go.html#line-769">#L769</a>: 		reflect.Uint, reflect.<b>Uint8</b>, reflect.Uint16, reflect.Uint32, reflect.Uint64, reflect.Uintptr:
+		<a href="../src/encoding/json/encode.go.html#line-828" class="path-duplicate">encode.go</a><a href="../src/encoding/json/encode.go.html#line-828">#L828</a>: 	if t.Elem().Kind() == reflect.<b>Uint8</b> {
+		<a href="../src/encoding/json/encode.go.html#line-956" class="path-duplicate">encode.go</a><a href="../src/encoding/json/encode.go.html#line-956">#L956</a>: 	case reflect.Uint, reflect.<b>Uint8</b>, reflect.Uint16, reflect.Uint32, reflect.Uint64, reflect.Uintptr:
+		<a href="../src/encoding/json/encode.go.html#line-1139" class="path-duplicate">encode.go</a><a href="../src/encoding/json/encode.go.html#line-1139">#L1139</a>: 						reflect.Uint, reflect.<b>Uint8</b>, reflect.Uint16, reflect.Uint32, reflect.Uint64, reflect.Uintptr,
+
+	<a href="../pkg/fmt.html">fmt</a>
+		<a href="../src/fmt/print.go.html#line-793">print.go#L793</a>: 	case reflect.Uint, reflect.<b>Uint8</b>, reflect.Uint16, reflect.Uint32, reflect.Uint64, reflect.Uintptr:
+		<a href="../src/fmt/print.go.html#line-873" class="path-duplicate">print.go</a><a href="../src/fmt/print.go.html#line-873">#L873</a>: 			if t.Elem().Kind() == reflect.<b>Uint8</b> {
+		<a href="../src/fmt/print.go.html#line-949" class="path-duplicate">print.go</a><a href="../src/fmt/print.go.html#line-949">#L949</a>: 			case reflect.Uint, reflect.<b>Uint8</b>, reflect.Uint16, reflect.Uint32, reflect.Uint64, reflect.Uintptr:
+		<a href="../src/fmt/scan.go.html#line-1029">scan.go#L1029</a>: 		case reflect.Uint, reflect.<b>Uint8</b>, reflect.Uint16, reflect.Uint32, reflect.Uint64, reflect.Uintptr:
+		<a href="../src/fmt/scan.go.html#line-1036" class="path-duplicate">scan.go</a><a href="../src/fmt/scan.go.html#line-1036">#L1036</a>: 			if typ.Elem().Kind() != reflect.<b>Uint8</b> {
+
+	<a href="../pkg/google.golang.org/protobuf/internal/descfmt.html">google.golang.org/protobuf/internal/descfmt</a>
+		<a href="../src/google.golang.org/protobuf/internal/descfmt/stringer.go.html#line-235">stringer.go#L235</a>: 		case reflect.Uint, reflect.<b>Uint8</b>, reflect.Uint16, reflect.Uint32, reflect.Uint64:
+
+	<a href="../pkg/google.golang.org/protobuf/internal/impl.html">google.golang.org/protobuf/internal/impl</a>
+		<a href="../src/google.golang.org/protobuf/internal/impl/codec_map.go.html#line-293">codec_map.go#L293</a>: 		case reflect.Uint, reflect.<b>Uint8</b>, reflect.Uint16, reflect.Uint32, reflect.Uint64, reflect.Uintptr:
+		<a href="../src/google.golang.org/protobuf/internal/impl/codec_tables.go.html#line-111">codec_tables.go#L111</a>: 			if ft.Kind() == reflect.Slice &amp;&amp; ft.Elem().Kind() == reflect.<b>Uint8</b> &amp;&amp; strs.EnforceUTF8(fd) {
+		<a href="../src/google.golang.org/protobuf/internal/impl/codec_tables.go.html#line-114" class="path-duplicate">codec_tables.go</a><a href="../src/google.golang.org/protobuf/internal/impl/codec_tables.go.html#line-114">#L114</a>: 			if ft.Kind() == reflect.Slice &amp;&amp; ft.Elem().Kind() == reflect.<b>Uint8</b> {
+		<a href="../src/google.golang.org/protobuf/internal/impl/codec_tables.go.html#line-121" class="path-duplicate">codec_tables.go</a><a href="../src/google.golang.org/protobuf/internal/impl/codec_tables.go.html#line-121">#L121</a>: 			if ft.Kind() == reflect.Slice &amp;&amp; ft.Elem().Kind() == reflect.<b>Uint8</b> {
+		<a href="../src/google.golang.org/protobuf/internal/impl/codec_tables.go.html#line-267" class="path-duplicate">codec_tables.go</a><a href="../src/google.golang.org/protobuf/internal/impl/codec_tables.go.html#line-267">#L267</a>: 			if ft.Kind() == reflect.Slice &amp;&amp; ft.Elem().Kind() == reflect.<b>Uint8</b> &amp;&amp; strs.EnforceUTF8(fd) {
+		<a href="../src/google.golang.org/protobuf/internal/impl/codec_tables.go.html#line-270" class="path-duplicate">codec_tables.go</a><a href="../src/google.golang.org/protobuf/internal/impl/codec_tables.go.html#line-270">#L270</a>: 			if ft.Kind() == reflect.Slice &amp;&amp; ft.Elem().Kind() == reflect.<b>Uint8</b> {
+		<a href="../src/google.golang.org/protobuf/internal/impl/codec_tables.go.html#line-277" class="path-duplicate">codec_tables.go</a><a href="../src/google.golang.org/protobuf/internal/impl/codec_tables.go.html#line-277">#L277</a>: 			if ft.Kind() == reflect.Slice &amp;&amp; ft.Elem().Kind() == reflect.<b>Uint8</b> {
+		<a href="../src/google.golang.org/protobuf/internal/impl/codec_tables.go.html#line-417" class="path-duplicate">codec_tables.go</a><a href="../src/google.golang.org/protobuf/internal/impl/codec_tables.go.html#line-417">#L417</a>: 			if ft.Kind() == reflect.Slice &amp;&amp; ft.Elem().Kind() == reflect.<b>Uint8</b> &amp;&amp; strs.EnforceUTF8(fd) {
+		<a href="../src/google.golang.org/protobuf/internal/impl/codec_tables.go.html#line-420" class="path-duplicate">codec_tables.go</a><a href="../src/google.golang.org/protobuf/internal/impl/codec_tables.go.html#line-420">#L420</a>: 			if ft.Kind() == reflect.Slice &amp;&amp; ft.Elem().Kind() == reflect.<b>Uint8</b> {
+		<a href="../src/google.golang.org/protobuf/internal/impl/codec_tables.go.html#line-427" class="path-duplicate">codec_tables.go</a><a href="../src/google.golang.org/protobuf/internal/impl/codec_tables.go.html#line-427">#L427</a>: 			if ft.Kind() == reflect.Slice &amp;&amp; ft.Elem().Kind() == reflect.<b>Uint8</b> {
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_extension.go.html#line-92">legacy_extension.go#L92</a>: 	isRepeated := t.Kind() == reflect.Slice &amp;&amp; t.Elem().Kind() != reflect.<b>Uint8</b>
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-290">legacy_message.go#L290</a>: 	isRepeated := t.Kind() == reflect.Slice &amp;&amp; t.Elem().Kind() != reflect.<b>Uint8</b>
+		<a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-258">message_reflect_field.go#L258</a>: 	isBytes := ft.Kind() == reflect.Slice &amp;&amp; ft.Elem().Kind() == reflect.<b>Uint8</b>
+		<a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-515" class="path-duplicate">message_reflect_field.go</a><a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-515">#L515</a>: 	case reflect.Uint, reflect.<b>Uint8</b>, reflect.Uint16, reflect.Uint32, reflect.Uint64, reflect.Uintptr:
+
+	<a href="../pkg/internal/fmtsort.html">internal/fmtsort</a>
+		<a href="../src/internal/fmtsort/sort.go.html#line-94">sort.go#L94</a>: 	case reflect.Uint, reflect.<b>Uint8</b>, reflect.Uint16, reflect.Uint32, reflect.Uint64, reflect.Uintptr:
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

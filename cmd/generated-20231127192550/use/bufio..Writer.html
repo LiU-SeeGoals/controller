@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: bufio.Writer</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../pkg/bufio.html">bufio</a>.<a href="../src/bufio/bufio.go.html#line-579">Writer</a></b></span>
+
+<span class="title">18 uses</span>
+
+	bufio (current package)
+		<a href="../src/bufio/bufio.go.html#line-579">bufio.go#L579</a>: type <b>Writer</b> struct {
+		<a href="../src/bufio/bufio.go.html#line-589" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-589">#L589</a>: func NewWriterSize(w io.Writer, size int) *<b>Writer</b> {
+		<a href="../src/bufio/bufio.go.html#line-591" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-591">#L591</a>: 	b, ok := w.(*<b>Writer</b>)
+		<a href="../src/bufio/bufio.go.html#line-598" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-598">#L598</a>: 	return &amp;<b>Writer</b>{
+		<a href="../src/bufio/bufio.go.html#line-607" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-607">#L607</a>: func NewWriter(w io.Writer) *<b>Writer</b> {
+		<a href="../src/bufio/bufio.go.html#line-612" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-612">#L612</a>: func (b *<b>Writer</b>) Size() int { return len(b.buf) }
+		<a href="../src/bufio/bufio.go.html#line-619" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-619">#L619</a>: func (b *<b>Writer</b>) Reset(w io.Writer) {
+		<a href="../src/bufio/bufio.go.html#line-635" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-635">#L635</a>: func (b *<b>Writer</b>) Flush() error {
+		<a href="../src/bufio/bufio.go.html#line-659" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-659">#L659</a>: func (b *<b>Writer</b>) Available() int { return len(b.buf) - b.n }
+		<a href="../src/bufio/bufio.go.html#line-665" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-665">#L665</a>: func (b *<b>Writer</b>) AvailableBuffer() []byte {
+		<a href="../src/bufio/bufio.go.html#line-670" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-670">#L670</a>: func (b *<b>Writer</b>) Buffered() int { return b.n }
+		<a href="../src/bufio/bufio.go.html#line-676" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-676">#L676</a>: func (b *<b>Writer</b>) Write(p []byte) (nn int, err error) {
+		<a href="../src/bufio/bufio.go.html#line-701" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-701">#L701</a>: func (b *<b>Writer</b>) WriteByte(c byte) error {
+		<a href="../src/bufio/bufio.go.html#line-715" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-715">#L715</a>: func (b *<b>Writer</b>) WriteRune(r rune) (size int, err error) {
+		<a href="../src/bufio/bufio.go.html#line-747" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-747">#L747</a>: func (b *<b>Writer</b>) WriteString(s string) (int, error) {
+		<a href="../src/bufio/bufio.go.html#line-784" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-784">#L784</a>: func (b *<b>Writer</b>) ReadFrom(r io.Reader) (n int64, err error) {
+		<a href="../src/bufio/bufio.go.html#line-836" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-836">#L836</a>: 	*<b>Writer</b>
+		<a href="../src/bufio/bufio.go.html#line-840" class="path-duplicate">bufio.go</a><a href="../src/bufio/bufio.go.html#line-840">#L840</a>: func NewReadWriter(r *Reader, w *<b>Writer</b>) *ReadWriter {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

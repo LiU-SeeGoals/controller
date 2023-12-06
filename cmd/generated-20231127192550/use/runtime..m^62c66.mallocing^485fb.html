@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.m.mallocing</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/runtime2.go.html#line-533">m</a>.<a href="../src/runtime/runtime2.go.html#line-552">mallocing</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">27 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/arena.go.html#line-462">arena.go#L462</a>: 	if mp.<b>mallocing</b> != 0 {
+		<a href="../src/runtime/arena.go.html#line-468" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-468">#L468</a>: 	mp.<b>mallocing</b> = 1
+		<a href="../src/runtime/arena.go.html#line-485" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-485">#L485</a>: 		mp.<b>mallocing</b> = 0
+		<a href="../src/runtime/arena.go.html#line-518" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-518">#L518</a>: 	mp.<b>mallocing</b> = 0
+		<a href="../src/runtime/arena.go.html#line-650" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-650">#L650</a>: 	if mp.<b>mallocing</b> != 0 {
+		<a href="../src/runtime/arena.go.html#line-656" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-656">#L656</a>: 	mp.<b>mallocing</b> = 1
+		<a href="../src/runtime/arena.go.html#line-708" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-708">#L708</a>: 	mp.<b>mallocing</b> = 0
+		<a href="../src/runtime/cgocheck.go.html#line-48">cgocheck.go#L48</a>: 	if gp.m.<b>mallocing</b> != 0 {
+		<a href="../src/runtime/iface.go.html#line-127">iface.go#L127</a>: 	if getg().m.<b>mallocing</b> != 0 {
+		<a href="../src/runtime/malloc.go.html#line-1006">malloc.go#L1006</a>: 	if mp.<b>mallocing</b> != 0 {
+		<a href="../src/runtime/malloc.go.html#line-1012" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-1012">#L1012</a>: 	mp.<b>mallocing</b> = 1
+		<a href="../src/runtime/malloc.go.html#line-1079" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-1079">#L1079</a>: 				mp.<b>mallocing</b> = 0
+		<a href="../src/runtime/malloc.go.html#line-1211" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-1211">#L1211</a>: 	mp.<b>mallocing</b> = 0
+		<a href="../src/runtime/mgcsweep.go.html#line-467">mgcsweep.go#L467</a>: 	if gp.m.locks == 0 &amp;&amp; gp.m.<b>mallocing</b> == 0 &amp;&amp; gp != gp.m.g0 {
+		<a href="../src/runtime/mgcsweep.go.html#line-506" class="path-duplicate">mgcsweep.go</a><a href="../src/runtime/mgcsweep.go.html#line-506">#L506</a>: 	if gp.m.locks == 0 &amp;&amp; gp.m.<b>mallocing</b> == 0 &amp;&amp; gp != gp.m.g0 {
+		<a href="../src/runtime/mheap.go.html#line-1658">mheap.go#L1658</a>: 	gp.m.<b>mallocing</b>++
+		<a href="../src/runtime/mheap.go.html#line-1663" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1663">#L1663</a>: 	gp.m.<b>mallocing</b>--
+		<a href="../src/runtime/panic.go.html#line-63">panic.go#L63</a>: 	if gp != nil &amp;&amp; gp.m != nil &amp;&amp; gp.m.<b>mallocing</b> != 0 {
+		<a href="../src/runtime/panic.go.html#line-77" class="path-duplicate">panic.go</a><a href="../src/runtime/panic.go.html#line-77">#L77</a>: 	if gp != nil &amp;&amp; gp.m != nil &amp;&amp; gp.m.<b>mallocing</b> != 0 {
+		<a href="../src/runtime/panic.go.html#line-843" class="path-duplicate">panic.go</a><a href="../src/runtime/panic.go.html#line-843">#L843</a>: 	if gp.m.<b>mallocing</b> != 0 {
+		<a href="../src/runtime/panic.go.html#line-1246" class="path-duplicate">panic.go</a><a href="../src/runtime/panic.go.html#line-1246">#L1246</a>: 	gp.m.<b>mallocing</b>++
+		<a href="../src/runtime/panic.go.html#line-1351" class="path-duplicate">panic.go</a><a href="../src/runtime/panic.go.html#line-1351">#L1351</a>: 	if mp.locks != 1 || mp.<b>mallocing</b> != 0 || mp.throwing != throwTypeNone || mp.preemptoff != "" || mp.dying != 0 {
+		<a href="../src/runtime/preempt.go.html#line-287">preempt.go#L287</a>: 	return mp.locks == 0 &amp;&amp; mp.<b>mallocing</b> == 0 &amp;&amp; mp.preemptoff == "" &amp;&amp; mp.p.ptr().status == _Prunning
+		<a href="../src/runtime/proc.go.html#line-4936">proc.go#L4936</a>: 	getg().m.<b>mallocing</b>++
+		<a href="../src/runtime/proc.go.html#line-5009" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5009">#L5009</a>: 	getg().m.<b>mallocing</b>--
+		<a href="../src/runtime/proc.go.html#line-5857" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5857">#L5857</a>: 		print(" mallocing=", mp.<b>mallocing</b>, " throwing=", mp.throwing, " preemptoff=", mp.preemptoff, " locks=", mp.locks, " dying=", mp.dying, " spinning=", mp.spinning, " blocked=", mp.blocked, " lockedg=")
+		<a href="../src/runtime/runtime2.go.html#line-552">runtime2.go#L552</a>: 	<b>mallocing</b>     int32
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

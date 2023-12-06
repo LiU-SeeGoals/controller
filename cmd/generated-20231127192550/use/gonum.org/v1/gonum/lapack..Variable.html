@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/lapack.Variable</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">const <b><a href="../../../../pkg/gonum.org/v1/gonum/lapack.html">gonum.org/v1/gonum/lapack</a>.<a href="../../../../src/gonum.org/v1/gonum/lapack/lapack.go.html#line-93">Variable</a></b></span>
+
+<span class="title">22 uses</span>
+
+	gonum.org/v1/gonum/lapack (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/lapack.go.html#line-93">lapack.go#L93</a>: 	<b>Variable</b> Pivot = 'V'
+
+	<a href="../../../../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-131">dbdsqr.go#L131</a>: 				impl.Dlasr(blas.Right, lapack.<b>Variable</b>, lapack.Forward, nru, n, work, work[n-1:], u, ldu)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-134" class="path-duplicate">dbdsqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-134">#L134</a>: 				impl.Dlasr(blas.Left, lapack.<b>Variable</b>, lapack.Forward, n, ncc, work, work[n-1:], c, ldc)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-334" class="path-duplicate">dbdsqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-334">#L334</a>: 						impl.Dlasr(blas.Left, lapack.<b>Variable</b>, lapack.Forward, m-l2, ncvt, work, work[n-1:], vt[l2*ldvt:], ldvt)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-337" class="path-duplicate">dbdsqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-337">#L337</a>: 						impl.Dlasr(blas.Right, lapack.<b>Variable</b>, lapack.Forward, nru, m-l2, work[nm12:], work[nm13:], u[l2:], ldu)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-340" class="path-duplicate">dbdsqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-340">#L340</a>: 						impl.Dlasr(blas.Left, lapack.<b>Variable</b>, lapack.Forward, m-l2, ncc, work[nm12:], work[nm13:], c[l2*ldc:], ldc)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-364" class="path-duplicate">dbdsqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-364">#L364</a>: 						impl.Dlasr(blas.Left, lapack.<b>Variable</b>, lapack.Backward, m-l2, ncvt, work[nm12:], work[nm13:], vt[l2*ldvt:], ldvt)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-367" class="path-duplicate">dbdsqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-367">#L367</a>: 						impl.Dlasr(blas.Right, lapack.<b>Variable</b>, lapack.Backward, nru, m-l2, work, work[n-1:], u[l2:], ldu)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-370" class="path-duplicate">dbdsqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-370">#L370</a>: 						impl.Dlasr(blas.Left, lapack.<b>Variable</b>, lapack.Backward, m-l2, ncc, work, work[n-1:], c[l2*ldc:], ldc)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-408" class="path-duplicate">dbdsqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-408">#L408</a>: 						impl.Dlasr(blas.Left, lapack.<b>Variable</b>, lapack.Forward, m-l2, ncvt, work, work[n-1:], vt[l2*ldvt:], ldvt)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-411" class="path-duplicate">dbdsqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-411">#L411</a>: 						impl.Dlasr(blas.Right, lapack.<b>Variable</b>, lapack.Forward, nru, m-l2, work[nm12:], work[nm13:], u[l2:], ldu)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-414" class="path-duplicate">dbdsqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-414">#L414</a>: 						impl.Dlasr(blas.Left, lapack.<b>Variable</b>, lapack.Forward, m-l2, ncc, work[nm12:], work[nm13:], c[l2*ldc:], ldc)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-451" class="path-duplicate">dbdsqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-451">#L451</a>: 						impl.Dlasr(blas.Left, lapack.<b>Variable</b>, lapack.Backward, m-l2, ncvt, work[nm12:], work[nm13:], vt[l2*ldvt:], ldvt)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-454" class="path-duplicate">dbdsqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-454">#L454</a>: 						impl.Dlasr(blas.Right, lapack.<b>Variable</b>, lapack.Backward, nru, m-l2, work, work[n-1:], u[l2:], ldu)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-457" class="path-duplicate">dbdsqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-457">#L457</a>: 						impl.Dlasr(blas.Left, lapack.<b>Variable</b>, lapack.Backward, m-l2, ncc, work, work[n-1:], c[l2*ldc:], ldc)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlasr.go.html#line-69">dlasr.go#L69</a>: 	case pivot != lapack.<b>Variable</b> &amp;&amp; pivot != lapack.Top &amp;&amp; pivot != lapack.Bottom:
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlasr.go.html#line-106" class="path-duplicate">dlasr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlasr.go.html#line-106">#L106</a>: 		if pivot == lapack.<b>Variable</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlasr.go.html#line-200" class="path-duplicate">dlasr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlasr.go.html#line-200">#L200</a>: 	if pivot == lapack.<b>Variable</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-211">dsteqr.go#L211</a>: 						impl.Dlasr(blas.Right, lapack.<b>Variable</b>, lapack.Backward,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-260" class="path-duplicate">dsteqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-260">#L260</a>: 					impl.Dlasr(blas.Right, lapack.<b>Variable</b>, lapack.Backward,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-297" class="path-duplicate">dsteqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-297">#L297</a>: 						impl.Dlasr(blas.Right, lapack.<b>Variable</b>, lapack.Forward,
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-346" class="path-duplicate">dsteqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dsteqr.go.html#line-346">#L346</a>: 					impl.Dlasr(blas.Right, lapack.<b>Variable</b>, lapack.Forward,
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

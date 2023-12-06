@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/mat.BandCholesky</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-738">BandCholesky</a></b></span>
+
+<span class="title">21 uses</span>
+
+	gonum.org/v1/gonum/mat (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-24">cholesky.go#L24</a>: 	_ Matrix    = (*<b>BandCholesky</b>)(nil)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-25" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-25">#L25</a>: 	_ Symmetric = (*<b>BandCholesky</b>)(nil)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-26" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-26">#L26</a>: 	_ Banded    = (*<b>BandCholesky</b>)(nil)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-27" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-27">#L27</a>: 	_ SymBanded = (*<b>BandCholesky</b>)(nil)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-738" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-738">#L738</a>: type <b>BandCholesky</b> struct {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-750" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-750">#L750</a>: func (ch *<b>BandCholesky</b>) Factorize(a SymBanded) (ok bool) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-784" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-784">#L784</a>: func (ch *<b>BandCholesky</b>) SolveTo(dst *Dense, b Matrix) error {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-807" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-807">#L807</a>: func (ch *<b>BandCholesky</b>) SolveVecTo(dst *VecDense, b Vector) error {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-830" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-830">#L830</a>: func (ch *<b>BandCholesky</b>) Cond() float64 {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-839" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-839">#L839</a>: func (ch *<b>BandCholesky</b>) Reset() {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-847" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-847">#L847</a>: func (ch *<b>BandCholesky</b>) Dims() (r, c int) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-856" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-856">#L856</a>: func (ch *<b>BandCholesky</b>) At(i, j int) float64 {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-882" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-882">#L882</a>: func (ch *<b>BandCholesky</b>) T() Matrix {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-887" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-887">#L887</a>: func (ch *<b>BandCholesky</b>) TBand() Banded {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-893" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-893">#L893</a>: func (ch *<b>BandCholesky</b>) SymmetricDim() int {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-900" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-900">#L900</a>: func (ch *<b>BandCholesky</b>) Bandwidth() (kl, ku int) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-907" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-907">#L907</a>: func (ch *<b>BandCholesky</b>) SymBand() (n, k int) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-915" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-915">#L915</a>: func (ch *<b>BandCholesky</b>) IsEmpty() bool {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-920" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-920">#L920</a>: func (ch *<b>BandCholesky</b>) Det() float64 {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-928" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-928">#L928</a>: func (ch *<b>BandCholesky</b>) LogDet() float64 {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-939" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-939">#L939</a>: func (ch *<b>BandCholesky</b>) valid() bool {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

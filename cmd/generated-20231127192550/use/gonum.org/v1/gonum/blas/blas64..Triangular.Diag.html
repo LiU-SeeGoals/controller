@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/blas/blas64.Triangular.Diag</title>
+<link href="../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../../../pkg/gonum.org/v1/gonum/blas/blas64.html">gonum.org/v1/gonum/blas/blas64</a>.<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-52">Triangular</a>.<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-54">Diag</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">29 uses</span>
+
+	gonum.org/v1/gonum/blas/blas64 (current package)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-54">blas64.go#L54</a>: 	<b>Diag</b>   blas.Diag
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-281" class="path-duplicate">blas64.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-281">#L281</a>: 	blas64.Dtrmv(a.Uplo, t, a.<b>Diag</b>, a.N, a.Data, a.Stride, x.Data, x.Inc)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-317" class="path-duplicate">blas64.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-317">#L317</a>: 	blas64.Dtrsv(a.Uplo, t, a.<b>Diag</b>, a.N, a.Data, a.Stride, x.Data, x.Inc)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-514" class="path-duplicate">blas64.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-514">#L514</a>: 	blas64.Dtrmm(s, a.Uplo, tA, a.<b>Diag</b>, b.Rows, b.Cols, alpha, a.Data, a.Stride, b.Data, b.Stride)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-532" class="path-duplicate">blas64.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-532">#L532</a>: 	blas64.Dtrsm(s, a.Uplo, tA, a.<b>Diag</b>, b.Rows, b.Cols, alpha, a.Data, a.Stride, b.Data, b.Stride)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-59">conv.go#L59</a>: 	if t.<b>Diag</b> != a.<b>Diag</b> {
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-96" class="path-duplicate">conv.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/blas64/conv.go.html#line-96">#L96</a>: 	if t.<b>Diag</b> != a.<b>Diag</b> {
+
+	<a href="../../../../../pkg/gonum.org/v1/gonum/lapack/lapack64.html">gonum.org/v1/gonum/lapack/lapack64</a>
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-53">lapack64.go#L53</a>: 	t.<b>Diag</b> = blas.NonUnit
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-169" class="path-duplicate">lapack64.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-169">#L169</a>: 	t.<b>Diag</b> = blas.NonUnit
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-587" class="path-duplicate">lapack64.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-587">#L587</a>: 	return lapack64.Dlantr(norm, a.Uplo, a.<b>Diag</b>, a.N, a.N, a.Data, max(1, a.Stride), work)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-740" class="path-duplicate">lapack64.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-740">#L740</a>: 	return lapack64.Dtrcon(norm, a.Uplo, a.<b>Diag</b>, a.N, a.Data, max(1, a.Stride), work, iwork)
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-749" class="path-duplicate">lapack64.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-749">#L749</a>: 	return lapack64.Dtrtri(a.Uplo, a.<b>Diag</b>, a.N, a.Data, max(1, a.Stride))
+		<a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-755" class="path-duplicate">lapack64.go</a><a href="../../../../../src/gonum.org/v1/gonum/lapack/lapack64/lapack64.go.html#line-755">#L755</a>: 	return lapack64.Dtrtrs(a.Uplo, trans, a.<b>Diag</b>, a.N, b.Cols, a.Data, max(1, a.Stride), b.Data, max(1, b.Stride))
+
+	<a href="../../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-398">cholesky.go#L398</a>: 			<b>Diag</b>:   blas.NonUnit,
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-434" class="path-duplicate">cholesky.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-434">#L434</a>: 			<b>Diag</b>:   blas.NonUnit,
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-206">dense.go#L206</a>: 			<b>Diag</b>:   diag,
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-226">diagonal.go#L226</a>: 		if mat.<b>Diag</b> == blas.Unit {
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-116">lq.go#L116</a>: 			<b>Diag</b>:   blas.NonUnit,
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-266">matrix.go#L266</a>: 		if rt.<b>Diag</b> == blas.Unit {
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-166">pool.go#L166</a>: 	t.mat.<b>Diag</b> = blas.NonUnit
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-116">qr.go#L116</a>: 			<b>Diag</b>:   blas.NonUnit,
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-145">triangular.go#L145</a>: 			<b>Diag</b>:   blas.NonUnit,
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-185" class="path-duplicate">triangular.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-185">#L185</a>: 	if t.mat.<b>Diag</b> == blas.Unit {
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-216" class="path-duplicate">triangular.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-216">#L216</a>: 	if mat.<b>Diag</b> == blas.Unit {
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-310" class="path-duplicate">triangular.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-310">#L310</a>: 			<b>Diag</b>:   blas.NonUnit,
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-345" class="path-duplicate">triangular.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-345">#L345</a>: 			<b>Diag</b>:   blas.NonUnit,
+		<a href="../../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-378" class="path-duplicate">triangular.go</a><a href="../../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-378">#L378</a>: 	if t.mat.<b>Diag</b> == blas.Unit {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.mallocgc</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/malloc.go.html#line-948">mallocgc</a></b></span>
+
+<span class="title">29 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/chan.go.html#line-96">chan.go#L96</a>: 		c = (*hchan)(<b>mallocgc</b>(hchanSize, nil, true))
+		<a href="../src/runtime/chan.go.html#line-102" class="path-duplicate">chan.go</a><a href="../src/runtime/chan.go.html#line-102">#L102</a>: 		c = (*hchan)(<b>mallocgc</b>(hchanSize+mem, nil, true))
+		<a href="../src/runtime/chan.go.html#line-107" class="path-duplicate">chan.go</a><a href="../src/runtime/chan.go.html#line-107">#L107</a>: 		c.buf = <b>mallocgc</b>(mem, elem, true)
+		<a href="../src/runtime/iface.go.html#line-137">iface.go#L137</a>: 		t2 := (*itabTableType)(<b>mallocgc</b>((2+2*t.size)*goarch.PtrSize, nil, true))
+		<a href="../src/runtime/iface.go.html#line-332" class="path-duplicate">iface.go</a><a href="../src/runtime/iface.go.html#line-332">#L332</a>: 	x := <b>mallocgc</b>(t.Size_, t, true)
+		<a href="../src/runtime/iface.go.html#line-348" class="path-duplicate">iface.go</a><a href="../src/runtime/iface.go.html#line-348">#L348</a>: 	x := <b>mallocgc</b>(t.Size_, t, false)
+		<a href="../src/runtime/iface.go.html#line-360" class="path-duplicate">iface.go</a><a href="../src/runtime/iface.go.html#line-360">#L360</a>: 		x = <b>mallocgc</b>(2, uint16Type, false)
+		<a href="../src/runtime/iface.go.html#line-373" class="path-duplicate">iface.go</a><a href="../src/runtime/iface.go.html#line-373">#L373</a>: 		x = <b>mallocgc</b>(4, uint32Type, false)
+		<a href="../src/runtime/iface.go.html#line-383" class="path-duplicate">iface.go</a><a href="../src/runtime/iface.go.html#line-383">#L383</a>: 		x = <b>mallocgc</b>(8, uint64Type, false)
+		<a href="../src/runtime/iface.go.html#line-393" class="path-duplicate">iface.go</a><a href="../src/runtime/iface.go.html#line-393">#L393</a>: 		x = <b>mallocgc</b>(unsafe.Sizeof(val), stringType, true)
+		<a href="../src/runtime/iface.go.html#line-404" class="path-duplicate">iface.go</a><a href="../src/runtime/iface.go.html#line-404">#L404</a>: 		x = <b>mallocgc</b>(unsafe.Sizeof(val), sliceType, true)
+		<a href="../src/runtime/malloc.go.html#line-948">malloc.go#L948</a>: func <b>mallocgc</b>(size uintptr, typ *_type, needzero bool) unsafe.Pointer {
+		<a href="../src/runtime/malloc.go.html#line-1324" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-1324">#L1324</a>: 	return <b>mallocgc</b>(typ.Size_, typ, true)
+		<a href="../src/runtime/malloc.go.html#line-1329" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-1329">#L1329</a>: 	return <b>mallocgc</b>(typ.Size_, typ, true)
+		<a href="../src/runtime/malloc.go.html#line-1334" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-1334">#L1334</a>: 	return <b>mallocgc</b>(typ.Size_, typ, true)
+		<a href="../src/runtime/malloc.go.html#line-1340" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-1340">#L1340</a>: 		return <b>mallocgc</b>(typ.Size_, typ, true)
+		<a href="../src/runtime/malloc.go.html#line-1346" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-1346">#L1346</a>: 	return <b>mallocgc</b>(mem, typ, true)
+		<a href="../src/runtime/mfinal.go.html#line-220">mfinal.go#L220</a>: 					frame = <b>mallocgc</b>(framesz, nil, true)
+		<a href="../src/runtime/slice.go.html#line-57">slice.go#L57</a>: 		to = <b>mallocgc</b>(tomem, nil, false)
+		<a href="../src/runtime/slice.go.html#line-63" class="path-duplicate">slice.go</a><a href="../src/runtime/slice.go.html#line-63">#L63</a>: 		to = <b>mallocgc</b>(tomem, et, true)
+		<a href="../src/runtime/slice.go.html#line-103" class="path-duplicate">slice.go</a><a href="../src/runtime/slice.go.html#line-103">#L103</a>: 	return <b>mallocgc</b>(mem, et, true)
+		<a href="../src/runtime/slice.go.html#line-266" class="path-duplicate">slice.go</a><a href="../src/runtime/slice.go.html#line-266">#L266</a>: 		p = <b>mallocgc</b>(capmem, nil, false)
+		<a href="../src/runtime/slice.go.html#line-274" class="path-duplicate">slice.go</a><a href="../src/runtime/slice.go.html#line-274">#L274</a>: 		p = <b>mallocgc</b>(capmem, et, true)
+		<a href="../src/runtime/slice.go.html#line-354" class="path-duplicate">slice.go</a><a href="../src/runtime/slice.go.html#line-354">#L354</a>: 	return unsafe.Slice((*byte)(<b>mallocgc</b>(uintptr(len), nil, false)), len)
+		<a href="../src/runtime/string.go.html#line-112">string.go#L112</a>: 		p = <b>mallocgc</b>(uintptr(n), nil, false)
+		<a href="../src/runtime/string.go.html#line-267" class="path-duplicate">string.go</a><a href="../src/runtime/string.go.html#line-267">#L267</a>: 	p := <b>mallocgc</b>(uintptr(size), nil, false)
+		<a href="../src/runtime/string.go.html#line-274" class="path-duplicate">string.go</a><a href="../src/runtime/string.go.html#line-274">#L274</a>: 	p := <b>mallocgc</b>(cap, nil, false)
+		<a href="../src/runtime/string.go.html#line-289" class="path-duplicate">string.go</a><a href="../src/runtime/string.go.html#line-289">#L289</a>: 	p := <b>mallocgc</b>(mem, nil, false)
+		<a href="../src/runtime/string.go.html#line-308" class="path-duplicate">string.go</a><a href="../src/runtime/string.go.html#line-308">#L308</a>: 	bp := <b>mallocgc</b>(uintptr(n), nil, false)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

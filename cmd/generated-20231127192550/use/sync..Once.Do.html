@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: sync.Once.Do</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/sync.html">sync</a>.<a href="../src/sync/once.go.html#line-18">Once</a>.<a href="../src/sync/once.go.html#line-48">Do</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">60 uses</span>
+
+	sync (current package)
+		<a href="../src/sync/once.go.html#line-48">once.go#L48</a>: func (o *Once) <b>Do</b>(f func()) {
+		<a href="../src/sync/oncefunc.go.html#line-31">oncefunc.go#L31</a>: 		once.<b>Do</b>(g)
+		<a href="../src/sync/oncefunc.go.html#line-60" class="path-duplicate">oncefunc.go</a><a href="../src/sync/oncefunc.go.html#line-60">#L60</a>: 		once.<b>Do</b>(g)
+		<a href="../src/sync/oncefunc.go.html#line-91" class="path-duplicate">oncefunc.go</a><a href="../src/sync/oncefunc.go.html#line-91">#L91</a>: 		once.<b>Do</b>(g)
+
+	<a href="../pkg/compress/flate.html">compress/flate</a>
+		<a href="../src/compress/flate/inflate.go.html#line-767">inflate.go#L767</a>: 	fixedOnce.<b>Do</b>(func() {
+
+	<a href="../pkg/context.html">context</a>
+		<a href="../src/context/context.go.html#line-317">context.go#L317</a>: 		a.once.<b>Do</b>(func() {
+		<a href="../src/context/context.go.html#line-342" class="path-duplicate">context.go</a><a href="../src/context/context.go.html#line-342">#L342</a>: 	a.once.<b>Do</b>(func() {
+
+	<a href="../pkg/google.golang.org/protobuf/internal/filedesc.html">google.golang.org/protobuf/internal/filedesc</a>
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc.go.html#line-519">desc.go#L519</a>: 	s.once.<b>Do</b>(func() {
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_lazy.go.html#line-690">desc_lazy.go#L690</a>: 		once.<b>Do</b>(func() {
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list.go.html#line-41">desc_list.go#L41</a>: 	p.once.<b>Do</b>(func() {
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list.go.html#line-93" class="path-duplicate">desc_list.go</a><a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list.go.html#line-93">#L93</a>: 	p.once.<b>Do</b>(func() {
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list.go.html#line-155" class="path-duplicate">desc_list.go</a><a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list.go.html#line-155">#L155</a>: 	p.once.<b>Do</b>(func() {
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list.go.html#line-231" class="path-duplicate">desc_list.go</a><a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list.go.html#line-231">#L231</a>: 	p.once.<b>Do</b>(func() {
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list.go.html#line-272" class="path-duplicate">desc_list.go</a><a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list.go.html#line-272">#L272</a>: 	p.once.<b>Do</b>(func() {
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list.go.html#line-415" class="path-duplicate">desc_list.go</a><a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list.go.html#line-415">#L415</a>: 	p.once.<b>Do</b>(func() {
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list_gen.go.html#line-41">desc_list_gen.go#L41</a>: 	p.once.<b>Do</b>(func() {
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list_gen.go.html#line-85" class="path-duplicate">desc_list_gen.go</a><a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list_gen.go.html#line-85">#L85</a>: 	p.once.<b>Do</b>(func() {
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list_gen.go.html#line-126" class="path-duplicate">desc_list_gen.go</a><a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list_gen.go.html#line-126">#L126</a>: 	p.once.<b>Do</b>(func() {
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list_gen.go.html#line-184" class="path-duplicate">desc_list_gen.go</a><a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list_gen.go.html#line-184">#L184</a>: 	p.once.<b>Do</b>(func() {
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list_gen.go.html#line-233" class="path-duplicate">desc_list_gen.go</a><a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list_gen.go.html#line-233">#L233</a>: 	p.once.<b>Do</b>(func() {
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list_gen.go.html#line-270" class="path-duplicate">desc_list_gen.go</a><a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list_gen.go.html#line-270">#L270</a>: 	p.once.<b>Do</b>(func() {
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list_gen.go.html#line-307" class="path-duplicate">desc_list_gen.go</a><a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list_gen.go.html#line-307">#L307</a>: 	p.once.<b>Do</b>(func() {
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list_gen.go.html#line-344" class="path-duplicate">desc_list_gen.go</a><a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list_gen.go.html#line-344">#L344</a>: 	p.once.<b>Do</b>(func() {
+
+	<a href="../pkg/google.golang.org/protobuf/internal/impl.html">google.golang.org/protobuf/internal/impl</a>
+		<a href="../src/google.golang.org/protobuf/internal/impl/codec_field.go.html#line-125">codec_field.go#L125</a>: 		once.<b>Do</b>(func() {
+		<a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-349">message_reflect_field.go#L349</a>: 		once.<b>Do</b>(func() {
+
+	<a href="../pkg/google.golang.org/protobuf/types/descriptorpb.html">google.golang.org/protobuf/types/descriptorpb</a>
+		<a href="../src/google.golang.org/protobuf/types/descriptorpb/descriptor.pb.go.html#line-4120">descriptor.pb.go#L4120</a>: 	file_google_protobuf_descriptor_proto_rawDescOnce.<b>Do</b>(func() {
+
+	<a href="../pkg/hash/crc32.html">hash/crc32</a>
+		<a href="../src/hash/crc32/crc32.go.html#line-126">crc32.go#L126</a>: 		ieeeOnce.<b>Do</b>(ieeeInit)
+		<a href="../src/hash/crc32/crc32.go.html#line-129" class="path-duplicate">crc32.go</a><a href="../src/hash/crc32/crc32.go.html#line-129">#L129</a>: 		castagnoliOnce.<b>Do</b>(castagnoliInit)
+		<a href="../src/hash/crc32/crc32.go.html#line-149" class="path-duplicate">crc32.go</a><a href="../src/hash/crc32/crc32.go.html#line-149">#L149</a>: 		ieeeOnce.<b>Do</b>(ieeeInit)
+		<a href="../src/hash/crc32/crc32.go.html#line-215" class="path-duplicate">crc32.go</a><a href="../src/hash/crc32/crc32.go.html#line-215">#L215</a>: 			ieeeOnce.<b>Do</b>(ieeeInit)
+		<a href="../src/hash/crc32/crc32.go.html#line-251" class="path-duplicate">crc32.go</a><a href="../src/hash/crc32/crc32.go.html#line-251">#L251</a>: 	ieeeOnce.<b>Do</b>(ieeeInit)
+
+	<a href="../pkg/internal/godebug.html">internal/godebug</a>
+		<a href="../src/internal/godebug/godebug.go.html#line-102">godebug.go#L102</a>: 	s.nonDefaultOnce.<b>Do</b>(s.register)
+		<a href="../src/internal/godebug/godebug.go.html#line-138" class="path-duplicate">godebug.go</a><a href="../src/internal/godebug/godebug.go.html#line-138">#L138</a>: 	s.once.<b>Do</b>(func() {
+
+	<a href="../pkg/internal/poll.html">internal/poll</a>
+		<a href="../src/internal/poll/copy_file_range_linux.go.html#line-23">copy_file_range_linux.go#L23</a>: 	kernelVersion53Once.<b>Do</b>(func() {
+		<a href="../src/internal/poll/fd_poll_runtime.go.html#line-39">fd_poll_runtime.go#L39</a>: 	serverInit.<b>Do</b>(runtime_pollServerInit)
+
+	<a href="../pkg/io.html">io</a>
+		<a href="../src/io/pipe.go.html#line-72">pipe.go#L72</a>: 	p.once.<b>Do</b>(func() { close(p.done) })
+		<a href="../src/io/pipe.go.html#line-103" class="path-duplicate">pipe.go</a><a href="../src/io/pipe.go.html#line-103">#L103</a>: 	p.once.<b>Do</b>(func() { close(p.done) })
+
+	<a href="../pkg/net.html">net</a>
+		<a href="../src/net/conf.go.html#line-81">conf.go#L81</a>: 	confOnce.<b>Do</b>(initConfVal)
+		<a href="../src/net/dnsclient_unix.go.html#line-372">dnsclient_unix.go#L372</a>: 	conf.initOnce.<b>Do</b>(conf.init)
+		<a href="../src/net/ipsock.go.html#line-33">ipsock.go#L33</a>: 	ipStackCaps.Once.<b>Do</b>(ipStackCaps.probe)
+		<a href="../src/net/ipsock.go.html#line-40" class="path-duplicate">ipsock.go</a><a href="../src/net/ipsock.go.html#line-40">#L40</a>: 	ipStackCaps.Once.<b>Do</b>(ipStackCaps.probe)
+		<a href="../src/net/ipsock.go.html#line-55" class="path-duplicate">ipsock.go</a><a href="../src/net/ipsock.go.html#line-55">#L55</a>: 	ipStackCaps.Once.<b>Do</b>(ipStackCaps.probe)
+		<a href="../src/net/lookup_unix.go.html#line-52">lookup_unix.go#L52</a>: 	onceReadProtocols.<b>Do</b>(readProtocols)
+		<a href="../src/net/mptcpsock_linux.go.html#line-30">mptcpsock_linux.go#L30</a>: 	mptcpOnce.<b>Do</b>(initMPTCPavailable)
+		<a href="../src/net/net.go.html#line-373">net.go#L373</a>: 	listenerBacklogCache.<b>Do</b>(func() { listenerBacklogCache.val = maxListenerBacklog() })
+		<a href="../src/net/net.go.html#line-685" class="path-duplicate">net.go</a><a href="../src/net/net.go.html#line-685">#L685</a>: 	threadOnce.<b>Do</b>(func() {
+		<a href="../src/net/nss.go.html#line-50">nss.go#L50</a>: 	conf.initOnce.<b>Do</b>(conf.init)
+		<a href="../src/net/pipe.go.html#line-236">pipe.go#L236</a>: 	p.once.<b>Do</b>(func() { close(p.localDone) })
+		<a href="../src/net/port_unix.go.html#line-55">port_unix.go#L55</a>: 	onceReadServices.<b>Do</b>(readServices)
+		<a href="../src/net/unixsock_posix.go.html#line-191">unixsock_posix.go#L191</a>: 	ln.unlinkOnce.<b>Do</b>(func() {
+
+	<a href="../pkg/strings.html">strings</a>
+		<a href="../src/strings/replace.go.html#line-96">replace.go#L96</a>: 	r.once.<b>Do</b>(r.buildOnce)
+		<a href="../src/strings/replace.go.html#line-102" class="path-duplicate">replace.go</a><a href="../src/strings/replace.go.html#line-102">#L102</a>: 	r.once.<b>Do</b>(r.buildOnce)
+
+	<a href="../pkg/syscall.html">syscall</a>
+		<a href="../src/syscall/env_unix.go.html#line-56">env_unix.go#L56</a>: 	envOnce.<b>Do</b>(copyenv)
+		<a href="../src/syscall/env_unix.go.html#line-70" class="path-duplicate">env_unix.go</a><a href="../src/syscall/env_unix.go.html#line-70">#L70</a>: 	envOnce.<b>Do</b>(copyenv)
+		<a href="../src/syscall/env_unix.go.html#line-92" class="path-duplicate">env_unix.go</a><a href="../src/syscall/env_unix.go.html#line-92">#L92</a>: 	envOnce.<b>Do</b>(copyenv)
+		<a href="../src/syscall/env_unix.go.html#line-127" class="path-duplicate">env_unix.go</a><a href="../src/syscall/env_unix.go.html#line-127">#L127</a>: 	envOnce.<b>Do</b>(copyenv) // prevent copyenv in Getenv/Setenv
+		<a href="../src/syscall/env_unix.go.html#line-140" class="path-duplicate">env_unix.go</a><a href="../src/syscall/env_unix.go.html#line-140">#L140</a>: 	envOnce.<b>Do</b>(copyenv)
+
+	<a href="../pkg/time.html">time</a>
+		<a href="../src/time/zoneinfo.go.html#line-92">zoneinfo.go#L92</a>: 		localOnce.<b>Do</b>(initLocal)
+		<a href="../src/time/zoneinfo.go.html#line-115" class="path-duplicate">zoneinfo.go</a><a href="../src/time/zoneinfo.go.html#line-115">#L115</a>: 		unnamedFixedZonesOnce.<b>Do</b>(func() {
+		<a href="../src/time/zoneinfo.go.html#line-674" class="path-duplicate">zoneinfo.go</a><a href="../src/time/zoneinfo.go.html#line-674">#L674</a>: 	zoneinfoOnce.<b>Do</b>(func() {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/blas.Float64Level1.Dcopy</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../../pkg/gonum.org/v1/gonum/blas.html">gonum.org/v1/gonum/blas</a>.<a href="../../../../src/gonum.org/v1/gonum/blas/blas.go.html#line-130">Float64Level1</a>.<a href="../../../../src/gonum.org/v1/gonum/blas/blas.go.html#line-136">Dcopy</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">35 uses</span>
+
+	gonum.org/v1/gonum/blas (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/blas/blas.go.html#line-136">blas.go#L136</a>: 	<b>Dcopy</b>(n int, x []float64, incX int, y []float64, incY int)
+
+	<a href="../../../../pkg/gonum.org/v1/gonum/blas/blas64.html">gonum.org/v1/gonum/blas/blas64</a>
+		<a href="../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-176">blas64.go#L176</a>: 	blas64.<b>Dcopy</b>(x.N, x.Data, x.Inc, y.Data, y.Inc)
+
+	<a href="../../../../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dggsvd3.go.html#line-234">dggsvd3.go#L234</a>: 	bi.<b>Dcopy</b>(n, alpha, 1, work[:n], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlacn2.go.html#line-86">dlacn2.go#L86</a>: 		bi.<b>Dcopy</b>(n, x, 1, v, 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlacn2.go.html#line-121" class="path-duplicate">dlacn2.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlacn2.go.html#line-121">#L121</a>: 			bi.<b>Dcopy</b>(n, x, 1, v, 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlahqr.go.html#line-327">dlahqr.go#L327</a>: 					bi.<b>Dcopy</b>(nr, h[k*ldh+k-1:], ldh, v[:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlahr2.go.html#line-133">dlahr2.go#L133</a>: 			bi.<b>Dcopy</b>(i, a[k*lda+i:], lda, t[nb-1:], ldt)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqr23.go.html#line-215">dlaqr23.go#L215</a>: 	bi.<b>Dcopy</b>(jw-1, h[(kwtop+1)*ldh+kwtop:], ldh+1, t[ldt:], ldt+1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqr23.go.html#line-352" class="path-duplicate">dlaqr23.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqr23.go.html#line-352">#L352</a>: 			bi.<b>Dcopy</b>(ns, v[:ns], 1, work[:ns], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqr23.go.html#line-367" class="path-duplicate">dlaqr23.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaqr23.go.html#line-367">#L367</a>: 		bi.<b>Dcopy</b>(jw-1, t[ldt:], ldt+1, h[(kwtop+1)*ldh+kwtop:], ldh+1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-143">dlarfb.go#L143</a>: 					bi.<b>Dcopy</b>(n, c[j*ldc:], 1, work[j:], ldwork)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-184" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-184">#L184</a>: 				bi.<b>Dcopy</b>(m, c[i:], ldc, work[i:], ldwork)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-226" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-226">#L226</a>: 				bi.<b>Dcopy</b>(n, c[(m-k+j)*ldc:], 1, work[j:], ldwork)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-266" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-266">#L266</a>: 			bi.<b>Dcopy</b>(m, c[n-k+j:], ldc, work[j:], ldwork)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-311" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-311">#L311</a>: 				bi.<b>Dcopy</b>(n, c[j*ldc:], 1, work[j:], ldwork)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-350" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-350">#L350</a>: 			bi.<b>Dcopy</b>(m, c[j:], ldc, work[j:], ldwork)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-391" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-391">#L391</a>: 			bi.<b>Dcopy</b>(n, c[(m-k+j)*ldc:], 1, work[j:], ldwork)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-429" class="path-duplicate">dlarfb.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlarfb.go.html#line-429">#L429</a>: 		bi.<b>Dcopy</b>(m, c[n-k+j:], ldc, work[j:], ldwork)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlasq1.go.html#line-73">dlasq1.go#L73</a>: 	bi.<b>Dcopy</b>(n, d, 1, work, 2)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlasq1.go.html#line-74" class="path-duplicate">dlasq1.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlasq1.go.html#line-74">#L74</a>: 	bi.<b>Dcopy</b>(n-1, e, 1, work[1:], 2)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatdf.go.html#line-96">dlatdf.go#L96</a>: 		bi.<b>Dcopy</b>(n, work[n:], 1, xm, 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatdf.go.html#line-102" class="path-duplicate">dlatdf.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatdf.go.html#line-102">#L102</a>: 		bi.<b>Dcopy</b>(n, xm, 1, xp, 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatdf.go.html#line-108" class="path-duplicate">dlatdf.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatdf.go.html#line-108">#L108</a>: 			bi.<b>Dcopy</b>(n, xp, 1, rhs, 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatdf.go.html#line-151" class="path-duplicate">dlatdf.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatdf.go.html#line-151">#L151</a>: 	bi.<b>Dcopy</b>(n-1, rhs, 1, xp, 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatdf.go.html#line-167" class="path-duplicate">dlatdf.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatdf.go.html#line-167">#L167</a>: 		bi.<b>Dcopy</b>(n, xp, 1, rhs, 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtgsja.go.html#line-330">dtgsja.go#L330</a>: 				bi.<b>Dcopy</b>(l-i, a[(k+i)*lda+n-l+i:], 1, work, 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtgsja.go.html#line-331" class="path-duplicate">dtgsja.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtgsja.go.html#line-331">#L331</a>: 				bi.<b>Dcopy</b>(l-i, b[i*ldb+n-l+i:], 1, work[l:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtgsja.go.html#line-362" class="path-duplicate">dtgsja.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtgsja.go.html#line-362">#L362</a>: 							bi.<b>Dcopy</b>(l-i, b[i*ldb+n-l+i:], 1, a[(k+i)*lda+n-l+i:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtgsja.go.html#line-367" class="path-duplicate">dtgsja.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtgsja.go.html#line-367">#L367</a>: 						bi.<b>Dcopy</b>(l-i, b[i*ldb+n-l+i:], 1, a[(k+i)*lda+n-l+i:], 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrevc3.go.html#line-374">dtrevc3.go#L374</a>: 				bi.<b>Dcopy</b>(ki+1, b[iv:], ldb, vr[is:], ldvr)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrevc3.go.html#line-485" class="path-duplicate">dtrevc3.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrevc3.go.html#line-485">#L485</a>: 				bi.<b>Dcopy</b>(ki+1, b[iv-1:], ldb, vr[is-1:], ldvr)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrevc3.go.html#line-486" class="path-duplicate">dtrevc3.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrevc3.go.html#line-486">#L486</a>: 				bi.<b>Dcopy</b>(ki+1, b[iv:], ldb, vr[is:], ldvr)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrevc3.go.html#line-684" class="path-duplicate">dtrevc3.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrevc3.go.html#line-684">#L684</a>: 				bi.<b>Dcopy</b>(n-ki, b[ki*ldb+iv:], ldb, vl[ki*ldvl+is:], ldvl)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrevc3.go.html#line-801" class="path-duplicate">dtrevc3.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrevc3.go.html#line-801">#L801</a>: 				bi.<b>Dcopy</b>(n-ki, b[ki*ldb+iv:], ldb, vl[ki*ldvl+is:], ldvl)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrevc3.go.html#line-802" class="path-duplicate">dtrevc3.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtrevc3.go.html#line-802">#L802</a>: 				bi.<b>Dcopy</b>(n-ki, b[ki*ldb+iv+1:], ldb, vl[ki*ldvl+is+1:], ldvl)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

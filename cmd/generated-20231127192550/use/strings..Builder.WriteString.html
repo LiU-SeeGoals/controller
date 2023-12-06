@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: strings.Builder.WriteString</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/strings.html">strings</a>.<a href="../src/strings/builder.go.html#line-16">Builder</a>.<a href="../src/strings/builder.go.html#line-114">WriteString</a></b></span><span style="font-size: large;"><i> (method, <a href="../imp/strings.Builder.html#name-WriteString">view implemented interface methods</a>)</i></span>
+
+<span class="title">20 uses</span>
+
+	strings (current package)
+		<a href="../src/strings/builder.go.html#line-114">builder.go#L114</a>: func (b *Builder) <b>WriteString</b>(s string) (int, error) {
+		<a href="../src/strings/replace.go.html#line-399">replace.go#L399</a>: 		buf.<b>WriteString</b>(s[i : i+match])
+		<a href="../src/strings/replace.go.html#line-400" class="path-duplicate">replace.go</a><a href="../src/strings/replace.go.html#line-400">#L400</a>: 		buf.<b>WriteString</b>(r.value)
+		<a href="../src/strings/replace.go.html#line-406" class="path-duplicate">replace.go</a><a href="../src/strings/replace.go.html#line-406">#L406</a>: 	buf.<b>WriteString</b>(s[i:])
+		<a href="../src/strings/strings.go.html#line-458">strings.go#L458</a>: 	b.<b>WriteString</b>(elems[0])
+		<a href="../src/strings/strings.go.html#line-460" class="path-duplicate">strings.go</a><a href="../src/strings/strings.go.html#line-460">#L460</a>: 		b.<b>WriteString</b>(sep)
+		<a href="../src/strings/strings.go.html#line-461" class="path-duplicate">strings.go</a><a href="../src/strings/strings.go.html#line-461">#L461</a>: 		b.<b>WriteString</b>(s)
+		<a href="../src/strings/strings.go.html#line-505" class="path-duplicate">strings.go</a><a href="../src/strings/strings.go.html#line-505">#L505</a>: 		b.<b>WriteString</b>(s[:i])
+		<a href="../src/strings/strings.go.html#line-586" class="path-duplicate">strings.go</a><a href="../src/strings/strings.go.html#line-586">#L586</a>: 	b.<b>WriteString</b>(s)
+		<a href="../src/strings/strings.go.html#line-595" class="path-duplicate">strings.go</a><a href="../src/strings/strings.go.html#line-595">#L595</a>: 		b.<b>WriteString</b>(b.String()[:chunk])
+		<a href="../src/strings/strings.go.html#line-626" class="path-duplicate">strings.go</a><a href="../src/strings/strings.go.html#line-626">#L626</a>: 					b.<b>WriteString</b>(s[pos:i])
+		<a href="../src/strings/strings.go.html#line-633" class="path-duplicate">strings.go</a><a href="../src/strings/strings.go.html#line-633">#L633</a>: 			b.<b>WriteString</b>(s[pos:])
+		<a href="../src/strings/strings.go.html#line-666" class="path-duplicate">strings.go</a><a href="../src/strings/strings.go.html#line-666">#L666</a>: 					b.<b>WriteString</b>(s[pos:i])
+		<a href="../src/strings/strings.go.html#line-673" class="path-duplicate">strings.go</a><a href="../src/strings/strings.go.html#line-673">#L673</a>: 			b.<b>WriteString</b>(s[pos:])
+		<a href="../src/strings/strings.go.html#line-715" class="path-duplicate">strings.go</a><a href="../src/strings/strings.go.html#line-715">#L715</a>: 			b.<b>WriteString</b>(s[:i])
+		<a href="../src/strings/strings.go.html#line-740" class="path-duplicate">strings.go</a><a href="../src/strings/strings.go.html#line-740">#L740</a>: 				b.<b>WriteString</b>(replacement)
+		<a href="../src/strings/strings.go.html#line-745" class="path-duplicate">strings.go</a><a href="../src/strings/strings.go.html#line-745">#L745</a>: 		b.<b>WriteString</b>(s[i : i+wid])
+		<a href="../src/strings/strings.go.html#line-1091" class="path-duplicate">strings.go</a><a href="../src/strings/strings.go.html#line-1091">#L1091</a>: 		b.<b>WriteString</b>(s[start:j])
+		<a href="../src/strings/strings.go.html#line-1092" class="path-duplicate">strings.go</a><a href="../src/strings/strings.go.html#line-1092">#L1092</a>: 		b.<b>WriteString</b>(new)
+		<a href="../src/strings/strings.go.html#line-1095" class="path-duplicate">strings.go</a><a href="../src/strings/strings.go.html#line-1095">#L1095</a>: 	b.<b>WriteString</b>(s[start:])
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

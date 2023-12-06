@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: doc.go in package gonum.org/v1/gonum/lapack/gonum</title>
+<link href="../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	doc.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>
+</code></pre>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">// Copyright ©2015 The Gonum Authors. All rights reserved.</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment">// Use of this source code is governed by a BSD-style</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment">// license that can be found in the LICENSE file.</span></code></span>
+<span class="codeline" id="line-4"><code></code></span>
+<div class="anchor" id="doc"><span class="codeline" id="line-5"><code><span class="comment">// Package gonum is a pure-go implementation of the LAPACK API. The LAPACK API defines</span></code></span>
+<span class="codeline" id="line-6"><code><span class="comment">// a set of algorithms for advanced matrix operations.</span></code></span>
+<span class="codeline" id="line-7"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-8"><code><span class="comment">// The function definitions and implementations follow that of the netlib reference</span></code></span>
+<span class="codeline" id="line-9"><code><span class="comment">// implementation. See http://www.netlib.org/lapack/explore-html/ for more</span></code></span>
+<span class="codeline" id="line-10"><code><span class="comment">// information, and http://www.netlib.org/lapack/explore-html/d4/de1/_l_i_c_e_n_s_e_source.html</span></code></span>
+<span class="codeline" id="line-11"><code><span class="comment">// for more license information.</span></code></span>
+<span class="codeline" id="line-12"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-13"><code><span class="comment">// Slice function arguments frequently represent vectors and matrices. The data</span></code></span>
+<span class="codeline" id="line-14"><code><span class="comment">// layout is identical to that found in https://pkg.go.dev/gonum.org/v1/gonum/blas/gonum.</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-16"><code><span class="comment">// Most LAPACK functions are built on top the routines defined in the BLAS API,</span></code></span>
+<span class="codeline" id="line-17"><code><span class="comment">// and as such the computation time for many LAPACK functions is</span></code></span>
+<span class="codeline" id="line-18"><code><span class="comment">// dominated by BLAS calls. Here, BLAS is accessed through the</span></code></span>
+<span class="codeline" id="line-19"><code><span class="comment">// blas64 package (https://pkg.go.dev/gonum.org/v1/gonum/blas/blas64). In particular,</span></code></span>
+<span class="codeline" id="line-20"><code><span class="comment">// this implies that an external BLAS library will be used if it is</span></code></span>
+<span class="codeline" id="line-21"><code><span class="comment">// registered in blas64.</span></code></span>
+<span class="codeline" id="line-22"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-23"><code><span class="comment">// The full LAPACK capability has not been implemented at present. The full</span></code></span>
+<span class="codeline" id="line-24"><code><span class="comment">// API is very large, containing approximately 200 functions for double precision</span></code></span>
+<span class="codeline" id="line-25"><code><span class="comment">// alone. Future additions will be focused on supporting the Gonum matrix</span></code></span>
+<span class="codeline" id="line-26"><code><span class="comment">// package (https://pkg.go.dev/gonum.org/v1/gonum/mat), though pull requests</span></code></span>
+<span class="codeline" id="line-27"><code><span class="comment">// with implementations and tests for LAPACK function are encouraged.</span></code></span></div><span class="codeline" id="line-28"><code><span class="keyword">package</span> gonum <span class="comment">// import "gonum.org/v1/gonum/lapack/gonum"</span></code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

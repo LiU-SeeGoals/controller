@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.schedt.sysmonwait</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/runtime2.go.html#line-774">schedt</a>.<a href="../src/runtime/runtime2.go.html#line-838">sysmonwait</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">13 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/proc.go.html#line-1450">proc.go#L1450</a>: 	if sched.<b>sysmonwait</b>.Load() {
+		<a href="../src/runtime/proc.go.html#line-1451" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-1451">#L1451</a>: 		sched.<b>sysmonwait</b>.Store(false)
+		<a href="../src/runtime/proc.go.html#line-4032" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4032">#L4032</a>: 	if sched.<b>sysmonwait</b>.Load() {
+		<a href="../src/runtime/proc.go.html#line-4069" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4069">#L4069</a>: 	if sched.<b>sysmonwait</b>.Load() {
+		<a href="../src/runtime/proc.go.html#line-4070" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4070">#L4070</a>: 		sched.<b>sysmonwait</b>.Store(false)
+		<a href="../src/runtime/proc.go.html#line-4305" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4305">#L4305</a>: 	if pp != nil &amp;&amp; sched.<b>sysmonwait</b>.Load() {
+		<a href="../src/runtime/proc.go.html#line-4306" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4306">#L4306</a>: 		sched.<b>sysmonwait</b>.Store(false)
+		<a href="../src/runtime/proc.go.html#line-4341" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4341">#L4341</a>: 	} else if sched.<b>sysmonwait</b>.Load() {
+		<a href="../src/runtime/proc.go.html#line-4342" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4342">#L4342</a>: 		sched.<b>sysmonwait</b>.Store(false)
+		<a href="../src/runtime/proc.go.html#line-5558" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5558">#L5558</a>: 					sched.<b>sysmonwait</b>.Store(true)
+		<a href="../src/runtime/proc.go.html#line-5575" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5575">#L5575</a>: 					sched.<b>sysmonwait</b>.Store(false)
+		<a href="../src/runtime/proc.go.html#line-5807" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5807">#L5807</a>: 		print(" gcwaiting=", sched.gcwaiting.Load(), " nmidlelocked=", sched.nmidlelocked, " stopwait=", sched.stopwait, " sysmonwait=", sched.<b>sysmonwait</b>.Load(), "\n")
+		<a href="../src/runtime/runtime2.go.html#line-838">runtime2.go#L838</a>: 	<b>sysmonwait</b> atomic.Bool
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

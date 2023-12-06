@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: unicode/utf8.DecodeRuneInString</title>
+<link href="../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../../pkg/unicode/utf8.html">unicode/utf8</a>.<a href="../../src/unicode/utf8/utf8.go.html#line-199">DecodeRuneInString</a></b></span>
+
+<span class="title">29 uses</span>
+
+	unicode/utf8 (current package)
+		<a href="../../src/unicode/utf8/utf8.go.html#line-199">utf8.go#L199</a>: func <b>DecodeRuneInString</b>(s string) (r rune, size int) {
+		<a href="../../src/unicode/utf8/utf8.go.html#line-312" class="path-duplicate">utf8.go</a><a href="../../src/unicode/utf8/utf8.go.html#line-312">#L312</a>: 	r, size = <b>DecodeRuneInString</b>(s[start:end])
+
+	<a href="../../pkg/encoding/json.html">encoding/json</a>
+		<a href="../../src/encoding/json/encode.go.html#line-1002">encode.go#L1002</a>: 		c, size := utf8.<b>DecodeRuneInString</b>(string(src[i : i+n]))
+
+	<a href="../../pkg/fmt.html">fmt</a>
+		<a href="../../src/fmt/print.go.html#line-1153">print.go#L1153</a>: 			verb, size = utf8.<b>DecodeRuneInString</b>(format[i:])
+		<a href="../../src/fmt/scan.go.html#line-1102">scan.go#L1102</a>: 		fmtc, w := utf8.<b>DecodeRuneInString</b>(format[i:])
+		<a href="../../src/fmt/scan.go.html#line-1121" class="path-duplicate">scan.go</a><a href="../../src/fmt/scan.go.html#line-1121">#L1121</a>: 				fmtc, w = utf8.<b>DecodeRuneInString</b>(format[i:])
+		<a href="../../src/fmt/scan.go.html#line-1161" class="path-duplicate">scan.go</a><a href="../../src/fmt/scan.go.html#line-1161">#L1161</a>: 			nextc, _ := utf8.<b>DecodeRuneInString</b>(format[i+w:]) // will not match % if string is empty
+		<a href="../../src/fmt/scan.go.html#line-1209" class="path-duplicate">scan.go</a><a href="../../src/fmt/scan.go.html#line-1209">#L1209</a>: 		c, w := utf8.<b>DecodeRuneInString</b>(format[i:])
+
+	<a href="../../pkg/github.com/golang/protobuf/proto.html">github.com/golang/protobuf/proto</a>
+		<a href="../../src/github.com/golang/protobuf/proto/text_decode.go.html#line-683">text_decode.go#L683</a>: 		r, n := utf8.<b>DecodeRuneInString</b>(s)
+		<a href="../../src/github.com/golang/protobuf/proto/text_decode.go.html#line-708" class="path-duplicate">text_decode.go</a><a href="../../src/github.com/golang/protobuf/proto/text_decode.go.html#line-708">#L708</a>: 	r, n := utf8.<b>DecodeRuneInString</b>(s)
+
+	<a href="../../pkg/go/token.html">go/token</a>
+		<a href="../../src/go/token/token.go.html#line-317">token.go#L317</a>: 	ch, _ := utf8.<b>DecodeRuneInString</b>(name)
+
+	<a href="../../pkg/google.golang.org/protobuf/internal/encoding/text.html">google.golang.org/protobuf/internal/encoding/text</a>
+		<a href="../../src/google.golang.org/protobuf/internal/encoding/text/encode.go.html#line-123">encode.go#L123</a>: 		switch r, n := utf8.<b>DecodeRuneInString</b>(in); {
+
+	<a href="../../pkg/google.golang.org/protobuf/internal/strs.html">google.golang.org/protobuf/internal/strs</a>
+		<a href="../../src/google.golang.org/protobuf/internal/strs/strings.go.html#line-83">strings.go#L83</a>: 	r, _ := utf8.<b>DecodeRuneInString</b>(s)
+
+	<a href="../../pkg/path.html">path</a>
+		<a href="../../src/path/match.go.html#line-138">match.go#L138</a>: 				r, n = utf8.<b>DecodeRuneInString</b>(s)
+		<a href="../../src/path/match.go.html#line-180" class="path-duplicate">match.go</a><a href="../../src/path/match.go.html#line-180">#L180</a>: 				_, n := utf8.<b>DecodeRuneInString</b>(s)
+		<a href="../../src/path/match.go.html#line-221" class="path-duplicate">match.go</a><a href="../../src/path/match.go.html#line-221">#L221</a>: 	r, n := utf8.<b>DecodeRuneInString</b>(chunk)
+
+	<a href="../../pkg/strconv.html">strconv</a>
+		<a href="../../src/strconv/quote.go.html#line-44">quote.go#L44</a>: 			r, width = utf8.<b>DecodeRuneInString</b>(s)
+		<a href="../../src/strconv/quote.go.html#line-217" class="path-duplicate">quote.go</a><a href="../../src/strconv/quote.go.html#line-217">#L217</a>: 		r, wid := utf8.<b>DecodeRuneInString</b>(s)
+		<a href="../../src/strconv/quote.go.html#line-273" class="path-duplicate">quote.go</a><a href="../../src/strconv/quote.go.html#line-273">#L273</a>: 		r, size := utf8.<b>DecodeRuneInString</b>(s)
+		<a href="../../src/strconv/quote.go.html#line-441" class="path-duplicate">quote.go</a><a href="../../src/strconv/quote.go.html#line-441">#L441</a>: 				r, n := utf8.<b>DecodeRuneInString</b>(in[len("'") : end-len("'")])
+
+	<a href="../../pkg/strings.html">strings</a>
+		<a href="../../src/strings/reader.go.html#line-97">reader.go#L97</a>: 	ch, size = utf8.<b>DecodeRuneInString</b>(r.s[r.i:])
+		<a href="../../src/strings/strings.go.html#line-28">strings.go#L28</a>: 		_, size := utf8.<b>DecodeRuneInString</b>(s)
+		<a href="../../src/strings/strings.go.html#line-496" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-496">#L496</a>: 			c, width = utf8.<b>DecodeRuneInString</b>(s[i:])
+		<a href="../../src/strings/strings.go.html#line-712" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-712">#L712</a>: 		_, wid := utf8.<b>DecodeRuneInString</b>(s[i:])
+		<a href="../../src/strings/strings.go.html#line-735" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-735">#L735</a>: 		_, wid := utf8.<b>DecodeRuneInString</b>(s[i:])
+		<a href="../../src/strings/strings.go.html#line-814" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-814">#L814</a>: 		_, wid := utf8.<b>DecodeRuneInString</b>(s[i:])
+		<a href="../../src/strings/strings.go.html#line-947" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-947">#L947</a>: 			r, n = utf8.<b>DecodeRuneInString</b>(s)
+		<a href="../../src/strings/strings.go.html#line-1085" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-1085">#L1085</a>: 				_, wid := utf8.<b>DecodeRuneInString</b>(s[start:])
+		<a href="../../src/strings/strings.go.html#line-1153" class="path-duplicate">strings.go</a><a href="../../src/strings/strings.go.html#line-1153">#L1153</a>: 			r, size := utf8.<b>DecodeRuneInString</b>(t)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

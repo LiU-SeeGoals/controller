@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/internal/asm/c64.ScalUnitary</title>
+<link href="../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../../../../../../pkg/gonum.org/v1/gonum/internal/asm/c64.html">gonum.org/v1/gonum/internal/asm/c64</a>.<a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/c64/scal.go.html#line-12">ScalUnitary</a></b></span>
+
+<span class="title">24 uses</span>
+
+	gonum.org/v1/gonum/internal/asm/c64 (current package)
+		<a href="../../../../../../src/gonum.org/v1/gonum/internal/asm/c64/scal.go.html#line-12">scal.go#L12</a>: func <b>ScalUnitary</b>(alpha complex64, x []complex64) {
+
+	<a href="../../../../../../pkg/gonum.org/v1/gonum/blas/gonum.html">gonum.org/v1/gonum/blas/gonum</a>
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level1cmplx64.go.html#line-429">level1cmplx64.go#L429</a>: 		c64.<b>ScalUnitary</b>(alpha, x[:n])
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2cmplx64.go.html#line-100">level2cmplx64.go#L100</a>: 				c64.<b>ScalUnitary</b>(beta, y[:lenY])
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2cmplx64.go.html#line-294" class="path-duplicate">level2cmplx64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level2cmplx64.go.html#line-294">#L294</a>: 				c64.<b>ScalUnitary</b>(beta, y[:lenY])
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-332">level3cmplx64.go#L332</a>: 				c64.<b>ScalUnitary</b>(beta, ci)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-884" class="path-duplicate">level3cmplx64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-884">#L884</a>: 				c64.<b>ScalUnitary</b>(beta, ci)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1031" class="path-duplicate">level3cmplx64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1031">#L1031</a>: 					c64.<b>ScalUnitary</b>(beta, ci)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1045" class="path-duplicate">level3cmplx64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1045">#L1045</a>: 					c64.<b>ScalUnitary</b>(beta, ci)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1198" class="path-duplicate">level3cmplx64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1198">#L1198</a>: 					c64.<b>ScalUnitary</b>(beta, ci)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1212" class="path-duplicate">level3cmplx64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1212">#L1212</a>: 					c64.<b>ScalUnitary</b>(beta, ci)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1433" class="path-duplicate">level3cmplx64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1433">#L1433</a>: 						c64.<b>ScalUnitary</b>(akk, bk)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1458" class="path-duplicate">level3cmplx64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1458">#L1458</a>: 						c64.<b>ScalUnitary</b>(akk, bk)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1611" class="path-duplicate">level3cmplx64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1611">#L1611</a>: 						c64.<b>ScalUnitary</b>(alpha, bi)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1620" class="path-duplicate">level3cmplx64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1620">#L1620</a>: 						c64.<b>ScalUnitary</b>(1/a[i*lda+i], bi)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1627" class="path-duplicate">level3cmplx64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1627">#L1627</a>: 						c64.<b>ScalUnitary</b>(alpha, bi)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1635" class="path-duplicate">level3cmplx64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1635">#L1635</a>: 						c64.<b>ScalUnitary</b>(1/a[i*lda+i], bi)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1646" class="path-duplicate">level3cmplx64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1646">#L1646</a>: 							c64.<b>ScalUnitary</b>(1/a[i*lda+i], bi)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1648" class="path-duplicate">level3cmplx64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1648">#L1648</a>: 							c64.<b>ScalUnitary</b>(1/cmplx.Conj(a[i*lda+i]), bi)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1663" class="path-duplicate">level3cmplx64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1663">#L1663</a>: 						c64.<b>ScalUnitary</b>(alpha, bi)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1671" class="path-duplicate">level3cmplx64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1671">#L1671</a>: 							c64.<b>ScalUnitary</b>(1/a[i*lda+i], bi)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1673" class="path-duplicate">level3cmplx64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1673">#L1673</a>: 							c64.<b>ScalUnitary</b>(1/cmplx.Conj(a[i*lda+i]), bi)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1687" class="path-duplicate">level3cmplx64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1687">#L1687</a>: 						c64.<b>ScalUnitary</b>(alpha, bi)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1699" class="path-duplicate">level3cmplx64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1699">#L1699</a>: 						c64.<b>ScalUnitary</b>(alpha, bi)
+		<a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1715" class="path-duplicate">level3cmplx64.go</a><a href="../../../../../../src/gonum.org/v1/gonum/blas/gonum/level3cmplx64.go.html#line-1715">#L1715</a>: 						c64.<b>ScalUnitary</b>(alpha, bi)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.assertLockHeld</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/lockrank_off.go.html#line-47">assertLockHeld</a></b></span>
+
+<span class="title">37 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/lockrank_off.go.html#line-47">lockrank_off.go#L47</a>: func <b>assertLockHeld</b>(l *mutex) {
+		<a href="../src/runtime/malloc.go.html#line-622">malloc.go#L622</a>: 	<b>assertLockHeld</b>(&amp;h.lock)
+		<a href="../src/runtime/mgcscavenge.go.html#line-700">mgcscavenge.go#L700</a>: 	<b>assertLockHeld</b>(&amp;scavenger.lock)
+		<a href="../src/runtime/mheap.go.html#line-536">mheap.go#L536</a>: 	<b>assertLockHeld</b>(&amp;h.lock)
+		<a href="../src/runtime/mheap.go.html#line-870" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-870">#L870</a>: 	<b>assertLockHeld</b>(&amp;h.lock)
+		<a href="../src/runtime/mheap.go.html#line-931" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-931">#L931</a>: 	<b>assertLockHeld</b>(&amp;h.lock) // Must be locked on return.
+		<a href="../src/runtime/mheap.go.html#line-1112" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1112">#L1112</a>: 	<b>assertLockHeld</b>(&amp;h.lock)
+		<a href="../src/runtime/mheap.go.html#line-1144" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1144">#L1144</a>: 	<b>assertLockHeld</b>(&amp;h.lock)
+		<a href="../src/runtime/mheap.go.html#line-1465" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1465">#L1465</a>: 	<b>assertLockHeld</b>(&amp;h.lock)
+		<a href="../src/runtime/mheap.go.html#line-1592" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-1592">#L1592</a>: 	<b>assertLockHeld</b>(&amp;h.lock)
+		<a href="../src/runtime/mpagealloc.go.html#line-358">mpagealloc.go#L358</a>: 	<b>assertLockHeld</b>(p.mheapLock)
+		<a href="../src/runtime/mpagealloc.go.html#line-482" class="path-duplicate">mpagealloc.go</a><a href="../src/runtime/mpagealloc.go.html#line-482">#L482</a>: 	<b>assertLockHeld</b>(p.mheapLock)
+		<a href="../src/runtime/mpagealloc.go.html#line-570" class="path-duplicate">mpagealloc.go</a><a href="../src/runtime/mpagealloc.go.html#line-570">#L570</a>: 	<b>assertLockHeld</b>(p.mheapLock)
+		<a href="../src/runtime/mpagealloc.go.html#line-611" class="path-duplicate">mpagealloc.go</a><a href="../src/runtime/mpagealloc.go.html#line-611">#L611</a>: 	<b>assertLockHeld</b>(p.mheapLock)
+		<a href="../src/runtime/mpagealloc.go.html#line-647" class="path-duplicate">mpagealloc.go</a><a href="../src/runtime/mpagealloc.go.html#line-647">#L647</a>: 	<b>assertLockHeld</b>(p.mheapLock)
+		<a href="../src/runtime/mpagealloc.go.html#line-872" class="path-duplicate">mpagealloc.go</a><a href="../src/runtime/mpagealloc.go.html#line-872">#L872</a>: 	<b>assertLockHeld</b>(p.mheapLock)
+		<a href="../src/runtime/mpagealloc.go.html#line-933" class="path-duplicate">mpagealloc.go</a><a href="../src/runtime/mpagealloc.go.html#line-933">#L933</a>: 	<b>assertLockHeld</b>(p.mheapLock)
+		<a href="../src/runtime/mpagecache.go.html#line-79">mpagecache.go#L79</a>: 	<b>assertLockHeld</b>(p.mheapLock)
+		<a href="../src/runtime/mpagecache.go.html#line-120" class="path-duplicate">mpagecache.go</a><a href="../src/runtime/mpagecache.go.html#line-120">#L120</a>: 	<b>assertLockHeld</b>(p.mheapLock)
+		<a href="../src/runtime/mprof.go.html#line-383">mprof.go#L383</a>: 	<b>assertLockHeld</b>(&amp;profMemActiveLock)
+		<a href="../src/runtime/mprof.go.html#line-384" class="path-duplicate">mprof.go</a><a href="../src/runtime/mprof.go.html#line-384">#L384</a>: 	<b>assertLockHeld</b>(&amp;profMemFutureLock[index])
+		<a href="../src/runtime/proc.go.html#line-789">proc.go#L789</a>: 	<b>assertLockHeld</b>(&amp;sched.lock)
+		<a href="../src/runtime/proc.go.html#line-811" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-811">#L811</a>: 	<b>assertLockHeld</b>(&amp;sched.lock)
+		<a href="../src/runtime/proc.go.html#line-5093" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5093">#L5093</a>: 	<b>assertLockHeld</b>(&amp;sched.lock)
+		<a href="../src/runtime/proc.go.html#line-5184" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5184">#L5184</a>: 	<b>assertLockHeld</b>(&amp;sched.lock)
+		<a href="../src/runtime/proc.go.html#line-5400" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5400">#L5400</a>: 	<b>assertLockHeld</b>(&amp;sched.lock)
+		<a href="../src/runtime/proc.go.html#line-5914" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5914">#L5914</a>: 	<b>assertLockHeld</b>(&amp;sched.lock)
+		<a href="../src/runtime/proc.go.html#line-5928" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5928">#L5928</a>: 	<b>assertLockHeld</b>(&amp;sched.lock)
+		<a href="../src/runtime/proc.go.html#line-5942" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5942">#L5942</a>: 	<b>assertLockHeld</b>(&amp;sched.lock)
+		<a href="../src/runtime/proc.go.html#line-5958" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5958">#L5958</a>: 	<b>assertLockHeld</b>(&amp;sched.lock)
+		<a href="../src/runtime/proc.go.html#line-5970" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5970">#L5970</a>: 	<b>assertLockHeld</b>(&amp;sched.lock)
+		<a href="../src/runtime/proc.go.html#line-5983" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5983">#L5983</a>: 	<b>assertLockHeld</b>(&amp;sched.lock)
+		<a href="../src/runtime/proc.go.html#line-5993" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5993">#L5993</a>: 	<b>assertLockHeld</b>(&amp;sched.lock)
+		<a href="../src/runtime/proc.go.html#line-6097" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-6097">#L6097</a>: 	<b>assertLockHeld</b>(&amp;sched.lock)
+		<a href="../src/runtime/proc.go.html#line-6124" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-6124">#L6124</a>: 	<b>assertLockHeld</b>(&amp;sched.lock)
+		<a href="../src/runtime/proc.go.html#line-6152" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-6152">#L6152</a>: 	<b>assertLockHeld</b>(&amp;sched.lock)
+		<a href="../src/runtime/trace.go.html#line-617">trace.go#L617</a>: 	<b>assertLockHeld</b>(&amp;trace.lock)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.bitvector.n</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/stack.go.html#line-582">bitvector</a>.<a href="../src/runtime/stack.go.html#line-583">n</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">25 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/heapdump.go.html#line-246">heapdump.go#L246</a>: 	for i := uintptr(0); i &lt; uintptr(cbv.<b>n</b>); i++ {
+		<a href="../src/runtime/heapdump.go.html#line-276" class="path-duplicate">heapdump.go</a><a href="../src/runtime/heapdump.go.html#line-276">#L276</a>: 		bv.<b>n</b> = -1
+		<a href="../src/runtime/heapdump.go.html#line-295" class="path-duplicate">heapdump.go</a><a href="../src/runtime/heapdump.go.html#line-295">#L295</a>: 	if child.args.<b>n</b> &gt;= 0 {
+		<a href="../src/runtime/heapdump.go.html#line-322" class="path-duplicate">heapdump.go</a><a href="../src/runtime/heapdump.go.html#line-322">#L322</a>: 		dumpbv(&amp;bv, s.varp-uintptr(bv.<b>n</b>)*goarch.PtrSize-s.sp)
+		<a href="../src/runtime/heapdump.go.html#line-335" class="path-duplicate">heapdump.go</a><a href="../src/runtime/heapdump.go.html#line-335">#L335</a>: 		child.args.<b>n</b> = -1
+		<a href="../src/runtime/heapdump.go.html#line-369" class="path-duplicate">heapdump.go</a><a href="../src/runtime/heapdump.go.html#line-369">#L369</a>: 	child.args.<b>n</b> = -1
+		<a href="../src/runtime/mbitmap.go.html#line-1483">mbitmap.go#L1483</a>: 			if locals.<b>n</b> == 0 {
+		<a href="../src/runtime/mbitmap.go.html#line-1486" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-1486">#L1486</a>: 			size := uintptr(locals.<b>n</b>) * goarch.PtrSize
+		<a href="../src/runtime/mgcmark.go.html#line-970">mgcmark.go#L970</a>: 	if locals.<b>n</b> &gt; 0 {
+		<a href="../src/runtime/mgcmark.go.html#line-971" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-971">#L971</a>: 		size := uintptr(locals.<b>n</b>) * goarch.PtrSize
+		<a href="../src/runtime/mgcmark.go.html#line-976" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-976">#L976</a>: 	if args.<b>n</b> &gt; 0 {
+		<a href="../src/runtime/mgcmark.go.html#line-977" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-977">#L977</a>: 		scanblock(frame.argp, uintptr(args.<b>n</b>)*goarch.PtrSize, args.bytedata, gcw, state)
+		<a href="../src/runtime/stack.go.html#line-583">stack.go#L583</a>: 	<b>n</b>        int32 // # of bits
+		<a href="../src/runtime/stack.go.html#line-602" class="path-duplicate">stack.go</a><a href="../src/runtime/stack.go.html#line-602">#L602</a>: 	num := uintptr(bv.<b>n</b>)
+		<a href="../src/runtime/stack.go.html#line-682" class="path-duplicate">stack.go</a><a href="../src/runtime/stack.go.html#line-682">#L682</a>: 	if locals.<b>n</b> &gt; 0 {
+		<a href="../src/runtime/stack.go.html#line-683" class="path-duplicate">stack.go</a><a href="../src/runtime/stack.go.html#line-683">#L683</a>: 		size := uintptr(locals.<b>n</b>) * goarch.PtrSize
+		<a href="../src/runtime/stack.go.html#line-688" class="path-duplicate">stack.go</a><a href="../src/runtime/stack.go.html#line-688">#L688</a>: 	if args.<b>n</b> &gt; 0 {
+		<a href="../src/runtime/stkframe.go.html#line-79">stkframe.go#L79</a>: 	return uintptr(argMap.<b>n</b>) * goarch.PtrSize
+		<a href="../src/runtime/stkframe.go.html#line-97" class="path-duplicate">stkframe.go</a><a href="../src/runtime/stkframe.go.html#line-97">#L97</a>: 		argMap.<b>n</b> = f.args / goarch.PtrSize
+		<a href="../src/runtime/stkframe.go.html#line-147" class="path-duplicate">stkframe.go</a><a href="../src/runtime/stkframe.go.html#line-147">#L147</a>: 			if n &lt; argMap.<b>n</b> {
+		<a href="../src/runtime/stkframe.go.html#line-148" class="path-duplicate">stkframe.go</a><a href="../src/runtime/stkframe.go.html#line-148">#L148</a>: 				argMap.<b>n</b> = n
+		<a href="../src/runtime/stkframe.go.html#line-206" class="path-duplicate">stkframe.go</a><a href="../src/runtime/stkframe.go.html#line-206">#L206</a>: 				print("      locals ", stackid, "/", stkmap.n, " ", locals.<b>n</b>, " words ", locals.bytedata, "\n")
+		<a href="../src/runtime/stkframe.go.html#line-216" class="path-duplicate">stkframe.go</a><a href="../src/runtime/stkframe.go.html#line-216">#L216</a>: 	if args.<b>n</b> &gt; 0 &amp;&amp; args.bytedata == nil {
+		<a href="../src/runtime/stkframe.go.html#line-221" class="path-duplicate">stkframe.go</a><a href="../src/runtime/stkframe.go.html#line-221">#L221</a>: 			print("runtime: frame ", funcname(f), " untyped args ", hex(frame.argp), "+", hex(args.<b>n</b>*goarch.PtrSize), "\n")
+		<a href="../src/runtime/stkframe.go.html#line-230" class="path-duplicate">stkframe.go</a><a href="../src/runtime/stkframe.go.html#line-230">#L230</a>: 			args.<b>n</b> = 0
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

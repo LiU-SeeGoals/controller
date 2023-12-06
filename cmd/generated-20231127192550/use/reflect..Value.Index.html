@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: reflect.Value.Index</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/reflect.html">reflect</a>.<a href="../src/reflect/value.go.html#line-39">Value</a>.<a href="../src/reflect/value.go.html#line-1400">Index</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">28 uses</span>
+
+	reflect (current package)
+		<a href="../src/reflect/deepequal.go.html#line-93">deepequal.go#L93</a>: 			if !deepValueEqual(v1.<b>Index</b>(i), v2.<b>Index</b>(i), visited) {
+		<a href="../src/reflect/deepequal.go.html#line-113" class="path-duplicate">deepequal.go</a><a href="../src/reflect/deepequal.go.html#line-113">#L113</a>: 			if !deepValueEqual(v1.<b>Index</b>(i), v2.<b>Index</b>(i), visited) {
+		<a href="../src/reflect/value.go.html#line-465">value.go#L465</a>: 			slice.<b>Index</b>(i).Set(x)
+		<a href="../src/reflect/value.go.html#line-1400" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1400">#L1400</a>: func (v Value) <b>Index</b>(i int) Value {
+		<a href="../src/reflect/value.go.html#line-1609" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1609">#L1609</a>: 			if !v.<b>Index</b>(i).IsZero() {
+		<a href="../src/reflect/value.go.html#line-2881" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2881">#L2881</a>: 		s.<b>Index</b>(n + i).Set(v)
+		<a href="../src/reflect/value.go.html#line-3361" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3361">#L3361</a>: 				if !v.<b>Index</b>(i).Comparable() {
+		<a href="../src/reflect/value.go.html#line-3439" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3439">#L3439</a>: 			if !v.<b>Index</b>(i).Equal(u.<b>Index</b>(i)) {
+
+	<a href="../pkg/encoding/binary.html">encoding/binary</a>
+		<a href="../src/encoding/binary/binary.go.html#line-619">binary.go#L619</a>: 			d.value(v.<b>Index</b>(i))
+		<a href="../src/encoding/binary/binary.go.html#line-641" class="path-duplicate">binary.go</a><a href="../src/encoding/binary/binary.go.html#line-641">#L641</a>: 			d.value(v.<b>Index</b>(i))
+		<a href="../src/encoding/binary/binary.go.html#line-688" class="path-duplicate">binary.go</a><a href="../src/encoding/binary/binary.go.html#line-688">#L688</a>: 			e.value(v.<b>Index</b>(i))
+		<a href="../src/encoding/binary/binary.go.html#line-706" class="path-duplicate">binary.go</a><a href="../src/encoding/binary/binary.go.html#line-706">#L706</a>: 			e.value(v.<b>Index</b>(i))
+
+	<a href="../pkg/encoding/json.html">encoding/json</a>
+		<a href="../src/encoding/json/decode.go.html#line-555">decode.go#L555</a>: 			if err := d.value(v.<b>Index</b>(i)); err != nil {
+		<a href="../src/encoding/json/decode.go.html#line-581" class="path-duplicate">decode.go</a><a href="../src/encoding/json/decode.go.html#line-581">#L581</a>: 				v.<b>Index</b>(i).SetZero() // zero remainder of array
+		<a href="../src/encoding/json/encode.go.html#line-849">encode.go#L849</a>: 		ae.elemEnc(e, v.<b>Index</b>(i), opts)
+
+	<a href="../pkg/fmt.html">fmt</a>
+		<a href="../src/fmt/print.go.html#line-885">print.go#L885</a>: 						bytes[i] = byte(f.<b>Index</b>(i).Uint())
+		<a href="../src/fmt/print.go.html#line-903" class="path-duplicate">print.go</a><a href="../src/fmt/print.go.html#line-903">#L903</a>: 				p.printValue(f.<b>Index</b>(i), verb, depth+1)
+		<a href="../src/fmt/print.go.html#line-912" class="path-duplicate">print.go</a><a href="../src/fmt/print.go.html#line-912">#L912</a>: 				p.printValue(f.<b>Index</b>(i), verb, depth+1)
+		<a href="../src/fmt/scan.go.html#line-1042">scan.go#L1042</a>: 				v.<b>Index</b>(i).SetUint(uint64(str[i]))
+
+	<a href="../pkg/google.golang.org/protobuf/internal/impl.html">google.golang.org/protobuf/internal/impl</a>
+		<a href="../src/google.golang.org/protobuf/internal/impl/convert_list.go.html#line-114">convert_list.go#L114</a>: 	return ls.conv.PBValueOf(ls.v.Elem().<b>Index</b>(i))
+		<a href="../src/google.golang.org/protobuf/internal/impl/convert_list.go.html#line-117" class="path-duplicate">convert_list.go</a><a href="../src/google.golang.org/protobuf/internal/impl/convert_list.go.html#line-117">#L117</a>: 	ls.v.Elem().<b>Index</b>(i).Set(ls.conv.GoValueOf(v))
+		<a href="../src/google.golang.org/protobuf/internal/impl/legacy_message.go.html#line-225">legacy_message.go#L225</a>: 			v := vs.<b>Index</b>(i)
+		<a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-524">message_reflect_field.go#L524</a>: 			if !isZero(v.<b>Index</b>(i)) {
+
+	<a href="../pkg/internal/fmtsort.html">internal/fmtsort</a>
+		<a href="../src/internal/fmtsort/sort.go.html#line-164">sort.go#L164</a>: 			if c := compare(aVal.<b>Index</b>(i), bVal.<b>Index</b>(i)); c != 0 {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

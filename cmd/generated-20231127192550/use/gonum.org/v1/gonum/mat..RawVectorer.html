@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/mat.RawVectorer</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-200">RawVectorer</a></b></span>
+
+<span class="title">25 uses</span>
+
+	gonum.org/v1/gonum/mat (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-296">cholesky.go#L296</a>: 	case <b>RawVectorer</b>:
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-614" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-614">#L614</a>: 	if rv, ok := x.(<b>RawVectorer</b>); ok {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-815" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-815">#L815</a>: 	if b, ok := b.(<b>RawVectorer</b>); ok &amp;&amp; dst != b {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-1122" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-1122">#L1122</a>: 	if b, ok := b.(<b>RawVectorer</b>); ok &amp;&amp; dst != b {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-237">diagonal.go#L237</a>: 	case <b>RawVectorer</b>:
+		<a href="../../../../src/gonum.org/v1/gonum/mat/inner.go.html#line-46">inner.go#L46</a>: 		if xrv, ok := x.(<b>RawVectorer</b>); ok {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/inner.go.html#line-51" class="path-duplicate">inner.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/inner.go.html#line-51">#L51</a>: 		if yrv, ok := y.(<b>RawVectorer</b>); ok {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/inner.go.html#line-94" class="path-duplicate">inner.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/inner.go.html#line-94">#L94</a>: 		if yrv, ok := y.(<b>RawVectorer</b>); ok {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-257">lq.go#L257</a>: 	if rv, ok := b.(<b>RawVectorer</b>); ok {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lu.go.html#line-410">lu.go#L410</a>: 	case <b>RawVectorer</b>:
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-200">matrix.go#L200</a>: type <b>RawVectorer</b> interface {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-284" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-284">#L284</a>: 	case <b>RawVectorer</b>:
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-439" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-439">#L439</a>: 	if arv, ok := a.(<b>RawVectorer</b>); ok {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-440" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-440">#L440</a>: 		if brv, ok := b.(<b>RawVectorer</b>); ok {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-255">qr.go#L255</a>: 	if rv, ok := b.(<b>RawVectorer</b>); ok {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/shadow.go.html#line-74">shadow.go#L74</a>: 	case <b>RawVectorer</b>:
+		<a href="../../../../src/gonum.org/v1/gonum/mat/shadow.go.html#line-101" class="path-duplicate">shadow.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/shadow.go.html#line-101">#L101</a>: 	case <b>RawVectorer</b>:
+		<a href="../../../../src/gonum.org/v1/gonum/mat/shadow.go.html#line-139" class="path-duplicate">shadow.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/shadow.go.html#line-139">#L139</a>: 	case <b>RawVectorer</b>:
+		<a href="../../../../src/gonum.org/v1/gonum/mat/shadow.go.html#line-227" class="path-duplicate">shadow.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/shadow.go.html#line-227">#L227</a>: 	case <b>RawVectorer</b>:
+		<a href="../../../../src/gonum.org/v1/gonum/mat/solve.go.html#line-149">solve.go#L149</a>: 	if rv, ok := b.(<b>RawVectorer</b>); ok {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-609">triband.go#L609</a>: 	if b, ok := b.(<b>RawVectorer</b>); ok &amp;&amp; dst != b {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-268">tridiag.go#L268</a>: 	if b, ok := b.(<b>RawVectorer</b>); ok &amp;&amp; dst != b {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-215">vector.go#L215</a>: 	if r, ok := a.(<b>RawVectorer</b>); ok {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-253" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-253">#L253</a>: 	if r, ok := a.(<b>RawVectorer</b>); ok {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-307" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-307">#L307</a>: 	if rv, ok := a.(<b>RawVectorer</b>); ok {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

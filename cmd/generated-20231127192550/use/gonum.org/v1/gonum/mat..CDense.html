@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/mat.CDense</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-21">CDense</a></b></span>
+
+<span class="title">46 uses</span>
+
+	gonum.org/v1/gonum/mat (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-14">cdense.go#L14</a>: 	cDense *<b>CDense</b>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-21" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-21">#L21</a>: type <b>CDense</b> struct {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-28" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-28">#L28</a>: func (m *<b>CDense</b>) Dims() (r, c int) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-33" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-33">#L33</a>: func (m *<b>CDense</b>) Caps() (r, c int) { return m.capRows, m.capCols }
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-37" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-37">#L37</a>: func (m *<b>CDense</b>) H() CMatrix {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-43" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-43">#L43</a>: func (m *<b>CDense</b>) T() CMatrix {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-50" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-50">#L50</a>: func (m *<b>CDense</b>) Conj(a CMatrix) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-55" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-55">#L55</a>: 	if arm, ok := a.(*<b>CDense</b>); ok {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-91" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-91">#L91</a>: func (m *<b>CDense</b>) Slice(i, k, j, l int) CMatrix {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-95" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-95">#L95</a>: func (m *<b>CDense</b>) slice(i, k, j, l int) *<b>CDense</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-121" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-121">#L121</a>: func NewCDense(r, c int, data []complex128) *<b>CDense</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-134" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-134">#L134</a>: 	return &amp;<b>CDense</b>{
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-154" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-154">#L154</a>: func (m *<b>CDense</b>) ReuseAs(r, c int) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-171" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-171">#L171</a>: func (m *<b>CDense</b>) reuseAsNonZeroed(r, c int) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-195" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-195">#L195</a>: func (m *<b>CDense</b>) reuseAsZeroed(r, c int) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-224" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-224">#L224</a>: func (m *<b>CDense</b>) isolatedWorkspace(a CMatrix) (w *<b>CDense</b>, restore func()) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-241" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-241">#L241</a>: func (m *<b>CDense</b>) Reset() {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-250" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-250">#L250</a>: func (m *<b>CDense</b>) IsEmpty() bool {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-257" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-257">#L257</a>: func (m *<b>CDense</b>) Zero() {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-272" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-272">#L272</a>: func (m *<b>CDense</b>) Copy(a CMatrix) (r, c int) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-295" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-295">#L295</a>: func (m *<b>CDense</b>) SetRawCMatrix(b cblas128.General) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-303" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-303">#L303</a>: func (m *<b>CDense</b>) RawCMatrix() cblas128.General { return m.mat }
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-309" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-309">#L309</a>: func (m *<b>CDense</b>) Grow(r, c int) CMatrix {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-320" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-320">#L320</a>: 	var t <b>CDense</b>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-346" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-346">#L346</a>: 		var tmp <b>CDense</b>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-211">cmatrix.go#L211</a>: 	case *<b>CDense</b>:
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-214" class="path-duplicate">cmatrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-214">#L214</a>: 		var d <b>CDense</b>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/eigen.go.html#line-142">eigen.go#L142</a>: 	rVectors *<b>CDense</b>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/eigen.go.html#line-143" class="path-duplicate">eigen.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/eigen.go.html#line-143">#L143</a>: 	lVectors *<b>CDense</b>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/eigen.go.html#line-229" class="path-duplicate">eigen.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/eigen.go.html#line-229">#L229</a>: 	var cvl, cvr <b>CDense</b>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/eigen.go.html#line-293" class="path-duplicate">eigen.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/eigen.go.html#line-293">#L293</a>: func (e *Eigen) complexEigenTo(dst *<b>CDense</b>, d *Dense) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/eigen.go.html#line-327" class="path-duplicate">eigen.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/eigen.go.html#line-327">#L327</a>: func (e *Eigen) VectorsTo(dst *<b>CDense</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/eigen.go.html#line-353" class="path-duplicate">eigen.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/eigen.go.html#line-353">#L353</a>: func (e *Eigen) LeftVectorsTo(dst *<b>CDense</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/hogsvd.go.html#line-109">hogsvd.go#L109</a>: 	var vc <b>CDense</b>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-43">index_no_bound_checks.go#L43</a>: func (m *<b>CDense</b>) At(i, j int) complex128 {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-53" class="path-duplicate">index_no_bound_checks.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-53">#L53</a>: func (m *<b>CDense</b>) at(i, j int) complex128 {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-58" class="path-duplicate">index_no_bound_checks.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-58">#L58</a>: func (m *<b>CDense</b>) Set(i, j int, v complex128) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-68" class="path-duplicate">index_no_bound_checks.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/index_no_bound_checks.go.html#line-68">#L68</a>: func (m *<b>CDense</b>) set(i, j int, v complex128) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-80">pool.go#L80</a>: 			return &amp;<b>CDense</b>{mat: cblas128.General{
+		<a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-202" class="path-duplicate">pool.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-202">#L202</a>: func getCDenseWorkspace(r, c int, clear bool) *<b>CDense</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-204" class="path-duplicate">pool.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-204">#L204</a>: 	w := poolCDense[poolFor(l)].Get().(*<b>CDense</b>)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-220" class="path-duplicate">pool.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/pool.go.html#line-220">#L220</a>: func putCDenseWorkspace(w *<b>CDense</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/shadow_complex.go.html#line-56">shadow_complex.go#L56</a>: func (m *<b>CDense</b>) checkOverlap(a cblas128.General) bool {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/shadow_complex.go.html#line-60" class="path-duplicate">shadow_complex.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/shadow_complex.go.html#line-60">#L60</a>: func (m *<b>CDense</b>) checkOverlapMatrix(a CMatrix) bool {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

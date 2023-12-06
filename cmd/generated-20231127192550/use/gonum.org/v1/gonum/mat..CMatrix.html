@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/mat.CMatrix</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-16">CMatrix</a></b></span>
+
+<span class="title">29 uses</span>
+
+	gonum.org/v1/gonum/mat (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-16">cdense.go#L16</a>: 	_ <b>CMatrix</b>   = cDense
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-37" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-37">#L37</a>: func (m *CDense) H() <b>CMatrix</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-43" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-43">#L43</a>: func (m *CDense) T() <b>CMatrix</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-50" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-50">#L50</a>: func (m *CDense) Conj(a <b>CMatrix</b>) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-91" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-91">#L91</a>: func (m *CDense) Slice(i, k, j, l int) <b>CMatrix</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-224" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-224">#L224</a>: func (m *CDense) isolatedWorkspace(a <b>CMatrix</b>) (w *CDense, restore func()) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-272" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-272">#L272</a>: func (m *CDense) Copy(a <b>CMatrix</b>) (r, c int) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-309" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-309">#L309</a>: func (m *CDense) Grow(r, c int) <b>CMatrix</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-16">cmatrix.go#L16</a>: type <b>CMatrix</b> interface {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-28" class="path-duplicate">cmatrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-28">#L28</a>: 	H() <b>CMatrix</b>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-34" class="path-duplicate">cmatrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-34">#L34</a>: 	T() <b>CMatrix</b>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-44" class="path-duplicate">cmatrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-44">#L44</a>: 	_ <b>CMatrix</b>          = ConjTranspose{}
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-52" class="path-duplicate">cmatrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-52">#L52</a>: 	CMatrix <b>CMatrix</b>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-71" class="path-duplicate">cmatrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-71">#L71</a>: func (t ConjTranspose) H() <b>CMatrix</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-77" class="path-duplicate">cmatrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-77">#L77</a>: func (t ConjTranspose) T() <b>CMatrix</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-82" class="path-duplicate">cmatrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-82">#L82</a>: func (t ConjTranspose) UnConjTranspose() <b>CMatrix</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-90" class="path-duplicate">cmatrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-90">#L90</a>: 	CMatrix <b>CMatrix</b>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-109" class="path-duplicate">cmatrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-109">#L109</a>: func (t CTranspose) H() <b>CMatrix</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-114" class="path-duplicate">cmatrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-114">#L114</a>: func (t CTranspose) T() <b>CMatrix</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-119" class="path-duplicate">cmatrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-119">#L119</a>: func (t CTranspose) Untranspose() <b>CMatrix</b> {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-127" class="path-duplicate">cmatrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-127">#L127</a>: 	UnConjTranspose() <b>CMatrix</b>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-140" class="path-duplicate">cmatrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-140">#L140</a>: 	Untranspose() <b>CMatrix</b>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-181" class="path-duplicate">cmatrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-181">#L181</a>: func untransposeCmplx(a <b>CMatrix</b>) (u <b>CMatrix</b>, trans, conj bool) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-208" class="path-duplicate">cmatrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-208">#L208</a>: func untransposeExtractCmplx(a <b>CMatrix</b>) (u <b>CMatrix</b>, trans, conj bool) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-224" class="path-duplicate">cmatrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-224">#L224</a>: func CEqual(a, b <b>CMatrix</b>) bool {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-244" class="path-duplicate">cmatrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cmatrix.go.html#line-244">#L244</a>: func CEqualApprox(a, b <b>CMatrix</b>, epsilon float64) bool {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/shadow_complex.go.html#line-60">shadow_complex.go#L60</a>: func (m *CDense) checkOverlapMatrix(a <b>CMatrix</b>) bool {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

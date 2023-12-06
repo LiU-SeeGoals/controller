@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/blas.Float64Level1.Dasum</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../../pkg/gonum.org/v1/gonum/blas.html">gonum.org/v1/gonum/blas</a>.<a href="../../../../src/gonum.org/v1/gonum/blas/blas.go.html#line-130">Float64Level1</a>.<a href="../../../../src/gonum.org/v1/gonum/blas/blas.go.html#line-133">Dasum</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">11 uses</span>
+
+	gonum.org/v1/gonum/blas (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/blas/blas.go.html#line-133">blas.go#L133</a>: 	<b>Dasum</b>(n int, x []float64, incX int) float64
+
+	<a href="../../../../pkg/gonum.org/v1/gonum/blas/blas64.html">gonum.org/v1/gonum/blas/blas64</a>
+		<a href="../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-140">blas64.go#L140</a>: 	return blas64.<b>Dasum</b>(x.N, x.Data, x.Inc)
+
+	<a href="../../../../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlacn2.go.html#line-67">dlacn2.go#L67</a>: 		est = bi.<b>Dasum</b>(n, x, 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlacn2.go.html#line-88" class="path-duplicate">dlacn2.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlacn2.go.html#line-88">#L88</a>: 		est = bi.<b>Dasum</b>(n, v, 1)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlacn2.go.html#line-119" class="path-duplicate">dlacn2.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlacn2.go.html#line-119">#L119</a>: 		tmp := 2 * (bi.<b>Dasum</b>(n, x, 1)) / float64(3*n)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatbs.go.html#line-79">dlatbs.go#L79</a>: 					cnorm[j] = bi.<b>Dasum</b>(jlen, ab[(j-jlen)*ldab+jlen:], kld)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatbs.go.html#line-88" class="path-duplicate">dlatbs.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatbs.go.html#line-88">#L88</a>: 					cnorm[j] = bi.<b>Dasum</b>(jlen, ab[(j+1)*ldab+kd-1:], kld)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatdf.go.html#line-107">dlatdf.go#L107</a>: 		if bi.<b>Dasum</b>(n, xp, 1) &gt; bi.<b>Dasum</b>(n, rhs, 1) {
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatrs.go.html#line-74">dlatrs.go#L74</a>: 				cnorm[j] = bi.<b>Dasum</b>(j, a[j:], lda)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatrs.go.html#line-78" class="path-duplicate">dlatrs.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlatrs.go.html#line-78">#L78</a>: 				cnorm[j] = bi.<b>Dasum</b>(n-j-1, a[(j+1)*lda+j:], lda)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

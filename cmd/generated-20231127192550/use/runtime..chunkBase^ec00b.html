@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.chunkBase</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/mpagealloc.go.html#line-111">chunkBase</a></b></span>
+
+<span class="title">11 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/mgcscavenge.go.html#line-763">mgcscavenge.go#L763</a>: 			addr := <b>chunkBase</b>(ci) + uintptr(base)*pageSize
+		<a href="../src/runtime/mgcscavenge.go.html#line-1113" class="path-duplicate">mgcscavenge.go</a><a href="../src/runtime/mgcscavenge.go.html#line-1113">#L1113</a>: 		newSearchAddr := <b>chunkBase</b>(i) + pallocChunkBytes - pageSize
+		<a href="../src/runtime/mgcscavenge.go.html#line-1161" class="path-duplicate">mgcscavenge.go</a><a href="../src/runtime/mgcscavenge.go.html#line-1161">#L1161</a>: 			sysHugePageCollapse(unsafe.Pointer(<b>chunkBase</b>(ci)), pallocChunkBytes)
+		<a href="../src/runtime/mgcscavenge.go.html#line-1177" class="path-duplicate">mgcscavenge.go</a><a href="../src/runtime/mgcscavenge.go.html#line-1177">#L1177</a>: 	addr := <b>chunkBase</b>(ci) + uintptr(page+npages-1)*pageSize
+		<a href="../src/runtime/mpagealloc.go.html#line-111">mpagealloc.go#L111</a>: func <b>chunkBase</b>(ci chunkIdx) uintptr {
+		<a href="../src/runtime/mpagealloc.go.html#line-850" class="path-duplicate">mpagealloc.go</a><a href="../src/runtime/mpagealloc.go.html#line-850">#L850</a>: 	addr := <b>chunkBase</b>(ci) + uintptr(j)*pageSize
+		<a href="../src/runtime/mpagealloc.go.html#line-854" class="path-duplicate">mpagealloc.go</a><a href="../src/runtime/mpagealloc.go.html#line-854">#L854</a>: 	searchAddr := <b>chunkBase</b>(ci) + uintptr(searchIdx)*pageSize
+		<a href="../src/runtime/mpagealloc.go.html#line-855" class="path-duplicate">mpagealloc.go</a><a href="../src/runtime/mpagealloc.go.html#line-855">#L855</a>: 	foundFree(offAddr{searchAddr}, <b>chunkBase</b>(ci+1)-searchAddr)
+		<a href="../src/runtime/mpagealloc.go.html#line-893" class="path-duplicate">mpagealloc.go</a><a href="../src/runtime/mpagealloc.go.html#line-893">#L893</a>: 			addr = <b>chunkBase</b>(i) + uintptr(j)*pageSize
+		<a href="../src/runtime/mpagealloc.go.html#line-894" class="path-duplicate">mpagealloc.go</a><a href="../src/runtime/mpagealloc.go.html#line-894">#L894</a>: 			searchAddr = offAddr{<b>chunkBase</b>(i) + uintptr(searchIdx)*pageSize}
+		<a href="../src/runtime/mpagecache.go.html#line-138">mpagecache.go#L138</a>: 			base:  <b>chunkBase</b>(ci) + alignDown(uintptr(j), 64)*pageSize,
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

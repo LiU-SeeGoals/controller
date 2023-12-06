@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: google.golang.org/protobuf/proto.UnmarshalOptions.Resolver</title>
+<link href="../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../pkg/google.golang.org/protobuf/proto.html">google.golang.org/protobuf/proto</a>.<a href="../../../src/google.golang.org/protobuf/proto/decode.go.html#line-24">UnmarshalOptions</a>.<a href="../../../src/google.golang.org/protobuf/proto/decode.go.html#line-42">Resolver</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">10 uses</span>
+
+	google.golang.org/protobuf/proto (current package)
+		<a href="../../../src/google.golang.org/protobuf/proto/decode.go.html#line-42">decode.go#L42</a>: 	<b>Resolver</b> interface {
+		<a href="../../../src/google.golang.org/protobuf/proto/decode.go.html#line-84" class="path-duplicate">decode.go</a><a href="../../../src/google.golang.org/protobuf/proto/decode.go.html#line-84">#L84</a>: 	if o.<b>Resolver</b> == nil {
+		<a href="../../../src/google.golang.org/protobuf/proto/decode.go.html#line-85" class="path-duplicate">decode.go</a><a href="../../../src/google.golang.org/protobuf/proto/decode.go.html#line-85">#L85</a>: 		o.<b>Resolver</b> = protoregistry.GlobalTypes
+		<a href="../../../src/google.golang.org/protobuf/proto/decode.go.html#line-99" class="path-duplicate">decode.go</a><a href="../../../src/google.golang.org/protobuf/proto/decode.go.html#line-99">#L99</a>: 			Resolver: o.<b>Resolver</b>,
+		<a href="../../../src/google.golang.org/protobuf/proto/decode.go.html#line-146" class="path-duplicate">decode.go</a><a href="../../../src/google.golang.org/protobuf/proto/decode.go.html#line-146">#L146</a>: 			extType, err := o.<b>Resolver</b>.FindExtensionByNumber(md.FullName(), num)
+		<a href="../../../src/google.golang.org/protobuf/proto/messageset.go.html#line-81">messageset.go#L81</a>: 	xt, err := o.<b>Resolver</b>.FindExtensionByNumber(md.FullName(), num)
+
+	<a href="../../../pkg/google.golang.org/protobuf/encoding/prototext.html">google.golang.org/protobuf/encoding/prototext</a>
+		<a href="../../../src/google.golang.org/protobuf/encoding/prototext/encode.go.html#line-358">encode.go#L358</a>: 		<b>Resolver</b>:     e.opts.Resolver,
+
+	<a href="../../../pkg/google.golang.org/protobuf/internal/filedesc.html">google.golang.org/protobuf/internal/filedesc</a>
+		<a href="../../../src/google.golang.org/protobuf/internal/filedesc/desc_lazy.go.html#line-697">desc_lazy.go#L697</a>: 				<b>Resolver</b>:     db.TypeResolver,
+
+	<a href="../../../pkg/google.golang.org/protobuf/internal/impl.html">google.golang.org/protobuf/internal/impl</a>
+		<a href="../../../src/google.golang.org/protobuf/internal/impl/decode.go.html#line-36">decode.go#L36</a>: 		<b>Resolver</b>:       o.resolver,
+
+	<a href="../../../pkg/github.com/golang/protobuf/proto.html">github.com/golang/protobuf/proto</a>
+		<a href="../../../src/github.com/golang/protobuf/proto/extensions.go.html#line-150">extensions.go#L150</a>: 			<b>Resolver</b>: extensionResolver{xt},
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

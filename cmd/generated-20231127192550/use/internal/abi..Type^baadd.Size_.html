@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: internal/abi.Type.Size_</title>
+<link href="../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../pkg/internal/abi.html">internal/abi</a>.<a href="../../src/internal/abi/type.go.html#line-20">Type</a>.<a href="../../src/internal/abi/type.go.html#line-21">Size_</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">184 uses</span>
+
+	internal/abi (current package)
+		<a href="../../src/internal/abi/type.go.html#line-21">type.go#L21</a>: 	<b>Size_</b>       uintptr
+		<a href="../../src/internal/abi/type.go.html#line-408" class="path-duplicate">type.go</a><a href="../../src/internal/abi/type.go.html#line-408">#L408</a>: func (t *Type) Size() uintptr { return t.<b>Size_</b> }
+
+	<a href="../../pkg/reflect.html">reflect</a>
+		<a href="../../src/reflect/type.go.html#line-559">type.go#L559</a>: 	return int(t.t.<b>Size_</b>) * 8
+		<a href="../../src/reflect/type.go.html#line-1596" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-1596">#L1596</a>: 	if typ.<b>Size_</b> &gt;= 1&lt;&lt;16 {
+		<a href="../../src/reflect/type.go.html#line-1688" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-1688">#L1688</a>: 	if ktyp.<b>Size_</b> &gt; maxKeySize {
+		<a href="../../src/reflect/type.go.html#line-1692" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-1692">#L1692</a>: 		mt.KeySize = uint8(ktyp.<b>Size_</b>)
+		<a href="../../src/reflect/type.go.html#line-1694" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-1694">#L1694</a>: 	if etyp.<b>Size_</b> &gt; maxValSize {
+		<a href="../../src/reflect/type.go.html#line-1698" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-1698">#L1698</a>: 		mt.MapType.ValueSize = uint8(etyp.<b>Size_</b>)
+		<a href="../../src/reflect/type.go.html#line-1700" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-1700">#L1700</a>: 	mt.MapType.BucketSize = uint16(mt.Bucket.<b>Size_</b>)
+		<a href="../../src/reflect/type.go.html#line-1959" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-1959">#L1959</a>: 	if ktyp.<b>Size_</b> &gt; maxKeySize {
+		<a href="../../src/reflect/type.go.html#line-1962" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-1962">#L1962</a>: 	if etyp.<b>Size_</b> &gt; maxValSize {
+		<a href="../../src/reflect/type.go.html#line-1974" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-1974">#L1974</a>: 	size := bucketSize*(1+ktyp.<b>Size_</b>+etyp.<b>Size_</b>) + goarch.PtrSize
+		<a href="../../src/reflect/type.go.html#line-1980" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-1980">#L1980</a>: 		nptr := (bucketSize*(1+ktyp.<b>Size_</b>+etyp.<b>Size_</b>) + goarch.PtrSize) / goarch.PtrSize
+		<a href="../../src/reflect/type.go.html#line-1991" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-1991">#L1991</a>: 		base += bucketSize * ktyp.<b>Size_</b> / goarch.PtrSize
+		<a href="../../src/reflect/type.go.html#line-1996" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-1996">#L1996</a>: 		base += bucketSize * etyp.<b>Size_</b> / goarch.PtrSize
+		<a href="../../src/reflect/type.go.html#line-2011" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2011">#L2011</a>: 		<b>Size_</b>:    size,
+		<a href="../../src/reflect/type.go.html#line-2032" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2032">#L2032</a>: 	words := typ.<b>Size_</b> / goarch.PtrSize
+		<a href="../../src/reflect/type.go.html#line-2361" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2361">#L2361</a>: 		size = offset + ft.<b>Size_</b>
+		<a href="../../src/reflect/type.go.html#line-2367" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2367">#L2367</a>: 		if ft.<b>Size_</b> == 0 {
+		<a href="../../src/reflect/type.go.html#line-2485" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2485">#L2485</a>: 	typ.<b>Size_</b> = size
+		<a href="../../src/reflect/type.go.html#line-2660" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2660">#L2660</a>: 	if typ.<b>Size_</b> &gt; 0 {
+		<a href="../../src/reflect/type.go.html#line-2661" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2661">#L2661</a>: 		max := ^uintptr(0) / typ.<b>Size_</b>
+		<a href="../../src/reflect/type.go.html#line-2666" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2666">#L2666</a>: 	array.<b>Size_</b> = typ.<b>Size_</b> * uintptr(length)
+		<a href="../../src/reflect/type.go.html#line-2668" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2668">#L2668</a>: 		array.PtrBytes = typ.<b>Size_</b>*uintptr(length-1) + typ.PtrBytes
+		<a href="../../src/reflect/type.go.html#line-2676" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2676">#L2676</a>: 	case typ.PtrBytes == 0 || array.<b>Size_</b> == 0:
+		<a href="../../src/reflect/type.go.html#line-2687" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2687">#L2687</a>: 	case typ.Kind_&amp;kindGCProg == 0 &amp;&amp; array.<b>Size_</b> &lt;= maxPtrmaskBytes*8*goarch.PtrSize:
+		<a href="../../src/reflect/type.go.html#line-2705" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2705">#L2705</a>: 		elemWords := typ.<b>Size_</b> / goarch.PtrSize
+		<a href="../../src/reflect/type.go.html#line-2726" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2726">#L2726</a>: 		array.PtrBytes = array.<b>Size_</b> // overestimate but ok; must match program
+		<a href="../../src/reflect/type.go.html#line-2822" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2822">#L2822</a>: 		<b>Size_</b>:    align(abid.retOffset+abid.ret.stackBytes, goarch.PtrSize),
+		<a href="../../src/reflect/type.go.html#line-2900" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2900">#L2900</a>: 			addTypeBits(bv, offset+uintptr(i)*tt.Elem.<b>Size_</b>, tt.Elem)
+
+	<a href="../../pkg/runtime.html">runtime</a>
+		<a href="../../src/runtime/alg.go.html#line-148">alg.go#L148</a>: 		switch t.<b>Size_</b> {
+		<a href="../../src/runtime/alg.go.html#line-154" class="path-duplicate">alg.go</a><a href="../../src/runtime/alg.go.html#line-154">#L154</a>: 			return memhash(p, h, t.<b>Size_</b>)
+		<a href="../../src/runtime/alg.go.html#line-177" class="path-duplicate">alg.go</a><a href="../../src/runtime/alg.go.html#line-177">#L177</a>: 			h = typehash(a.Elem, add(p, i*a.Elem.<b>Size_</b>), h)
+		<a href="../../src/runtime/arena.go.html#line-438">arena.go#L438</a>: 	size := typ.<b>Size_</b>
+		<a href="../../src/runtime/arena.go.html#line-504" class="path-duplicate">arena.go</a><a href="../../src/runtime/arena.go.html#line-504">#L504</a>: 			c.scanAlloc += size - (typ.<b>Size_</b> - typ.PtrBytes)
+		<a href="../../src/runtime/arena.go.html#line-581" class="path-duplicate">arena.go</a><a href="../../src/runtime/arena.go.html#line-581">#L581</a>: 	h = h.pad(typ.<b>Size_</b> - typ.PtrBytes)
+		<a href="../../src/runtime/arena.go.html#line-582" class="path-duplicate">arena.go</a><a href="../../src/runtime/arena.go.html#line-582">#L582</a>: 	h.flush(uintptr(ptr), typ.<b>Size_</b>)
+		<a href="../../src/runtime/arena.go.html#line-594" class="path-duplicate">arena.go</a><a href="../../src/runtime/arena.go.html#line-594">#L594</a>: 		size := typ.<b>Size_</b>
+		<a href="../../src/runtime/arena.go.html#line-600" class="path-duplicate">arena.go</a><a href="../../src/runtime/arena.go.html#line-600">#L600</a>: 			off := i % typ.<b>Size_</b>
+		<a href="../../src/runtime/arena.go.html#line-623" class="path-duplicate">arena.go</a><a href="../../src/runtime/arena.go.html#line-623">#L623</a>: 	mem, overflow := math.MulUintptr(typ.<b>Size_</b>, uintptr(n))
+		<a href="../../src/runtime/arena.go.html#line-628" class="path-duplicate">arena.go</a><a href="../../src/runtime/arena.go.html#line-628">#L628</a>: 		userArenaHeapBitsSetType(typ, add(ptr, uintptr(i)*typ.<b>Size_</b>), base)
+		<a href="../../src/runtime/cgocall.go.html#line-481">cgocall.go#L481</a>: 			p = add(p, at.Elem.<b>Size_</b>)
+		<a href="../../src/runtime/cgocall.go.html#line-530" class="path-duplicate">cgocall.go</a><a href="../../src/runtime/cgocall.go.html#line-530">#L530</a>: 			p = add(p, st.Elem.<b>Size_</b>)
+		<a href="../../src/runtime/cgocheck.go.html#line-80">cgocheck.go#L80</a>: 	cgoCheckMemmove2(typ, dst, src, 0, typ.<b>Size_</b>)
+		<a href="../../src/runtime/cgocheck.go.html#line-124" class="path-duplicate">cgocheck.go</a><a href="../../src/runtime/cgocheck.go.html#line-124">#L124</a>: 		cgoCheckTypedBlock(typ, p, 0, typ.<b>Size_</b>)
+		<a href="../../src/runtime/cgocheck.go.html#line-125" class="path-duplicate">cgocheck.go</a><a href="../../src/runtime/cgocheck.go.html#line-125">#L125</a>: 		p = add(p, typ.<b>Size_</b>)
+		<a href="../../src/runtime/cgocheck.go.html#line-258" class="path-duplicate">cgocheck.go</a><a href="../../src/runtime/cgocheck.go.html#line-258">#L258</a>: 			if off &lt; at.Elem.<b>Size_</b> {
+		<a href="../../src/runtime/cgocheck.go.html#line-261" class="path-duplicate">cgocheck.go</a><a href="../../src/runtime/cgocheck.go.html#line-261">#L261</a>: 			src = add(src, at.Elem.<b>Size_</b>)
+		<a href="../../src/runtime/cgocheck.go.html#line-263" class="path-duplicate">cgocheck.go</a><a href="../../src/runtime/cgocheck.go.html#line-263">#L263</a>: 			if skipped &gt; at.Elem.<b>Size_</b> {
+		<a href="../../src/runtime/cgocheck.go.html#line-264" class="path-duplicate">cgocheck.go</a><a href="../../src/runtime/cgocheck.go.html#line-264">#L264</a>: 				skipped = at.Elem.<b>Size_</b>
+		<a href="../../src/runtime/cgocheck.go.html#line-266" class="path-duplicate">cgocheck.go</a><a href="../../src/runtime/cgocheck.go.html#line-266">#L266</a>: 			checked := at.Elem.<b>Size_</b> - skipped
+		<a href="../../src/runtime/cgocheck.go.html#line-276" class="path-duplicate">cgocheck.go</a><a href="../../src/runtime/cgocheck.go.html#line-276">#L276</a>: 			if off &lt; f.Typ.<b>Size_</b> {
+		<a href="../../src/runtime/cgocheck.go.html#line-279" class="path-duplicate">cgocheck.go</a><a href="../../src/runtime/cgocheck.go.html#line-279">#L279</a>: 			src = add(src, f.Typ.<b>Size_</b>)
+		<a href="../../src/runtime/cgocheck.go.html#line-281" class="path-duplicate">cgocheck.go</a><a href="../../src/runtime/cgocheck.go.html#line-281">#L281</a>: 			if skipped &gt; f.Typ.<b>Size_</b> {
+		<a href="../../src/runtime/cgocheck.go.html#line-282" class="path-duplicate">cgocheck.go</a><a href="../../src/runtime/cgocheck.go.html#line-282">#L282</a>: 				skipped = f.Typ.<b>Size_</b>
+		<a href="../../src/runtime/cgocheck.go.html#line-284" class="path-duplicate">cgocheck.go</a><a href="../../src/runtime/cgocheck.go.html#line-284">#L284</a>: 			checked := f.Typ.<b>Size_</b> - skipped
+		<a href="../../src/runtime/chan.go.html#line-76">chan.go#L76</a>: 	if elem.<b>Size_</b> &gt;= 1&lt;&lt;16 {
+		<a href="../../src/runtime/chan.go.html#line-83" class="path-duplicate">chan.go</a><a href="../../src/runtime/chan.go.html#line-83">#L83</a>: 	mem, overflow := math.MulUintptr(elem.<b>Size_</b>, uintptr(size))
+		<a href="../../src/runtime/chan.go.html#line-110" class="path-duplicate">chan.go</a><a href="../../src/runtime/chan.go.html#line-110">#L110</a>: 	c.elemsize = uint16(elem.<b>Size_</b>)
+		<a href="../../src/runtime/chan.go.html#line-116" class="path-duplicate">chan.go</a><a href="../../src/runtime/chan.go.html#line-116">#L116</a>: 		print("makechan: chan=", c, "; elemsize=", elem.<b>Size_</b>, "; dataqsiz=", size, "\n")
+		<a href="../../src/runtime/chan.go.html#line-342" class="path-duplicate">chan.go</a><a href="../../src/runtime/chan.go.html#line-342">#L342</a>: 	typeBitsBulkBarrier(t, uintptr(dst), uintptr(src), t.<b>Size_</b>)
+		<a href="../../src/runtime/chan.go.html#line-345" class="path-duplicate">chan.go</a><a href="../../src/runtime/chan.go.html#line-345">#L345</a>: 	memmove(dst, src, t.<b>Size_</b>)
+		<a href="../../src/runtime/chan.go.html#line-353" class="path-duplicate">chan.go</a><a href="../../src/runtime/chan.go.html#line-353">#L353</a>: 	typeBitsBulkBarrier(t, uintptr(dst), uintptr(src), t.<b>Size_</b>)
+		<a href="../../src/runtime/chan.go.html#line-354" class="path-duplicate">chan.go</a><a href="../../src/runtime/chan.go.html#line-354">#L354</a>: 	memmove(dst, src, t.<b>Size_</b>)
+		<a href="../../src/runtime/checkptr.go.html#line-25">checkptr.go#L25</a>: 	if checkptrStraddles(p, n*elem.<b>Size_</b>) {
+		<a href="../../src/runtime/heapdump.go.html#line-196">heapdump.go#L196</a>: 	dumpint(uint64(t.<b>Size_</b>))
+		<a href="../../src/runtime/iface.go.html#line-327">iface.go#L327</a>: 		msanread(v, t.<b>Size_</b>)
+		<a href="../../src/runtime/iface.go.html#line-330" class="path-duplicate">iface.go</a><a href="../../src/runtime/iface.go.html#line-330">#L330</a>: 		asanread(v, t.<b>Size_</b>)
+		<a href="../../src/runtime/iface.go.html#line-332" class="path-duplicate">iface.go</a><a href="../../src/runtime/iface.go.html#line-332">#L332</a>: 	x := mallocgc(t.<b>Size_</b>, t, true)
+		<a href="../../src/runtime/iface.go.html#line-342" class="path-duplicate">iface.go</a><a href="../../src/runtime/iface.go.html#line-342">#L342</a>: 		msanread(v, t.<b>Size_</b>)
+		<a href="../../src/runtime/iface.go.html#line-345" class="path-duplicate">iface.go</a><a href="../../src/runtime/iface.go.html#line-345">#L345</a>: 		asanread(v, t.<b>Size_</b>)
+		<a href="../../src/runtime/iface.go.html#line-348" class="path-duplicate">iface.go</a><a href="../../src/runtime/iface.go.html#line-348">#L348</a>: 	x := mallocgc(t.<b>Size_</b>, t, false)
+		<a href="../../src/runtime/iface.go.html#line-349" class="path-duplicate">iface.go</a><a href="../../src/runtime/iface.go.html#line-349">#L349</a>: 	memmove(x, v, t.<b>Size_</b>)
+		<a href="../../src/runtime/malloc.go.html#line-1145">malloc.go#L1145</a>: 		if dataSize &gt; typ.<b>Size_</b> {
+		<a href="../../src/runtime/malloc.go.html#line-1150" class="path-duplicate">malloc.go</a><a href="../../src/runtime/malloc.go.html#line-1150">#L1150</a>: 				scanSize = dataSize - typ.<b>Size_</b> + typ.PtrBytes
+		<a href="../../src/runtime/malloc.go.html#line-1324" class="path-duplicate">malloc.go</a><a href="../../src/runtime/malloc.go.html#line-1324">#L1324</a>: 	return mallocgc(typ.<b>Size_</b>, typ, true)
+		<a href="../../src/runtime/malloc.go.html#line-1329" class="path-duplicate">malloc.go</a><a href="../../src/runtime/malloc.go.html#line-1329">#L1329</a>: 	return mallocgc(typ.<b>Size_</b>, typ, true)
+		<a href="../../src/runtime/malloc.go.html#line-1334" class="path-duplicate">malloc.go</a><a href="../../src/runtime/malloc.go.html#line-1334">#L1334</a>: 	return mallocgc(typ.<b>Size_</b>, typ, true)
+		<a href="../../src/runtime/malloc.go.html#line-1340" class="path-duplicate">malloc.go</a><a href="../../src/runtime/malloc.go.html#line-1340">#L1340</a>: 		return mallocgc(typ.<b>Size_</b>, typ, true)
+		<a href="../../src/runtime/malloc.go.html#line-1342" class="path-duplicate">malloc.go</a><a href="../../src/runtime/malloc.go.html#line-1342">#L1342</a>: 	mem, overflow := math.MulUintptr(typ.<b>Size_</b>, uintptr(n))
+		<a href="../../src/runtime/map.go.html#line-306">map.go#L306</a>: 	mem, overflow := math.MulUintptr(uintptr(hint), t.Bucket.<b>Size_</b>)
+		<a href="../../src/runtime/map.go.html#line-356" class="path-duplicate">map.go</a><a href="../../src/runtime/map.go.html#line-356">#L356</a>: 		sz := t.Bucket.<b>Size_</b> * nbuckets
+		<a href="../../src/runtime/map.go.html#line-359" class="path-duplicate">map.go</a><a href="../../src/runtime/map.go.html#line-359">#L359</a>: 			nbuckets = up / t.Bucket.<b>Size_</b>
+		<a href="../../src/runtime/map.go.html#line-370" class="path-duplicate">map.go</a><a href="../../src/runtime/map.go.html#line-370">#L370</a>: 		size := t.Bucket.<b>Size_</b> * nbuckets
+		<a href="../../src/runtime/map.go.html#line-404" class="path-duplicate">map.go</a><a href="../../src/runtime/map.go.html#line-404">#L404</a>: 		msanread(key, t.Key.<b>Size_</b>)
+		<a href="../../src/runtime/map.go.html#line-407" class="path-duplicate">map.go</a><a href="../../src/runtime/map.go.html#line-407">#L407</a>: 		asanread(key, t.Key.<b>Size_</b>)
+		<a href="../../src/runtime/map.go.html#line-465" class="path-duplicate">map.go</a><a href="../../src/runtime/map.go.html#line-465">#L465</a>: 		msanread(key, t.Key.<b>Size_</b>)
+		<a href="../../src/runtime/map.go.html#line-468" class="path-duplicate">map.go</a><a href="../../src/runtime/map.go.html#line-468">#L468</a>: 		asanread(key, t.Key.<b>Size_</b>)
+		<a href="../../src/runtime/map.go.html#line-590" class="path-duplicate">map.go</a><a href="../../src/runtime/map.go.html#line-590">#L590</a>: 		msanread(key, t.Key.<b>Size_</b>)
+		<a href="../../src/runtime/map.go.html#line-593" class="path-duplicate">map.go</a><a href="../../src/runtime/map.go.html#line-593">#L593</a>: 		asanread(key, t.Key.<b>Size_</b>)
+		<a href="../../src/runtime/map.go.html#line-704" class="path-duplicate">map.go</a><a href="../../src/runtime/map.go.html#line-704">#L704</a>: 		msanread(key, t.Key.<b>Size_</b>)
+		<a href="../../src/runtime/map.go.html#line-707" class="path-duplicate">map.go</a><a href="../../src/runtime/map.go.html#line-707">#L707</a>: 		asanread(key, t.Key.<b>Size_</b>)
+		<a href="../../src/runtime/map.go.html#line-753" class="path-duplicate">map.go</a><a href="../../src/runtime/map.go.html#line-753">#L753</a>: 				memclrHasPointers(k, t.Key.<b>Size_</b>)
+		<a href="../../src/runtime/map.go.html#line-759" class="path-duplicate">map.go</a><a href="../../src/runtime/map.go.html#line-759">#L759</a>: 				memclrHasPointers(e, t.Elem.<b>Size_</b>)
+		<a href="../../src/runtime/map.go.html#line-761" class="path-duplicate">map.go</a><a href="../../src/runtime/map.go.html#line-761">#L761</a>: 				memclrNoHeapPointers(e, t.Elem.<b>Size_</b>)
+		<a href="../../src/runtime/map.go.html#line-1315" class="path-duplicate">map.go</a><a href="../../src/runtime/map.go.html#line-1315">#L1315</a>: 	if t.Key.<b>Size_</b> &gt; maxKeySize &amp;&amp; (!t.IndirectKey() || t.KeySize != uint8(goarch.PtrSize)) ||
+		<a href="../../src/runtime/map.go.html#line-1316" class="path-duplicate">map.go</a><a href="../../src/runtime/map.go.html#line-1316">#L1316</a>: 		t.Key.<b>Size_</b> &lt;= maxKeySize &amp;&amp; (t.IndirectKey() || t.KeySize != uint8(t.Key.<b>Size_</b>)) {
+		<a href="../../src/runtime/map.go.html#line-1319" class="path-duplicate">map.go</a><a href="../../src/runtime/map.go.html#line-1319">#L1319</a>: 	if t.Elem.<b>Size_</b> &gt; maxElemSize &amp;&amp; (!t.IndirectElem() || t.ValueSize != uint8(goarch.PtrSize)) ||
+		<a href="../../src/runtime/map.go.html#line-1320" class="path-duplicate">map.go</a><a href="../../src/runtime/map.go.html#line-1320">#L1320</a>: 		t.Elem.<b>Size_</b> &lt;= maxElemSize &amp;&amp; (t.IndirectElem() || t.ValueSize != uint8(t.Elem.<b>Size_</b>)) {
+		<a href="../../src/runtime/map.go.html#line-1329" class="path-duplicate">map.go</a><a href="../../src/runtime/map.go.html#line-1329">#L1329</a>: 	if t.Key.<b>Size_</b>%uintptr(t.Key.Align_) != 0 {
+		<a href="../../src/runtime/map.go.html#line-1332" class="path-duplicate">map.go</a><a href="../../src/runtime/map.go.html#line-1332">#L1332</a>: 	if t.Elem.<b>Size_</b>%uintptr(t.Elem.Align_) != 0 {
+		<a href="../../src/runtime/map_fast32.go.html#line-312">map_fast32.go#L312</a>: 				memclrHasPointers(e, t.Elem.<b>Size_</b>)
+		<a href="../../src/runtime/map_fast32.go.html#line-314" class="path-duplicate">map_fast32.go</a><a href="../../src/runtime/map_fast32.go.html#line-314">#L314</a>: 				memclrNoHeapPointers(e, t.Elem.<b>Size_</b>)
+		<a href="../../src/runtime/map_fast64.go.html#line-314">map_fast64.go#L314</a>: 				memclrHasPointers(e, t.Elem.<b>Size_</b>)
+		<a href="../../src/runtime/map_fast64.go.html#line-316" class="path-duplicate">map_fast64.go</a><a href="../../src/runtime/map_fast64.go.html#line-316">#L316</a>: 				memclrNoHeapPointers(e, t.Elem.<b>Size_</b>)
+		<a href="../../src/runtime/map_faststr.go.html#line-340">map_faststr.go#L340</a>: 				memclrHasPointers(e, t.Elem.<b>Size_</b>)
+		<a href="../../src/runtime/map_faststr.go.html#line-342" class="path-duplicate">map_faststr.go</a><a href="../../src/runtime/map_faststr.go.html#line-342">#L342</a>: 				memclrNoHeapPointers(e, t.Elem.<b>Size_</b>)
+		<a href="../../src/runtime/mbarrier.go.html#line-166">mbarrier.go#L166</a>: 	memmove(dst, src, typ.<b>Size_</b>)
+		<a href="../../src/runtime/mbarrier.go.html#line-168" class="path-duplicate">mbarrier.go</a><a href="../../src/runtime/mbarrier.go.html#line-168">#L168</a>: 		cgoCheckMemmove2(typ, dst, src, 0, typ.<b>Size_</b>)
+		<a href="../../src/runtime/mbarrier.go.html#line-199" class="path-duplicate">mbarrier.go</a><a href="../../src/runtime/mbarrier.go.html#line-199">#L199</a>: 		msanwrite(dst, typ.<b>Size_</b>)
+		<a href="../../src/runtime/mbarrier.go.html#line-200" class="path-duplicate">mbarrier.go</a><a href="../../src/runtime/mbarrier.go.html#line-200">#L200</a>: 		msanread(src, typ.<b>Size_</b>)
+		<a href="../../src/runtime/mbarrier.go.html#line-203" class="path-duplicate">mbarrier.go</a><a href="../../src/runtime/mbarrier.go.html#line-203">#L203</a>: 		asanwrite(dst, typ.<b>Size_</b>)
+		<a href="../../src/runtime/mbarrier.go.html#line-204" class="path-duplicate">mbarrier.go</a><a href="../../src/runtime/mbarrier.go.html#line-204">#L204</a>: 		asanread(src, typ.<b>Size_</b>)
+		<a href="../../src/runtime/mbarrier.go.html#line-255" class="path-duplicate">mbarrier.go</a><a href="../../src/runtime/mbarrier.go.html#line-255">#L255</a>: 		racewriterangepc(dstPtr, uintptr(n)*typ.<b>Size_</b>, callerpc, pc)
+		<a href="../../src/runtime/mbarrier.go.html#line-256" class="path-duplicate">mbarrier.go</a><a href="../../src/runtime/mbarrier.go.html#line-256">#L256</a>: 		racereadrangepc(srcPtr, uintptr(n)*typ.<b>Size_</b>, callerpc, pc)
+		<a href="../../src/runtime/mbarrier.go.html#line-259" class="path-duplicate">mbarrier.go</a><a href="../../src/runtime/mbarrier.go.html#line-259">#L259</a>: 		msanwrite(dstPtr, uintptr(n)*typ.<b>Size_</b>)
+		<a href="../../src/runtime/mbarrier.go.html#line-260" class="path-duplicate">mbarrier.go</a><a href="../../src/runtime/mbarrier.go.html#line-260">#L260</a>: 		msanread(srcPtr, uintptr(n)*typ.<b>Size_</b>)
+		<a href="../../src/runtime/mbarrier.go.html#line-263" class="path-duplicate">mbarrier.go</a><a href="../../src/runtime/mbarrier.go.html#line-263">#L263</a>: 		asanwrite(dstPtr, uintptr(n)*typ.<b>Size_</b>)
+		<a href="../../src/runtime/mbarrier.go.html#line-264" class="path-duplicate">mbarrier.go</a><a href="../../src/runtime/mbarrier.go.html#line-264">#L264</a>: 		asanread(srcPtr, uintptr(n)*typ.<b>Size_</b>)
+		<a href="../../src/runtime/mbarrier.go.html#line-279" class="path-duplicate">mbarrier.go</a><a href="../../src/runtime/mbarrier.go.html#line-279">#L279</a>: 	size := uintptr(n) * typ.<b>Size_</b>
+		<a href="../../src/runtime/mbarrier.go.html#line-281" class="path-duplicate">mbarrier.go</a><a href="../../src/runtime/mbarrier.go.html#line-281">#L281</a>: 		pwsize := size - typ.<b>Size_</b> + typ.PtrBytes
+		<a href="../../src/runtime/mbarrier.go.html#line-293" class="path-duplicate">mbarrier.go</a><a href="../../src/runtime/mbarrier.go.html#line-293">#L293</a>: 		return slicecopy(dst.array, dst.len, src.array, src.len, elemType.<b>Size_</b>)
+		<a href="../../src/runtime/mbarrier.go.html#line-313" class="path-duplicate">mbarrier.go</a><a href="../../src/runtime/mbarrier.go.html#line-313">#L313</a>: 	memclrNoHeapPointers(ptr, typ.<b>Size_</b>)
+		<a href="../../src/runtime/mbarrier.go.html#line-331" class="path-duplicate">mbarrier.go</a><a href="../../src/runtime/mbarrier.go.html#line-331">#L331</a>: 	size := typ.<b>Size_</b> * uintptr(len)
+		<a href="../../src/runtime/mbitmap.go.html#line-692">mbitmap.go#L692</a>: 	if typ.<b>Size_</b> != size {
+		<a href="../../src/runtime/mbitmap.go.html#line-693" class="path-duplicate">mbitmap.go</a><a href="../../src/runtime/mbitmap.go.html#line-693">#L693</a>: 		println("runtime: typeBitsBulkBarrier with type ", toRType(typ).string(), " of size ", typ.<b>Size_</b>, " but memory size", size)
+		<a href="../../src/runtime/mbitmap.go.html#line-949" class="path-duplicate">mbitmap.go</a><a href="../../src/runtime/mbitmap.go.html#line-949">#L949</a>: 	if doubleCheck &amp;&amp; dataSize%typ.<b>Size_</b> != 0 {
+		<a href="../../src/runtime/mbitmap.go.html#line-980" class="path-duplicate">mbitmap.go</a><a href="../../src/runtime/mbitmap.go.html#line-980">#L980</a>: 		for i := uintptr(0); true; i += typ.<b>Size_</b> {
+		<a href="../../src/runtime/mbitmap.go.html#line-991" class="path-duplicate">mbitmap.go</a><a href="../../src/runtime/mbitmap.go.html#line-991">#L991</a>: 			if i+typ.<b>Size_</b> == dataSize {
+		<a href="../../src/runtime/mbitmap.go.html#line-996" class="path-duplicate">mbitmap.go</a><a href="../../src/runtime/mbitmap.go.html#line-996">#L996</a>: 			h = h.pad(typ.<b>Size_</b> - n*goarch.PtrSize)
+		<a href="../../src/runtime/mbitmap.go.html#line-1027" class="path-duplicate">mbitmap.go</a><a href="../../src/runtime/mbitmap.go.html#line-1027">#L1027</a>: 	if typ.<b>Size_</b> == dataSize { // Single element
+		<a href="../../src/runtime/mbitmap.go.html#line-1045" class="path-duplicate">mbitmap.go</a><a href="../../src/runtime/mbitmap.go.html#line-1045">#L1045</a>: 		words := typ.<b>Size_</b> / goarch.PtrSize // total words, including scalar tail
+		<a href="../../src/runtime/mbitmap.go.html#line-1047" class="path-duplicate">mbitmap.go</a><a href="../../src/runtime/mbitmap.go.html#line-1047">#L1047</a>: 			n := dataSize / typ.<b>Size_</b>
+		<a href="../../src/runtime/mbitmap.go.html#line-1068" class="path-duplicate">mbitmap.go</a><a href="../../src/runtime/mbitmap.go.html#line-1068">#L1068</a>: 			for i := uintptr(0); true; i += typ.<b>Size_</b> {
+		<a href="../../src/runtime/mbitmap.go.html#line-1078" class="path-duplicate">mbitmap.go</a><a href="../../src/runtime/mbitmap.go.html#line-1078">#L1078</a>: 				if i+typ.<b>Size_</b> == dataSize {
+		<a href="../../src/runtime/mbitmap.go.html#line-1082" class="path-duplicate">mbitmap.go</a><a href="../../src/runtime/mbitmap.go.html#line-1082">#L1082</a>: 				h = h.pad(typ.<b>Size_</b> - typ.PtrBytes)
+		<a href="../../src/runtime/mbitmap.go.html#line-1094" class="path-duplicate">mbitmap.go</a><a href="../../src/runtime/mbitmap.go.html#line-1094">#L1094</a>: 				off := i % typ.<b>Size_</b>
+		<a href="../../src/runtime/mbitmap.go.html#line-1427" class="path-duplicate">mbitmap.go</a><a href="../../src/runtime/mbitmap.go.html#line-1427">#L1427</a>: 			n := (*ptrtype)(unsafe.Pointer(t)).Elem.<b>Size_</b>
+		<a href="../../src/runtime/mbitmap.go.html#line-1439" class="path-duplicate">mbitmap.go</a><a href="../../src/runtime/mbitmap.go.html#line-1439">#L1439</a>: 			n := (*ptrtype)(unsafe.Pointer(t)).Elem.<b>Size_</b>
+		<a href="../../src/runtime/mbitmap.go.html#line-1487" class="path-duplicate">mbitmap.go</a><a href="../../src/runtime/mbitmap.go.html#line-1487">#L1487</a>: 			n := (*ptrtype)(unsafe.Pointer(t)).Elem.<b>Size_</b>
+		<a href="../../src/runtime/mfinal.go.html#line-425">mfinal.go#L425</a>: 		if ot.Elem == nil || ot.Elem.PtrBytes != 0 || ot.Elem.<b>Size_</b> &gt;= maxTinySize {
+		<a href="../../src/runtime/mfinal.go.html#line-476" class="path-duplicate">mfinal.go</a><a href="../../src/runtime/mfinal.go.html#line-476">#L476</a>: 		nret = alignUp(nret, uintptr(t.Align_)) + uintptr(t.<b>Size_</b>)
+		<a href="../../src/runtime/select.go.html#line-403">select.go#L403</a>: 			msanread(cas.elem, c.elemtype.<b>Size_</b>)
+		<a href="../../src/runtime/select.go.html#line-405" class="path-duplicate">select.go</a><a href="../../src/runtime/select.go.html#line-405">#L405</a>: 			msanwrite(cas.elem, c.elemtype.<b>Size_</b>)
+		<a href="../../src/runtime/select.go.html#line-410" class="path-duplicate">select.go</a><a href="../../src/runtime/select.go.html#line-410">#L410</a>: 			asanread(cas.elem, c.elemtype.<b>Size_</b>)
+		<a href="../../src/runtime/select.go.html#line-412" class="path-duplicate">select.go</a><a href="../../src/runtime/select.go.html#line-412">#L412</a>: 			asanwrite(cas.elem, c.elemtype.<b>Size_</b>)
+		<a href="../../src/runtime/select.go.html#line-428" class="path-duplicate">select.go</a><a href="../../src/runtime/select.go.html#line-428">#L428</a>: 		msanwrite(cas.elem, c.elemtype.<b>Size_</b>)
+		<a href="../../src/runtime/select.go.html#line-431" class="path-duplicate">select.go</a><a href="../../src/runtime/select.go.html#line-431">#L431</a>: 		asanwrite(cas.elem, c.elemtype.<b>Size_</b>)
+		<a href="../../src/runtime/select.go.html#line-454" class="path-duplicate">select.go</a><a href="../../src/runtime/select.go.html#line-454">#L454</a>: 		msanread(cas.elem, c.elemtype.<b>Size_</b>)
+		<a href="../../src/runtime/select.go.html#line-457" class="path-duplicate">select.go</a><a href="../../src/runtime/select.go.html#line-457">#L457</a>: 		asanread(cas.elem, c.elemtype.<b>Size_</b>)
+		<a href="../../src/runtime/select.go.html#line-495" class="path-duplicate">select.go</a><a href="../../src/runtime/select.go.html#line-495">#L495</a>: 		msanread(cas.elem, c.elemtype.<b>Size_</b>)
+		<a href="../../src/runtime/select.go.html#line-498" class="path-duplicate">select.go</a><a href="../../src/runtime/select.go.html#line-498">#L498</a>: 		asanread(cas.elem, c.elemtype.<b>Size_</b>)
+		<a href="../../src/runtime/slice.go.html#line-42">slice.go#L42</a>: 		tomem, overflow = math.MulUintptr(et.<b>Size_</b>, uintptr(tolen))
+		<a href="../../src/runtime/slice.go.html#line-46" class="path-duplicate">slice.go</a><a href="../../src/runtime/slice.go.html#line-46">#L46</a>: 		copymem = et.<b>Size_</b> * uintptr(fromlen)
+		<a href="../../src/runtime/slice.go.html#line-51" class="path-duplicate">slice.go</a><a href="../../src/runtime/slice.go.html#line-51">#L51</a>: 		tomem = et.<b>Size_</b> * uintptr(tolen)
+		<a href="../../src/runtime/slice.go.html#line-89" class="path-duplicate">slice.go</a><a href="../../src/runtime/slice.go.html#line-89">#L89</a>: 	mem, overflow := math.MulUintptr(et.<b>Size_</b>, uintptr(cap))
+		<a href="../../src/runtime/slice.go.html#line-96" class="path-duplicate">slice.go</a><a href="../../src/runtime/slice.go.html#line-96">#L96</a>: 		mem, overflow := math.MulUintptr(et.<b>Size_</b>, uintptr(len))
+		<a href="../../src/runtime/slice.go.html#line-161" class="path-duplicate">slice.go</a><a href="../../src/runtime/slice.go.html#line-161">#L161</a>: 		racereadrangepc(oldPtr, uintptr(oldLen*int(et.<b>Size_</b>)), callerpc, abi.FuncPCABIInternal(growslice))
+		<a href="../../src/runtime/slice.go.html#line-164" class="path-duplicate">slice.go</a><a href="../../src/runtime/slice.go.html#line-164">#L164</a>: 		msanread(oldPtr, uintptr(oldLen*int(et.<b>Size_</b>)))
+		<a href="../../src/runtime/slice.go.html#line-167" class="path-duplicate">slice.go</a><a href="../../src/runtime/slice.go.html#line-167">#L167</a>: 		asanread(oldPtr, uintptr(oldLen*int(et.<b>Size_</b>)))
+		<a href="../../src/runtime/slice.go.html#line-174" class="path-duplicate">slice.go</a><a href="../../src/runtime/slice.go.html#line-174">#L174</a>: 	if et.<b>Size_</b> == 0 {
+		<a href="../../src/runtime/slice.go.html#line-212" class="path-duplicate">slice.go</a><a href="../../src/runtime/slice.go.html#line-212">#L212</a>: 	case et.<b>Size_</b> == 1:
+		<a href="../../src/runtime/slice.go.html#line-218" class="path-duplicate">slice.go</a><a href="../../src/runtime/slice.go.html#line-218">#L218</a>: 	case et.<b>Size_</b> == goarch.PtrSize:
+		<a href="../../src/runtime/slice.go.html#line-224" class="path-duplicate">slice.go</a><a href="../../src/runtime/slice.go.html#line-224">#L224</a>: 	case isPowerOfTwo(et.<b>Size_</b>):
+		<a href="../../src/runtime/slice.go.html#line-228" class="path-duplicate">slice.go</a><a href="../../src/runtime/slice.go.html#line-228">#L228</a>: 			shift = uintptr(sys.TrailingZeros64(uint64(et.<b>Size_</b>))) &amp; 63
+		<a href="../../src/runtime/slice.go.html#line-230" class="path-duplicate">slice.go</a><a href="../../src/runtime/slice.go.html#line-230">#L230</a>: 			shift = uintptr(sys.TrailingZeros32(uint32(et.<b>Size_</b>))) &amp; 31
+		<a href="../../src/runtime/slice.go.html#line-239" class="path-duplicate">slice.go</a><a href="../../src/runtime/slice.go.html#line-239">#L239</a>: 		lenmem = uintptr(oldLen) * et.<b>Size_</b>
+		<a href="../../src/runtime/slice.go.html#line-240" class="path-duplicate">slice.go</a><a href="../../src/runtime/slice.go.html#line-240">#L240</a>: 		newlenmem = uintptr(newLen) * et.<b>Size_</b>
+		<a href="../../src/runtime/slice.go.html#line-241" class="path-duplicate">slice.go</a><a href="../../src/runtime/slice.go.html#line-241">#L241</a>: 		capmem, overflow = math.MulUintptr(et.<b>Size_</b>, uintptr(newcap))
+		<a href="../../src/runtime/slice.go.html#line-243" class="path-duplicate">slice.go</a><a href="../../src/runtime/slice.go.html#line-243">#L243</a>: 		newcap = int(capmem / et.<b>Size_</b>)
+		<a href="../../src/runtime/slice.go.html#line-244" class="path-duplicate">slice.go</a><a href="../../src/runtime/slice.go.html#line-244">#L244</a>: 		capmem = uintptr(newcap) * et.<b>Size_</b>
+		<a href="../../src/runtime/slice.go.html#line-278" class="path-duplicate">slice.go</a><a href="../../src/runtime/slice.go.html#line-278">#L278</a>: 			bulkBarrierPreWriteSrcOnly(uintptr(p), uintptr(oldPtr), lenmem-et.<b>Size_</b>+et.PtrBytes)
+		<a href="../../src/runtime/slice.go.html#line-297" class="path-duplicate">slice.go</a><a href="../../src/runtime/slice.go.html#line-297">#L297</a>: 		oldcapmem := uintptr(old.cap) * et.<b>Size_</b>
+		<a href="../../src/runtime/slice.go.html#line-298" class="path-duplicate">slice.go</a><a href="../../src/runtime/slice.go.html#line-298">#L298</a>: 		newlenmem := uintptr(new.len) * et.<b>Size_</b>
+		<a href="../../src/runtime/stkframe.go.html#line-284">stkframe.go#L284</a>: 		off:       -int32(alignUp(abiRegArgsType.<b>Size_</b>, 8)), // It's always the highest address local.
+		<a href="../../src/runtime/stkframe.go.html#line-285" class="path-duplicate">stkframe.go</a><a href="../../src/runtime/stkframe.go.html#line-285">#L285</a>: 		size:      int32(abiRegArgsType.<b>Size_</b>),
+		<a href="../../src/runtime/unsafe.go.html#line-58">unsafe.go#L58</a>: 	if et.<b>Size_</b> == 0 {
+		<a href="../../src/runtime/unsafe.go.html#line-64" class="path-duplicate">unsafe.go</a><a href="../../src/runtime/unsafe.go.html#line-64">#L64</a>: 	mem, overflow := math.MulUintptr(et.<b>Size_</b>, uintptr(len))
+		<a href="../../src/runtime/unsafe.go.html#line-87" class="path-duplicate">unsafe.go</a><a href="../../src/runtime/unsafe.go.html#line-87">#L87</a>: 	if checkptrStraddles(ptr, uintptr(len64)*et.<b>Size_</b>) {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

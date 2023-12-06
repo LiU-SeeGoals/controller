@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: strings.ToLower</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../pkg/strings.html">strings</a>.<a href="../src/strings/strings.go.html#line-641">ToLower</a></b></span>
+
+<span class="title">8 uses</span>
+
+	strings (current package)
+		<a href="../src/strings/strings.go.html#line-641">strings.go#L641</a>: func <b>ToLower</b>(s string) string {
+
+	<a href="../pkg/github.com/golang/protobuf/proto.html">github.com/golang/protobuf/proto</a>
+		<a href="../src/github.com/golang/protobuf/proto/text_decode.go.html#line-122">text_decode.go#L122</a>: 			gd := fds.ByName(protoreflect.Name(strings.<b>ToLower</b>(string(name))))
+
+	<a href="../pkg/google.golang.org/protobuf/internal/encoding/tag.html">google.golang.org/protobuf/internal/encoding/tag</a>
+		<a href="../src/google.golang.org/protobuf/internal/encoding/tag/tag.go.html#line-130">tag.go#L130</a>: 		f.L0.FullName = protoreflect.FullName(strings.<b>ToLower</b>(string(f.L0.FullName)))
+
+	<a href="../pkg/google.golang.org/protobuf/internal/encoding/text.html">google.golang.org/protobuf/internal/encoding/text</a>
+		<a href="../src/google.golang.org/protobuf/internal/encoding/text/decode_token.go.html#line-315">decode_token.go#L315</a>: 		if f, ok := floatLits[strings.<b>ToLower</b>(string(t.raw))]; ok {
+		<a href="../src/google.golang.org/protobuf/internal/encoding/text/decode_token.go.html#line-338" class="path-duplicate">decode_token.go</a><a href="../src/google.golang.org/protobuf/internal/encoding/text/decode_token.go.html#line-338">#L338</a>: 		if f, ok := floatLits[strings.<b>ToLower</b>(string(t.raw))]; ok {
+
+	<a href="../pkg/google.golang.org/protobuf/reflect/protodesc.html">google.golang.org/protobuf/reflect/protodesc</a>
+		<a href="../src/google.golang.org/protobuf/reflect/protodesc/desc_validate.go.html#line-56">desc_validate.go#L56</a>: 			prefix := strings.Replace(strings.<b>ToLower</b>(string(e.Name())), "_", "", -1)
+		<a href="../src/google.golang.org/protobuf/reflect/protodesc/desc_validate.go.html#line-123" class="path-duplicate">desc_validate.go</a><a href="../src/google.golang.org/protobuf/reflect/protodesc/desc_validate.go.html#line-123">#L123</a>: 				s := strings.Replace(strings.<b>ToLower</b>(string(f1.Name())), "_", "", -1)
+		<a href="../src/google.golang.org/protobuf/reflect/protodesc/desc_validate.go.html#line-325" class="path-duplicate">desc_validate.go</a><a href="../src/google.golang.org/protobuf/reflect/protodesc/desc_validate.go.html#line-325">#L325</a>: 	case fd.Name() != protoreflect.Name(strings.<b>ToLower</b>(string(md.Name()))):
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

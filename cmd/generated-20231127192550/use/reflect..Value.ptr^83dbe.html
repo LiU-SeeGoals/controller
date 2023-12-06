@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: reflect.Value.ptr</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/reflect.html">reflect</a>.<a href="../src/reflect/value.go.html#line-39">Value</a>.<a href="../src/reflect/value.go.html#line-46">ptr</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">173 uses</span>
+
+	reflect (current package)
+		<a href="../src/reflect/deepequal.go.html#line-68">deepequal.go#L68</a>: 				return v.<b>ptr</b>
+		<a href="../src/reflect/makefunc.go.html#line-104">makefunc.go#L104</a>: 	rcvr := Value{v.typ(), v.<b>ptr</b>, fl}
+		<a href="../src/reflect/swapper.go.html#line-42">swapper.go#L42</a>: 			ps := *(*[]unsafe.Pointer)(v.<b>ptr</b>)
+		<a href="../src/reflect/swapper.go.html#line-46" class="path-duplicate">swapper.go</a><a href="../src/reflect/swapper.go.html#line-46">#L46</a>: 			ss := *(*[]string)(v.<b>ptr</b>)
+		<a href="../src/reflect/swapper.go.html#line-52" class="path-duplicate">swapper.go</a><a href="../src/reflect/swapper.go.html#line-52">#L52</a>: 			is := *(*[]int64)(v.<b>ptr</b>)
+		<a href="../src/reflect/swapper.go.html#line-55" class="path-duplicate">swapper.go</a><a href="../src/reflect/swapper.go.html#line-55">#L55</a>: 			is := *(*[]int32)(v.<b>ptr</b>)
+		<a href="../src/reflect/swapper.go.html#line-58" class="path-duplicate">swapper.go</a><a href="../src/reflect/swapper.go.html#line-58">#L58</a>: 			is := *(*[]int16)(v.<b>ptr</b>)
+		<a href="../src/reflect/swapper.go.html#line-61" class="path-duplicate">swapper.go</a><a href="../src/reflect/swapper.go.html#line-61">#L61</a>: 			is := *(*[]int8)(v.<b>ptr</b>)
+		<a href="../src/reflect/swapper.go.html#line-66" class="path-duplicate">swapper.go</a><a href="../src/reflect/swapper.go.html#line-66">#L66</a>: 	s := (*unsafeheader.Slice)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-46">value.go#L46</a>: 	<b>ptr</b> unsafe.Pointer
+		<a href="../src/reflect/value.go.html#line-113" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-113">#L113</a>: 		return *(*unsafe.Pointer)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-115" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-115">#L115</a>: 	return v.<b>ptr</b>
+		<a href="../src/reflect/value.go.html#line-130" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-130">#L130</a>: 		ptr := v.<b>ptr</b>
+		<a href="../src/reflect/value.go.html#line-142" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-142">#L142</a>: 		e.word = *(*unsafe.Pointer)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-145" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-145">#L145</a>: 		e.word = v.<b>ptr</b>
+		<a href="../src/reflect/value.go.html#line-288" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-288">#L288</a>: 	return Value{ptrTo(v.typ()), v.<b>ptr</b>, fl | flag(Pointer)}
+		<a href="../src/reflect/value.go.html#line-298" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-298">#L298</a>: 	return *(*bool)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-313" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-313">#L313</a>: 		return *(*[]byte)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-325" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-325">#L325</a>: 		return *(*[]byte)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-333" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-333">#L333</a>: 		p := (*byte)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-348" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-348">#L348</a>: 	return *(*[]rune)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-412" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-412">#L412</a>: 		fn = *(*unsafe.Pointer)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-414" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-414">#L414</a>: 		fn = v.<b>ptr</b>
+		<a href="../src/reflect/value.go.html#line-542" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-542">#L542</a>: 					typedmemmove(&amp;targ.t, addr, v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-544" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-544">#L544</a>: 					*(*unsafe.Pointer)(addr) = v.<b>ptr</b>
+		<a href="../src/reflect/value.go.html#line-551" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-551">#L551</a>: 					offset := add(v.<b>ptr</b>, st.offset, "precomputed value offset")
+		<a href="../src/reflect/value.go.html#line-562" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-562">#L562</a>: 						regArgs.Ptrs[st.ireg] = v.<b>ptr</b>
+		<a href="../src/reflect/value.go.html#line-564" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-564">#L564</a>: 					regArgs.Ints[st.ireg] = uintptr(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-571" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-571">#L571</a>: 				offset := add(v.<b>ptr</b>, st.offset, "precomputed value offset")
+		<a href="../src/reflect/value.go.html#line-737" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-737">#L737</a>: 				v.<b>ptr</b> = unsafe_New(typ)
+		<a href="../src/reflect/value.go.html#line-739" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-739">#L739</a>: 					typedmemmove(typ, v.<b>ptr</b>, add(ptr, st.stkOff, "typ.size &gt; 0"))
+		<a href="../src/reflect/value.go.html#line-743" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-743">#L743</a>: 				v.<b>ptr</b> = *(*unsafe.Pointer)(add(ptr, st.stkOff, "1-ptr"))
+		<a href="../src/reflect/value.go.html#line-750" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-750">#L750</a>: 				v.<b>ptr</b> = unsafe_New(typ)
+		<a href="../src/reflect/value.go.html#line-754" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-754">#L754</a>: 						offset := add(v.<b>ptr</b>, st.offset, "precomputed value offset")
+		<a href="../src/reflect/value.go.html#line-757" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-757">#L757</a>: 						s := add(v.<b>ptr</b>, st.offset, "precomputed value offset")
+		<a href="../src/reflect/value.go.html#line-760" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-760">#L760</a>: 						offset := add(v.<b>ptr</b>, st.offset, "precomputed value offset")
+		<a href="../src/reflect/value.go.html#line-775" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-775">#L775</a>: 				v.<b>ptr</b> = regs.Ptrs[steps[0].ireg]
+		<a href="../src/reflect/value.go.html#line-830" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-830">#L830</a>: 						memmove(addr, v.<b>ptr</b>, st.size)
+		<a href="../src/reflect/value.go.html#line-833" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-833">#L833</a>: 						*(*uintptr)(addr) = uintptr(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-840" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-840">#L840</a>: 						offset := add(v.<b>ptr</b>, st.offset, "precomputed value offset")
+		<a href="../src/reflect/value.go.html#line-848" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-848">#L848</a>: 						regs.Ints[st.ireg] = uintptr(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-855" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-855">#L855</a>: 					offset := add(v.<b>ptr</b>, st.offset, "precomputed value offset")
+		<a href="../src/reflect/value.go.html#line-898" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-898">#L898</a>: 		iface := (*nonEmptyInterface)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-930" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-930">#L930</a>: 		iface := (*nonEmptyInterface)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-933" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-933">#L933</a>: 		*(*unsafe.Pointer)(p) = *(*unsafe.Pointer)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-935" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-935">#L935</a>: 		*(*unsafe.Pointer)(p) = v.<b>ptr</b>
+		<a href="../src/reflect/value.go.html#line-1168" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1168">#L1168</a>: 		return (*unsafeheader.Slice)(v.<b>ptr</b>).Cap
+		<a href="../src/reflect/value.go.html#line-1213" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1213">#L1213</a>: 		return complex128(*(*complex64)(v.<b>ptr</b>))
+		<a href="../src/reflect/value.go.html#line-1215" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1215">#L1215</a>: 		return *(*complex128)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-1230" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1230">#L1230</a>: 			eface = *(*any)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-1234" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1234">#L1234</a>: 			})(v.<b>ptr</b>))
+		<a href="../src/reflect/value.go.html#line-1242" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1242">#L1242</a>: 		ptr := v.<b>ptr</b>
+		<a href="../src/reflect/value.go.html#line-1302" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1302">#L1302</a>: 	ptr := add(v.<b>ptr</b>, field.Offset, "same as non-reflect &amp;v.field")
+		<a href="../src/reflect/value.go.html#line-1389" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1389">#L1389</a>: 		return float64(*(*float32)(v.<b>ptr</b>))
+		<a href="../src/reflect/value.go.html#line-1391" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1391">#L1391</a>: 		return *(*float64)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-1415" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1415">#L1415</a>: 		val := add(v.<b>ptr</b>, offset, "same as &amp;v[i], i &lt; tt.len")
+		<a href="../src/reflect/value.go.html#line-1422" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1422">#L1422</a>: 		s := (*unsafeheader.Slice)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-1433" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1433">#L1433</a>: 		s := (*unsafeheader.String)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-1458" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1458">#L1458</a>: 	p := v.<b>ptr</b>
+		<a href="../src/reflect/value.go.html#line-1512" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1512">#L1512</a>: 			return *(*any)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-1516" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1516">#L1516</a>: 		})(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-1535" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1535">#L1535</a>: 	escapes(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-1541" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1541">#L1541</a>: 	return *(*[2]uintptr)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-1558" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1558">#L1558</a>: 		ptr := v.<b>ptr</b>
+		<a href="../src/reflect/value.go.html#line-1566" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1566">#L1566</a>: 		return *(*unsafe.Pointer)(v.<b>ptr</b>) == nil
+		<a href="../src/reflect/value.go.html#line-1599" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1599">#L1599</a>: 				return v.<b>ptr</b> == nil
+		<a href="../src/reflect/value.go.html#line-1604" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1604">#L1604</a>: 			return v.typ().Equal(noescape(v.<b>ptr</b>), unsafe.Pointer(&amp;zeroVal[0]))
+		<a href="../src/reflect/value.go.html#line-1622" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1622">#L1622</a>: 				return v.<b>ptr</b> == nil
+		<a href="../src/reflect/value.go.html#line-1625" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1625">#L1625</a>: 			return v.typ().Equal(noescape(v.<b>ptr</b>), unsafe.Pointer(&amp;zeroVal[0]))
+		<a href="../src/reflect/value.go.html#line-1648" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1648">#L1648</a>: 		*(*bool)(v.<b>ptr</b>) = false
+		<a href="../src/reflect/value.go.html#line-1650" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1650">#L1650</a>: 		*(*int)(v.<b>ptr</b>) = 0
+		<a href="../src/reflect/value.go.html#line-1652" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1652">#L1652</a>: 		*(*int8)(v.<b>ptr</b>) = 0
+		<a href="../src/reflect/value.go.html#line-1654" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1654">#L1654</a>: 		*(*int16)(v.<b>ptr</b>) = 0
+		<a href="../src/reflect/value.go.html#line-1656" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1656">#L1656</a>: 		*(*int32)(v.<b>ptr</b>) = 0
+		<a href="../src/reflect/value.go.html#line-1658" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1658">#L1658</a>: 		*(*int64)(v.<b>ptr</b>) = 0
+		<a href="../src/reflect/value.go.html#line-1660" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1660">#L1660</a>: 		*(*uint)(v.<b>ptr</b>) = 0
+		<a href="../src/reflect/value.go.html#line-1662" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1662">#L1662</a>: 		*(*uint8)(v.<b>ptr</b>) = 0
+		<a href="../src/reflect/value.go.html#line-1664" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1664">#L1664</a>: 		*(*uint16)(v.<b>ptr</b>) = 0
+		<a href="../src/reflect/value.go.html#line-1666" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1666">#L1666</a>: 		*(*uint32)(v.<b>ptr</b>) = 0
+		<a href="../src/reflect/value.go.html#line-1668" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1668">#L1668</a>: 		*(*uint64)(v.<b>ptr</b>) = 0
+		<a href="../src/reflect/value.go.html#line-1670" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1670">#L1670</a>: 		*(*uintptr)(v.<b>ptr</b>) = 0
+		<a href="../src/reflect/value.go.html#line-1672" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1672">#L1672</a>: 		*(*float32)(v.<b>ptr</b>) = 0
+		<a href="../src/reflect/value.go.html#line-1674" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1674">#L1674</a>: 		*(*float64)(v.<b>ptr</b>) = 0
+		<a href="../src/reflect/value.go.html#line-1676" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1676">#L1676</a>: 		*(*complex64)(v.<b>ptr</b>) = 0
+		<a href="../src/reflect/value.go.html#line-1678" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1678">#L1678</a>: 		*(*complex128)(v.<b>ptr</b>) = 0
+		<a href="../src/reflect/value.go.html#line-1680" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1680">#L1680</a>: 		*(*string)(v.<b>ptr</b>) = ""
+		<a href="../src/reflect/value.go.html#line-1682" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1682">#L1682</a>: 		*(*unsafeheader.Slice)(v.<b>ptr</b>) = unsafeheader.Slice{}
+		<a href="../src/reflect/value.go.html#line-1684" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1684">#L1684</a>: 		*(*[2]unsafe.Pointer)(v.<b>ptr</b>) = [2]unsafe.Pointer{}
+		<a href="../src/reflect/value.go.html#line-1686" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1686">#L1686</a>: 		*(*unsafe.Pointer)(v.<b>ptr</b>) = nil
+		<a href="../src/reflect/value.go.html#line-1688" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1688">#L1688</a>: 		typedmemclr(v.typ(), v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-1707" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1707">#L1707</a>: 		return (*unsafeheader.Slice)(v.<b>ptr</b>).Len
+		<a href="../src/reflect/value.go.html#line-1723" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1723">#L1723</a>: 		return (*unsafeheader.String)(v.<b>ptr</b>).Len
+		<a href="../src/reflect/value.go.html#line-1753" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1753">#L1753</a>: 		k := *(*string)(key.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-1759" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1759">#L1759</a>: 			k = key.<b>ptr</b>
+		<a href="../src/reflect/value.go.html#line-1761" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1761">#L1761</a>: 			k = unsafe.Pointer(&amp;key.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-1872" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1872">#L1872</a>: 		target = v.<b>ptr</b>
+		<a href="../src/reflect/value.go.html#line-1881" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1881">#L1881</a>: 	typedmemmove(v.typ(), v.<b>ptr</b>, key.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-1915" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1915">#L1915</a>: 		target = v.<b>ptr</b>
+		<a href="../src/reflect/value.go.html#line-1924" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-1924">#L1924</a>: 	typedmemmove(v.typ(), v.<b>ptr</b>, elem.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-2022" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2022">#L2022</a>: 	return Value{v.typ(), v.<b>ptr</b>, fl}
+		<a href="../src/reflect/value.go.html#line-2146" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2146">#L2146</a>: 	escapes(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-2152" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2152">#L2152</a>: 			val := *(*uintptr)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-2182" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2182">#L2182</a>: 		return uintptr((*unsafeheader.Slice)(v.<b>ptr</b>).Data)
+		<a href="../src/reflect/value.go.html#line-2210" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2210">#L2210</a>: 		val.<b>ptr</b> = p
+		<a href="../src/reflect/value.go.html#line-2213" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2213">#L2213</a>: 		p = unsafe.Pointer(&amp;val.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-2242" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2242">#L2242</a>: 		p = x.<b>ptr</b>
+		<a href="../src/reflect/value.go.html#line-2244" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2244">#L2244</a>: 		p = unsafe.Pointer(&amp;x.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-2258" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2258">#L2258</a>: 		target = v.<b>ptr</b>
+		<a href="../src/reflect/value.go.html#line-2262" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2262">#L2262</a>: 		if x.<b>ptr</b> == unsafe.Pointer(&amp;zeroVal[0]) {
+		<a href="../src/reflect/value.go.html#line-2263" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2263">#L2263</a>: 			typedmemclr(v.typ(), v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-2265" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2265">#L2265</a>: 			typedmemmove(v.typ(), v.<b>ptr</b>, x.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-2268" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2268">#L2268</a>: 		*(*unsafe.Pointer)(v.<b>ptr</b>) = x.<b>ptr</b>
+		<a href="../src/reflect/value.go.html#line-2277" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2277">#L2277</a>: 	*(*bool)(v.<b>ptr</b>) = x
+		<a href="../src/reflect/value.go.html#line-2288" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2288">#L2288</a>: 	*(*[]byte)(v.<b>ptr</b>) = x
+		<a href="../src/reflect/value.go.html#line-2299" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2299">#L2299</a>: 	*(*[]rune)(v.<b>ptr</b>) = x
+		<a href="../src/reflect/value.go.html#line-2310" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2310">#L2310</a>: 		*(*complex64)(v.<b>ptr</b>) = complex64(x)
+		<a href="../src/reflect/value.go.html#line-2312" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2312">#L2312</a>: 		*(*complex128)(v.<b>ptr</b>) = x
+		<a href="../src/reflect/value.go.html#line-2324" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2324">#L2324</a>: 		*(*float32)(v.<b>ptr</b>) = float32(x)
+		<a href="../src/reflect/value.go.html#line-2326" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2326">#L2326</a>: 		*(*float64)(v.<b>ptr</b>) = x
+		<a href="../src/reflect/value.go.html#line-2338" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2338">#L2338</a>: 		*(*int)(v.<b>ptr</b>) = int(x)
+		<a href="../src/reflect/value.go.html#line-2340" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2340">#L2340</a>: 		*(*int8)(v.<b>ptr</b>) = int8(x)
+		<a href="../src/reflect/value.go.html#line-2342" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2342">#L2342</a>: 		*(*int16)(v.<b>ptr</b>) = int16(x)
+		<a href="../src/reflect/value.go.html#line-2344" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2344">#L2344</a>: 		*(*int32)(v.<b>ptr</b>) = int32(x)
+		<a href="../src/reflect/value.go.html#line-2346" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2346">#L2346</a>: 		*(*int64)(v.<b>ptr</b>) = x
+		<a href="../src/reflect/value.go.html#line-2356" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2356">#L2356</a>: 	s := (*unsafeheader.Slice)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-2369" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2369">#L2369</a>: 	s := (*unsafeheader.Slice)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-2389" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2389">#L2389</a>: 		k := *(*string)(key.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-2398" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2398">#L2398</a>: 			e = elem.<b>ptr</b>
+		<a href="../src/reflect/value.go.html#line-2400" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2400">#L2400</a>: 			e = unsafe.Pointer(&amp;elem.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-2409" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2409">#L2409</a>: 		k = key.<b>ptr</b>
+		<a href="../src/reflect/value.go.html#line-2411" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2411">#L2411</a>: 		k = unsafe.Pointer(&amp;key.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-2421" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2421">#L2421</a>: 		e = elem.<b>ptr</b>
+		<a href="../src/reflect/value.go.html#line-2423" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2423">#L2423</a>: 		e = unsafe.Pointer(&amp;elem.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-2436" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2436">#L2436</a>: 		*(*uint)(v.<b>ptr</b>) = uint(x)
+		<a href="../src/reflect/value.go.html#line-2438" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2438">#L2438</a>: 		*(*uint8)(v.<b>ptr</b>) = uint8(x)
+		<a href="../src/reflect/value.go.html#line-2440" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2440">#L2440</a>: 		*(*uint16)(v.<b>ptr</b>) = uint16(x)
+		<a href="../src/reflect/value.go.html#line-2442" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2442">#L2442</a>: 		*(*uint32)(v.<b>ptr</b>) = uint32(x)
+		<a href="../src/reflect/value.go.html#line-2444" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2444">#L2444</a>: 		*(*uint64)(v.<b>ptr</b>) = x
+		<a href="../src/reflect/value.go.html#line-2446" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2446">#L2446</a>: 		*(*uintptr)(v.<b>ptr</b>) = uintptr(x)
+		<a href="../src/reflect/value.go.html#line-2455" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2455">#L2455</a>: 	*(*unsafe.Pointer)(v.<b>ptr</b>) = x
+		<a href="../src/reflect/value.go.html#line-2463" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2463">#L2463</a>: 	*(*string)(v.<b>ptr</b>) = x
+		<a href="../src/reflect/value.go.html#line-2486" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2486">#L2486</a>: 		base = v.<b>ptr</b>
+		<a href="../src/reflect/value.go.html#line-2490" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2490">#L2490</a>: 		s := (*unsafeheader.Slice)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-2495" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2495">#L2495</a>: 		s := (*unsafeheader.String)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-2548" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2548">#L2548</a>: 		base = v.<b>ptr</b>
+		<a href="../src/reflect/value.go.html#line-2552" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2552">#L2552</a>: 		s := (*unsafeheader.Slice)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-2589" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2589">#L2589</a>: 		return *(*string)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-2677" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2677">#L2677</a>: 	p := v.<b>ptr</b>
+		<a href="../src/reflect/value.go.html#line-2712" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2712">#L2712</a>: 	escapes(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-2713" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2713">#L2713</a>: 	return uintptr(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-2734" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2734">#L2734</a>: 			if !verifyNotInHeapPtr(*(*uintptr)(v.<b>ptr</b>)) {
+		<a href="../src/reflect/value.go.html#line-2737" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2737">#L2737</a>: 			return *(*unsafe.Pointer)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-2762" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2762">#L2762</a>: 		return (*unsafeheader.Slice)(v.<b>ptr</b>).Data
+		<a href="../src/reflect/value.go.html#line-2825" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2825">#L2825</a>: 	p := (*unsafeheader.Slice)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-2848" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2848">#L2848</a>: 	sh := *(*unsafeheader.Slice)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-2850" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2850">#L2850</a>: 	v.<b>ptr</b> = unsafe.Pointer(s)
+		<a href="../src/reflect/value.go.html#line-2864" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2864">#L2864</a>: 		sh := *(*unsafeheader.Slice)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-2934" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2934">#L2934</a>: 		ds.Data = dst.<b>ptr</b>
+		<a href="../src/reflect/value.go.html#line-2938" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2938">#L2938</a>: 		ds = *(*unsafeheader.Slice)(dst.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-2941" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2941">#L2941</a>: 		ss.Data = src.<b>ptr</b>
+		<a href="../src/reflect/value.go.html#line-2945" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2945">#L2945</a>: 		ss = *(*unsafeheader.Slice)(src.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-2947" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-2947">#L2947</a>: 		sh := *(*unsafeheader.String)(src.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-3076" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3076">#L3076</a>: 				rc.val = v.<b>ptr</b>
+		<a href="../src/reflect/value.go.html#line-3078" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3078">#L3078</a>: 				rc.val = unsafe.Pointer(&amp;v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-3285" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3285">#L3285</a>: 		return Value{dst, v.<b>ptr</b>, fl}
+		<a href="../src/reflect/value.go.html#line-3673" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3673">#L3673</a>: 		return makeFloat32(v.flag.ro(), *(*float32)(v.<b>ptr</b>), t)
+		<a href="../src/reflect/value.go.html#line-3727" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3727">#L3727</a>: 	h := (*unsafeheader.Slice)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-3737" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3737">#L3737</a>: 	h := (*unsafeheader.Slice)(v.<b>ptr</b>)
+		<a href="../src/reflect/value.go.html#line-3751" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-3751">#L3751</a>: 	ptr := v.<b>ptr</b>
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

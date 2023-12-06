@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.g.goid</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/runtime2.go.html#line-414">g</a>.<a href="../src/runtime/runtime2.go.html#line-447">goid</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">46 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/arena.go.html#line-721">arena.go#L721</a>: 		if inittrace.active &amp;&amp; inittrace.id == getg().<b>goid</b> {
+		<a href="../src/runtime/heapdump.go.html#line-355">heapdump.go#L355</a>: 	dumpint(gp.<b>goid</b>)
+		<a href="../src/runtime/malloc.go.html#line-994">malloc.go#L994</a>: 		if inittrace.active &amp;&amp; inittrace.id == getg().<b>goid</b> {
+		<a href="../src/runtime/malloc.go.html#line-1228" class="path-duplicate">malloc.go</a><a href="../src/runtime/malloc.go.html#line-1228">#L1228</a>: 		if inittrace.active &amp;&amp; inittrace.id == getg().<b>goid</b> {
+		<a href="../src/runtime/mgcmark.go.html#line-139">mgcmark.go#L139</a>: 			println("gp", gp, "goid", gp.<b>goid</b>,
+		<a href="../src/runtime/mgcmark.go.html#line-736" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-736">#L736</a>: 		print("runtime:scanstack: gp=", gp, ", goid=", gp.<b>goid</b>, ", gp-&gt;atomicstatus=", hex(readgstatus(gp)), "\n")
+		<a href="../src/runtime/mgcmark.go.html#line-742" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-742">#L742</a>: 		print("runtime: gp=", gp, ", goid=", gp.<b>goid</b>, ", gp-&gt;atomicstatus=", readgstatus(gp), "\n")
+		<a href="../src/runtime/mgcmark.go.html#line-747" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-747">#L747</a>: 		print("runtime: gp=", gp, ", goid=", gp.<b>goid</b>, ", gp-&gt;atomicstatus=", readgstatus(gp), "\n")
+		<a href="../src/runtime/mgcmark.go.html#line-786" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-786">#L786</a>: 		println("stack trace goroutine", gp.<b>goid</b>)
+		<a href="../src/runtime/mgcmark.go.html#line-790" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-790">#L790</a>: 		print("scanning async preempted goroutine ", gp.<b>goid</b>, " stack [", hex(gp.stack.lo), ",", hex(gp.stack.hi), ")\n")
+		<a href="../src/runtime/mprof.go.html#line-1067">mprof.go#L1067</a>: 		print("doRecordGoroutineProfile gp1=", gp1.<b>goid</b>, "\n")
+		<a href="../src/runtime/proc.go.html#line-194">proc.go#L194</a>: 		inittrace.id = getg().<b>goid</b>
+		<a href="../src/runtime/proc.go.html#line-783" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-783">#L783</a>: 	print("runtime:   gp: gp=", gp, ", goid=", gp.<b>goid</b>, ", gp-&gt;atomicstatus=", readgstatus(gp), "\n")
+		<a href="../src/runtime/proc.go.html#line-784" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-784">#L784</a>: 	print("runtime: getg:  g=", thisg, ", goid=", thisg.<b>goid</b>, ",  g-&gt;atomicstatus=", readgstatus(thisg), "\n")
+		<a href="../src/runtime/proc.go.html#line-2135" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-2135">#L2135</a>: 	gp.<b>goid</b> = sched.goidgen.Add(1)
+		<a href="../src/runtime/proc.go.html#line-4533" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4533">#L4533</a>: 	newg.parentGoid = callergp.<b>goid</b>
+		<a href="../src/runtime/proc.go.html#line-4569" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4569">#L4569</a>: 	newg.<b>goid</b> = pp.goidcache
+		<a href="../src/runtime/proc.go.html#line-4593" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4593">#L4593</a>: 	if debug.tracebackancestors &lt;= 0 || callergp.<b>goid</b> == 0 {
+		<a href="../src/runtime/proc.go.html#line-4613" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-4613">#L4613</a>: 		goid: callergp.<b>goid</b>,
+		<a href="../src/runtime/proc.go.html#line-5449" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5449">#L5449</a>: 			print("runtime: checkdead: find g ", gp.<b>goid</b>, " in status ", s, "\n")
+		<a href="../src/runtime/proc.go.html#line-5853" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5853">#L5853</a>: 			print(mp.curg.<b>goid</b>)
+		<a href="../src/runtime/proc.go.html#line-5859" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5859">#L5859</a>: 			print(lockedg.<b>goid</b>)
+		<a href="../src/runtime/proc.go.html#line-5867" class="path-duplicate">proc.go</a><a href="../src/runtime/proc.go.html#line-5867">#L5867</a>: 		print("  G", gp.<b>goid</b>, ": status=", readgstatus(gp), "(", gp.waitreason.String(), ") m=")
+		<a href="../src/runtime/runtime2.go.html#line-447">runtime2.go#L447</a>: 	<b>goid</b>         uint64
+		<a href="../src/runtime/stack.go.html#line-1049">stack.go#L1049</a>: 		print("runtime: gp=", gp, ", goid=", gp.<b>goid</b>, ", gp-&gt;status=", hex(readgstatus(gp)), "\n ")
+		<a href="../src/runtime/trace.go.html#line-337">trace.go#L337</a>: 			traceEvent(traceEvGoCreate, -1, gp.<b>goid</b>, uint64(id), stackID)
+		<a href="../src/runtime/trace.go.html#line-342" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-342">#L342</a>: 			traceEvent(traceEvGoWaiting, -1, gp.<b>goid</b>)
+		<a href="../src/runtime/trace.go.html#line-347" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-347">#L347</a>: 			traceEvent(traceEvGoInSyscall, -1, gp.<b>goid</b>)
+		<a href="../src/runtime/trace.go.html#line-356" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-356">#L356</a>: 			traceEvent(traceEvGoCreate, -1, gp.<b>goid</b>, uint64(id), stackID)
+		<a href="../src/runtime/trace.go.html#line-359" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-359">#L359</a>: 			traceEvent(traceEvGoInSyscall, -1, gp.<b>goid</b>)
+		<a href="../src/runtime/trace.go.html#line-547" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-547">#L547</a>: 				println("runtime: got trace reader", g2, g2.<b>goid</b>)
+		<a href="../src/runtime/trace.go.html#line-871" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-871">#L871</a>: 		hdr[1] = gp.<b>goid</b>
+		<a href="../src/runtime/trace.go.html#line-997" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-997">#L997</a>: 	if nstk &gt; 0 &amp;&amp; curgp.<b>goid</b> == 1 {
+		<a href="../src/runtime/trace.go.html#line-1579" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1579">#L1579</a>: 	traceEvent(traceEvGoCreate, 2, newg.<b>goid</b>, uint64(id))
+		<a href="../src/runtime/trace.go.html#line-1587" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1587">#L1587</a>: 		traceEvent(traceEvGoStartLabel, -1, gp.<b>goid</b>, gp.trace.seq, trace.markWorkerLabels[pp.ptr().gcMarkWorkerMode])
+		<a href="../src/runtime/trace.go.html#line-1589" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1589">#L1589</a>: 		traceEvent(traceEvGoStartLocal, -1, gp.<b>goid</b>)
+		<a href="../src/runtime/trace.go.html#line-1592" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1592">#L1592</a>: 		traceEvent(traceEvGoStart, -1, gp.<b>goid</b>, gp.trace.seq)
+		<a href="../src/runtime/trace.go.html#line-1622" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1622">#L1622</a>: 		traceEvent(traceEvGoUnblockLocal, skip, gp.<b>goid</b>)
+		<a href="../src/runtime/trace.go.html#line-1625" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1625">#L1625</a>: 		traceEvent(traceEvGoUnblock, skip, gp.<b>goid</b>, gp.trace.seq)
+		<a href="../src/runtime/trace.go.html#line-1674" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1674">#L1674</a>: 	traceEvent(traceEvGoSysExit, -1, gp.<b>goid</b>, gp.trace.seq, uint64(ts))
+		<a href="../src/runtime/trace.go.html#line-1803" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1803">#L1803</a>: 	traceEvent(traceEvGoInSyscall, -1, gp.<b>goid</b>)
+		<a href="../src/runtime/traceback.go.html#line-205">traceback.go#L205</a>: 			print("runtime: g ", gp.<b>goid</b>, ": unknown pc ", hex(frame.pc), "\n")
+		<a href="../src/runtime/traceback.go.html#line-471" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-471">#L471</a>: 			print("runtime: g ", gp.<b>goid</b>, ": unexpected return pc for ", funcname(f), " called from ", hex(frame.lr), "\n")
+		<a href="../src/runtime/traceback.go.html#line-569" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-569">#L569</a>: 		print("runtime: g", gp.<b>goid</b>, ": frame.sp=", hex(u.frame.sp), " top=", hex(gp.stktopsp), "\n")
+		<a href="../src/runtime/traceback.go.html#line-798" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-798">#L798</a>: 	if f.valid() &amp;&amp; showframe(f.srcFunc(), gp, false, abi.FuncIDNormal) &amp;&amp; gp.<b>goid</b> != 1 {
+		<a href="../src/runtime/traceback.go.html#line-1209" class="path-duplicate">traceback.go</a><a href="../src/runtime/traceback.go.html#line-1209">#L1209</a>: 	print("goroutine ", gp.<b>goid</b>, " [", status)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

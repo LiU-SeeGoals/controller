@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/mat.min</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-954">min</a></b></span>
+
+<span class="title">48 uses</span>
+
+	gonum.org/v1/gonum/mat (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-151">band.go#L151</a>: 	if data != nil &amp;&amp; len(data) != <b>min</b>(r, c+kl)*bc {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-155" class="path-duplicate">band.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-155">#L155</a>: 		data = make([]float64, <b>min</b>(r, c+kl)*bc)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-231" class="path-duplicate">band.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-231">#L231</a>: 	n := <b>min</b>(b.mat.Rows, b.mat.Cols)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-244" class="path-duplicate">band.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-244">#L244</a>: 	for i := 0; i &lt; <b>min</b>(b.mat.Rows, b.mat.Cols+b.mat.KL); i++ {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-245" class="path-duplicate">band.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-245">#L245</a>: 		for j := max(0, i-b.mat.KL); j &lt; <b>min</b>(b.mat.Cols, i+b.mat.KU+1); j++ {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-260" class="path-duplicate">band.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-260">#L260</a>: 	for j := max(0, i-b.mat.KL); j &lt; <b>min</b>(b.mat.Cols, i+b.mat.KU+1); j++ {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-274" class="path-duplicate">band.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-274">#L274</a>: 	for i := 0; i &lt; <b>min</b>(b.mat.Rows, b.mat.Cols+b.mat.KL); i++ {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-291" class="path-duplicate">band.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-291">#L291</a>: 		u := <b>min</b>(nCol, m+kL-i)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-277">cdense.go#L277</a>: 	r = <b>min</b>(r, m.mat.Rows)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-278" class="path-duplicate">cdense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cdense.go.html#line-278">#L278</a>: 	c = <b>min</b>(c, m.mat.Cols)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-105">cholesky.go#L105</a>: 	for k := 0; k &lt;= <b>min</b>(i, j); k++ {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-1035" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-1035">#L1035</a>: 	minij := <b>min</b>(<b>min</b>(i+1, j+1), c.rank)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-306">dense.go#L306</a>: 	n := <b>min</b>(m.mat.Rows, m.mat.Cols)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-469" class="path-duplicate">dense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-469">#L469</a>: 	r = <b>min</b>(r, m.mat.Rows)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-470" class="path-duplicate">dense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-470">#L470</a>: 	c = <b>min</b>(c, m.mat.Cols)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-178">diagonal.go#L178</a>: 	n := <b>min</b>(m.Dims())
+		<a href="../../../../src/gonum.org/v1/gonum/mat/gsvd.go.html#line-180">gsvd.go#L180</a>: 	d := <b>min</b>(r, c)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/gsvd.go.html#line-205" class="path-duplicate">gsvd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/gsvd.go.html#line-205">#L205</a>: 	d := <b>min</b>(r, c)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/gsvd.go.html#line-212" class="path-duplicate">gsvd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/gsvd.go.html#line-212">#L212</a>: 	copy(s, gsvd.s1[k:<b>min</b>(r, c)])
+		<a href="../../../../src/gonum.org/v1/gonum/mat/gsvd.go.html#line-230" class="path-duplicate">gsvd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/gsvd.go.html#line-230">#L230</a>: 	d := <b>min</b>(r, c)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/gsvd.go.html#line-255" class="path-duplicate">gsvd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/gsvd.go.html#line-255">#L255</a>: 	h := <b>min</b>(k+l, r)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/gsvd.go.html#line-306" class="path-duplicate">gsvd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/gsvd.go.html#line-306">#L306</a>: 	for i := k; i &lt; <b>min</b>(r, k+l); i++ {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/gsvd.go.html#line-334" class="path-duplicate">gsvd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/gsvd.go.html#line-334">#L334</a>: 	for i := 0; i &lt; <b>min</b>(l, r-k); i++ {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/lq.go.html#line-58">lq.go#L58</a>: 	k := <b>min</b>(m, n)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-954">matrix.go#L954</a>: func <b>min</b>(a, b int) int {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/qr.go.html#line-58">qr.go#L58</a>: 	k := <b>min</b>(m, n)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/shadow.go.html#line-48">shadow.go#L48</a>: 	if rectanglesOverlap(off, a.Cols, b.Cols, <b>min</b>(a.Stride, b.Stride)) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/shadow.go.html#line-187" class="path-duplicate">shadow.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/shadow.go.html#line-187">#L187</a>: 	inc := <b>min</b>(mat.Inc, a.Inc)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/shadow_complex.go.html#line-50">shadow_complex.go#L50</a>: 	if rectanglesOverlap(off, a.Cols, b.Cols, <b>min</b>(a.Stride, b.Stride)) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-103">svd.go#L103</a>: 			Cols:   <b>min</b>(m, n),
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-104" class="path-duplicate">svd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-104">#L104</a>: 			Stride: <b>min</b>(m, n),
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-105" class="path-duplicate">svd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-105">#L105</a>: 			Data:   use(svd.u.Data, m*<b>min</b>(m, n)),
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-121" class="path-duplicate">svd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-121">#L121</a>: 			Rows:   <b>min</b>(m, n),
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-124" class="path-duplicate">svd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-124">#L124</a>: 			Data:   use(svd.vt.Data, <b>min</b>(m, n)*n),
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-134" class="path-duplicate">svd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-134">#L134</a>: 	svd.s = use(svd.s, <b>min</b>(m, n))
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symband.go.html#line-191">symband.go#L191</a>: 		u := <b>min</b>(1+s.mat.K, s.mat.N-i)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symband.go.html#line-212" class="path-duplicate">symband.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/symband.go.html#line-212">#L212</a>: 		for j := max(0, i-s.mat.K); j &lt; <b>min</b>(s.mat.N, i+s.mat.K+1); j++ {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symband.go.html#line-227" class="path-duplicate">symband.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/symband.go.html#line-227">#L227</a>: 	for j := max(0, i-s.mat.K); j &lt; <b>min</b>(s.mat.N, i+s.mat.K+1); j++ {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-299">symmetric.go#L299</a>: 	n = <b>min</b>(n, s.mat.N)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-399">triangular.go#L399</a>: 	r = <b>min</b>(r, t.mat.N)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-400" class="path-duplicate">triangular.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-400">#L400</a>: 	c = <b>min</b>(c, t.mat.N)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-369">triband.go#L369</a>: 			for j := i; j &lt; <b>min</b>(i+t.mat.K+1, t.mat.N); j++ {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-395" class="path-duplicate">triband.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-395">#L395</a>: 		for j := i; j &lt; <b>min</b>(i+t.mat.K+1, t.mat.N); j++ {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-438" class="path-duplicate">triband.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-438">#L438</a>: 			u := <b>min</b>(1+t.mat.K, t.mat.N-i)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-647" class="path-duplicate">triband.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-647">#L647</a>: 					ilen := <b>min</b>(k+1, n-i)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-676" class="path-duplicate">triband.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-676">#L676</a>: 			ilen := <b>min</b>(k+1, n-i)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-249">vector.go#L249</a>: 	n := <b>min</b>(v.Len(), a.Len())
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

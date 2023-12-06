@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/mat.untransposeExtract</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-238">untransposeExtract</a></b></span>
+
+<span class="title">43 uses</span>
+
+	gonum.org/v1/gonum/mat (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/band.go.html#line-351">band.go#L351</a>: 	xMat, _ := <b>untransposeExtract</b>(x)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-422">dense.go#L422</a>: 	aU, trans := <b>untransposeExtract</b>(a)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-475" class="path-duplicate">dense.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-475">#L475</a>: 	aU, trans := <b>untransposeExtract</b>(a)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-24">dense_arithmetic.go#L24</a>: 	aU, aTrans := <b>untransposeExtract</b>(a)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-25" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-25">#L25</a>: 	bU, bTrans := <b>untransposeExtract</b>(b)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-73" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-73">#L73</a>: 	aU, aTrans := <b>untransposeExtract</b>(a)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-74" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-74">#L74</a>: 	bU, bTrans := <b>untransposeExtract</b>(b)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-123" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-123">#L123</a>: 	aU, aTrans := <b>untransposeExtract</b>(a)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-124" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-124">#L124</a>: 	bU, bTrans := <b>untransposeExtract</b>(b)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-173" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-173">#L173</a>: 	aU, aTrans := <b>untransposeExtract</b>(a)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-174" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-174">#L174</a>: 	bU, bTrans := <b>untransposeExtract</b>(b)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-224" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-224">#L224</a>: 	aU, aTrans := <b>untransposeExtract</b>(a)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-286" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-286">#L286</a>: 	aU, aTrans := <b>untransposeExtract</b>(a)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-287" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-287">#L287</a>: 	bU, bTrans := <b>untransposeExtract</b>(b)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-705" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-705">#L705</a>: 	aU, aTrans := <b>untransposeExtract</b>(a)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-745" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-745">#L745</a>: 	aU, aTrans := <b>untransposeExtract</b>(a)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-792" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-792">#L792</a>: 		aU, _ := <b>untransposeExtract</b>(a)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-800" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-800">#L800</a>: 	xU, _ := <b>untransposeExtract</b>(x)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-808" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-808">#L808</a>: 	yU, _ := <b>untransposeExtract</b>(y)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-847" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-847">#L847</a>: 	xU, _ := <b>untransposeExtract</b>(x)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-855" class="path-duplicate">dense_arithmetic.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/dense_arithmetic.go.html#line-855">#L855</a>: 	yU, _ := <b>untransposeExtract</b>(y)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-238">matrix.go#L238</a>: func <b>untransposeExtract</b>(a Matrix) (Matrix, bool) {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-783" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-783">#L783</a>: 	m, trans := <b>untransposeExtract</b>(a)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-940" class="path-duplicate">matrix.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-940">#L940</a>: 	m, _ := <b>untransposeExtract</b>(a)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symband.go.html#line-295">symband.go#L295</a>: 	xMat, _ := <b>untransposeExtract</b>(x)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-341">symmetric.go#L341</a>: 	xU, _ := <b>untransposeExtract</b>(x)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-367" class="path-duplicate">symmetric.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-367">#L367</a>: 	xMat, aTrans := <b>untransposeExtract</b>(x)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-459" class="path-duplicate">symmetric.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-459">#L459</a>: 	xU, _ := <b>untransposeExtract</b>(x)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-467" class="path-duplicate">symmetric.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-467">#L467</a>: 	yU, _ := <b>untransposeExtract</b>(y)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-640">triband.go#L640</a>: 	sU, _ := <b>untransposeExtract</b>(s)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-215">tridiag.go#L215</a>: 	xMat, _ := <b>untransposeExtract</b>(x)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-344">vector.go#L344</a>: 	aU, _ := <b>untransposeExtract</b>(a)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-353" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-353">#L353</a>: 	bU, _ := <b>untransposeExtract</b>(b)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-408" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-408">#L408</a>: 	aU, _ := <b>untransposeExtract</b>(a)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-409" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-409">#L409</a>: 	bU, _ := <b>untransposeExtract</b>(b)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-451" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-451">#L451</a>: 	aU, _ := <b>untransposeExtract</b>(a)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-452" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-452">#L452</a>: 	bU, _ := <b>untransposeExtract</b>(b)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-495" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-495">#L495</a>: 	aU, _ := <b>untransposeExtract</b>(a)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-496" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-496">#L496</a>: 	bU, _ := <b>untransposeExtract</b>(b)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-544" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-544">#L544</a>: 	aU, _ := <b>untransposeExtract</b>(a)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-545" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-545">#L545</a>: 	bU, _ := <b>untransposeExtract</b>(b)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-590" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-590">#L590</a>: 	aU, trans := <b>untransposeExtract</b>(a)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-593" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-593">#L593</a>: 	bU, _ := <b>untransposeExtract</b>(b)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

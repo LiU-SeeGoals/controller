@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/blas.Float64Level1.Drot</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../../pkg/gonum.org/v1/gonum/blas.html">gonum.org/v1/gonum/blas</a>.<a href="../../../../src/gonum.org/v1/gonum/blas/blas.go.html#line-130">Float64Level1</a>.<a href="../../../../src/gonum.org/v1/gonum/blas/blas.go.html#line-140">Drot</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">26 uses</span>
+
+	gonum.org/v1/gonum/blas (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/blas/blas.go.html#line-140">blas.go#L140</a>: 	<b>Drot</b>(n int, x []float64, incX int, y []float64, incY int, c float64, s float64)
+
+	<a href="../../../../pkg/gonum.org/v1/gonum/blas/blas64.html">gonum.org/v1/gonum/blas/blas64</a>
+		<a href="../../../../src/gonum.org/v1/gonum/blas/blas64/blas64.go.html#line-228">blas64.go#L228</a>: 	blas64.<b>Drot</b>(x.N, x.Data, x.Inc, y.Data, y.Inc, c, s)
+
+	<a href="../../../../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-225">dbdsqr.go#L225</a>: 					bi.<b>Drot</b>(ncvt, vt[(m-2)*ldvt:], 1, vt[(m-1)*ldvt:], 1, cosr, sinr)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-228" class="path-duplicate">dbdsqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-228">#L228</a>: 					bi.<b>Drot</b>(nru, u[m-2:], ldu, u[m-1:], ldu, cosl, sinl)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-231" class="path-duplicate">dbdsqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dbdsqr.go.html#line-231">#L231</a>: 					bi.<b>Drot</b>(ncc, c[(m-2)*ldc:], 1, c[(m-1)*ldc:], 1, cosl, sinl)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-247">dgeev.go#L247</a>: 			bi.<b>Drot</b>(n, vl[i:], ldvl, vl[i+1:], ldvl, cs, sn)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-274" class="path-duplicate">dgeev.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dgeev.go.html#line-274">#L274</a>: 			bi.<b>Drot</b>(n, vr[i:], ldvr, vr[i+1:], ldvr, cs, sn)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaexc.go.html#line-92">dlaexc.go#L92</a>: 			bi.<b>Drot</b>(n-j3, t[j1*ldt+j3:], 1, t[j2*ldt+j3:], 1, cs, sn)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaexc.go.html#line-95" class="path-duplicate">dlaexc.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaexc.go.html#line-95">#L95</a>: 			bi.<b>Drot</b>(j1, t[j1:], ldt, t[j2:], ldt, cs, sn)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaexc.go.html#line-103" class="path-duplicate">dlaexc.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaexc.go.html#line-103">#L103</a>: 			bi.<b>Drot</b>(n, q[j1:], ldq, q[j2:], ldq, cs, sn)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaexc.go.html#line-242" class="path-duplicate">dlaexc.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaexc.go.html#line-242">#L242</a>: 			bi.<b>Drot</b>(n-j1-2, t[j1*ldt+j1+2:], 1, t[j2*ldt+j1+2:], 1, cs, sn)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaexc.go.html#line-245" class="path-duplicate">dlaexc.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaexc.go.html#line-245">#L245</a>: 			bi.<b>Drot</b>(j1, t[j1:], ldt, t[j2:], ldt, cs, sn)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaexc.go.html#line-248" class="path-duplicate">dlaexc.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaexc.go.html#line-248">#L248</a>: 			bi.<b>Drot</b>(n, q[j1:], ldq, q[j2:], ldq, cs, sn)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaexc.go.html#line-260" class="path-duplicate">dlaexc.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaexc.go.html#line-260">#L260</a>: 			bi.<b>Drot</b>(n-j3-2, t[j3*ldt+j3+2:], 1, t[j4*ldt+j3+2:], 1, cs, sn)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaexc.go.html#line-262" class="path-duplicate">dlaexc.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaexc.go.html#line-262">#L262</a>: 		bi.<b>Drot</b>(j3, t[j3:], ldt, t[j4:], ldt, cs, sn)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaexc.go.html#line-264" class="path-duplicate">dlaexc.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlaexc.go.html#line-264">#L264</a>: 			bi.<b>Drot</b>(n, q[j3:], ldq, q[j4:], ldq, cs, sn)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlahqr.go.html#line-431">dlahqr.go#L431</a>: 					bi.<b>Drot</b>(i2-i, h[(i-1)*ldh+i+1:], 1, h[i*ldh+i+1:], 1, cs, sn)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlahqr.go.html#line-433" class="path-duplicate">dlahqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlahqr.go.html#line-433">#L433</a>: 				bi.<b>Drot</b>(i-i1-1, h[i1*ldh+i-1:], ldh, h[i1*ldh+i:], ldh, cs, sn)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlahqr.go.html#line-438" class="path-duplicate">dlahqr.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dlahqr.go.html#line-438">#L438</a>: 				bi.<b>Drot</b>(nz, z[iloz*ldz+i-1:], ldz, z[iloz*ldz+i:], ldz, cs, sn)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtgsja.go.html#line-286">dtgsja.go#L286</a>: 					bi.<b>Drot</b>(l, a[(k+j)*lda+n-l:], 1, a[(k+i)*lda+n-l:], 1, csu, snu)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtgsja.go.html#line-290" class="path-duplicate">dtgsja.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtgsja.go.html#line-290">#L290</a>: 				bi.<b>Drot</b>(l, b[j*ldb+n-l:], 1, b[i*ldb+n-l:], 1, csv, snv)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtgsja.go.html#line-294" class="path-duplicate">dtgsja.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtgsja.go.html#line-294">#L294</a>: 				bi.<b>Drot</b>(min(k+l, m), a[n-l+j:], lda, a[n-l+i:], lda, csq, snq)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtgsja.go.html#line-295" class="path-duplicate">dtgsja.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtgsja.go.html#line-295">#L295</a>: 				bi.<b>Drot</b>(l, b[n-l+j:], ldb, b[n-l+i:], ldb, csq, snq)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtgsja.go.html#line-311" class="path-duplicate">dtgsja.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtgsja.go.html#line-311">#L311</a>: 					bi.<b>Drot</b>(m, u[k+j:], ldu, u[k+i:], ldu, csu, snu)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtgsja.go.html#line-314" class="path-duplicate">dtgsja.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtgsja.go.html#line-314">#L314</a>: 					bi.<b>Drot</b>(p, v[j:], ldv, v[i:], ldv, csv, snv)
+		<a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtgsja.go.html#line-317" class="path-duplicate">dtgsja.go</a><a href="../../../../src/gonum.org/v1/gonum/lapack/gonum/dtgsja.go.html#line-317">#L317</a>: 					bi.<b>Drot</b>(n, q[n-l+j:], ldq, q[n-l+i:], ldq, csq, snq)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

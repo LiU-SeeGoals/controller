@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.ptrBits</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">const <b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/mbitmap.go.html#line-384">ptrBits</a></b></span>
+
+<span class="title">40 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/arena.go.html#line-568">arena.go#L568</a>: 	for i := uintptr(0); i &lt; nb; i += <b>ptrBits</b> {
+		<a href="../src/runtime/arena.go.html#line-570" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-570">#L570</a>: 		if k &gt; <b>ptrBits</b> {
+		<a href="../src/runtime/arena.go.html#line-571" class="path-duplicate">arena.go</a><a href="../src/runtime/arena.go.html#line-571">#L571</a>: 			k = <b>ptrBits</b>
+		<a href="../src/runtime/mbitmap.go.html#line-384">mbitmap.go#L384</a>: const <b>ptrBits</b> = 8 * goarch.PtrSize
+		<a href="../src/runtime/mbitmap.go.html#line-419" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-419">#L419</a>: 	idx := word / <b>ptrBits</b>
+		<a href="../src/runtime/mbitmap.go.html#line-420" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-420">#L420</a>: 	off := word % <b>ptrBits</b>
+		<a href="../src/runtime/mbitmap.go.html#line-424" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-424">#L424</a>: 	valid := <b>ptrBits</b> - off
+		<a href="../src/runtime/mbitmap.go.html#line-431" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-431">#L431</a>: 		mask &amp;= 1&lt;&lt;(nptr&amp;(<b>ptrBits</b>-1)) - 1
+		<a href="../src/runtime/mbitmap.go.html#line-466" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-466">#L466</a>: 			h.mask ^= uintptr(1) &lt;&lt; (i &amp; (<b>ptrBits</b> - 1))
+		<a href="../src/runtime/mbitmap.go.html#line-509" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-509">#L509</a>: 	h.mask ^= uintptr(1) &lt;&lt; (i &amp; (<b>ptrBits</b> - 1))
+		<a href="../src/runtime/mbitmap.go.html#line-744" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-744">#L744</a>: 	for i := uintptr(0); i &lt; nptrs; i += <b>ptrBits</b> {
+		<a href="../src/runtime/mbitmap.go.html#line-745" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-745">#L745</a>: 		h = h.write(^uintptr(0), <b>ptrBits</b>)
+		<a href="../src/runtime/mbitmap.go.html#line-781" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-781">#L781</a>: 	h.low = addr / goarch.PtrSize % <b>ptrBits</b>
+		<a href="../src/runtime/mbitmap.go.html#line-796" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-796">#L796</a>: 	if h.valid+valid &lt;= <b>ptrBits</b> {
+		<a href="../src/runtime/mbitmap.go.html#line-806" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-806">#L806</a>: 	h.mask = bits &gt;&gt; (<b>ptrBits</b> - h.valid) // leftover for next word
+		<a href="../src/runtime/mbitmap.go.html#line-807" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-807">#L807</a>: 	h.valid += valid - <b>ptrBits</b>           // have h.valid+valid bits, writing ptrBits of them
+		<a href="../src/runtime/mbitmap.go.html#line-813" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-813">#L813</a>: 	idx := h.addr / (<b>ptrBits</b> * goarch.PtrSize) % heapArenaBitmapWords
+		<a href="../src/runtime/mbitmap.go.html#line-827" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-827">#L827</a>: 	h.addr += <b>ptrBits</b> * goarch.PtrSize
+		<a href="../src/runtime/mbitmap.go.html#line-838" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-838">#L838</a>: 	for words &gt; <b>ptrBits</b> {
+		<a href="../src/runtime/mbitmap.go.html#line-839" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-839">#L839</a>: 		h = h.write(0, <b>ptrBits</b>)
+		<a href="../src/runtime/mbitmap.go.html#line-840" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-840">#L840</a>: 		words -= <b>ptrBits</b>
+		<a href="../src/runtime/mbitmap.go.html#line-855" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-855">#L855</a>: 		z := <b>ptrBits</b> - h.valid
+		<a href="../src/runtime/mbitmap.go.html#line-866" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-866">#L866</a>: 	idx := h.addr / (<b>ptrBits</b> * goarch.PtrSize) % heapArenaBitmapWords
+		<a href="../src/runtime/mbitmap.go.html#line-883" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-883">#L883</a>: 	h.addr += <b>ptrBits</b> * goarch.PtrSize
+		<a href="../src/runtime/mbitmap.go.html#line-894" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-894">#L894</a>: 		idx := h.addr / (<b>ptrBits</b> * goarch.PtrSize) % heapArenaBitmapWords
+		<a href="../src/runtime/mbitmap.go.html#line-895" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-895">#L895</a>: 		if zeros &lt; <b>ptrBits</b> {
+		<a href="../src/runtime/mbitmap.go.html#line-898" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-898">#L898</a>: 		} else if zeros == <b>ptrBits</b> {
+		<a href="../src/runtime/mbitmap.go.html#line-903" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-903">#L903</a>: 			zeros -= <b>ptrBits</b>
+		<a href="../src/runtime/mbitmap.go.html#line-906" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-906">#L906</a>: 		h.addr += <b>ptrBits</b> * goarch.PtrSize
+		<a href="../src/runtime/mbitmap.go.html#line-1028" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-1028">#L1028</a>: 		if ptrs &lt;= <b>ptrBits</b> { // Single small element
+		<a href="../src/runtime/mbitmap.go.html#line-1034" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-1034">#L1034</a>: 				h = h.write(readUintptr(p), <b>ptrBits</b>)
+		<a href="../src/runtime/mbitmap.go.html#line-1035" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-1035">#L1035</a>: 				p = addb(p, <b>ptrBits</b>/8)
+		<a href="../src/runtime/mbitmap.go.html#line-1036" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-1036">#L1036</a>: 				ptrs -= <b>ptrBits</b>
+		<a href="../src/runtime/mbitmap.go.html#line-1037" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-1037">#L1037</a>: 				if ptrs &lt;= <b>ptrBits</b> {
+		<a href="../src/runtime/mbitmap.go.html#line-1046" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-1046">#L1046</a>: 		if words &lt;= <b>ptrBits</b> {               // Repeated small element
+		<a href="../src/runtime/mbitmap.go.html#line-1050" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-1050">#L1050</a>: 			for words &lt;= <b>ptrBits</b>/2 {
+		<a href="../src/runtime/mbitmap.go.html#line-1071" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-1071">#L1071</a>: 				for j &gt; <b>ptrBits</b> {
+		<a href="../src/runtime/mbitmap.go.html#line-1072" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-1072">#L1072</a>: 					h = h.write(readUintptr(p), <b>ptrBits</b>)
+		<a href="../src/runtime/mbitmap.go.html#line-1073" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-1073">#L1073</a>: 					p = addb(p, <b>ptrBits</b>/8)
+		<a href="../src/runtime/mbitmap.go.html#line-1074" class="path-duplicate">mbitmap.go</a><a href="../src/runtime/mbitmap.go.html#line-1074">#L1074</a>: 					j -= <b>ptrBits</b>
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

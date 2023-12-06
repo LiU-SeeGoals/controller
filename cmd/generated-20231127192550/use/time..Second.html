@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: time.Second</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">const <b><a href="../pkg/time.html">time</a>.<a href="../src/time/time.go.html#line-635">Second</a></b></span>
+
+<span class="title">21 uses</span>
+
+	time (current package)
+		<a href="../src/time/format.go.html#line-1579">format.go#L1579</a>: 	"s":  uint64(<b>Second</b>),
+		<a href="../src/time/time.go.html#line-635">time.go#L635</a>: 	<b>Second</b>               = 1000 * Millisecond
+		<a href="../src/time/time.go.html#line-636" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-636">#L636</a>: 	Minute               = 60 * <b>Second</b>
+		<a href="../src/time/time.go.html#line-655" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-655">#L655</a>: 	if u &lt; uint64(<b>Second</b>) {
+		<a href="../src/time/time.go.html#line-778" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-778">#L778</a>: 	sec := d / <b>Second</b>
+		<a href="../src/time/time.go.html#line-779" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-779">#L779</a>: 	nsec := d % <b>Second</b>
+		<a href="../src/time/time.go.html#line-897" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-897">#L897</a>: 	d := Duration(t.sec()-u.sec())*<b>Second</b> + Duration(t.nsec()-u.nsec())
+		<a href="../src/time/time.go.html#line-1577" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-1577">#L1577</a>: 	case d &lt; <b>Second</b> &amp;&amp; <b>Second</b>%(d+d) == 0:
+		<a href="../src/time/time.go.html#line-1582" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-1582">#L1582</a>: 	case d%<b>Second</b> == 0:
+		<a href="../src/time/time.go.html#line-1583" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-1583">#L1583</a>: 		d1 := int64(d / <b>Second</b>)
+		<a href="../src/time/time.go.html#line-1585" class="path-duplicate">time.go</a><a href="../src/time/time.go.html#line-1585">#L1585</a>: 		r = Duration(sec%d1)*<b>Second</b> + Duration(nsec)
+
+	<a href="../pkg/net.html">net</a>
+		<a href="../src/net/dial.go.html#line-18">dial.go#L18</a>: 	defaultTCPKeepAlive = 15 * time.<b>Second</b>
+		<a href="../src/net/dial.go.html#line-209" class="path-duplicate">dial.go</a><a href="../src/net/dial.go.html#line-209">#L209</a>: 	const saneMinimum = 2 * time.<b>Second</b>
+		<a href="../src/net/dnsclient_unix.go.html#line-385">dnsclient_unix.go#L385</a>: 	if conf.lastChecked.After(now.Add(-5 * time.<b>Second</b>)) {
+		<a href="../src/net/dnsconfig_unix.go.html#line-21">dnsconfig_unix.go#L21</a>: 		timeout:  5 * time.<b>Second</b>,
+		<a href="../src/net/dnsconfig_unix.go.html#line-91" class="path-duplicate">dnsconfig_unix.go</a><a href="../src/net/dnsconfig_unix.go.html#line-91">#L91</a>: 					conf.timeout = time.Duration(n) * time.<b>Second</b>
+		<a href="../src/net/hosts.go.html#line-16">hosts.go#L16</a>: const cacheMaxAge = 5 * time.<b>Second</b>
+		<a href="../src/net/interface.go.html#line-200">interface.go#L200</a>: 	if !force &amp;&amp; zc.lastFetched.After(now.Add(-60*time.<b>Second</b>)) {
+		<a href="../src/net/nss.go.html#line-59">nss.go#L59</a>: 	if conf.lastChecked.After(now.Add(-5 * time.<b>Second</b>)) {
+		<a href="../src/net/tcpsockopt_unix.go.html#line-17">tcpsockopt_unix.go#L17</a>: 	secs := int(roundDurationUp(d, time.<b>Second</b>))
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

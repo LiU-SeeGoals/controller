@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: internal/abi.Method.Name</title>
+<link href="../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../pkg/internal/abi.html">internal/abi</a>.<a href="../../src/internal/abi/type.go.html#line-186">Method</a>.<a href="../../src/internal/abi/type.go.html#line-187">Name</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">15 uses</span>
+
+	internal/abi (current package)
+		<a href="../../src/internal/abi/type.go.html#line-187">type.go#L187</a>: 	<b>Name</b> NameOff // name of method
+
+	<a href="../../pkg/internal/reflectlite.html">internal/reflectlite</a>
+		<a href="../../src/internal/reflectlite/type.go.html#line-488">type.go#L488</a>: 		vmName := rV.nameOff(vm.<b>Name</b>)
+
+	<a href="../../pkg/reflect.html">reflect</a>
+		<a href="../../src/reflect/type.go.html#line-594">type.go#L594</a>: 	pname := t.nameOff(p.<b>Name</b>)
+		<a href="../../src/reflect/type.go.html#line-636" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-636">#L636</a>: 		if !(t.nameOff(methods[h].<b>Name</b>).Name() &gt;= name) {
+		<a href="../../src/reflect/type.go.html#line-643" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-643">#L643</a>: 	if i &lt; len(methods) &amp;&amp; name == t.nameOff(methods[i].<b>Name</b>).Name() {
+		<a href="../../src/reflect/type.go.html#line-1329" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-1329">#L1329</a>: 		vmName := nameOffFor(V, vm.<b>Name</b>)
+		<a href="../../src/reflect/type.go.html#line-2262" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2262">#L2262</a>: 						<b>Name</b>: resolveReflectName(ift.nameOff(m.Name)),
+		<a href="../../src/reflect/type.go.html#line-2279" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2279">#L2279</a>: 						mname := nameOffFor(ft, m.<b>Name</b>)
+		<a href="../../src/reflect/type.go.html#line-2286" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2286">#L2286</a>: 							<b>Name</b>: resolveReflectName(mname),
+		<a href="../../src/reflect/type.go.html#line-2295" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2295">#L2295</a>: 						mname := nameOffFor(ft, m.<b>Name</b>)
+		<a href="../../src/reflect/type.go.html#line-2302" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2302">#L2302</a>: 							<b>Name</b>: resolveReflectName(mname),
+		<a href="../../src/reflect/type.go.html#line-2319" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2319">#L2319</a>: 						mname := nameOffFor(ft, m.<b>Name</b>)
+		<a href="../../src/reflect/type.go.html#line-2326" class="path-duplicate">type.go</a><a href="../../src/reflect/type.go.html#line-2326">#L2326</a>: 							<b>Name</b>: resolveReflectName(mname),
+		<a href="../../src/reflect/value.go.html#line-912">value.go#L912</a>: 		if !nameOffFor(v.typ(), m.<b>Name</b>).IsExported() {
+
+	<a href="../../pkg/runtime.html">runtime</a>
+		<a href="../../src/runtime/iface.go.html#line-220">iface.go#L220</a>: 			tname := rtyp.nameOff(t.<b>Name</b>)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

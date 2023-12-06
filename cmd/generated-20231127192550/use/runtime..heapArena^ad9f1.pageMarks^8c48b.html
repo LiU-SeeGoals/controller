@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.heapArena.pageMarks</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/mheap.go.html#line-237">heapArena</a>.<a href="../src/runtime/mheap.go.html#line-292">pageMarks</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">10 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/mgc.go.html#line-1618">mgc.go#L1618</a>: 		for i := range ha.<b>pageMarks</b> {
+		<a href="../src/runtime/mgc.go.html#line-1619" class="path-duplicate">mgc.go</a><a href="../src/runtime/mgc.go.html#line-1619">#L1619</a>: 			ha.<b>pageMarks</b>[i] = 0
+		<a href="../src/runtime/mgcmark.go.html#line-1487">mgcmark.go#L1487</a>: 		if arena.<b>pageMarks</b>[pageIdx]&amp;pageMask == 0 {
+		<a href="../src/runtime/mgcmark.go.html#line-1488" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-1488">#L1488</a>: 			atomic.Or8(&amp;arena.<b>pageMarks</b>[pageIdx], pageMask)
+		<a href="../src/runtime/mgcmark.go.html#line-1575" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-1575">#L1575</a>: 	if arena.<b>pageMarks</b>[pageIdx]&amp;pageMask == 0 {
+		<a href="../src/runtime/mgcmark.go.html#line-1576" class="path-duplicate">mgcmark.go</a><a href="../src/runtime/mgcmark.go.html#line-1576">#L1576</a>: 		atomic.Or8(&amp;arena.<b>pageMarks</b>[pageIdx], pageMask)
+		<a href="../src/runtime/mheap.go.html#line-292">mheap.go#L292</a>: 	<b>pageMarks</b> [pagesPerArena / 8]uint8
+		<a href="../src/runtime/mheap.go.html#line-885" class="path-duplicate">mheap.go</a><a href="../src/runtime/mheap.go.html#line-885">#L885</a>: 		marked := ha.<b>pageMarks</b>[arenaPage/8:]
+		<a href="../src/runtime/mwbbuf.go.html#line-254">mwbbuf.go#L254</a>: 		if arena.<b>pageMarks</b>[pageIdx]&amp;pageMask == 0 {
+		<a href="../src/runtime/mwbbuf.go.html#line-255" class="path-duplicate">mwbbuf.go</a><a href="../src/runtime/mwbbuf.go.html#line-255">#L255</a>: 			atomic.Or8(&amp;arena.<b>pageMarks</b>[pageIdx], pageMask)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

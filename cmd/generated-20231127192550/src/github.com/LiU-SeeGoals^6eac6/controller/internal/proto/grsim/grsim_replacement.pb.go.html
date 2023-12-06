@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: grsim_replacement.pb.go in package github.com/LiU-SeeGoals/controller/internal/proto/grsim</title>
+<link href="../../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	grsim_replacement.pb.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../../pkg/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim.html">github.com/LiU-SeeGoals/controller/internal/proto/grsim</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10],
+input[id=r11]:checked ~pre label[for=r11],
+input[id=r12]:checked ~pre label[for=r12],
+input[id=r13]:checked ~pre label[for=r13],
+input[id=r14]:checked ~pre label[for=r14],
+input[id=r15]:checked ~pre label[for=r15],
+input[id=r16]:checked ~pre label[for=r16],
+input[id=r17]:checked ~pre label[for=r17],
+input[id=r18]:checked ~pre label[for=r18],
+input[id=r19]:checked ~pre label[for=r19],
+input[id=r20]:checked ~pre label[for=r20],
+input[id=r21]:checked ~pre label[for=r21],
+input[id=r22]:checked ~pre label[for=r22],
+input[id=r23]:checked ~pre label[for=r23],
+input[id=r24]:checked ~pre label[for=r24],
+input[id=r25]:checked ~pre label[for=r25],
+input[id=r26]:checked ~pre label[for=r26],
+input[id=r27]:checked ~pre label[for=r27],
+input[id=r28]:checked ~pre label[for=r28],
+input[id=r29]:checked ~pre label[for=r29],
+input[id=r30]:checked ~pre label[for=r30],
+input[id=r31]:checked ~pre label[for=r31],
+input[id=r32]:checked ~pre label[for=r32],
+input[id=r33]:checked ~pre label[for=r33],
+input[id=r34]:checked ~pre label[for=r34],
+input[id=r35]:checked ~pre label[for=r35],
+input[id=r36]:checked ~pre label[for=r36],
+input[id=r37]:checked ~pre label[for=r37],
+input[id=r38]:checked ~pre label[for=r38],
+input[id=r39]:checked ~pre label[for=r39],
+input[id=r40]:checked ~pre label[for=r40],
+input[id=r41]:checked ~pre label[for=r41],
+input[id=r42]:checked ~pre label[for=r42],
+input[id=r43]:checked ~pre label[for=r43],
+input[id=r44]:checked ~pre label[for=r44],
+input[id=r45]:checked ~pre label[for=r45],
+input[id=r46]:checked ~pre label[for=r46],
+input[id=r47]:checked ~pre label[for=r47],
+input[id=r48]:checked ~pre label[for=r48],
+input[id=r49]:checked ~pre label[for=r49],
+input[id=r50]:checked ~pre label[for=r50],
+input[id=r51]:checked ~pre label[for=r51],
+input[id=r52]:checked ~pre label[for=r52],
+input[id=r53]:checked ~pre label[for=r53],
+input[id=r54]:checked ~pre label[for=r54],
+input[id=r55]:checked ~pre label[for=r55],
+input[id=r56]:checked ~pre label[for=r56],
+input[id=r57]:checked ~pre label[for=r57],
+input[id=r58]:checked ~pre label[for=r58],
+input[id=r59]:checked ~pre label[for=r59],
+input[id=r60]:checked ~pre label[for=r60],
+input[id=r61]:checked ~pre label[for=r61],
+input[id=r62]:checked ~pre label[for=r62],
+input[id=r63]:checked ~pre label[for=r63],
+input[id=r64]:checked ~pre label[for=r64],
+input[id=r65]:checked ~pre label[for=r65],
+input[id=r66]:checked ~pre label[for=r66],
+input[id=r67]:checked ~pre label[for=r67],
+input[id=r68]:checked ~pre label[for=r68],
+input[id=r69]:checked ~pre label[for=r69],
+input[id=r70]:checked ~pre label[for=r70],
+input[id=r71]:checked ~pre label[for=r71],
+input[id=r72]:checked ~pre label[for=r72],
+input[id=r73]:checked ~pre label[for=r73],
+input[id=r74]:checked ~pre label[for=r74],
+input[id=r75]:checked ~pre label[for=r75],
+input[id=r76]:checked ~pre label[for=r76],
+input[id=r77]:checked ~pre label[for=r77],
+input[id=r78]:checked ~pre label[for=r78],
+input[id=r79]:checked ~pre label[for=r79],
+input[id=r80]:checked ~pre label[for=r80],
+input[id=r81]:checked ~pre label[for=r81],
+input[id=r82]:checked ~pre label[for=r82],
+input[id=r83]:checked ~pre label[for=r83],
+input[id=r84]:checked ~pre label[for=r84],
+input[id=r85]:checked ~pre label[for=r85]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1,
+input[id=i2]:checked ~pre .i2
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="r11" type="radio" name="g"/>
+<input id="r12" type="radio" name="g"/>
+<input id="r13" type="radio" name="g"/>
+<input id="r14" type="radio" name="g"/>
+<input id="r15" type="radio" name="g"/>
+<input id="r16" type="radio" name="g"/>
+<input id="r17" type="radio" name="g"/>
+<input id="r18" type="radio" name="g"/>
+<input id="r19" type="radio" name="g"/>
+<input id="r20" type="radio" name="g"/>
+<input id="r21" type="radio" name="g"/>
+<input id="r22" type="radio" name="g"/>
+<input id="r23" type="radio" name="g"/>
+<input id="r24" type="radio" name="g"/>
+<input id="r25" type="radio" name="g"/>
+<input id="r26" type="radio" name="g"/>
+<input id="r27" type="radio" name="g"/>
+<input id="r28" type="radio" name="g"/>
+<input id="r29" type="radio" name="g"/>
+<input id="r30" type="radio" name="g"/>
+<input id="r31" type="radio" name="g"/>
+<input id="r32" type="radio" name="g"/>
+<input id="r33" type="radio" name="g"/>
+<input id="r34" type="radio" name="g"/>
+<input id="r35" type="radio" name="g"/>
+<input id="r36" type="radio" name="g"/>
+<input id="r37" type="radio" name="g"/>
+<input id="r38" type="radio" name="g"/>
+<input id="r39" type="radio" name="g"/>
+<input id="r40" type="radio" name="g"/>
+<input id="r41" type="radio" name="g"/>
+<input id="r42" type="radio" name="g"/>
+<input id="r43" type="radio" name="g"/>
+<input id="r44" type="radio" name="g"/>
+<input id="r45" type="radio" name="g"/>
+<input id="r46" type="radio" name="g"/>
+<input id="r47" type="radio" name="g"/>
+<input id="r48" type="radio" name="g"/>
+<input id="r49" type="radio" name="g"/>
+<input id="r50" type="radio" name="g"/>
+<input id="r51" type="radio" name="g"/>
+<input id="r52" type="radio" name="g"/>
+<input id="r53" type="radio" name="g"/>
+<input id="r54" type="radio" name="g"/>
+<input id="r55" type="radio" name="g"/>
+<input id="r56" type="radio" name="g"/>
+<input id="r57" type="radio" name="g"/>
+<input id="r58" type="radio" name="g"/>
+<input id="r59" type="radio" name="g"/>
+<input id="r60" type="radio" name="g"/>
+<input id="r61" type="radio" name="g"/>
+<input id="r62" type="radio" name="g"/>
+<input id="r63" type="radio" name="g"/>
+<input id="r64" type="radio" name="g"/>
+<input id="r65" type="radio" name="g"/>
+<input id="r66" type="radio" name="g"/>
+<input id="r67" type="radio" name="g"/>
+<input id="r68" type="radio" name="g"/>
+<input id="r69" type="radio" name="g"/>
+<input id="r70" type="radio" name="g"/>
+<input id="r71" type="radio" name="g"/>
+<input id="r72" type="radio" name="g"/>
+<input id="r73" type="radio" name="g"/>
+<input id="r74" type="radio" name="g"/>
+<input id="r75" type="radio" name="g"/>
+<input id="r76" type="radio" name="g"/>
+<input id="r77" type="radio" name="g"/>
+<input id="r78" type="radio" name="g"/>
+<input id="r79" type="radio" name="g"/>
+<input id="r80" type="radio" name="g"/>
+<input id="r81" type="radio" name="g"/>
+<input id="r82" type="radio" name="g"/>
+<input id="r83" type="radio" name="g"/>
+<input id="r84" type="radio" name="g"/>
+<input id="r85" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+<input id="i2" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">// Code generated by protoc-gen-go. DO NOT EDIT.</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment">// source: grsim_replacement.proto</span></code></span>
+<span class="codeline" id="line-3"><code></code></span>
+<span class="codeline" id="line-4"><code><span class="keyword">package</span> grsim</code></span>
+<span class="codeline" id="line-5"><code></code></span>
+<span class="codeline" id="line-6"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-7"><code>	<a href="../../../../../../../pkg/fmt.html" class="ident i0">fmt</a> <label for="i0"><span class="lit-string i0">"fmt"</span></label></code></span>
+<span class="codeline" id="line-8"><code>	<a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i1">proto</a> <label for="i1"><span class="lit-string i1">"github.com/golang/protobuf/proto"</span></label></code></span>
+<span class="codeline" id="line-9"><code>	<a href="../../../../../../../pkg/math.html" class="ident i2">math</a> <label for="i2"><span class="lit-string i2">"math"</span></label></code></span>
+<span class="codeline" id="line-10"><code>)</code></span>
+<span class="codeline" id="line-11"><code></code></span>
+<span class="codeline" id="line-12"><code><span class="comment">// Reference imports to suppress errors if they are not otherwise used.</span></code></span>
+<span class="codeline" id="line-13"><code><span class="keyword">var</span> _ = <a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i1">proto</a>.<a href="../../../../../golang/protobuf/proto/wire.go.html#line-22" class="ident">Marshal</a></code></span>
+<span class="codeline" id="line-14"><code><span class="keyword">var</span> _ = <a href="../../../../../../../pkg/fmt.html" class="ident i0">fmt</a>.<a href="../../../../../../fmt/errors.go.html#line-22" class="ident">Errorf</a></code></span>
+<span class="codeline" id="line-15"><code><span class="keyword">var</span> _ = <a href="../../../../../../../pkg/math.html" class="ident i2">math</a>.<a href="../../../../../../math/bits.go.html#line-20" class="ident">Inf</a></code></span>
+<span class="codeline" id="line-16"><code></code></span>
+<span class="codeline" id="line-17"><code><span class="comment">// This is a compile-time assertion to ensure that this generated file</span></code></span>
+<span class="codeline" id="line-18"><code><span class="comment">// is compatible with the proto package it is being compiled against.</span></code></span>
+<span class="codeline" id="line-19"><code><span class="comment">// A compilation error at this line likely means your copy of the</span></code></span>
+<span class="codeline" id="line-20"><code><span class="comment">// proto package needs to be updated.</span></code></span>
+<span class="codeline" id="line-21"><code><span class="keyword">const</span> _ = <a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i1">proto</a>.<a href="../../../../../golang/protobuf/proto/proto.go.html#line-25" class="ident">ProtoPackageIsVersion3</a> <span class="comment">// please upgrade the proto package</span></code></span>
+<span class="codeline" id="line-22"><code></code></span>
+<span class="codeline" id="line-23"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim.html#name-GrSim_RobotReplacement" class="ident">GrSim_RobotReplacement</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-24"><code>	<a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_RobotReplacement.X.html" class="ident">X</a>                    *<a href="../../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a> <span class="lit-string">`protobuf:"fixed64,1,req,name=x" json:"x,omitempty"`</span></code></span>
+<span class="codeline" id="line-25"><code>	<a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_RobotReplacement.Y.html" class="ident">Y</a>                    *<a href="../../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a> <span class="lit-string">`protobuf:"fixed64,2,req,name=y" json:"y,omitempty"`</span></code></span>
+<span class="codeline" id="line-26"><code>	<a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_RobotReplacement.Dir.html" class="ident">Dir</a>                  *<a href="../../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a> <span class="lit-string">`protobuf:"fixed64,3,req,name=dir" json:"dir,omitempty"`</span></code></span>
+<span class="codeline" id="line-27"><code>	<a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_RobotReplacement.Id.html" class="ident">Id</a>                   *<a href="../../../../../../../pkg/builtin.html#name-uint32" class="ident">uint32</a>  <span class="lit-string">`protobuf:"varint,4,req,name=id" json:"id,omitempty"`</span></code></span>
+<span class="codeline" id="line-28"><code>	<a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_RobotReplacement.Yellowteam.html" class="ident">Yellowteam</a>           *<a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>    <span class="lit-string">`protobuf:"varint,5,req,name=yellowteam" json:"yellowteam,omitempty"`</span></code></span>
+<span class="codeline" id="line-29"><code>	<a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_RobotReplacement.Turnon.html" class="ident">Turnon</a>               *<a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>    <span class="lit-string">`protobuf:"varint,6,opt,name=turnon" json:"turnon,omitempty"`</span></code></span>
+<span class="codeline" id="line-30"><code>	<a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_RobotReplacement.XXX_NoUnkeyedLiteral.html" class="ident">XXX_NoUnkeyedLiteral</a> <span class="keyword">struct</span>{} <span class="lit-string">`json:"-"`</span></code></span>
+<span class="codeline" id="line-31"><code>	<a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_RobotReplacement.XXX_unrecognized.html" class="ident">XXX_unrecognized</a>     []<a href="../../../../../../../pkg/builtin.html#name-byte" class="ident">byte</a>   <span class="lit-string">`json:"-"`</span></code></span>
+<span class="codeline" id="line-32"><code>	<a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_RobotReplacement.XXX_sizecache.html" class="ident">XXX_sizecache</a>        <a href="../../../../../../../pkg/builtin.html#name-int32" class="ident">int32</a>    <span class="lit-string">`json:"-"`</span></code></span>
+<span class="codeline" id="line-33"><code>}</code></span>
+<span class="codeline" id="line-34"><code></code></span>
+<span class="codeline" id="line-35"><code><span class="keyword">func</span> (<label for="r0" class="ident">m</label> *<a href="#line-23" class="ident">GrSim_RobotReplacement</a>) <label for="r1" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_RobotReplacement.Reset.html" class="ident">Reset</a></label>()         { *<label for="r0" class="ident">m</label> = <a href="#line-23" class="ident">GrSim_RobotReplacement</a>{} }</code></span>
+<span class="codeline" id="line-36"><code><span class="keyword">func</span> (<label for="r2" class="ident">m</label> *<a href="#line-23" class="ident">GrSim_RobotReplacement</a>) <label for="r3" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_RobotReplacement.String.html" class="ident">String</a></label>() <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a> { <span class="keyword">return</span> <a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i1">proto</a>.<a href="../../../../../golang/protobuf/proto/text_encode.go.html#line-106" class="ident">CompactTextString</a>(<label for="r2" class="ident">m</label>) }</code></span>
+<span class="codeline" id="line-37"><code><span class="keyword">func</span> (*<a href="#line-23" class="ident">GrSim_RobotReplacement</a>) <label for="r4" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_RobotReplacement.ProtoMessage.html" class="ident">ProtoMessage</a></label>()    {}</code></span>
+<span class="codeline" id="line-38"><code><span class="keyword">func</span> (*<a href="#line-23" class="ident">GrSim_RobotReplacement</a>) <label for="r5" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_RobotReplacement.Descriptor.html" class="ident">Descriptor</a></label>() ([]<a href="../../../../../../../pkg/builtin.html#name-byte" class="ident">byte</a>, []<a href="../../../../../../../pkg/builtin.html#name-int" class="ident">int</a>) {</code></span>
+<span class="codeline" id="line-39"><code>	<span class="keyword">return</span> <a href="#line-220" class="ident">fileDescriptor_e9447b4cd61a47d6</a>, []<a href="../../../../../../../pkg/builtin.html#name-int" class="ident">int</a>{<span class="lit-number">0</span>}</code></span>
+<span class="codeline" id="line-40"><code>}</code></span>
+<span class="codeline" id="line-41"><code></code></span>
+<span class="codeline" id="line-42"><code><span class="keyword">func</span> (<label for="r6" class="ident">m</label> *<a href="#line-23" class="ident">GrSim_RobotReplacement</a>) <label for="r7" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_RobotReplacement.XXX_Unmarshal.html" class="ident">XXX_Unmarshal</a></label>(<label for="r8" class="ident">b</label> []<a href="../../../../../../../pkg/builtin.html#name-byte" class="ident">byte</a>) <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a> {</code></span>
+<span class="codeline" id="line-43"><code>	<span class="keyword">return</span> <a href="#line-58" class="ident">xxx_messageInfo_GrSim_RobotReplacement</a>.<a href="../../../../../golang/protobuf/proto/deprecated.go.html#line-111" class="ident">Unmarshal</a>(<label for="r6" class="ident">m</label>, <label for="r8" class="ident">b</label>)</code></span>
+<span class="codeline" id="line-44"><code>}</code></span>
+<span class="codeline" id="line-45"><code><span class="keyword">func</span> (<label for="r9" class="ident">m</label> *<a href="#line-23" class="ident">GrSim_RobotReplacement</a>) <label for="r10" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_RobotReplacement.XXX_Marshal.html" class="ident">XXX_Marshal</a></label>(<label for="r11" class="ident">b</label> []<a href="../../../../../../../pkg/builtin.html#name-byte" class="ident">byte</a>, <label for="r12" class="ident">deterministic</label> <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>) ([]<a href="../../../../../../../pkg/builtin.html#name-byte" class="ident">byte</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-46"><code>	<span class="keyword">return</span> <a href="#line-58" class="ident">xxx_messageInfo_GrSim_RobotReplacement</a>.<a href="../../../../../golang/protobuf/proto/deprecated.go.html#line-96" class="ident">Marshal</a>(<label for="r11" class="ident">b</label>, <label for="r9" class="ident">m</label>, <label for="r12" class="ident">deterministic</label>)</code></span>
+<span class="codeline" id="line-47"><code>}</code></span>
+<span class="codeline" id="line-48"><code><span class="keyword">func</span> (<label for="r13" class="ident">m</label> *<a href="#line-23" class="ident">GrSim_RobotReplacement</a>) <label for="r14" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_RobotReplacement.XXX_Merge.html" class="ident">XXX_Merge</a></label>(<label for="r15" class="ident">src</label> <a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i1">proto</a>.<a href="../../../../../golang/protobuf/proto/proto.go.html#line-50" class="ident">Message</a>) {</code></span>
+<span class="codeline" id="line-49"><code>	<a href="#line-58" class="ident">xxx_messageInfo_GrSim_RobotReplacement</a>.<a href="../../../../../golang/protobuf/proto/deprecated.go.html#line-101" class="ident">Merge</a>(<label for="r13" class="ident">m</label>, <label for="r15" class="ident">src</label>)</code></span>
+<span class="codeline" id="line-50"><code>}</code></span>
+<span class="codeline" id="line-51"><code><span class="keyword">func</span> (<label for="r16" class="ident">m</label> *<a href="#line-23" class="ident">GrSim_RobotReplacement</a>) <label for="r17" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_RobotReplacement.XXX_Size.html" class="ident">XXX_Size</a></label>() <a href="../../../../../../../pkg/builtin.html#name-int" class="ident">int</a> {</code></span>
+<span class="codeline" id="line-52"><code>	<span class="keyword">return</span> <a href="#line-58" class="ident">xxx_messageInfo_GrSim_RobotReplacement</a>.<a href="../../../../../golang/protobuf/proto/deprecated.go.html#line-106" class="ident">Size</a>(<label for="r16" class="ident">m</label>)</code></span>
+<span class="codeline" id="line-53"><code>}</code></span>
+<span class="codeline" id="line-54"><code><span class="keyword">func</span> (<label for="r18" class="ident">m</label> *<a href="#line-23" class="ident">GrSim_RobotReplacement</a>) <label for="r19" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_RobotReplacement.XXX_DiscardUnknown.html" class="ident">XXX_DiscardUnknown</a></label>() {</code></span>
+<span class="codeline" id="line-55"><code>	<a href="#line-58" class="ident">xxx_messageInfo_GrSim_RobotReplacement</a>.<a href="../../../../../golang/protobuf/proto/deprecated.go.html#line-91" class="ident">DiscardUnknown</a>(<label for="r18" class="ident">m</label>)</code></span>
+<span class="codeline" id="line-56"><code>}</code></span>
+<span class="codeline" id="line-57"><code></code></span>
+<span class="codeline" id="line-58"><code><span class="keyword">var</span> <a href="../../../../../../../pkg/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim.html#name-xxx_messageInfo_GrSim_RobotReplacement" class="ident">xxx_messageInfo_GrSim_RobotReplacement</a> <a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i1">proto</a>.<a href="../../../../../golang/protobuf/proto/deprecated.go.html#line-88" class="ident">InternalMessageInfo</a></code></span>
+<span class="codeline" id="line-59"><code></code></span>
+<span class="codeline" id="line-60"><code><span class="keyword">func</span> (<label for="r20" class="ident">m</label> *<a href="#line-23" class="ident">GrSim_RobotReplacement</a>) <label for="r21" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_RobotReplacement.GetX.html" class="ident">GetX</a></label>() <a href="../../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a> {</code></span>
+<span class="codeline" id="line-61"><code>	<span class="keyword">if</span> <label for="r20" class="ident">m</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> &amp;&amp; <label for="r20" class="ident">m</label>.<a href="#line-24" class="ident">X</a> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-62"><code>		<span class="keyword">return</span> *<label for="r20" class="ident">m</label>.<a href="#line-24" class="ident">X</a></code></span>
+<span class="codeline" id="line-63"><code>	}</code></span>
+<span class="codeline" id="line-64"><code>	<span class="keyword">return</span> <span class="lit-number">0</span></code></span>
+<span class="codeline" id="line-65"><code>}</code></span>
+<span class="codeline" id="line-66"><code></code></span>
+<span class="codeline" id="line-67"><code><span class="keyword">func</span> (<label for="r22" class="ident">m</label> *<a href="#line-23" class="ident">GrSim_RobotReplacement</a>) <label for="r23" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_RobotReplacement.GetY.html" class="ident">GetY</a></label>() <a href="../../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a> {</code></span>
+<span class="codeline" id="line-68"><code>	<span class="keyword">if</span> <label for="r22" class="ident">m</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> &amp;&amp; <label for="r22" class="ident">m</label>.<a href="#line-25" class="ident">Y</a> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-69"><code>		<span class="keyword">return</span> *<label for="r22" class="ident">m</label>.<a href="#line-25" class="ident">Y</a></code></span>
+<span class="codeline" id="line-70"><code>	}</code></span>
+<span class="codeline" id="line-71"><code>	<span class="keyword">return</span> <span class="lit-number">0</span></code></span>
+<span class="codeline" id="line-72"><code>}</code></span>
+<span class="codeline" id="line-73"><code></code></span>
+<span class="codeline" id="line-74"><code><span class="keyword">func</span> (<label for="r24" class="ident">m</label> *<a href="#line-23" class="ident">GrSim_RobotReplacement</a>) <label for="r25" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_RobotReplacement.GetDir.html" class="ident">GetDir</a></label>() <a href="../../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a> {</code></span>
+<span class="codeline" id="line-75"><code>	<span class="keyword">if</span> <label for="r24" class="ident">m</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> &amp;&amp; <label for="r24" class="ident">m</label>.<a href="#line-26" class="ident">Dir</a> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-76"><code>		<span class="keyword">return</span> *<label for="r24" class="ident">m</label>.<a href="#line-26" class="ident">Dir</a></code></span>
+<span class="codeline" id="line-77"><code>	}</code></span>
+<span class="codeline" id="line-78"><code>	<span class="keyword">return</span> <span class="lit-number">0</span></code></span>
+<span class="codeline" id="line-79"><code>}</code></span>
+<span class="codeline" id="line-80"><code></code></span>
+<span class="codeline" id="line-81"><code><span class="keyword">func</span> (<label for="r26" class="ident">m</label> *<a href="#line-23" class="ident">GrSim_RobotReplacement</a>) <label for="r27" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_RobotReplacement.GetId.html" class="ident">GetId</a></label>() <a href="../../../../../../../pkg/builtin.html#name-uint32" class="ident">uint32</a> {</code></span>
+<span class="codeline" id="line-82"><code>	<span class="keyword">if</span> <label for="r26" class="ident">m</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> &amp;&amp; <label for="r26" class="ident">m</label>.<a href="#line-27" class="ident">Id</a> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-83"><code>		<span class="keyword">return</span> *<label for="r26" class="ident">m</label>.<a href="#line-27" class="ident">Id</a></code></span>
+<span class="codeline" id="line-84"><code>	}</code></span>
+<span class="codeline" id="line-85"><code>	<span class="keyword">return</span> <span class="lit-number">0</span></code></span>
+<span class="codeline" id="line-86"><code>}</code></span>
+<span class="codeline" id="line-87"><code></code></span>
+<span class="codeline" id="line-88"><code><span class="keyword">func</span> (<label for="r28" class="ident">m</label> *<a href="#line-23" class="ident">GrSim_RobotReplacement</a>) <label for="r29" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_RobotReplacement.GetYellowteam.html" class="ident">GetYellowteam</a></label>() <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a> {</code></span>
+<span class="codeline" id="line-89"><code>	<span class="keyword">if</span> <label for="r28" class="ident">m</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> &amp;&amp; <label for="r28" class="ident">m</label>.<a href="#line-28" class="ident">Yellowteam</a> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-90"><code>		<span class="keyword">return</span> *<label for="r28" class="ident">m</label>.<a href="#line-28" class="ident">Yellowteam</a></code></span>
+<span class="codeline" id="line-91"><code>	}</code></span>
+<span class="codeline" id="line-92"><code>	<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-false" class="ident">false</a></code></span>
+<span class="codeline" id="line-93"><code>}</code></span>
+<span class="codeline" id="line-94"><code></code></span>
+<span class="codeline" id="line-95"><code><span class="keyword">func</span> (<label for="r30" class="ident">m</label> *<a href="#line-23" class="ident">GrSim_RobotReplacement</a>) <label for="r31" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_RobotReplacement.GetTurnon.html" class="ident">GetTurnon</a></label>() <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a> {</code></span>
+<span class="codeline" id="line-96"><code>	<span class="keyword">if</span> <label for="r30" class="ident">m</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> &amp;&amp; <label for="r30" class="ident">m</label>.<a href="#line-29" class="ident">Turnon</a> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-97"><code>		<span class="keyword">return</span> *<label for="r30" class="ident">m</label>.<a href="#line-29" class="ident">Turnon</a></code></span>
+<span class="codeline" id="line-98"><code>	}</code></span>
+<span class="codeline" id="line-99"><code>	<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-false" class="ident">false</a></code></span>
+<span class="codeline" id="line-100"><code>}</code></span>
+<span class="codeline" id="line-101"><code></code></span>
+<span class="codeline" id="line-102"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim.html#name-GrSim_BallReplacement" class="ident">GrSim_BallReplacement</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-103"><code>	<a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_BallReplacement.X.html" class="ident">X</a>                    *<a href="../../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a> <span class="lit-string">`protobuf:"fixed64,1,opt,name=x" json:"x,omitempty"`</span></code></span>
+<span class="codeline" id="line-104"><code>	<a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_BallReplacement.Y.html" class="ident">Y</a>                    *<a href="../../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a> <span class="lit-string">`protobuf:"fixed64,2,opt,name=y" json:"y,omitempty"`</span></code></span>
+<span class="codeline" id="line-105"><code>	<a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_BallReplacement.Vx.html" class="ident">Vx</a>                   *<a href="../../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a> <span class="lit-string">`protobuf:"fixed64,3,opt,name=vx" json:"vx,omitempty"`</span></code></span>
+<span class="codeline" id="line-106"><code>	<a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_BallReplacement.Vy.html" class="ident">Vy</a>                   *<a href="../../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a> <span class="lit-string">`protobuf:"fixed64,4,opt,name=vy" json:"vy,omitempty"`</span></code></span>
+<span class="codeline" id="line-107"><code>	<a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_BallReplacement.XXX_NoUnkeyedLiteral.html" class="ident">XXX_NoUnkeyedLiteral</a> <span class="keyword">struct</span>{} <span class="lit-string">`json:"-"`</span></code></span>
+<span class="codeline" id="line-108"><code>	<a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_BallReplacement.XXX_unrecognized.html" class="ident">XXX_unrecognized</a>     []<a href="../../../../../../../pkg/builtin.html#name-byte" class="ident">byte</a>   <span class="lit-string">`json:"-"`</span></code></span>
+<span class="codeline" id="line-109"><code>	<a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_BallReplacement.XXX_sizecache.html" class="ident">XXX_sizecache</a>        <a href="../../../../../../../pkg/builtin.html#name-int32" class="ident">int32</a>    <span class="lit-string">`json:"-"`</span></code></span>
+<span class="codeline" id="line-110"><code>}</code></span>
+<span class="codeline" id="line-111"><code></code></span>
+<span class="codeline" id="line-112"><code><span class="keyword">func</span> (<label for="r32" class="ident">m</label> *<a href="#line-102" class="ident">GrSim_BallReplacement</a>) <label for="r33" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_BallReplacement.Reset.html" class="ident">Reset</a></label>()         { *<label for="r32" class="ident">m</label> = <a href="#line-102" class="ident">GrSim_BallReplacement</a>{} }</code></span>
+<span class="codeline" id="line-113"><code><span class="keyword">func</span> (<label for="r34" class="ident">m</label> *<a href="#line-102" class="ident">GrSim_BallReplacement</a>) <label for="r35" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_BallReplacement.String.html" class="ident">String</a></label>() <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a> { <span class="keyword">return</span> <a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i1">proto</a>.<a href="../../../../../golang/protobuf/proto/text_encode.go.html#line-106" class="ident">CompactTextString</a>(<label for="r34" class="ident">m</label>) }</code></span>
+<span class="codeline" id="line-114"><code><span class="keyword">func</span> (*<a href="#line-102" class="ident">GrSim_BallReplacement</a>) <label for="r36" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_BallReplacement.ProtoMessage.html" class="ident">ProtoMessage</a></label>()    {}</code></span>
+<span class="codeline" id="line-115"><code><span class="keyword">func</span> (*<a href="#line-102" class="ident">GrSim_BallReplacement</a>) <label for="r37" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_BallReplacement.Descriptor.html" class="ident">Descriptor</a></label>() ([]<a href="../../../../../../../pkg/builtin.html#name-byte" class="ident">byte</a>, []<a href="../../../../../../../pkg/builtin.html#name-int" class="ident">int</a>) {</code></span>
+<span class="codeline" id="line-116"><code>	<span class="keyword">return</span> <a href="#line-220" class="ident">fileDescriptor_e9447b4cd61a47d6</a>, []<a href="../../../../../../../pkg/builtin.html#name-int" class="ident">int</a>{<span class="lit-number">1</span>}</code></span>
+<span class="codeline" id="line-117"><code>}</code></span>
+<span class="codeline" id="line-118"><code></code></span>
+<span class="codeline" id="line-119"><code><span class="keyword">func</span> (<label for="r38" class="ident">m</label> *<a href="#line-102" class="ident">GrSim_BallReplacement</a>) <label for="r39" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_BallReplacement.XXX_Unmarshal.html" class="ident">XXX_Unmarshal</a></label>(<label for="r40" class="ident">b</label> []<a href="../../../../../../../pkg/builtin.html#name-byte" class="ident">byte</a>) <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a> {</code></span>
+<span class="codeline" id="line-120"><code>	<span class="keyword">return</span> <a href="#line-135" class="ident">xxx_messageInfo_GrSim_BallReplacement</a>.<a href="../../../../../golang/protobuf/proto/deprecated.go.html#line-111" class="ident">Unmarshal</a>(<label for="r38" class="ident">m</label>, <label for="r40" class="ident">b</label>)</code></span>
+<span class="codeline" id="line-121"><code>}</code></span>
+<span class="codeline" id="line-122"><code><span class="keyword">func</span> (<label for="r41" class="ident">m</label> *<a href="#line-102" class="ident">GrSim_BallReplacement</a>) <label for="r42" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_BallReplacement.XXX_Marshal.html" class="ident">XXX_Marshal</a></label>(<label for="r43" class="ident">b</label> []<a href="../../../../../../../pkg/builtin.html#name-byte" class="ident">byte</a>, <label for="r44" class="ident">deterministic</label> <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>) ([]<a href="../../../../../../../pkg/builtin.html#name-byte" class="ident">byte</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-123"><code>	<span class="keyword">return</span> <a href="#line-135" class="ident">xxx_messageInfo_GrSim_BallReplacement</a>.<a href="../../../../../golang/protobuf/proto/deprecated.go.html#line-96" class="ident">Marshal</a>(<label for="r43" class="ident">b</label>, <label for="r41" class="ident">m</label>, <label for="r44" class="ident">deterministic</label>)</code></span>
+<span class="codeline" id="line-124"><code>}</code></span>
+<span class="codeline" id="line-125"><code><span class="keyword">func</span> (<label for="r45" class="ident">m</label> *<a href="#line-102" class="ident">GrSim_BallReplacement</a>) <label for="r46" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_BallReplacement.XXX_Merge.html" class="ident">XXX_Merge</a></label>(<label for="r47" class="ident">src</label> <a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i1">proto</a>.<a href="../../../../../golang/protobuf/proto/proto.go.html#line-50" class="ident">Message</a>) {</code></span>
+<span class="codeline" id="line-126"><code>	<a href="#line-135" class="ident">xxx_messageInfo_GrSim_BallReplacement</a>.<a href="../../../../../golang/protobuf/proto/deprecated.go.html#line-101" class="ident">Merge</a>(<label for="r45" class="ident">m</label>, <label for="r47" class="ident">src</label>)</code></span>
+<span class="codeline" id="line-127"><code>}</code></span>
+<span class="codeline" id="line-128"><code><span class="keyword">func</span> (<label for="r48" class="ident">m</label> *<a href="#line-102" class="ident">GrSim_BallReplacement</a>) <label for="r49" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_BallReplacement.XXX_Size.html" class="ident">XXX_Size</a></label>() <a href="../../../../../../../pkg/builtin.html#name-int" class="ident">int</a> {</code></span>
+<span class="codeline" id="line-129"><code>	<span class="keyword">return</span> <a href="#line-135" class="ident">xxx_messageInfo_GrSim_BallReplacement</a>.<a href="../../../../../golang/protobuf/proto/deprecated.go.html#line-106" class="ident">Size</a>(<label for="r48" class="ident">m</label>)</code></span>
+<span class="codeline" id="line-130"><code>}</code></span>
+<span class="codeline" id="line-131"><code><span class="keyword">func</span> (<label for="r50" class="ident">m</label> *<a href="#line-102" class="ident">GrSim_BallReplacement</a>) <label for="r51" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_BallReplacement.XXX_DiscardUnknown.html" class="ident">XXX_DiscardUnknown</a></label>() {</code></span>
+<span class="codeline" id="line-132"><code>	<a href="#line-135" class="ident">xxx_messageInfo_GrSim_BallReplacement</a>.<a href="../../../../../golang/protobuf/proto/deprecated.go.html#line-91" class="ident">DiscardUnknown</a>(<label for="r50" class="ident">m</label>)</code></span>
+<span class="codeline" id="line-133"><code>}</code></span>
+<span class="codeline" id="line-134"><code></code></span>
+<span class="codeline" id="line-135"><code><span class="keyword">var</span> <a href="../../../../../../../pkg/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim.html#name-xxx_messageInfo_GrSim_BallReplacement" class="ident">xxx_messageInfo_GrSim_BallReplacement</a> <a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i1">proto</a>.<a href="../../../../../golang/protobuf/proto/deprecated.go.html#line-88" class="ident">InternalMessageInfo</a></code></span>
+<span class="codeline" id="line-136"><code></code></span>
+<span class="codeline" id="line-137"><code><span class="keyword">func</span> (<label for="r52" class="ident">m</label> *<a href="#line-102" class="ident">GrSim_BallReplacement</a>) <label for="r53" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_BallReplacement.GetX.html" class="ident">GetX</a></label>() <a href="../../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a> {</code></span>
+<span class="codeline" id="line-138"><code>	<span class="keyword">if</span> <label for="r52" class="ident">m</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> &amp;&amp; <label for="r52" class="ident">m</label>.<a href="#line-103" class="ident">X</a> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-139"><code>		<span class="keyword">return</span> *<label for="r52" class="ident">m</label>.<a href="#line-103" class="ident">X</a></code></span>
+<span class="codeline" id="line-140"><code>	}</code></span>
+<span class="codeline" id="line-141"><code>	<span class="keyword">return</span> <span class="lit-number">0</span></code></span>
+<span class="codeline" id="line-142"><code>}</code></span>
+<span class="codeline" id="line-143"><code></code></span>
+<span class="codeline" id="line-144"><code><span class="keyword">func</span> (<label for="r54" class="ident">m</label> *<a href="#line-102" class="ident">GrSim_BallReplacement</a>) <label for="r55" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_BallReplacement.GetY.html" class="ident">GetY</a></label>() <a href="../../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a> {</code></span>
+<span class="codeline" id="line-145"><code>	<span class="keyword">if</span> <label for="r54" class="ident">m</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> &amp;&amp; <label for="r54" class="ident">m</label>.<a href="#line-104" class="ident">Y</a> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-146"><code>		<span class="keyword">return</span> *<label for="r54" class="ident">m</label>.<a href="#line-104" class="ident">Y</a></code></span>
+<span class="codeline" id="line-147"><code>	}</code></span>
+<span class="codeline" id="line-148"><code>	<span class="keyword">return</span> <span class="lit-number">0</span></code></span>
+<span class="codeline" id="line-149"><code>}</code></span>
+<span class="codeline" id="line-150"><code></code></span>
+<span class="codeline" id="line-151"><code><span class="keyword">func</span> (<label for="r56" class="ident">m</label> *<a href="#line-102" class="ident">GrSim_BallReplacement</a>) <label for="r57" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_BallReplacement.GetVx.html" class="ident">GetVx</a></label>() <a href="../../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a> {</code></span>
+<span class="codeline" id="line-152"><code>	<span class="keyword">if</span> <label for="r56" class="ident">m</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> &amp;&amp; <label for="r56" class="ident">m</label>.<a href="#line-105" class="ident">Vx</a> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-153"><code>		<span class="keyword">return</span> *<label for="r56" class="ident">m</label>.<a href="#line-105" class="ident">Vx</a></code></span>
+<span class="codeline" id="line-154"><code>	}</code></span>
+<span class="codeline" id="line-155"><code>	<span class="keyword">return</span> <span class="lit-number">0</span></code></span>
+<span class="codeline" id="line-156"><code>}</code></span>
+<span class="codeline" id="line-157"><code></code></span>
+<span class="codeline" id="line-158"><code><span class="keyword">func</span> (<label for="r58" class="ident">m</label> *<a href="#line-102" class="ident">GrSim_BallReplacement</a>) <label for="r59" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_BallReplacement.GetVy.html" class="ident">GetVy</a></label>() <a href="../../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a> {</code></span>
+<span class="codeline" id="line-159"><code>	<span class="keyword">if</span> <label for="r58" class="ident">m</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> &amp;&amp; <label for="r58" class="ident">m</label>.<a href="#line-106" class="ident">Vy</a> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-160"><code>		<span class="keyword">return</span> *<label for="r58" class="ident">m</label>.<a href="#line-106" class="ident">Vy</a></code></span>
+<span class="codeline" id="line-161"><code>	}</code></span>
+<span class="codeline" id="line-162"><code>	<span class="keyword">return</span> <span class="lit-number">0</span></code></span>
+<span class="codeline" id="line-163"><code>}</code></span>
+<span class="codeline" id="line-164"><code></code></span>
+<span class="codeline" id="line-165"><code><span class="keyword">type</span> <a href="../../../../../../../pkg/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim.html#name-GrSim_Replacement" class="ident">GrSim_Replacement</a> <span class="keyword">struct</span> {</code></span>
+<span class="codeline" id="line-166"><code>	<a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_Replacement.Ball.html" class="ident">Ball</a>                 *<a href="#line-102" class="ident">GrSim_BallReplacement</a>    <span class="lit-string">`protobuf:"bytes,1,opt,name=ball" json:"ball,omitempty"`</span></code></span>
+<span class="codeline" id="line-167"><code>	<a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_Replacement.Robots.html" class="ident">Robots</a>               []*<a href="#line-23" class="ident">GrSim_RobotReplacement</a> <span class="lit-string">`protobuf:"bytes,2,rep,name=robots" json:"robots,omitempty"`</span></code></span>
+<span class="codeline" id="line-168"><code>	<a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_Replacement.XXX_NoUnkeyedLiteral.html" class="ident">XXX_NoUnkeyedLiteral</a> <span class="keyword">struct</span>{}                  <span class="lit-string">`json:"-"`</span></code></span>
+<span class="codeline" id="line-169"><code>	<a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_Replacement.XXX_unrecognized.html" class="ident">XXX_unrecognized</a>     []<a href="../../../../../../../pkg/builtin.html#name-byte" class="ident">byte</a>                    <span class="lit-string">`json:"-"`</span></code></span>
+<span class="codeline" id="line-170"><code>	<a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_Replacement.XXX_sizecache.html" class="ident">XXX_sizecache</a>        <a href="../../../../../../../pkg/builtin.html#name-int32" class="ident">int32</a>                     <span class="lit-string">`json:"-"`</span></code></span>
+<span class="codeline" id="line-171"><code>}</code></span>
+<span class="codeline" id="line-172"><code></code></span>
+<span class="codeline" id="line-173"><code><span class="keyword">func</span> (<label for="r60" class="ident">m</label> *<a href="#line-165" class="ident">GrSim_Replacement</a>) <label for="r61" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_Replacement.Reset.html" class="ident">Reset</a></label>()         { *<label for="r60" class="ident">m</label> = <a href="#line-165" class="ident">GrSim_Replacement</a>{} }</code></span>
+<span class="codeline" id="line-174"><code><span class="keyword">func</span> (<label for="r62" class="ident">m</label> *<a href="#line-165" class="ident">GrSim_Replacement</a>) <label for="r63" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_Replacement.String.html" class="ident">String</a></label>() <a href="../../../../../../../pkg/builtin.html#name-string" class="ident">string</a> { <span class="keyword">return</span> <a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i1">proto</a>.<a href="../../../../../golang/protobuf/proto/text_encode.go.html#line-106" class="ident">CompactTextString</a>(<label for="r62" class="ident">m</label>) }</code></span>
+<span class="codeline" id="line-175"><code><span class="keyword">func</span> (*<a href="#line-165" class="ident">GrSim_Replacement</a>) <label for="r64" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_Replacement.ProtoMessage.html" class="ident">ProtoMessage</a></label>()    {}</code></span>
+<span class="codeline" id="line-176"><code><span class="keyword">func</span> (*<a href="#line-165" class="ident">GrSim_Replacement</a>) <label for="r65" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_Replacement.Descriptor.html" class="ident">Descriptor</a></label>() ([]<a href="../../../../../../../pkg/builtin.html#name-byte" class="ident">byte</a>, []<a href="../../../../../../../pkg/builtin.html#name-int" class="ident">int</a>) {</code></span>
+<span class="codeline" id="line-177"><code>	<span class="keyword">return</span> <a href="#line-220" class="ident">fileDescriptor_e9447b4cd61a47d6</a>, []<a href="../../../../../../../pkg/builtin.html#name-int" class="ident">int</a>{<span class="lit-number">2</span>}</code></span>
+<span class="codeline" id="line-178"><code>}</code></span>
+<span class="codeline" id="line-179"><code></code></span>
+<span class="codeline" id="line-180"><code><span class="keyword">func</span> (<label for="r66" class="ident">m</label> *<a href="#line-165" class="ident">GrSim_Replacement</a>) <label for="r67" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_Replacement.XXX_Unmarshal.html" class="ident">XXX_Unmarshal</a></label>(<label for="r68" class="ident">b</label> []<a href="../../../../../../../pkg/builtin.html#name-byte" class="ident">byte</a>) <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a> {</code></span>
+<span class="codeline" id="line-181"><code>	<span class="keyword">return</span> <a href="#line-196" class="ident">xxx_messageInfo_GrSim_Replacement</a>.<a href="../../../../../golang/protobuf/proto/deprecated.go.html#line-111" class="ident">Unmarshal</a>(<label for="r66" class="ident">m</label>, <label for="r68" class="ident">b</label>)</code></span>
+<span class="codeline" id="line-182"><code>}</code></span>
+<span class="codeline" id="line-183"><code><span class="keyword">func</span> (<label for="r69" class="ident">m</label> *<a href="#line-165" class="ident">GrSim_Replacement</a>) <label for="r70" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_Replacement.XXX_Marshal.html" class="ident">XXX_Marshal</a></label>(<label for="r71" class="ident">b</label> []<a href="../../../../../../../pkg/builtin.html#name-byte" class="ident">byte</a>, <label for="r72" class="ident">deterministic</label> <a href="../../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a>) ([]<a href="../../../../../../../pkg/builtin.html#name-byte" class="ident">byte</a>, <a href="../../../../../../../pkg/builtin.html#name-error" class="ident">error</a>) {</code></span>
+<span class="codeline" id="line-184"><code>	<span class="keyword">return</span> <a href="#line-196" class="ident">xxx_messageInfo_GrSim_Replacement</a>.<a href="../../../../../golang/protobuf/proto/deprecated.go.html#line-96" class="ident">Marshal</a>(<label for="r71" class="ident">b</label>, <label for="r69" class="ident">m</label>, <label for="r72" class="ident">deterministic</label>)</code></span>
+<span class="codeline" id="line-185"><code>}</code></span>
+<span class="codeline" id="line-186"><code><span class="keyword">func</span> (<label for="r73" class="ident">m</label> *<a href="#line-165" class="ident">GrSim_Replacement</a>) <label for="r74" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_Replacement.XXX_Merge.html" class="ident">XXX_Merge</a></label>(<label for="r75" class="ident">src</label> <a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i1">proto</a>.<a href="../../../../../golang/protobuf/proto/proto.go.html#line-50" class="ident">Message</a>) {</code></span>
+<span class="codeline" id="line-187"><code>	<a href="#line-196" class="ident">xxx_messageInfo_GrSim_Replacement</a>.<a href="../../../../../golang/protobuf/proto/deprecated.go.html#line-101" class="ident">Merge</a>(<label for="r73" class="ident">m</label>, <label for="r75" class="ident">src</label>)</code></span>
+<span class="codeline" id="line-188"><code>}</code></span>
+<span class="codeline" id="line-189"><code><span class="keyword">func</span> (<label for="r76" class="ident">m</label> *<a href="#line-165" class="ident">GrSim_Replacement</a>) <label for="r77" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_Replacement.XXX_Size.html" class="ident">XXX_Size</a></label>() <a href="../../../../../../../pkg/builtin.html#name-int" class="ident">int</a> {</code></span>
+<span class="codeline" id="line-190"><code>	<span class="keyword">return</span> <a href="#line-196" class="ident">xxx_messageInfo_GrSim_Replacement</a>.<a href="../../../../../golang/protobuf/proto/deprecated.go.html#line-106" class="ident">Size</a>(<label for="r76" class="ident">m</label>)</code></span>
+<span class="codeline" id="line-191"><code>}</code></span>
+<span class="codeline" id="line-192"><code><span class="keyword">func</span> (<label for="r78" class="ident">m</label> *<a href="#line-165" class="ident">GrSim_Replacement</a>) <label for="r79" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_Replacement.XXX_DiscardUnknown.html" class="ident">XXX_DiscardUnknown</a></label>() {</code></span>
+<span class="codeline" id="line-193"><code>	<a href="#line-196" class="ident">xxx_messageInfo_GrSim_Replacement</a>.<a href="../../../../../golang/protobuf/proto/deprecated.go.html#line-91" class="ident">DiscardUnknown</a>(<label for="r78" class="ident">m</label>)</code></span>
+<span class="codeline" id="line-194"><code>}</code></span>
+<span class="codeline" id="line-195"><code></code></span>
+<span class="codeline" id="line-196"><code><span class="keyword">var</span> <a href="../../../../../../../pkg/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim.html#name-xxx_messageInfo_GrSim_Replacement" class="ident">xxx_messageInfo_GrSim_Replacement</a> <a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i1">proto</a>.<a href="../../../../../golang/protobuf/proto/deprecated.go.html#line-88" class="ident">InternalMessageInfo</a></code></span>
+<span class="codeline" id="line-197"><code></code></span>
+<span class="codeline" id="line-198"><code><span class="keyword">func</span> (<label for="r80" class="ident">m</label> *<a href="#line-165" class="ident">GrSim_Replacement</a>) <label for="r81" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_Replacement.GetBall.html" class="ident">GetBall</a></label>() *<a href="#line-102" class="ident">GrSim_BallReplacement</a> {</code></span>
+<span class="codeline" id="line-199"><code>	<span class="keyword">if</span> <label for="r80" class="ident">m</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-200"><code>		<span class="keyword">return</span> <label for="r80" class="ident">m</label>.<a href="#line-166" class="ident">Ball</a></code></span>
+<span class="codeline" id="line-201"><code>	}</code></span>
+<span class="codeline" id="line-202"><code>	<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-203"><code>}</code></span>
+<span class="codeline" id="line-204"><code></code></span>
+<span class="codeline" id="line-205"><code><span class="keyword">func</span> (<label for="r82" class="ident">m</label> *<a href="#line-165" class="ident">GrSim_Replacement</a>) <label for="r83" class="ident"><a href="../../../../../../../use/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim..GrSim_Replacement.GetRobots.html" class="ident">GetRobots</a></label>() []*<a href="#line-23" class="ident">GrSim_RobotReplacement</a> {</code></span>
+<span class="codeline" id="line-206"><code>	<span class="keyword">if</span> <label for="r82" class="ident">m</label> != <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a> {</code></span>
+<span class="codeline" id="line-207"><code>		<span class="keyword">return</span> <label for="r82" class="ident">m</label>.<a href="#line-167" class="ident">Robots</a></code></span>
+<span class="codeline" id="line-208"><code>	}</code></span>
+<span class="codeline" id="line-209"><code>	<span class="keyword">return</span> <a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a></code></span>
+<span class="codeline" id="line-210"><code>}</code></span>
+<span class="codeline" id="line-211"><code></code></span>
+<span class="codeline" id="line-212"><code><span class="keyword">func</span> <label for="r84" class="ident"><a href="../../../../../../../pkg/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim.html#name-init" class="ident">init</a></label>() {</code></span>
+<span class="codeline" id="line-213"><code>	<a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i1">proto</a>.<a href="../../../../../golang/protobuf/proto/registry.go.html#line-179" class="ident">RegisterType</a>((*<a href="#line-23" class="ident">GrSim_RobotReplacement</a>)(<a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>), <span class="lit-string">"grSim_RobotReplacement"</span>)</code></span>
+<span class="codeline" id="line-214"><code>	<a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i1">proto</a>.<a href="../../../../../golang/protobuf/proto/registry.go.html#line-179" class="ident">RegisterType</a>((*<a href="#line-102" class="ident">GrSim_BallReplacement</a>)(<a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>), <span class="lit-string">"grSim_BallReplacement"</span>)</code></span>
+<span class="codeline" id="line-215"><code>	<a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i1">proto</a>.<a href="../../../../../golang/protobuf/proto/registry.go.html#line-179" class="ident">RegisterType</a>((*<a href="#line-165" class="ident">GrSim_Replacement</a>)(<a href="../../../../../../../pkg/builtin.html#name-nil" class="ident">nil</a>), <span class="lit-string">"grSim_Replacement"</span>)</code></span>
+<span class="codeline" id="line-216"><code>}</code></span>
+<span class="codeline" id="line-217"><code></code></span>
+<span class="codeline" id="line-218"><code><span class="keyword">func</span> <label for="r85" class="ident"><a href="../../../../../../../pkg/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim.html#name-init" class="ident">init</a></label>() { <a href="../../../../../../../pkg/github.com/golang/protobuf/proto.html" class="ident i1">proto</a>.<a href="../../../../../golang/protobuf/proto/registry.go.html#line-34" class="ident">RegisterFile</a>(<span class="lit-string">"grsim_replacement.proto"</span>, <a href="#line-220" class="ident">fileDescriptor_e9447b4cd61a47d6</a>) }</code></span>
+<span class="codeline" id="line-219"><code></code></span>
+<span class="codeline" id="line-220"><code><span class="keyword">var</span> <a href="../../../../../../../pkg/github.com/LiU-SeeGoals^6eac6/controller/internal/proto/grsim.html#name-fileDescriptor_e9447b4cd61a47d6" class="ident">fileDescriptor_e9447b4cd61a47d6</a> = []<a href="../../../../../../../pkg/builtin.html#name-byte" class="ident">byte</a>{</code></span>
+<span class="codeline" id="line-221"><code>	<span class="comment">// 243 bytes of a gzipped FileDescriptorProto</span></code></span>
+<span class="codeline" id="line-222"><code>	<span class="lit-number">0x1f</span>, <span class="lit-number">0x8b</span>, <span class="lit-number">0x08</span>, <span class="lit-number">0x00</span>, <span class="lit-number">0x00</span>, <span class="lit-number">0x00</span>, <span class="lit-number">0x00</span>, <span class="lit-number">0x00</span>, <span class="lit-number">0x02</span>, <span class="lit-number">0xff</span>, <span class="lit-number">0x6c</span>, <span class="lit-number">0x90</span>, <span class="lit-number">0xd1</span>, <span class="lit-number">0x6a</span>, <span class="lit-number">0xc3</span>, <span class="lit-number">0x20</span>,</code></span>
+<span class="codeline" id="line-223"><code>	<span class="lit-number">0x18</span>, <span class="lit-number">0x85</span>, <span class="lit-number">0xd1</span>, <span class="lit-number">0xa4</span>, <span class="lit-number">0x59</span>, <span class="lit-number">0xf9</span>, <span class="lit-number">0xbb</span>, <span class="lit-number">0x95</span>, <span class="lit-number">0x4d</span>, <span class="lit-number">0x58</span>, <span class="lit-number">0xfa</span>, <span class="lit-number">0x5f</span>, <span class="lit-number">0x0d</span>, <span class="lit-number">0xc9</span>, <span class="lit-number">0x95</span>, <span class="lit-number">0xec</span>,</code></span>
+<span class="codeline" id="line-224"><code>	<span class="lit-number">0x22</span>, <span class="lit-number">0x83</span>, <span class="lit-number">0x3e</span>, <span class="lit-number">0x42</span>, <span class="lit-number">0x1f</span>, <span class="lit-number">0xc1</span>, <span class="lit-number">0xde</span>, <span class="lit-number">0xed</span>, <span class="lit-number">0xa6</span>, <span class="lit-number">0xa4</span>, <span class="lit-number">0x8b</span>, <span class="lit-number">0x14</span>, <span class="lit-number">0xc1</span>, <span class="lit-number">0xc4</span>, <span class="lit-number">0x60</span>, <span class="lit-number">0x5d</span>,</code></span>
+<span class="codeline" id="line-225"><code>	<span class="lit-number">0x17</span>, <span class="lit-number">0x5f</span>, <span class="lit-number">0x62</span>, <span class="lit-number">0xcf</span>, <span class="lit-number">0x3c</span>, <span class="lit-number">0x62</span>, <span class="lit-number">0x02</span>, <span class="lit-number">0x4b</span>, <span class="lit-number">0x21</span>, <span class="lit-number">0x77</span>, <span class="lit-number">0x7e</span>, <span class="lit-number">0x72</span>, <span class="lit-number">0x38</span>, <span class="lit-number">0x7e</span>, <span class="lit-number">0x1e</span>, <span class="lit-number">0xd8</span>,</code></span>
+<span class="codeline" id="line-226"><code>	<span class="lit-number">0x5d</span>, <span class="lit-number">0xdc</span>, <span class="lit-number">0x55</span>, <span class="lit-number">0x37</span>, <span class="lit-number">0x27</span>, <span class="lit-number">0xa7</span>, <span class="lit-number">0x3a</span>, <span class="lit-number">0x53</span>, <span class="lit-number">0x7d</span>, <span class="lit-number">0xa9</span>, <span class="lit-number">0x46</span>, <span class="lit-number">0xb5</span>, <span class="lit-number">0xbe</span>, <span class="lit-number">0xec</span>, <span class="lit-number">0x9c</span>, <span class="lit-number">0xf5</span>,</code></span>
+<span class="codeline" id="line-227"><code>	<span class="lit-number">0xb6</span>, <span class="lit-number">0xf8</span>, <span class="lit-number">0x25</span>, <span class="lit-number">0x90</span>, <span class="lit-number">0x5f</span>, <span class="lit-number">0xdc</span>, <span class="lit-number">0x51</span>, <span class="lit-number">0x37</span>, <span class="lit-number">0x27</span>, <span class="lit-number">0x69</span>, <span class="lit-number">0xcf</span>, <span class="lit-number">0xd6</span>, <span class="lit-number">0xcb</span>, <span class="lit-number">0xff</span>, <span class="lit-number">0x00</span>, <span class="lit-number">0x7b</span>,</code></span>
+<span class="codeline" id="line-228"><code>	<span class="lit-number">0x04</span>, <span class="lit-number">0xd2</span>, <span class="lit-number">0x23</span>, <span class="lit-number">0xe1</span>, <span class="lit-number">0x54</span>, <span class="lit-number">0x10</span>, <span class="lit-number">0x49</span>, <span class="lit-number">0xfa</span>, <span class="lit-number">0x81</span>, <span class="lit-number">0x02</span>, <span class="lit-number">0xd2</span>, <span class="lit-number">0x91</span>, <span class="lit-number">0x02</span>, <span class="lit-number">0x7b</span>, <span class="lit-number">0x86</span>, <span class="lit-number">0xa4</span>,</code></span>
+<span class="codeline" id="line-229"><code>	<span class="lit-number">0xd6</span>, <span class="lit-number">0x0e</span>, <span class="lit-number">0x93</span>, <span class="lit-number">0xc8</span>, <span class="lit-number">0xc3</span>, <span class="lit-number">0x91</span>, <span class="lit-number">0x6d</span>, <span class="lit-number">0x81</span>, <span class="lit-number">0xea</span>, <span class="lit-number">0x1a</span>, <span class="lit-number">0x53</span>, <span class="lit-number">0x4e</span>, <span class="lit-number">0xc5</span>, <span class="lit-number">0x93</span>, <span class="lit-number">0xa4</span>, <span class="lit-number">0xba</span>,</code></span>
+<span class="codeline" id="line-230"><code>	<span class="lit-number">0x66</span>, <span class="lit-number">0x6f</span>, <span class="lit-number">0x00</span>, <span class="lit-number">0x41</span>, <span class="lit-number">0x19</span>, <span class="lit-number">0x63</span>, <span class="lit-number">0x7f</span>, <span class="lit-number">0xbc</span>, <span class="lit-number">0xaa</span>, <span class="lit-number">0x1a</span>, <span class="lit-number">0x5c</span>, <span class="lit-number">0x71</span>, <span class="lit-number">0x2a</span>, <span class="lit-number">0xd6</span>, <span class="lit-number">0x72</span>, <span class="lit-number">0x76</span>,</code></span>
+<span class="codeline" id="line-231"><code>	<span class="lit-number">0xc3</span>, <span class="lit-number">0x72</span>, <span class="lit-number">0xc8</span>, <span class="lit-number">0xfc</span>, <span class="lit-number">0xb7</span>, <span class="lit-number">0x6b</span>, <span class="lit-number">0x6d</span>, <span class="lit-number">0x8b</span>, <span class="lit-number">0x19</span>, <span class="lit-number">0x27</span>, <span class="lit-number">0x62</span>, <span class="lit-number">0x2d</span>, <span class="lit-number">0x27</span>, <span class="lit-number">0x2a</span>, <span class="lit-number">0x8e</span>, <span class="lit-number">0xf0</span>,</code></span>
+<span class="codeline" id="line-232"><code>	<span class="lit-number">0x3a</span>, <span class="lit-number">0xfa</span>, <span class="lit-number">0x1c</span>, <span class="lit-number">0x2a</span>, <span class="lit-number">0x63</span>, <span class="lit-number">0x16</span>, <span class="lit-number">0x74</span>, <span class="lit-number">0xc8</span>, <span class="lit-number">0x9d</span>, <span class="lit-number">0x0e</span>, <span class="lit-number">0x19</span>, <span class="lit-number">0x75</span>, <span class="lit-number">0xb6</span>, <span class="lit-number">0x40</span>, <span class="lit-number">0x6f</span>, <span class="lit-number">0x3d</span>,</code></span>
+<span class="codeline" id="line-233"><code>	<span class="lit-number">0x26</span>, <span class="lit-number">0x11</span>, <span class="lit-number">0xe9</span>, <span class="lit-number">0xad</span>, <span class="lit-number">0x8f</span>, <span class="lit-number">0x1c</span>, <span class="lit-number">0x30</span>, <span class="lit-number">0x9d</span>, <span class="lit-number">0x38</span>, <span class="lit-number">0x14</span>, <span class="lit-number">0x1d</span>, <span class="lit-number">0xbc</span>, <span class="lit-number">0x4c</span>, <span class="lit-number">0x9f</span>, <span class="lit-number">0x9c</span>, <span class="lit-number">0x15</span>,</code></span>
+<span class="codeline" id="line-234"><code>	<span class="lit-number">0xbe</span>, <span class="lit-number">0x43</span>, <span class="lit-number">0x7a</span>, <span class="lit-number">0xae</span>, <span class="lit-number">0x8c</span>, <span class="lit-number">0x89</span>, <span class="lit-number">0x9d</span>, <span class="lit-number">0x9b</span>, <span class="lit-number">0x7d</span>, <span class="lit-number">0x5e</span>, <span class="lit-number">0x2e</span>, <span class="lit-number">0x3e</span>, <span class="lit-number">0x2b</span>, <span class="lit-number">0x63</span>, <span class="lit-number">0x86</span>, <span class="lit-number">0x7d</span>,</code></span>
+<span class="codeline" id="line-235"><code>	<span class="lit-number">0x40</span>, <span class="lit-number">0xe6</span>, <span class="lit-number">0x86</span>, <span class="lit-number">0x7d</span>, <span class="lit-number">0xae</span>, <span class="lit-number">0x48</span>, <span class="lit-number">0x79</span>, <span class="lit-number">0x22</span>, <span class="lit-number">0x36</span>, <span class="lit-number">0xfb</span>, <span class="lit-number">0x5d</span>, <span class="lit-number">0xb9</span>, <span class="lit-number">0x3c</span>, <span class="lit-number">0x9a</span>, <span class="lit-number">0x9c</span>, <span class="lit-number">0x62</span>,</code></span>
+<span class="codeline" id="line-236"><code>	<span class="lit-number">0x87</span>, <span class="lit-number">0x87</span>, <span class="lit-number">0xcf</span>, <span class="lit-number">0x55</span>, <span class="lit-number">0x9c</span>, <span class="lit-number">0xfc</span>, <span class="lit-number">0x2f</span>, <span class="lit-number">0x00</span>, <span class="lit-number">0x00</span>, <span class="lit-number">0xff</span>, <span class="lit-number">0xff</span>, <span class="lit-number">0xe2</span>, <span class="lit-number">0xe6</span>, <span class="lit-number">0xca</span>, <span class="lit-number">0xa0</span>, <span class="lit-number">0x7a</span>,</code></span>
+<span class="codeline" id="line-237"><code>	<span class="lit-number">0x01</span>, <span class="lit-number">0x00</span>, <span class="lit-number">0x00</span>,</code></span>
+<span class="codeline" id="line-238"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

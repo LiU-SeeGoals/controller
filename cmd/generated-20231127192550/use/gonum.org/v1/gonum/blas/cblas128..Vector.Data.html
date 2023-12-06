@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/blas/cblas128.Vector.Data</title>
+<link href="../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../../../pkg/gonum.org/v1/gonum/blas/cblas128.html">gonum.org/v1/gonum/blas/cblas128</a>.<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-30">Vector</a>.<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-33">Data</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">42 uses</span>
+
+	gonum.org/v1/gonum/blas/cblas128 (current package)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-33">cblas128.go#L33</a>: 	<b>Data</b> []complex128
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-126" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-126">#L126</a>: 	return cblas128.Zdotu(x.N, x.<b>Data</b>, x.Inc, y.<b>Data</b>, y.Inc)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-139" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-139">#L139</a>: 	return cblas128.Zdotc(x.N, x.<b>Data</b>, x.Inc, y.<b>Data</b>, y.Inc)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-151" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-151">#L151</a>: 	return cblas128.Dznrm2(x.N, x.<b>Data</b>, x.Inc)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-164" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-164">#L164</a>: 	return cblas128.Dzasum(x.N, x.<b>Data</b>, x.Inc)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-178" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-178">#L178</a>: 	return cblas128.Izamax(x.N, x.<b>Data</b>, x.Inc)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-190" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-190">#L190</a>: 	cblas128.Zswap(x.N, x.<b>Data</b>, x.Inc, y.<b>Data</b>, y.Inc)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-202" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-202">#L202</a>: 	cblas128.Zcopy(x.N, x.<b>Data</b>, x.Inc, y.<b>Data</b>, y.Inc)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-215" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-215">#L215</a>: 	cblas128.Zaxpy(x.N, alpha, x.<b>Data</b>, x.Inc, y.<b>Data</b>, y.Inc)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-229" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-229">#L229</a>: 	cblas128.Zscal(x.N, alpha, x.<b>Data</b>, x.Inc)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-243" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-243">#L243</a>: 	cblas128.Zdscal(x.N, alpha, x.<b>Data</b>, x.Inc)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-257" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-257">#L257</a>: 	cblas128.Zgemv(t, a.Rows, a.Cols, alpha, a.Data, a.Stride, x.<b>Data</b>, x.Inc, beta, y.<b>Data</b>, y.Inc)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-269" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-269">#L269</a>: 	cblas128.Zgbmv(t, a.Rows, a.Cols, a.KL, a.KU, alpha, a.Data, a.Stride, x.<b>Data</b>, x.Inc, beta, y.<b>Data</b>, y.Inc)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-280" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-280">#L280</a>: 	cblas128.Ztrmv(a.Uplo, t, a.Diag, a.N, a.Data, a.Stride, x.<b>Data</b>, x.Inc)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-291" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-291">#L291</a>: 	cblas128.Ztbmv(a.Uplo, t, a.Diag, a.N, a.K, a.Data, a.Stride, x.<b>Data</b>, x.Inc)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-302" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-302">#L302</a>: 	cblas128.Ztpmv(a.Uplo, t, a.Diag, a.N, a.Data, x.<b>Data</b>, x.Inc)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-319" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-319">#L319</a>: 	cblas128.Ztrsv(a.Uplo, t, a.Diag, a.N, a.Data, a.Stride, x.<b>Data</b>, x.Inc)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-336" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-336">#L336</a>: 	cblas128.Ztbsv(a.Uplo, t, a.Diag, a.N, a.K, a.Data, a.Stride, x.<b>Data</b>, x.Inc)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-353" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-353">#L353</a>: 	cblas128.Ztpsv(a.Uplo, t, a.Diag, a.N, a.Data, x.<b>Data</b>, x.Inc)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-363" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-363">#L363</a>: 	cblas128.Zhemv(a.Uplo, a.N, alpha, a.Data, a.Stride, x.<b>Data</b>, x.Inc, beta, y.<b>Data</b>, y.Inc)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-373" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-373">#L373</a>: 	cblas128.Zhbmv(a.Uplo, a.N, a.K, alpha, a.Data, a.Stride, x.<b>Data</b>, x.Inc, beta, y.<b>Data</b>, y.Inc)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-383" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-383">#L383</a>: 	cblas128.Zhpmv(a.Uplo, a.N, alpha, a.Data, x.<b>Data</b>, x.Inc, beta, y.<b>Data</b>, y.Inc)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-392" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-392">#L392</a>: 	cblas128.Zgeru(a.Rows, a.Cols, alpha, x.<b>Data</b>, x.Inc, y.<b>Data</b>, y.Inc, a.Data, a.Stride)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-401" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-401">#L401</a>: 	cblas128.Zgerc(a.Rows, a.Cols, alpha, x.<b>Data</b>, x.Inc, y.<b>Data</b>, y.Inc, a.Data, a.Stride)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-410" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-410">#L410</a>: 	cblas128.Zher(a.Uplo, a.N, alpha, x.<b>Data</b>, x.Inc, a.Data, a.Stride)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-420" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-420">#L420</a>: 	cblas128.Zhpr(a.Uplo, a.N, alpha, x.<b>Data</b>, x.Inc, a.Data)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-429" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-429">#L429</a>: 	cblas128.Zher2(a.Uplo, a.N, alpha, x.<b>Data</b>, x.Inc, y.<b>Data</b>, y.Inc, a.Data, a.Stride)
+		<a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-439" class="path-duplicate">cblas128.go</a><a href="../../../../../src/gonum.org/v1/gonum/blas/cblas128/cblas128.go.html#line-439">#L439</a>: 	cblas128.Zhpr2(a.Uplo, a.N, alpha, x.<b>Data</b>, x.Inc, y.<b>Data</b>, y.Inc, a.Data)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

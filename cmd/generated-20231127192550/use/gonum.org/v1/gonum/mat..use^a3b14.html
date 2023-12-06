@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/mat.use</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">func <b><a href="../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-970">use</a></b></span>
+
+<span class="title">27 uses</span>
+
+	gonum.org/v1/gonum/mat (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-203">cholesky.go#L203</a>: 		c.chol = NewTriDense(n, Upper, <b>use</b>(c.chol.mat.Data, n*n))
+		<a href="../../../../src/gonum.org/v1/gonum/mat/dense.go.html#line-112">dense.go#L112</a>: 			Data:   <b>use</b>(m.mat.Data, r*c),
+		<a href="../../../../src/gonum.org/v1/gonum/mat/diagonal.go.html#line-287">diagonal.go#L287</a>: 			Data: <b>use</b>(d.mat.Data, r),
+		<a href="../../../../src/gonum.org/v1/gonum/mat/gsvd.go.html#line-108">gsvd.go#L108</a>: 				Data:   <b>use</b>(gsvd.u.Data, r*r),
+		<a href="../../../../src/gonum.org/v1/gonum/mat/gsvd.go.html#line-117" class="path-duplicate">gsvd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/gsvd.go.html#line-117">#L117</a>: 				Data:   <b>use</b>(gsvd.v.Data, p*p),
+		<a href="../../../../src/gonum.org/v1/gonum/mat/gsvd.go.html#line-126" class="path-duplicate">gsvd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/gsvd.go.html#line-126">#L126</a>: 				Data:   <b>use</b>(gsvd.q.Data, c*c),
+		<a href="../../../../src/gonum.org/v1/gonum/mat/gsvd.go.html#line-135" class="path-duplicate">gsvd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/gsvd.go.html#line-135">#L135</a>: 	gsvd.s1 = <b>use</b>(gsvd.s1, c)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/gsvd.go.html#line-136" class="path-duplicate">gsvd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/gsvd.go.html#line-136">#L136</a>: 	gsvd.s2 = <b>use</b>(gsvd.s2, c)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/gsvd.go.html#line-140" class="path-duplicate">gsvd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/gsvd.go.html#line-140">#L140</a>: 	gsvd.work = <b>use</b>(gsvd.work, 1)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/gsvd.go.html#line-142" class="path-duplicate">gsvd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/gsvd.go.html#line-142">#L142</a>: 	gsvd.work = <b>use</b>(gsvd.work, int(gsvd.work[0]))
+		<a href="../../../../src/gonum.org/v1/gonum/mat/matrix.go.html#line-970">matrix.go#L970</a>: func <b>use</b>(f []float64, l int) []float64 {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-97">svd.go#L97</a>: 			Data:   <b>use</b>(svd.u.Data, m*m),
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-105" class="path-duplicate">svd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-105">#L105</a>: 			Data:   <b>use</b>(svd.u.Data, m*min(m, n)),
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-116" class="path-duplicate">svd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-116">#L116</a>: 			Data:   <b>use</b>(svd.vt.Data, n*n),
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-124" class="path-duplicate">svd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-124">#L124</a>: 			Data:   <b>use</b>(svd.vt.Data, min(m, n)*n),
+		<a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-134" class="path-duplicate">svd.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/svd.go.html#line-134">#L134</a>: 	svd.s = <b>use</b>(svd.s, min(m, n))
+		<a href="../../../../src/gonum.org/v1/gonum/mat/symmetric.go.html#line-191">symmetric.go#L191</a>: 			Data:   <b>use</b>(s.mat.Data, n*n),
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triangular.go.html#line-311">triangular.go#L311</a>: 			Data:   <b>use</b>(t.mat.Data, n*n),
+		<a href="../../../../src/gonum.org/v1/gonum/mat/triband.go.html#line-351">triband.go#L351</a>: 			Data:   <b>use</b>(t.mat.Data, n*(k+1)),
+		<a href="../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-143">tridiag.go#L143</a>: 			DL: <b>use</b>(a.mat.DL, 0),
+		<a href="../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-144" class="path-duplicate">tridiag.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-144">#L144</a>: 			D:  <b>use</b>(a.mat.D, 1),
+		<a href="../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-145" class="path-duplicate">tridiag.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-145">#L145</a>: 			DU: <b>use</b>(a.mat.DU, 0),
+		<a href="../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-151" class="path-duplicate">tridiag.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-151">#L151</a>: 			DL: <b>use</b>(a.mat.DL, n-1),
+		<a href="../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-152" class="path-duplicate">tridiag.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-152">#L152</a>: 			D:  <b>use</b>(a.mat.D, n),
+		<a href="../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-153" class="path-duplicate">tridiag.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/tridiag.go.html#line-153">#L153</a>: 			DU: <b>use</b>(a.mat.DU, n-1),
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-213">vector.go#L213</a>: 		Data: <b>use</b>(v.mat.Data, n),
+		<a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-733" class="path-duplicate">vector.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/vector.go.html#line-733">#L733</a>: 			Data: <b>use</b>(v.mat.Data, r),
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source: dlascl.go in package gonum.org/v1/gonum/lapack/gonum</title>
+<link href="../../../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre id="header"><code><span class="title">Source File</span>
+	dlascl.go
+
+<span class="title">Belonging Package</span>
+	<a href="../../../../../../pkg/gonum.org/v1/gonum/lapack/gonum.html">gonum.org/v1/gonum/lapack/gonum</a>
+</code></pre>
+<style>input[type=radio] {display: none;}
+input[id=r0]:checked ~pre label[for=r0],
+input[id=r1]:checked ~pre label[for=r1],
+input[id=r2]:checked ~pre label[for=r2],
+input[id=r3]:checked ~pre label[for=r3],
+input[id=r4]:checked ~pre label[for=r4],
+input[id=r5]:checked ~pre label[for=r5],
+input[id=r6]:checked ~pre label[for=r6],
+input[id=r7]:checked ~pre label[for=r7],
+input[id=r8]:checked ~pre label[for=r8],
+input[id=r9]:checked ~pre label[for=r9],
+input[id=r10]:checked ~pre label[for=r10],
+input[id=r11]:checked ~pre label[for=r11],
+input[id=r12]:checked ~pre label[for=r12],
+input[id=r13]:checked ~pre label[for=r13],
+input[id=r14]:checked ~pre label[for=r14],
+input[id=r15]:checked ~pre label[for=r15],
+input[id=r16]:checked ~pre label[for=r16],
+input[id=r17]:checked ~pre label[for=r17],
+input[id=r18]:checked ~pre label[for=r18],
+input[id=r19]:checked ~pre label[for=r19],
+input[id=r20]:checked ~pre label[for=r20],
+input[id=r21]:checked ~pre label[for=r21],
+input[id=r22]:checked ~pre label[for=r22],
+input[id=r23]:checked ~pre label[for=r23],
+input[id=r24]:checked ~pre label[for=r24]
+{background: #226; color: #ff8;}
+input[id=i0]:checked ~pre .i0,
+input[id=i1]:checked ~pre .i1
+{background: brown; color: #eed;}
+</style><input id="r0" type="radio" name="g"/>
+<input id="r1" type="radio" name="g"/>
+<input id="r2" type="radio" name="g"/>
+<input id="r3" type="radio" name="g"/>
+<input id="r4" type="radio" name="g"/>
+<input id="r5" type="radio" name="g"/>
+<input id="r6" type="radio" name="g"/>
+<input id="r7" type="radio" name="g"/>
+<input id="r8" type="radio" name="g"/>
+<input id="r9" type="radio" name="g"/>
+<input id="r10" type="radio" name="g"/>
+<input id="r11" type="radio" name="g"/>
+<input id="r12" type="radio" name="g"/>
+<input id="r13" type="radio" name="g"/>
+<input id="r14" type="radio" name="g"/>
+<input id="r15" type="radio" name="g"/>
+<input id="r16" type="radio" name="g"/>
+<input id="r17" type="radio" name="g"/>
+<input id="r18" type="radio" name="g"/>
+<input id="r19" type="radio" name="g"/>
+<input id="r20" type="radio" name="g"/>
+<input id="r21" type="radio" name="g"/>
+<input id="r22" type="radio" name="g"/>
+<input id="r23" type="radio" name="g"/>
+<input id="r24" type="radio" name="g"/>
+<input id="i0" type="radio" name="i"/>
+<input id="i1" type="radio" name="i"/>
+
+<pre class="line-numbers">
+<span class="codeline" id="line-1"><code><span class="comment">// Copyright ©2015 The Gonum Authors. All rights reserved.</span></code></span>
+<span class="codeline" id="line-2"><code><span class="comment">// Use of this source code is governed by a BSD-style</span></code></span>
+<span class="codeline" id="line-3"><code><span class="comment">// license that can be found in the LICENSE file.</span></code></span>
+<span class="codeline" id="line-4"><code></code></span>
+<span class="codeline" id="line-5"><code><span class="keyword">package</span> gonum</code></span>
+<span class="codeline" id="line-6"><code></code></span>
+<span class="codeline" id="line-7"><code><span class="keyword">import</span> (</code></span>
+<span class="codeline" id="line-8"><code>	<label for="i0"><span class="lit-string i0">"math"</span></label></code></span>
+<span class="codeline" id="line-9"><code></code></span>
+<span class="codeline" id="line-10"><code>	<label for="i1"><span class="lit-string i1">"gonum.org/v1/gonum/lapack"</span></label></code></span>
+<span class="codeline" id="line-11"><code>)</code></span>
+<span class="codeline" id="line-12"><code></code></span>
+<span class="codeline" id="line-13"><code><span class="comment">// Dlascl multiplies an m×n matrix by the scalar cto/cfrom.</span></code></span>
+<span class="codeline" id="line-14"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-15"><code><span class="comment">// cfrom must not be zero, and cto and cfrom must not be NaN, otherwise Dlascl</span></code></span>
+<span class="codeline" id="line-16"><code><span class="comment">// will panic.</span></code></span>
+<span class="codeline" id="line-17"><code><span class="comment">//</span></code></span>
+<span class="codeline" id="line-18"><code><span class="comment">// Dlascl is an internal routine. It is exported for testing purposes.</span></code></span>
+<span class="codeline" id="line-19"><code><span class="keyword">func</span> (<label for="r0" class="ident">impl</label> <a href="lapack.go.html#line-12" class="ident">Implementation</a>) <label for="r1" class="ident"><a href="../../../../../../use/gonum.org/v1/gonum/lapack/gonum..Implementation.Dlascl.html" class="ident">Dlascl</a></label>(<label for="r2" class="ident">kind</label> <a href="../../../../../../pkg/gonum.org/v1/gonum/lapack.html" class="ident i1">lapack</a>.<a href="../lapack.go.html#line-81" class="ident">MatrixType</a>, <label for="r3" class="ident">kl</label>, <label for="r4" class="ident">ku</label> <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a>, <label for="r5" class="ident">cfrom</label>, <label for="r6" class="ident">cto</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r7" class="ident">m</label>, <label for="r8" class="ident">n</label> <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a>, <label for="r9" class="ident">a</label> []<a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a>, <label for="r10" class="ident">lda</label> <a href="../../../../../../pkg/builtin.html#name-int" class="ident">int</a>) {</code></span>
+<span class="codeline" id="line-20"><code>	<span class="keyword">switch</span> <label for="r2" class="ident">kind</label> {</code></span>
+<span class="codeline" id="line-21"><code>	<span class="keyword">default</span>:</code></span>
+<span class="codeline" id="line-22"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-21" class="ident">badMatrixType</a>)</code></span>
+<span class="codeline" id="line-23"><code>	<span class="keyword">case</span> <span class="lit-number">'H'</span>, <span class="lit-number">'B'</span>, <span class="lit-number">'Q'</span>, <span class="lit-number">'Z'</span>: <span class="comment">// See dlascl.f.</span></code></span>
+<span class="codeline" id="line-24"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<span class="lit-string">"not implemented"</span>)</code></span>
+<span class="codeline" id="line-25"><code>	<span class="keyword">case</span> <a href="../../../../../../pkg/gonum.org/v1/gonum/lapack.html" class="ident i1">lapack</a>.<a href="../lapack.go.html#line-84" class="ident">General</a>, <a href="../../../../../../pkg/gonum.org/v1/gonum/lapack.html" class="ident i1">lapack</a>.<a href="../lapack.go.html#line-85" class="ident">UpperTri</a>, <a href="../../../../../../pkg/gonum.org/v1/gonum/lapack.html" class="ident i1">lapack</a>.<a href="../lapack.go.html#line-86" class="ident">LowerTri</a>:</code></span>
+<span class="codeline" id="line-26"><code>		<span class="keyword">if</span> <label for="r10" class="ident">lda</label> &lt; <a href="lapack.go.html#line-23" class="ident">max</a>(<span class="lit-number">1</span>, <label for="r8" class="ident">n</label>) {</code></span>
+<span class="codeline" id="line-27"><code>			<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-157" class="ident">badLdA</a>)</code></span>
+<span class="codeline" id="line-28"><code>		}</code></span>
+<span class="codeline" id="line-29"><code>	}</code></span>
+<span class="codeline" id="line-30"><code>	<span class="keyword">switch</span> {</code></span>
+<span class="codeline" id="line-31"><code>	<span class="keyword">case</span> <label for="r5" class="ident">cfrom</label> == <span class="lit-number">0</span>:</code></span>
+<span class="codeline" id="line-32"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-99" class="ident">zeroCFrom</a>)</code></span>
+<span class="codeline" id="line-33"><code>	<span class="keyword">case</span> <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/bits.go.html#line-34" class="ident">IsNaN</a>(<label for="r5" class="ident">cfrom</label>):</code></span>
+<span class="codeline" id="line-34"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-79" class="ident">nanCFrom</a>)</code></span>
+<span class="codeline" id="line-35"><code>	<span class="keyword">case</span> <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/bits.go.html#line-34" class="ident">IsNaN</a>(<label for="r6" class="ident">cto</label>):</code></span>
+<span class="codeline" id="line-36"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-80" class="ident">nanCTo</a>)</code></span>
+<span class="codeline" id="line-37"><code>	<span class="keyword">case</span> <label for="r7" class="ident">m</label> &lt; <span class="lit-number">0</span>:</code></span>
+<span class="codeline" id="line-38"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-72" class="ident">mLT0</a>)</code></span>
+<span class="codeline" id="line-39"><code>	<span class="keyword">case</span> <label for="r8" class="ident">n</label> &lt; <span class="lit-number">0</span>:</code></span>
+<span class="codeline" id="line-40"><code>		<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-76" class="ident">nLT0</a>)</code></span>
+<span class="codeline" id="line-41"><code>	}</code></span>
+<span class="codeline" id="line-42"><code></code></span>
+<span class="codeline" id="line-43"><code>	<span class="keyword">if</span> <label for="r8" class="ident">n</label> == <span class="lit-number">0</span> || <label for="r7" class="ident">m</label> == <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-44"><code>		<span class="keyword">return</span></code></span>
+<span class="codeline" id="line-45"><code>	}</code></span>
+<span class="codeline" id="line-46"><code></code></span>
+<span class="codeline" id="line-47"><code>	<span class="keyword">switch</span> <label for="r2" class="ident">kind</label> {</code></span>
+<span class="codeline" id="line-48"><code>	<span class="keyword">case</span> <a href="../../../../../../pkg/gonum.org/v1/gonum/lapack.html" class="ident i1">lapack</a>.<a href="../lapack.go.html#line-84" class="ident">General</a>, <a href="../../../../../../pkg/gonum.org/v1/gonum/lapack.html" class="ident i1">lapack</a>.<a href="../lapack.go.html#line-85" class="ident">UpperTri</a>, <a href="../../../../../../pkg/gonum.org/v1/gonum/lapack.html" class="ident i1">lapack</a>.<a href="../lapack.go.html#line-86" class="ident">LowerTri</a>:</code></span>
+<span class="codeline" id="line-49"><code>		<span class="keyword">if</span> <a href="../../../../../../pkg/builtin.html#name-len" class="ident">len</a>(<label for="r9" class="ident">a</label>) &lt; (<label for="r7" class="ident">m</label>-<span class="lit-number">1</span>)*<label for="r10" class="ident">lda</label>+<label for="r8" class="ident">n</label> {</code></span>
+<span class="codeline" id="line-50"><code>			<a href="../../../../../../pkg/builtin.html#name-panic" class="ident">panic</a>(<a href="errors.go.html#line-117" class="ident">shortA</a>)</code></span>
+<span class="codeline" id="line-51"><code>		}</code></span>
+<span class="codeline" id="line-52"><code>	}</code></span>
+<span class="codeline" id="line-53"><code></code></span>
+<span class="codeline" id="line-54"><code>	<label for="r11" class="ident">smlnum</label> := <a href="lapack.go.html#line-50" class="ident">dlamchS</a></code></span>
+<span class="codeline" id="line-55"><code>	<label for="r12" class="ident">bignum</label> := <span class="lit-number">1</span> / <label for="r11" class="ident">smlnum</label></code></span>
+<span class="codeline" id="line-56"><code>	<label for="r13" class="ident">cfromc</label> := <label for="r5" class="ident">cfrom</label></code></span>
+<span class="codeline" id="line-57"><code>	<label for="r14" class="ident">ctoc</label> := <label for="r6" class="ident">cto</label></code></span>
+<span class="codeline" id="line-58"><code>	<label for="r15" class="ident">cfrom1</label> := <label for="r13" class="ident">cfromc</label> * <label for="r11" class="ident">smlnum</label></code></span>
+<span class="codeline" id="line-59"><code>	<span class="keyword">for</span> {</code></span>
+<span class="codeline" id="line-60"><code>		<span class="keyword">var</span> <label for="r16" class="ident">done</label> <a href="../../../../../../pkg/builtin.html#name-bool" class="ident">bool</a></code></span>
+<span class="codeline" id="line-61"><code>		<span class="keyword">var</span> <label for="r17" class="ident">mul</label>, <label for="r18" class="ident">ctol</label> <a href="../../../../../../pkg/builtin.html#name-float64" class="ident">float64</a></code></span>
+<span class="codeline" id="line-62"><code>		<span class="keyword">if</span> <label for="r15" class="ident">cfrom1</label> == <label for="r13" class="ident">cfromc</label> {</code></span>
+<span class="codeline" id="line-63"><code>			<span class="comment">// cfromc is inf.</span></code></span>
+<span class="codeline" id="line-64"><code>			<label for="r17" class="ident">mul</label> = <label for="r14" class="ident">ctoc</label> / <label for="r13" class="ident">cfromc</label></code></span>
+<span class="codeline" id="line-65"><code>			<label for="r16" class="ident">done</label> = <a href="../../../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-66"><code>			<label for="r18" class="ident">ctol</label> = <label for="r14" class="ident">ctoc</label></code></span>
+<span class="codeline" id="line-67"><code>		} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-68"><code>			<label for="r18" class="ident">ctol</label> = <label for="r14" class="ident">ctoc</label> / <label for="r12" class="ident">bignum</label></code></span>
+<span class="codeline" id="line-69"><code>			<span class="keyword">if</span> <label for="r18" class="ident">ctol</label> == <label for="r14" class="ident">ctoc</label> {</code></span>
+<span class="codeline" id="line-70"><code>				<span class="comment">// ctoc is either 0 or inf.</span></code></span>
+<span class="codeline" id="line-71"><code>				<label for="r17" class="ident">mul</label> = <label for="r14" class="ident">ctoc</label></code></span>
+<span class="codeline" id="line-72"><code>				<label for="r16" class="ident">done</label> = <a href="../../../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-73"><code>				<label for="r13" class="ident">cfromc</label> = <span class="lit-number">1</span></code></span>
+<span class="codeline" id="line-74"><code>			} <span class="keyword">else</span> <span class="keyword">if</span> <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r15" class="ident">cfrom1</label>) &gt; <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r14" class="ident">ctoc</label>) &amp;&amp; <label for="r14" class="ident">ctoc</label> != <span class="lit-number">0</span> {</code></span>
+<span class="codeline" id="line-75"><code>				<label for="r17" class="ident">mul</label> = <label for="r11" class="ident">smlnum</label></code></span>
+<span class="codeline" id="line-76"><code>				<label for="r16" class="ident">done</label> = <a href="../../../../../../pkg/builtin.html#name-false" class="ident">false</a></code></span>
+<span class="codeline" id="line-77"><code>				<label for="r13" class="ident">cfromc</label> = <label for="r15" class="ident">cfrom1</label></code></span>
+<span class="codeline" id="line-78"><code>			} <span class="keyword">else</span> <span class="keyword">if</span> <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r18" class="ident">ctol</label>) &gt; <a href="../../../../../../pkg/math.html" class="ident i0">math</a>.<a href="../../../../../math/abs.go.html#line-13" class="ident">Abs</a>(<label for="r13" class="ident">cfromc</label>) {</code></span>
+<span class="codeline" id="line-79"><code>				<label for="r17" class="ident">mul</label> = <label for="r12" class="ident">bignum</label></code></span>
+<span class="codeline" id="line-80"><code>				<label for="r16" class="ident">done</label> = <a href="../../../../../../pkg/builtin.html#name-false" class="ident">false</a></code></span>
+<span class="codeline" id="line-81"><code>				<label for="r14" class="ident">ctoc</label> = <label for="r18" class="ident">ctol</label></code></span>
+<span class="codeline" id="line-82"><code>			} <span class="keyword">else</span> {</code></span>
+<span class="codeline" id="line-83"><code>				<label for="r17" class="ident">mul</label> = <label for="r14" class="ident">ctoc</label> / <label for="r13" class="ident">cfromc</label></code></span>
+<span class="codeline" id="line-84"><code>				<label for="r16" class="ident">done</label> = <a href="../../../../../../pkg/builtin.html#name-true" class="ident">true</a></code></span>
+<span class="codeline" id="line-85"><code>			}</code></span>
+<span class="codeline" id="line-86"><code>		}</code></span>
+<span class="codeline" id="line-87"><code>		<span class="keyword">switch</span> <label for="r2" class="ident">kind</label> {</code></span>
+<span class="codeline" id="line-88"><code>		<span class="keyword">case</span> <a href="../../../../../../pkg/gonum.org/v1/gonum/lapack.html" class="ident i1">lapack</a>.<a href="../lapack.go.html#line-84" class="ident">General</a>:</code></span>
+<span class="codeline" id="line-89"><code>			<span class="keyword">for</span> <label for="r19" class="ident">i</label> := <span class="lit-number">0</span>; <label for="r19" class="ident">i</label> &lt; <label for="r7" class="ident">m</label>; <label for="r19" class="ident">i</label>++ {</code></span>
+<span class="codeline" id="line-90"><code>				<span class="keyword">for</span> <label for="r20" class="ident">j</label> := <span class="lit-number">0</span>; <label for="r20" class="ident">j</label> &lt; <label for="r8" class="ident">n</label>; <label for="r20" class="ident">j</label>++ {</code></span>
+<span class="codeline" id="line-91"><code>					<label for="r9" class="ident">a</label>[<label for="r19" class="ident">i</label>*<label for="r10" class="ident">lda</label>+<label for="r20" class="ident">j</label>] = <label for="r9" class="ident">a</label>[<label for="r19" class="ident">i</label>*<label for="r10" class="ident">lda</label>+<label for="r20" class="ident">j</label>] * <label for="r17" class="ident">mul</label></code></span>
+<span class="codeline" id="line-92"><code>				}</code></span>
+<span class="codeline" id="line-93"><code>			}</code></span>
+<span class="codeline" id="line-94"><code>		<span class="keyword">case</span> <a href="../../../../../../pkg/gonum.org/v1/gonum/lapack.html" class="ident i1">lapack</a>.<a href="../lapack.go.html#line-85" class="ident">UpperTri</a>:</code></span>
+<span class="codeline" id="line-95"><code>			<span class="keyword">for</span> <label for="r21" class="ident">i</label> := <span class="lit-number">0</span>; <label for="r21" class="ident">i</label> &lt; <label for="r7" class="ident">m</label>; <label for="r21" class="ident">i</label>++ {</code></span>
+<span class="codeline" id="line-96"><code>				<span class="keyword">for</span> <label for="r22" class="ident">j</label> := <label for="r21" class="ident">i</label>; <label for="r22" class="ident">j</label> &lt; <label for="r8" class="ident">n</label>; <label for="r22" class="ident">j</label>++ {</code></span>
+<span class="codeline" id="line-97"><code>					<label for="r9" class="ident">a</label>[<label for="r21" class="ident">i</label>*<label for="r10" class="ident">lda</label>+<label for="r22" class="ident">j</label>] = <label for="r9" class="ident">a</label>[<label for="r21" class="ident">i</label>*<label for="r10" class="ident">lda</label>+<label for="r22" class="ident">j</label>] * <label for="r17" class="ident">mul</label></code></span>
+<span class="codeline" id="line-98"><code>				}</code></span>
+<span class="codeline" id="line-99"><code>			}</code></span>
+<span class="codeline" id="line-100"><code>		<span class="keyword">case</span> <a href="../../../../../../pkg/gonum.org/v1/gonum/lapack.html" class="ident i1">lapack</a>.<a href="../lapack.go.html#line-86" class="ident">LowerTri</a>:</code></span>
+<span class="codeline" id="line-101"><code>			<span class="keyword">for</span> <label for="r23" class="ident">i</label> := <span class="lit-number">0</span>; <label for="r23" class="ident">i</label> &lt; <label for="r7" class="ident">m</label>; <label for="r23" class="ident">i</label>++ {</code></span>
+<span class="codeline" id="line-102"><code>				<span class="keyword">for</span> <label for="r24" class="ident">j</label> := <span class="lit-number">0</span>; <label for="r24" class="ident">j</label> &lt;= <a href="lapack.go.html#line-16" class="ident">min</a>(<label for="r23" class="ident">i</label>, <label for="r8" class="ident">n</label>-<span class="lit-number">1</span>); <label for="r24" class="ident">j</label>++ {</code></span>
+<span class="codeline" id="line-103"><code>					<label for="r9" class="ident">a</label>[<label for="r23" class="ident">i</label>*<label for="r10" class="ident">lda</label>+<label for="r24" class="ident">j</label>] = <label for="r9" class="ident">a</label>[<label for="r23" class="ident">i</label>*<label for="r10" class="ident">lda</label>+<label for="r24" class="ident">j</label>] * <label for="r17" class="ident">mul</label></code></span>
+<span class="codeline" id="line-104"><code>				}</code></span>
+<span class="codeline" id="line-105"><code>			}</code></span>
+<span class="codeline" id="line-106"><code>		}</code></span>
+<span class="codeline" id="line-107"><code>		<span class="keyword">if</span> <label for="r16" class="ident">done</label> {</code></span>
+<span class="codeline" id="line-108"><code>			<span class="keyword">break</span></code></span>
+<span class="codeline" id="line-109"><code>		}</code></span>
+<span class="codeline" id="line-110"><code>	}</code></span>
+<span class="codeline" id="line-111"><code>}</code></span>
+</pre><pre id="footer">
+<table><tr><td><img src="../../../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

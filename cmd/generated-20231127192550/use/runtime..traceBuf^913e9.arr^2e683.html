@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.traceBuf.arr</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/trace.go.html#line-238">traceBuf</a>.<a href="../src/runtime/trace.go.html#line-241">arr</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">15 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/trace.go.html#line-241">trace.go#L241</a>: 	<b>arr</b> [64&lt;&lt;10 - unsafe.Sizeof(traceBufHeader{})]byte // underlying buffer for traceBufHeader.buf
+		<a href="../src/runtime/trace.go.html#line-623" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-623">#L623</a>: 		return buf.ptr().<b>arr</b>[:buf.ptr().pos], false
+		<a href="../src/runtime/trace.go.html#line-795" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-795">#L795</a>: 	if buf == nil || len(buf.<b>arr</b>)-buf.pos &lt; maxSize {
+		<a href="../src/runtime/trace.go.html#line-823" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-823">#L823</a>: 		lenp = &amp;buf.<b>arr</b>[buf.pos-1]
+		<a href="../src/runtime/trace.go.html#line-1129" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1129">#L1129</a>: 	if buf == nil || len(buf.<b>arr</b>)-buf.pos &lt; size {
+		<a href="../src/runtime/trace.go.html#line-1141" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1141">#L1141</a>: 	if room := len(buf.<b>arr</b>) - buf.pos; room &lt; slen+traceBytesPerNumber {
+		<a href="../src/runtime/trace.go.html#line-1146" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1146">#L1146</a>: 	buf.pos += copy(buf.<b>arr</b>[buf.pos:], s[:slen])
+		<a href="../src/runtime/trace.go.html#line-1156" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1156">#L1156</a>: 		buf.<b>arr</b>[pos] = 0x80 | byte(v)
+		<a href="../src/runtime/trace.go.html#line-1159" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1159">#L1159</a>: 	buf.<b>arr</b>[pos] = byte(v)
+		<a href="../src/runtime/trace.go.html#line-1171" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1171">#L1171</a>: 			buf.<b>arr</b>[pos] = 0x80 | byte(v)
+		<a href="../src/runtime/trace.go.html#line-1173" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1173">#L1173</a>: 			buf.<b>arr</b>[pos] = byte(v)
+		<a href="../src/runtime/trace.go.html#line-1182" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1182">#L1182</a>: 	buf.<b>arr</b>[buf.pos] = v
+		<a href="../src/runtime/trace.go.html#line-1306" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1306">#L1306</a>: 			if buf := bufp.ptr(); len(buf.<b>arr</b>)-buf.pos &lt; maxSize {
+		<a href="../src/runtime/trace.go.html#line-1770" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1770">#L1770</a>: 	if room := len(buf.<b>arr</b>) - buf.pos; room &lt; slen+traceBytesPerNumber {
+		<a href="../src/runtime/trace.go.html#line-1774" class="path-duplicate">trace.go</a><a href="../src/runtime/trace.go.html#line-1774">#L1774</a>: 	buf.pos += copy(buf.<b>arr</b>[buf.pos:], message[:slen])
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

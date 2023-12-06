@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: sync.Pool.Get</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../pkg/sync.html">sync</a>.<a href="../src/sync/pool.go.html#line-49">Pool</a>.<a href="../src/sync/pool.go.html#line-127">Get</a></b></span><span style="font-size: large;"><i> (method)</i></span>
+
+<span class="title">21 uses</span>
+
+	sync (current package)
+		<a href="../src/sync/pool.go.html#line-127">pool.go#L127</a>: func (p *Pool) <b>Get</b>() any {
+
+	<a href="../pkg/encoding/json.html">encoding/json</a>
+		<a href="../src/encoding/json/encode.go.html#line-268">encode.go#L268</a>: 	if v := encodeStatePool.<b>Get</b>(); v != nil {
+		<a href="../src/encoding/json/scanner.go.html#line-94">scanner.go#L94</a>: 	scan := scannerPool.<b>Get</b>().(*scanner)
+
+	<a href="../pkg/fmt.html">fmt</a>
+		<a href="../src/fmt/print.go.html#line-152">print.go#L152</a>: 	p := ppFree.<b>Get</b>().(*pp)
+		<a href="../src/fmt/scan.go.html#line-384">scan.go#L384</a>: 	s = ssFree.<b>Get</b>().(*ss)
+
+	<a href="../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>
+		<a href="../src/gonum.org/v1/gonum/mat/pool.go.html#line-102">pool.go#L102</a>: 	w := poolDense[poolFor(l)].<b>Get</b>().(*Dense)
+		<a href="../src/gonum.org/v1/gonum/mat/pool.go.html#line-128" class="path-duplicate">pool.go</a><a href="../src/gonum.org/v1/gonum/mat/pool.go.html#line-128">#L128</a>: 	s := poolSymDense[poolFor(l)].<b>Get</b>().(*SymDense)
+		<a href="../src/gonum.org/v1/gonum/mat/pool.go.html#line-152" class="path-duplicate">pool.go</a><a href="../src/gonum.org/v1/gonum/mat/pool.go.html#line-152">#L152</a>: 	t := poolTriDense[poolFor(l)].<b>Get</b>().(*TriDense)
+		<a href="../src/gonum.org/v1/gonum/mat/pool.go.html#line-183" class="path-duplicate">pool.go</a><a href="../src/gonum.org/v1/gonum/mat/pool.go.html#line-183">#L183</a>: 	v := poolVecDense[poolFor(l)].<b>Get</b>().(*VecDense)
+		<a href="../src/gonum.org/v1/gonum/mat/pool.go.html#line-204" class="path-duplicate">pool.go</a><a href="../src/gonum.org/v1/gonum/mat/pool.go.html#line-204">#L204</a>: 	w := poolCDense[poolFor(l)].<b>Get</b>().(*CDense)
+		<a href="../src/gonum.org/v1/gonum/mat/pool.go.html#line-227" class="path-duplicate">pool.go</a><a href="../src/gonum.org/v1/gonum/mat/pool.go.html#line-227">#L227</a>: 	w := *poolFloat64s[poolFor(uint(l))].<b>Get</b>().(*[]float64)
+		<a href="../src/gonum.org/v1/gonum/mat/pool.go.html#line-245" class="path-duplicate">pool.go</a><a href="../src/gonum.org/v1/gonum/mat/pool.go.html#line-245">#L245</a>: 	w := *poolInts[poolFor(uint(l))].<b>Get</b>().(*[]int)
+
+	<a href="../pkg/google.golang.org/protobuf/internal/filedesc.html">google.golang.org/protobuf/internal/filedesc</a>
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_init.go.html#line-454">desc_init.go#L454</a>: 	return nameBuilderPool.<b>Get</b>().(*strs.Builder)
+
+	<a href="../pkg/google.golang.org/protobuf/internal/order.html">google.golang.org/protobuf/internal/order</a>
+		<a href="../src/google.golang.org/protobuf/internal/order/range.go.html#line-40">range.go#L40</a>: 	p := messageFieldPool.<b>Get</b>().(*[]messageField)
+		<a href="../src/google.golang.org/protobuf/internal/order/range.go.html#line-91" class="path-duplicate">range.go</a><a href="../src/google.golang.org/protobuf/internal/order/range.go.html#line-91">#L91</a>: 	p := mapEntryPool.<b>Get</b>().(*[]mapEntry)
+
+	<a href="../pkg/internal/poll.html">internal/poll</a>
+		<a href="../src/internal/poll/splice_linux.go.html#line-194">splice_linux.go#L194</a>: 	v := splicePipePool.<b>Get</b>()
+
+	<a href="../pkg/io.html">io</a>
+		<a href="../src/io/io.go.html#line-655">io.go#L655</a>: 	bufp := blackHolePool.<b>Get</b>().(*[]byte)
+
+	<a href="../pkg/os.html">os</a>
+		<a href="../src/os/dir_unix.go.html#line-48">dir_unix.go#L48</a>: 		f.dirinfo.buf = dirBufPool.<b>Get</b>().(*[]byte)
+
+	<a href="../pkg/reflect.html">reflect</a>
+		<a href="../src/reflect/value.go.html#line-489">value.go#L489</a>: 			stackArgs = framePool.<b>Get</b>().(unsafe.Pointer)
+		<a href="../src/reflect/value.go.html#line-982" class="path-duplicate">value.go</a><a href="../src/reflect/value.go.html#line-982">#L982</a>: 	methodFrame := methodFramePool.<b>Get</b>().(unsafe.Pointer)
+
+	<a href="../pkg/syscall.html">syscall</a>
+		<a href="../src/syscall/netlink_linux.go.html#line-84">netlink_linux.go#L84</a>: 	rbNew := pageBufPool.<b>Get</b>().(*[]byte)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

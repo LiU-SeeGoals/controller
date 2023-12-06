@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: gonum.org/v1/gonum/mat.Cholesky.chol</title>
+<link href="../../../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;"><b><a href="../../../../pkg/gonum.org/v1/gonum/mat.html">gonum.org/v1/gonum/mat</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-47">Cholesky</a>.<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-52">chol</a></b></span><span style="font-size: large;"><i> (field)</i></span>
+
+<span class="title">73 uses</span>
+
+	gonum.org/v1/gonum/mat (current package)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-52">cholesky.go#L52</a>: 	<b>chol</b> *TriDense
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-60" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-60">#L60</a>: 	n := c.<b>chol</b>.mat.N
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-71" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-71">#L71</a>: 		unorm := lapack64.Lantr(CondNorm, c.<b>chol</b>.mat, work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-72" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-72">#L72</a>: 		lnorm := lapack64.Lantr(CondNormTrans, c.<b>chol</b>.mat, work)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-75" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-75">#L75</a>: 	sym := c.<b>chol</b>.asSymBlas()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-87" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-87">#L87</a>: 	r, c = ch.<b>chol</b>.Dims()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-106" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-106">#L106</a>: 		val += c.<b>chol</b>.at(k, i) * c.<b>chol</b>.at(k, j)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-119" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-119">#L119</a>: 	r, _ := c.<b>chol</b>.Dims()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-136" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-136">#L136</a>: 	if c.<b>chol</b> == nil {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-137" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-137">#L137</a>: 		c.<b>chol</b> = NewTriDense(n, Upper, nil)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-139" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-139">#L139</a>: 		c.<b>chol</b>.Reset()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-140" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-140">#L140</a>: 		c.<b>chol</b>.reuseAsNonZeroed(n, Upper)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-142" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-142">#L142</a>: 	copySymIntoTriangle(c.<b>chol</b>, a)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-144" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-144">#L144</a>: 	sym := c.<b>chol</b>.asSymBlas()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-145" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-145">#L145</a>: 	work := getFloat64s(c.<b>chol</b>.mat.N, false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-160" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-160">#L160</a>: 	if c.<b>chol</b> != nil {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-161" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-161">#L161</a>: 		c.<b>chol</b>.Reset()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-170" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-170">#L170</a>: 	return c.<b>chol</b> == nil || c.<b>chol</b>.IsEmpty()
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-183" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-183">#L183</a>: 	if c.<b>chol</b> == nil {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-184" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-184">#L184</a>: 		c.<b>chol</b> = NewTriDense(n, Upper, nil)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-186" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-186">#L186</a>: 		c.<b>chol</b>.reuseAsNonZeroed(n, Upper)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-188" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-188">#L188</a>: 	c.<b>chol</b>.Copy(t)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-200" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-200">#L200</a>: 	if c.<b>chol</b> == nil {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-201" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-201">#L201</a>: 		c.<b>chol</b> = NewTriDense(n, Upper, nil)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-203" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-203">#L203</a>: 		c.<b>chol</b> = NewTriDense(n, Upper, use(c.<b>chol</b>.mat.Data, n*n))
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-205" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-205">#L205</a>: 	c.<b>chol</b>.Copy(chol.<b>chol</b>)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-223" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-223">#L223</a>: 	for i := 0; i &lt; c.<b>chol</b>.mat.N; i++ {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-224" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-224">#L224</a>: 		det += 2 * math.Log(c.<b>chol</b>.mat.Data[i*c.<b>chol</b>.mat.Stride+i])
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-237" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-237">#L237</a>: 	n := c.<b>chol</b>.mat.N
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-247" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-247">#L247</a>: 	lapack64.Potrs(c.<b>chol</b>.mat, dst.mat)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-263" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-263">#L263</a>: 	bn := b.<b>chol</b>.mat.N
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-264" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-264">#L264</a>: 	if a.<b>chol</b>.mat.N != bn {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-269" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-269">#L269</a>: 	dst.Copy(b.<b>chol</b>.T())
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-270" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-270">#L270</a>: 	blas64.Trsm(blas.Left, blas.Trans, 1, a.<b>chol</b>.mat, dst.mat)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-271" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-271">#L271</a>: 	blas64.Trsm(blas.Left, blas.NoTrans, 1, a.<b>chol</b>.mat, dst.mat)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-272" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-272">#L272</a>: 	blas64.Trmm(blas.Right, blas.NoTrans, 1, b.<b>chol</b>.mat, dst.mat)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-288" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-288">#L288</a>: 	n := c.<b>chol</b>.mat.N
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-305" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-305">#L305</a>: 		lapack64.Potrs(c.<b>chol</b>.mat, dst.asGeneral())
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-317" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-317">#L317</a>: 	return c.<b>chol</b>
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-332" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-332">#L332</a>: 	n := c.<b>chol</b>.mat.N
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-344" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-344">#L344</a>: 	dst.Copy(c.<b>chol</b>)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-359" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-359">#L359</a>: 	n := c.<b>chol</b>.mat.N
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-371" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-371">#L371</a>: 	dst.Copy(c.<b>chol</b>.TTri())
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-383" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-383">#L383</a>: 	n := c.<b>chol</b>.mat.N
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-405" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-405">#L405</a>: 	u.Copy(c.<b>chol</b>)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-427" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-427">#L427</a>: 	dst.reuseAsNonZeroed(c.<b>chol</b>.mat.N)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-441" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-441">#L441</a>: 	u.Copy(c.<b>chol</b>)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-473" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-473">#L473</a>: 	if c.<b>chol</b> == nil {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-474" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-474">#L474</a>: 		c.<b>chol</b> = NewTriDense(n, Upper, nil)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-475" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-475">#L475</a>: 	} else if c.<b>chol</b>.mat.N != n {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-478" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-478">#L478</a>: 	c.<b>chol</b>.ScaleTri(math.Sqrt(f), orig.<b>chol</b>)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-527" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-527">#L527</a>: 	_ = t.SolveVec(a.<b>chol</b>.T(), w)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-536" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-536">#L536</a>: 	newU.Copy(a.<b>chol</b>)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-541" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-541">#L541</a>: 	c.<b>chol</b> = newU
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-573" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-573">#L573</a>: 		if c.<b>chol</b> == nil {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-574" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-574">#L574</a>: 			c.<b>chol</b> = NewTriDense(n, Upper, nil)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-575" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-575">#L575</a>: 		} else if c.<b>chol</b>.mat.N != n {
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-578" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-578">#L578</a>: 		c.<b>chol</b>.Copy(orig.<b>chol</b>)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-628" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-628">#L628</a>: 		umat := c.<b>chol</b>.mat
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-662" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-662">#L662</a>: 	ok = lapack64.Trtrs(blas.Trans, c.<b>chol</b>.RawTriangular(), blas64.General{
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-693" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-693">#L693</a>: 	workMat := getTriDenseWorkspace(c.<b>chol</b>.mat.N, c.<b>chol</b>.triKind(), false)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-695" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-695">#L695</a>: 	workMat.Copy(c.<b>chol</b>)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-718" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-718">#L718</a>: 		c.<b>chol</b>.Copy(workMat)
+		<a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-725" class="path-duplicate">cholesky.go</a><a href="../../../../src/gonum.org/v1/gonum/mat/cholesky.go.html#line-725">#L725</a>: 	return c.<b>chol</b> != nil &amp;&amp; !c.<b>chol</b>.IsEmpty()
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

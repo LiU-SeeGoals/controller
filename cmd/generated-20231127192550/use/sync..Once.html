@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: sync.Once</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../pkg/sync.html">sync</a>.<a href="../src/sync/once.go.html#line-18">Once</a></b></span>
+
+<span class="title">50 uses</span>
+
+	sync (current package)
+		<a href="../src/sync/once.go.html#line-18">once.go#L18</a>: type <b>Once</b> struct {
+		<a href="../src/sync/once.go.html#line-48" class="path-duplicate">once.go</a><a href="../src/sync/once.go.html#line-48">#L48</a>: func (o *<b>Once</b>) Do(f func()) {
+		<a href="../src/sync/once.go.html#line-69" class="path-duplicate">once.go</a><a href="../src/sync/once.go.html#line-69">#L69</a>: func (o *<b>Once</b>) doSlow(f func()) {
+		<a href="../src/sync/oncefunc.go.html#line-13">oncefunc.go#L13</a>: 		once  <b>Once</b>
+		<a href="../src/sync/oncefunc.go.html#line-44" class="path-duplicate">oncefunc.go</a><a href="../src/sync/oncefunc.go.html#line-44">#L44</a>: 		once   <b>Once</b>
+		<a href="../src/sync/oncefunc.go.html#line-74" class="path-duplicate">oncefunc.go</a><a href="../src/sync/oncefunc.go.html#line-74">#L74</a>: 		once  <b>Once</b>
+
+	<a href="../pkg/compress/flate.html">compress/flate</a>
+		<a href="../src/compress/flate/inflate.go.html#line-29">inflate.go#L29</a>: var fixedOnce sync.<b>Once</b>
+
+	<a href="../pkg/context.html">context</a>
+		<a href="../src/context/context.go.html#line-333">context.go#L333</a>: 	once sync.<b>Once</b> // either starts running f or stops f from running
+
+	<a href="../pkg/google.golang.org/protobuf/internal/filedesc.html">google.golang.org/protobuf/internal/filedesc</a>
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc.go.html#line-507">desc.go#L507</a>: 	once     sync.<b>Once</b>
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_lazy.go.html#line-688">desc_lazy.go#L688</a>: 	var once sync.<b>Once</b>
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list.go.html#line-31">desc_list.go#L31</a>: 	once sync.<b>Once</b>
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list.go.html#line-70" class="path-duplicate">desc_list.go</a><a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list.go.html#line-70">#L70</a>: 	once   sync.<b>Once</b>
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list.go.html#line-132" class="path-duplicate">desc_list.go</a><a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list.go.html#line-132">#L132</a>: 	once   sync.<b>Once</b>
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list.go.html#line-224" class="path-duplicate">desc_list.go</a><a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list.go.html#line-224">#L224</a>: 	once sync.<b>Once</b>
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list.go.html#line-247" class="path-duplicate">desc_list.go</a><a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list.go.html#line-247">#L247</a>: 	once   sync.<b>Once</b>
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list.go.html#line-301" class="path-duplicate">desc_list.go</a><a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list.go.html#line-301">#L301</a>: 	once   sync.<b>Once</b>
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list_gen.go.html#line-20">desc_list_gen.go#L20</a>: 	once   sync.<b>Once</b>
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list_gen.go.html#line-57" class="path-duplicate">desc_list_gen.go</a><a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list_gen.go.html#line-57">#L57</a>: 	once   sync.<b>Once</b>
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list_gen.go.html#line-105" class="path-duplicate">desc_list_gen.go</a><a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list_gen.go.html#line-105">#L105</a>: 	once   sync.<b>Once</b>
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list_gen.go.html#line-142" class="path-duplicate">desc_list_gen.go</a><a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list_gen.go.html#line-142">#L142</a>: 	once   sync.<b>Once</b>
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list_gen.go.html#line-212" class="path-duplicate">desc_list_gen.go</a><a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list_gen.go.html#line-212">#L212</a>: 	once   sync.<b>Once</b>
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list_gen.go.html#line-249" class="path-duplicate">desc_list_gen.go</a><a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list_gen.go.html#line-249">#L249</a>: 	once   sync.<b>Once</b>
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list_gen.go.html#line-286" class="path-duplicate">desc_list_gen.go</a><a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list_gen.go.html#line-286">#L286</a>: 	once   sync.<b>Once</b>
+		<a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list_gen.go.html#line-323" class="path-duplicate">desc_list_gen.go</a><a href="../src/google.golang.org/protobuf/internal/filedesc/desc_list_gen.go.html#line-323">#L323</a>: 	once   sync.<b>Once</b>
+
+	<a href="../pkg/google.golang.org/protobuf/internal/impl.html">google.golang.org/protobuf/internal/impl</a>
+		<a href="../src/google.golang.org/protobuf/internal/impl/codec_field.go.html#line-122">codec_field.go#L122</a>: 	var once sync.<b>Once</b>
+		<a href="../src/google.golang.org/protobuf/internal/impl/message_reflect_field.go.html#line-346">message_reflect_field.go#L346</a>: 	var once sync.<b>Once</b>
+
+	<a href="../pkg/google.golang.org/protobuf/types/descriptorpb.html">google.golang.org/protobuf/types/descriptorpb</a>
+		<a href="../src/google.golang.org/protobuf/types/descriptorpb/descriptor.pb.go.html#line-4115">descriptor.pb.go#L4115</a>: 	file_google_protobuf_descriptor_proto_rawDescOnce sync.<b>Once</b>
+
+	<a href="../pkg/hash/crc32.html">hash/crc32</a>
+		<a href="../src/hash/crc32/crc32.go.html#line-80">crc32.go#L80</a>: var castagnoliOnce sync.<b>Once</b>
+		<a href="../src/hash/crc32/crc32.go.html#line-106" class="path-duplicate">crc32.go</a><a href="../src/hash/crc32/crc32.go.html#line-106">#L106</a>: var ieeeOnce sync.<b>Once</b>
+
+	<a href="../pkg/internal/godebug.html">internal/godebug</a>
+		<a href="../src/internal/godebug/godebug.go.html#line-48">godebug.go#L48</a>: 	once sync.<b>Once</b>
+		<a href="../src/internal/godebug/godebug.go.html#line-54" class="path-duplicate">godebug.go</a><a href="../src/internal/godebug/godebug.go.html#line-54">#L54</a>: 	nonDefaultOnce sync.<b>Once</b>
+
+	<a href="../pkg/internal/poll.html">internal/poll</a>
+		<a href="../src/internal/poll/copy_file_range_linux.go.html#line-14">copy_file_range_linux.go#L14</a>: 	kernelVersion53Once sync.<b>Once</b>
+		<a href="../src/internal/poll/fd_poll_runtime.go.html#line-36">fd_poll_runtime.go#L36</a>: var serverInit sync.<b>Once</b>
+
+	<a href="../pkg/io.html">io</a>
+		<a href="../src/io/pipe.go.html#line-44">pipe.go#L44</a>: 	once sync.<b>Once</b> // Protects closing done
+
+	<a href="../pkg/net.html">net</a>
+		<a href="../src/net/conf.go.html#line-75">conf.go#L75</a>: 	confOnce sync.<b>Once</b> // guards init of confVal via initConfVal
+		<a href="../src/net/dnsclient_unix.go.html#line-339">dnsclient_unix.go#L339</a>: 	initOnce sync.<b>Once</b> // guards init of resolverConfig
+		<a href="../src/net/ipsock.go.html#line-22">ipsock.go#L22</a>: 	sync.<b>Once</b>             // guards following
+		<a href="../src/net/lookup_unix.go.html#line-16">lookup_unix.go#L16</a>: var onceReadProtocols sync.<b>Once</b>
+		<a href="../src/net/mptcpsock_linux.go.html#line-17">mptcpsock_linux.go#L17</a>: 	mptcpOnce      sync.<b>Once</b>
+		<a href="../src/net/net.go.html#line-367">net.go#L367</a>: 	sync.<b>Once</b>
+		<a href="../src/net/net.go.html#line-682" class="path-duplicate">net.go</a><a href="../src/net/net.go.html#line-682">#L682</a>: var threadOnce sync.<b>Once</b>
+		<a href="../src/net/nss.go.html#line-22">nss.go#L22</a>: 	initOnce sync.<b>Once</b> // guards init of nsswitchConfig
+		<a href="../src/net/pipe.go.html#line-100">pipe.go#L100</a>: 	once       sync.<b>Once</b> // Protects closing localDone
+		<a href="../src/net/port_unix.go.html#line-16">port_unix.go#L16</a>: var onceReadServices sync.<b>Once</b>
+		<a href="../src/net/unixsock.go.html#line-224">unixsock.go#L224</a>: 	unlinkOnce sync.<b>Once</b>
+
+	<a href="../pkg/strings.html">strings</a>
+		<a href="../src/strings/replace.go.html#line-15">replace.go#L15</a>: 	once   sync.<b>Once</b> // guards buildOnce method
+
+	<a href="../pkg/syscall.html">syscall</a>
+		<a href="../src/syscall/env_unix.go.html#line-18">env_unix.go#L18</a>: 	envOnce sync.<b>Once</b>
+
+	<a href="../pkg/time.html">time</a>
+		<a href="../src/time/zoneinfo.go.html#line-85">zoneinfo.go#L85</a>: var localOnce sync.<b>Once</b>
+		<a href="../src/time/zoneinfo.go.html#line-104" class="path-duplicate">zoneinfo.go</a><a href="../src/time/zoneinfo.go.html#line-104">#L104</a>: var unnamedFixedZonesOnce sync.<b>Once</b>
+		<a href="../src/time/zoneinfo.go.html#line-645" class="path-duplicate">zoneinfo.go</a><a href="../src/time/zoneinfo.go.html#line-645">#L645</a>: var zoneinfoOnce sync.<b>Once</b>
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

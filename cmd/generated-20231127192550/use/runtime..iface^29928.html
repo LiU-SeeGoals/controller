@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: runtime.iface</title>
+<link href="../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">type <b><a href="../pkg/runtime.html">runtime</a>.<a href="../src/runtime/runtime2.go.html#line-204">iface</a></b></span>
+
+<span class="title">13 uses</span>
+
+	runtime (current package)
+		<a href="../src/runtime/alg.go.html#line-98">alg.go#L98</a>: 	a := (*<b>iface</b>)(p)
+		<a href="../src/runtime/alg.go.html#line-235" class="path-duplicate">alg.go</a><a href="../src/runtime/alg.go.html#line-235">#L235</a>: 	x := *(*<b>iface</b>)(p)
+		<a href="../src/runtime/alg.go.html#line-236" class="path-duplicate">alg.go</a><a href="../src/runtime/alg.go.html#line-236">#L236</a>: 	y := *(*<b>iface</b>)(q)
+		<a href="../src/runtime/iface.go.html#line-433">iface.go#L433</a>: func assertI2I2(inter *interfacetype, i <b>iface</b>) (r <b>iface</b>) {
+		<a href="../src/runtime/iface.go.html#line-457" class="path-duplicate">iface.go</a><a href="../src/runtime/iface.go.html#line-457">#L457</a>: func assertE2I2(inter *interfacetype, e eface) (r <b>iface</b>) {
+		<a href="../src/runtime/iface.go.html#line-472" class="path-duplicate">iface.go</a><a href="../src/runtime/iface.go.html#line-472">#L472</a>: func reflect_ifaceE2I(inter *interfacetype, e eface, dst *<b>iface</b>) {
+		<a href="../src/runtime/iface.go.html#line-473" class="path-duplicate">iface.go</a><a href="../src/runtime/iface.go.html#line-473">#L473</a>: 	*dst = <b>iface</b>{assertE2I(inter, e._type), e.data}
+		<a href="../src/runtime/iface.go.html#line-477" class="path-duplicate">iface.go</a><a href="../src/runtime/iface.go.html#line-477">#L477</a>: func reflectlite_ifaceE2I(inter *interfacetype, e eface, dst *<b>iface</b>) {
+		<a href="../src/runtime/iface.go.html#line-478" class="path-duplicate">iface.go</a><a href="../src/runtime/iface.go.html#line-478">#L478</a>: 	*dst = <b>iface</b>{assertE2I(inter, e._type), e.data}
+		<a href="../src/runtime/mfinal.go.html#line-249">mfinal.go#L249</a>: 						(*<b>iface</b>)(r).tab = assertE2I(ityp, (*eface)(r)._type)
+		<a href="../src/runtime/print.go.html#line-259">print.go#L259</a>: func printiface(i <b>iface</b>) {
+		<a href="../src/runtime/runtime2.go.html#line-204">runtime2.go#L204</a>: type <b>iface</b> struct {
+</code></pre><pre id="footer">
+<table><tr><td><img src="../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>

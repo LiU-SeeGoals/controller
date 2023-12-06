@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>References: unicode/utf8.UTFMax</title>
+<link href="../../css/auto-v0.6.7.css" rel="stylesheet">
+<script src="../../jvs/golds-v0.6.7.js"></script>
+<body onload="onPageLoad()"><div>
+
+<pre><code><span style="font-size:x-large;">const <b><a href="../../pkg/unicode/utf8.html">unicode/utf8</a>.<a href="../../src/unicode/utf8/utf8.go.html#line-19">UTFMax</a></b></span>
+
+<span class="title">20 uses</span>
+
+	unicode/utf8 (current package)
+		<a href="../../src/unicode/utf8/utf8.go.html#line-19">utf8.go#L19</a>: 	<b>UTFMax</b>    = 4            // maximum number of bytes of a UTF-8 encoded Unicode character.
+		<a href="../../src/unicode/utf8/utf8.go.html#line-260" class="path-duplicate">utf8.go</a><a href="../../src/unicode/utf8/utf8.go.html#line-260">#L260</a>: 	lim := end - <b>UTFMax</b>
+		<a href="../../src/unicode/utf8/utf8.go.html#line-300" class="path-duplicate">utf8.go</a><a href="../../src/unicode/utf8/utf8.go.html#line-300">#L300</a>: 	lim := end - <b>UTFMax</b>
+
+	<a href="../../pkg/bufio.html">bufio</a>
+		<a href="../../src/bufio/bufio.go.html#line-306">bufio.go#L306</a>: 	for b.r+utf8.<b>UTFMax</b> &gt; b.w &amp;&amp; !utf8.FullRune(b.buf[b.r:b.w]) &amp;&amp; b.err == nil &amp;&amp; b.w-b.r &lt; len(b.buf) {
+		<a href="../../src/bufio/bufio.go.html#line-728" class="path-duplicate">bufio.go</a><a href="../../src/bufio/bufio.go.html#line-728">#L728</a>: 	if n &lt; utf8.<b>UTFMax</b> {
+		<a href="../../src/bufio/bufio.go.html#line-733" class="path-duplicate">bufio.go</a><a href="../../src/bufio/bufio.go.html#line-733">#L733</a>: 		if n &lt; utf8.<b>UTFMax</b> {
+
+	<a href="../../pkg/bytes.html">bytes</a>
+		<a href="../../src/bytes/buffer.go.html#line-306">buffer.go#L306</a>: 	m, ok := b.tryGrowByReslice(utf8.<b>UTFMax</b>)
+		<a href="../../src/bytes/buffer.go.html#line-308" class="path-duplicate">buffer.go</a><a href="../../src/bytes/buffer.go.html#line-308">#L308</a>: 		m = b.grow(utf8.<b>UTFMax</b>)
+		<a href="../../src/bytes/bytes.go.html#line-176">bytes.go#L176</a>: 		var b [utf8.<b>UTFMax</b>]byte
+
+	<a href="../../pkg/encoding/json.html">encoding/json</a>
+		<a href="../../src/encoding/json/decode.go.html#line-1208">decode.go#L1208</a>: 	b := make([]byte, len(s)+2*utf8.<b>UTFMax</b>)
+		<a href="../../src/encoding/json/decode.go.html#line-1214" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-1214">#L1214</a>: 		if w &gt;= len(b)-2*utf8.<b>UTFMax</b> {
+		<a href="../../src/encoding/json/decode.go.html#line-1215" class="path-duplicate">decode.go</a><a href="../../src/encoding/json/decode.go.html#line-1215">#L1215</a>: 			nb := make([]byte, (len(b)+utf8.<b>UTFMax</b>)*2)
+		<a href="../../src/encoding/json/encode.go.html#line-999">encode.go#L999</a>: 		if n &gt; utf8.<b>UTFMax</b> {
+		<a href="../../src/encoding/json/encode.go.html#line-1000" class="path-duplicate">encode.go</a><a href="../../src/encoding/json/encode.go.html#line-1000">#L1000</a>: 			n = utf8.<b>UTFMax</b>
+
+	<a href="../../pkg/fmt.html">fmt</a>
+		<a href="../../src/fmt/format.go.html#line-145">format.go#L145</a>: 		width := 2 + prec + 2 + utf8.<b>UTFMax</b> + 1
+		<a href="../../src/fmt/scan.go.html#line-306">scan.go#L306</a>: 	buf      [utf8.<b>UTFMax</b>]byte // used only inside ReadRune
+		<a href="../../src/fmt/scan.go.html#line-308" class="path-duplicate">scan.go</a><a href="../../src/fmt/scan.go.html#line-308">#L308</a>: 	pendBuf  [utf8.<b>UTFMax</b>]byte // bytes left over
+
+	<a href="../../pkg/strconv.html">strconv</a>
+		<a href="../../src/strconv/quote.go.html#line-69">quote.go#L69</a>: 	var runeTmp [utf8.<b>UTFMax</b>]byte
+		<a href="../../src/strconv/quote.go.html#line-474" class="path-duplicate">quote.go</a><a href="../../src/strconv/quote.go.html#line-474">#L474</a>: 					var arr [utf8.<b>UTFMax</b>]byte
+
+	<a href="../../pkg/strings.html">strings</a>
+		<a href="../../src/strings/strings.go.html#line-504">strings.go#L504</a>: 		b.Grow(len(s) + utf8.<b>UTFMax</b>)
+</code></pre><pre id="footer">
+<table><tr><td><img src="../../png/go101-twitter.png"></td>
+<td>The pages are generated with <a href="https://go101.org/apps-and-libs/golds.html"><b>Golds</b></a> <i>v0.6.7</i>. (GOOS=linux GOARCH=amd64)
+<b>Golds</b> is a <a href="https://go101.org">Go 101</a> project developed by <a href="https://tapirgames.com">Tapir Liu</a>.
+PR and bug reports are welcome and can be submitted to <a href="https://github.com/go101/golds">the issue list</a>.
+Please follow <a href="https://twitter.com/go100and1">@Go100and1</a> (reachable from the left QR code) to get the latest news of <b>Golds</b>.</td></tr></table></pre>
