@@ -1,0 +1,16 @@
+.canvasContainer{
+    background-color: gray;
+    height:100vh;
+}
+
+.canvasBackground {
+    height: 100vh;
+    overflow: hidden;
+    text-align: center;
+  }
+  
+  .canvasBackground img {
+    /* width: 100%; */
+    height: 100%;
+    object-fit: cover; /* or object-fit: contain; depending on your design preference */
+  }
