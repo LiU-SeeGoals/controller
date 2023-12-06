@@ -48,11 +48,11 @@ type Rotate struct {
 	AngularVel int
 }
 
-// index 0: positive left
-// index 1: positive forward
+// Forward is x=0, y=1, Backward is x=0, y=-1, Left is x=-1, y=0, Right is x=1, y=0
+// the size of the vector sets the speed of the robot
 type SetNavigationDirection struct {
 	Id   int
-	Direction *mat.VecDense
+	Direction *mat.VecDense // 2D vector, first value is x, second is y
 }
 
 type Init struct {
@@ -112,7 +112,8 @@ func (k *Kick) TranslateReal() *basestation.Command {
 }
 
 func (s *Stop) TranslateGrsim(params *datatypes.Parameters) {
-
+	params.VelNormal = float32(0)
+	params.VelTangent = float32(0)
 }
 
 func (s *Stop) TranslateReal() *basestation.Command {
