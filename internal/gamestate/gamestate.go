@@ -33,6 +33,7 @@ func (gs *GameState) TestActions() {
 	act := &action.Move{}
 	act.Pos = gs.yellow_team[0].pos
 	act.Dest = mat.NewVecDense(3, nil)
+	act.Id = 3
 	act.Dest.SetVec(0, 4)
 	act.Dest.SetVec(1, 4)
 	act.Dest.SetVec(2, 0)
@@ -47,7 +48,7 @@ func (gs *GameState) TestActions() {
 	var action []action.Action
 	action = append(action, act)
 
-	gs.Grsim_client.AddActions(action)
+	gs.Grsim_client.SendActions(action)
 }
 
 // Updates position of robots and balls to their actual position
@@ -115,7 +116,7 @@ func NewGameState(sslClientAddress string, sslReceiverAddress string) *GameState
 	gs := &GameState{}
 
 	gs.Grsim_client = client.NewGrsimClient(sslClientAddress)
-	gs.Grsim_client.Connect()
+	gs.Grsim_client.Init()
 
 	gs.setupSSLVisionReceiver(sslReceiverAddress)
 

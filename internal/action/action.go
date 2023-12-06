@@ -21,7 +21,7 @@ type Stop struct {
 
 type Move struct {
 	// The id of the robot.
-	Id   int
+	Id int
 	// Current position of Robot, vector contains (x,y,w)
 	Pos *mat.VecDense
 	// Goal destination of Robot, vector contains (x,y,w)
@@ -30,28 +30,28 @@ type Move struct {
 	Dribble bool
 }
 
-
 type Dribble struct {
+	Id int
 	// set Dribbling, useless right now
 	Dribble bool
 }
 
 type Kick struct {
-	Id   int
+	Id int
 	// 1 is slow, 10 is faster, limits unknown
 	KickSpeed int
 }
 
 // Negative value rotates robot clockwise
 type Rotate struct {
-	Id   int
+	Id         int
 	AngularVel int
 }
 
 // Forward is x=0, y=1, Backward is x=0, y=-1, Left is x=-1, y=0, Right is x=1, y=0
 // the size of the vector sets the speed of the robot
 type SetNavigationDirection struct {
-	Id   int
+	Id        int
 	Direction *mat.VecDense // 2D vector, first value is x, second is y
 }
 
@@ -67,7 +67,7 @@ func (s *SetNavigationDirection) TranslateGrsim(params *datatypes.Parameters) {
 func (s *SetNavigationDirection) TranslateReal() *basestation.Command {
 	command := &basestation.Command{
 		CommandId: basestation.ActionType_SET_NAVIGATION_DIRECTION_ACTION,
-		RobotId: int32(s.Id),         
+		RobotId:   int32(s.Id),
 		Direction: &basestation.Vector2D{
 			X: int32(s.Direction.AtVec(0)),
 			Y: int32(s.Direction.AtVec(1)),
@@ -78,13 +78,14 @@ func (s *SetNavigationDirection) TranslateReal() *basestation.Command {
 }
 
 func (r *Rotate) TranslateGrsim(params *datatypes.Parameters) {
+	params.RobotId = uint32(r.Id)
 	params.VelAngular = float32(r.AngularVel)
 }
 
 func (r *Rotate) TranslateReal() *basestation.Command {
 	command_move := &basestation.Command{
-		CommandId: basestation.ActionType_ROTATE_ACTION,
-		RobotId: int32(r.Id),         
+		CommandId:  basestation.ActionType_ROTATE_ACTION,
+		RobotId:    int32(r.Id),
 		AngularVel: int32(r.AngularVel),
 	}
 
@@ -92,19 +93,19 @@ func (r *Rotate) TranslateReal() *basestation.Command {
 }
 
 func (d *Dribble) TranslateGrsim(params *datatypes.Parameters) {
-
+	params.RobotId = uint32(d.Id)
 	params.Spinner = d.Dribble
 }
 
 func (k *Kick) TranslateGrsim(params *datatypes.Parameters) {
-
+	params.RobotId = uint32(k.Id)
 	params.KickSpeedX = float32(k.KickSpeed)
 }
 
 func (k *Kick) TranslateReal() *basestation.Command {
 	command_move := &basestation.Command{
 		CommandId: basestation.ActionType_KICK_ACTION,
-		RobotId: int32(k.Id),
+		RobotId:   int32(k.Id),
 		KickSpeed: int32(k.KickSpeed),
 	}
 
@@ -112,19 +113,20 @@ func (k *Kick) TranslateReal() *basestation.Command {
 }
 
 func (s *Stop) TranslateGrsim(params *datatypes.Parameters) {
-
+	params.RobotId = uint32(s.Id)
 }
 
 func (s *Stop) TranslateReal() *basestation.Command {
 	command_move := &basestation.Command{
 		CommandId: basestation.ActionType_STOP_ACTION,
-		RobotId: int32(s.Id),
+		RobotId:   int32(s.Id),
 	}
 
 	return command_move
 }
 
 func (mv *Move) TranslateGrsim(params *datatypes.Parameters) {
+	params.RobotId = uint32(mv.Id)
 	diff := mat.NewVecDense(3, nil)
 	diff.SubVec(mv.Dest, mv.Pos)
 	params.Spinner = mv.Dribble
@@ -134,7 +136,7 @@ func (mv *Move) TranslateGrsim(params *datatypes.Parameters) {
 	diffDestAngle := mv.Pos.AtVec(2) - mv.Dest.AtVec(2)
 
 	fmt.Println(diffPosAngle)
-	if math.Abs(diff.AtVec(0)) > 100 || math.Abs(diff.AtVec(1)) > 100 {
+	if math.Abs(diff.AtVec(0)) > 0.1 || math.Abs(diff.AtVec(1)) > 0.1 {
 
 		if diffPosAngle > 0.2 {
 			params.VelAngular = 4
@@ -153,7 +155,7 @@ func (mv *Move) TranslateGrsim(params *datatypes.Parameters) {
 func (m *Move) TranslateReal() *basestation.Command {
 	command_move := &basestation.Command{
 		CommandId: basestation.ActionType_MOVE_ACTION,
-		RobotId: int32(m.Id),         
+		RobotId:   int32(m.Id),
 		Pos: &basestation.Vector3D{
 			X: int32(m.Pos.AtVec(0)),
 			Y: int32(m.Pos.AtVec(1)),
@@ -169,15 +171,16 @@ func (m *Move) TranslateReal() *basestation.Command {
 	return command_move
 }
 
-func (i *Init) TranslateGrsim(params *datatypes.Parameters) {}
+func (i *Init) TranslateGrsim(params *datatypes.Parameters) {
+	params.RobotId = uint32(i.Id)
+}
 
 func (i *Init) TranslateReal() *basestation.Command {
 
 	command_move := &basestation.Command{
 		CommandId: basestation.ActionType_INIT_ACTION,
-		RobotId: int32(i.Id),
+		RobotId:   int32(i.Id),
 	}
 
 	return command_move
 }
-
