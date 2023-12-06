@@ -30,13 +30,15 @@ type GameState struct {
 // Method used for testing actions,
 // a proper test should be implemented
 func (gs *GameState) TestActions() {
+	id := 0
 	act := &action.Move{}
-	act.Pos = gs.yellow_team[0].pos
+	act.Pos = gs.yellow_team[id].pos
 	act.Dest = mat.NewVecDense(3, nil)
-	act.Dest.SetVec(0, 4)
-	act.Dest.SetVec(1, 4)
+	act.Id = id
+	act.Dest.SetVec(0, 0)
+	act.Dest.SetVec(1, 0)
 	act.Dest.SetVec(2, 0)
-	act.Dribble = true
+	//act.Dribble = true
 
 	//act := &action.Kick{}
 	//act.Kickspeed = 10
@@ -47,7 +49,7 @@ func (gs *GameState) TestActions() {
 	var action []action.Action
 	action = append(action, act)
 
-	gs.Grsim_client.AddActions(action)
+	gs.Grsim_client.SendActions(action)
 }
 
 // Updates position of robots and balls to their actual position
@@ -115,7 +117,7 @@ func NewGameState(sslClientAddress string, sslReceiverAddress string) *GameState
 	gs := &GameState{}
 
 	gs.Grsim_client = client.NewGrsimClient(sslClientAddress)
-	gs.Grsim_client.Connect()
+	gs.Grsim_client.Init()
 
 	gs.setupSSLVisionReceiver(sslReceiverAddress)
 

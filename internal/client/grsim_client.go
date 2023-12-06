@@ -52,7 +52,7 @@ func (client *GrsimClient) Init() {
 	if err != nil {
 		panic(err)
 	}
-	client.conn = conn	
+	client.conn = conn
 }
 
 func (client *GrsimClient) CloseConnection() {
@@ -64,9 +64,8 @@ func (client *GrsimClient) CloseConnection() {
 // One action per robot.
 func (client *GrsimClient) SendActions(actions []action.Action) {
 
-	for id, action := range actions {
+	for _, action := range actions {
 		params := datatypes.NewParameters()
-		params.RobotId = uint32(id)
 		action.TranslateGrsim(params)
 		client.addRobotCommand(params)
 	}
