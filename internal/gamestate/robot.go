@@ -7,25 +7,26 @@ import (
 )
 
 type Team int
+
 const (
 	Blue Team = iota
 	Yellow
 )
 
 type Robot struct {
-	id int
-	team Team 
-	pos *mat.VecDense
-	vel *mat.VecDense
+	id   int
+	team Team
+	pos  *mat.VecDense
+	vel  *mat.VecDense
 }
 
 func NewRobot(id int, team Team) *Robot {
 	return &Robot{
-		id: id,
+		id:   id,
 		team: team,
-		pos: mat.NewVecDense(3, []float64{0, 0, 0}), // in mm 
-		vel: mat.NewVecDense(3, []float64{0, 0, 0}), // in mm/s
-	}	
+		pos:  mat.NewVecDense(3, []float64{0, 0, 0}), // in mm
+		vel:  mat.NewVecDense(3, []float64{0, 0, 0}), // in mm/s
+	}
 }
 
 func (r *Robot) SetPosition(x, y, w float64) {
@@ -49,8 +50,8 @@ func (r *Robot) String() string {
 	v_y := r.pos.AtVec(1)
 	v_w := r.pos.AtVec(2)
 
-    posString := fmt.Sprintf("(%f, %f, %f)", x, y, w)
-    velString := fmt.Sprintf("(%f, %f, %f)", v_x, v_y, v_w)
+	posString := fmt.Sprintf("(%f, %f, %f)", x, y, w)
+	velString := fmt.Sprintf("(%f, %f, %f)", v_x, v_y, v_w)
 
-    return fmt.Sprintf("id: %d, pos: %s, vel: %s", r.id, posString, velString)
+	return fmt.Sprintf("id: %d, pos: %s, vel: %s", r.id, posString, velString)
 }

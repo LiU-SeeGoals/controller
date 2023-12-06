@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"net"
 
+	"github.com/LiU-SeeGoals/controller/internal/action"
+	"github.com/LiU-SeeGoals/controller/internal/datatypes"
 	"github.com/LiU-SeeGoals/controller/internal/proto/grsim"
 	"github.com/golang/protobuf/proto"
 )
@@ -31,7 +33,7 @@ type GrsimClient struct {
 
 // Create new Grsim client
 // Address should be <ip>:<port>
-func NewSSLGrsimClient(addr string) *GrsimClient {
+func NewGrsimClient(addr string) *GrsimClient {
 	udpAddr, err := net.ResolveUDPAddr("udp", addr)
 	if err != nil {
 		panic(err)
@@ -45,30 +47,46 @@ func NewSSLGrsimClient(addr string) *GrsimClient {
 
 // Connect/subscribe receiver to UDP multicast.
 // Note, this will NOT block.
-func (client *GrsimClient) Connect() {
+func (client *GrsimClient) Init() {
 	conn, err := net.DialUDP("udp", nil, client.addr)
 	if err != nil {
 		panic(err)
 	}
+	client.conn = conn	
+}
 
-	client.conn = conn
+func (client *GrsimClient) CloseConnection() {
+	// Do nothing, only implemented to satisfy interface
+}
+
+// Send a slice of actions to GrSim
+// Actions need to be ordered by robot id.
+// One action per robot.
+func (client *GrsimClient) SendActions(actions []action.Action) {
+
+	for id, action := range actions {
+		params := datatypes.NewParameters()
+		params.RobotId = uint32(id)
+		action.TranslateGrsim(params)
+		client.addRobotCommand(params)
+	}
+	client.send()
 }
 
 // Add a new Robot command to client buffer
-func (client *GrsimClient) AddRobotCommand(
-	yellowTeam bool,
-	robotId uint32,
-	velTangent float32,
-	velNormal float32,
-	velAngular float32,
-	kickSpeedX float32,
-	kickSpeedZ float32,
-	spinner bool,
-	wheelsSpeed bool,
-) {
-	command := newRobotCommand(robotId, velTangent, velNormal, velAngular, kickSpeedX, kickSpeedZ, spinner, wheelsSpeed)
+func (client *GrsimClient) addRobotCommand(params *datatypes.Parameters) {
+	command := newRobotCommand(
+		params.RobotId,
+		params.VelTangent,
+		params.VelNormal,
+		params.VelAngular,
+		params.KickSpeedX,
+		params.KickSpeedZ,
+		params.Spinner,
+		params.WheelsSpeed,
+	)
 
-	if yellowTeam {
+	if params.YellowTeam {
 		client.buffYellow = append(client.buffYellow, command)
 		return
 	}
@@ -106,7 +124,7 @@ func (client *GrsimClient) clearCommandBuffer() {
 	client.buffBlue = []*grsim.GrSim_Robot_Command{}
 }
 
-func (client *GrsimClient) Send() (int, error) {
+func (client *GrsimClient) send() (int, error) {
 	// Incr time
 	client.time += 1.0
 
