@@ -4,12 +4,12 @@ import (
 	"math"
 
 	"github.com/LiU-SeeGoals/controller/internal/datatypes"
-	"github.com/LiU-SeeGoals/controller/internal/proto/basestation"
+	"github.com/LiU-SeeGoals/controller/internal/proto/robot_action"
 	"gonum.org/v1/gonum/mat"
 )
 
 type Action interface {
-	TranslateReal() *basestation.Command
+	TranslateReal() *robot_action.Command
 	// Translates an action to parameters defined for grsim
 	TranslateGrsim(params *datatypes.Parameters)
 }
@@ -64,11 +64,11 @@ func (s *SetNavigationDirection) TranslateGrsim(params *datatypes.Parameters) {
 	params.VelTangent = float32(s.Direction.AtVec(1))
 }
 
-func (s *SetNavigationDirection) TranslateReal() *basestation.Command {
-	command := &basestation.Command{
-		CommandId: basestation.ActionType_SET_NAVIGATION_DIRECTION_ACTION,
+func (s *SetNavigationDirection) TranslateReal() *robot_action.Command {
+	command := &robot_action.Command{
+		CommandId: robot_action.ActionType_SET_NAVIGATION_DIRECTION_ACTION,
 		RobotId:   int32(s.Id),
-		Direction: &basestation.Vector2D{
+		Direction: &robot_action.Vector2D{
 			X: int32(s.Direction.AtVec(0)),
 			Y: int32(s.Direction.AtVec(1)),
 		},
@@ -82,9 +82,9 @@ func (r *Rotate) TranslateGrsim(params *datatypes.Parameters) {
 	params.VelAngular = float32(r.AngularVel)
 }
 
-func (r *Rotate) TranslateReal() *basestation.Command {
-	command_move := &basestation.Command{
-		CommandId:  basestation.ActionType_ROTATE_ACTION,
+func (r *Rotate) TranslateReal() *robot_action.Command {
+	command_move := &robot_action.Command{
+		CommandId:  robot_action.ActionType_ROTATE_ACTION,
 		RobotId:    int32(r.Id),
 		AngularVel: int32(r.AngularVel),
 	}
@@ -102,9 +102,9 @@ func (k *Kick) TranslateGrsim(params *datatypes.Parameters) {
 	params.KickSpeedX = float32(k.KickSpeed)
 }
 
-func (k *Kick) TranslateReal() *basestation.Command {
-	command_move := &basestation.Command{
-		CommandId: basestation.ActionType_KICK_ACTION,
+func (k *Kick) TranslateReal() *robot_action.Command {
+	command_move := &robot_action.Command{
+		CommandId: robot_action.ActionType_KICK_ACTION,
 		RobotId:   int32(k.Id),
 		KickSpeed: int32(k.KickSpeed),
 	}
@@ -120,9 +120,9 @@ func (s *Stop) TranslateGrsim(params *datatypes.Parameters) {
 
 }
 
-func (s *Stop) TranslateReal() *basestation.Command {
-	command_move := &basestation.Command{
-		CommandId: basestation.ActionType_STOP_ACTION,
+func (s *Stop) TranslateReal() *robot_action.Command {
+	command_move := &robot_action.Command{
+		CommandId: robot_action.ActionType_STOP_ACTION,
 		RobotId:   int32(s.Id),
 	}
 
@@ -155,16 +155,16 @@ func (mv *Move) TranslateGrsim(params *datatypes.Parameters) {
 	}
 }
 
-func (m *Move) TranslateReal() *basestation.Command {
-	command_move := &basestation.Command{
-		CommandId: basestation.ActionType_MOVE_ACTION,
+func (m *Move) TranslateReal() *robot_action.Command {
+	command_move := &robot_action.Command{
+		CommandId: robot_action.ActionType_MOVE_ACTION,
 		RobotId:   int32(m.Id),
-		Pos: &basestation.Vector3D{
+		Pos: &robot_action.Vector3D{
 			X: int32(m.Pos.AtVec(0)),
 			Y: int32(m.Pos.AtVec(1)),
 			W: float32(m.Pos.AtVec(2)),
 		},
-		Dest: &basestation.Vector3D{
+		Dest: &robot_action.Vector3D{
 			X: int32(m.Dest.AtVec(0)),
 			Y: int32(m.Dest.AtVec(1)),
 			W: float32(m.Dest.AtVec(2)),
@@ -178,10 +178,10 @@ func (i *Init) TranslateGrsim(params *datatypes.Parameters) {
 	params.RobotId = uint32(i.Id)
 }
 
-func (i *Init) TranslateReal() *basestation.Command {
+func (i *Init) TranslateReal() *robot_action.Command {
 
-	command_move := &basestation.Command{
-		CommandId: basestation.ActionType_INIT_ACTION,
+	command_move := &robot_action.Command{
+		CommandId: robot_action.ActionType_INIT_ACTION,
 		RobotId:   int32(i.Id),
 	}
 
