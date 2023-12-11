@@ -1,4 +1,33 @@
 .menuContainer{
     background-color: darkgray;
     height: 100vh;
+    display: grid;
+    grid-template-rows: 30px 1fr;
+}
+
+.headerMenu{
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    background-color: gray;
+    gap: 2px;
+
+}
+
+.headerMenu div:hover{
+    cursor: pointer;
+}
+
+.headerMenu div{
+    background-color: darkgray;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px 5px 0px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#_{
+    background-color: gray;
 }

@@ -1,0 +1,22 @@
+.robotCard {
+    /* display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr; */
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    background-color: lightblue;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.robotCard p {
+    margin: 10px;
+
+}
+
+.statusContainer {
+    overflow: auto;
+    height: 100vh;
+}
