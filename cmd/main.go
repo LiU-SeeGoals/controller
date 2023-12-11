@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/LiU-SeeGoals/controller/internal/ai"
 	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
@@ -18,6 +16,6 @@ func main() {
 	for {
 		ai.Update()
 		worldPredictor.Update()
-		fmt.Println(gs)
+		//fmt.Println(gs)
 	}
 }

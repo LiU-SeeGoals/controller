@@ -28,8 +28,12 @@ func (gs *GameState) SetBall(x, y, z float64) {
 	gs.ball.SetPosition(x, y, z)
 }
 
-func (gs *GameState) GetRobot(id int, team Team) *Robot {
-	if team == Blue {
+func (gs *GameState) GetBall() *Ball {
+	return gs.ball
+}
+
+func (gs *GameState) GetRobot(id int, isBlue bool) *Robot {
+	if isBlue {
 		return gs.blue_team[id]
 	}
 	return gs.yellow_team[id]

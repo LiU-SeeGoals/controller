@@ -1,6 +1,7 @@
 package action
 
 import (
+	"fmt"
 	"math"
 
 	"github.com/LiU-SeeGoals/controller/internal/datatypes"
@@ -139,10 +140,15 @@ func (mv *Move) TranslateGrsim(params *datatypes.Parameters) {
 	diffPosAngle := angle - mv.Pos.AtVec(2)
 	diffDestAngle := mv.Pos.AtVec(2) - mv.Dest.AtVec(2)
 
+	fmt.Println("angle:", diffPosAngle)
+	fmt.Println("diff:", diff)
+
 	if math.Abs(diff.AtVec(0)) > 50 || math.Abs(diff.AtVec(1)) > 50 {
 
-		if diffPosAngle > 0.2 {
+		if diffPosAngle > 0.2 && diffPosAngle < 6.0 {
+
 			params.VelAngular = 4
+
 		} else if diffPosAngle < -0.2 {
 			params.VelAngular = -4
 		} else {

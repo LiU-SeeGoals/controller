@@ -16,6 +16,10 @@ func NewBall() *Ball {
 	}
 }
 
+func (b *Ball) GetPosition() *mat.VecDense {
+	return b.pos
+}
+
 func (b *Ball) SetPosition(x, y, w float64) {
 	b.pos.SetVec(0, x)
 	b.pos.SetVec(1, y)
