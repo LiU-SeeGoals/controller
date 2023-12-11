@@ -7,7 +7,7 @@ import (
 	"sync"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
-	"github.com/LiU-SeeGoals/controller/internal/proto/basestation"
+	"github.com/LiU-SeeGoals/controller/internal/proto/robot_action"
 	"github.com/golang/protobuf/proto"
 )
 
@@ -23,7 +23,7 @@ type BaseStationClient struct {
 	address string
 	queueMutex sync.Mutex
 	threadMutex sync.Mutex
-	queue []*basestation.Command
+	queue []*robot_action.Command
 	hasBeenInited bool
 
 }
@@ -38,7 +38,7 @@ func NewBaseStationClient(address string) *BaseStationClient {
 	return &BaseStationClient{
 		connection: connection,
 		address: address,
-		queue: make([]*basestation.Command, 0),
+		queue: make([]*robot_action.Command, 0),
 		hasBeenInited: false,
 	}	
 }

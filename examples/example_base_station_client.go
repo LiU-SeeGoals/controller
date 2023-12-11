@@ -1,19 +1,18 @@
 package examples
 
 import (
-	"math"
-	"time"
-	"net"
 	"fmt"
+	"math"
+	"net"
 	"strconv"
+	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"gonum.org/v1/gonum/mat"
 	"google.golang.org/protobuf/proto"
 
-	"github.com/LiU-SeeGoals/controller/internal/proto/basestation" // This import path assumes 'controller' is the module name
-
+	"github.com/LiU-SeeGoals/controller/internal/proto/robot_action"
 )
 
 
@@ -32,8 +31,8 @@ func sendPacket(port int) {
 		&action.Stop{Id: 2},
 		&action.Move{
 			Id: 3,
-			Pos: mat.NewVecDense(3, []float64{100, 200, math.Pi}), // Example values for Pos
-			Goal: mat.NewVecDense(3, []float64{300, 400, -math.Pi}), // Example values for Goal
+			Pos: mat.NewVecDense(3, []float64{100, 200, math.Pi}),
+			Goal: mat.NewVecDense(3, []float64{300, 400, -math.Pi}),
 		},
 	}
 
@@ -60,7 +59,7 @@ func startServer(port int) {
 		_, remoteaddr, err := ser.ReadFromUDP(p)
 		fmt.Printf("Read a message from %v \n", remoteaddr)
 
-		command := &basestation.Command{}
+		command := &robot_action.Command{}
 		proto.Unmarshal(p, command)
 		fmt.Printf("Unmarshalled command: %v\n", command)
 
