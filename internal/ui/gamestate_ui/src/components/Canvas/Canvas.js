@@ -6,31 +6,31 @@ function Canvas(props) {
     const speed_arrow_color = 'rgba(0, 128, 128, 1)'
     let scaleFactor = 1;
 
+    const canvasInit = (event) => {
+        const canvas = canvasRef.current;
+        // Adjust canvas width to match the image width
+        canvas.width = event.target.width;
+        canvas.height = event.target.height;
+
+        scaleFactor = canvas.width / 100; // Make the canvas independet on window scaling
+        canvas.addEventListener('click', handleClick); // event for mouse click
+        draw();
+    };
+
+    // draws everything on canvas
     function draw() {
         const canvas = canvasRef.current;
         const context = canvas.getContext('2d');
 
+        // Clear the canvas
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        
         // drawing all of gamestate here
         var gameState = props.gameState;
         gameState.map((robot) => {
             drawRobot(context, robot);
-        
         });
-        // // Your drawing code goes here
-        // context.fillStyle = 'rgba(255, 0, 0, 0.5)';
-        // context.fillRect(0, 0, canvas.width, canvas.height);
-        
-        // drawRobot(context, 50, 50, 3, 3.14, 30);
-        // drawCircle(context, 75, 50, 3);
-      }
-    
-    const drawCircle = (context, x, y, radius) => {
-        context.beginPath();
-        context.arc(x*scaleFactor, y*scaleFactor, radius*scaleFactor, 0, 2 * Math.PI);
-        context.fillStyle = 'rgba(255, 0, 0, 1)';
-        context.fill();
-        context.stroke();
-    };
+    }
 
     const drawRobot = (context, robot) => {
         let x = robot.x;
@@ -41,25 +41,23 @@ function Canvas(props) {
         let arrowThickness = 3;
         let colorMap = {"yellow": "rgba(255, 255, 0, 1)", "blue": "rgba(0, 0, 255, 1)"};
         let color = colorMap[robot.team];
+
         drawArrow(context, x, y, angle, arrowLength, arrowThickness);
-        // Draw the circle
+        drawCircle(context, x, y, radius, color);
+
+        // Draw a black circle in the robot if it is selected
+        if (robot.selected) {
+            drawCircle(context, x, y, radius/3, 'rgba(0, 0, 0, 1)');
+        }
+    };
+
+    const drawCircle = (context, x, y, radius, color) => {
         context.beginPath();
-        context.arc(x * scaleFactor, y * scaleFactor, radius * scaleFactor, 0, 2 * Math.PI);
-        context.strokeStyle = 'rgba(255, 0, 0, 0)';
+        context.arc(x*scaleFactor, y*scaleFactor, radius*scaleFactor, 0, 2 * Math.PI);
+        context.strokeStyle = 'rgba(0, 0, 0, 0)'; // make the border transparent
         context.fillStyle = color;
         context.fill();
         context.stroke();
-
-        if (robot.selected) {
-            context.beginPath();
-            context.arc(x * scaleFactor, y * scaleFactor, radius/5 * scaleFactor, 0, 2 * Math.PI);
-            context.strokeStyle = 'rgba(0, 0, 0, 0)';
-            context.fillStyle = 'rgba(0, 0, 0, 1)';
-            context.fill();
-            context.stroke();
-        }
-
-    
     };
 
     const drawArrow = (context, x, y, angle, length, thickness, color) => {
@@ -103,59 +101,45 @@ function Canvas(props) {
         const rect = canvasRef.current.getBoundingClientRect();
         const x = (event.clientX - rect.left)/scaleFactor;
         const y = (event.clientY - rect.top)/scaleFactor;
-
         let gameStateCopy = [...props.gameState];
-        
-        // deselect all robots
-        gameStateCopy.map((robot, index) => {
-            gameStateCopy[index]["selected"] = false;
-        });
 
+        // Check if clicked on a robot
+        let clickedOnRobot = false;
+        let clickedOnRobotIndex = -1;
         props.gameState.map((robot, index) => {
             if (Math.pow(x - robot.x, 2) + Math.pow(y - robot.y, 2) < Math.pow(3, 2)) {
-                console.log("selected: " + index);
-                gameStateCopy[index]["selected"] = !gameStateCopy[index]["selected"];
-                props.setGameState(...gameStateCopy);
-                console.log(props.gameState)
-                draw();
+                clickedOnRobot = true;
+                clickedOnRobotIndex = index;
             }
         });  
-    };
 
-    // const handleMouseMove = (event) => {
-    //     const context = canvas.getContext('2d');
-    //     context.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas to remove previous circles.
-    //     draw();
-        
-    //     const x = event.clientX - canvas.getBoundingClientRect().left;
-    //     const y = event.clientY - canvas.getBoundingClientRect().top;
-        
-    //     context.beginPath();
-    //     context.arc(x * scaleFactor, y * scaleFactor, radius * scaleFactor, 0, 2 * Math.PI);
-    //     context.strokeStyle = 'rgba(0, 0, 0, 0)';
-    //     context.fillStyle = 'rgba(0, 0, 0, 1)';
-    //     context.fill();
-    //     context.stroke();
-    //   };
+        // If a robot is selected, move it here
+        if (!clickedOnRobot) {
+            props.gameState.map((robot, index) => {
+                if (robot.selected) {
+                    gameStateCopy[index]["x"] = x;
+                    gameStateCopy[index]["y"] = y;
+                }
+            }); 
+        }
 
-    const handleImageLoad = (event) => {
-        const canvas = canvasRef.current;
-        console.log("canvas width: " + event.target.width); 
-        // Adjust canvas width to match the image width
-        canvas.width = event.target.width;
-        canvas.height = event.target.height;
-        // Make the canvas independet on window scaling
-        scaleFactor = canvas.width / 100; 
-        canvas.addEventListener('click', handleClick);
-        // canvas.addEventListener('mousemove', handleMouseMove);
+        // deselect all robots
+        gameStateCopy.map((robot, index) => {
+            if(clickedOnRobot && index === clickedOnRobotIndex) {
+                gameStateCopy[index]["selected"] = !gameStateCopy[index]["selected"];
+            } else {
+                gameStateCopy[index]["selected"] = false;
+            }
+        });
+        props.setGameState(...gameStateCopy);
         draw();
-      };
+    };
 
     return (
         <div className="canvasContainer">
             
             <div className="canvasBackground">
-                <img src="./background.png" alt="canvas" onLoad={handleImageLoad} />
+                <img src="./background.png" alt="canvas" onLoad={canvasInit} />
             </div>
             <canvas className="myCanvas" ref={canvasRef} height={500} />
         </div>
