@@ -6,8 +6,8 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/action"
 
 	"github.com/LiU-SeeGoals/controller/internal/client"
-	"github.com/LiU-SeeGoals/controller/internal/proto/ssl_vision"
 	"github.com/LiU-SeeGoals/controller/internal/receiver"
+	"github.com/LiU-SeeGoals/proto-messages/ssl_vision"
 	"gonum.org/v1/gonum/mat"
 )
 
