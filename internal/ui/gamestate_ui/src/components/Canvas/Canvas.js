@@ -12,7 +12,7 @@ function Canvas(props) {
         canvas.width = event.target.width;
         canvas.height = event.target.height;
 
-        scaleFactor = canvas.width / 100; // Make the canvas independet on window scaling
+        scaleFactor = canvas.width / 6600; // Make the canvas independet on window scaling
         canvas.addEventListener('click', handleClick); // event for mouse click
         draw();
     };
@@ -35,7 +35,7 @@ function Canvas(props) {
     const drawRobot = (context, robot) => {
         let x = robot.x;
         let y = robot.y;
-        let radius = 3;
+        let radius = 180;
         let angle = Math.atan2(robot.speed_y, robot.speed_x);
         let arrowLength = 10* Math.sqrt(robot.speed_x * robot.speed_x + robot.speed_y * robot.speed_y);
         let arrowThickness = 3;
@@ -139,7 +139,7 @@ function Canvas(props) {
         <div className="canvasContainer">
             
             <div className="canvasBackground">
-                <img src="./background.png" alt="canvas" onLoad={canvasInit} />
+                <img src="./background.svg" alt="canvas" onLoad={canvasInit} />
             </div>
             <canvas className="myCanvas" ref={canvasRef} height={500} />
         </div>

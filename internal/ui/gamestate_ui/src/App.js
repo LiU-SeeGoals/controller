@@ -27,7 +27,7 @@ function App() {
   const [isResizing, setIsResizing] = useState(false);
   const [sidebarWidth, setSidebarWidth] = useState(700);
   const initialGameState = [
-    {"id": 0, "team":"blue", "x": 5, "y": 45, "speed_x":1, "speed_y":1, "selected": false},
+    {"id": 0, "team":"blue", "x": 3300, "y": 5200, "speed_x":1, "speed_y":1, "selected": false},
     {"id": 1, "team":"blue", "x": 5, "y": 55, "speed_x":0, "speed_y":0, "selected": false},
     {"id": 2, "team":"blue", "x": 5, "y": 65, "speed_x":0, "speed_y":0, "selected": false},
     {"id": 3, "team":"blue", "x": 5, "y": 75, "speed_x":0, "speed_y":0, "selected": false},
@@ -62,6 +62,39 @@ function App() {
     },
     [isResizing]
   );
+
+useEffect(() => {
+    const socket = new WebSocket('ws://localhost:8080/ws');
+
+    socket.onmessage = (event) => {
+      try {
+        const gamestateFromServer = JSON.parse(event.data);
+        if (gamestateFromServer.BlueTeam && gamestateFromServer.YellowTeam) {
+            let gameStateCopy = [...gameState];
+
+            for (let i = 0; i < gamestateFromServer.BlueTeam.length; i++) {
+              gameStateCopy[i]["y"] = gamestateFromServer.BlueTeam[i]["PosX"] + 3300;
+              gameStateCopy[i]["x"] = gamestateFromServer.BlueTeam[i]["PosY"] + 4800;
+            }
+
+            for (let i = 0; i < gamestateFromServer.YellowTeam.length; i++) {
+              gameStateCopy[i + gamestateFromServer.BlueTeam.length].x = gamestateFromServer.YellowTeam[i].PosX;
+              gameStateCopy[i + gamestateFromServer.YellowTeam.length].y = gamestateFromServer.YellowTeam[i].PosY;
+            }
+
+            setGameState(gameStateCopy);
+            console.log(gameStateCopy);
+        }
+      } catch (e) {
+        console.error('Error parsing message JSON', e);
+      }
+    };
+
+    return () => {
+      socket.close();
+    };
+  }, []); // Removed
+
 
   React.useEffect(() => {
     window.addEventListener("mousemove", resize);
