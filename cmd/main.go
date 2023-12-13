@@ -2,10 +2,10 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
+	"github.com/LiU-SeeGoals/controller/internal/webserver"
 )
 
 type Config struct {
@@ -19,11 +19,15 @@ func main() {
 		panic(err)
 	}
 
+	go webserver.Once.Do(webserver.StartWebServer)
+
+
 	gs := gamestate.NewGameState(conf.GrSimAddress, conf.SSLClientAddress)
 	for {
-		//gs.TestActions()
+		gs.TestActions()
 		gs.Update()
-		fmt.Println(gs)
+
+		//fmt.Println(gs)
 	}
 }
 

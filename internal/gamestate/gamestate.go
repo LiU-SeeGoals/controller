@@ -1,9 +1,11 @@
 package gamestate
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
+	"github.com/LiU-SeeGoals/controller/internal/webserver"
 
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/proto/ssl_vision"
@@ -25,6 +27,34 @@ type GameState struct {
 	ball *Ball
 	// Holds field data
 	field Field
+}
+
+type GameStateDTO struct {
+	BlueTeam [TEAM_SIZE]RobotDTO
+	YellowTeam [TEAM_SIZE]RobotDTO
+	Ball BallDTO
+}
+
+func (gs *GameState) ToDTO() *GameStateDTO {
+
+	gameStateDTO := GameStateDTO{}
+
+	for i := 0; i < TEAM_SIZE; i++ {
+		gameStateDTO.BlueTeam[i] = gs.GetRobot(i, Blue).ToDTO()
+		gameStateDTO.YellowTeam[i] = gs.GetRobot(i, Yellow).ToDTO()
+	}
+
+	gameStateDTO.Ball = gs.ball.ToDTO()
+	
+	return &gameStateDTO
+}
+
+func (gs *GameState) ToJson() []byte {
+	gameStateJson, err := json.Marshal(gs.ToDTO())
+	if err != nil {
+		fmt.Println("The gamestate packet could not be marshalled to JSON.")
+	}
+	return gameStateJson
 }
 
 // Method used for testing actions,
@@ -52,8 +82,11 @@ func (gs *GameState) TestActions() {
 	gs.Grsim_client.SendActions(action)
 }
 
+var (helloman int = 0)
 // Updates position of robots and balls to their actual position
 func (gs *GameState) Update() {
+	// helloman = helloman + 1
+	// fmt.Println(helloman)
 	var packet ssl_vision.SSL_WrapperPacket
 
 	var detect *ssl_vision.SSL_DetectionFrame
@@ -94,6 +127,11 @@ func (gs *GameState) Update() {
 	}
 
 	parseFieldData(&gs.field, field)
+	gs.broadcastGameState()
+}
+
+func (gs *GameState) broadcastGameState() {
+	webserver.BroadcastGameState(gs.ToJson())
 }
 
 func (gs *GameState) GetRobot(id int, team Team) *Robot {
@@ -226,3 +264,5 @@ func parseFieldArcs(f *Field, arcs []*ssl_vision.SSL_FieldCircularArc) {
 func convertShapeType(typ ssl_vision.SSL_FieldShapeType) FieldShape {
 	return FieldShape(typ)
 }
+
+

@@ -146,7 +146,7 @@ func (mv *Move) TranslateGrsim(params *datatypes.Parameters) {
 		} else if diffPosAngle < -0.2 {
 			params.VelAngular = -4
 		} else {
-			params.VelTangent = 1
+			params.VelTangent = 5
 		}
 	} else if diffDestAngle > 0.2 {
 		params.VelAngular = -4

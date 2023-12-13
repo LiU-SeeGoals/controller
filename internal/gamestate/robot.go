@@ -20,6 +20,7 @@ type Robot struct {
 	vel  *mat.VecDense
 }
 
+
 func NewRobot(id int, team Team) *Robot {
 	return &Robot{
 		id:   id,
@@ -54,4 +55,28 @@ func (r *Robot) String() string {
 	velString := fmt.Sprintf("(%f, %f, %f)", v_x, v_y, v_w)
 
 	return fmt.Sprintf("id: %d, pos: %s, vel: %s", r.id, posString, velString)
+}
+
+func (r *Robot) ToDTO() RobotDTO {
+	return RobotDTO{
+		Id: r.id,
+		Team: r.team,
+		PosX: int(r.pos.AtVec(0)),
+		PosY: int(r.pos.AtVec(1)),
+		PosW: r.pos.AtVec(2),
+		VelX: int(r.vel.AtVec(0)),
+		VelY: int(r.vel.AtVec(1)),
+		VelW: r.vel.AtVec(2),
+	}
+}
+
+type RobotDTO struct {
+	Id int
+	Team Team
+	PosX int
+	PosY int
+	PosW float64
+	VelX int
+	VelY int
+	VelW float64
 }
