@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
 )
@@ -13,6 +11,6 @@ func main() {
 	for {
 		gs.TestActions()
 		gs.Update()
-		fmt.Println(gs)
+		//fmt.Println(gs)
 	}
 }

@@ -19,8 +19,11 @@ type SSLReceiver struct {
 	conn *net.UDPConn
 	// UDP address
 	addr *net.UDPAddr
+
 	// Read buffer
 	buff []byte
+
+	currentFrameNumber uint32;
 }
 
 // Create a new SSL vision receiver.
@@ -35,6 +38,7 @@ func NewSSLReceiver(addr string) *SSLReceiver {
 		conn: nil,
 		addr: udpAddr,
 		buff: make([]byte, read_buff_sz),
+		currentFrameNumber: 0,
 	}
 }
 
@@ -55,7 +59,8 @@ func (r *SSLReceiver) Connect() {
 //	go recv.Receive()
 //
 // Parsed packets are transferred using packetChan.
-func (r *SSLReceiver) Receive(packetChan chan ssl_vision.SSL_WrapperPacket) {
+func (r *SSLReceiver) Receive(packetChan chan []*ssl_vision.SSL_WrapperPacket) {
+	var packets []*ssl_vision.SSL_WrapperPacket
 	var packet ssl_vision.SSL_WrapperPacket
 	for {
 		sz, err := r.conn.Read(r.buff)
@@ -70,6 +75,17 @@ func (r *SSLReceiver) Receive(packetChan chan ssl_vision.SSL_WrapperPacket) {
 			continue
 		}
 
-		packetChan <- packet
+		if *packet.Detection.FrameNumber < r.currentFrameNumber {
+			packet.Detection.FrameNumber = &r.currentFrameNumber
+			packetChan <- packets
+			packets = make([]*ssl_vision.SSL_WrapperPacket, 0)
+		}
+
+		packets = append(packets, &packet)
+
+		if len(packets) >= 4 {
+			packetChan <- packets
+			packets = make([]*ssl_vision.SSL_WrapperPacket, 0)
+		}
 	}
 }

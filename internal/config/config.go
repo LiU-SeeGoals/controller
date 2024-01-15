@@ -13,6 +13,7 @@ import (
 type Config struct {
 	SSLClientAddress *string `json:"sslClientAddress"`
 	GrSimAddress     *string `json:"grSimAddress"`
+	AmountOfRobots   *int    `json:"amountOfRobots"`
 }
 
 var (
@@ -67,4 +68,9 @@ func GetSSLClientAddress() string {
 // GetGrSimAddress returns the GrSim address from the config.
 func GetGrSimAddress() string {
 	return *GetInstance().GrSimAddress
+}
+
+// GetAmountOfRobots returns the amount of robot per team.
+func GetAmountOfRobots() int {
+	return *GetInstance().AmountOfRobots
 }

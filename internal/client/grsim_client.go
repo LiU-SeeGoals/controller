@@ -1,11 +1,9 @@
 package client
 
 import (
-	"fmt"
 	"net"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
-	"github.com/LiU-SeeGoals/controller/internal/datatypes"
 	"github.com/LiU-SeeGoals/proto-messages/grsim"
 	"github.com/golang/protobuf/proto"
 )
@@ -23,6 +21,8 @@ type GrsimClient struct {
 
 	// Blue team robot command buffer
 	buffBlue []*grsim.GrSim_Robot_Command
+
+	packets []* grsim.GrSim_Packet
 
 	// Local time
 	// Note: grsim requires us to send a "timestamp",
@@ -63,34 +63,78 @@ func (client *GrsimClient) CloseConnection() {
 // Actions need to be ordered by robot id.
 // One action per robot.
 func (client *GrsimClient) SendActions(actions []action.Action) {
+	var blue_packet *grsim.GrSim_Packet = &grsim.GrSim_Packet{
+		Commands: &grsim.GrSim_Commands{
+			Isteamyellow: proto.Bool(false),
+			Timestamp:   proto.Float64(client.time),
+		},
+	}
+	var yellow_packet *grsim.GrSim_Packet = &grsim.GrSim_Packet{
+			Commands: &grsim.GrSim_Commands{
+				Isteamyellow: proto.Bool(true),
+				Timestamp:   proto.Float64(client.time),
+			},
+	}
+	var command *grsim.GrSim_Robot_Command
 
 	for _, action := range actions {
-		params := datatypes.NewParameters()
-		action.TranslateGrsim(params)
-		client.addRobotCommand(params)
+		command = action.TranslateGrsim()
+		if action.IsTeamYellow() {
+			yellow_packet.Commands.RobotCommands = append(yellow_packet.Commands.RobotCommands, command)
+			continue
+		}
+		blue_packet.Commands.RobotCommands = append(blue_packet.Commands.RobotCommands, command)
 	}
+
+	if len(blue_packet.Commands.RobotCommands) > 0 {
+		client.queuePacket(blue_packet)
+	}
+
+	if len(yellow_packet.Commands.RobotCommands) > 0 {
+		client.queuePacket(yellow_packet)
+	}
+
 	client.send()
+	client.time += 0.016667
 }
+
+func (client *GrsimClient) queuePacket(packet *grsim.GrSim_Packet) {
+	client.packets = append(client.packets, packet)
+}
+
+func (client *GrsimClient) send() {
+	for _, packet := range client.packets {
+		data, err := proto.Marshal(packet)
+		if err != nil {
+			//err = fmt.Errorf("unable to marshal data: %w", err)
+		}
+
+		_, err = client.conn.Write(data)
+		if err != nil {
+			//err = fmt.Errorf("unable to send data over socket: %w", err)
+		}
+	}
+}
+
+// func (client *GrsimClient) sendPlacement(placements []action.Placement) {
+// 	var command *grsim.GrSim_Replacement
+// 	for _, placement := range placements {
+// 		command = placement.Translate()
+// 		if placement.IsBall() {
+// 
+// 		}
+// 	}
+// }
 
 // Add a new Robot command to client buffer
-func (client *GrsimClient) addRobotCommand(params *datatypes.Parameters) {
-	command := newRobotCommand(
-		params.RobotId,
-		params.VelTangent,
-		params.VelNormal,
-		params.VelAngular,
-		params.KickSpeedX,
-		params.KickSpeedZ,
-		params.Spinner,
-		params.WheelsSpeed,
-	)
-
-	if params.YellowTeam {
-		client.buffYellow = append(client.buffYellow, command)
-		return
-	}
-	client.buffBlue = append(client.buffBlue, command)
-}
+// func (client *GrsimClient) addRobotCommand(command *grsim.GrSim_Robot_Command) {
+// 
+// 	if command.YellowTeam {
+// 		client.buffYellow = append(client.buffYellow, command)
+// 		return
+// 	}
+// 	client.buffBlue = append(client.buffBlue, command)
+// }
 
 // Helper function creates a new robot command
 func newRobotCommand(
@@ -123,54 +167,54 @@ func (client *GrsimClient) clearCommandBuffer() {
 	client.buffBlue = []*grsim.GrSim_Robot_Command{}
 }
 
-func (client *GrsimClient) send() (int, error) {
-	// Incr time
-	client.time += 1.0
-
-	// Clear buffers
-	defer client.clearCommandBuffer()
-
-	packet := &grsim.GrSim_Packet{}
-
-	isteamyellow := true
-	packet.Commands = &grsim.GrSim_Commands{
-		Timestamp:     &client.time,
-		Isteamyellow:  &isteamyellow,
-		RobotCommands: client.buffYellow,
-	}
-
-	// Yellow team
-	data, err := proto.Marshal(packet)
-	if err != nil {
-		err = fmt.Errorf("unable to marshal yellow team data: %w", err)
-		return 0, err
-	}
-
-	writeYellow, err := client.conn.Write(data)
-	if err != nil {
-		err = fmt.Errorf("unable to send yellow team data over socket: %w", err)
-		return 0, err
-	}
-
-	isteamyellow = false
-	packet.Commands = &grsim.GrSim_Commands{
-		Timestamp:     &client.time,
-		Isteamyellow:  &isteamyellow,
-		RobotCommands: client.buffBlue,
-	}
-
-	// Blue team
-	data, err = proto.Marshal(packet)
-	if err != nil {
-		err = fmt.Errorf("unable to marshal blue team data: %w", err)
-		return 0, err
-	}
-
-	writeBlue, err := client.conn.Write(data)
-	if err != nil {
-		err = fmt.Errorf("unable to send blue team data over socket: %w", err)
-		return 0, err
-	}
-
-	return writeYellow + writeBlue, nil
-}
+// func (client *GrsimClient) send() (int, error) {
+// 	// Incr time
+// 	client.time += 1.0
+// 
+// 	// Clear buffers
+// 	defer client.clearCommandBuffer()
+// 
+// 	packet := &grsim.GrSim_Packet{}
+// 
+// 	isteamyellow := true
+// 	packet.Commands = &grsim.GrSim_Commands{
+// 		Timestamp:     &client.time,
+// 		Isteamyellow:  &isteamyellow,
+// 		RobotCommands: client.buffYellow,
+// 	}
+// 
+// 	// Yellow team
+// 	data, err := proto.Marshal(packet)
+// 	if err != nil {
+// 		err = fmt.Errorf("unable to marshal yellow team data: %w", err)
+// 		return 0, err
+// 	}
+// 
+// 	writeYellow, err := client.conn.Write(data)
+// 	if err != nil {
+// 		err = fmt.Errorf("unable to send yellow team data over socket: %w", err)
+// 		return 0, err
+// 	}
+// 
+// 	isteamyellow = false
+// 	packet.Commands = &grsim.GrSim_Commands{
+// 		Timestamp:     &client.time,
+// 		Isteamyellow:  &isteamyellow,
+// 		RobotCommands: client.buffBlue,
+// 	}
+// 
+// 	// Blue team
+// 	data, err = proto.Marshal(packet)
+// 	if err != nil {
+// 		err = fmt.Errorf("unable to marshal blue team data: %w", err)
+// 		return 0, err
+// 	}
+// 
+// 	writeBlue, err := client.conn.Write(data)
+// 	if err != nil {
+// 		err = fmt.Errorf("unable to send blue team data over socket: %w", err)
+// 		return 0, err
+// 	}
+// 
+// 	return writeYellow + writeBlue, nil
+// }

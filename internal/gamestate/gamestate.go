@@ -4,11 +4,13 @@ import (
 	"fmt"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
+	"github.com/LiU-SeeGoals/controller/internal/config"
+	"github.com/LiU-SeeGoals/controller/internal/gamestate/robot"
+	"gonum.org/v1/gonum/mat"
 
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/receiver"
 	"github.com/LiU-SeeGoals/proto-messages/ssl_vision"
-	"gonum.org/v1/gonum/mat"
 )
 
 const TEAM_SIZE = 6
@@ -16,10 +18,10 @@ const TEAM_SIZE = 6
 type GameState struct {
 	Grsim_client         *client.GrsimClient
 	ssl_receiver         *receiver.SSLReceiver
-	ssl_receiver_channel chan ssl_vision.SSL_WrapperPacket
+	ssl_receiver_channel chan []*ssl_vision.SSL_WrapperPacket
 
-	blue_team   [TEAM_SIZE]*Robot
-	yellow_team [TEAM_SIZE]*Robot
+	blue_team   [TEAM_SIZE]*robot.Robot
+	yellow_team [TEAM_SIZE]*robot.Robot
 
 	// Holds ball data
 	ball *Ball
@@ -30,74 +32,70 @@ type GameState struct {
 // Method used for testing actions,
 // a proper test should be implemented
 func (gs *GameState) TestActions() {
-	id := 0
-	act := &action.Move{}
-	act.Pos = gs.yellow_team[id].pos
-	act.Dest = mat.NewVecDense(3, nil)
-	act.Id = id
-	act.Dest.SetVec(0, 0)
-	act.Dest.SetVec(1, 0)
-	act.Dest.SetVec(2, 0)
-	//act.Dribble = true
 
-	//act := &action.Kick{}
-	//act.Kickspeed = 10
-
-	//act := &action.Dribble{}
-	//act.Dribble = true
-
-	var action []action.Action
-	action = append(action, act)
-
-	gs.Grsim_client.SendActions(action)
+	zeroVec := mat.NewVecDense(3, []float64{0, 0, 0})
+	actions := make([]action.Action, 0)
+	actions = append(actions, action.NewMove(0, robot.Yellow, gs.yellow_team[0].GetPosition(), zeroVec, false))
+	actions = append(actions, action.NewMove(1, robot.Yellow, gs.yellow_team[1].GetPosition(), zeroVec, false))
+	actions = append(actions, action.NewMove(2, robot.Yellow, gs.yellow_team[2].GetPosition(), zeroVec, false))
+	actions = append(actions, action.NewMove(3, robot.Yellow, gs.yellow_team[3].GetPosition(), zeroVec, false))
+	actions = append(actions, action.NewMove(4, robot.Yellow, gs.yellow_team[4].GetPosition(), zeroVec, false))
+	actions = append(actions, action.NewMove(5, robot.Yellow, gs.yellow_team[5].GetPosition(), zeroVec, false))
+	actions = append(actions, action.NewMove(0, robot.Blue, gs.blue_team[0].GetPosition(), zeroVec, false))
+	actions = append(actions, action.NewMove(1, robot.Blue, gs.blue_team[1].GetPosition(), zeroVec, false))
+	actions = append(actions, action.NewMove(2, robot.Blue, gs.blue_team[2].GetPosition(), zeroVec, false))
+	actions = append(actions, action.NewMove(3, robot.Blue, gs.blue_team[3].GetPosition(), zeroVec, false))
+	actions = append(actions, action.NewMove(4, robot.Blue, gs.blue_team[4].GetPosition(), zeroVec, false))
+	actions = append(actions, action.NewMove(5, robot.Blue, gs.blue_team[5].GetPosition(), zeroVec, false))
+	gs.Grsim_client.SendActions(actions)
 }
 
 // Updates position of robots and balls to their actual position
 func (gs *GameState) Update() {
-	var packet ssl_vision.SSL_WrapperPacket
+	var packets []*ssl_vision.SSL_WrapperPacket
 
-	var detect *ssl_vision.SSL_DetectionFrame
 	var field *ssl_vision.SSL_GeometryFieldSize
 
-	packet = <-gs.ssl_receiver_channel
+	packets = <-gs.ssl_receiver_channel
 
-	detect = packet.GetDetection()
-
-	geo := packet.GetGeometry()
+	geo := packets[0].GetGeometry()
 	if geo != nil {
 		field = geo.GetField()
 	}
 
-	for _, robot := range detect.GetRobotsBlue() {
-		x := float64(robot.GetX())
-		y := float64(robot.GetY())
-		w := float64(*robot.Orientation)
+	var robotDetection []int = make([]int, config.GetAmountOfRobots())
+	for _, packet := range packets {
+		for _, robot := range packet.Detection.GetRobotsBlue() {
+			x := float64(robot.GetX())
+			y := float64(robot.GetY())
+			w := float64(*robot.Orientation)
 
-		gs.blue_team[robot.GetRobotId()].SetPosition(x, y, w)
-	}
+			gs.blue_team[robot.GetRobotId()].SetPosition(x, y, w)
+		}
 
-	for _, robot := range detect.GetRobotsYellow() {
-		x := float64(robot.GetX())
-		y := float64(robot.GetY())
-		w := float64(*robot.Orientation)
+		for _, robot := range packet.Detection.GetRobotsYellow() {
+			x := float64(robot.GetX())
+			y := float64(robot.GetY())
+			w := float64(*robot.Orientation)
 
-		gs.yellow_team[robot.GetRobotId()].SetPosition(x, y, w)
+			gs.yellow_team[robot.GetRobotId()].SetPosition(x, y, w)
 
-	}
+		}
 
-	for _, ball := range detect.GetBalls() {
-		x := float64(ball.GetX())
-		y := float64(ball.GetY())
-		w := float64(ball.GetZ())
+		for _, ball := range packet.Detection.GetBalls() {
+			x := float64(ball.GetX())
+			y := float64(ball.GetY())
+			w := float64(ball.GetZ())
 
-		gs.ball.SetPosition(x, y, w)
+			gs.ball.SetPosition(x, y, w)
+		}
 	}
 
 	parseFieldData(&gs.field, field)
 }
 
-func (gs *GameState) GetRobot(id int, team Team) *Robot {
-	if team == Blue {
+func (gs *GameState) GetRobot(id int, team robot.Team) *robot.Robot {
+	if team == robot.Blue {
 		return gs.blue_team[id]
 	}
 	return gs.yellow_team[id]
@@ -109,7 +107,7 @@ func (gs *GameState) setupSSLVisionReceiver(addr string) {
 	gs.ssl_receiver = receiver.NewSSLReceiver(addr)
 	gs.ssl_receiver.Connect()
 
-	gs.ssl_receiver_channel = make(chan ssl_vision.SSL_WrapperPacket)
+	gs.ssl_receiver_channel = make(chan []*ssl_vision.SSL_WrapperPacket)
 	go gs.ssl_receiver.Receive(gs.ssl_receiver_channel)
 }
 
@@ -124,8 +122,8 @@ func NewGameState(sslClientAddress string, sslReceiverAddress string) *GameState
 	gs.ball = NewBall()
 
 	for i := 0; i < TEAM_SIZE; i++ {
-		gs.blue_team[i] = NewRobot(i, Blue)
-		gs.yellow_team[i] = NewRobot(i, Yellow)
+		gs.blue_team[i] = robot.NewRobot(i, robot.Blue)
+		gs.yellow_team[i] = robot.NewRobot(i, robot.Yellow)
 	}
 
 	return gs
