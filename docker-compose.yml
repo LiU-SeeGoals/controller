@@ -1,0 +1,73 @@
+version: '3.5'
+
+services:
+
+  ssl-vision-client:
+    image: robocupssl/ssl-vision-client:latest
+    command:
+      - "-visionAddress"
+      - "${SSL_VISION_MULTICAST_ADDR}:${SSL_VISION_MAIN_PORT}"
+      - "-visualizationAddress"
+      - "${SSL_VISION_MULTICAST_ADDR}:${SSL_VISION_VIZ_PORT}"
+      - "-address"
+      - ":${WEB_VISION_UI_PORT}"
+    ports:
+      - "${WEB_VISION_UI_PORT}:${WEB_VISION_UI_PORT}"
+    networks:
+      - simulation
+    depends_on:
+      - grsim
+
+  ssl-game-controller:
+    image: robocupssl/ssl-game-controller
+    command:
+      - "-visionAddress"
+      - "${SSL_VISION_MULTICAST_ADDR}:${SSL_VISION_MAIN_PORT}"
+      - "-trackerAddress"
+      - "${SSL_VISION_MULTICAST_ADDR}:${SSL_VISION_MAIN_PORT}"
+      - "-publishAddress"
+      - "${GC_PUBLISH_ADDR}:${GC_PUBLISH_PORT}"
+      - "-address"
+      - ":${WEB_GC_UI_PORT}"
+    ports:
+      - "${WEB_GC_UI_PORT}:${WEB_GC_UI_PORT}"
+    networks:
+      - simulation
+    depends_on:
+      - grsim
+
+  grsim:
+    image: robocupssl/grsim:latest
+    networks:
+      - simulation
+
+  controller:
+    build: .
+    volumes:
+      - ./:/var/controller
+    tty: true
+    networks:
+      - simulation
+
+  #ssl-status-board:
+  #  image: robocupssl/ssl-status-board:latest
+  #  command: -refereeAddress 224.5.23.1:11003
+  #  ports:
+  #    - "8084:8082"
+  #  networks:
+  #    - simulation
+
+  #ssl-game-controller:
+  #  image: bobrik/socat:latest
+  #  command: 'TCP4-LISTEN:8083,fork TCP4:simulator:50543'
+  #  ports:
+  #    - "8083:8083"
+  #  networks:
+  #    - simulation
+
+volumes:
+  grafana_data:
+  influxdb_data:
+
+networks:
+  simulation:
