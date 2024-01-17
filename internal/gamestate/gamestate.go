@@ -10,7 +10,6 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/proto/ssl_vision"
 	"github.com/LiU-SeeGoals/controller/internal/receiver"
-	"gonum.org/v1/gonum/mat"
 )
 
 const TEAM_SIZE = 6
@@ -27,12 +26,14 @@ type GameState struct {
 	ball *Ball
 	// Holds field data
 	field Field
+
+	actions []action.Action
 }
 
 type GameStateDTO struct {
-	BlueTeam [TEAM_SIZE]RobotDTO
+	BlueTeam   [TEAM_SIZE]RobotDTO
 	YellowTeam [TEAM_SIZE]RobotDTO
-	Ball BallDTO
+	Ball       BallDTO
 }
 
 func (gs *GameState) ToDTO() *GameStateDTO {
@@ -45,7 +46,7 @@ func (gs *GameState) ToDTO() *GameStateDTO {
 	}
 
 	gameStateDTO.Ball = gs.ball.ToDTO()
-	
+
 	return &gameStateDTO
 }
 
@@ -57,32 +58,19 @@ func (gs *GameState) ToJson() []byte {
 	return gameStateJson
 }
 
-// Method used for testing actions,
-// a proper test should be implemented
-func (gs *GameState) TestActions() {
-	id := 0
-	act := &action.Move{}
-	act.Pos = gs.yellow_team[id].pos
-	act.Dest = mat.NewVecDense(3, nil)
-	act.Id = id
-	act.Dest.SetVec(0, 0)
-	act.Dest.SetVec(1, 0)
-	act.Dest.SetVec(2, 0)
-	//act.Dribble = true
-
-	//act := &action.Kick{}
-	//act.Kickspeed = 10
-
-	//act := &action.Dribble{}
-	//act.Dribble = true
-
-	var action []action.Action
-	action = append(action, act)
-
-	gs.Grsim_client.SendActions(action)
+func (gs *GameState) AddAction(action action.Action) {
+	gs.actions = append(gs.actions, action)
 }
 
-var (helloman int = 0)
+func (gs *GameState) sendActions() {
+	gs.Grsim_client.SendActions(gs.actions)
+	gs.actions = nil
+}
+
+var (
+	helloman int = 0
+)
+
 // Updates position of robots and balls to their actual position
 func (gs *GameState) Update() {
 	// helloman = helloman + 1
@@ -128,6 +116,7 @@ func (gs *GameState) Update() {
 
 	parseFieldData(&gs.field, field)
 	gs.broadcastGameState()
+	gs.sendActions()
 }
 
 func (gs *GameState) broadcastGameState() {
@@ -264,5 +253,3 @@ func parseFieldArcs(f *Field, arcs []*ssl_vision.SSL_FieldCircularArc) {
 func convertShapeType(typ ssl_vision.SSL_FieldShapeType) FieldShape {
 	return FieldShape(typ)
 }
-
-

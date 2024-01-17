@@ -4,8 +4,10 @@ import (
 	"encoding/json"
 	"os"
 
+	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
 	"github.com/LiU-SeeGoals/controller/internal/webserver"
+	"gonum.org/v1/gonum/mat"
 )
 
 type Config struct {
@@ -21,14 +23,27 @@ func main() {
 
 	go webserver.Once.Do(webserver.StartWebServer)
 
-
 	gs := gamestate.NewGameState(conf.GrSimAddress, conf.SSLClientAddress)
+
+	testAction := createTestAction(gs)
 	for {
-		gs.TestActions()
+		gs.AddAction(testAction)
 		gs.Update()
 
 		//fmt.Println(gs)
 	}
+}
+
+func createTestAction(gs *gamestate.GameState) action.Action {
+	id := 0
+	act := &action.Move{}
+	act.Pos = gs.GetRobot(id, gamestate.Yellow).GetPosition()
+	act.Dest = mat.NewVecDense(3, nil)
+	act.Id = id
+	act.Dest.SetVec(0, 0)
+	act.Dest.SetVec(1, 0)
+	act.Dest.SetVec(2, 0)
+	return act
 }
 
 func LoadConfig() (*Config, error) {
