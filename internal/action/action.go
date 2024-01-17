@@ -130,28 +130,44 @@ func (s *Stop) TranslateReal() *robot_action.Command {
 }
 
 func (mv *Move) TranslateGrsim(params *datatypes.Parameters) {
+
 	params.RobotId = uint32(mv.Id)
 	diff := mat.NewVecDense(3, nil)
 	diff.SubVec(mv.Dest, mv.Pos)
 	params.Spinner = mv.Dribble
 
-	angle := math.Atan2(diff.AtVec(1), diff.AtVec(0))
-	diffPosAngle := angle - mv.Pos.AtVec(2)
-	diffDestAngle := mv.Pos.AtVec(2) - mv.Dest.AtVec(2)
+	goalAngle := math.Atan2(diff.AtVec(1), diff.AtVec(0))
+	currAngle := mv.Pos.AtVec(2)
+	inPosition := false
 
-	if math.Abs(diff.AtVec(0)) > 50 || math.Abs(diff.AtVec(1)) > 50 {
+	if math.Abs(diff.AtVec(0)) < 50 && math.Abs(diff.AtVec(1)) < 50 {
+		inPosition = true
+		goalAngle = mv.Dest.AtVec(2)
 
-		if diffPosAngle > 0.2 {
-			params.VelAngular = 4
-		} else if diffPosAngle < -0.2 {
-			params.VelAngular = -4
-		} else {
-			params.VelTangent = 1
+	}
+
+	// Normalize an angle to be within -π to π
+	normalizeAngle := func(angle float64) float64 {
+		angle = math.Mod(angle+math.Pi, 2*math.Pi)
+		if angle < 0 {
+			angle += 2 * math.Pi
 		}
-	} else if diffDestAngle > 0.2 {
-		params.VelAngular = -4
-	} else if diffDestAngle < -0.2 {
-		params.VelAngular = 4
+		return angle - math.Pi
+	}
+
+	// Calculate difference between current angle and goal angle
+	angleDiff := normalizeAngle(goalAngle - currAngle)
+
+	// Set angular velocity
+	if angleDiff > 0.2 {
+		params.VelAngular = 2 // Adjust this value as necessary
+	} else if angleDiff < -0.2 {
+		params.VelAngular = -2 // Adjust this value as necessary
+	}
+
+	// Set forward speed
+	if math.Abs(angleDiff) < 0.3 && !inPosition {
+		params.VelTangent = 1 // Move forward when facing the goal
 	}
 }
 
