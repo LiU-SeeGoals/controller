@@ -1,59 +1,133 @@
 package config
 
 import (
-	"encoding/json"
 	"fmt"
-	"os"
+	"log"
 	"path/filepath"
-	"reflect"
 	"runtime"
 	"sync"
+
+	"github.com/caarlos0/env/v10"
+	"github.com/joho/godotenv"
 )
 
+// Config wraps around specific config object.
+//
+// Check the .env file to make changes.
+// Unless you have a good reason, you shouldn't need to use this directly.
+// It's better to use the helper methods in this file instead.
 type Config struct {
-	SSLClientAddress *string `json:"sslClientAddress"`
-	GrSimAddress     *string `json:"grSimAddress"`
+	// Environment - e.g. "docker"
+	Env string `env:"ENVIRONMENT,required"`
+
+	// SSL vision config
+	SSLVision ConfigSSLVision
+
+	// Grsim config
+	Grsim ConfigGrsim
+
+	// Game controller config
+	GC ConfigGameController
+}
+
+// Config struct for SSL Vision.
+//
+// Check the .env file to make changes.
+// Unless you have a good reason, you
+// shouldn't need to use this directly.
+type ConfigSSLVision struct {
+	// Multicast address.
+	Address string `env:"SSL_VISION_MULTICAST_ADDR,required"`
+
+	// Tracker, detection, and geometry packets.
+	Port string `env:"SSL_VISION_MAIN_PORT,required"`
+
+	// Visualization packets.
+	VizPort string `env:"SSL_VISION_VIZ_PORT,required"`
+}
+
+// Config struct for grsim
+//
+// Check the .env file to make changes.
+// Unless you have a good reason, you
+// shouldn't need to use this directly.
+type ConfigGrsim struct {
+	// Grsim address
+	Address string `env:"GRSIM_ADDR,required"`
+
+	// Command listen port.
+	// Accepts robots commands.
+	CommandPort string `env:"GRSIM_COMMAND_LISTEN_PORT,required"`
+
+	// Blue team status listen port.
+	// Use unknown.
+	BlueStatusPort string `env:"GRSIM_BLUE_STATUS_SEND_PORT,required"`
+
+	// Yellow team status listen port.
+	// Use unknown.
+	YellowStatusPort string `env:"GRSIM_YELLOW_STATUS_SEND_PORT,required"`
+
+	// Simulation controller send port.
+	// Use unknown.
+	SimControllerPort string `env:"GRSIM_SIM_CONTROLLER_SEND_PORT,required"`
+
+	// Blue team controller listen port.
+	// Use unknown.
+	BlueControllerPort string `env:"GRSIM_BLUE_CONTROLLER_LISTEN_PORT,required"`
+
+	// Yellow team controller listen port.
+	// Use unknown.
+	YellowControllerPort string `env:"GRSIM_YELLOW_CONTROLLER_LISTEN_PORT,required"`
+}
+
+// Config struct for game controller (GC)
+//
+// Check the .env file to make changes.
+// Unless you have a good reason, you
+// shouldn't need to use this directly.
+type ConfigGameController struct {
+	// GC multicast publish address
+	Address string `env:"GC_PUBLISH_ADDR,required"`
+
+	// GC publish port
+	Port string `env:"GC_PUBLISH_PORT,required"`
 }
 
 var (
+	// Config instance
 	instance *Config
-	once     sync.Once
+
+	// Init helper
+	once sync.Once
 )
 
+// Loads config from .env file.
+// Config object saved as global object in this file.
 func loadConfig() {
 	// Determine the path to the config file.
 	_, filename, _, ok := runtime.Caller(0)
 	if !ok {
 		panic("loadConfig: unable to determine current directory")
 	}
-	configPath := filepath.Join(filepath.Dir(filename), "../../config.json")
-	configPath = filepath.Clean(configPath)
+	envPath := filepath.Join(filepath.Dir(filename), "../../.env")
+	envPath = filepath.Clean(envPath)
 
-	// Open the config file.
-	file, err := os.Open(configPath)
+	err := godotenv.Load(envPath)
 	if err != nil {
-		panic(fmt.Errorf("loadConfig: %w", err))
-	}
-	defer file.Close()
-
-	// Deserialize the json.
-	instance = &Config{}
-	decoder := json.NewDecoder(file)
-	if err := decoder.Decode(instance); err != nil {
-		panic(fmt.Errorf("loadConfig: %w", err))
+		log.Fatalf("Unable to load .env file: %e", err)
 	}
 
-	// Validate required fields using reflection
-	val := reflect.ValueOf(instance).Elem()
-	for i := 0; i < val.NumField(); i++ {
-		field := val.Field(i)
-		if field.Kind() == reflect.Ptr && field.IsNil() {
-			panic(fmt.Sprintf("loadConfig: missing required field '%s'", val.Type().Field(i).Name))
-		}
+	cfg := &Config{}
+	err = env.Parse(cfg)
+	if err != nil {
+		log.Fatalf("Unable to parse config: %e", err)
 	}
+
+	instance = cfg
 }
 
-// GetInstance returns the singleton instance of the Config object, initializing it if necessary.
+// GetInstance returns the singleton instance of the Config object,
+// initializing it if necessary.
 func GetInstance() *Config {
 	once.Do(loadConfig)
 	return instance
@@ -61,10 +135,12 @@ func GetInstance() *Config {
 
 // GetSSLClientAddress returns the SSL client address from the config.
 func GetSSLClientAddress() string {
-	return *GetInstance().SSLClientAddress
+	cfg := GetInstance()
+	return fmt.Sprintf("%s:%s", cfg.SSLVision.Address, cfg.SSLVision.Port)
 }
 
 // GetGrSimAddress returns the GrSim address from the config.
 func GetGrSimAddress() string {
-	return *GetInstance().GrSimAddress
+	cfg := GetInstance()
+	return fmt.Sprintf("%s:%s", cfg.Grsim.Address, cfg.Grsim.CommandPort)
 }
