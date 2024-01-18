@@ -65,9 +65,5 @@ services:
   #  networks:
   #    - simulation
 
-volumes:
-  grafana_data:
-  influxdb_data:
-
 networks:
   simulation:
