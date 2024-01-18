@@ -37,7 +37,7 @@ To start the environment:
 ./scripts/compose_up.sh
 ```
 
-This will start the docker environment (in detached mode). The Seegoals controller is meade to be run from inside the container. The controller container can be entered by:
+This will start the docker environment (in detached mode). The Seegoals controller is meant to be run from inside the container. The controller container can be entered by:
 ```sh
 ./scripts/enter.sh
 ```
