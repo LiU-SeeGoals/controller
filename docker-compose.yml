@@ -38,11 +38,21 @@ services:
 
   grsim:
     image: robocupssl/grsim:latest
+    # Uncomment to enable grsim UI via vnc:
+    #command: vnc
+    environment:
+      - VNC_PASSWORD=vnc
+      - VNC_GEOMETRY=1280x1024
     networks:
       - simulation
+    ports:
+      # vnc port
+      - "5900:5900"
 
   controller:
     build: .
+    env_file:
+      - .env
     volumes:
       - ./:/var/controller
     tty: true
