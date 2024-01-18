@@ -19,7 +19,7 @@ services:
       - grsim
 
   ssl-game-controller:
-    image: robocupssl/ssl-game-controller
+    image: robocupssl/ssl-game-controller:latest
     command:
       - "-visionAddress"
       - "${SSL_VISION_MULTICAST_ADDR}:${SSL_VISION_MAIN_PORT}"
