@@ -1,8 +1,6 @@
 package ai
 
 import (
-	"fmt"
-
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
 )
@@ -19,7 +17,7 @@ func NewRoleExecutor() *RoleExecutor {
 }
 
 func (re *RoleExecutor) GetActions(roles *Roles, gamestate *gamestate.GameState) []action.Action {
-	fmt.Println("Fiskmåsen")
+
 	var actionList []action.Action
 
 	act := &action.Move{}

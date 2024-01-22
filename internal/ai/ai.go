@@ -69,12 +69,9 @@ func (ai *Ai) TestActions() {
 	ai.client.SendActions(actionList)
 }
 
-// TODO
-// fixa datastructurer
-// skriva test
 func (ai *Ai) Update() {
-	data := ai.preCalculator.Process(ai.gamestate)
-	plays := ai.playFinder.FindPlays(data)
+	gameAnalysis := ai.preCalculator.Process(ai.gamestate)
+	plays := ai.playFinder.FindPlays(gameAnalysis)
 	roles := ai.roleAssigner.AssignRoles(plays)
 	actions := ai.roleExecutor.GetActions(roles, ai.gamestate)
 

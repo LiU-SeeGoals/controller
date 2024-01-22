@@ -1,8 +1,6 @@
 package ai
 
 import (
-	"fmt"
-
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
 )
 
@@ -14,10 +12,10 @@ func NewPreCalculator() *PreCalculator {
 	return pc
 }
 
-type Data struct { // name is a placeholder
+type GameAnalysis struct {
 }
 
-func (pc *PreCalculator) Process(gamestate *gamestate.GameState) *Data {
-	fmt.Println("Ugglan")
-	return &Data{}
+func (pc *PreCalculator) Process(gamestate *gamestate.GameState) *GameAnalysis {
+
+	return &GameAnalysis{}
 }

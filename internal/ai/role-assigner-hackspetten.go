@@ -1,7 +1,5 @@
 package ai
 
-import "fmt"
-
 type RoleAssigner struct {
 }
 
@@ -14,6 +12,6 @@ type Roles struct {
 }
 
 func (ra *RoleAssigner) AssignRoles(plays *Plays) *Roles {
-	fmt.Println("Hackspetten")
+
 	return &Roles{}
 }
