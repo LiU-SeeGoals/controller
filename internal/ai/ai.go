@@ -7,8 +7,26 @@ import (
 )
 
 type Ai struct {
-	gamestate    *gamestate.GameState
-	Grsim_client *client.GrsimClient
+	gamestate     *gamestate.GameState
+	client        *client.GrsimClient // TODO change this
+	preCalculator *PreCalculator
+	playFinder    *PlayFinder
+	roleAssigner  *RoleAssigner
+	roleExecutor  *RoleExecutor
+}
+
+func NewAi(gamestate *gamestate.GameState, addr string) *Ai {
+	ai := &Ai{
+		preCalculator: NewPreCalculator(),
+		playFinder:    NewPlayFinder(),
+		roleAssigner:  NewRoleAssigner(),
+		roleExecutor:  NewRoleExecutor(),
+
+		gamestate: gamestate,
+		client:    client.NewGrsimClient(addr),
+	}
+	ai.client.Init()
+	return ai
 }
 
 // Method used for testing actions,
@@ -24,7 +42,7 @@ func (ai *Ai) TestActions() {
 	act.Id = robot.GetID()
 
 	act.Dest = ai.gamestate.GetBall().GetPosition()
-	act.Dest.SetVec(0, 4)
+	act.Dest.SetVec(0, 50)
 	act.Dest.SetVec(1, 0)
 	act.Dest.SetVec(2, 0)
 	act.Dribble = true
@@ -48,19 +66,20 @@ func (ai *Ai) TestActions() {
 	//	actionList = append(actionList, act)
 	//}
 
-	ai.Grsim_client.SendActions(actionList)
+	ai.client.SendActions(actionList)
 }
 
+// TODO
+// fixa datastructurer
+// skriva test
 func (ai *Ai) Update() {
-	ai.TestActions()
+	data := ai.preCalculator.Process(ai.gamestate)
+	plays := ai.playFinder.FindPlays(data)
+	roles := ai.roleAssigner.AssignRoles(plays)
+	actions := ai.roleExecutor.GetActions(roles, ai.gamestate)
 
-}
+	ai.client.SendActions(actions)
 
-func NewAi(gamestate *gamestate.GameState, addr string) *Ai {
-	ai := &Ai{}
+	//ai.TestActions()
 
-	ai.gamestate = gamestate
-	ai.Grsim_client = client.NewGrsimClient(addr)
-	ai.Grsim_client.Init()
-	return ai
 }

@@ -12,10 +12,10 @@ func main() {
 	gs := gamestate.NewGameState()
 	worldPredictor := world_predictor.NewWorldPredictor(config.GetSSLClientAddress(), gs)
 	ai := ai.NewAi(gs, config.GetGrSimAddress())
-
 	for {
-		ai.Update()
+
 		worldPredictor.Update()
-		//fmt.Println(gs)
+		ai.Update()
 	}
+
 }
