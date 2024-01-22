@@ -2,15 +2,6 @@ package gamestate
 
 import (
 	"fmt"
-
-
-	"github.com/LiU-SeeGoals/controller/internal/action"
-
-	"github.com/LiU-SeeGoals/controller/internal/client"
-	"github.com/LiU-SeeGoals/controller/internal/receiver"
-	"github.com/LiU-SeeGoals/proto-messages/ssl_vision"
-	"gonum.org/v1/gonum/mat"
-
 )
 
 const TEAM_SIZE = 6
