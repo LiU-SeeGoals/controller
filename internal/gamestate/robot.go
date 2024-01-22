@@ -55,3 +55,23 @@ func (r *Robot) String() string {
 
 	return fmt.Sprintf("id: %d, pos: %s, vel: %s", r.id, posString, velString)
 }
+
+// GetID returns the id of the Robot.
+func (r *Robot) GetID() int {
+	return r.id
+}
+
+// GetTeam returns the team of the Robot.
+func (r *Robot) GetTeam() Team {
+	return r.team
+}
+
+// GetPosition returns the position vector of the Robot.
+func (r *Robot) GetPosition() *mat.VecDense {
+	return r.pos
+}
+
+// GetVelocity returns the velocity vector of the Robot.
+func (r *Robot) GetVelocity() *mat.VecDense {
+	return r.vel
+}
