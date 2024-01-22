@@ -4,6 +4,7 @@ import (
 	"time"
 	"fmt"
 	"strconv"
+    "strings"
 
 	"gonum.org/v1/gonum/mat"
 
@@ -31,8 +32,14 @@ func askForClient(port string) client.Client {
 	fmt.Scanln(&clientType)
 	switch clientType {
 	case "b":
+        fmt.Println("Enter <ip>:<port> for the basestation, port defaults to 6001: ")
+        var basestationIP string
+        fmt.Scanln(&basestationIP)
+        if !strings.Contains(basestationIP, ":") {
+            basestationIP = basestationIP + ":6001";
+        }
 		fmt.Println("Creating base station client.")
-		return client.NewBaseStationClient(port)
+		return client.NewBaseStationClient(basestationIP)
 	}
 	fmt.Println("Creating grsim client.")
 	return client.NewGrsimClient(port)
@@ -113,7 +120,8 @@ func listenKeyboard(robotId int, client client.Client){
 	}
 	defer keyboard.Close()
 
-	fmt.Println("Use WASD to control the robot. Press 'ESC' to exit.")
+	fmt.Println("Use WASD to control the robot, L to stop all movement, K to kick.")
+    fmt.Println("Press <ESC> to exit.")
 
 	for {
 		char, key, err := keyboard.GetKey()

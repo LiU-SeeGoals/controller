@@ -12,4 +12,7 @@ require (
 	google.golang.org/protobuf v1.31.0
 )
 
-require golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a // indirect
+require (
+	github.com/LiU-SeeGoals/proto-messages v0.1.0
+	golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a // indirect
+)
