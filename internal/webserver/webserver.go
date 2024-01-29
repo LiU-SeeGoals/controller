@@ -61,19 +61,19 @@ import (
 
 // Define the WebServer class
 type WebServer struct {
-    websocketConnections []*websocket.Conn
-    websocketConnectionsMutex  sync.Mutex
+	websocketConnections      []*websocket.Conn
+	websocketConnectionsMutex sync.Mutex
 
-    websocketupgrader *websocket.Upgrader
+	websocketupgrader *websocket.Upgrader
 
-    gameStatePacketQueue []([]byte)
-    gameStateQueueMutex sync.Mutex
-    broadcastThreadMutex sync.Mutex
+	gameStatePacketQueue []([]byte)
+	gameStateQueueMutex  sync.Mutex
+	broadcastThreadMutex sync.Mutex
 }
 
 var (
 	webserverInstance *WebServer
-	Once sync.Once
+	Once              sync.Once
 )
 
 func GetInstance() *WebServer {
@@ -83,14 +83,13 @@ func GetInstance() *WebServer {
 
 // Constructor for the WebServer class
 func StartWebServer() {
-    webserverInstance = &WebServer{
+	webserverInstance = &WebServer{
 		gameStatePacketQueue: make([]([]byte), 0),
 	}
 
+	webserverInstance.websocketupgrader = webserverInstance.getUpgrader()
 
-    webserverInstance.websocketupgrader = webserverInstance.getUpgrader()
-
-    http.HandleFunc("/ws", webserverInstance.handleGameStateRequest)
+	http.HandleFunc("/ws", webserverInstance.handleGameStateRequest)
 	go http.ListenAndServe(":8080", nil)
 	go webserverInstance.sendGameState()
 }
@@ -102,12 +101,12 @@ func BroadcastGameState(gameStateJson []byte) {
 	webserver.gameStateQueueMutex.Unlock()
 }
 
-func (server *WebServer) getUpgrader() (*websocket.Upgrader) {
-    return &websocket.Upgrader{
+func (server *WebServer) getUpgrader() *websocket.Upgrader {
+	return &websocket.Upgrader{
 		CheckOrigin: func(r *http.Request) bool {
 			return true
 		},
-    }
+	}
 }
 
 // Method to handle connections
@@ -118,35 +117,38 @@ func (server *WebServer) handleGameStateRequest(w http.ResponseWriter, r *http.R
 		panic(err)
 	}
 
-    server.websocketConnectionsMutex.Lock()
-    server.websocketConnections = append(server.websocketConnections, ws)
-	fmt.Println("making a connection");
+	server.websocketConnectionsMutex.Lock()
+	server.websocketConnections = append(server.websocketConnections, ws)
+	fmt.Println("making a connection")
 	fmt.Println(len(server.websocketConnections))
 	b := make([]byte, 10)
-	ws.WriteMessage(websocket.TextMessage, b);
-    server.websocketConnectionsMutex.Unlock()
+	ws.WriteMessage(websocket.TextMessage, b)
+	server.websocketConnectionsMutex.Unlock()
 	fmt.Print("done serving client")
 }
 
-var (helloman int)
+var (
+	helloman int
+)
+
 func (server *WebServer) sendGameState() {
 	var gameStateJSON []byte
-    for {
-        if len(server.gameStatePacketQueue) == 0 {
+	for {
+		if len(server.gameStatePacketQueue) == 0 {
 			continue
-        }
+		}
 
 		server.gameStateQueueMutex.Lock()
 		gameStateJSON = server.gameStatePacketQueue[0]
 		server.gameStatePacketQueue = server.gameStatePacketQueue[1:]
 		server.gameStateQueueMutex.Unlock()
 
-
 		server.websocketConnectionsMutex.Lock()
 		for _, ws := range server.websocketConnections {
 			fmt.Println("writing")
+			//fmt.Println(str(gameStateJSON))
 			ws.WriteMessage(websocket.TextMessage, gameStateJSON)
 		}
 		server.websocketConnectionsMutex.Unlock()
-    }
-} 
+	}
+}

@@ -25,16 +25,18 @@ func main() {
 
 	gs := gamestate.NewGameState(conf.GrSimAddress, conf.SSLClientAddress)
 
-	testAction := createTestAction(gs)
+	testAction := createTestActionMove(gs)
+	// testAction2 := createTestActionInit(gs)
 	for {
 		gs.AddAction(testAction)
+		// gs.AddAction(testAction2)
 		gs.Update()
 
 		//fmt.Println(gs)
 	}
 }
 
-func createTestAction(gs *gamestate.GameState) action.Action {
+func createTestActionMove(gs *gamestate.GameState) action.Action {
 	id := 0
 	act := &action.Move{}
 	act.Pos = gs.GetRobot(id, gamestate.Yellow).GetPosition()
@@ -45,6 +47,13 @@ func createTestAction(gs *gamestate.GameState) action.Action {
 	act.Dest.SetVec(2, 0)
 	return act
 }
+
+// func createTestActionInit(gs *gamestate.GameState) action.Action {
+// 	id := 1
+// 	act := &action.Init{}
+// 	act.Id = id
+// 	return act
+// }
 
 func LoadConfig() (*Config, error) {
 	file, err := os.Open("../config.json")

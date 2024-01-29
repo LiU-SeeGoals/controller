@@ -34,6 +34,7 @@ type GameStateDTO struct {
 	BlueTeam   [TEAM_SIZE]RobotDTO
 	YellowTeam [TEAM_SIZE]RobotDTO
 	Ball       BallDTO
+	Actions    []action.ActionDTO
 }
 
 func (gs *GameState) ToDTO() *GameStateDTO {
@@ -46,6 +47,11 @@ func (gs *GameState) ToDTO() *GameStateDTO {
 	}
 
 	gameStateDTO.Ball = gs.ball.ToDTO()
+	gameStateDTO.Actions = make([]action.ActionDTO, len(gs.actions))
+
+	for i, act := range gs.actions {
+		gameStateDTO.Actions[i] = act.ToDTO()
+	}
 
 	return &gameStateDTO
 }

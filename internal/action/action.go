@@ -12,6 +12,23 @@ type Action interface {
 	TranslateReal() *basestation.Command
 	// Translates an action to parameters defined for grsim
 	TranslateGrsim(params *datatypes.Parameters)
+	ToDTO() ActionDTO
+}
+
+type ActionDTO struct {
+	// The id of the robot.
+	Id     int
+	Action basestation.ActionType
+	// Current position of Robot, vector contains (x,y,w)
+	PosX int32
+	PosY int32
+	PosW float32
+	// Goal destination of Robot, vector contains (x,y,w)
+	DestX int32
+	DestY int32
+	DestW float32
+	// Decides if the robot should dribble while moving
+	Dribble bool
 }
 
 type Stop struct {
@@ -174,6 +191,20 @@ func (m *Move) TranslateReal() *basestation.Command {
 	return command_move
 }
 
+func (m *Move) ToDTO() ActionDTO {
+	return ActionDTO{
+		Action:  basestation.ActionType_MOVE_ACTION,
+		Id:      m.Id,
+		PosX:    int32(m.Pos.AtVec(0)),
+		PosY:    int32(m.Pos.AtVec(1)),
+		PosW:    float32(m.Pos.AtVec(2)),
+		DestX:   int32(m.Dest.AtVec(0)),
+		DestY:   int32(m.Dest.AtVec(1)),
+		DestW:   float32(m.Dest.AtVec(2)),
+		Dribble: m.Dribble,
+	}
+}
+
 func (i *Init) TranslateGrsim(params *datatypes.Parameters) {
 	params.RobotId = uint32(i.Id)
 }
@@ -186,4 +217,11 @@ func (i *Init) TranslateReal() *basestation.Command {
 	}
 
 	return command_move
+}
+
+func (i *Init) ToDTO() ActionDTO {
+	return ActionDTO{
+		Action: basestation.ActionType_INIT_ACTION,
+		Id:     i.Id,
+	}
 }
