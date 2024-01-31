@@ -26,5 +26,3 @@ go.work
 # Build files
 /build/*
 
-# protobuf files
-*.pb*
