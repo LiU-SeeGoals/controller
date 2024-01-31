@@ -1,4 +1,4 @@
-package client
+package parse_client
 
 import (
 	"errors"
@@ -18,7 +18,7 @@ type Connection interface {
 	Close() error
 }
 
-type BaseStationClient struct {
+type ParseClient struct {
 	connection    Connection
 	address       string
 	queueMutex    sync.Mutex
@@ -27,14 +27,14 @@ type BaseStationClient struct {
 	hasBeenInited bool
 }
 
-func NewBaseStationClient(address string) *BaseStationClient {
+func NewParseClient(address string) *ParseClient {
 	var err error = nil
 	connection, _ := net.Dial("udp", address)
 	if err != nil {
 		fmt.Printf("Some error %v\n", err)
 	}
 
-	return &BaseStationClient{
+	return &ParseClient{
 		connection:    connection,
 		address:       address,
 		queue:         make([]*robot_action.Command, 0),

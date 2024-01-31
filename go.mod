@@ -13,6 +13,6 @@ require (
 )
 
 require (
-	github.com/LiU-SeeGoals/proto-messages v0.1.0
+	github.com/LiU-SeeGoals/proto-messages v0.1.1
 	golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a // indirect
 )
