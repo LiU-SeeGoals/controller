@@ -52,12 +52,19 @@
 package webserver
 
 import (
+	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"sync"
 
+	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/gorilla/websocket"
 )
+
+//----------------------------------------------------------------------------------------------
+// Start of WebServer class
+//----------------------------------------------------------------------------------------------
 
 // Define the WebServer class
 type WebServer struct {
@@ -67,8 +74,10 @@ type WebServer struct {
 	websocketupgrader *websocket.Upgrader
 
 	gameStatePacketQueue []([]byte)
+	incomingActions      []action.ActionDTO
 	gameStateQueueMutex  sync.Mutex
 	broadcastThreadMutex sync.Mutex
+	receivedDataMutex    sync.Mutex
 }
 
 var (
@@ -76,6 +85,7 @@ var (
 	Once              sync.Once
 )
 
+// Method to get the singleton instance of the WebServer class
 func GetInstance() *WebServer {
 	Once.Do(StartWebServer)
 	return webserverInstance
@@ -92,13 +102,7 @@ func StartWebServer() {
 	http.HandleFunc("/ws", webserverInstance.handleGameStateRequest)
 	go http.ListenAndServe(":8080", nil)
 	go webserverInstance.sendGameState()
-}
-
-func BroadcastGameState(gameStateJson []byte) {
-	webserver := GetInstance()
-	webserver.gameStateQueueMutex.Lock()
-	webserver.gameStatePacketQueue = append(webserver.gameStatePacketQueue, gameStateJson)
-	webserver.gameStateQueueMutex.Unlock()
+	go webserverInstance.receiveData()
 }
 
 func (server *WebServer) getUpgrader() *websocket.Upgrader {
@@ -127,10 +131,7 @@ func (server *WebServer) handleGameStateRequest(w http.ResponseWriter, r *http.R
 	fmt.Print("done serving client")
 }
 
-var (
-	helloman int
-)
-
+// Method to send the game state to all connected clients
 func (server *WebServer) sendGameState() {
 	var gameStateJSON []byte
 	for {
@@ -151,4 +152,54 @@ func (server *WebServer) sendGameState() {
 		}
 		server.websocketConnectionsMutex.Unlock()
 	}
+}
+
+// Method to receive data from all connected clients
+func (server *WebServer) receiveData() {
+	server.websocketConnectionsMutex.Lock()
+	defer server.websocketConnectionsMutex.Unlock()
+
+	for _, ws := range server.websocketConnections {
+		_, message, err := ws.ReadMessage()
+		if err != nil {
+			log.Println("Error reading message:", err)
+			continue // Use continue here to move to the next iteration
+		}
+
+		var receivedData []action.ActionDTO
+		err_unmarshal := json.Unmarshal(message, &receivedData)
+		if err_unmarshal != nil {
+			log.Println("Error unmarshalling message:", err_unmarshal)
+			continue // Use continue here to move to the next iteration
+		} else {
+			server.receivedDataMutex.Lock()
+			// Correctly appending the receivedData slice to incomingActions
+			server.incomingActions = append(server.incomingActions, receivedData...)
+			server.receivedDataMutex.Unlock()
+		}
+	}
+}
+
+//----------------------------------------------------------------------------------------------
+// End of WebServer class
+//----------------------------------------------------------------------------------------------
+
+// Returns a list of all new incoming actions
+func GetIncoming() []action.ActionDTO {
+	webserver := GetInstance()
+	webserver.receivedDataMutex.Lock()
+	defer webserver.receivedDataMutex.Unlock()
+	// Return a copy of the incomingActions slice
+	actionsCopy := make([]action.ActionDTO, len(webserver.incomingActions))
+	copy(actionsCopy, webserver.incomingActions)
+	webserver.incomingActions = nil // Empty the incomingActions slice
+	return actionsCopy
+}
+
+// Broadcasts the game state to all connected clients
+func BroadcastGameState(gameStateJson []byte) {
+	webserver := GetInstance()
+	webserver.gameStateQueueMutex.Lock()
+	webserver.gameStatePacketQueue = append(webserver.gameStatePacketQueue, gameStateJson)
+	webserver.gameStateQueueMutex.Unlock()
 }

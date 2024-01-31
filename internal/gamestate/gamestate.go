@@ -73,10 +73,6 @@ func (gs *GameState) sendActions() {
 	gs.actions = nil
 }
 
-var (
-	helloman int = 0
-)
-
 // Updates position of robots and balls to their actual position
 func (gs *GameState) Update() {
 	// helloman = helloman + 1
@@ -127,6 +123,17 @@ func (gs *GameState) Update() {
 
 func (gs *GameState) broadcastGameState() {
 	webserver.BroadcastGameState(gs.ToJson())
+	// list of incoming actions
+	incomming := webserver.GetIncoming()
+
+	// If we got new actions --> then handle them
+	if len(incomming) > 0 {
+		gs.handleIncoming(incomming)
+	}
+}
+
+func (gs *GameState) handleIncoming(incomming []action.ActionDTO) {
+	fmt.Println("Received a new action")
 }
 
 func (gs *GameState) GetRobot(id int, team Team) *Robot {
