@@ -133,7 +133,7 @@ func (gs *GameState) broadcastGameState() {
 }
 
 func (gs *GameState) handleIncoming(incomming []action.ActionDTO) {
-	fmt.Println("Received a new action")
+	fmt.Println("Received a new action (gamestate)")
 }
 
 func (gs *GameState) GetRobot(id int, team Team) *Robot {

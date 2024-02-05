@@ -1,54 +1,3 @@
-// package webserver
-//
-// import (
-// 	"encoding/json"
-// 	"fmt"
-// 	"net/http"
-//
-// 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
-// 	"github.com/gorilla/websocket"
-// )
-//
-//
-// func HandleConnections(w http.ResponseWriter, r *http.Request) {
-// 	upgrader := websocket.Upgrader{
-// 		CheckOrigin: func(r *http.Request) bool {
-// 			return true // Allow connections from any origin
-// 		},
-// 	}
-//
-//     // Upgrade initial GET request to a WebSocket
-//     ws, err := upgrader.Upgrade(w, r, nil)
-//     if err != nil {
-//         panic(err)
-//     }
-//     defer ws.Close()
-//
-//     // Initialize your game state here or pass it to this function
-//     gs := gamestate.NewGameState("127.0.0.1:20011", "224.5.23.2:10020")
-//
-//     // Main loop: wait for a message and send it to all connected clients
-//     for {
-//         // Read message from browser (you can also remove this if you don't expect messages from the client)
-//
-//         // Update the game state
-//         gs.Update() // Assuming this updates your game state
-//
-//         gameStateJSON, err := json.Marshal(gs.ToDTO())
-//         // Serialize the game state to JSON
-//         if err != nil {
-//             panic(err) // Handle the error appropriately
-//         }
-// 		fmt.Println(string(gameStateJSON))
-// 		ws.WriteMessage(websocket.TextMessage, gameStateJSON);
-//
-//         // Send the serialized game state to the client
-//         if err := ws.WriteMessage(websocket.TextMessage, gameStateJSON); err != nil {
-//             break // Exit the loop if there's an error
-//         }
-//     }
-// }
-
 package webserver
 
 import (
@@ -125,8 +74,6 @@ func (server *WebServer) handleGameStateRequest(w http.ResponseWriter, r *http.R
 	server.websocketConnections = append(server.websocketConnections, ws)
 	fmt.Println("making a connection")
 	fmt.Println(len(server.websocketConnections))
-	b := make([]byte, 10)
-	ws.WriteMessage(websocket.TextMessage, b)
 	server.websocketConnectionsMutex.Unlock()
 	fmt.Print("done serving client")
 }
@@ -146,8 +93,6 @@ func (server *WebServer) sendGameState() {
 
 		server.websocketConnectionsMutex.Lock()
 		for _, ws := range server.websocketConnections {
-			fmt.Println("writing")
-			//fmt.Println(str(gameStateJSON))
 			ws.WriteMessage(websocket.TextMessage, gameStateJSON)
 		}
 		server.websocketConnectionsMutex.Unlock()
@@ -156,27 +101,35 @@ func (server *WebServer) sendGameState() {
 
 // Method to receive data from all connected clients
 func (server *WebServer) receiveData() {
-	server.websocketConnectionsMutex.Lock()
-	defer server.websocketConnectionsMutex.Unlock()
+	var validConnections []*websocket.Conn
+	for {
+		validConnections = validConnections[:0] // reset list
+		server.websocketConnectionsMutex.Lock()
+		for _, ws := range server.websocketConnections {
+			_, message, err := ws.ReadMessage()
+			if err != nil {
+				ws.Close()
+				continue
+			}
 
-	for _, ws := range server.websocketConnections {
-		_, message, err := ws.ReadMessage()
-		if err != nil {
-			log.Println("Error reading message:", err)
-			continue // Use continue here to move to the next iteration
+			var receivedData action.ActionDTO
+			err_unmarshal := json.Unmarshal(message, &receivedData)
+			if err_unmarshal != nil {
+				log.Println("Error unmarshalling message:", err_unmarshal)
+				continue
+			} else {
+				server.receivedDataMutex.Lock()
+				log.Println("Received data:", receivedData)
+				server.incomingActions = append(server.incomingActions, receivedData)
+				server.receivedDataMutex.Unlock()
+			}
+			validConnections = append(validConnections, ws)
 		}
 
-		var receivedData []action.ActionDTO
-		err_unmarshal := json.Unmarshal(message, &receivedData)
-		if err_unmarshal != nil {
-			log.Println("Error unmarshalling message:", err_unmarshal)
-			continue // Use continue here to move to the next iteration
-		} else {
-			server.receivedDataMutex.Lock()
-			// Correctly appending the receivedData slice to incomingActions
-			server.incomingActions = append(server.incomingActions, receivedData...)
-			server.receivedDataMutex.Unlock()
-		}
+		// Remove invalid connections
+		server.websocketConnections = validConnections
+
+		server.websocketConnectionsMutex.Unlock()
 	}
 }
 

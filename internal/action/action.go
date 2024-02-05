@@ -17,18 +17,18 @@ type Action interface {
 
 type ActionDTO struct {
 	// The id of the robot.
-	Id     int
-	Action basestation.ActionType
+	Id     int                    `json:"Id"`
+	Action basestation.ActionType `json:"Action"`
 	// Current position of Robot, vector contains (x,y,w)
-	PosX int32
-	PosY int32
-	PosW float32
+	PosX int32   `json:"PosX"`
+	PosY int32   `json:"PosY"`
+	PosW float32 `json:"PosW"`
 	// Goal destination of Robot, vector contains (x,y,w)
-	DestX int32
-	DestY int32
-	DestW float32
+	DestX int32   `json:"DestX"`
+	DestY int32   `json:"DestY"`
+	DestW float32 `json:"DestW"`
 	// Decides if the robot should dribble while moving
-	Dribble bool
+	Dribble bool `json:"Dribble"`
 }
 
 type Stop struct {
