@@ -70,10 +70,10 @@ func (ai *Ai) TestActions() {
 }
 
 func (ai *Ai) Update() {
-	gameAnalysis := ai.preCalculator.Process(ai.gamestate)
-	plays := ai.playFinder.FindPlays(gameAnalysis)
-	roles := ai.roleAssigner.AssignRoles(plays)
-	actions := ai.roleExecutor.GetActions(roles, ai.gamestate)
+	gameAnalysis := ai.preCalculator.Process(*ai.gamestate)
+	plays := ai.playFinder.FindPlays(gameAnalysis, *ai.gamestate)
+	roles := ai.roleAssigner.AssignRoles(plays, *ai.gamestate)
+	actions := ai.roleExecutor.GetActions(roles, *ai.gamestate)
 
 	ai.client.SendActions(actions)
 

@@ -16,7 +16,6 @@ func NewBall() *Ball {
 	}
 }
 
-// dont use outside of gamestate/worldpredictor
 func (b *Ball) GetPosition() *mat.VecDense {
 	return b.pos
 }

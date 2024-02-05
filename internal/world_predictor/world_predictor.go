@@ -2,8 +2,8 @@ package world_predictor
 
 import (
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
-	"github.com/LiU-SeeGoals/controller/internal/proto/ssl_vision"
 	"github.com/LiU-SeeGoals/controller/internal/receiver"
+	"github.com/LiU-SeeGoals/proto-messages/ssl_vision"
 )
 
 type WorldPredictor struct {
@@ -64,6 +64,7 @@ func (wp *WorldPredictor) setupSSLVisionReceiver(addr string) {
 
 	wp.ssl_receiver_channel = make(chan ssl_vision.SSL_WrapperPacket)
 	go wp.ssl_receiver.Receive(wp.ssl_receiver_channel)
+
 }
 
 func NewWorldPredictor(sslReceiverAddress string, gs *gamestate.GameState) *WorldPredictor {
@@ -80,7 +81,7 @@ func parseFieldData(f *gamestate.Field, data *ssl_vision.SSL_GeometryFieldSize) 
 	}
 
 	// parse field data
-	f.FieldLengt = data.GetFieldLength()
+	f.FieldLength = data.GetFieldLength()
 	f.FieldWidth = data.GetFieldWidth()
 	f.BallRadius = data.GetBallRadius()
 	f.BoundaryWidth = data.GetBoundaryWidth()

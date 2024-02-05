@@ -6,6 +6,13 @@ import (
 
 const TEAM_SIZE = 6
 
+type Team int
+
+const (
+	Blue Team = iota
+	Yellow
+)
+
 type GameState struct {
 	blue_team   [TEAM_SIZE]*Robot
 	yellow_team [TEAM_SIZE]*Robot
@@ -14,6 +21,13 @@ type GameState struct {
 	ball *Ball
 	// Holds field data
 	Field Field
+}
+
+func (gs *GameState) GetTeam(team Team) [TEAM_SIZE]*Robot {
+	if team == Yellow {
+		return gs.yellow_team
+	}
+	return gs.blue_team
 }
 
 func (gs *GameState) SetRobot(robotId uint32, x, y, w float64, isBlue bool) {

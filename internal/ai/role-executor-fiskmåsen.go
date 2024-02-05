@@ -16,24 +16,21 @@ func NewRoleExecutor() *RoleExecutor {
 	return re
 }
 
-func (re *RoleExecutor) GetActions(roles *Roles, gamestate *gamestate.GameState) []action.Action {
+func (re *RoleExecutor) GetActions(roles *[]Role, gamestate *gamestate.GameState) []action.Action {
 
 	var actionList []action.Action
 
-	act := &action.Move{}
-	id := 4
+	// gigantic switch case in the works
+	for _, role := range *roles {
+		actionList = append(actionList, role.NextStep())
 
-	robot := gamestate.GetRobot(id, false)
-	act.Pos = robot.GetPosition()
-	act.Id = robot.GetID()
-
-	act.Dest = gamestate.GetBall().GetPosition()
-	act.Dest.SetVec(0, 50)
-	act.Dest.SetVec(1, 0)
-	act.Dest.SetVec(2, 0)
-	act.Dribble = true
-
-	actionList = append(actionList, act)
+		// switch role.role {
+		// case Keeper:
+		// 	actionList = append(actionList, Keeper(role.robotId, gamestate))
+		// default:
+		// 	fmt.Println("Panic")
+		// }
+	}
 
 	return actionList
 }

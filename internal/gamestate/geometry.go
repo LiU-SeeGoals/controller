@@ -36,7 +36,7 @@ const (
 // anything is unclear.
 type Field struct {
 	// Field length (distance between goal lines) in mm
-	FieldLengt int32
+	FieldLength int32
 
 	// Field width (distance between touch lines) in mm
 	FieldWidth int32
@@ -63,10 +63,10 @@ type Field struct {
 	BoundaryWidth int32
 
 	// Depth of the penalty/defense area (measured between line centers) in mm
-	PenaltyAreaDepth int32
+	PenaltyAreaDepth int32 //goalline
 
 	// Width of the penalty/defense area (measured between line centers) in mm
-	PenaltyAreaWidth int32
+	PenaltyAreaWidth int32 // goalline
 
 	// Radius of the center circle (measured between line centers) in mm
 	CenterRadius int32

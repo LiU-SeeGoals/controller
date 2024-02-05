@@ -6,13 +6,6 @@ import (
 	"gonum.org/v1/gonum/mat"
 )
 
-type Team int
-
-const (
-	Blue Team = iota
-	Yellow
-)
-
 type Robot struct {
 	id   int
 	team Team
