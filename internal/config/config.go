@@ -13,6 +13,7 @@ import (
 type Config struct {
 	SSLClientAddress *string `json:"sslClientAddress"`
 	GrSimAddress     *string `json:"grSimAddress"`
+	AmountOfCameras  *uint32    `json:"amountOfCameras"`
 }
 
 var (
@@ -67,4 +68,9 @@ func GetSSLClientAddress() string {
 // GetGrSimAddress returns the GrSim address from the config.
 func GetGrSimAddress() string {
 	return *GetInstance().GrSimAddress
+}
+
+// GetAmountOfCameras returns the amount of cameras from the config.
+func GetAmountOfCameras() uint32 {
+	return *GetInstance().AmountOfCameras
 }

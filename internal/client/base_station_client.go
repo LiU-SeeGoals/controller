@@ -7,7 +7,7 @@ import (
 	"sync"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
-	"github.com/LiU-SeeGoals/proto-messages/robot_action"
+	"github.com/LiU-SeeGoals/proto-messages/go/robot_action"
 	"github.com/golang/protobuf/proto"
 )
 

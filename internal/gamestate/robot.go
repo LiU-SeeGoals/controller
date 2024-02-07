@@ -46,9 +46,9 @@ func (r *Robot) String() string {
 	y := r.pos.AtVec(1)
 	w := r.pos.AtVec(2)
 
-	v_x := r.pos.AtVec(0)
-	v_y := r.pos.AtVec(1)
-	v_w := r.pos.AtVec(2)
+	v_x := r.vel.AtVec(0)
+	v_y := r.vel.AtVec(1)
+	v_w := r.vel.AtVec(2)
 
 	posString := fmt.Sprintf("(%f, %f, %f)", x, y, w)
 	velString := fmt.Sprintf("(%f, %f, %f)", v_x, v_y, v_w)
@@ -74,4 +74,10 @@ func (r *Robot) GetPosition() *mat.VecDense {
 // GetVelocity returns the velocity vector of the Robot.
 func (r *Robot) GetVelocity() *mat.VecDense {
 	return r.vel
+}
+
+func (r *Robot) NormalizePosition(normalizationFactor float64) {
+	r.pos.SetVec(0, r.pos.AtVec(0)/normalizationFactor)
+	r.pos.SetVec(1, r.pos.AtVec(1)/normalizationFactor)
+	r.pos.SetVec(2, r.pos.AtVec(2)/normalizationFactor)
 }

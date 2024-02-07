@@ -4,11 +4,10 @@ import (
 	"fmt"
 )
 
-const TEAM_SIZE = 6
-
 type GameState struct {
-	blue_team   [TEAM_SIZE]*Robot
-	yellow_team [TEAM_SIZE]*Robot
+	frameNumber int
+	blue_team   map[int]*Robot
+	yellow_team map[int]*Robot
 
 	// Holds ball data
 	ball *Ball
@@ -16,7 +15,7 @@ type GameState struct {
 	Field Field
 }
 
-func (gs *GameState) SetRobot(robotId uint32, x, y, w float64, isBlue bool) {
+func (gs *GameState) SetRobot(robotId int, x, y, w float64, isBlue bool) {
 	if isBlue {
 		gs.blue_team[robotId].SetPosition(x, y, w)
 	} else {
@@ -32,6 +31,22 @@ func (gs *GameState) GetBall() *Ball {
 	return gs.ball
 }
 
+func (gs *GameState) GetFrameNumber() int {
+	return gs.frameNumber
+}
+
+func (gs *GameState) SetFrameNumber(frameNumber int) {
+	gs.frameNumber = frameNumber
+}
+
+func (gs *GameState) AddRobot(id int, isBlue bool) {
+	if isBlue {
+		gs.blue_team[id] = NewRobot(id, Blue)
+		return
+	}
+	gs.yellow_team[id] = NewRobot(id, Yellow)
+}
+
 func (gs *GameState) GetRobot(id int, isBlue bool) *Robot {
 	if isBlue {
 		return gs.blue_team[id]
@@ -39,15 +54,20 @@ func (gs *GameState) GetRobot(id int, isBlue bool) *Robot {
 	return gs.yellow_team[id]
 }
 
+func (gs *GameState) Clear() {
+	gs.blue_team = make(map[int]*Robot)
+	gs.yellow_team = make(map[int]*Robot)
+	gs.ball = NewBall()
+	gs.Field = Field{}
+}
+
 func NewGameState() *GameState {
 	gs := &GameState{}
 
 	gs.ball = NewBall()
 
-	for i := 0; i < TEAM_SIZE; i++ {
-		gs.blue_team[i] = NewRobot(i, Blue)
-		gs.yellow_team[i] = NewRobot(i, Yellow)
-	}
+	gs.blue_team = make(map[int]*Robot)
+	gs.yellow_team = make(map[int]*Robot)
 
 	return gs
 }
@@ -55,11 +75,11 @@ func NewGameState() *GameState {
 // String representation of game state
 func (gs *GameState) String() string {
 	gs_str := "{\n blue team: {\n"
-	for i := 0; i < TEAM_SIZE; i++ {
+	for i, _ := range gs.blue_team{
 		gs_str += "robot: {" + gs.blue_team[i].String() + " },\n"
 	}
 	gs_str += "},\n yellow team: {\n"
-	for i := 0; i < TEAM_SIZE; i++ {
+	for i, _ := range gs.yellow_team {
 		gs_str += "robot: {" + gs.yellow_team[i].String() + " },\n"
 	}
 	for _, line := range gs.Field.FieldLines {

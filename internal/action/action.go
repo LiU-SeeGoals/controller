@@ -4,7 +4,7 @@ import (
 	"math"
 
 	"github.com/LiU-SeeGoals/controller/internal/datatypes"
-	"github.com/LiU-SeeGoals/proto-messages/robot_action"
+	"github.com/LiU-SeeGoals/proto-messages/go/robot_action"
 	"gonum.org/v1/gonum/mat"
 )
 

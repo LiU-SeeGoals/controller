@@ -2,9 +2,10 @@ package receiver
 
 import (
 	"fmt"
+	"log/slog"
 	"net"
 
-	"github.com/LiU-SeeGoals/proto-messages/ssl_vision"
+	"github.com/LiU-SeeGoals/proto-messages/go/ssl_vision"
 	"github.com/golang/protobuf/proto"
 )
 
@@ -21,6 +22,8 @@ type SSLReceiver struct {
 	addr *net.UDPAddr
 	// Read buffer
 	buff []byte
+	// Channel to send packets to
+	ssl_receiver_channel chan *ssl_vision.SSL_WrapperPacket
 }
 
 // Create a new SSL vision receiver.
@@ -28,6 +31,7 @@ type SSLReceiver struct {
 func NewSSLReceiver(addr string) *SSLReceiver {
 	udpAddr, err := net.ResolveUDPAddr("udp", addr)
 	if err != nil {
+		slog.Error("Unable to resolve UDP address: %s", err)
 		panic(err)
 	}
 
@@ -35,6 +39,7 @@ func NewSSLReceiver(addr string) *SSLReceiver {
 		conn: nil,
 		addr: udpAddr,
 		buff: make([]byte, read_buff_sz),
+		ssl_receiver_channel: make(chan *ssl_vision.SSL_WrapperPacket),
 	}
 }
 
@@ -43,10 +48,17 @@ func NewSSLReceiver(addr string) *SSLReceiver {
 func (r *SSLReceiver) Connect() {
 	conn, err := net.ListenMulticastUDP("udp", nil, r.addr)
 	if err != nil {
+		slog.Error("Unable to connect to UDP multicast: %s", err)
 		panic(err)
 	}
 
 	r.conn = conn
+	go r.receivePackets()
+}
+
+func (r *SSLReceiver) Receive() *ssl_vision.SSL_WrapperPacket {
+	packet := <-r.ssl_receiver_channel
+	return packet
 }
 
 // Start receiving packets.
@@ -55,21 +67,22 @@ func (r *SSLReceiver) Connect() {
 //	go recv.Receive()
 //
 // Parsed packets are transferred using packetChan.
-func (r *SSLReceiver) Receive(packetChan chan ssl_vision.SSL_WrapperPacket) {
-	var packet ssl_vision.SSL_WrapperPacket
+func (r *SSLReceiver) receivePackets() {
+	var packet *ssl_vision.SSL_WrapperPacket
 	for {
+		packet = &ssl_vision.SSL_WrapperPacket{}
 		sz, err := r.conn.Read(r.buff)
 		if err != nil {
 			fmt.Printf("Unable to receive packet: %s", err)
 			continue
 		}
 
-		err = proto.Unmarshal(r.buff[:sz], &packet)
+		err = proto.Unmarshal(r.buff[:sz], packet)
 		if err != nil {
 			fmt.Printf("Unable to unmarshal packet: %s", err)
 			continue
 		}
 
-		packetChan <- packet
+		r.ssl_receiver_channel <- packet
 	}
 }

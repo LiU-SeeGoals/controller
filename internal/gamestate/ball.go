@@ -34,3 +34,9 @@ func (b *Ball) SetVelocity(v_x, v_y, v_w float64) {
 	b.vel.SetVec(1, v_y)
 	b.vel.SetVec(2, v_w)
 }
+
+func (b *Ball) NormalizePosition(normalizationFactor float64) {
+	b.pos.SetVec(0, b.pos.AtVec(0)/normalizationFactor)
+	b.pos.SetVec(1, b.pos.AtVec(1)/normalizationFactor)
+	b.pos.SetVec(2, b.pos.AtVec(2)/normalizationFactor)
+}
