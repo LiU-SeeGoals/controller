@@ -2,7 +2,7 @@ package world_predictor
 
 import (
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
-	"github.com/LiU-SeeGoals/controller/internal/proto/ssl_vision"
+	"github.com/LiU-SeeGoals/proto-messages/go/ssl_vision"
 	"github.com/LiU-SeeGoals/controller/internal/receiver"
 )
 
