@@ -8,8 +8,11 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/webserver"
 
 	"github.com/LiU-SeeGoals/controller/internal/client"
+	"github.com/LiU-SeeGoals/controller/internal/proto/basestation"
 	"github.com/LiU-SeeGoals/controller/internal/proto/ssl_vision"
 	"github.com/LiU-SeeGoals/controller/internal/receiver"
+
+	"gonum.org/v1/gonum/mat"
 )
 
 const TEAM_SIZE = 6
@@ -134,6 +137,27 @@ func (gs *GameState) broadcastGameState() {
 
 func (gs *GameState) handleIncoming(incomming []action.ActionDTO) {
 	fmt.Println("Received a new action (gamestate)")
+	for _, act := range incomming {
+		switch act.Action {
+		case basestation.ActionType_MOVE_ACTION:
+			pos := mat.NewVecDense(3, []float64{float64(act.PosX), float64(act.PosY), float64(act.PosW)})
+			dest := mat.NewVecDense(3, []float64{float64(act.DestX), float64(act.DestY), float64(act.DestW)})
+			gs.AddAction(&action.Move{act.Id, pos, dest, act.Dribble})
+		case basestation.ActionType_INIT_ACTION:
+			gs.AddAction(&action.Init{act.Id})
+		case basestation.ActionType_ROTATE_ACTION:
+			gs.AddAction(&action.Rotate{act.Id, int(act.PosW)})
+		case basestation.ActionType_KICK_ACTION:
+			standardKickSpeed := 1
+			gs.AddAction(&action.Kick{act.Id, standardKickSpeed})
+		case basestation.ActionType_SET_NAVIGATION_DIRECTION_ACTION:
+			dest := mat.NewVecDense(3, []float64{float64(act.DestX), float64(act.DestY)})
+			gs.AddAction(&action.SetNavigationDirection{act.Id, dest})
+		case basestation.ActionType_STOP_ACTION:
+			gs.AddAction(&action.Stop{act.Id})
+		}
+	}
+
 }
 
 func (gs *GameState) GetRobot(id int, team Team) *Robot {
