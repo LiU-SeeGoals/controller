@@ -22,7 +22,7 @@ func NewBaller(gameState *gamestate.GameState, condition *mat.VecDense) *Baller 
 }
 
 // TODO complete this function
-func (ba *Baller) AssignHeuristic(robot *[]gamestate.Robot) int {
+func (ba *Baller) AssignHeuristic(robot [gamestate.TEAM_SIZE]*gamestate.Robot) int {
 	return 1
 }
 

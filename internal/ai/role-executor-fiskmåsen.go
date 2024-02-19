@@ -16,12 +16,12 @@ func NewRoleExecutor() *RoleExecutor {
 	return re
 }
 
-func (re *RoleExecutor) GetActions(roles *[]Role, gamestate *gamestate.GameState) []action.Action {
+func (re *RoleExecutor) GetActions(roles []Role, gamestateObj *gamestate.GameState) []action.Action {
 
 	var actionList []action.Action
 
 	// gigantic switch case in the works
-	for _, role := range *roles {
+	for _, role := range roles {
 		actionList = append(actionList, role.NextStep())
 
 		// switch role.role {

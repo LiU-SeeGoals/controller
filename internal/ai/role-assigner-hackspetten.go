@@ -10,16 +10,16 @@ func NewRoleAssigner() *RoleAssigner {
 	return ra
 }
 
-func (ra *RoleAssigner) AssignRoles(plays *[]Play, gamestate gamestate.GameState) *[]Role {
+func (ra *RoleAssigner) AssignRoles(plays []Play, gamestateObj *gamestate.GameState) []Role {
 
 	var roles []Role
 	// Loop through plays order by priority
-	for _, play := range *plays {
+	for _, play := range plays {
 
 		// Loop though roles needed for play and assign them to robots
 		for _, role := range play.roles {
 			// TODO logic for choosing robots to assign for roles
-			role.Assign(role.AssignHeuristic(gamestate.GetTeam(gamestate.Yellow)))
+			role.Assign(role.AssignHeuristic(gamestateObj.GetTeam(gamestate.Yellow)))
 
 		}
 
@@ -28,5 +28,5 @@ func (ra *RoleAssigner) AssignRoles(plays *[]Play, gamestate gamestate.GameState
 		}
 	}
 
-	return &roles
+	return roles
 }

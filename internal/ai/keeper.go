@@ -11,7 +11,7 @@ type Keeper struct {
 	gamestate *gamestate.GameState
 }
 
-func (ke *Keeper) AssignHeuristic(robot *[]gamestate.Robot) int {
+func (ke *Keeper) AssignHeuristic(robot [gamestate.TEAM_SIZE]*gamestate.Robot) int {
 	return 5
 }
 

@@ -15,7 +15,7 @@ func NewPreCalculator() *PreCalculator {
 type GameAnalysis struct {
 }
 
-func (pc *PreCalculator) Process(gamestate *gamestate.GameState) *GameAnalysis {
+func (pc *PreCalculator) Process(gamestateObj *gamestate.GameState) *GameAnalysis {
 
 	return &GameAnalysis{}
 }

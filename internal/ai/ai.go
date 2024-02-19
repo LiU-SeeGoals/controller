@@ -7,7 +7,7 @@ import (
 )
 
 type Ai struct {
-	gamestate     *gamestate.GameState
+	gamestateObj  *gamestate.GameState
 	client        *client.GrsimClient // TODO change this
 	preCalculator *PreCalculator
 	playFinder    *PlayFinder
@@ -15,15 +15,15 @@ type Ai struct {
 	roleExecutor  *RoleExecutor
 }
 
-func NewAi(gamestate *gamestate.GameState, addr string) *Ai {
+func NewAi(gamestateObj *gamestate.GameState, addr string) *Ai {
 	ai := &Ai{
 		preCalculator: NewPreCalculator(),
 		playFinder:    NewPlayFinder(),
 		roleAssigner:  NewRoleAssigner(),
 		roleExecutor:  NewRoleExecutor(),
 
-		gamestate: gamestate,
-		client:    client.NewGrsimClient(addr),
+		gamestateObj: gamestateObj,
+		client:       client.NewGrsimClient(addr),
 	}
 	ai.client.Init()
 	return ai
@@ -37,11 +37,11 @@ func (ai *Ai) TestActions() {
 	act := &action.Move{}
 	id := 4
 
-	robot := ai.gamestate.GetRobot(id, false)
+	robot := ai.gamestateObj.GetRobot(id, false)
 	act.Pos = robot.GetPosition()
 	act.Id = robot.GetID()
 
-	act.Dest = ai.gamestate.GetBall().GetPosition()
+	act.Dest = ai.gamestateObj.GetBall().GetPosition()
 	act.Dest.SetVec(0, 50)
 	act.Dest.SetVec(1, 0)
 	act.Dest.SetVec(2, 0)
@@ -70,10 +70,10 @@ func (ai *Ai) TestActions() {
 }
 
 func (ai *Ai) Update() {
-	gameAnalysis := ai.preCalculator.Process(*ai.gamestate)
-	plays := ai.playFinder.FindPlays(gameAnalysis, *ai.gamestate)
-	roles := ai.roleAssigner.AssignRoles(plays, *ai.gamestate)
-	actions := ai.roleExecutor.GetActions(roles, *ai.gamestate)
+	gameAnalysis := ai.preCalculator.Process(ai.gamestateObj)
+	plays := ai.playFinder.FindPlays(gameAnalysis, ai.gamestateObj)
+	roles := ai.roleAssigner.AssignRoles(plays, ai.gamestateObj)
+	actions := ai.roleExecutor.GetActions(roles, ai.gamestateObj)
 
 	ai.client.SendActions(actions)
 
