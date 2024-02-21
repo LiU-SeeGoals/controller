@@ -1,9 +1,11 @@
 package world_predictor
 
 import (
+	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
-	"github.com/LiU-SeeGoals/proto-messages/go/ssl_vision"
+	"github.com/LiU-SeeGoals/controller/internal/parsed_vision"
+	"github.com/LiU-SeeGoals/proto_go/ssl_vision"
 	"gonum.org/v1/gonum/mat"
 
 	"github.com/LiU-SeeGoals/controller/internal/receiver"
@@ -11,14 +13,25 @@ import (
 
 type WorldPredictor struct {
 	ssl_receiver         *receiver.SSLReceiver
-	buffer *DoubleRingBuffer
+	basestation_client   *client.BaseStationClient[*parsed_vision.ParsedFrame]
+	old_gamestate        *RingBuffer
+	buffer 				 *DoubleRingBuffer
 }
 
 func NewWorldPredictor() *WorldPredictor {
 	wp := &WorldPredictor{}
+
+	// Start up ssl_receiver
 	wp.ssl_receiver = receiver.NewSSLReceiver(config.GetSSLClientAddress())
 	wp.ssl_receiver.Connect()
+
+	// Start up basestation_client
+	baseStationAddress := config.GetBaseStationAddress()
+	baseStationVisionPort := config.GetBaseStationVisionPort()
+	wp.basestation_client = client.NewBaseStationClient[*parsed_vision.ParsedFrame](baseStationAddress, baseStationVisionPort)
+
 	wp.buffer = NewDoubleRingBuffer()
+	wp.old_gamestate = NewRingBuffer()
 	go wp.predictGameState()
 	return wp
 }
@@ -47,7 +60,10 @@ func (wp *WorldPredictor) predictGameState() {
 		if wp.isGameStateDone(*packet.Detection.FrameNumber, curFrameNumber, amountOfPackets) {
 			// Normalize game state and place it in buffer.
 			wp.normalizeGameState(curGameState, robotNormalizationFactor, &ballNormalizationFactor)
+			wp.old_gamestate.placeNewGameState(curGameState)
 			wp.buffer.PlaceGameState()
+
+			wp.basestation_client.Send(wp.old_gamestate.GetGameState(0).GetParsedGameState())
 
 			// Prepare to handle next gamestate.
 			curGameState = wp.buffer.GetGameStateInProgress()

@@ -3,8 +3,8 @@ package examples
 import (
 	"fmt"
 
-	"github.com/LiU-SeeGoals/controller/internal/proto/ssl_vision"
 	"github.com/LiU-SeeGoals/controller/internal/receiver"
+	"github.com/LiU-SeeGoals/proto_go/ssl_vision"
 )
 
 func SSLVisionExample() {

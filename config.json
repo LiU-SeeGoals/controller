@@ -1,5 +1,9 @@
 {
     "grSimAddress": "127.0.0.1:20011",
     "sslClientAddress": "224.5.23.2:10020",
-    "amountOfCameras": 4
+    "amountOfCameras": 4,
+    "baseStationAddress": "127.0.0.1",
+    "baseStationVisionPort": 10006,
+    "baseStationActionPort": 10007,
+    "isBlueTeam": true
 }

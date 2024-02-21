@@ -5,7 +5,7 @@ import (
 	"log/slog"
 	"net"
 
-	"github.com/LiU-SeeGoals/proto-messages/go/ssl_vision"
+	"github.com/LiU-SeeGoals/proto_go/ssl_vision"
 	"github.com/golang/protobuf/proto"
 )
 

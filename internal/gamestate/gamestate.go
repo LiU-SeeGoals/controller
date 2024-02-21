@@ -2,6 +2,9 @@ package gamestate
 
 import (
 	"fmt"
+
+	"github.com/LiU-SeeGoals/controller/internal/config"
+	"github.com/LiU-SeeGoals/controller/internal/parsed_vision"
 )
 
 type GameState struct {
@@ -61,6 +64,27 @@ func (gs *GameState) Clear() {
 	gs.Field = Field{}
 }
 
+func (gs *GameState) GetParsedGameState() *parsed_vision.ParsedFrame {
+	var robots []*parsed_vision.Robot
+	var parsedFrame = parsed_vision.ParsedFrame{}
+
+	parsedFrame.Ball = gs.ball.GetParsedBall()
+
+	isBlue := config.GetIsBlueTeam() // Subject to change (idk how we get info on which team color we play as.)
+	selectedTeam := gs.yellow_team
+	if isBlue {
+		selectedTeam = gs.blue_team
+	}
+
+	for _, robot := range selectedTeam {
+		robots = append(robots, robot.GetParsedRobot())
+	}
+
+	parsedFrame.Robots = robots 
+
+	return &parsedFrame
+}
+
 func NewGameState() *GameState {
 	gs := &GameState{}
 
@@ -91,3 +115,4 @@ func (gs *GameState) String() string {
 	gs_str += "}"
 	return gs_str
 }
+

@@ -10,7 +10,7 @@ import (
 	"gonum.org/v1/gonum/mat"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
-	"github.com/LiU-SeeGoals/proto-messages/robot_action"
+	"github.com/LiU-SeeGoals/proto_go/robot_action"
 	"google.golang.org/protobuf/proto"
 )
 

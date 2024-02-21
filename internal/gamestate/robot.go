@@ -3,6 +3,8 @@ package gamestate
 import (
 	"fmt"
 
+	"github.com/LiU-SeeGoals/controller/internal/parsed_vision"
+	"github.com/LiU-SeeGoals/proto_go/robot_action"
 	"gonum.org/v1/gonum/mat"
 )
 
@@ -74,6 +76,19 @@ func (r *Robot) GetPosition() *mat.VecDense {
 // GetVelocity returns the velocity vector of the Robot.
 func (r *Robot) GetVelocity() *mat.VecDense {
 	return r.vel
+}
+
+func (r *Robot) GetParsedRobot() *parsed_vision.Robot {
+	return &parsed_vision.Robot{
+		RobotId: uint32(r.id),
+		Pos: 	 &robot_action.Vector3D{X: int32(r.pos.AtVec(0)), 
+										Y: int32(r.pos.AtVec(1)), 
+										W: float32(r.pos.AtVec(2))},
+		Vel: 	 &robot_action.Vector3D{X: int32(r.vel.AtVec(0)), 
+										Y: int32(r.vel.AtVec(1)), 
+										W: float32(r.vel.AtVec(2))},
+	}
+
 }
 
 func (r *Robot) NormalizePosition(normalizationFactor float64) {

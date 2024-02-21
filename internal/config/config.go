@@ -13,7 +13,11 @@ import (
 type Config struct {
 	SSLClientAddress *string `json:"sslClientAddress"`
 	GrSimAddress     *string `json:"grSimAddress"`
+	BaseStationAddress *string `json:"baseStationAddress"`
+	BaseStationVisionPort *int `json:"baseStationVisionPort"`
+	BaseStationActionPort *int `json:"baseStationActionPort"`
 	AmountOfCameras  *uint32    `json:"amountOfCameras"`
+	IsBlueTeam *bool `json:"isBlueTeam"`
 }
 
 var (
@@ -73,4 +77,23 @@ func GetGrSimAddress() string {
 // GetAmountOfCameras returns the amount of cameras from the config.
 func GetAmountOfCameras() uint32 {
 	return *GetInstance().AmountOfCameras
+}
+
+// GetBaseStationClientAddress returns the base station client address from the config.
+func GetBaseStationAddress() string {
+	return *GetInstance().BaseStationAddress
+}
+
+// GetBaseStationVisionPort returns the base station vision port from the config.
+func GetBaseStationVisionPort() int {
+	return *GetInstance().BaseStationVisionPort
+}
+
+// GetBaseStationActionPort returns the base station action port from the config.
+func GetBaseStationActionPort() int {
+	return *GetInstance().BaseStationActionPort
+}
+
+func GetIsBlueTeam() bool {
+	return *GetInstance().IsBlueTeam
 }
