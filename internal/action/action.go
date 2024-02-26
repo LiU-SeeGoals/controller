@@ -23,8 +23,12 @@ type MoveTo struct {
 	Id int
 	// Current position of Robot, vector contains (x,y,w)
 	Pos *mat.VecDense
+	// Current angle of Robot
+	Angle float64
 	// Goal destination of Robot, vector contains (x,y,w)
-	Dest *mat.VecDense
+	DestPos *mat.VecDense
+
+	DestAngle float64
 	// Decides if the robot should dribble while moving
 	Dribble bool
 }
@@ -132,17 +136,17 @@ func (s *Stop) TranslateReal() *robot_action.Command {
 func (mv *MoveTo) TranslateGrsim(params *datatypes.Parameters) {
 
 	params.RobotId = uint32(mv.Id)
-	diff := mat.NewVecDense(3, nil)
-	diff.SubVec(mv.Dest, mv.Pos)
+	diff := mat.NewVecDense(2, nil)
+	diff.SubVec(mv.DestPos, mv.Pos)
 	params.Spinner = mv.Dribble
 
 	goalAngle := math.Atan2(diff.AtVec(1), diff.AtVec(0))
-	currAngle := mv.Pos.AtVec(2)
+	currAngle := mv.Angle
 	inPosition := false
 
 	if math.Abs(diff.AtVec(0)) < 50 && math.Abs(diff.AtVec(1)) < 50 {
 		inPosition = true
-		goalAngle = mv.Dest.AtVec(2)
+		goalAngle = mv.DestAngle
 
 	}
 
@@ -178,13 +182,19 @@ func (m *MoveTo) TranslateReal() *robot_action.Command {
 		Pos: &robot_action.Vector3D{
 			X: int32(m.Pos.AtVec(0)),
 			Y: int32(m.Pos.AtVec(1)),
-			W: float32(m.Pos.AtVec(2)),
+			W: float32(m.Angle),
 		},
+		/*Angle: float64{
+			m.Angle,
+		},*/
 		Dest: &robot_action.Vector3D{
-			X: int32(m.Dest.AtVec(0)),
-			Y: int32(m.Dest.AtVec(1)),
-			W: float32(m.Dest.AtVec(2)),
+			X: int32(m.DestPos.AtVec(0)),
+			Y: int32(m.DestPos.AtVec(1)),
+			W: float32(m.DestAngle),
 		},
+		/*DestAngle: float64{
+			m.DestAngle,
+		},*/
 	}
 
 	return command_move

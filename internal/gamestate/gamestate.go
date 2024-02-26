@@ -18,9 +18,11 @@ type GameState struct {
 
 func (gs *GameState) SetRobot(robotId uint32, x, y, w float64, team Team) {
 	if team == Blue {
-		gs.blue_team[robotId].SetPosition(x, y, w)
+		gs.blue_team[robotId].SetPosition(x, y)
+		gs.blue_team[robotId].SetAngle(w)
 	} else {
-		gs.yellow_team[robotId].SetPosition(x, y, w)
+		gs.yellow_team[robotId].SetPosition(x, y)
+		gs.blue_team[robotId].SetAngle(w)
 	}
 }
 

@@ -4,6 +4,7 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
+	"gonum.org/v1/gonum/mat"
 )
 
 type Ai struct {
@@ -41,10 +42,7 @@ func (ai *Ai) TestActions() {
 	act.Pos = robot.GetPosition()
 	act.Id = robot.GetID()
 
-	act.Dest = ai.gamestate.GetBall().GetPosition()
-	act.Dest.SetVec(0, 50)
-	act.Dest.SetVec(1, 0)
-	act.Dest.SetVec(2, 0)
+	act.DestPos = mat.NewVecDense(2, []float64{5000, 0})
 	act.Dribble = true
 
 	actionList = append(actionList, act)
