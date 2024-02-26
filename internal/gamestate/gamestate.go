@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-const TEAM_SIZE = 6
+const TEAM_SIZE = 11
 
 type GameState struct {
 	blue_team   [TEAM_SIZE]*Robot
@@ -16,11 +16,13 @@ type GameState struct {
 	Field Field
 }
 
-func (gs *GameState) SetRobot(robotId uint32, x, y, w float64, isBlue bool) {
-	if isBlue {
-		gs.blue_team[robotId].SetPosition(x, y, w)
+func (gs *GameState) SetRobot(robotId uint32, x, y, w float64, team Team) {
+	if team == Blue {
+		gs.blue_team[robotId].SetPosition(x, y)
+		gs.blue_team[robotId].SetAngle(w)
 	} else {
-		gs.yellow_team[robotId].SetPosition(x, y, w)
+		gs.yellow_team[robotId].SetPosition(x, y)
+		gs.blue_team[robotId].SetAngle(w)
 	}
 }
 
@@ -32,8 +34,8 @@ func (gs *GameState) GetBall() *Ball {
 	return gs.ball
 }
 
-func (gs *GameState) GetRobot(id int, isBlue bool) *Robot {
-	if isBlue {
+func (gs *GameState) GetRobot(id int, team Team) *Robot {
+	if team == Blue {
 		return gs.blue_team[id]
 	}
 	return gs.yellow_team[id]

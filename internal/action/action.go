@@ -4,7 +4,7 @@ import (
 	"math"
 
 	"github.com/LiU-SeeGoals/controller/internal/datatypes"
-	"github.com/LiU-SeeGoals/proto-messages/robot_action"
+	"github.com/LiU-SeeGoals/proto_go/robot_action"
 	"gonum.org/v1/gonum/mat"
 )
 
@@ -18,13 +18,17 @@ type Stop struct {
 	Id int
 }
 
-type Move struct {
+type MoveTo struct {
 	// The id of the robot.
 	Id int
 	// Current position of Robot, vector contains (x,y,w)
 	Pos *mat.VecDense
+	// Current angle of Robot
+	Angle float64
 	// Goal destination of Robot, vector contains (x,y,w)
-	Dest *mat.VecDense
+	DestPos *mat.VecDense
+
+	DestAngle float64
 	// Decides if the robot should dribble while moving
 	Dribble bool
 }
@@ -49,7 +53,7 @@ type Rotate struct {
 
 // Forward is x=0, y=1, Backward is x=0, y=-1, Left is x=-1, y=0, Right is x=1, y=0
 // the size of the vector sets the speed of the robot
-type SetNavigationDirection struct {
+type Move struct {
 	Id        int
 	Direction *mat.VecDense // 2D vector, first value is x, second is y
 }
@@ -58,15 +62,15 @@ type Init struct {
 	Id int
 }
 
-func (s *SetNavigationDirection) TranslateGrsim(params *datatypes.Parameters) {
+func (s *Move) TranslateGrsim(params *datatypes.Parameters) {
 	params.RobotId = uint32(s.Id)
 	params.VelNormal = float32(s.Direction.AtVec(0))
 	params.VelTangent = float32(s.Direction.AtVec(1))
 }
 
-func (s *SetNavigationDirection) TranslateReal() *robot_action.Command {
+func (s *Move) TranslateReal() *robot_action.Command {
 	command := &robot_action.Command{
-		CommandId: robot_action.ActionType_SET_NAVIGATION_DIRECTION_ACTION,
+		CommandId: robot_action.ActionType_MOVE_ACTION,
 		RobotId:   int32(s.Id),
 		Direction: &robot_action.Vector2D{
 			X: int32(s.Direction.AtVec(0)),
@@ -129,20 +133,20 @@ func (s *Stop) TranslateReal() *robot_action.Command {
 	return command_move
 }
 
-func (mv *Move) TranslateGrsim(params *datatypes.Parameters) {
+func (mv *MoveTo) TranslateGrsim(params *datatypes.Parameters) {
 
 	params.RobotId = uint32(mv.Id)
-	diff := mat.NewVecDense(3, nil)
-	diff.SubVec(mv.Dest, mv.Pos)
+	diff := mat.NewVecDense(2, nil)
+	diff.SubVec(mv.DestPos, mv.Pos)
 	params.Spinner = mv.Dribble
 
 	goalAngle := math.Atan2(diff.AtVec(1), diff.AtVec(0))
-	currAngle := mv.Pos.AtVec(2)
+	currAngle := mv.Angle
 	inPosition := false
 
 	if math.Abs(diff.AtVec(0)) < 50 && math.Abs(diff.AtVec(1)) < 50 {
 		inPosition = true
-		goalAngle = mv.Dest.AtVec(2)
+		goalAngle = mv.DestAngle
 
 	}
 
@@ -171,20 +175,26 @@ func (mv *Move) TranslateGrsim(params *datatypes.Parameters) {
 	}
 }
 
-func (m *Move) TranslateReal() *robot_action.Command {
+func (m *MoveTo) TranslateReal() *robot_action.Command {
 	command_move := &robot_action.Command{
 		CommandId: robot_action.ActionType_MOVE_ACTION,
 		RobotId:   int32(m.Id),
 		Pos: &robot_action.Vector3D{
 			X: int32(m.Pos.AtVec(0)),
 			Y: int32(m.Pos.AtVec(1)),
-			W: float32(m.Pos.AtVec(2)),
+			W: float32(m.Angle),
 		},
+		/*Angle: float64{
+			m.Angle,
+		},*/
 		Dest: &robot_action.Vector3D{
-			X: int32(m.Dest.AtVec(0)),
-			Y: int32(m.Dest.AtVec(1)),
-			W: float32(m.Dest.AtVec(2)),
+			X: int32(m.DestPos.AtVec(0)),
+			Y: int32(m.DestPos.AtVec(1)),
+			W: float32(m.DestAngle),
 		},
+		/*DestAngle: float64{
+			m.DestAngle,
+		},*/
 	}
 
 	return command_move

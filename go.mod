@@ -1,6 +1,8 @@
 module github.com/LiU-SeeGoals/controller
 
-go 1.21
+go 1.21.2
+
+toolchain go1.21.7
 
 require (
 	github.com/golang/protobuf v1.5.3
@@ -8,16 +10,11 @@ require (
 )
 
 require (
+	github.com/LiU-SeeGoals/proto_go v0.1.1
+	github.com/caarlos0/env/v10 v10.0.0
 	github.com/eiannone/keyboard v0.0.0-20220611211555-0d226195f203
-	google.golang.org/protobuf v1.31.0
+	github.com/joho/godotenv v1.5.1
+	google.golang.org/protobuf v1.32.0
 )
 
-require (
-	github.com/caarlos0/env/v10 v10.0.0 // indirect
-	github.com/joho/godotenv v1.5.1 // indirect
-)
-
-require (
-	github.com/LiU-SeeGoals/proto-messages v0.1.0
-	golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a // indirect
-)
+require golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a // indirect

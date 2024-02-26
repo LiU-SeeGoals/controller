@@ -2,8 +2,8 @@ package world_predictor
 
 import (
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
-	"github.com/LiU-SeeGoals/controller/internal/proto/ssl_vision"
 	"github.com/LiU-SeeGoals/controller/internal/receiver"
+	"github.com/LiU-SeeGoals/proto_go/ssl_vision"
 )
 
 type WorldPredictor struct {
@@ -33,7 +33,7 @@ func (wp *WorldPredictor) Update() {
 		y := float64(robot.GetY())
 		w := float64(*robot.Orientation)
 
-		wp.gamestate.SetRobot(robot.GetRobotId(), x, y, w, true)
+		wp.gamestate.SetRobot(robot.GetRobotId(), x, y, w, gamestate.Blue)
 	}
 
 	for _, robot := range detect.GetRobotsYellow() {
@@ -41,7 +41,7 @@ func (wp *WorldPredictor) Update() {
 		y := float64(robot.GetY())
 		w := float64(*robot.Orientation)
 
-		wp.gamestate.SetRobot(robot.GetRobotId(), x, y, w, false)
+		wp.gamestate.SetRobot(robot.GetRobotId(), x, y, w, gamestate.Yellow)
 
 	}
 
@@ -80,7 +80,7 @@ func parseFieldData(f *gamestate.Field, data *ssl_vision.SSL_GeometryFieldSize) 
 	}
 
 	// parse field data
-	f.FieldLengt = data.GetFieldLength()
+	/*f.FieldLengt = data.GetFieldLength()
 	f.FieldWidth = data.GetFieldWidth()
 	f.BallRadius = data.GetBallRadius()
 	f.BoundaryWidth = data.GetBoundaryWidth()
@@ -92,7 +92,7 @@ func parseFieldData(f *gamestate.Field, data *ssl_vision.SSL_GeometryFieldSize) 
 	f.LineThickness = data.GetLineThickness()
 	f.MaxRobotRadius = data.GetMaxRobotRadius()
 	f.PenaltyAreaDepth = data.GetPenaltyAreaDepth()
-	f.PenaltyAreaWidth = data.GetPenaltyAreaWidth()
+	f.PenaltyAreaWidth = data.GetPenaltyAreaWidth()*/
 
 	parseFieldLines(f, data.GetFieldLines())
 	parseFieldArcs(f, data.GetFieldArcs())

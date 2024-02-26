@@ -3,6 +3,7 @@ package ai
 import (
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
+	"gonum.org/v1/gonum/mat"
 )
 
 type RoleExecutor struct {
@@ -16,21 +17,18 @@ func NewRoleExecutor() *RoleExecutor {
 	return re
 }
 
-func (re *RoleExecutor) GetActions(roles *Roles, gamestate *gamestate.GameState) []action.Action {
+func (re *RoleExecutor) GetActions(roles *Roles, gamestateObj *gamestate.GameState) []action.Action {
 
 	var actionList []action.Action
 
-	act := &action.Move{}
+	act := &action.MoveTo{}
 	id := 4
 
-	robot := gamestate.GetRobot(id, false)
+	robot := gamestateObj.GetRobot(id, gamestate.Blue)
 	act.Pos = robot.GetPosition()
 	act.Id = robot.GetID()
 
-	act.Dest = gamestate.GetBall().GetPosition()
-	act.Dest.SetVec(0, 50)
-	act.Dest.SetVec(1, 0)
-	act.Dest.SetVec(2, 0)
+	act.DestPos = mat.NewVecDense(2, []float64{5000, 0})
 	act.Dribble = true
 
 	actionList = append(actionList, act)
