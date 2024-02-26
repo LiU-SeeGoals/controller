@@ -26,9 +26,8 @@ func NewWorldPredictor() *WorldPredictor {
 	wp.ssl_receiver.Connect()
 
 	// Start up basestation_client
-	baseStationAddress := config.GetBaseStationAddress()
-	baseStationVisionPort := config.GetBaseStationVisionPort()
-	wp.basestation_client = client.NewBaseStationClient[*parsed_vision.ParsedFrame](baseStationAddress, baseStationVisionPort)
+	visionAddress := config.GetBaseStationVisionAddress()
+	wp.basestation_client = client.NewBaseStationClient[*parsed_vision.ParsedFrame](visionAddress)
 
 	wp.buffer = NewDoubleRingBuffer()
 	wp.old_gamestate = NewRingBuffer()

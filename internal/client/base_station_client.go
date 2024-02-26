@@ -14,10 +14,9 @@ type BaseStationClient[T proto.Message] struct {
 	connMutex	  sync.Mutex
 }
 
-func NewBaseStationClient[T proto.Message](address string, port int) *BaseStationClient[T] {
+func NewBaseStationClient[T proto.Message](address string) *BaseStationClient[T] {
 
-	fullAddress := fmt.Sprintf("%s:%d", address, port)
-	connection, err := net.Dial("udp", fullAddress)
+	connection, err := net.Dial("udp", address)
 	if err != nil {
 		slog.Error("Failed to dial UDP connection on address %s.\n%v", address, err)
 		return nil

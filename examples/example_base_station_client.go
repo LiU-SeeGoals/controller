@@ -15,7 +15,6 @@ import (
 	"github.com/LiU-SeeGoals/proto_go/robot_action"
 )
 
-
 func main() {
 	var port int = 25565
 	go startServer(port)
@@ -23,16 +22,16 @@ func main() {
 }
 
 func sendPacket(port int) {
-	BaseStationClient := client.NewBaseStationClient("127.0.0.1:"+strconv.Itoa(port))
+	BaseStationClient := client.NewBaseStationClient("127.0.0.1:" + strconv.Itoa(port))
 	BaseStationClient.Init()
 
 	// Creates 2 random actions to send
 	actions := []action.Action{
 		&action.Stop{Id: 2},
 		&action.Move{
-			Id: 3,
-			Pos: mat.NewVecDense(3, []float64{100, 200, math.Pi}),
-			Goal: mat.NewVecDense(3, []float64{300, 400, -math.Pi}),
+			Id:   3,
+			Pos:  mat.NewVecDense(3, []float64{100, 200, math.Pi}),
+			Dest: mat.NewVecDense(3, []float64{300, 400, -math.Pi}),
 		},
 	}
 
@@ -67,6 +66,6 @@ func startServer(port int) {
 			fmt.Printf("Some error  %v", err)
 			continue
 		}
-		
+
 	}
 }
