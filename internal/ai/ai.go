@@ -37,7 +37,7 @@ func (ai *Ai) TestActions() {
 	act := &action.MoveTo{}
 	id := 4
 
-	robot := ai.gamestate.GetRobot(id, false)
+	robot := ai.gamestate.GetRobot(id, gamestate.Blue)
 	act.Pos = robot.GetPosition()
 	act.Id = robot.GetID()
 

@@ -33,7 +33,7 @@ func (wp *WorldPredictor) Update() {
 		y := float64(robot.GetY())
 		w := float64(*robot.Orientation)
 
-		wp.gamestate.SetRobot(robot.GetRobotId(), x, y, w, true)
+		wp.gamestate.SetRobot(robot.GetRobotId(), x, y, w, gamestate.Blue)
 	}
 
 	for _, robot := range detect.GetRobotsYellow() {
@@ -41,7 +41,7 @@ func (wp *WorldPredictor) Update() {
 		y := float64(robot.GetY())
 		w := float64(*robot.Orientation)
 
-		wp.gamestate.SetRobot(robot.GetRobotId(), x, y, w, false)
+		wp.gamestate.SetRobot(robot.GetRobotId(), x, y, w, gamestate.Yellow)
 
 	}
 

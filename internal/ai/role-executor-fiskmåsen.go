@@ -16,18 +16,18 @@ func NewRoleExecutor() *RoleExecutor {
 	return re
 }
 
-func (re *RoleExecutor) GetActions(roles *Roles, gamestate *gamestate.GameState) []action.Action {
+func (re *RoleExecutor) GetActions(roles *Roles, gamestateObj *gamestate.GameState) []action.Action {
 
 	var actionList []action.Action
 
 	act := &action.MoveTo{}
 	id := 4
 
-	robot := gamestate.GetRobot(id, false)
+	robot := gamestateObj.GetRobot(id, gamestate.Blue)
 	act.Pos = robot.GetPosition()
 	act.Id = robot.GetID()
 
-	act.Dest = gamestate.GetBall().GetPosition()
+	act.Dest = gamestateObj.GetBall().GetPosition()
 	act.Dest.SetVec(0, 50)
 	act.Dest.SetVec(1, 0)
 	act.Dest.SetVec(2, 0)

@@ -16,8 +16,8 @@ type GameState struct {
 	Field Field
 }
 
-func (gs *GameState) SetRobot(robotId uint32, x, y, w float64, isBlue bool) {
-	if isBlue {
+func (gs *GameState) SetRobot(robotId uint32, x, y, w float64, team Team) {
+	if team == Blue {
 		gs.blue_team[robotId].SetPosition(x, y, w)
 	} else {
 		gs.yellow_team[robotId].SetPosition(x, y, w)
@@ -32,8 +32,8 @@ func (gs *GameState) GetBall() *Ball {
 	return gs.ball
 }
 
-func (gs *GameState) GetRobot(id int, isBlue bool) *Robot {
-	if isBlue {
+func (gs *GameState) GetRobot(id int, team Team) *Robot {
+	if team == Blue {
 		return gs.blue_team[id]
 	}
 	return gs.yellow_team[id]
