@@ -18,7 +18,7 @@ type Stop struct {
 	Id int
 }
 
-type Move struct {
+type MoveTo struct {
 	// The id of the robot.
 	Id int
 	// Current position of Robot, vector contains (x,y,w)
@@ -49,7 +49,7 @@ type Rotate struct {
 
 // Forward is x=0, y=1, Backward is x=0, y=-1, Left is x=-1, y=0, Right is x=1, y=0
 // the size of the vector sets the speed of the robot
-type SetNavigationDirection struct {
+type Move struct {
 	Id        int
 	Direction *mat.VecDense // 2D vector, first value is x, second is y
 }
@@ -58,13 +58,13 @@ type Init struct {
 	Id int
 }
 
-func (s *SetNavigationDirection) TranslateGrsim(params *datatypes.Parameters) {
+func (s *Move) TranslateGrsim(params *datatypes.Parameters) {
 	params.RobotId = uint32(s.Id)
 	params.VelNormal = float32(s.Direction.AtVec(0))
 	params.VelTangent = float32(s.Direction.AtVec(1))
 }
 
-func (s *SetNavigationDirection) TranslateReal() *robot_action.Command {
+func (s *Move) TranslateReal() *robot_action.Command {
 	command := &robot_action.Command{
 		CommandId: robot_action.ActionType_MOVE_ACTION,
 		RobotId:   int32(s.Id),
@@ -129,7 +129,7 @@ func (s *Stop) TranslateReal() *robot_action.Command {
 	return command_move
 }
 
-func (mv *Move) TranslateGrsim(params *datatypes.Parameters) {
+func (mv *MoveTo) TranslateGrsim(params *datatypes.Parameters) {
 
 	params.RobotId = uint32(mv.Id)
 	diff := mat.NewVecDense(3, nil)
@@ -171,7 +171,7 @@ func (mv *Move) TranslateGrsim(params *datatypes.Parameters) {
 	}
 }
 
-func (m *Move) TranslateReal() *robot_action.Command {
+func (m *MoveTo) TranslateReal() *robot_action.Command {
 	command_move := &robot_action.Command{
 		CommandId: robot_action.ActionType_MOVE_ACTION,
 		RobotId:   int32(m.Id),

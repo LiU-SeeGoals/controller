@@ -34,7 +34,7 @@ func NewAi(gamestate *gamestate.GameState, addr string) *Ai {
 func (ai *Ai) TestActions() {
 
 	var actionList []action.Action
-	act := &action.Move{}
+	act := &action.MoveTo{}
 	id := 4
 
 	robot := ai.gamestate.GetRobot(id, false)
