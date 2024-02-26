@@ -10,7 +10,7 @@ import (
 	"gonum.org/v1/gonum/mat"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
-	"github.com/LiU-SeeGoals/proto-messages/robot_action"
+	"github.com/LiU-SeeGoals/proto_go/robot_action"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -52,7 +52,7 @@ func TestSocketCommunication(t *testing.T) {
 		Direction: mat.NewVecDense(2, []float64{100, 200}),
 	}
 	setNavDirCommand := &robot_action.Command{
-		CommandId: robot_action.ActionType_SET_NAVIGATION_DIRECTION_ACTION,
+		CommandId: robot_action.ActionType_MOVE_ACTION,
 		RobotId:   9,
 		Direction: &robot_action.Vector2D{X: int32(100), Y: int32(200)},
 	}

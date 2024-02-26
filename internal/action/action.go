@@ -4,7 +4,7 @@ import (
 	"math"
 
 	"github.com/LiU-SeeGoals/controller/internal/datatypes"
-	"github.com/LiU-SeeGoals/proto-messages/robot_action"
+	"github.com/LiU-SeeGoals/proto_go/robot_action"
 	"gonum.org/v1/gonum/mat"
 )
 
@@ -66,7 +66,7 @@ func (s *SetNavigationDirection) TranslateGrsim(params *datatypes.Parameters) {
 
 func (s *SetNavigationDirection) TranslateReal() *robot_action.Command {
 	command := &robot_action.Command{
-		CommandId: robot_action.ActionType_SET_NAVIGATION_DIRECTION_ACTION,
+		CommandId: robot_action.ActionType_MOVE_ACTION,
 		RobotId:   int32(s.Id),
 		Direction: &robot_action.Vector2D{
 			X: int32(s.Direction.AtVec(0)),

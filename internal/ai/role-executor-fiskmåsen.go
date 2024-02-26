@@ -23,6 +23,7 @@ func (re *RoleExecutor) GetActions(roles *Roles, gamestate *gamestate.GameState)
 	act := &action.Move{}
 	id := 4
 
+	fmt.println("GOOOO")
 	robot := gamestate.GetRobot(id, false)
 	act.Pos = robot.GetPosition()
 	act.Id = robot.GetID()
