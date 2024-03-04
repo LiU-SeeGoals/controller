@@ -7,7 +7,7 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/datatypes"
 	"github.com/LiU-SeeGoals/proto-messages/grsim"
-	"github.com/golang/protobuf/proto"
+	"google.golang.org/protobuf/proto"
 )
 
 // SSL Vision receiver
