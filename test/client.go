@@ -1,9 +1,5 @@
 package main
 
-import (
-	"github.com/LiU-SeeGoals/controller/internal/client"
-)
-
 // func main() {
 //     p :=  make([]byte, 2048)
 //     conn, err := net.Dial("udp", "127.0.0.1:1234")
@@ -20,7 +16,7 @@ import (
 //     conn.Close()
 // }
 
-func main() {
-	base_station_client := client.NewBaseStationClient("127.0.0.1:1234")
+// func main() {
+// 	base_station_client := client.NewBaseStationClient("127.0.0.1:1234")
 
-}
+// }
