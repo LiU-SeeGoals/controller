@@ -1,5 +1,7 @@
 github.com/LiU-SeeGoals/proto-messages v0.1.0 h1:Z8TjHJVX2uYEvOmYWf+yZCx2xR5pgArVOwY8R2mQfHs=
 github.com/LiU-SeeGoals/proto-messages v0.1.0/go.mod h1:xiDya6yIj+zx+6yOR9vIk77aKX0Z3qmwUUW+h2jiP70=
+github.com/LiU-SeeGoals/proto_go v0.1.1 h1:pPIQMqSU6NTMjkWGDKGzhpkSfIsgFuNn25kv6gjgbVY=
+github.com/LiU-SeeGoals/proto_go v0.1.1/go.mod h1:4XN5g5VNfXFenrBIzCIIf0ublFfwN2AjdvG11V9oHa0=
 github.com/caarlos0/env/v10 v10.0.0 h1:yIHUBZGsyqCnpTkbjk8asUlx6RFhhEs+h7TOBdgdzXA=
 github.com/caarlos0/env/v10 v10.0.0/go.mod h1:ZfulV76NvVPw3tm591U4SwL3Xx9ldzBP9aGxzeN7G18=
 github.com/eiannone/keyboard v0.0.0-20220611211555-0d226195f203 h1:XBBHcIb256gUJtLmY22n99HaZTz+r2Z51xUPi01m3wg=
@@ -23,3 +25,5 @@ google.golang.org/protobuf v1.26.0-rc.1/go.mod h1:jlhhOSvTdKEhbULTjvd4ARK9grFBp0
 google.golang.org/protobuf v1.26.0/go.mod h1:9q0QmTI4eRPtz6boOQmLYwt+qCgq0jsYwAQnmE0givc=
 google.golang.org/protobuf v1.31.0 h1:g0LDEJHgrBl9N9r17Ru3sqWhkIx2NB67okBHPwC7hs8=
 google.golang.org/protobuf v1.31.0/go.mod h1:HV8QOd/L58Z+nl8r43ehVNZIU/HEI6OcFqwMG9pJV4I=
+google.golang.org/protobuf v1.32.0 h1:pPC6BG5ex8PDFnkbrGU3EixyhKcQ2aDuBS36lqK/C7I=
+google.golang.org/protobuf v1.32.0/go.mod h1:c6P6GXX6sHbq/GpV6MGZEdwhWPcYBgnhAHhKbcUYpos=

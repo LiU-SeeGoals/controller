@@ -32,6 +32,14 @@ func (gs *GameState) GetBall() *Ball {
 	return gs.ball
 }
 
+func (gs *GameState) GetTeam(team Team) [TEAM_SIZE]*Robot {
+	if team == Yellow {
+		return gs.yellow_team
+	} else {
+		return gs.blue_team
+	}
+}
+
 func (gs *GameState) GetRobot(id int, isBlue bool) *Robot {
 	if isBlue {
 		return gs.blue_team[id]
