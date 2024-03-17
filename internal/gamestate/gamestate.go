@@ -15,7 +15,7 @@ import (
 	"gonum.org/v1/gonum/mat"
 )
 
-const TEAM_SIZE = 6
+const TEAM_SIZE = 12
 
 type GameState struct {
 	Grsim_client         *client.GrsimClient

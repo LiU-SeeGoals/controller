@@ -26,6 +26,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
@@ -43,7 +44,13 @@ func main() {
 
 	go webserver.Once.Do(webserver.StartWebServer)
 
-	gs := gamestate.NewGameState(conf.GRSIM_ADDR, conf.SSL_VISION_MAIN_PORT)
+	var grsim_addr = conf.GRSIM_ADDR + ":" + conf.GRSIM_COMMAND_LISTEN_PORT
+	var vision = conf.SSL_VISION_MULTICAST_ADDR + ":" + conf.SSL_VISION_MAIN_PORT
+
+	fmt.Println(grsim_addr)
+	fmt.Println(vision)
+
+	gs := gamestate.NewGameState(grsim_addr, vision)
 
 	testAction := createTestActionMove(gs)
 	// testAction2 := createTestActionInit(gs)
@@ -69,8 +76,10 @@ func createTestActionMove(gs *gamestate.GameState) action.Action {
 }
 
 type Config struct {
-	SSL_VISION_MAIN_PORT string
-	GRSIM_ADDR           string
+	SSL_VISION_MAIN_PORT      string
+	GRSIM_ADDR                string
+	GRSIM_COMMAND_LISTEN_PORT string
+	SSL_VISION_MULTICAST_ADDR string
 }
 
 func LoadConfig() (*Config, error) {
@@ -82,8 +91,10 @@ func LoadConfig() (*Config, error) {
 
 	// Create config structure and populate it
 	config := &Config{
-		SSL_VISION_MAIN_PORT: os.Getenv("SSL_VISION_MAIN_PORT"),
-		GRSIM_ADDR:           os.Getenv("GRSIM_ADDR"),
+		SSL_VISION_MAIN_PORT:      os.Getenv("SSL_VISION_MAIN_PORT"),
+		GRSIM_ADDR:                os.Getenv("GRSIM_ADDR"),
+		GRSIM_COMMAND_LISTEN_PORT: os.Getenv("GRSIM_COMMAND_LISTEN_PORT"),
+		SSL_VISION_MULTICAST_ADDR: os.Getenv("SSL_VISION_MULTICAST_ADDR"),
 	}
 
 	return config, nil
