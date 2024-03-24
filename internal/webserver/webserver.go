@@ -52,6 +52,7 @@ func StartWebServer() {
 	go http.ListenAndServe(":8080", nil)
 	go webserverInstance.sendGameState()
 	go webserverInstance.receiveData()
+	fmt.Println("server online")
 }
 
 func (server *WebServer) getUpgrader() *websocket.Upgrader {
