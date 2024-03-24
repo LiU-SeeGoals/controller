@@ -10,9 +10,6 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/receiver"
 	"github.com/LiU-SeeGoals/proto-messages/ssl_vision"
-	"github.com/LiU-SeeGoals/proto_go/robot_action"
-
-	"gonum.org/v1/gonum/mat"
 )
 
 const TEAM_SIZE = 12
@@ -141,26 +138,26 @@ func (gs *GameState) GetBall() *Ball {
 
 func (gs *GameState) handleIncoming(incomming []action.ActionDTO) {
 	fmt.Println("Received a new action (gamestate)")
-	for _, act := range incomming {
-		switch act.Action {
-		case robot_action.ActionType_MOVE_ACTION:
-			pos := mat.NewVecDense(3, []float64{float64(act.PosX), float64(act.PosY), float64(act.PosW)})
-			dest := mat.NewVecDense(3, []float64{float64(act.DestX), float64(act.DestY), float64(act.DestW)})
-			gs.AddAction(&action.Move{act.Id, pos, dest, act.Dribble})
-		case robot_action.ActionType_INIT_ACTION:
-			gs.AddAction(&action.Init{act.Id})
-		case robot_action.ActionType_ROTATE_ACTION:
-			gs.AddAction(&action.Rotate{act.Id, int(act.PosW)})
-		case robot_action.ActionType_KICK_ACTION:
-			standardKickSpeed := 1
-			gs.AddAction(&action.Kick{act.Id, standardKickSpeed})
-		case robot_action.ActionType_MOVE_TO_ACTION:
-			dest := mat.NewVecDense(3, []float64{float64(act.DestX), float64(act.DestY)})
-			gs.AddAction(&action.SetNavigationDirection{act.Id, dest})
-		case robot_action.ActionType_STOP_ACTION:
-			gs.AddAction(&action.Stop{act.Id})
-		}
-	}
+	// for _, act := range incomming {
+	// 	switch act.Action {
+	// 	case robot_action.ActionType_MOVE_ACTION:
+	// 		pos := mat.NewVecDense(3, []float64{float64(act.PosX), float64(act.PosY), float64(act.PosW)})
+	// 		dest := mat.NewVecDense(3, []float64{float64(act.DestX), float64(act.DestY), float64(act.DestW)})
+	// 		gs.AddAction(&action.Move{act.Id, pos, dest, act.Dribble})
+	// 	case robot_action.ActionType_INIT_ACTION:
+	// 		gs.AddAction(&action.Init{act.Id})
+	// 	case robot_action.ActionType_ROTATE_ACTION:
+	// 		gs.AddAction(&action.Rotate{act.Id, int(act.PosW)})
+	// 	case robot_action.ActionType_KICK_ACTION:
+	// 		standardKickSpeed := 1
+	// 		gs.AddAction(&action.Kick{act.Id, standardKickSpeed})
+	// 	case robot_action.ActionType_MOVE_TO_ACTION:
+	// 		dest := mat.NewVecDense(3, []float64{float64(act.DestX), float64(act.DestY)})
+	// 		gs.AddAction(&action.SetNavigationDirection{act.Id, dest})
+	// 	case robot_action.ActionType_STOP_ACTION:
+	// 		gs.AddAction(&action.Stop{act.Id})
+	// 	}
+	// }
 
 }
 
