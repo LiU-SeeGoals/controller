@@ -7,8 +7,8 @@ import (
 const TEAM_SIZE = 6
 
 type GameState struct {
-	blue_team   [TEAM_SIZE]*Robot
-	yellow_team [TEAM_SIZE]*Robot
+	Blue_team   [TEAM_SIZE]*Robot
+	Yellow_team [TEAM_SIZE]*Robot
 
 	// Holds ball data
 	ball *Ball
@@ -18,9 +18,9 @@ type GameState struct {
 
 func (gs *GameState) SetRobot(robotId uint32, x, y, w float64, isBlue bool) {
 	if isBlue {
-		gs.blue_team[robotId].SetPosition(x, y, w)
+		gs.Blue_team[robotId].SetPosition(x, y, w)
 	} else {
-		gs.yellow_team[robotId].SetPosition(x, y, w)
+		gs.Yellow_team[robotId].SetPosition(x, y, w)
 	}
 }
 
@@ -34,17 +34,17 @@ func (gs *GameState) GetBall() *Ball {
 
 func (gs *GameState) GetTeam(team Team) [TEAM_SIZE]*Robot {
 	if team == Yellow {
-		return gs.yellow_team
+		return gs.Yellow_team
 	} else {
-		return gs.blue_team
+		return gs.Blue_team
 	}
 }
 
 func (gs *GameState) GetRobot(id int, isBlue bool) *Robot {
 	if isBlue {
-		return gs.blue_team[id]
+		return gs.Blue_team[id]
 	}
-	return gs.yellow_team[id]
+	return gs.Yellow_team[id]
 }
 
 func NewGameState() *GameState {
@@ -53,8 +53,8 @@ func NewGameState() *GameState {
 	gs.ball = NewBall()
 
 	for i := 0; i < TEAM_SIZE; i++ {
-		gs.blue_team[i] = NewRobot(i, Blue)
-		gs.yellow_team[i] = NewRobot(i, Yellow)
+		gs.Blue_team[i] = NewRobot(i, Blue)
+		gs.Yellow_team[i] = NewRobot(i, Yellow)
 	}
 
 	return gs
@@ -64,11 +64,11 @@ func NewGameState() *GameState {
 func (gs *GameState) String() string {
 	gs_str := "{\n blue team: {\n"
 	for i := 0; i < TEAM_SIZE; i++ {
-		gs_str += "robot: {" + gs.blue_team[i].String() + " },\n"
+		gs_str += "robot: {" + gs.Blue_team[i].String() + " },\n"
 	}
 	gs_str += "},\n yellow team: {\n"
 	for i := 0; i < TEAM_SIZE; i++ {
-		gs_str += "robot: {" + gs.yellow_team[i].String() + " },\n"
+		gs_str += "robot: {" + gs.Yellow_team[i].String() + " },\n"
 	}
 	for _, line := range gs.Field.FieldLines {
 		gs_str += fmt.Sprintf("line: {%s}\n", line.String())
