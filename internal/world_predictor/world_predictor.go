@@ -1,6 +1,8 @@
 package world_predictor
 
 import (
+	"log/slog"
+
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
@@ -19,6 +21,7 @@ type WorldPredictor struct {
 }
 
 func NewWorldPredictor() *WorldPredictor {
+	slog.Info("Starting up world predictor")
 	wp := &WorldPredictor{}
 
 	// Start up ssl_receiver
@@ -43,7 +46,47 @@ func (wp *WorldPredictor) Update() {
 	wp.buffer.Update()
 }
 
+// `predictGameState` continuously processes incoming SSL_WrapperPackets to predict the game state.
+//
+// This function operates in a loop, receiving packets from an SSL receiver and using them to update
+// the current game state prediction. The function performs several key operations in each iteration:
+//
+// 1. Receive a new packet from the SSL receiver.
+//
+// 2. Check if the current game state is considered complete based on the frame number and the amount
+//    of packets received. If the game state is complete, it normalizes the game state data, places
+//    the normalized game state into a buffer, and sends the parsed game state to the base station
+//    client. It then resets the tracking variables for the next game state.
+//
+// 3. Predicts the positions of robots and the ball based on the received packet and updates the
+//    current game state prediction accordingly.
+//
+// The function maintains several key pieces of state throughout its execution:
+//
+// - `curGameState`: The current GameState object being calculated and predicted.
+//
+// - `curFrameNumber`: The frame number of the current processed packet.
+//
+// - `amountOfPackets`: The number of packets that have been processed for the current game state.
+// 	  This is necessary because the SSL vision system sends multiple packets from different cameras
+//    and when we have processed all packets from all the cameras, we can consider the game state
+//    prediction to be complete and move on to the next prediction cycle.
+//
+// - `robotNormalizationFactor`: A mapping from teams to their respective robots, and from each
+//    robot to its normalization factor. Used to normalize robot positions.
+//
+// - `ballNormalizationFactor`: A normalization factor for the ball position.
+//
+// The loop continues indefinitely, constantly receiving new packets and updating the game state
+// predictions. This function is a core part of the WorldPredictor's functionality, providing
+// real-time predictions of the game state based on the incoming data from the SSL vision system.
+//
+// Note: This function assumes that the SSL receiver and the base station client are correctly
+// initialized and configured. It also relies on a well-defined buffer system for storing and
+// retrieving game states.
 func (wp *WorldPredictor) predictGameState() {
+	slog.Info("World predictor started successfully")
+
 	var packet *ssl_vision.SSL_WrapperPacket
 	var curGameState *gamestate.GameState = wp.buffer.GetGameStateInProgress()
 	var curFrameNumber uint32 = 0

@@ -29,6 +29,7 @@ type SSLReceiver struct {
 // Create a new SSL vision receiver.
 // Address should be <ip>:<port> - grSim default is 224.5.23.2:10020
 func NewSSLReceiver(addr string) *SSLReceiver {
+	slog.Info("Creating new SSL receiver on", slog.String("address", addr))
 	udpAddr, err := net.ResolveUDPAddr("udp", addr)
 	if err != nil {
 		slog.Error("Unable to resolve UDP address: %s", err)

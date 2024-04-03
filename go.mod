@@ -10,15 +10,16 @@ require (
 require (
 	github.com/LiU-SeeGoals/proto_go v0.1.1
 	github.com/eiannone/keyboard v0.0.0-20220611211555-0d226195f203
+	github.com/lmittmann/tint v1.0.4
 	github.com/stretchr/testify v1.8.4
 	google.golang.org/protobuf v1.32.0
 )
 
 require (
+	github.com/caarlos0/env/v10 v10.0.0
 	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/joho/godotenv v1.5.1
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/caarlos0/env/v10 v10.0.0 // indirect
-	github.com/joho/godotenv v1.5.1 // indirect
 )
 
 require (

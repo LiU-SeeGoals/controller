@@ -58,6 +58,10 @@ services:
     tty: true
     networks:
       - simulation
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+
 
   #ssl-status-board:
   #  image: robocupssl/ssl-status-board:latest
