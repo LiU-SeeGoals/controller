@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/LiU-SeeGoals/controller/internal/config"
-	"github.com/LiU-SeeGoals/controller/internal/parsed_vision"
+	"github.com/LiU-SeeGoals/proto_go/parsed_vision"
 )
 
 type GameState struct {

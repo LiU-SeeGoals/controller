@@ -8,7 +8,7 @@ require (
 )
 
 require (
-	github.com/LiU-SeeGoals/proto_go v0.1.1
+	github.com/LiU-SeeGoals/proto_go v0.1.2
 	github.com/eiannone/keyboard v0.0.0-20220611211555-0d226195f203
 	github.com/lmittmann/tint v1.0.4
 	github.com/stretchr/testify v1.8.4

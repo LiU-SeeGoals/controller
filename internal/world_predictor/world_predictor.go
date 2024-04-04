@@ -6,7 +6,7 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
-	"github.com/LiU-SeeGoals/controller/internal/parsed_vision"
+	"github.com/LiU-SeeGoals/proto_go/parsed_vision"
 	"github.com/LiU-SeeGoals/proto_go/ssl_vision"
 	"gonum.org/v1/gonum/mat"
 

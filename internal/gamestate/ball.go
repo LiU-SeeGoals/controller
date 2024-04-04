@@ -1,7 +1,7 @@
 package gamestate
 
 import (
-	"github.com/LiU-SeeGoals/controller/internal/parsed_vision"
+	"github.com/LiU-SeeGoals/proto_go/parsed_vision"
 	"github.com/LiU-SeeGoals/proto_go/robot_action"
 	"gonum.org/v1/gonum/mat"
 )
