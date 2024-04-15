@@ -9,7 +9,7 @@ import (
 
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/receiver"
-	"github.com/LiU-SeeGoals/proto-messages/ssl_vision"
+	"github.com/LiU-SeeGoals/proto_go/ssl_vision"
 )
 
 const TEAM_SIZE = 12

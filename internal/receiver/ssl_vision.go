@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"net"
 
-	"github.com/LiU-SeeGoals/proto-messages/ssl_vision"
+	"github.com/LiU-SeeGoals/proto_go/ssl_vision"
+
 	"google.golang.org/protobuf/proto"
 )
 

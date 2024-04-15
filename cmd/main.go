@@ -29,11 +29,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
 	"github.com/LiU-SeeGoals/controller/internal/webserver"
 	"github.com/joho/godotenv"
-	"gonum.org/v1/gonum/mat"
 )
 
 func main() {
@@ -52,10 +50,10 @@ func main() {
 
 	gs := gamestate.NewGameState(grsim_addr, vision)
 
-	testAction := createTestActionMove(gs)
+	//testAction := createTestActionMove(gs)
 	// testAction2 := createTestActionInit(gs)
 	for {
-		gs.AddAction(testAction)
+		//gs.AddAction(testAction)
 		// gs.AddAction(testAction2)
 		gs.Update()
 
@@ -63,17 +61,17 @@ func main() {
 	}
 }
 
-func createTestActionMove(gs *gamestate.GameState) action.Action {
-	id := 0
-	act := &action.Move{}
-	act.Pos = gs.GetRobot(id, gamestate.Yellow).GetPosition()
-	act.Dest = mat.NewVecDense(3, nil)
-	act.Id = id
-	act.Dest.SetVec(0, 0)
-	act.Dest.SetVec(1, 0)
-	act.Dest.SetVec(2, 0)
-	return act
-}
+//func createTestActionMove(gs *gamestate.GameState) action.Action {
+//	id := 0
+//	act := &action.Move{}
+//	act.Pos = gs.GetRobot(id, gamestate.Yellow).GetPosition()
+//	act.Dest = mat.NewVecDense(3, nil)
+//	act.Id = id
+//	act.Dest.SetVec(0, 0)
+//	act.Dest.SetVec(1, 0)
+//	act.Dest.SetVec(2, 0)
+//	return act
+//}
 
 type Config struct {
 	SSL_VISION_MAIN_PORT      string

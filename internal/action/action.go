@@ -4,7 +4,6 @@ import (
 	"math"
 
 	"github.com/LiU-SeeGoals/controller/internal/datatypes"
-	// "github.com/LiU-SeeGoals/controller/internal/proto/basestation"
 	"github.com/LiU-SeeGoals/proto_go/robot_action"
 	"gonum.org/v1/gonum/mat"
 )
@@ -48,7 +47,7 @@ type Stop struct {
 	Id int
 }
 
-type Move struct {
+type MoveTo struct {
 	// The id of the robot.
 	Id int
 	// Current position of Robot, vector contains (x,y,w)
@@ -79,7 +78,7 @@ type Rotate struct {
 
 // Forward is x=0, y=1, Backward is x=0, y=-1, Left is x=-1, y=0, Right is x=1, y=0
 // the size of the vector sets the speed of the robot
-type SetNavigationDirection struct {
+type Move struct {
 	Id        int
 	Direction *mat.VecDense // 2D vector, first value is x, second is y
 }
@@ -92,10 +91,10 @@ type Init struct {
 // TranslateGrsim
 //----------------------------------------------------------------------------------------------
 
-func (s *SetNavigationDirection) TranslateGrsim(params *datatypes.Parameters) {
-	params.RobotId = uint32(s.Id)
-	params.VelNormal = float32(s.Direction.AtVec(0))
-	params.VelTangent = float32(s.Direction.AtVec(1))
+func (m *Move) TranslateGrsim(params *datatypes.Parameters) {
+	params.RobotId = uint32(m.Id)
+	params.VelNormal = float32(m.Direction.AtVec(0))
+	params.VelTangent = float32(m.Direction.AtVec(1))
 }
 
 func (r *Rotate) TranslateGrsim(params *datatypes.Parameters) {
@@ -114,29 +113,45 @@ func (s *Stop) TranslateGrsim(params *datatypes.Parameters) {
 	params.VelTangent = float32(0)
 }
 
-func (mv *Move) TranslateGrsim(params *datatypes.Parameters) {
-	params.RobotId = uint32(mv.Id)
+func (mt *MoveTo) TranslateGrsim(params *datatypes.Parameters) {
+
+	params.RobotId = uint32(mt.Id)
 	diff := mat.NewVecDense(3, nil)
-	diff.SubVec(mv.Dest, mv.Pos)
-	params.Spinner = mv.Dribble
+	diff.SubVec(mt.Dest, mt.Pos)
+	params.Spinner = mt.Dribble
 
-	angle := math.Atan2(diff.AtVec(1), diff.AtVec(0))
-	diffPosAngle := angle - mv.Pos.AtVec(2)
-	diffDestAngle := mv.Pos.AtVec(2) - mv.Dest.AtVec(2)
+	goalAngle := math.Atan2(diff.AtVec(1), diff.AtVec(0))
+	currAngle := mt.Pos.AtVec(2)
+	inPosition := false
 
-	if math.Abs(diff.AtVec(0)) > 50 || math.Abs(diff.AtVec(1)) > 50 {
+	if math.Abs(diff.AtVec(0)) < 50 && math.Abs(diff.AtVec(1)) < 50 {
+		inPosition = true
+		goalAngle = mt.Dest.AtVec(2)
 
-		if diffPosAngle > 0.2 {
-			params.VelAngular = 4
-		} else if diffPosAngle < -0.2 {
-			params.VelAngular = -4
-		} else {
-			params.VelTangent = 5
+	}
+
+	// Normalize an angle to be within -π to π
+	normalizeAngle := func(angle float64) float64 {
+		angle = math.Mod(angle+math.Pi, 2*math.Pi)
+		if angle < 0 {
+			angle += 2 * math.Pi
 		}
-	} else if diffDestAngle > 0.2 {
-		params.VelAngular = -4
-	} else if diffDestAngle < -0.2 {
-		params.VelAngular = 4
+		return angle - math.Pi
+	}
+
+	// Calculate difference between current angle and goal angle
+	angleDiff := normalizeAngle(goalAngle - currAngle)
+
+	// Set angular velocity
+	if angleDiff > 0.2 {
+		params.VelAngular = 2 // Adjust this value as necessary
+	} else if angleDiff < -0.2 {
+		params.VelAngular = -2 // Adjust this value as necessary
+	}
+
+	// Set forward speed
+	if math.Abs(angleDiff) < 0.3 && !inPosition {
+		params.VelTangent = 1 // Move forward when facing the goal
 	}
 }
 
@@ -179,19 +194,19 @@ func (s *Stop) TranslateReal() *robot_action.Command {
 	return command_move
 }
 
-func (m *Move) TranslateReal() *robot_action.Command {
+func (mt *MoveTo) TranslateReal() *robot_action.Command {
 	command_move := &robot_action.Command{
-		CommandId: robot_action.ActionType_MOVE_ACTION,
-		RobotId:   int32(m.Id),
+		CommandId: robot_action.ActionType_MOVE_TO_ACTION,
+		RobotId:   int32(mt.Id),
 		Pos: &robot_action.Vector3D{
-			X: int32(m.Pos.AtVec(0)),
-			Y: int32(m.Pos.AtVec(1)),
-			W: float32(m.Pos.AtVec(2)),
+			X: int32(mt.Pos.AtVec(0)),
+			Y: int32(mt.Pos.AtVec(1)),
+			W: float32(mt.Pos.AtVec(2)),
 		},
 		Dest: &robot_action.Vector3D{
-			X: int32(m.Dest.AtVec(0)),
-			Y: int32(m.Dest.AtVec(1)),
-			W: float32(m.Dest.AtVec(2)),
+			X: int32(mt.Dest.AtVec(0)),
+			Y: int32(mt.Dest.AtVec(1)),
+			W: float32(mt.Dest.AtVec(2)),
 		},
 	}
 	return command_move
@@ -206,9 +221,9 @@ func (i *Init) TranslateReal() *robot_action.Command {
 	return command_move
 }
 
-func (s *SetNavigationDirection) TranslateReal() *robot_action.Command {
+func (s *Move) TranslateReal() *robot_action.Command {
 	command := &robot_action.Command{
-		CommandId: robot_action.ActionType_MOVE_TO_ACTION,
+		CommandId: robot_action.ActionType_MOVE_ACTION,
 		RobotId:   int32(s.Id),
 		Direction: &robot_action.Vector2D{
 			X: int32(s.Direction.AtVec(0)),
@@ -222,9 +237,9 @@ func (s *SetNavigationDirection) TranslateReal() *robot_action.Command {
 // ToDTO
 //----------------------------------------------------------------------------------------------
 
-func (m *Move) ToDTO() ActionDTO {
+func (m *MoveTo) ToDTO() ActionDTO {
 	return ActionDTO{
-		Action:  robot_action.ActionType_MOVE_ACTION,
+		Action:  robot_action.ActionType_MOVE_TO_ACTION,
 		Id:      m.Id,
 		PosX:    int32(m.Pos.AtVec(0)),
 		PosY:    int32(m.Pos.AtVec(1)),
@@ -266,9 +281,9 @@ func (s *Stop) ToDTO() ActionDTO {
 	}
 }
 
-func (s *SetNavigationDirection) ToDTO() ActionDTO {
+func (s *Move) ToDTO() ActionDTO {
 	return ActionDTO{
-		Action: robot_action.ActionType_MOVE_TO_ACTION,
+		Action: robot_action.ActionType_MOVE_ACTION,
 		Id:     s.Id,
 		DestX:  int32(s.Direction.AtVec(0)),
 		DestY:  int32(s.Direction.AtVec(1)),

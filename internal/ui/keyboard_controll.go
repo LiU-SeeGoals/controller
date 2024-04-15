@@ -1,19 +1,19 @@
 package main
 
 import (
-	"time"
 	"fmt"
 	"strconv"
-    "strings"
+	"strings"
+	"time"
 
 	"gonum.org/v1/gonum/mat"
 
-	"github.com/eiannone/keyboard"
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/client"
+	"github.com/eiannone/keyboard"
 )
 
-var(
+var (
 	prevChar rune
 )
 
@@ -32,12 +32,12 @@ func askForClient(port string) client.Client {
 	fmt.Scanln(&clientType)
 	switch clientType {
 	case "b":
-        fmt.Println("Enter <ip>:<port> for the basestation, port defaults to 6001: ")
-        var basestationIP string
-        fmt.Scanln(&basestationIP)
-        if !strings.Contains(basestationIP, ":") {
-            basestationIP = basestationIP + ":6001";
-        }
+		fmt.Println("Enter <ip>:<port> for the basestation, port defaults to 6001: ")
+		var basestationIP string
+		fmt.Scanln(&basestationIP)
+		if !strings.Contains(basestationIP, ":") {
+			basestationIP = basestationIP + ":6001"
+		}
 		fmt.Println("Creating base station client.")
 		return client.NewBaseStationClient(basestationIP)
 	}
@@ -67,53 +67,52 @@ func sendCommand(robotId int, char rune, client client.Client) {
 		switch char {
 		case 'w':
 			fmt.Println("Moving forward")
-			action := &action.SetNavigationDirection{
-				Id: 		robotId,
-				Direction:  mat.NewVecDense(2, []float64{0.0, 1.0}),
+			action := &action.Move{
+				Id:        robotId,
+				Direction: mat.NewVecDense(2, []float64{0.0, 1.0}),
 			}
 			actions = append(actions, action)
 		case 'l':
 			fmt.Println("Stopping robot")
 			action := &action.Stop{
-				Id: 		robotId,
+				Id: robotId,
 			}
 			actions = append(actions, action)
 		case 'a':
 			fmt.Println("Moving left")
-			action := &action.SetNavigationDirection{
-				Id: 		robotId,
-				Direction:  mat.NewVecDense(2, []float64{1.0, 0.0}),
+			action := &action.Move{
+				Id:        robotId,
+				Direction: mat.NewVecDense(2, []float64{1.0, 0.0}),
 			}
 			actions = append(actions, action)
 		case 's':
 			fmt.Println("Moving backward")
-			action := &action.SetNavigationDirection{
-				Id: 		robotId,
-				Direction:  mat.NewVecDense(2, []float64{0.0, -1.0}),
+			action := &action.Move{
+				Id:        robotId,
+				Direction: mat.NewVecDense(2, []float64{0.0, -1.0}),
 			}
 			actions = append(actions, action)
 		case 'd':
 			fmt.Println("Moving right")
-			action := &action.SetNavigationDirection{
-				Id: 		robotId,
-				Direction:  mat.NewVecDense(2, []float64{-1.0, 0.0}),
+			action := &action.Move{
+				Id:        robotId,
+				Direction: mat.NewVecDense(2, []float64{-1.0, 0.0}),
 			}
 			actions = append(actions, action)
 		case 'k':
 			fmt.Println("Kicking")
 			action := &action.Kick{
-				Id: 		robotId,
+				Id: robotId,
 			}
 			actions = append(actions, action)
 		}
 	}
 
-
 	prevChar = char
 	client.SendActions(actions)
 }
 
-func listenKeyboard(robotId int, client client.Client){
+func listenKeyboard(robotId int, client client.Client) {
 	err := keyboard.Open()
 	if err != nil {
 		panic(err)
@@ -121,7 +120,7 @@ func listenKeyboard(robotId int, client client.Client){
 	defer keyboard.Close()
 
 	fmt.Println("Use WASD to control the robot, L to stop all movement, K to kick.")
-    fmt.Println("Press <ESC> to exit.")
+	fmt.Println("Press <ESC> to exit.")
 
 	for {
 		char, key, err := keyboard.GetKey()
@@ -132,7 +131,6 @@ func listenKeyboard(robotId int, client client.Client){
 		if key == keyboard.KeyEsc {
 			break
 		}
-	
 
 		sendCommand(robotId, char, client)
 		time.Sleep(100 * time.Millisecond)

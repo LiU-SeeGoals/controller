@@ -20,7 +20,7 @@ func (re *RoleExecutor) GetActions(roles *Roles, gs *gamestate.GameState) []acti
 
 	var actionList []action.Action
 
-	act := &action.Move{}
+	act := &action.MoveTo{}
 	id := 4
 
 	robot := gs.GetRobot(id, gamestate.Yellow)
