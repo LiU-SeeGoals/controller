@@ -12,12 +12,12 @@ type WorldPredictor struct {
 	gamestate            *gamestate.GameState
 }
 
-// Updates position of robots and balls to their actual position
+// // Updates position of robots and balls to their actual position
 func (wp *WorldPredictor) Update() {
 	var packet ssl_vision.SSL_WrapperPacket
 
 	var detect *ssl_vision.SSL_DetectionFrame
-	var field *ssl_vision.SSL_GeometryFieldSize
+	//var field *ssl_vision.SSL_GeometryFieldSize
 
 	packet = <-wp.ssl_receiver_channel
 
@@ -25,7 +25,7 @@ func (wp *WorldPredictor) Update() {
 
 	geo := packet.GetGeometry()
 	if geo != nil {
-		field = geo.GetField()
+		//field = geo.GetField()
 	}
 
 	for _, robot := range detect.GetRobotsBlue() {
@@ -33,7 +33,7 @@ func (wp *WorldPredictor) Update() {
 		y := float64(robot.GetY())
 		w := float64(*robot.Orientation)
 
-		wp.gamestate.SetRobot(robot.GetRobotId(), x, y, w, true)
+		wp.gamestate.GetRobot(int(robot.GetRobotId()), gamestate.Blue).SetPosition(x, y, w)
 	}
 
 	for _, robot := range detect.GetRobotsYellow() {
@@ -41,7 +41,7 @@ func (wp *WorldPredictor) Update() {
 		y := float64(robot.GetY())
 		w := float64(*robot.Orientation)
 
-		wp.gamestate.SetRobot(robot.GetRobotId(), x, y, w, false)
+		wp.gamestate.GetRobot(int(robot.GetRobotId()), gamestate.Yellow).SetPosition(x, y, w)
 
 	}
 
@@ -50,10 +50,10 @@ func (wp *WorldPredictor) Update() {
 		y := float64(ball.GetY())
 		z := float64(ball.GetZ())
 
-		wp.gamestate.SetBall(x, y, z)
+		wp.gamestate.GetBall().SetPosition(x, y, z)
 	}
 
-	parseFieldData(&wp.gamestate.Field, field)
+	//parseFieldData(&wp.gamestate.Field, field)
 }
 
 // Start a SSL Vision receiver, returns a channel from

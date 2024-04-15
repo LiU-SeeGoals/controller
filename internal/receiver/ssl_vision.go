@@ -5,7 +5,8 @@ import (
 	"net"
 
 	"github.com/LiU-SeeGoals/proto_go/ssl_vision"
-	"github.com/golang/protobuf/proto"
+
+	"google.golang.org/protobuf/proto"
 )
 
 const (

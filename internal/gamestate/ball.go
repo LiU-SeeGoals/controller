@@ -16,21 +16,38 @@ func NewBall() *Ball {
 	}
 }
 
-// dont use outside of gamestate/worldpredictor
-func (b *Ball) GetPosition() *mat.VecDense {
-	return b.pos
-}
-
-// dont use outside of gamestate/worldpredictor
 func (b *Ball) SetPosition(x, y, w float64) {
 	b.pos.SetVec(0, x)
 	b.pos.SetVec(1, y)
 	b.pos.SetVec(2, w)
 }
 
-// dont use outside of gamestate/worldpredictor
 func (b *Ball) SetVelocity(v_x, v_y, v_w float64) {
 	b.vel.SetVec(0, v_x)
 	b.vel.SetVec(1, v_y)
 	b.vel.SetVec(2, v_w)
+}
+
+func (b *Ball) ToDTO() BallDTO {
+	return BallDTO{
+		PosX: int(b.pos.AtVec(0)),
+		PosY: int(b.pos.AtVec(1)),
+		PosW: b.pos.AtVec(2),
+		VelX: int(b.vel.AtVec(0)),
+		VelY: int(b.vel.AtVec(1)),
+		VelW: b.vel.AtVec(1),
+	}
+}
+
+func (b *Ball) GetPosition() *mat.VecDense {
+	return b.pos
+}
+
+type BallDTO struct {
+	PosX int
+	PosY int
+	PosW float64
+	VelX int
+	VelY int
+	VelW float64
 }

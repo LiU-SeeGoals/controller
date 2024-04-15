@@ -2,15 +2,28 @@ module github.com/LiU-SeeGoals/controller
 
 go 1.21.2
 
+toolchain go1.22.0
+
 require (
-	github.com/LiU-SeeGoals/proto-messages/go/ssl_vision v0.1.0
-	github.com/LiU-SeeGoals/proto_go v0.1.0
-	github.com/caarlos0/env/v10 v10.0.0
-	github.com/eiannone/keyboard v0.0.0-20220611211555-0d226195f203
-	github.com/golang/protobuf v1.5.3
-	github.com/joho/godotenv v1.5.1
+	// github.com/golang/protobuf v1.5.0
 	gonum.org/v1/gonum v0.14.0
 	google.golang.org/protobuf v1.32.0
 )
 
-require golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a // indirect
+require (
+	github.com/LiU-SeeGoals/proto_go v0.1.1
+	github.com/caarlos0/env/v10 v10.0.0
+	github.com/eiannone/keyboard v0.0.0-20220611211555-0d226195f203
+	github.com/gorilla/websocket v1.5.1
+	// google.golang.org/protobuf v1.31.0
+	github.com/joho/godotenv v1.5.1
+
+// golang.org/x/net v1.2.3
+)
+
+require (
+	github.com/LiU-SeeGoals/proto-messages v0.1.0
+	golang.org/x/sys v0.17.0 // indirect
+)
+
+require golang.org/x/net v0.21.0 // indirect

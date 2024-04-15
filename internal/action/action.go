@@ -8,11 +8,40 @@ import (
 	"gonum.org/v1/gonum/mat"
 )
 
+// import (
+// 	"math"
+
+// 	"github.com/LiU-SeeGoals/controller/internal/datatypes"
+// 	"github.com/LiU-SeeGoals/controller/internal/proto/basestation"
+// 	"gonum.org/v1/gonum/mat"
+// )
+
 type Action interface {
 	TranslateReal() *robot_action.Command
 	// Translates an action to parameters defined for grsim
 	TranslateGrsim(params *datatypes.Parameters)
+	ToDTO() ActionDTO
 }
+
+type ActionDTO struct {
+	// The id of the robot.
+	Id     int                     `json:"Id"`
+	Action robot_action.ActionType `json:"Action"`
+	// Current position of Robot, vector contains (x,y,w)
+	PosX int32   `json:"PosX"`
+	PosY int32   `json:"PosY"`
+	PosW float32 `json:"PosW"`
+	// Goal destination of Robot, vector contains (x,y,w)
+	DestX int32   `json:"DestX"`
+	DestY int32   `json:"DestY"`
+	DestW float32 `json:"DestW"`
+	// Decides if the robot should dribble while moving
+	Dribble bool `json:"Dribble"`
+}
+
+//----------------------------------------------------------------------------------------------
+// Actions structs
+//----------------------------------------------------------------------------------------------
 
 type Stop struct {
 	Id int
@@ -58,23 +87,14 @@ type Init struct {
 	Id int
 }
 
+//----------------------------------------------------------------------------------------------
+// TranslateGrsim
+//----------------------------------------------------------------------------------------------
+
 func (m *Move) TranslateGrsim(params *datatypes.Parameters) {
 	params.RobotId = uint32(m.Id)
 	params.VelNormal = float32(m.Direction.AtVec(0))
 	params.VelTangent = float32(m.Direction.AtVec(1))
-}
-
-func (m *Move) TranslateReal() *robot_action.Command {
-	command := &robot_action.Command{
-		CommandId: robot_action.ActionType_MOVE_ACTION,
-		RobotId:   int32(m.Id),
-		Direction: &robot_action.Vector2D{
-			X: int32(m.Direction.AtVec(0)),
-			Y: int32(m.Direction.AtVec(1)),
-		},
-	}
-
-	return command
 }
 
 func (r *Rotate) TranslateGrsim(params *datatypes.Parameters) {
@@ -82,51 +102,15 @@ func (r *Rotate) TranslateGrsim(params *datatypes.Parameters) {
 	params.VelAngular = float32(r.AngularVel)
 }
 
-func (r *Rotate) TranslateReal() *robot_action.Command {
-	command_move := &robot_action.Command{
-		CommandId:  robot_action.ActionType_ROTATE_ACTION,
-		RobotId:    int32(r.Id),
-		AngularVel: int32(r.AngularVel),
-	}
-
-	return command_move
-}
-
-func (d *Dribble) TranslateGrsim(params *datatypes.Parameters) {
-	params.RobotId = uint32(d.Id)
-	params.Spinner = d.Dribble
-}
-
 func (k *Kick) TranslateGrsim(params *datatypes.Parameters) {
 	params.RobotId = uint32(k.Id)
 	params.KickSpeedX = float32(k.KickSpeed)
 }
 
-func (k *Kick) TranslateReal() *robot_action.Command {
-	command_move := &robot_action.Command{
-		CommandId: robot_action.ActionType_KICK_ACTION,
-		RobotId:   int32(k.Id),
-		KickSpeed: int32(k.KickSpeed),
-	}
-
-	return command_move
-}
-
 func (s *Stop) TranslateGrsim(params *datatypes.Parameters) {
-
 	params.RobotId = uint32(s.Id)
 	params.VelNormal = float32(0)
 	params.VelTangent = float32(0)
-
-}
-
-func (s *Stop) TranslateReal() *robot_action.Command {
-	command_move := &robot_action.Command{
-		CommandId: robot_action.ActionType_STOP_ACTION,
-		RobotId:   int32(s.Id),
-	}
-
-	return command_move
 }
 
 func (mt *MoveTo) TranslateGrsim(params *datatypes.Parameters) {
@@ -171,9 +155,48 @@ func (mt *MoveTo) TranslateGrsim(params *datatypes.Parameters) {
 	}
 }
 
+func (d *Dribble) TranslateGrsim(params *datatypes.Parameters) {
+	params.RobotId = uint32(d.Id)
+	params.Spinner = d.Dribble
+}
+
+func (i *Init) TranslateGrsim(params *datatypes.Parameters) {
+	params.RobotId = uint32(i.Id)
+}
+
+//----------------------------------------------------------------------------------------------
+// TranslateReal
+//----------------------------------------------------------------------------------------------
+
+func (r *Rotate) TranslateReal() *robot_action.Command {
+	command_move := &robot_action.Command{
+		CommandId:  robot_action.ActionType_ROTATE_ACTION,
+		RobotId:    int32(r.Id),
+		AngularVel: int32(r.AngularVel),
+	}
+	return command_move
+}
+
+func (k *Kick) TranslateReal() *robot_action.Command {
+	command_move := &robot_action.Command{
+		CommandId: robot_action.ActionType_KICK_ACTION,
+		RobotId:   int32(k.Id),
+		KickSpeed: int32(k.KickSpeed),
+	}
+	return command_move
+}
+
+func (s *Stop) TranslateReal() *robot_action.Command {
+	command_move := &robot_action.Command{
+		CommandId: robot_action.ActionType_STOP_ACTION,
+		RobotId:   int32(s.Id),
+	}
+	return command_move
+}
+
 func (mt *MoveTo) TranslateReal() *robot_action.Command {
 	command_move := &robot_action.Command{
-		CommandId: robot_action.ActionType_MOVE_ACTION,
+		CommandId: robot_action.ActionType_MOVE_TO_ACTION,
 		RobotId:   int32(mt.Id),
 		Pos: &robot_action.Vector3D{
 			X: int32(mt.Pos.AtVec(0)),
@@ -186,12 +209,7 @@ func (mt *MoveTo) TranslateReal() *robot_action.Command {
 			W: float32(mt.Dest.AtVec(2)),
 		},
 	}
-
 	return command_move
-}
-
-func (i *Init) TranslateGrsim(params *datatypes.Parameters) {
-	params.RobotId = uint32(i.Id)
 }
 
 func (i *Init) TranslateReal() *robot_action.Command {
@@ -200,6 +218,75 @@ func (i *Init) TranslateReal() *robot_action.Command {
 		CommandId: robot_action.ActionType_INIT_ACTION,
 		RobotId:   int32(i.Id),
 	}
-
 	return command_move
+}
+
+func (s *Move) TranslateReal() *robot_action.Command {
+	command := &robot_action.Command{
+		CommandId: robot_action.ActionType_MOVE_ACTION,
+		RobotId:   int32(s.Id),
+		Direction: &robot_action.Vector2D{
+			X: int32(s.Direction.AtVec(0)),
+			Y: int32(s.Direction.AtVec(1)),
+		},
+	}
+	return command
+}
+
+//----------------------------------------------------------------------------------------------
+// ToDTO
+//----------------------------------------------------------------------------------------------
+
+func (m *MoveTo) ToDTO() ActionDTO {
+	return ActionDTO{
+		Action:  robot_action.ActionType_MOVE_TO_ACTION,
+		Id:      m.Id,
+		PosX:    int32(m.Pos.AtVec(0)),
+		PosY:    int32(m.Pos.AtVec(1)),
+		PosW:    float32(m.Pos.AtVec(2)),
+		DestX:   int32(m.Dest.AtVec(0)),
+		DestY:   int32(m.Dest.AtVec(1)),
+		DestW:   float32(m.Dest.AtVec(2)),
+		Dribble: m.Dribble,
+	}
+}
+
+func (i *Init) ToDTO() ActionDTO {
+	return ActionDTO{
+		Action: robot_action.ActionType_INIT_ACTION,
+		Id:     i.Id,
+	}
+}
+
+func (r *Rotate) ToDTO() ActionDTO {
+	return ActionDTO{
+		Action: robot_action.ActionType_ROTATE_ACTION,
+		Id:     r.Id,
+		PosW:   float32(r.AngularVel),
+	}
+}
+
+func (k *Kick) ToDTO() ActionDTO {
+	return ActionDTO{
+		Action: robot_action.ActionType_KICK_ACTION,
+		Id:     k.Id,
+		PosW:   float32(k.KickSpeed),
+	}
+}
+
+func (s *Stop) ToDTO() ActionDTO {
+	return ActionDTO{
+		Action: robot_action.ActionType_STOP_ACTION,
+		Id:     s.Id,
+	}
+}
+
+func (s *Move) ToDTO() ActionDTO {
+	return ActionDTO{
+		Action: robot_action.ActionType_MOVE_ACTION,
+		Id:     s.Id,
+		DestX:  int32(s.Direction.AtVec(0)),
+		DestY:  int32(s.Direction.AtVec(1)),
+		DestW:  0,
+	}
 }
