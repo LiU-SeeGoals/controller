@@ -10,7 +10,7 @@ import (
 	"gonum.org/v1/gonum/mat"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
-	"github.com/LiU-SeeGoals/proto-messages/robot_action"
+	"github.com/LiU-SeeGoals/proto_go/robot_action"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -34,25 +34,25 @@ func TestSocketCommunication(t *testing.T) {
 	initCommand := &robot_action.Command{CommandId: robot_action.ActionType_INIT_ACTION, RobotId: 3}
 
 	// Define move action
-	moveAction := &action.Move{
+	moveToAction := &action.MoveTo{
 		Id:   1,
 		Pos:  mat.NewVecDense(3, []float64{100, 200, math.Pi}),
 		Dest: mat.NewVecDense(3, []float64{300, 400, -math.Pi}),
 	}
-	moveCommand := &robot_action.Command{
-		CommandId: robot_action.ActionType_MOVE_ACTION,
+	moveToCommand := &robot_action.Command{
+		CommandId: robot_action.ActionType_MOVE_TO_ACTION,
 		RobotId:   1,
 		Pos:       &robot_action.Vector3D{X: int32(100), Y: int32(200), W: float32(math.Pi)},
 		Dest:      &robot_action.Vector3D{X: int32(300), Y: int32(400), W: float32(-math.Pi)},
 	}
 
 	// Define set navigation direction action.
-	setNavDirAction := &action.SetNavigationDirection{
+	moveAction := &action.Move{
 		Id:        9,
 		Direction: mat.NewVecDense(2, []float64{100, 200}),
 	}
-	setNavDirCommand := &robot_action.Command{
-		CommandId: robot_action.ActionType_SET_NAVIGATION_DIRECTION_ACTION,
+	moveCommand := &robot_action.Command{
+		CommandId: robot_action.ActionType_MOVE_ACTION,
 		RobotId:   9,
 		Direction: &robot_action.Vector2D{X: int32(100), Y: int32(200)},
 	}
@@ -76,8 +76,8 @@ func TestSocketCommunication(t *testing.T) {
 		{stopAction, stopCommand},
 		{kickAction, kickCommand},
 		{initAction, initCommand},
+		{moveToAction, moveToCommand},
 		{moveAction, moveCommand},
-		{setNavDirAction, setNavDirCommand},
 		{rotateAction, rotateCommand},
 	}
 

@@ -52,10 +52,10 @@ type Field struct {
 
 	// Goal depth (distance from outer goal line edge to inner goal back) in mm
 	GoalDepth int32
-
+	// Is never set!
 	// Goal height in mm
 	GoalHeight int32
-
+	// Is never set!
 	// Distance between the goal center and the center of the penalty mark in mm
 	GoalToPenalty int32
 
@@ -68,16 +68,20 @@ type Field struct {
 	// Width of the penalty/defense area (measured between line centers) in mm
 	PenaltyAreaWidth int32
 
+	// Is never set!
 	// Radius of the center circle (measured between line centers) in mm
 	CenterRadius int32
 
+	// Is never set!
 	// Thickness/width of the lines on the field in mm
 	LineThickness int32
 
+	// Is never set!
 	// Ball radius in mm
 	// (float type to represent sub-mm precision)
 	BallRadius float32
 
+	// Is never set!
 	// Max allowed robot radius in mm
 	// (float type to represent sub-mm precision)
 	MaxRobotRadius float32

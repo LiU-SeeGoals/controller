@@ -13,7 +13,7 @@ func sendSampleAction() {
 
 	actions := []action.Action{
 		&action.Stop{Id: 2},
-		&action.Move{
+		&action.MoveTo{
 			Id:   3,
 			Pos:  mat.NewVecDense(3, []float64{100, 200, math.Pi}),  // Example values for Pos
 			Dest: mat.NewVecDense(3, []float64{300, 400, -math.Pi}), // Example values for Goal
