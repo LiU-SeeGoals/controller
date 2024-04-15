@@ -53,7 +53,7 @@ func (wp *WorldPredictor) Update() {
 		wp.gamestate.SetBall(x, y, z)
 	}
 
-	parseFieldData(&wp.gamestate.Field, field)
+	parseFieldData(wp.gamestate.Field, field)
 }
 
 // Start a SSL Vision receiver, returns a channel from

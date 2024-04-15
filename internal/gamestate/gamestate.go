@@ -11,9 +11,9 @@ type GameState struct {
 	Yellow_team [TEAM_SIZE]*Robot
 
 	// Holds ball data
-	ball *Ball
+	Ball *Ball
 	// Holds field data
-	Field Field
+	Field *Field
 }
 
 func (gs *GameState) SetRobot(robotId uint32, x, y, w float64, isBlue bool) {
@@ -25,11 +25,11 @@ func (gs *GameState) SetRobot(robotId uint32, x, y, w float64, isBlue bool) {
 }
 
 func (gs *GameState) SetBall(x, y, z float64) {
-	gs.ball.SetPosition(x, y, z)
+	gs.Ball.SetPosition(x, y, z)
 }
 
 func (gs *GameState) GetBall() *Ball {
-	return gs.ball
+	return gs.Ball
 }
 
 func (gs *GameState) GetTeam(team Team) [TEAM_SIZE]*Robot {
@@ -50,7 +50,7 @@ func (gs *GameState) GetRobot(id int, isBlue bool) *Robot {
 func NewGameState() *GameState {
 	gs := &GameState{}
 
-	gs.ball = NewBall()
+	gs.Ball = NewBall()
 
 	for i := 0; i < TEAM_SIZE; i++ {
 		gs.Blue_team[i] = NewRobot(i, Blue)

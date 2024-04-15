@@ -17,7 +17,7 @@ type Ai struct {
 
 func NewAi(gamestate *gamestate.GameState, addr string) *Ai {
 	ai := &Ai{
-		preCalculator: NewPreCalculator(),
+		preCalculator: NewPreCalculator(gamestate.Field),
 		playFinder:    NewPlayFinder(),
 		roleAssigner:  NewRoleAssigner(),
 		roleExecutor:  NewRoleExecutor(),

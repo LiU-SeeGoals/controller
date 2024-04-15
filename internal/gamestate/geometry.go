@@ -36,7 +36,7 @@ const (
 // anything is unclear.
 type Field struct {
 	// Field length (distance between goal lines) in mm
-	FieldLengt int32
+	FieldLength int32
 
 	// Field width (distance between touch lines) in mm
 	FieldWidth int32

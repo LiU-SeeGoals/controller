@@ -3,20 +3,21 @@ package ai
 import (
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
 	"gonum.org/v1/gonum/mat"
+	"math"
 )
 
 const NUM_ROWS = 3
-const NUM_COLS = 6
+const NUM_COLS = 3
 const NUM_CHANNELS = 3
 
 type PreCalculator struct {
-	analysis GameAnalysis
+	analysis *GameAnalysis
 }
 
 // Constructor for the PreCalculator
-func NewPreCalculator(field gamestate.Field) *PreCalculator {
+func NewPreCalculator(field *gamestate.Field) *PreCalculator {
 	pc := &PreCalculator{
-		analysis: *newAnalysis(field.FieldLengt, field.FieldWidth),
+		analysis: newAnalysis(field.FieldLength, field.FieldWidth),
 	}
 	return pc
 }
@@ -25,6 +26,8 @@ func NewPreCalculator(field gamestate.Field) *PreCalculator {
 func newAnalysis(fieldLength, fieldWidth int32) *GameAnalysis {
 	analysis := GameAnalysis{}
 	zones := [NUM_ROWS * NUM_COLS]Zone{}
+	analysis.zoneLength = float32(fieldLength) / float32(NUM_COLS)
+	analysis.zoneWidth = float32(fieldWidth) / float32(NUM_ROWS)
 
 	// Initialize the zones
 	for i := 0; i < NUM_ROWS; i++ {
@@ -57,7 +60,8 @@ func adjacentZones(id int) [4]int {
 func newZone(id int, centerCoordinates mat.VecDense) *Zone {
 	zone := Zone{
 		id:                 id,
-		robots:             nil,
+		yellow_robots:      nil,
+		blue_robots:        nil,
 		controlProbability: 0.0,
 		centerCoordinates:  centerCoordinates,
 		adjacentZones:      adjacentZones(id),
@@ -75,11 +79,12 @@ func newChannel(id int, associatedZones [NUM_COLS]int) *Channel {
 	return &channel
 }
 
-// The pitch is divied into 18 zones, numbered 0-17, starting from the defensive
+// The pitch is divied into 9 zones, numbered 0-8, starting from the defensive
 // end to the attacking end, and from (goalkeepers perspective) left to right across the field.
 type Zone struct {
-	id                 int                // id of the zone, 0-17
-	robots             []*gamestate.Robot // robots in the zone
+	id                 int                // id of the zone, 0-8
+	blue_robots        []*gamestate.Robot // blue robots in the zone
+	yellow_robots      []*gamestate.Robot // yellow robots in the zone
 	controlProbability float64            // probability of maintaining control of the ball in this zone
 	centerCoordinates  mat.VecDense       // coordinates of the center of the zone
 	adjacentZones      [4]int             // array of adjacent zones ids
@@ -97,7 +102,7 @@ type Channel struct {
 
 // Struct to hold the analysis of the gamestate
 type GameAnalysis struct {
-	zones         [NUM_ROWS * NUM_COLS]Zone // The pitch is divided into 18 zones, 3 rows and 6 columns
+	zones         [NUM_ROWS * NUM_COLS]Zone // The pitch is divided into 9 zones, 3 rows and 3 columns
 	channels      [NUM_CHANNELS]Channel     // The pitch is divided into 3 channels
 	inPossession  bool                      // true if the team is in possession of the ball
 	zoneLength    float32                   // length of each zoneLength
@@ -110,36 +115,38 @@ func (an *GameAnalysis) updateZones(gamestateObj *gamestate.GameState) {
 
 	// Reset the zones
 	for i := 0; i < NUM_ROWS*NUM_COLS; i++ {
-		an.zones[i].robots = nil
+		an.zones[i].yellow_robots = []*gamestate.Robot{}
+		an.zones[i].blue_robots = []*gamestate.Robot{}
+		an.zones[i].controlProbability = 0.49
 	}
-	blueCount := [NUM_ROWS * NUM_COLS]int{}
-	yellowCount := [NUM_ROWS * NUM_COLS]int{}
 
-	// count blue robots in each zone
+	// count blue robots in each zone and add them to the zone
 	for _, robot := range gamestateObj.Blue_team {
-		col := robot.GetPosition().AtVec(0) / float64(an.zoneLength)
-		row := robot.GetPosition().AtVec(1) / float64(an.zoneWidth)
-		blueCount[int(row)*NUM_COLS+int(col)]++
+		col := math.Floor(robot.GetPosition().AtVec(0) / float64(an.zoneLength))
+		row := math.Floor(robot.GetPosition().AtVec(1) / float64(an.zoneWidth))
+		an.zones[int(row)*NUM_COLS+int(col)].blue_robots = append(an.zones[int(row)*NUM_COLS+int(col)].blue_robots, robot)
 	}
 
 	// count yellow robots in each zone
 	for _, robot := range gamestateObj.Yellow_team {
-		col := robot.GetPosition().AtVec(0) / float64(an.zoneLength)
-		row := robot.GetPosition().AtVec(1) / float64(an.zoneWidth)
-		yellowCount[int(row)*NUM_COLS+int(col)]++
+		col := math.Floor(robot.GetPosition().AtVec(0) / float64(an.zoneLength))
+		row := math.Floor(robot.GetPosition().AtVec(1) / float64(an.zoneWidth))
+		an.zones[int(row)*NUM_COLS+int(col)].yellow_robots = append(an.zones[int(row)*NUM_COLS+int(col)].yellow_robots, robot)
 	}
 
 	// calculate the proportion of robots in each zone
 	for i := range an.zones {
-		totalRobots := blueCount[i] + yellowCount[i]
+		blueCount := len(an.zones[i].blue_robots)
+		yellowCount := len(an.zones[i].yellow_robots)
+		totalRobots := blueCount + yellowCount
 		if totalRobots > 0 {
-			if blueCount[i] == 0 && yellowCount[i] != 0 {
+			if blueCount == 0 && yellowCount != 0 {
 				an.zones[i].controlProbability = 1.0
 			} else {
-				an.zones[i].controlProbability = float64(yellowCount[i]) / float64(totalRobots)
+				an.zones[i].controlProbability = float64(yellowCount) / float64(totalRobots)
 			}
 		} else {
-			an.zones[i].controlProbability = 0.5
+			an.zones[i].controlProbability = 0.49
 		}
 	}
 }
@@ -149,5 +156,5 @@ func (pc *PreCalculator) Process(gamestateObj *gamestate.GameState) *GameAnalysi
 	// pc.updateChannels(gamestateObj)
 	// pc.updatePossession(gamestateObj)
 
-	return &pc.analysis
+	return pc.analysis
 }
