@@ -2,8 +2,8 @@ package world_predictor
 
 import (
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
-	"github.com/LiU-SeeGoals/proto-messages/go/ssl_vision"
 	"github.com/LiU-SeeGoals/controller/internal/receiver"
+	"github.com/LiU-SeeGoals/proto_go/ssl_vision"
 )
 
 type WorldPredictor struct {
@@ -80,17 +80,12 @@ func parseFieldData(f *gamestate.Field, data *ssl_vision.SSL_GeometryFieldSize) 
 	}
 
 	// parse field data
+
 	f.FieldLengt = data.GetFieldLength()
 	f.FieldWidth = data.GetFieldWidth()
-	f.BallRadius = data.GetBallRadius()
 	f.BoundaryWidth = data.GetBoundaryWidth()
-	f.CenterRadius = data.GetCenterCircleRadius()
 	f.GoalDepth = data.GetGoalDepth()
-	f.GoalHeight = data.GetGoalHeight()
 	f.GoalWidth = data.GetGoalWidth()
-	f.GoalToPenalty = data.GetGoalCenterToPenaltyMark()
-	f.LineThickness = data.GetLineThickness()
-	f.MaxRobotRadius = data.GetMaxRobotRadius()
 	f.PenaltyAreaDepth = data.GetPenaltyAreaDepth()
 	f.PenaltyAreaWidth = data.GetPenaltyAreaWidth()
 

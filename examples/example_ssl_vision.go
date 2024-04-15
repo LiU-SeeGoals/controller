@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/LiU-SeeGoals/controller/internal/receiver"
-	"github.com/LiU-SeeGoals/proto-messages/go/ssl_vision"
+	"github.com/LiU-SeeGoals/proto_go/ssl_vision"
 )
 
 func SSLVisionExample() {
