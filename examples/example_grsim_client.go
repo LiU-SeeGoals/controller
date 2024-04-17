@@ -15,7 +15,7 @@ func GrsimClientExample() {
 	c := client.NewGrsimClient("127.0.0.1:20011")
 	c.Init()
 
-	move := &action.Move{
+	move := &action.MoveTo{
 		Pos:     mat.NewVecDense(3, []float64{1.0, 1.0, 0.0}),
 		Dest:    mat.NewVecDense(3, []float64{5.0, 1.0, 0.0}),
 		Dribble: false,

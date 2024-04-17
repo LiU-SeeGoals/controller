@@ -1,8 +1,12 @@
 package world_predictor
 
 import (
+	"fmt"
+
+	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
 	"github.com/LiU-SeeGoals/controller/internal/receiver"
+	"github.com/LiU-SeeGoals/controller/internal/webserver"
 	"github.com/LiU-SeeGoals/proto_go/ssl_vision"
 )
 
@@ -12,7 +16,7 @@ type WorldPredictor struct {
 	gamestate            *gamestate.GameState
 }
 
-// Updates position of robots and balls to their actual position
+// // Updates position of robots and balls to their actual position
 func (wp *WorldPredictor) Update() {
 	var packet ssl_vision.SSL_WrapperPacket
 
@@ -33,7 +37,7 @@ func (wp *WorldPredictor) Update() {
 		y := float64(robot.GetY())
 		w := float64(*robot.Orientation)
 
-		wp.gamestate.SetRobot(robot.GetRobotId(), x, y, w, true)
+		wp.gamestate.GetRobot(int(robot.GetRobotId()), gamestate.Blue).SetPosition(x, y, w)
 	}
 
 	for _, robot := range detect.GetRobotsYellow() {
@@ -41,7 +45,7 @@ func (wp *WorldPredictor) Update() {
 		y := float64(robot.GetY())
 		w := float64(*robot.Orientation)
 
-		wp.gamestate.SetRobot(robot.GetRobotId(), x, y, w, false)
+		wp.gamestate.GetRobot(int(robot.GetRobotId()), gamestate.Yellow).SetPosition(x, y, w)
 
 	}
 
@@ -50,10 +54,48 @@ func (wp *WorldPredictor) Update() {
 		y := float64(ball.GetY())
 		z := float64(ball.GetZ())
 
-		wp.gamestate.SetBall(x, y, z)
+		wp.gamestate.GetBall().SetPosition(x, y, z)
 	}
 
 	parseFieldData(wp.gamestate.Field, field)
+	wp.broadcastGameState()
+	//wp.sendActions()
+}
+
+func (gs *WorldPredictor) handleIncoming(incomming []action.ActionDTO) {
+	fmt.Println("Received a new action (gamestate)")
+	// for _, act := range incomming {
+	// 	switch act.Action {
+	// 	case robot_action.ActionType_MOVE_ACTION:
+	// 		pos := mat.NewVecDense(3, []float64{float64(act.PosX), float64(act.PosY), float64(act.PosW)})
+	// 		dest := mat.NewVecDense(3, []float64{float64(act.DestX), float64(act.DestY), float64(act.DestW)})
+	// 		gs.AddAction(&action.Move{act.Id, pos, dest, act.Dribble})
+	// 	case robot_action.ActionType_INIT_ACTION:
+	// 		gs.AddAction(&action.Init{act.Id})
+	// 	case robot_action.ActionType_ROTATE_ACTION:
+	// 		gs.AddAction(&action.Rotate{act.Id, int(act.PosW)})
+	// 	case robot_action.ActionType_KICK_ACTION:
+	// 		standardKickSpeed := 1
+	// 		gs.AddAction(&action.Kick{act.Id, standardKickSpeed})
+	// 	case robot_action.ActionType_MOVE_TO_ACTION:
+	// 		dest := mat.NewVecDense(3, []float64{float64(act.DestX), float64(act.DestY)})
+	// 		gs.AddAction(&action.SetNavigationDirection{act.Id, dest})
+	// 	case robot_action.ActionType_STOP_ACTION:
+	// 		gs.AddAction(&action.Stop{act.Id})
+	// 	}
+	// }
+
+}
+
+func (wp *WorldPredictor) broadcastGameState() {
+	webserver.BroadcastGameState(wp.gamestate.ToJson())
+	// list of incoming actions
+	incomming := webserver.GetIncoming()
+
+	// If we got new actions --> then handle them
+	if len(incomming) > 0 {
+		wp.handleIncoming(incomming)
+	}
 }
 
 // Start a SSL Vision receiver, returns a channel from
@@ -78,25 +120,19 @@ func parseFieldData(f *gamestate.Field, data *ssl_vision.SSL_GeometryFieldSize) 
 	if data == nil {
 		return
 	}
-	/*
-		// parse field data
-		f.FieldLengt = data.GetFieldLength()
-		f.FieldWidth = data.GetFieldWidth()
-		f.BallRadius = data.GetBallRadius()
-		f.BoundaryWidth = data.GetBoundaryWidth()
-		f.CenterRadius = data.GetCenterCircleRadius()
-		f.GoalDepth = data.GetGoalDepth()
-		f.GoalHeight = data.GetGoalHeight()
-		f.GoalWidth = data.GetGoalWidth()
-		f.GoalToPenalty = data.GetGoalCenterToPenaltyMark()
-		f.LineThickness = data.GetLineThickness()
-		f.MaxRobotRadius = data.GetMaxRobotRadius()
-		f.PenaltyAreaDepth = data.GetPenaltyAreaDepth()
-		f.PenaltyAreaWidth = data.GetPenaltyAreaWidth()
 
-		parseFieldLines(f, data.GetFieldLines())
-		parseFieldArcs(f, data.GetFieldArcs())
-	*/
+	// parse field data
+
+	f.FieldLength = data.GetFieldLength()
+	f.FieldWidth = data.GetFieldWidth()
+	f.BoundaryWidth = data.GetBoundaryWidth()
+	f.GoalDepth = data.GetGoalDepth()
+	f.GoalWidth = data.GetGoalWidth()
+	f.PenaltyAreaDepth = data.GetPenaltyAreaDepth()
+	f.PenaltyAreaWidth = data.GetPenaltyAreaWidth()
+
+	parseFieldLines(f, data.GetFieldLines())
+	parseFieldArcs(f, data.GetFieldArcs())
 }
 
 // Parse field lines from ssl packet

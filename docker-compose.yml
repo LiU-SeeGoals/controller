@@ -56,8 +56,22 @@ services:
     volumes:
       - ./:/var/controller
     tty: true
+    ports:
+      - "8080:8080"
     networks:
       - simulation
+
+  game-viewer:
+    build: ../GameViewer
+    volumes:
+      - ../GameViewer/:/var/GameViewer
+    tty: true
+    ports:
+      - "5173:5173"
+    networks:
+      - simulation
+    depends_on:
+      - controller
 
   #ssl-status-board:
   #  image: robocupssl/ssl-status-board:latest

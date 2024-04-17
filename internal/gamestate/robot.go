@@ -3,6 +3,9 @@ package gamestate
 import (
 	"fmt"
 
+	"time"
+
+	"github.com/LiU-SeeGoals/controller/internal/action"
 	"gonum.org/v1/gonum/mat"
 )
 
@@ -14,10 +17,13 @@ const (
 )
 
 type Robot struct {
-	id   int
-	team Team
-	pos  *mat.VecDense
-	vel  *mat.VecDense
+	id          int
+	team        Team
+	pos         *mat.VecDense
+	prevPos     *mat.VecDense
+	lastUpdated time.Time
+	vel         *mat.VecDense
+	action      action.Action
 }
 
 func NewRobot(id int, team Team) *Robot {
@@ -30,12 +36,40 @@ func NewRobot(id int, team Team) *Robot {
 }
 
 func (r *Robot) SetPosition(x, y, w float64) {
-	r.pos.SetVec(0, x)
-	r.pos.SetVec(1, y)
-	r.pos.SetVec(2, w)
+	// Store the current time
+	currentTime := time.Now()
+
+	// Calculate the time difference in seconds
+	timeDiff := currentTime.Sub(r.lastUpdated).Milliseconds()
+
+	if timeDiff > 0 {
+		// Calculate the change in position for x and y
+		deltaX := x - r.pos.AtVec(0)
+		deltaY := y - r.pos.AtVec(1)
+		deltaW := w - r.pos.AtVec(2)
+
+		// Calculate the velocity components
+		velocityX := deltaX / (float64(timeDiff) * 1000)
+		velocityY := deltaY / (float64(timeDiff) * 1000)
+		velocityW := deltaW / (float64(timeDiff) * 1000)
+
+		// Update the velocity using setVelocity
+		r.setVelocity(velocityX, velocityY, velocityW)
+
+		r.pos.SetVec(0, x)
+		r.pos.SetVec(1, y)
+		r.pos.SetVec(2, w)
+	}
+
+	// Update the lastUpdated time
+	r.lastUpdated = currentTime
 }
 
-func (r *Robot) SetVelocity(v_x, v_y, v_w float64) {
+func (r *Robot) GetPosition() *mat.VecDense {
+	return r.pos
+}
+
+func (r *Robot) setVelocity(v_x, v_y, v_w float64) {
 	r.vel.SetVec(0, v_x)
 	r.vel.SetVec(1, v_y)
 	r.vel.SetVec(2, v_w)
@@ -56,22 +90,30 @@ func (r *Robot) String() string {
 	return fmt.Sprintf("id: %d, pos: %s, vel: %s", r.id, posString, velString)
 }
 
-// GetID returns the id of the Robot.
+func (r *Robot) ToDTO() RobotDTO {
+	return RobotDTO{
+		Id:   r.id,
+		Team: r.team,
+		PosX: int(r.pos.AtVec(0)),
+		PosY: int(r.pos.AtVec(1)),
+		PosW: r.pos.AtVec(2),
+		VelX: r.vel.AtVec(0),
+		VelY: r.vel.AtVec(1),
+		VelW: r.vel.AtVec(2),
+	}
+}
+
 func (r *Robot) GetID() int {
 	return r.id
 }
 
-// GetTeam returns the team of the Robot.
-func (r *Robot) GetTeam() Team {
-	return r.team
-}
-
-// GetPosition returns the position vector of the Robot.
-func (r *Robot) GetPosition() *mat.VecDense {
-	return r.pos
-}
-
-// GetVelocity returns the velocity vector of the Robot.
-func (r *Robot) GetVelocity() *mat.VecDense {
-	return r.vel
+type RobotDTO struct {
+	Id   int
+	Team Team
+	PosX int
+	PosY int
+	PosW float64
+	VelX float64
+	VelY float64
+	VelW float64
 }

@@ -1,7 +1,6 @@
 package ai
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
@@ -51,13 +50,13 @@ func TestUpdateZones(t *testing.T) {
 	addRobots(gs)
 	pc := NewPreCalculator(field)
 
-	// all robots are in the same zone 
+	// all robots are in the same zone
 	// so the control probability should be 0.5
 	pc.analysis.updateZones(gs)
 	if pc.analysis.zones[0].controlProbability != 0.5 {
 		t.Errorf("Expected controlProbability of zone 0 to be 0.5, got %f", pc.analysis.zones[0].controlProbability)
 	}
-	
+
 	// move one robot to zone 3
 	gs.Yellow_team[0].SetPosition(0, 3, 0)
 	pc.analysis.updateZones(gs)
