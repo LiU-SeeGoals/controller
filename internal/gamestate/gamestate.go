@@ -9,6 +9,7 @@ import (
 
 type GameState struct {
 	frameNumber int
+	timeCapture float64
 	blue_team   map[int]*Robot
 	yellow_team map[int]*Robot
 
@@ -85,6 +86,19 @@ func (gs *GameState) GetParsedGameState() *parsed_vision.ParsedFrame {
 	return &parsedFrame
 }
 
+func (gs *GameState) CalculateVelocities(prevGameState *GameState) {
+	if prevGameState == nil {
+		return
+	}
+
+	for i, robot := range gs.blue_team {
+		robot.CalculateVelocity(prevGameState.blue_team[i])
+	}
+	for i, robot := range gs.yellow_team {
+		robot.CalculateVelocity(prevGameState.yellow_team[i])
+	}
+}
+
 func NewGameState() *GameState {
 	gs := &GameState{}
 
@@ -95,6 +109,7 @@ func NewGameState() *GameState {
 
 	return gs
 }
+
 
 // String representation of game state
 func (gs *GameState) String() string {

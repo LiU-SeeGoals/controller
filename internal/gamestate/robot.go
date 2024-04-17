@@ -91,6 +91,16 @@ func (r *Robot) GetParsedRobot() *parsed_vision.Robot {
 
 }
 
+func (r *Robot) CalculateVelocity(prevRobot *Robot) {
+	if prevRobot == nil {
+		return
+	}
+
+	r.vel.SetVec(0, (r.pos.AtVec(0)-prevRobot.pos.AtVec(0)))
+	r.vel.SetVec(1, (r.pos.AtVec(1)-prevRobot.pos.AtVec(1)))
+	r.vel.SetVec(2, (r.pos.AtVec(2)-prevRobot.pos.AtVec(2)))
+}
+
 func (r *Robot) NormalizePosition(normalizationFactor float64) {
 	r.pos.SetVec(0, r.pos.AtVec(0)/normalizationFactor)
 	r.pos.SetVec(1, r.pos.AtVec(1)/normalizationFactor)

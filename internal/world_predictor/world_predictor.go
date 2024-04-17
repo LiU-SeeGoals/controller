@@ -89,6 +89,7 @@ func (wp *WorldPredictor) predictGameState() {
 
 	var packet *ssl_vision.SSL_WrapperPacket
 	var curGameState *gamestate.GameState = wp.buffer.GetGameStateInProgress()
+	var prevGameState *gamestate.GameState
 	var curFrameNumber uint32 = 0
 	var amountOfPackets uint32 = 0
 	robotNormalizationFactor := make(map[gamestate.Team]map[int]float64)
@@ -100,8 +101,9 @@ func (wp *WorldPredictor) predictGameState() {
 		packet = wp.ssl_receiver.Receive()
 
 		if wp.isGameStateDone(*packet.Detection.FrameNumber, curFrameNumber, amountOfPackets) {
-			// Normalize game state and place it in buffer.
 			wp.normalizeGameState(curGameState, robotNormalizationFactor, &ballNormalizationFactor)
+			curGameState.CalculateVelocities(prevGameState)
+
 			wp.old_gamestate.placeNewGameState(curGameState)
 			wp.buffer.PlaceGameState()
 
@@ -163,8 +165,6 @@ func (wp *WorldPredictor) predictRobot(packet *ssl_vision.SSL_WrapperPacket, g *
 		w = robotPosition.AtVec(2) + float64(robotDetection.GetOrientation()) * confidence
 		robot.SetPosition(x, y, w)
 
-		// Add speed calculation here
-		
 	}
 
 	for _, robotDetection := range yellow_team {
@@ -189,7 +189,6 @@ func (wp *WorldPredictor) predictRobot(packet *ssl_vision.SSL_WrapperPacket, g *
 		w = robotPosition.AtVec(2) + float64(robotDetection.GetOrientation()) * confidence
 		robot.SetPosition(x, y, w)
 
-		// Add speed calculation here
 	}
 }
 
