@@ -3,8 +3,8 @@ package action
 import (
 	"math"
 
-	"github.com/LiU-SeeGoals/controller/internal/datatypes"
 	"github.com/LiU-SeeGoals/proto_go/robot_action"
+	"github.com/LiU-SeeGoals/proto_go/simulation"
 	"gonum.org/v1/gonum/mat"
 )
 
@@ -19,7 +19,7 @@ import (
 type Action interface {
 	TranslateReal() *robot_action.Command
 	// Translates an action to parameters defined for grsim
-	TranslateGrsim(params *datatypes.Parameters)
+	TranslateSim() *simulation.RobotCommand
 	ToDTO() ActionDTO
 }
 
@@ -87,46 +87,54 @@ type Init struct {
 	Id int
 }
 
-//----------------------------------------------------------------------------------------------
-// TranslateGrsim
-//----------------------------------------------------------------------------------------------
+//------------------------------------------------------------------//
+// TranslateSim translates the action to simulation proto message	//
+// (there are a lot of wrapper proto messages :(                    //
+//------------------------------------------------------------------//
 
-func (m *Move) TranslateGrsim(params *datatypes.Parameters) {
-	params.RobotId = uint32(m.Id)
-	params.VelNormal = float32(m.Direction.AtVec(0))
-	params.VelTangent = float32(m.Direction.AtVec(1))
+func (s *Stop) TranslateSim() *simulation.RobotCommand {
+	id := uint32(s.Id)
+	angular := float32(0)
+	forward := float32(0)
+	left := float32(0)
+
+	localVel := &simulation.MoveLocalVelocity{
+		Forward: &forward,
+		Left:    &left,
+		Angular: &angular,
+	}
+
+	moveCommand := &simulation.RobotMoveCommand{
+		Command: &simulation.RobotMoveCommand_LocalVelocity{
+			LocalVelocity: localVel,
+		},
+	}
+
+	return &simulation.RobotCommand{
+		Id:          &id,
+		MoveCommand: moveCommand,
+	}
+
 }
 
-func (r *Rotate) TranslateGrsim(params *datatypes.Parameters) {
-	params.RobotId = uint32(r.Id)
-	params.VelAngular = float32(r.AngularVel)
-}
+func (mv *MoveTo) TranslateSim() *simulation.RobotCommand {
 
-func (k *Kick) TranslateGrsim(params *datatypes.Parameters) {
-	params.RobotId = uint32(k.Id)
-	params.KickSpeedX = float32(k.KickSpeed)
-}
-
-func (s *Stop) TranslateGrsim(params *datatypes.Parameters) {
-	params.RobotId = uint32(s.Id)
-	params.VelNormal = float32(0)
-	params.VelTangent = float32(0)
-}
-
-func (mt *MoveTo) TranslateGrsim(params *datatypes.Parameters) {
-
-	params.RobotId = uint32(mt.Id)
+	id := uint32(mv.Id)
 	diff := mat.NewVecDense(3, nil)
-	diff.SubVec(mt.Dest, mt.Pos)
-	params.Spinner = mt.Dribble
+	diff.SubVec(mv.Dest, mv.Pos)
+
+	dribblerSpeed := float32(0)
+	if mv.Dribble {
+		dribblerSpeed = 100 // in rpm, adjust as needed
+	}
 
 	goalAngle := math.Atan2(diff.AtVec(1), diff.AtVec(0))
-	currAngle := mt.Pos.AtVec(2)
+	currAngle := mv.Pos.AtVec(2)
 	inPosition := false
 
 	if math.Abs(diff.AtVec(0)) < 50 && math.Abs(diff.AtVec(1)) < 50 {
 		inPosition = true
-		goalAngle = mt.Dest.AtVec(2)
+		goalAngle = mv.Dest.AtVec(2)
 
 	}
 
@@ -143,25 +151,124 @@ func (mt *MoveTo) TranslateGrsim(params *datatypes.Parameters) {
 	angleDiff := normalizeAngle(goalAngle - currAngle)
 
 	// Set angular velocity
+	angular := float32(0)
 	if angleDiff > 0.2 {
-		params.VelAngular = 2 // Adjust this value as necessary
+		angular = 2 // Adjust this value as necessary
 	} else if angleDiff < -0.2 {
-		params.VelAngular = -2 // Adjust this value as necessary
+		angular = -2 // Adjust this value as necessary
 	}
 
 	// Set forward speed
+	forward := float32(0)
 	if math.Abs(angleDiff) < 0.3 && !inPosition {
-		params.VelTangent = 1 // Move forward when facing the goal
+		forward = 1 // Move forward when facing the goal
+	}
+
+	left := float32(0)
+
+	// Create the local velocity command
+	localVel := &simulation.MoveLocalVelocity{
+		Forward: &forward,
+		Left:    &left,
+		Angular: &angular,
+	}
+
+	// Create the move command and assign the local velocity to the oneof field
+	moveCommand := &simulation.RobotMoveCommand{
+		Command: &simulation.RobotMoveCommand_LocalVelocity{
+			LocalVelocity: localVel,
+		},
+	}
+
+	// Create the robot command with the move command
+	return &simulation.RobotCommand{
+		Id:            &id,
+		MoveCommand:   moveCommand,
+		DribblerSpeed: &dribblerSpeed,
 	}
 }
 
-func (d *Dribble) TranslateGrsim(params *datatypes.Parameters) {
-	params.RobotId = uint32(d.Id)
-	params.Spinner = d.Dribble
+func (d *Dribble) TranslateSim() *simulation.RobotCommand {
+	id := uint32(d.Id)
+	dribblerSpeed := float32(0)
+	if d.Dribble {
+		dribblerSpeed = 100 // in rpm, adjust as needed
+	}
+
+	return &simulation.RobotCommand{
+		Id:            &id,
+		DribblerSpeed: &dribblerSpeed,
+	}
 }
 
-func (i *Init) TranslateGrsim(params *datatypes.Parameters) {
-	params.RobotId = uint32(i.Id)
+func (k *Kick) TranslateSim() *simulation.RobotCommand {
+	id := uint32(k.Id)
+	kickSpeed := float32(k.KickSpeed) // in m/s
+
+	return &simulation.RobotCommand{
+		Id:        &id,
+		KickSpeed: &kickSpeed,
+	}
+}
+
+func (r *Rotate) TranslateSim() *simulation.RobotCommand {
+	id := uint32(r.Id)
+	angular := float32(r.AngularVel) // No angular velocity currently, adjust as needed
+	forward := float32(0)
+	left := float32(0)
+
+	localVel := &simulation.MoveLocalVelocity{
+		Forward: &forward,
+		Left:    &left,
+		Angular: &angular,
+	}
+
+	moveCommand := &simulation.RobotMoveCommand{
+		Command: &simulation.RobotMoveCommand_LocalVelocity{
+			LocalVelocity: localVel,
+		},
+	}
+
+	return &simulation.RobotCommand{
+		Id:          &id,
+		MoveCommand: moveCommand,
+	}
+}
+
+func (s *Move) TranslateSim() *simulation.RobotCommand {
+
+	id := uint32(s.Id)
+	angular := float32(0) // No angular velocity currently, adjust as needed
+	forward := float32(s.Direction.AtVec(0))
+	left := float32(s.Direction.AtVec(1))
+
+	// Create the local velocity command
+	localVel := &simulation.MoveLocalVelocity{
+		Forward: &forward,
+		Left:    &left,
+		Angular: &angular,
+	}
+
+	// Create the move command and assign the local velocity to the oneof field
+	moveCommand := &simulation.RobotMoveCommand{
+		Command: &simulation.RobotMoveCommand_LocalVelocity{
+			LocalVelocity: localVel,
+		},
+	}
+
+	// Create the robot command with the move command
+	return &simulation.RobotCommand{
+		Id:          &id,
+		MoveCommand: moveCommand,
+	}
+}
+
+// Do nothing, only implemented to satisfy interface
+func (i *Init) TranslateSim() *simulation.RobotCommand {
+	id := uint32(i.Id)
+	return &simulation.RobotCommand{
+		Id: &id,
+	}
 }
 
 //----------------------------------------------------------------------------------------------

@@ -77,6 +77,6 @@ func (ai *Ai) Update() {
 
 	ai.client.SendActions(actions)
 
-	//ai.TestActions()
+	ai.TestActions()
 
 }
