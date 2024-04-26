@@ -10,7 +10,7 @@ import (
 )
 
 // SSL Vision receiver
-type GrsimClient struct {
+type SimClient struct {
 	// Connection
 	conn *net.UDPConn
 
@@ -20,14 +20,14 @@ type GrsimClient struct {
 
 // Create new Grsim client
 // Address should be <ip>:<port>
-func NewGrsimClient(addr string) *GrsimClient {
+func NewSimClient(addr string) *SimClient {
 	fmt.Println("Creating new SimClient with address: ", addr)
 	udpAddr, err := net.ResolveUDPAddr("udp", addr)
 	if err != nil {
 		panic(err)
 	}
 
-	return &GrsimClient{
+	return &SimClient{
 		conn: nil,
 		addr: udpAddr,
 	}
@@ -35,7 +35,7 @@ func NewGrsimClient(addr string) *GrsimClient {
 
 // Connect/subscribe receiver to UDP multicast.
 // Note, this will NOT block.
-func (client *GrsimClient) Init() {
+func (client *SimClient) Init() {
 	conn, err := net.DialUDP("udp", nil, client.addr)
 	if err != nil {
 		panic(err)
@@ -43,12 +43,12 @@ func (client *GrsimClient) Init() {
 	client.conn = conn
 }
 
-func (client *GrsimClient) CloseConnection() {
+func (client *SimClient) CloseConnection() {
 	// Do nothing, only implemented to satisfy interface
 }
 
 // sends all the actions to the simulator
-func (client *GrsimClient) SendActions(actions []action.Action) (int, error) {
+func (client *SimClient) SendActions(actions []action.Action) (int, error) {
 	robotCommands := make([]*simulation.RobotCommand, 0)
 	for _, action := range actions {
 		robotCommands = append(robotCommands, action.TranslateSim())
@@ -62,7 +62,7 @@ func (client *GrsimClient) SendActions(actions []action.Action) (int, error) {
 	// return client.SendTestMessage()
 }
 
-func (client *GrsimClient) send(msg proto.Message) (int, error) {
+func (client *SimClient) send(msg proto.Message) (int, error) {
 	fmt.Println("Sending message")
 
 	data, err := proto.Marshal(msg)
@@ -77,7 +77,7 @@ func (client *GrsimClient) send(msg proto.Message) (int, error) {
 	return writeCount, nil
 }
 
-func (client *GrsimClient) SendTestMessage() (int, error) {
+func (client *SimClient) SendTestMessage() (int, error) {
 	// fmt.Println("Sending message")
 	idNum := uint32(3)
 	team := simulation.Team_BLUE
