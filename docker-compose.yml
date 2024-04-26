@@ -15,39 +15,36 @@ services:
       - "${WEB_VISION_UI_PORT}:${WEB_VISION_UI_PORT}"
     networks:
       - simulation
+    # network_mode: "host"
     depends_on:
       - grsim
 
-  ssl-game-controller:
-    image: robocupssl/ssl-game-controller:latest
-    command:
-      - "-visionAddress"
-      - "${SSL_VISION_MULTICAST_ADDR}:${SSL_VISION_MAIN_PORT}"
-      - "-trackerAddress"
-      - "${SSL_VISION_MULTICAST_ADDR}:${SSL_VISION_MAIN_PORT}"
-      - "-publishAddress"
-      - "${GC_PUBLISH_ADDR}:${GC_PUBLISH_PORT}"
-      - "-address"
-      - ":${WEB_GC_UI_PORT}"
-    ports:
-      - "${WEB_GC_UI_PORT}:${WEB_GC_UI_PORT}"
-    networks:
-      - simulation
-    depends_on:
-      - grsim
+  # ssl-game-controller:
+  #   image: robocupssl/ssl-game-controller:latest
+  #   command:
+  #     - "-visionAddress"
+  #     - "${SSL_VISION_MULTICAST_ADDR}:${SSL_VISION_MAIN_PORT}"
+  #     - "-trackerAddress"
+  #     - "${SSL_VISION_MULTICAST_ADDR}:${SSL_VISION_MAIN_PORT}"
+  #     - "-publishAddress"
+  #     - "${GC_PUBLISH_ADDR}:${GC_PUBLISH_PORT}"
+  #     - "-address"
+  #     - ":${WEB_GC_UI_PORT}"
+  #   ports:
+  #     - "${WEB_GC_UI_PORT}:${WEB_GC_UI_PORT}"
+  #   networks:
+  #     - simulation
+  #   depends_on:
+  #     - grsim
 
   grsim:
-    image: robocupssl/grsim:latest
-    # Uncomment to enable grsim UI via vnc:
-    #command: vnc
-    environment:
-      - VNC_PASSWORD=vnc
-      - VNC_GEOMETRY=1280x1024
+    image: roboticserlangen/simulatorcli:commit-6a4e1c06533b
+    command:
+      - "-geometry"
+      - "2020B"
     networks:
       - simulation
-    ports:
-      # vnc port
-      - "5900:5900"
+
 
   controller:
     build: .
@@ -60,18 +57,19 @@ services:
       - "8080:8080"
     networks:
       - simulation
+    # network_mode: "host"
 
-  game-viewer:
-    build: ../GameViewer
-    volumes:
-      - ../GameViewer/:/var/GameViewer
-    tty: true
-    ports:
-      - "5173:5173"
-    networks:
-      - simulation
-    depends_on:
-      - controller
+  # game-viewer:
+  #   build: ../GameViewer
+  #   volumes:
+  #     - ../GameViewer/:/var/GameViewer
+  #   tty: true
+  #   ports:
+  #     - "5173:5173"
+  #   networks:
+  #     - simulation
+  #   depends_on:
+  #     - controller
 
   #ssl-status-board:
   #  image: robocupssl/ssl-status-board:latest
@@ -88,6 +86,27 @@ services:
   #    - "8083:8083"
   #  networks:
   #    - simulation
+  # ssl-remote-control-yellow:
+  #   image: "robocupssl/ssl-remote-control:1.1.3"
+  #   command:
+  #     - "-address"
+  #     - ":8084"
+  #     - "-refereeAddress"
+  #     - "224.5.23.1:11003"
+  #     - "-team"
+  #     - "YELLOW"
+  #   networks:
+  #     - simulation
+  #   ports:
+  #     - "8084:8084/tcp"
 
 networks:
   simulation:
+
+# Is the port numbering the same as in grSim, i.e:
+# GRSIM_COMMAND_LISTEN_PORT           = 20011
+# GRSIM_BLUE_STATUS_SEND_PORT         = 30011
+# GRSIM_YELLOW_STATUS_SEND_PORT       = 30012
+# GRSIM_SIM_CONTROLLER_SEND_PORT      = 10300
+# GRSIM_BLUE_CONTROLLER_LISTEN_PORT   = 10301
+# GRSIM_YELLOW_CONTROLLER_LISTEN_PORT = 10302
