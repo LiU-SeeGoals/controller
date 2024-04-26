@@ -25,9 +25,9 @@ func main() {
 	listenKeyboard(robotId, client)
 }
 
-// Client for base station or for grsim
+// Client for base station or for sim
 func askForClient(port string) client.Client {
-	fmt.Println("Please enter the client type (g)grsim (default) or (b)base_station: ")
+	fmt.Println("Please enter the client type (g)sim (default) or (b)base_station: ")
 	var clientType string
 	fmt.Scanln(&clientType)
 	switch clientType {
@@ -41,8 +41,8 @@ func askForClient(port string) client.Client {
 		fmt.Println("Creating base station client.")
 		return client.NewBaseStationClient(basestationIP)
 	}
-	fmt.Println("Creating grsim client.")
-	return client.NewGrsimClient(port)
+	fmt.Println("Creating sim client.")
+	return client.NewSimClient(port)
 }
 
 func askForRobotId() int {
