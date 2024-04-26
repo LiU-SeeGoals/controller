@@ -140,7 +140,7 @@ func GetSSLClientAddress() string {
 }
 
 // Get SimAddress returns the Sim address from the config.
-func GetSimAddress() string {
+func GetSimControlAddress() string {
 	cfg := GetInstance()
 	return fmt.Sprintf("%s:%s", cfg.Sim.Address, cfg.Sim.SimControllerPort)
 }

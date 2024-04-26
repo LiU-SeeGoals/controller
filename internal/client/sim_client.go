@@ -58,11 +58,11 @@ func (client *SimClient) SendActions(actions []action.Action) (int, error) {
 		RobotCommands: robotCommands,
 	}
 
-	return client.send(RobotControl)
+	return client.Send(RobotControl)
 	// return client.SendTestMessage()
 }
 
-func (client *SimClient) send(msg proto.Message) (int, error) {
+func (client *SimClient) Send(msg proto.Message) (int, error) {
 	fmt.Println("Sending message")
 
 	data, err := proto.Marshal(msg)

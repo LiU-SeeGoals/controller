@@ -42,7 +42,7 @@ func askForClient(port string) client.Client {
 		return client.NewBaseStationClient(basestationIP)
 	}
 	fmt.Println("Creating sim client.")
-	return client.NewSimClient(port)
+	return client.NewBaseStationClient(port)
 }
 
 func askForRobotId() int {
