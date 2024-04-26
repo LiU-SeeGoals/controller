@@ -15,7 +15,6 @@ services:
       - "${WEB_VISION_UI_PORT}:${WEB_VISION_UI_PORT}"
     networks:
       - simulation
-    # network_mode: "host"
     depends_on:
       - sim
 
@@ -39,9 +38,9 @@ services:
 
   sim:
     image: roboticserlangen/simulatorcli:commit-6a4e1c06533b
-    command:
-      - "-geometry"
-      - "2020B"
+    environment:
+      GEOMETRY: "2020B"
+      REALISM: "RC2021"
     networks:
       - simulation
 
