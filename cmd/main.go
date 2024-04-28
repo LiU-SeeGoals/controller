@@ -30,7 +30,6 @@ import (
 	"os"
 
 	"github.com/LiU-SeeGoals/controller/internal/ai"
-	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
 	"github.com/LiU-SeeGoals/controller/internal/webserver"
 	"github.com/LiU-SeeGoals/controller/internal/world_predictor"
@@ -45,22 +44,25 @@ func main() {
 
 	go webserver.Once.Do(webserver.StartWebServer)
 
-	var grsim_addr = conf.GRSIM_ADDR + ":" + conf.GRSIM_COMMAND_LISTEN_PORT
-	var vision = conf.SSL_VISION_MULTICAST_ADDR + ":" + conf.SSL_VISION_MAIN_PORT
+	// var grsim_addr = conf.GRSIM_ADDR + ":" + conf.GRSIM_COMMAND_LISTEN_PORT
+	var grsim_addr = "127.0.0.1:10302"
+	var vision_addr = conf.SSL_VISION_MULTICAST_ADDR + ":" + conf.SSL_VISION_MAIN_PORT
 
 	fmt.Println(grsim_addr)
-	fmt.Println(vision)
+	fmt.Println(vision_addr)
 
-	gs := gamestate.NewGameState(grsim_addr, vision)
-	wp := world_predictor.NewWorldPredictor(config.GetSSLClientAddress(), gs)
-	ai := ai.NewAi(gs, config.GetGrSimAddress())
-	//testAction := createTestActionMove(gs)
-	// testAction2 := createTestActionInit(gs)
+	gs := gamestate.NewGameState()
+	wp := world_predictor.NewWorldPredictor(vision_addr, gs)
+	ai := ai.NewAi(grsim_addr, gs)
+	broadcast := true
 	for {
 		//gs.AddAction(testAction)
 		// gs.AddAction(testAction2)
 		wp.Update()
 		ai.Update()
+		if broadcast {
+			webserver.BroadcastGameState(gs.ToJson())
+		}
 
 		//fmt.Println(gs)
 	}

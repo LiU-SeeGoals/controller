@@ -16,10 +16,11 @@ type WorldPredictor struct {
 	gamestate            *gamestate.GameState
 }
 
-// // Updates position of robots and balls to their actual position
+// Updates position of robots and balls to their actual position
 func (wp *WorldPredictor) Update() {
+	fmt.Println("Updating world predictor")
 	var packet ssl_vision.SSL_WrapperPacket
-
+	fmt.Println(packet)
 	var detect *ssl_vision.SSL_DetectionFrame
 	var field *ssl_vision.SSL_GeometryFieldSize
 
@@ -29,10 +30,12 @@ func (wp *WorldPredictor) Update() {
 
 	geo := packet.GetGeometry()
 	if geo != nil {
+		fmt.Println("Got geometry")
 		field = geo.GetField()
 	}
 
 	for _, robot := range detect.GetRobotsBlue() {
+		fmt.Println("Robot: ", robot.GetRobotId())
 		x := float64(robot.GetX())
 		y := float64(robot.GetY())
 		w := float64(*robot.Orientation)
@@ -58,12 +61,15 @@ func (wp *WorldPredictor) Update() {
 	}
 
 	parseFieldData(wp.gamestate.Field, field)
-	wp.broadcastGameState()
+	// wp.broadcastGameState()
 	//wp.sendActions()
 }
 
 func (gs *WorldPredictor) handleIncoming(incomming []action.ActionDTO) {
 	fmt.Println("Received a new action (gamestate)")
+
+	// TODO also set manual control for the robot that is controlled
+
 	// for _, act := range incomming {
 	// 	switch act.Action {
 	// 	case robot_action.ActionType_MOVE_ACTION:
@@ -125,6 +131,7 @@ func parseFieldData(f *gamestate.Field, data *ssl_vision.SSL_GeometryFieldSize) 
 
 	f.FieldLength = data.GetFieldLength()
 	f.FieldWidth = data.GetFieldWidth()
+	fmt.Println("Field length: ", f.FieldLength)
 	f.BoundaryWidth = data.GetBoundaryWidth()
 	f.GoalDepth = data.GetGoalDepth()
 	f.GoalWidth = data.GetGoalWidth()
