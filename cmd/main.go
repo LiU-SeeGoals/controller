@@ -10,17 +10,17 @@ import (
 )
 
 func main() {
-	gs := gamestate.NewGameState(config.GetSSLClientAddress())
+	gs := gamestate.NewGameState()
 	worldPredictor := world_predictor.NewWorldPredictor(config.GetSSLClientAddress(), gs)
-	ai := ai.NewAi(gs, config.GetSimYellowTeamAddress())
+	ai := ai.NewAi(config.GetSimYellowTeamAddress(), gs)
 	sim_config := config.NewSimControl()
 
-	presentYellow := []int{0, 1, 2, 3, 4, 5, 6}
-	presentBlue := []int{0, 1, 2}
+	presentYellow := []int{0, 1, 2, 3, 4, 5}
+	presentBlue := []int{0, 1, 2,3,4,5}
 	sim_config.SetPresentRobots(presentYellow, presentBlue)
 	for {
 		worldPredictor.Update()
 		ai.Update()
-		fmt.Println(gs)
+		fmt.Println(*gs)
 	}
 }
