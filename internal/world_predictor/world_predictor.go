@@ -1,9 +1,8 @@
 package world_predictor
 
 import (
-	"fmt"
 
-	"github.com/LiU-SeeGoals/controller/internal/action"
+	// "github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
 	"github.com/LiU-SeeGoals/controller/internal/receiver"
 	"github.com/LiU-SeeGoals/controller/internal/webserver"
@@ -20,16 +19,16 @@ type WorldPredictor struct {
 func (wp *WorldPredictor) Update() {
 	var packet ssl_vision.SSL_WrapperPacket
 	var detect *ssl_vision.SSL_DetectionFrame
-	var field *ssl_vision.SSL_GeometryFieldSize
+	// var field *ssl_vision.SSL_GeometryFieldSize
 
 	packet = <-wp.ssl_receiver_channel
 
 	detect = packet.GetDetection()
 
-	geo := packet.GetGeometry()
-	if geo != nil {
-		field = geo.GetField()
-	}
+	// geo := packet.GetGeometry()
+	// if geo != nil {
+	// 	field = geo.GetField()
+	// }
 
 	for _, robot := range detect.GetRobotsBlue() {
 		x := float64(robot.GetX())
@@ -56,48 +55,48 @@ func (wp *WorldPredictor) Update() {
 		wp.gamestate.GetBall().SetPosition(x, y, z)
 	}
 
-	parseFieldData(wp.gamestate.Field, field)
-	// wp.broadcastGameState()
+	// parseFieldData(wp.gamestate.Field, field)
+	wp.broadcastGameState()
 	//wp.sendActions()
 }
 
-func (gs *WorldPredictor) handleIncoming(incomming []action.ActionDTO) {
-	fmt.Println("Received a new action (gamestate)")
-
-	// TODO also set manual control for the robot that is controlled
-
-	// for _, act := range incomming {
-	// 	switch act.Action {
-	// 	case robot_action.ActionType_MOVE_ACTION:
-	// 		pos := mat.NewVecDense(3, []float64{float64(act.PosX), float64(act.PosY), float64(act.PosW)})
-	// 		dest := mat.NewVecDense(3, []float64{float64(act.DestX), float64(act.DestY), float64(act.DestW)})
-	// 		gs.AddAction(&action.Move{act.Id, pos, dest, act.Dribble})
-	// 	case robot_action.ActionType_INIT_ACTION:
-	// 		gs.AddAction(&action.Init{act.Id})
-	// 	case robot_action.ActionType_ROTATE_ACTION:
-	// 		gs.AddAction(&action.Rotate{act.Id, int(act.PosW)})
-	// 	case robot_action.ActionType_KICK_ACTION:
-	// 		standardKickSpeed := 1
-	// 		gs.AddAction(&action.Kick{act.Id, standardKickSpeed})
-	// 	case robot_action.ActionType_MOVE_TO_ACTION:
-	// 		dest := mat.NewVecDense(3, []float64{float64(act.DestX), float64(act.DestY)})
-	// 		gs.AddAction(&action.SetNavigationDirection{act.Id, dest})
-	// 	case robot_action.ActionType_STOP_ACTION:
-	// 		gs.AddAction(&action.Stop{act.Id})
-	// 	}
-	// }
-
-}
+// func (gs *WorldPredictor) handleIncoming(incomming []action.ActionDTO) {
+// 	fmt.Println("Received a new action (gamestate)")
+//
+// 	// TODO also set manual control for the robot that is controlled
+//
+// 	// for _, act := range incomming {
+// 	// 	switch act.Action {
+// 	// 	case robot_action.ActionType_MOVE_ACTION:
+// 	// 		pos := mat.NewVecDense(3, []float64{float64(act.PosX), float64(act.PosY), float64(act.PosW)})
+// 	// 		dest := mat.NewVecDense(3, []float64{float64(act.DestX), float64(act.DestY), float64(act.DestW)})
+// 	// 		gs.AddAction(&action.Move{act.Id, pos, dest, act.Dribble})
+// 	// 	case robot_action.ActionType_INIT_ACTION:
+// 	// 		gs.AddAction(&action.Init{act.Id})
+// 	// 	case robot_action.ActionType_ROTATE_ACTION:
+// 	// 		gs.AddAction(&action.Rotate{act.Id, int(act.PosW)})
+// 	// 	case robot_action.ActionType_KICK_ACTION:
+// 	// 		standardKickSpeed := 1
+// 	// 		gs.AddAction(&action.Kick{act.Id, standardKickSpeed})
+// 	// 	case robot_action.ActionType_MOVE_TO_ACTION:
+// 	// 		dest := mat.NewVecDense(3, []float64{float64(act.DestX), float64(act.DestY)})
+// 	// 		gs.AddAction(&action.SetNavigationDirection{act.Id, dest})
+// 	// 	case robot_action.ActionType_STOP_ACTION:
+// 	// 		gs.AddAction(&action.Stop{act.Id})
+// 	// 	}
+// 	// }
+//
+// }
 
 func (wp *WorldPredictor) broadcastGameState() {
 	webserver.BroadcastGameState(wp.gamestate.ToJson())
-	// list of incoming actions
-	incomming := webserver.GetIncoming()
-
-	// If we got new actions --> then handle them
-	if len(incomming) > 0 {
-		wp.handleIncoming(incomming)
-	}
+	// // list of incoming actions
+	// incomming := webserver.GetIncoming()
+	//
+	// // If we got new actions --> then handle them
+	// if len(incomming) > 0 {
+	// 	wp.handleIncoming(incomming)
+	// }
 }
 
 // Start a SSL Vision receiver, returns a channel from
@@ -117,7 +116,7 @@ func NewWorldPredictor(sslReceiverAddress string, gs *gamestate.GameState) *Worl
 	return wp
 }
 
-// Parse geoemtry field data
+/* // Parse geoemtry field data
 func parseFieldData(f *gamestate.Field, data *ssl_vision.SSL_GeometryFieldSize) {
 	if data == nil {
 		return
@@ -210,5 +209,5 @@ func hasArc(name string, f *gamestate.Field) bool {
 		}
 	}
 
-	return false
-}
+	return false 
+}*/

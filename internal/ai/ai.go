@@ -20,7 +20,7 @@ type Ai struct {
 
 func NewAi(addr string, gamestate *gamestate.GameState) *Ai {
 	ai := &Ai{
-		preCalculator: nil,
+		preCalculator: NewPreCalculator(9, 6),
 		playFinder:    NewPlayFinder(),
 		roleAssigner:  NewRoleAssigner(),
 		roleExecutor:  NewRoleExecutor(),
@@ -66,10 +66,6 @@ func (ai *Ai) handleIncoming(incomming []action.ActionDTO) []action.Action {
 
 func (ai *Ai) Update() {
 	// --- AI ---
-	if ai.preCalculator == nil {
-		fmt.Println("Creating pre-calculator")
-		ai.preCalculator = NewPreCalculator(ai.gamestate.Field)
-	}
 	gameAnalysis := ai.preCalculator.Process(ai.gamestate)
 	plays := ai.playFinder.FindPlays(gameAnalysis)
 	roles := ai.roleAssigner.AssignRoles(plays)

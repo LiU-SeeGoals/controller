@@ -15,12 +15,12 @@ func main() {
 	ai := ai.NewAi(config.GetSimYellowTeamAddress(), gs)
 	sim_config := config.NewSimControl()
 
-	presentYellow := []int{0, 1, 2, 3, 4, 5, 6}
-	presentBlue := []int{0, 1, 2}
+	presentYellow := []int{0, 1, 2, 3, 4, 5}
+	presentBlue := []int{0, 1, 2,3,4,5}
 	sim_config.SetPresentRobots(presentYellow, presentBlue)
 	for {
 		worldPredictor.Update()
 		ai.Update()
-		fmt.Println(gs)
+		fmt.Println(*gs)
 	}
 }

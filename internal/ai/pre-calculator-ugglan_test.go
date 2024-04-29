@@ -45,10 +45,10 @@ func addRobots(gs *gamestate.GameState) {
 
 func TestUpdateZones(t *testing.T) {
 	// Create necessary objects
-	field := newMockField(2*NUM_COLS, 2*NUM_ROWS)
+	// field := newMockField(2*NUM_COLS, 2*NUM_ROWS)
 	gs := newMockGameState()
 	addRobots(gs)
-	pc := NewPreCalculator(field)
+	pc := NewPreCalculator(9,6)
 
 	// all robots are in the same zone
 	// so the control probability should be 0.5
@@ -91,8 +91,8 @@ func TestNewAnalysis(t *testing.T) {
 }
 
 func TestNewPreCalculator(t *testing.T) {
-	field := newMockField(6, 3)
-	pc := NewPreCalculator(field)
+	// field := newMockField(6, 3)
+	pc := NewPreCalculator(9, 6)
 
 	if pc.analysis == nil {
 		t.Errorf("Expected analysis to be initialized")

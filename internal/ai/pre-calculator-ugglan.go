@@ -1,9 +1,10 @@
 package ai
 
 import (
+	"math"
+
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
 	"gonum.org/v1/gonum/mat"
-	"math"
 )
 
 const NUM_ROWS = 3
@@ -15,9 +16,9 @@ type PreCalculator struct {
 }
 
 // Constructor for the PreCalculator
-func NewPreCalculator(field *gamestate.Field) *PreCalculator {
+func NewPreCalculator(fieldLength, fieldWidth int32) *PreCalculator {
 	pc := &PreCalculator{
-		analysis: newAnalysis(field.FieldLength, field.FieldWidth),
+		analysis: newAnalysis(fieldLength, fieldWidth),
 	}
 	return pc
 }
@@ -111,6 +112,7 @@ type GameAnalysis struct {
 	channelLength float32                   // length of each channelLength
 }
 
+// BROKEN
 func (an *GameAnalysis) updateZones(gamestateObj *gamestate.GameState) {
 
 	// Reset the zones
@@ -119,7 +121,6 @@ func (an *GameAnalysis) updateZones(gamestateObj *gamestate.GameState) {
 		an.zones[i].blue_robots = []*gamestate.Robot{}
 		an.zones[i].controlProbability = 0.49
 	}
-
 	// count blue robots in each zone and add them to the zone
 	for _, robot := range gamestateObj.Blue_team {
 		col := math.Floor(robot.GetPosition().AtVec(0) / float64(an.zoneLength))
@@ -152,7 +153,7 @@ func (an *GameAnalysis) updateZones(gamestateObj *gamestate.GameState) {
 }
 
 func (pc *PreCalculator) Process(gamestateObj *gamestate.GameState) *GameAnalysis {
-	pc.analysis.updateZones(gamestateObj)
+	// pc.analysis.updateZones(gamestateObj)
 	// pc.updateChannels(gamestateObj)
 	// pc.updatePossession(gamestateObj)
 
