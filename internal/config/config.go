@@ -23,8 +23,8 @@ type Config struct {
 	// SSL vision config
 	SSLVision ConfigSSLVision
 
-	// Grsim config
-	Grsim ConfigGrsim
+	// Sim config
+	Sim ConfigSim
 
 	// Game controller config
 	GC ConfigGameController
@@ -46,38 +46,38 @@ type ConfigSSLVision struct {
 	VizPort string `env:"SSL_VISION_VIZ_PORT,required"`
 }
 
-// Config struct for grsim
+// Config struct for sim
 //
 // Check the .env file to make changes.
 // Unless you have a good reason, you
 // shouldn't need to use this directly.
-type ConfigGrsim struct {
-	// Grsim address
-	Address string `env:"GRSIM_ADDR,required"`
+type ConfigSim struct {
+	// Sim address
+	Address string `env:"SIM_ADDR,required"`
 
 	// Command listen port.
 	// Accepts robots commands.
-	CommandPort string `env:"GRSIM_COMMAND_LISTEN_PORT,required"`
+	CommandPort string `env:"SIM_COMMAND_LISTEN_PORT,required"`
 
 	// Blue team status listen port.
 	// Use unknown.
-	BlueStatusPort string `env:"GRSIM_BLUE_STATUS_SEND_PORT,required"`
+	BlueStatusPort string `env:"SIM_BLUE_STATUS_SEND_PORT,required"`
 
 	// Yellow team status listen port.
 	// Use unknown.
-	YellowStatusPort string `env:"GRSIM_YELLOW_STATUS_SEND_PORT,required"`
+	YellowStatusPort string `env:"SIM_YELLOW_STATUS_SEND_PORT,required"`
 
 	// Simulation controller send port.
 	// Use unknown.
-	SimControllerPort string `env:"GRSIM_SIM_CONTROLLER_SEND_PORT,required"`
+	SimControllerPort string `env:"SIM_SIM_CONTROLLER_SEND_PORT,required"`
 
 	// Blue team controller listen port.
 	// Use unknown.
-	BlueControllerPort string `env:"GRSIM_BLUE_CONTROLLER_LISTEN_PORT,required"`
+	BlueControllerPort string `env:"SIM_BLUE_CONTROLLER_LISTEN_PORT,required"`
 
 	// Yellow team controller listen port.
 	// Use unknown.
-	YellowControllerPort string `env:"GRSIM_YELLOW_CONTROLLER_LISTEN_PORT,required"`
+	YellowControllerPort string `env:"SIM_YELLOW_CONTROLLER_LISTEN_PORT,required"`
 }
 
 // Config struct for game controller (GC)
@@ -139,8 +139,18 @@ func GetSSLClientAddress() string {
 	return fmt.Sprintf("%s:%s", cfg.SSLVision.Address, cfg.SSLVision.Port)
 }
 
-// GetGrSimAddress returns the GrSim address from the config.
-func GetGrSimAddress() string {
+// Get SimAddress returns the Sim address from the config.
+func GetSimControlAddress() string {
 	cfg := GetInstance()
-	return fmt.Sprintf("%s:%s", cfg.Grsim.Address, cfg.Grsim.CommandPort)
+	return fmt.Sprintf("%s:%s", cfg.Sim.Address, cfg.Sim.SimControllerPort)
+}
+
+func GetSimBlueTeamAddress() string {
+	cfg := GetInstance()
+	return fmt.Sprintf("%s:%s", cfg.Sim.Address, cfg.Sim.BlueControllerPort)
+}
+
+func GetSimYellowTeamAddress() string {
+	cfg := GetInstance()
+	return fmt.Sprintf("%s:%s", cfg.Sim.Address, cfg.Sim.YellowControllerPort)
 }

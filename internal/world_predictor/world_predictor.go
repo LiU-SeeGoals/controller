@@ -18,9 +18,7 @@ type WorldPredictor struct {
 
 // Updates position of robots and balls to their actual position
 func (wp *WorldPredictor) Update() {
-	fmt.Println("Updating world predictor")
 	var packet ssl_vision.SSL_WrapperPacket
-	fmt.Println(packet)
 	var detect *ssl_vision.SSL_DetectionFrame
 	var field *ssl_vision.SSL_GeometryFieldSize
 
@@ -30,12 +28,10 @@ func (wp *WorldPredictor) Update() {
 
 	geo := packet.GetGeometry()
 	if geo != nil {
-		fmt.Println("Got geometry")
 		field = geo.GetField()
 	}
 
 	for _, robot := range detect.GetRobotsBlue() {
-		fmt.Println("Robot: ", robot.GetRobotId())
 		x := float64(robot.GetX())
 		y := float64(robot.GetY())
 		w := float64(*robot.Orientation)

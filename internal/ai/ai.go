@@ -10,9 +10,8 @@ import (
 )
 
 type Ai struct {
-	gamestate *gamestate.GameState
-	// client *client.Client
-	client        *client.GrsimClient // TODO change to client.Client
+	gamestate     *gamestate.GameState
+	client        *client.SimClient // TODO change this
 	preCalculator *PreCalculator
 	playFinder    *PlayFinder
 	roleAssigner  *RoleAssigner
@@ -27,7 +26,7 @@ func NewAi(addr string, gamestate *gamestate.GameState) *Ai {
 		roleExecutor:  NewRoleExecutor(),
 
 		gamestate: gamestate,
-		client:    client.NewGrsimClient(addr),
+		client:    client.NewSimClient(addr),
 	}
 	ai.client.Init()
 	return ai

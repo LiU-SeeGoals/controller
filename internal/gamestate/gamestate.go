@@ -17,11 +17,6 @@ type GameState struct {
 	Ball *Ball
 	// Holds field data
 	Field *Field
-	
-	// Actions received from webGUI
-	// ManualActions []action.Action
-	// Which robots are controlled manually
-	// Manual  [TEAM_SIZE]bool
 }
 
 type GameStateDTO struct {
@@ -66,13 +61,10 @@ func (gs *GameState) SetRobot(robotId uint32, x, y, w float64, isBlue bool) {
 	}
 }
 
+// Updates position of robots and balls to their actual position
 func (gs *GameState) SetBall(x, y, z float64) {
 	gs.Ball.SetPosition(x, y, z)
 }
-
-// func (gs *GameState) AddAction(action action.Action) {
-// 	gs.ManualActions = append(gs.ManualActions, action)
-// }
 
 func (gs *GameState) GetBall() *Ball {
 	return gs.Ball
@@ -97,13 +89,13 @@ func NewGameState() *GameState {
 	gs := &GameState{}
 
 	gs.Ball = NewBall()
-
 	for i := 0; i < TEAM_SIZE; i++ {
 		gs.Blue_team[i] = NewRobot(i, Blue)
 		gs.Yellow_team[i] = NewRobot(i, Yellow)
 	}
 
 	return gs
+
 }
 
 // String representation of game state
