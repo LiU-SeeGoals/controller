@@ -44,8 +44,7 @@ func main() {
 
 	go webserver.Once.Do(webserver.StartWebServer)
 
-	// var grsim_addr = conf.GRSIM_ADDR + ":" + conf.GRSIM_COMMAND_LISTEN_PORT
-	var grsim_addr = "127.0.0.1:10302"
+	var grsim_addr = conf.GRSIM_ADDR + ":" + conf.GRSIM_COMMAND_LISTEN_PORT
 	var vision_addr = conf.SSL_VISION_MULTICAST_ADDR + ":" + conf.SSL_VISION_MAIN_PORT
 
 	fmt.Println(grsim_addr)
