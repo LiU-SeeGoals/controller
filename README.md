@@ -2,6 +2,49 @@
 
 # See Goals Robot Controller
 
+## Overview
+### What is the purpose of this repo?
+This is the repo containing the AI of the project. All the stratergies on how the robots will move and respond to opponents actions. This repo also is reponsible for the connections of our internal repos and external SSL repos.  
+
+## Setup 🚀
+
+### starting docker
+The prefered developmen environment is docker. To build the project run following command in project root.
+```
+docker compose build
+```
+```
+docker compose up
+```
+
+### webbpage
+The webpage can be found by typing following addres in your webbrowser after starting the containers:
+```
+http://localhost:5173/
+```
+
+### running main script
+Now the containers should be running. To run a program you need to enter the controller container. This can be done by running:
+```
+docker ps
+```
+Take note of the "container ID"
+Then run this command to enter the container:
+```
+docker exec -it {first 3 letters of container ID} sh
+``` 
+Now you are inside the container. To start the controller main program, go to 
+```
+~/cmd
+``` 
+And then run:
+```
+go run main.go
+``` 
+
+Now the main program have been started. 
+
+
 ## Project Structure
 
 Project structure is based on: https://github.com/golang-standards/project-layout
@@ -23,13 +66,13 @@ Following are the most important environment variables:
 * `SSL_VISION_MULTICAST_ADDR` - multicast IP used by SSL vision
 * `SSL_VISION_MAIN_PORT` - port used for tracking, detection, and geometry packets
 * `GRSIM_ADDR` - grsim IP address
-* `GRSIM_COMMAND_LISTEN_PORT` - grsim command listen port
+* `SIM_COMMAND_LISTEN_PORT` - sim command listen port
 * `GC_PUBLISH_ADDR` - multicast IP used by game controller
 * `GC_PUBLISH_PORT` - publish port used by game controller
 * `WEB_VISION_UI_PORT` - port on host machine for SSL vision UI when running docker
 * `WEB_GC_UI_PORT` - port on host machine for game controller UI when running docker
 
-## Docker environment
+<!-- ## Docker environment
 The docker environment should be used for local development. It uses grsim to simulate the game.
 
 To start the environment:
@@ -45,20 +88,4 @@ This will start the docker environment (in detached mode). The Seegoals controll
 Taking down the environment is done with
 ```sh
 ./scripts/compose_down.sh
-```
-
-Note, since the Seegoals controller and grsim run in different containers, grsim is **not** reachable at `127.0.0.1`. Instead, you should set `GRSIM_ADDR = "grsim"` in `.env`.
-
-(Docker creates aliases for containers in the same network, so `"grsim"` will resolve to the grsim container IP.)
-
-## Simulation
-Seegoals uses **grsim** for game simulation. It's possible to run grsim in headless mode (no UI) by using the docker environment.
-
-### Actions
-Send actions to GrSim by using AddActions() owned by GrsimClient. AddActions takes a slice of actions, ordered by robot id, and translates the action to parameters accepted by GrSim.
-
-Supported actions:
-- Dribble (cant be used simultaneously as other actions)
-- Kick
-- Move
-- Stop (useless)
+``` -->
