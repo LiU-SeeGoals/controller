@@ -18,7 +18,7 @@ type SimClient struct {
 	addr *net.UDPAddr
 }
 
-// Create new Grsim client
+// Create new sim client
 // Address should be <ip>:<port>
 func NewSimClient(addr string) *SimClient {
 	fmt.Println("Creating new SimClient with address: ", addr)
@@ -63,7 +63,7 @@ func (client *SimClient) SendActions(actions []action.Action) (int, error) {
 }
 
 func (client *SimClient) Send(msg proto.Message) (int, error) {
-	fmt.Println("Sending message")
+	// fmt.Println("Sending message")
 
 	data, err := proto.Marshal(msg)
 	if err != nil {

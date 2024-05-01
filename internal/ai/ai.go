@@ -70,20 +70,21 @@ func (ai *Ai) Update() {
 	plays := ai.playFinder.FindPlays(gameAnalysis)
 	roles := ai.roleAssigner.AssignRoles(plays)
 	actions := ai.roleExecutor.GetActions(roles, ai.gamestate)
-	
+
 	// --- Manual control ---
 	incomming := webserver.GetIncoming() // List of incoming actions
 	manualActions := []action.Action{}
 	if len(incomming) > 0 {
 		manualActions = ai.handleIncoming(incomming) // If we got new actions --> then handle them
 	}
-	
+
 	// Replace the manual actions with the calculated actions
 	for i := 0; i < len(manualActions); i++ {
 		actions[i] = manualActions[i]
 	}
 
-	ai.client.SendActions(actions) // Send actions
+	ai.client.SendActions(actions)                      // Send actions
+	webserver.BroadcastGameState(ai.gamestate.ToJson()) // NOTE temporary, will soon change to proto messages
 
 	//ai.TestActions()
 
