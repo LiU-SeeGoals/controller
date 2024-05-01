@@ -18,7 +18,7 @@ import (
 
 type Action interface {
 	TranslateReal() *robot_action.Command
-	// Translates an action to parameters defined for grsim
+	// Translates an action to parameters defined for sim
 	TranslateSim() *simulation.RobotCommand
 	ToDTO() ActionDTO
 }

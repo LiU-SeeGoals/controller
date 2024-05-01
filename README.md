@@ -65,7 +65,7 @@ Following are the most important environment variables:
 * `ENVIRONMENT` - environment flag to indicate what setup is being used
 * `SSL_VISION_MULTICAST_ADDR` - multicast IP used by SSL vision
 * `SSL_VISION_MAIN_PORT` - port used for tracking, detection, and geometry packets
-* `GRSIM_ADDR` - grsim IP address
+* `SIM_ADDR` - sim IP address
 * `SIM_COMMAND_LISTEN_PORT` - sim command listen port
 * `GC_PUBLISH_ADDR` - multicast IP used by game controller
 * `GC_PUBLISH_PORT` - publish port used by game controller
@@ -73,7 +73,7 @@ Following are the most important environment variables:
 * `WEB_GC_UI_PORT` - port on host machine for game controller UI when running docker
 
 <!-- ## Docker environment
-The docker environment should be used for local development. It uses grsim to simulate the game.
+The docker environment should be used for local development. It uses sim to simulate the game.
 
 To start the environment:
 ```sh

@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/LiU-SeeGoals/controller/internal/ai"
 	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
@@ -16,11 +14,11 @@ func main() {
 	sim_config := config.NewSimControl()
 
 	presentYellow := []int{0, 1, 2, 3, 4, 5}
-	presentBlue := []int{0, 1, 2,3,4,5}
+	presentBlue := []int{0, 1, 2, 3, 4, 5}
 	sim_config.SetPresentRobots(presentYellow, presentBlue)
 	for {
 		worldPredictor.Update()
 		ai.Update()
-		fmt.Println(*gs)
+		// fmt.Println(*gs)
 	}
 }
