@@ -8,22 +8,11 @@ This is the repo containing the AI of the project. All the stratergies on how th
 
 ## Setup 🚀
 
-### starting docker
-The prefered developmen environment is docker. To build the project run following command in project root.
-```
-docker compose build
-```
-```
-docker compose up
-```
+Go to `https://github.com/LiU-SeeGoals/docker` and follow the setup in the README.md for running the code in docker containers.
 
-### webbpage
-The webpage can be found by typing following addres in your webbrowser after starting the containers:
-```
-http://localhost:5173/
-```
+After following the guide you should now have the containers running and the `controller` repo (this repo) running locally. Now you can go to the next step below.
 
-### running main script
+### Running main script
 Now the containers should be running. To run a program you need to enter the controller container. This can be done by running:
 ```
 docker ps
@@ -35,14 +24,14 @@ docker exec -it {first 3 letters of container ID} sh
 ``` 
 Now you are inside the container. To start the controller main program, go to 
 ```
-~/cmd
+/var/controller/cmd
 ``` 
 And then run:
 ```
 go run main.go
 ``` 
 
-Now the main program have been started. 
+Now the main program have been started. When making changes on the code on the repo on your computer locally, the code in the container is directly linked to it. This means you don't need to restart the container. You only need to stop the process by ctrl+C and then start it again for the updated code to take effect in the container.
 
 
 ## Project Structure
