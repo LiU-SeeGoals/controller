@@ -36,11 +36,6 @@ func (gs *GameState) ToDTO() *GameStateDTO {
 	}
 
 	gameStateDTO.Ball = gs.Ball.ToDTO()
-	// gameStateDTO.Actions = make([]action.ActionDTO, len(gs.ManualActions))
-
-	// for i, act := range gs.ManualActions {
-	// 	gameStateDTO.Actions[i] = act.ToDTO()
-	// }
 
 	return &gameStateDTO
 }
@@ -53,8 +48,9 @@ func (gs *GameState) ToJson() []byte {
 	return gameStateJson
 }
 
-func (gs *GameState) SetRobot(robotId uint32, x, y, w float64, isBlue bool) {
-	if isBlue {
+
+func (gs *GameState) SetRobot(robotId uint32, x, y, w float64, team Team) {
+	if team == Blue {
 		gs.Blue_team[robotId].SetPosition(x, y, w)
 	} else {
 		gs.Yellow_team[robotId].SetPosition(x, y, w)
@@ -85,6 +81,7 @@ func (gs *GameState) GetRobot(id int, team Team) *Robot {
 	return gs.Yellow_team[id]
 }
 
+// Constructor for game state
 func NewGameState() *GameState {
 	gs := &GameState{}
 
