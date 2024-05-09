@@ -1,128 +1,106 @@
 package ai
 
 import (
-	"fmt"
-
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
 	"github.com/LiU-SeeGoals/controller/internal/webserver"
+	"gonum.org/v1/gonum/mat"
 )
 
 type Ai struct {
-	gamestate     *gamestate.GameState
-	client        *client.SimClient // TODO change this
-	preCalculator *PreCalculator
-	playFinder    *PlayFinder
-	roleAssigner  *RoleAssigner
-	roleExecutor  *RoleExecutor
+	gamestateObj *gamestate.GameState
+	client       *client.SimClient // TODO change this
+	ugglan       *PreCalculator
+	strutsen     *StrategyFinder
+	hackspetten  *RoleAssigner
+	fiskmasen    *RoleExecutor
 }
 
-func NewAi(addr string, gamestate *gamestate.GameState) *Ai {
+// Constructor for the ai, initializes the client
+// and the different components used in the decision pipeline
+func NewAi(addr string, gamestateObj *gamestate.GameState) *Ai {
 	ai := &Ai{
-		preCalculator: NewPreCalculator(9, 6),
-		playFinder:    NewPlayFinder(),
-		roleAssigner:  NewRoleAssigner(),
-		roleExecutor:  NewRoleExecutor(),
+		ugglan:      NewPreCalculator(9, 6),
+		strutsen:    NewPlayFinder(),
+		hackspetten: NewRoleAssigner(),
+		fiskmasen:   NewRoleExecutor(),
 
-		gamestate: gamestate,
-		client:    client.NewSimClient(addr),
+		gamestateObj: gamestateObj,
+		client:       client.NewSimClient(addr),
 	}
 	ai.client.Init()
 	return ai
 }
 
-func (ai *Ai) handleIncoming(incomming []action.ActionDTO) []action.Action {
-	fmt.Println("Received a new action (gamestate)")
-
-	// TODO also set manual control for the robot that is controlled
-
-	// for _, act := range incomming {
-	// 	switch act.Action {
-	// 	case robot_action.ActionType_MOVE_ACTION:
-	// 		pos := mat.NewVecDense(3, []float64{float64(act.PosX), float64(act.PosY), float64(act.PosW)})
-	// 		dest := mat.NewVecDense(3, []float64{float64(act.DestX), float64(act.DestY), float64(act.DestW)})
-	// 		gs.AddAction(&action.Move{act.Id, pos, dest, act.Dribble})
-	// 	case robot_action.ActionType_INIT_ACTION:
-	// 		gs.AddAction(&action.Init{act.Id})
-	// 	case robot_action.ActionType_ROTATE_ACTION:
-	// 		gs.AddAction(&action.Rotate{act.Id, int(act.PosW)})
-	// 	case robot_action.ActionType_KICK_ACTION:
-	// 		standardKickSpeed := 1
-	// 		gs.AddAction(&action.Kick{act.Id, standardKickSpeed})
-	// 	case robot_action.ActionType_MOVE_TO_ACTION:
-	// 		dest := mat.NewVecDense(3, []float64{float64(act.DestX), float64(act.DestY)})
-	// 		gs.AddAction(&action.SetNavigationDirection{act.Id, dest})
-	// 	case robot_action.ActionType_STOP_ACTION:
-	// 		gs.AddAction(&action.Stop{act.Id})
-	// 	}
-	// }
-	return nil
-
+// Returns one actions for each robot
+func (ai *Ai) decisionPipeline() []action.Action {
+	// --- decision pipeline ---
+	gameAnalysis := ai.ugglan.Analyse(ai.gamestateObj)
+	plays := ai.strutsen.FindStrategy(gameAnalysis)
+	roles := ai.hackspetten.AssignRoles(plays)
+	actions := ai.fiskmasen.GetActions(roles, ai.gamestateObj)
+	return actions
 }
 
-// Method used for testing actions,
-// a proper test should be implemented
-
-func (ai *Ai) Update() {
-	// --- AI ---
-	gameAnalysis := ai.preCalculator.Process(ai.gamestate)
-	plays := ai.playFinder.FindPlays(gameAnalysis)
-	roles := ai.roleAssigner.AssignRoles(plays)
-	actions := ai.roleExecutor.GetActions(roles, ai.gamestate)
-
+// Check if there are any new actions from the webserver
+// returns an empty list if no actions were sent
+func (ai *Ai) manualControl() []action.Action {
 	// --- Manual control ---
 	incomming := webserver.GetIncoming() // List of incoming actions
 	manualActions := []action.Action{}
 	if len(incomming) > 0 {
-		manualActions = ai.handleIncoming(incomming) // If we got new actions --> then handle them
+		// maybe do something with the incoming actions?
+	}
+	return manualActions
+}
+
+// Decides on new actions for the robots, then send them out with the use of the client
+// and broadcast the gamestate through the webserver to Gameviewer
+func (ai *Ai) CreateAndSendActions() {
+	calculatedActions := ai.decisionPipeline() // Calculate new actions
+
+	manualActions := ai.manualControl() // Manual control
+
+	// TODO: Replace calculated actions with the manual ones
+	// for the relevant robots. Automatic control should probably
+	// be disabled for some time for a robot that has received
+	actions := calculatedActions
+	if len(manualActions) > 0 {
+		actions = manualActions
 	}
 
-	// Replace the manual actions with the calculated actions
-	for i := 0; i < len(manualActions); i++ {
-		actions[i] = manualActions[i]
-	}
-
-	ai.client.SendActions(actions)                      // Send actions
-	webserver.BroadcastGameState(ai.gamestate.ToJson()) // NOTE temporary, will soon change to proto messages
-
-	//ai.TestActions()
+	actions = ai.GenerateMoveActions([]int{0, 1}, []struct{ x, y float64 }{{x: 0.0, y: 0.0}, {x: 0.0, y: 0.0}})
+	ai.client.SendActions(actions)                         // Send actions
+	webserver.BroadcastGameState(ai.gamestateObj.ToJson()) // NOTE temporary, will soon change to proto messages
 
 }
-func (ai *Ai) TestActions() {
 
+// This function can be used to test the MoveTo action.
+// To use it simply call it with a slice of ids for the robots
+// of interest and the corresponding destinations.
+// This will return a list of actions that can be sent to the client.
+func (ai *Ai) GenerateMoveActions(robotIDs []int, destinations []struct{ x, y float64 }) []action.Action {
 	var actionList []action.Action
-	act := &action.MoveTo{}
-	id := 4
 
-	robot := ai.gamestate.GetRobot(id, gamestate.Yellow)
-	act.Pos = robot.GetPosition()
-	act.Id = robot.GetID()
+	for i, robotID := range robotIDs {
+		if i >= len(destinations) {
+			break // Prevent out-of-range errors if there are more IDs than destinations
+		}
 
-	act.Dest = ai.gamestate.GetBall().GetPosition()
-	act.Dest.SetVec(0, 50)
-	act.Dest.SetVec(1, 0)
-	act.Dest.SetVec(2, 0)
-	act.Dribble = true
+		act := &action.MoveTo{}
+		robot := ai.gamestateObj.GetRobot(robotID, gamestate.Yellow)
+		act.Pos = robot.GetPosition()
+		act.Id = robot.GetID()
 
-	actionList = append(actionList, act)
+		destX := destinations[i].x
+		destY := destinations[i].y
+		act.Dest = mat.NewVecDense(3, []float64{destX, destY, 0})
 
-	//for id := 0; id < 6; id++ {
-	//
-	//	act := &action.Move{}
-	//
-	//	robot := ai.gamestate.GetRobot(id, false)
-	//	act.Pos = robot.GetPosition()
-	//	act.Id = robot.GetID()
-	//
-	//	act.Dest = ai.gamestate.GetBall().GetPosition() //mat.NewVecDense(3, nil)
-	//	//act.Dest.SetVec(0, 4)
-	//	//act.Dest.SetVec(1, 0)
-	//	//act.Dest.SetVec(2, 0)
-	//	act.Dribble = true
-	//
-	//	actionList = append(actionList, act)
-	//}
+		act.Dribble = true // Assuming all moves require dribbling
 
-	ai.client.SendActions(actionList)
+		actionList = append(actionList, act)
+	}
+
+	return actionList
 }

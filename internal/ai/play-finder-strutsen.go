@@ -1,17 +1,17 @@
 package ai
 
-type PlayFinder struct {
+type StrategyFinder struct {
 }
 
-func NewPlayFinder() *PlayFinder {
-	pf := &PlayFinder{}
+func NewPlayFinder() *StrategyFinder {
+	pf := &StrategyFinder{}
 	return pf
 }
 
 type Plays struct {
 }
 
-func (pf *PlayFinder) FindPlays(gameAnalysis *GameAnalysis) *Plays {
+func (pf *StrategyFinder) FindStrategy(gameAnalysis *GameAnalysis) *Plays {
 
 	return &Plays{}
 }
