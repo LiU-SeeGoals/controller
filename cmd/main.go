@@ -17,8 +17,8 @@ func main() {
 	presentBlue := []int{0, 1, 2, 3, 4, 5}
 	sim_config.SetPresentRobots(presentYellow, presentBlue)
 	for {
-		worldPredictor.Update()
-		ai.Update()
+		worldPredictor.UpdateGamestate()
+		ai.CreateAndSendActions()
 		// fmt.Println(*gs)
 	}
 }
