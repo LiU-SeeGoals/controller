@@ -6,12 +6,12 @@ import (
 )
 
 type RoleExecutor struct {
-	pathPlanner *PathPlanner
+	tornseglaren *PathPlanner
 }
 
 func NewRoleExecutor() *RoleExecutor {
 	re := &RoleExecutor{
-		pathPlanner: NewPathPlanner(),
+		tornseglaren: NewPathPlanner(),
 	}
 	return re
 }

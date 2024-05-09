@@ -152,7 +152,7 @@ func (an *GameAnalysis) updateZones(gamestateObj *gamestate.GameState) {
 	}
 }
 
-func (pc *PreCalculator) Process(gamestateObj *gamestate.GameState) *GameAnalysis {
+func (pc *PreCalculator) Analyse(gamestateObj *gamestate.GameState) *GameAnalysis {
 	// pc.analysis.updateZones(gamestateObj)
 	// pc.updateChannels(gamestateObj)
 	// pc.updatePossession(gamestateObj)
