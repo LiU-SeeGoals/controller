@@ -21,7 +21,7 @@ type Ai struct {
 // and the different components used in the decision pipeline
 func NewAi(addr string, gamestateObj *gamestate.GameState) *Ai {
 	ai := &Ai{
-		ugglan:      NewPreCalculator(9, 6),
+		ugglan:      NewPreCalculator(9, 6), // TODO: these are field dimensions, should be read from config
 		strutsen:    NewPlayFinder(),
 		hackspetten: NewRoleAssigner(),
 		fiskmasen:   NewRoleExecutor(),

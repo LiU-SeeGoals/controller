@@ -7,6 +7,7 @@ import (
 	"gonum.org/v1/gonum/mat"
 )
 
+// TODO: should be moved to a config file
 const NUM_ROWS = 3
 const NUM_COLS = 3
 const NUM_CHANNELS = 3
@@ -23,63 +24,6 @@ func NewPreCalculator(fieldLength, fieldWidth int32) *PreCalculator {
 	return pc
 }
 
-// GameAnalysis constructor
-func newAnalysis(fieldLength, fieldWidth int32) *GameAnalysis {
-	analysis := GameAnalysis{}
-	zones := [NUM_ROWS * NUM_COLS]Zone{}
-	analysis.zoneLength = float32(fieldLength) / float32(NUM_COLS)
-	analysis.zoneWidth = float32(fieldWidth) / float32(NUM_ROWS)
-
-	// Initialize the zones
-	for i := 0; i < NUM_ROWS; i++ {
-		for j := 0; j < NUM_COLS; j++ {
-			x := float64(j) * float64(fieldLength) / float64(NUM_COLS)
-			y := float64(i) * float64(fieldWidth) / float64(NUM_ROWS)
-			id := i*NUM_COLS + j
-			zones[id] = *newZone(id, *mat.NewVecDense(2, []float64{x, y}))
-		}
-	}
-	analysis.zones = zones
-
-	return &analysis
-}
-
-// Helper function to get the adjacent zones of a given zone
-func adjacentZones(id int) [4]int {
-	directions := [4]int{-1, 1, -NUM_COLS, NUM_COLS}
-	adjacentZones := [4]int{}
-	for i, direction := range directions {
-		// Check if the adjacent zone is in of bounds
-		if id+direction >= 0 || id+direction < NUM_ROWS*NUM_COLS {
-			adjacentZones[i] = id + direction
-		}
-	}
-	return adjacentZones
-}
-
-// Zone Constructor
-func newZone(id int, centerCoordinates mat.VecDense) *Zone {
-	zone := Zone{
-		id:                 id,
-		yellow_robots:      nil,
-		blue_robots:        nil,
-		controlProbability: 0.0,
-		centerCoordinates:  centerCoordinates,
-		adjacentZones:      adjacentZones(id),
-	}
-	return &zone
-}
-
-// Channel constructor
-func newChannel(id int, associatedZones [NUM_COLS]int) *Channel {
-	channel := Channel{
-		id:              id,
-		AssociatedZones: associatedZones,
-		robots:          nil,
-	}
-	return &channel
-}
-
 // The pitch is divied into 9 zones, numbered 0-8, starting from the defensive
 // end to the attacking end, and from (goalkeepers perspective) left to right across the field.
 type Zone struct {
@@ -93,12 +37,49 @@ type Zone struct {
 	length             float32            // height of the Zone
 }
 
+// Zone Constructor
+func newZone(id int, centerCoordinates mat.VecDense) *Zone {
+
+	// Helper function to get zone ids adjacent of a given zone
+	adjacentZones := func(id int) [4]int {
+		directions := [4]int{-1, 1, -NUM_COLS, NUM_COLS}
+		adjacentZones := [4]int{}
+		for i, direction := range directions {
+			// Check if the adjacent zone is in of bounds
+			if id+direction >= 0 || id+direction < NUM_ROWS*NUM_COLS {
+				adjacentZones[i] = id + direction
+			}
+		}
+		return adjacentZones
+	}
+
+	zone := Zone{
+		id:                 id,
+		yellow_robots:      nil,
+		blue_robots:        nil,
+		controlProbability: 0.0,
+		centerCoordinates:  centerCoordinates,
+		adjacentZones:      adjacentZones(id),
+	}
+	return &zone
+}
+
 // The pitch is divided into 3 channels, left wing(0), center channel(1), and right wing(2).
 type Channel struct {
 	id                 int                // id of channel. 0: left wing, 1: center channel, 2: right wing
 	AssociatedZones    [NUM_COLS]int      // IDs of zones that fall within this channel
 	robots             []*gamestate.Robot // robots in the channel
 	controlProbability float64            // probability of maintaining control of the ball in this channel
+}
+
+// Channel constructor
+func newChannel(id int, associatedZones [NUM_COLS]int) *Channel {
+	channel := Channel{
+		id:              id,
+		AssociatedZones: associatedZones,
+		robots:          nil,
+	}
+	return &channel
 }
 
 // Struct to hold the analysis of the gamestate
@@ -112,7 +93,28 @@ type GameAnalysis struct {
 	channelLength float32                   // length of each channelLength
 }
 
-// BROKEN
+// GameAnalysis constructor
+func newAnalysis(fieldLength, fieldWidth int32) *GameAnalysis {
+	analysis := GameAnalysis{}
+	zones := [NUM_ROWS * NUM_COLS]Zone{}
+	analysis.zoneLength = float32(fieldLength) / float32(NUM_COLS)
+	analysis.zoneWidth = float32(fieldWidth) / float32(NUM_ROWS)
+
+	// Initialize the zones
+	for i := 0; i < NUM_ROWS; i++ {
+		for j := 0; j < NUM_COLS; j++ {
+			centerX := float64(j) * float64(fieldLength) / float64(NUM_COLS)
+			centerY := float64(i) * float64(fieldWidth) / float64(NUM_ROWS)
+			id := i*NUM_COLS + j
+			zones[id] = *newZone(id, *mat.NewVecDense(2, []float64{centerX, centerY}))
+		}
+	}
+	analysis.zones = zones
+
+	return &analysis
+}
+
+// TODO: BROKEN
 func (an *GameAnalysis) updateZones(gamestateObj *gamestate.GameState) {
 
 	// Reset the zones
@@ -121,21 +123,31 @@ func (an *GameAnalysis) updateZones(gamestateObj *gamestate.GameState) {
 		an.zones[i].blue_robots = []*gamestate.Robot{}
 		an.zones[i].controlProbability = 0.49
 	}
-	// count blue robots in each zone and add them to the zone
+
+	// General function to handle robot assignment to zones
+	assignRobotToZone := func(robot *gamestate.Robot, team gamestate.Team) {
+		col := math.Floor(robot.GetPosition().AtVec(0) / float64(an.zoneLength))
+		row := math.Floor(robot.GetPosition().AtVec(1) / float64(an.zoneWidth))
+		index := int(col)*NUM_COLS + int(row)
+
+		if team == gamestate.Blue{
+			an.zones[index].blue_robots = append(an.zones[index].blue_robots, robot)
+		} else {
+			an.zones[index].yellow_robots = append(an.zones[index].yellow_robots, robot)
+		}
+	}
+
+	// Process blue robots
 	for _, robot := range gamestateObj.Blue_team {
-		col := math.Floor(robot.GetPosition().AtVec(0) / float64(an.zoneLength))
-		row := math.Floor(robot.GetPosition().AtVec(1) / float64(an.zoneWidth))
-		an.zones[int(row)*NUM_COLS+int(col)].blue_robots = append(an.zones[int(row)*NUM_COLS+int(col)].blue_robots, robot)
+		assignRobotToZone(robot, gamestate.Blue)
 	}
 
-	// count yellow robots in each zone
+	// Process yellow robots
 	for _, robot := range gamestateObj.Yellow_team {
-		col := math.Floor(robot.GetPosition().AtVec(0) / float64(an.zoneLength))
-		row := math.Floor(robot.GetPosition().AtVec(1) / float64(an.zoneWidth))
-		an.zones[int(row)*NUM_COLS+int(col)].yellow_robots = append(an.zones[int(row)*NUM_COLS+int(col)].yellow_robots, robot)
+		assignRobotToZone(robot, gamestate.Yellow)
 	}
 
-	// calculate the proportion of robots in each zone
+	// Calculate the proportion of robots in each zone
 	for i := range an.zones {
 		blueCount := len(an.zones[i].blue_robots)
 		yellowCount := len(an.zones[i].yellow_robots)
