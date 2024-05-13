@@ -28,6 +28,8 @@ func SimulatedAnnealing() {
 	presentBlue := []int{0, 1, 2, 3, 4, 5}
 	sim_controller.SetPresentRobots(presentYellow, presentBlue)
 
+	sim_controller.RobotStartPositionConfig1(len(presentYellow))
+
 	ssl_receiver.InitGameState(gs, 0)
 	start_time := time.Now().UnixMilli()
 	for {
