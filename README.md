@@ -104,7 +104,8 @@ Talks to the GameViewer, receives manual actions and sends gamestate and actions
 This is where we send actions to the robots, the client is indifferent to whether it's the real robots or the simulation.
 
 ## Code standard
-This project uses the [SeeGoals Go standard](https://github.com/LiU-SeeGoals/wiki/wiki/1.-Processes-&-Standards#seegoal-%F0%93%85%B0---go-coding-standard).
+This project uses the [SeeGoals Go standard](https://github.com/LiU-SeeGoals/wiki/wiki/1.1.-Processes-&-Standards#seegoal---go-coding-standard).
+
 
 ## Compiling/Building
 
