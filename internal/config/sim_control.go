@@ -114,7 +114,73 @@ func (sc *simControl) SetRobotDimentions() {
 }
 
 func (sc *simControl) RobotStartPositionConfig1(numberOfRobots int) {
-	fmt.Println("Not yet implemented")
+	orientation := float32(0.0) // Approx. 45 degrees in radians
+	vx := float32(0.0)          // Velocity towards x-axis
+	vy := float32(0.0)          // Velocity towards y-axis
+	vAngular := float32(0.0)    // Angular velocity
+
+	robotList := []*simulation.TeleportRobot{}
+
+	for i := 0; i < numberOfRobots; i++ {
+		idNum := uint32(i)
+		teamYellow := simulation.Team_YELLOW
+		teamBlue := simulation.Team_YELLOW
+		idYellow:= simulation.SimRobotId{
+			Id:   &idNum,
+			Team: &teamYellow, 
+		}
+
+		idBlue:= simulation.SimRobotId{
+			Id:   &idNum,
+			Team: &teamBlue,
+		}
+
+		xYellow := float32(-1.0)           // X-coordinate
+		xBlue := float32(1.0)           	 // X-coordinate
+		var y float32
+		if i % 2 == 0 {
+			y = float32(-1.0)           // Y-coordinate
+		} else {
+			y = float32(1.0)            // Y-coordinate
+		}
+
+		teleportRobotBlue := &simulation.TeleportRobot{
+			Id:          &idBlue,
+			X:           &xBlue,
+			Y:           &y,
+			Orientation: &orientation,
+			VX:          &vx,
+			VY:          &vy,
+			VAngular:    &vAngular,
+			Present:     nil,
+		}
+
+		teleportRobotYellow := &simulation.TeleportRobot{
+			Id:          &idYellow,
+			X:           &xYellow,
+			Y:           &y,
+			Orientation: &orientation,
+			VX:          &vx,
+			VY:          &vy,
+			VAngular:    &vAngular,
+			Present:     nil,
+		}
+
+		robotList = append(robotList, teleportRobotYellow)
+		robotList = append(robotList, teleportRobotBlue)
+	}
+	fmt.Println("RobotList: ", robotList)
+	simControl := &simulation.SimulatorControl{
+		TeleportRobot:   robotList,
+		TeleportBall:    nil,
+		SimulationSpeed: nil,
+	}
+
+	simCommand := &simulation.SimulatorCommand{
+		Control: simControl,
+		Config:  nil,
+	}
+	sc.client.Send(simCommand)
 }
 
 func (sc *simControl) RobotStartPositionConfig2(numberOfRobots int) {
