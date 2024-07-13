@@ -15,6 +15,7 @@ import (
 
 var (
 	prevChar rune
+    speed int
 )
 
 func main() {
@@ -27,7 +28,7 @@ func main() {
 
 // Client for base station or for sim
 func askForClient(port string) client.Client {
-	fmt.Println("Please enter the client type (g)sim (default) or (b)base_station: ")
+	fmt.Println("Please enter the client type (g)sim (default) or (b)ase station: ")
 	var clientType string
 	fmt.Scanln(&clientType)
 	switch clientType {
@@ -61,54 +62,65 @@ func askForRobotId() int {
 func sendCommand(robotId int, char rune, client client.Client) {
 	actions := []action.Action{}
 
-	if prevChar == char { // same command as last time -> no need to send it again
-		return
-	} else { // new command
-		switch char {
-		case 'w':
-			fmt.Println("Moving forward")
-			action := &action.Move{
-				Id:        robotId,
-				Direction: mat.NewVecDense(2, []float64{0.0, 1.0}),
-			}
-			actions = append(actions, action)
-		case 'l':
-			fmt.Println("Stopping robot")
-			action := &action.Stop{
-				Id: robotId,
-			}
-			actions = append(actions, action)
-		case 'a':
-			fmt.Println("Moving left")
-			action := &action.Move{
-				Id:        robotId,
-				Direction: mat.NewVecDense(2, []float64{1.0, 0.0}),
-			}
-			actions = append(actions, action)
-		case 's':
-			fmt.Println("Moving backward")
-			action := &action.Move{
-				Id:        robotId,
-				Direction: mat.NewVecDense(2, []float64{0.0, -1.0}),
-			}
-			actions = append(actions, action)
-		case 'd':
-			fmt.Println("Moving right")
-			action := &action.Move{
-				Id:        robotId,
-				Direction: mat.NewVecDense(2, []float64{-1.0, 0.0}),
-			}
-			actions = append(actions, action)
-		case 'k':
-			fmt.Println("Kicking")
-			action := &action.Kick{
-				Id: robotId,
-			}
-			actions = append(actions, action)
-		}
+    switch char {
+    case 'w':
+        fmt.Println("Moving forward")
+        action := &action.Move{
+            Id:        robotId,
+            Direction: mat.NewVecDense(2, []float64{0.0, 1.0}),
+        }
+        actions = append(actions, action)
+    case 'l':
+        fmt.Println("Stopping robot")
+        action := &action.Stop{
+            Id: robotId,
+        }
+        actions = append(actions, action)
+    case 'a':
+        fmt.Println("Moving left")
+        action := &action.Move{
+            Id:        robotId,
+            Direction: mat.NewVecDense(2, []float64{1.0, 0.0}),
+        }
+        actions = append(actions, action)
+    case 's':
+        fmt.Println("Moving backward")
+        action := &action.Move{
+            Id:        robotId,
+            Direction: mat.NewVecDense(2, []float64{0.0, -1.0}),
+        }
+        actions = append(actions, action)
+    case 'd':
+        fmt.Println("Moving right")
+        action := &action.Move{
+            Id:        robotId,
+            Direction: mat.NewVecDense(2, []float64{-1.0, 0.0}),
+        }
+        actions = append(actions, action)
+    case 'k':
+        fmt.Println("Kicking")
+        action := &action.Kick{
+            Id: robotId,
+        }
+        actions = append(actions, action)
+    case 'o':
+        speed -= 1
+        action := &action.Kick{
+            Id: robotId,
+            KickSpeed: speed,
+        }
+        fmt.Println("Speed decreased", speed)
+        actions = append(actions, action)
+    case 'p':
+        speed += 1
+        action := &action.Kick{
+            Id: robotId,
+            KickSpeed: speed,
+        }
+        fmt.Println("Speed increased", speed)
+        actions = append(actions, action)
 	}
 
-	prevChar = char
 	client.SendActions(actions)
 }
 
@@ -120,7 +132,7 @@ func listenKeyboard(robotId int, client client.Client) {
 	defer keyboard.Close()
 
 	fmt.Println("Use WASD to control the robot, L to stop all movement, K to kick.")
-	fmt.Println("Press <ESC> to exit.")
+	fmt.Println("Press <ESC> or 'q' to exit.")
 
 	for {
 		char, key, err := keyboard.GetKey()
@@ -128,7 +140,7 @@ func listenKeyboard(robotId int, client client.Client) {
 			panic(err)
 		}
 
-		if key == keyboard.KeyEsc {
+		if key == keyboard.KeyEsc || char == 'q' {
 			break
 		}
 
