@@ -87,6 +87,10 @@ type Init struct {
 	Id int
 }
 
+type Ping struct {
+    Id int
+}
+
 //------------------------------------------------------------------//
 // TranslateSim translates the action to simulation proto message	//
 // (there are a lot of wrapper proto messages :(                    //
@@ -271,6 +275,14 @@ func (i *Init) TranslateSim() *simulation.RobotCommand {
 	}
 }
 
+// Do nothing, only implemented to satisfy interface
+func (i *Ping) TranslateSim() *simulation.RobotCommand {
+	id := uint32(i.Id)
+	return &simulation.RobotCommand{
+		Id: &id,
+	}
+}
+
 //----------------------------------------------------------------------------------------------
 // TranslateReal
 //----------------------------------------------------------------------------------------------
@@ -340,6 +352,14 @@ func (s *Move) TranslateReal() *robot_action.Command {
 	return command
 }
 
+func (s *Ping) TranslateReal() *robot_action.Command {
+	command := &robot_action.Command{
+		CommandId: robot_action.ActionType_MOVE_ACTION,
+		RobotId:   int32(s.Id),
+	}
+	return command
+}
+
 //----------------------------------------------------------------------------------------------
 // ToDTO
 //----------------------------------------------------------------------------------------------
@@ -395,5 +415,12 @@ func (s *Move) ToDTO() ActionDTO {
 		DestX:  int32(s.Direction.AtVec(0)),
 		DestY:  int32(s.Direction.AtVec(1)),
 		DestW:  0,
+	}
+}
+
+func (s *Ping) ToDTO() ActionDTO {
+	return ActionDTO{
+		Action: robot_action.ActionType_PING,
+		Id:     s.Id,
 	}
 }

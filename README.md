@@ -72,6 +72,9 @@ Following are the most important environment variables:
 * `WEB_VISION_UI_PORT` - port on host machine for SSL vision UI when running docker
 * `WEB_GC_UI_PORT` - port on host machine for game controller UI when running docker
 
+## Updating protobuf files
+Follow the instructions [here](https://github.com/LiU-SeeGoals/proto-messages) when you've updated the actual protobuf files. To make this project use the newest files from the proto-go repo, run `go get github.com/LiU-SeeGoals/proto_go@main`.
+
 <!-- ## Docker environment
 The docker environment should be used for local development. It uses sim to simulate the game.
 
