@@ -3,6 +3,8 @@ package ai
 import (
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
+	"gonum.org/v1/gonum/mat"
+	"math"
 )
 
 type RoleExecutor struct {
@@ -36,4 +38,22 @@ func (re *RoleExecutor) GetActions(roles *Roles, gs *gamestate.GameState) []acti
 	actionList = append(actionList, act)
 
 	return actionList
+}
+
+func (re *RoleExecutor) relativeAngle(posA, posB *mat.VecDense) float64 {
+	diff := mat.NewVecDense(3, nil)
+	diff.SubVec(posB, posA)
+
+	goalAngle := math.Atan2(diff.AtVec(1), diff.AtVec(0))
+	currAngle := posA.AtVec(2)
+
+	normalizeAngle := func(angle float64) float64 {
+		angle = math.Mod(angle+math.Pi, 2*math.Pi)
+		if angle < 0 {
+			angle += 2 * math.Pi
+		}
+		return angle - math.Pi
+	}
+
+	return normalizeAngle(goalAngle - currAngle)
 }
