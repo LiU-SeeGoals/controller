@@ -3,8 +3,6 @@ package gamestate
 import (
 	"encoding/json"
 	"fmt"
-
-	"github.com/LiU-SeeGoals/controller/internal/action"
 )
 
 const TEAM_SIZE = 12
@@ -20,23 +18,19 @@ type GameState struct {
 }
 
 type GameStateDTO struct {
-	BlueTeam   [TEAM_SIZE]RobotDTO
-	YellowTeam [TEAM_SIZE]RobotDTO
-	Ball       BallDTO
-	Actions    []action.ActionDTO
+	RobotPositions [2 * TEAM_SIZE]RobotDTO
+	BallPosition   BallDTO
 }
 
 func (gs *GameState) ToDTO() *GameStateDTO {
-
 	gameStateDTO := GameStateDTO{}
-
 	for i := 0; i < TEAM_SIZE; i++ {
-		gameStateDTO.BlueTeam[i] = gs.GetRobot(i, Blue).ToDTO()
-		gameStateDTO.YellowTeam[i] = gs.GetRobot(i, Yellow).ToDTO()
+		gameStateDTO.RobotPositions[i] = gs.GetRobot(i, Blue).ToDTO()
 	}
-
-	gameStateDTO.Ball = gs.Ball.ToDTO()
-
+	for i := 0; i < TEAM_SIZE; i++ {
+		gameStateDTO.RobotPositions[TEAM_SIZE+i] = gs.GetRobot(i, Yellow).ToDTO()
+	}
+	gameStateDTO.BallPosition = gs.Ball.ToDTO()
 	return &gameStateDTO
 }
 
@@ -47,7 +41,6 @@ func (gs *GameState) ToJson() []byte {
 	}
 	return gameStateJson
 }
-
 
 func (gs *GameState) SetRobot(robotId uint32, x, y, w float64, team Team) {
 	if team == Blue {
