@@ -71,8 +71,22 @@ func (ai *Ai) CreateAndSendActions() {
 	}
 
 	actions = ai.GenerateMoveActions([]int{0, 1}, []struct{ x, y float64 }{{x: 0.0, y: 0.0}, {x: 0.0, y: 0.0}})
-	ai.client.SendActions(actions)                         // Send actions
-	webserver.BroadcastGameState(ai.gamestateObj.ToJson()) // NOTE temporary, will soon change to proto messages
+	ai.client.SendActions(actions) // Send actions
+
+	// Make it correct type for the website
+	actionTDO := make([]action.ActionDTO, len(actions))
+	for i, obj := range actions {
+		actionTDO[i] = obj.ToDTO()
+	}
+	terminal_messages := []string{"message 1", "message 2"}
+	var gamestateDTO = ai.gamestateObj.ToDTO()
+	var websiteMessage = webserver.WebsiteDTO{
+		RobotPositions: gamestateDTO.RobotPositions,
+		BallPosition:   gamestateDTO.BallPosition,
+		RobotActions:   actionTDO,
+		TerminalLog:    terminal_messages,
+	}
+	webserver.BroadcastGameState(websiteMessage)
 
 }
 
