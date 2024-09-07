@@ -1,5 +1,7 @@
 github.com/LiU-SeeGoals/proto_go v0.1.3-0.20240422095541-37613a76d9c3 h1:UsDLiDc1md2Vpa3nrfUCtfF/5zN4Ss4JJ49r9cgA/RI=
 github.com/LiU-SeeGoals/proto_go v0.1.3-0.20240422095541-37613a76d9c3/go.mod h1:4XN5g5VNfXFenrBIzCIIf0ublFfwN2AjdvG11V9oHa0=
+github.com/LiU-SeeGoals/proto_go v0.1.3-0.20240717164152-af5850e7d20c h1:puxRh2PRMNuUnTNGWXvIe/CSzR/9o9G2ekPfIPeQXM8=
+github.com/LiU-SeeGoals/proto_go v0.1.3-0.20240717164152-af5850e7d20c/go.mod h1:4XN5g5VNfXFenrBIzCIIf0ublFfwN2AjdvG11V9oHa0=
 github.com/caarlos0/env/v10 v10.0.0 h1:yIHUBZGsyqCnpTkbjk8asUlx6RFhhEs+h7TOBdgdzXA=
 github.com/caarlos0/env/v10 v10.0.0/go.mod h1:ZfulV76NvVPw3tm591U4SwL3Xx9ldzBP9aGxzeN7G18=
 github.com/eiannone/keyboard v0.0.0-20220611211555-0d226195f203 h1:XBBHcIb256gUJtLmY22n99HaZTz+r2Z51xUPi01m3wg=
