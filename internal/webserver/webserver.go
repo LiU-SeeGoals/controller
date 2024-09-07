@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
+	"github.com/LiU-SeeGoals/controller/internal/gamestate"
 	"github.com/gorilla/websocket"
 )
 
@@ -157,6 +158,21 @@ func (server *WebServer) receiveData() {
 // The WebServer class is a singleton class, so you can only have one instance of it,
 // and the functions under handles all of it so multiple instances are not created
 
+type WebsiteDTO struct {
+	RobotPositions [2 * gamestate.TEAM_SIZE]gamestate.RobotDTO
+	BallPosition   gamestate.BallDTO
+	RobotActions   []action.ActionDTO
+	TerminalLog    []string
+}
+
+func toJson(input WebsiteDTO) []byte {
+	output, err := json.Marshal(input)
+	if err != nil {
+		fmt.Println("The WebsiteDTO packet could not be marshalled to JSON.")
+	}
+	return output
+}
+
 // Returns a list of all new incoming actions
 func GetIncoming() []action.ActionDTO {
 	webserver := getInstance()
@@ -170,7 +186,8 @@ func GetIncoming() []action.ActionDTO {
 }
 
 // Broadcasts the game state to all connected clients
-func BroadcastGameState(gameStateJson []byte) {
+func BroadcastGameState(message WebsiteDTO) {
+	gameStateJson := toJson(message)
 	webserver := getInstance()
 	webserver.gameStateQueueMutex.Lock()
 	webserver.gameStatePacketQueue = append(webserver.gameStatePacketQueue, gameStateJson)
