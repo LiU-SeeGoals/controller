@@ -58,6 +58,7 @@ func (ai *Ai) manualControl() []action.Action {
 // Decides on new actions for the robots, then send them out with the use of the client
 // and broadcast the gamestate through the webserver to Gameviewer
 func (ai *Ai) CreateAndSendActions() {
+
 	calculatedActions := ai.decisionPipeline() // Calculate new actions
 
 	manualActions := ai.manualControl() // Manual control
@@ -92,9 +93,9 @@ func (ai *Ai) CreateAndSendActions() {
 
 // This function can be used to test the MoveTo action.
 // To use it simply call it with a slice of ids for the robots
-// of interest and the corresponding destinations.
-// This will return a list of actions that can be sent to the client.
 func (ai *Ai) GenerateMoveActions(robotIDs []int, destinations []struct{ x, y float64 }) []action.Action {
+	// of interest and the corresponding destinations.
+	// This will return a list of actions that can be sent to the client.
 	var actionList []action.Action
 
 	for i, robotID := range robotIDs {
@@ -102,7 +103,7 @@ func (ai *Ai) GenerateMoveActions(robotIDs []int, destinations []struct{ x, y fl
 			break // Prevent out-of-range errors if there are more IDs than destinations
 		}
 
-		act := &action.MoveTo{}
+		act := action.MoveTo{}
 		robot := ai.gamestateObj.GetRobot(robotID, gamestate.Yellow)
 		act.Pos = robot.GetPosition()
 		act.Id = robot.GetID()
@@ -113,7 +114,7 @@ func (ai *Ai) GenerateMoveActions(robotIDs []int, destinations []struct{ x, y fl
 
 		act.Dribble = true // Assuming all moves require dribbling
 
-		actionList = append(actionList, act)
+		actionList = append(actionList, &act)
 	}
 
 	return actionList
