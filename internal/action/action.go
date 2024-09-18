@@ -21,7 +21,6 @@ type Action interface {
 	// Translates an action to parameters defined for sim
 	TranslateSim() *simulation.RobotCommand
 	ToDTO() ActionDTO
-}
 
 type ActionDTO struct {
 	// The id of the robot.
@@ -38,7 +37,6 @@ type ActionDTO struct {
 	// Decides if the robot should dribble while moving
 	Dribble bool `json:"Dribble"`
 }
-
 //----------------------------------------------------------------------------------------------
 // Actions structs
 //----------------------------------------------------------------------------------------------
@@ -85,6 +83,10 @@ type Move struct {
 
 type Init struct {
 	Id int
+}
+
+type Ping struct {
+    Id int
 }
 
 //------------------------------------------------------------------//
@@ -271,6 +273,15 @@ func (i *Init) TranslateSim() *simulation.RobotCommand {
 	}
 }
 
+
+// Do nothing, only implemented to satisfy interface
+func (i *Ping) TranslateSim() *simulation.RobotCommand {
+	id := uint32(i.Id)
+	return &simulation.RobotCommand{
+		Id: &id,
+	}
+}
+
 //----------------------------------------------------------------------------------------------
 // TranslateReal
 //----------------------------------------------------------------------------------------------
@@ -340,6 +351,15 @@ func (s *Move) TranslateReal() *robot_action.Command {
 	return command
 }
 
+
+func (s *Ping) TranslateReal() *robot_action.Command {
+	command := &robot_action.Command{
+		CommandId: robot_action.ActionType_MOVE_ACTION,
+		RobotId:   int32(s.Id),
+	}
+	return command
+}
+
 //----------------------------------------------------------------------------------------------
 // ToDTO
 //----------------------------------------------------------------------------------------------
@@ -397,3 +417,12 @@ func (s *Move) ToDTO() ActionDTO {
 		DestW:  0,
 	}
 }
+
+
+func (s *Ping) ToDTO() ActionDTO {
+	return ActionDTO{
+		Action: robot_action.ActionType_PING,
+		Id:     s.Id,
+	}
+}
+
