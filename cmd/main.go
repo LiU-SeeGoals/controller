@@ -4,7 +4,7 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/ai"
 	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
-	"github.com/LiU-SeeGoals/controller/internal/world_predictor"
+	"github.com/LiU-SeeGoals/controller/internal/receiver"
 )
 
 func main() {
