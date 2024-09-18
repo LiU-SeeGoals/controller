@@ -9,15 +9,15 @@ import (
 
 func main() {
 	gs := gamestate.NewGameState()
-	worldPredictor := world_predictor.NewWorldPredictor(config.GetSSLClientAddress(), gs)
+	ssl_receiver := receiver.NewSSLReceiver(config.GetSSLClientAddress())
 	ai := ai.NewAi(config.GetSimYellowTeamAddress(), gs)
-	sim_config := config.NewSimControl()
+	sim_controller := config.NewSimControl()
 
 	presentYellow := []int{0, 1, 2, 3, 4, 5}
 	presentBlue := []int{0, 1, 2, 3, 4, 5}
-	sim_config.SetPresentRobots(presentYellow, presentBlue)
+	sim_controller.SetPresentRobots(presentYellow, presentBlue)
 	for {
-		worldPredictor.UpdateGamestate()
+		ssl_receiver.UpdateGamestate(gs)
 		ai.CreateAndSendActions()
 		// fmt.Println(*gs)
 	}

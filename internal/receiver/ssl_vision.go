@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"net"
 
-	"github.com/LiU-SeeGoals/controller/internal/gamestate"
 	"github.com/LiU-SeeGoals/proto_go/ssl_vision"
 	"google.golang.org/protobuf/proto"
 )
@@ -78,10 +77,15 @@ func (r *SSLConnection) Receive(packetChan chan *ssl_vision.SSL_WrapperPacket) {
 type SSLReceiver struct {
 	ssl         *SSLConnection
 	ssl_channel chan *ssl_vision.SSL_WrapperPacket
-	gamestate   *gamestate.GameState
 }
 
-func (reciver *SSLReceiver) UpdateGamestate() {
+type GameState interface {
+	SetYellowRobot(robotId uint32, x, y, w float64)
+	SetBlueRobot(robotId uint32, x, y, w float64)
+	SetBall(x, y, z float64)
+}
+
+func (reciver *SSLReceiver) UpdateGamestate(gs *GameState) {
 	var packet *ssl_vision.SSL_WrapperPacket
 
 	packet = <-reciver.ssl_channel
@@ -92,7 +96,7 @@ func (reciver *SSLReceiver) UpdateGamestate() {
 		y := float64(robot.GetY())
 		w := float64(*robot.Orientation)
 
-		reciver.gamestate.SetRobot(robot.GetRobotId(), x, y, w, gamestate.Blue)
+		gs.SetYellowRobot(robot.GetRobotId(), x, y, w)
 	}
 
 	for _, robot := range detect.GetRobotsYellow() {
@@ -100,7 +104,7 @@ func (reciver *SSLReceiver) UpdateGamestate() {
 		y := float64(robot.GetY())
 		w := float64(*robot.Orientation)
 
-		reciver.gamestate.SetRobot(robot.GetRobotId(), x, y, w, gamestate.Yellow)
+		gs.SetBlueRobot(robot.GetRobotId(), x, y, w)
 	}
 
 	for _, ball := range detect.GetBalls() {
@@ -108,7 +112,7 @@ func (reciver *SSLReceiver) UpdateGamestate() {
 		y := float64(ball.GetY())
 		z := float64(ball.GetZ())
 
-		reciver.gamestate.SetBall(x, y, z)
+		gs.SetBall(x, y, z)
 	}
 
 }
@@ -120,10 +124,11 @@ func (receiver *SSLReceiver) Connect() {
 	go receiver.ssl.Receive(receiver.ssl_channel)
 }
 
-func NewSSLReceiver(sslReceiverAddress string, gs *gamestate.GameState) *SSLReceiver {
-	return &SSLReceiver{
+func NewSSLReceiver(sslReceiverAddress string) *SSLReceiver {
+	receiver := &SSLReceiver{
 		ssl:         NewSSLConnection(sslReceiverAddress),
 		ssl_channel: make(chan *ssl_vision.SSL_WrapperPacket),
-		gamestate:   gs,
 	}
+	receiver.Connect()
+	return receiver
 }

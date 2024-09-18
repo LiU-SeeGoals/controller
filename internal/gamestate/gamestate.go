@@ -42,12 +42,12 @@ func (gs *GameState) ToJson() []byte {
 	return gameStateJson
 }
 
-func (gs *GameState) SetRobot(robotId uint32, x, y, w float64, team Team) {
-	if team == Blue {
-		gs.Blue_team[robotId].SetPosition(x, y, w)
-	} else {
-		gs.Yellow_team[robotId].SetPosition(x, y, w)
-	}
+func (gs *GameState) SetYellowRobot(robotId uint32, x, y, w float64) {
+	gs.Yellow_team[robotId].SetPosition(x, y, w)
+}
+
+func (gs *GameState) SetBlueRobot(robotId uint32, x, y, w float64) {
+	gs.Blue_team[robotId].SetPosition(x, y, w)
 }
 
 // Updates position of robots and balls to their actual position
