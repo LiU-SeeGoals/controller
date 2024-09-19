@@ -3,9 +3,10 @@ package gamestate
 import (
 	"encoding/json"
 	"fmt"
+	"time"
 )
 
-const TEAM_SIZE = 12
+const TEAM_SIZE = 11
 
 type GameState struct {
 	Blue_team   [TEAM_SIZE]*Robot
@@ -15,6 +16,9 @@ type GameState struct {
 	Ball *Ball
 	// Holds field data
 	Field *Field
+
+	MessageReceived time.Time
+	LagTime         time.Duration
 }
 
 type GameStateDTO struct {
@@ -53,6 +57,22 @@ func (gs *GameState) SetBlueRobot(robotId uint32, x, y, w float64) {
 // Updates position of robots and balls to their actual position
 func (gs *GameState) SetBall(x, y, z float64) {
 	gs.Ball.SetPosition(x, y, z)
+}
+
+func (gs *GameState) SetMessageReceivedTime(time time.Time) {
+	gs.MessageReceived = time
+
+}
+func (gs *GameState) GetMessageReceivedTime() time.Time {
+	return gs.MessageReceived
+}
+
+func (gs *GameState) SetLagTime(lagTime time.Duration) {
+	gs.LagTime = lagTime
+}
+
+func (gs *GameState) GetLagTime() time.Duration {
+	return gs.LagTime
 }
 
 func (gs *GameState) GetBall() *Ball {

@@ -3,6 +3,7 @@ package receiver
 import (
 	"fmt"
 	"net"
+	"time"
 
 	"github.com/LiU-SeeGoals/proto_go/ssl_vision"
 	"google.golang.org/protobuf/proto"
@@ -84,14 +85,18 @@ type GameState interface {
 	SetYellowRobot(robotId uint32, x, y, w float64)
 	SetBlueRobot(robotId uint32, x, y, w float64)
 	SetBall(x, y, z float64)
+	SetMessageReceivedTime(time time.Time)
+	SetLagTime(lagTime time.Duration)
+	GetMessageReceivedTime() time.Time
 }
 
-func (receiver *SSLReceiver) UpdateGamestate(gs GameState) {
-	packet, ok := <-receiver.ssl_channel
-	if !ok {
-		return
-	}
+func unpack(packet *ssl_vision.SSL_WrapperPacket, gs GameState) {
 	detect := packet.GetDetection()
+	time := time.Now()
+	lag_time := time.Sub(time)
+
+	gs.SetMessageReceivedTime(time)
+	gs.SetLagTime(lag_time)
 
 	for _, robot := range detect.GetRobotsBlue() {
 		x := float64(robot.GetX())
@@ -115,6 +120,22 @@ func (receiver *SSLReceiver) UpdateGamestate(gs GameState) {
 		z := float64(ball.GetZ())
 
 		gs.SetBall(x, y, z)
+	}
+}
+
+func update_lag_time(gs GameState) {
+	time := gs.GetMessageReceivedTime()
+	lag_time := time.Sub(time)
+	gs.SetLagTime(lag_time)
+}
+
+func (receiver *SSLReceiver) UpdateGamestate(gs GameState) {
+	// none-blocking receive
+	select {
+	case packet := <-receiver.ssl_channel:
+		unpack(packet, gs)
+	default:
+		update_lag_time(gs)
 	}
 
 }
