@@ -3,7 +3,6 @@ package receiver
 import (
 	"fmt"
 	"net"
-	"time"
 
 	"github.com/LiU-SeeGoals/proto_go/ssl_vision"
 	"google.golang.org/protobuf/proto"
@@ -82,28 +81,25 @@ type SSLReceiver struct {
 }
 
 type GameState interface {
-	SetYellowRobot(robotId uint32, x, y, w float64)
-	SetBlueRobot(robotId uint32, x, y, w float64)
-	SetBall(x, y, z float64)
-	SetMessageReceivedTime(time time.Time)
-	SetLagTime(lagTime time.Duration)
-	GetMessageReceivedTime() time.Time
+	SetYellowRobot(robotId uint32, x, y, w float64, time int64)
+	SetBlueRobot(robotId uint32, x, y, w float64, time int64)
+	SetBall(x, y, z float64, time int64)
+	SetMessageReceivedTime(time int64)
+	SetLagTime(lagTime int64)
+	GetMessageReceivedTime() int64
 }
 
-func unpack(packet *ssl_vision.SSL_WrapperPacket, gs GameState) {
+func unpack(packet *ssl_vision.SSL_WrapperPacket, gs GameState, play_time int64) {
 	detect := packet.GetDetection()
-	time := time.Now()
-	lag_time := time.Sub(time)
-
-	gs.SetMessageReceivedTime(time)
-	gs.SetLagTime(lag_time)
+	gs.SetMessageReceivedTime(play_time)
+	gs.SetLagTime(0)
 
 	for _, robot := range detect.GetRobotsBlue() {
 		x := float64(robot.GetX())
 		y := float64(robot.GetY())
 		w := float64(*robot.Orientation)
 
-		gs.SetYellowRobot(robot.GetRobotId(), x, y, w)
+		gs.SetYellowRobot(robot.GetRobotId(), x, y, w, play_time)
 	}
 
 	for _, robot := range detect.GetRobotsYellow() {
@@ -111,7 +107,7 @@ func unpack(packet *ssl_vision.SSL_WrapperPacket, gs GameState) {
 		y := float64(robot.GetY())
 		w := float64(*robot.Orientation)
 
-		gs.SetBlueRobot(robot.GetRobotId(), x, y, w)
+		gs.SetBlueRobot(robot.GetRobotId(), x, y, w, play_time)
 	}
 
 	for _, ball := range detect.GetBalls() {
@@ -119,23 +115,41 @@ func unpack(packet *ssl_vision.SSL_WrapperPacket, gs GameState) {
 		y := float64(ball.GetY())
 		z := float64(ball.GetZ())
 
-		gs.SetBall(x, y, z)
+		gs.SetBall(x, y, z, play_time)
 	}
 }
 
-func update_lag_time(gs GameState) {
+func update_lag_time(gs GameState, play_time int64) {
 	time := gs.GetMessageReceivedTime()
-	lag_time := time.Sub(time)
+	lag_time := play_time - time
 	gs.SetLagTime(lag_time)
 }
 
-func (receiver *SSLReceiver) UpdateGamestate(gs GameState) {
-	// none-blocking receive
+func (receiver *SSLReceiver) InitGameState(gs GameState, play_time int64) {
+	packet, ok := <-receiver.ssl_channel
+	if !ok {
+		fmt.Println("SSL Channel closed")
+		return
+	}
+	unpack(packet, gs, play_time)
+}
+
+func (receiver *SSLReceiver) UpdateGamestate(gs GameState, play_time int64) {
+	packet, ok := <-receiver.ssl_channel
+	if !ok {
+		fmt.Println("SSL Channel closed")
+		return
+	}
+	unpack(packet, gs, play_time)
+}
+
+func (receiver *SSLReceiver) UpdateGamestateNB(gs GameState, play_time int64) {
+	// // none-blocking receive
 	select {
 	case packet := <-receiver.ssl_channel:
-		unpack(packet, gs)
+		unpack(packet, gs, play_time)
 	default:
-		update_lag_time(gs)
+		update_lag_time(gs, play_time)
 	}
 
 }

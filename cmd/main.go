@@ -3,6 +3,8 @@ package main
 import (
 	// "fmt"
 
+	"time"
+
 	"github.com/LiU-SeeGoals/controller/internal/ai"
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/config"
@@ -13,7 +15,8 @@ import (
 )
 
 func main() {
-	gs := gamestate.NewGameState()
+	start_time := time.Now().UnixMilli()
+	gs := gamestate.NewGameState(3)
 	ssl_receiver := receiver.NewSSLReceiver(config.GetSSLClientAddress())
 
 	ai_blue := ai.NewAi(gamestate.Blue)
@@ -29,9 +32,10 @@ func main() {
 	sim_controller.SetPresentRobots(presentYellow, presentBlue)
 
 	terminal_messages := []string{"message 1", "message 2"}
-
+	ssl_receiver.InitGameState(gs, time.Now().UnixMilli()-start_time)
 	for {
-		ssl_receiver.UpdateGamestate(gs)
+		play_time := time.Now().UnixMilli() - start_time
+		ssl_receiver.UpdateGamestate(gs, play_time)
 
 		blue_actions := ai_blue.CreateActions(gs)
 		yellow_actions := ai_yellow.CreateActions(gs)

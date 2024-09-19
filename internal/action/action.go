@@ -26,7 +26,6 @@ type Action interface {
 type ActionDTO struct {
 	// The id of the robot.
 	Id     int                     `json:"Id"`
-	Team   int                     `json:"Team"`
 	Action robot_action.ActionType `json:"Action"`
 	// Current position of Robot, vector contains (x,y,w)
 	PosX int32   `json:"PosX"`

@@ -3,7 +3,6 @@ package gamestate
 import (
 	"encoding/json"
 	"fmt"
-	"time"
 )
 
 const TEAM_SIZE = 11
@@ -17,8 +16,8 @@ type GameState struct {
 	// Holds field data
 	Field *Field
 
-	MessageReceived time.Time
-	LagTime         time.Duration
+	MessageReceived int64
+	LagTime         int64
 }
 
 type GameStateDTO struct {
@@ -46,32 +45,35 @@ func (gs *GameState) ToJson() []byte {
 	return gameStateJson
 }
 
-func (gs *GameState) SetYellowRobot(robotId uint32, x, y, w float64) {
-	gs.Yellow_team[robotId].SetPosition(x, y, w)
+func (gs *GameState) SetYellowRobot(robotId uint32, x, y, w float64, time int64) {
+	gs.Yellow_team[robotId].SetPositionTime(x, y, w, time)
+	gs.Yellow_team[robotId].UpdateVelocity()
 }
 
-func (gs *GameState) SetBlueRobot(robotId uint32, x, y, w float64) {
-	gs.Blue_team[robotId].SetPosition(x, y, w)
+func (gs *GameState) SetBlueRobot(robotId uint32, x, y, w float64, time int64) {
+	gs.Blue_team[robotId].SetPositionTime(x, y, w, time)
+	gs.Blue_team[robotId].UpdateVelocity()
 }
 
 // Updates position of robots and balls to their actual position
-func (gs *GameState) SetBall(x, y, z float64) {
-	gs.Ball.SetPosition(x, y, z)
+func (gs *GameState) SetBall(x, y, z float64, time int64) {
+	gs.Ball.SetPositionTime(x, y, z, time)
+	gs.Ball.UpdateVelocity()
 }
 
-func (gs *GameState) SetMessageReceivedTime(time time.Time) {
+func (gs *GameState) SetMessageReceivedTime(time int64) {
 	gs.MessageReceived = time
 
 }
-func (gs *GameState) GetMessageReceivedTime() time.Time {
+func (gs *GameState) GetMessageReceivedTime() int64 {
 	return gs.MessageReceived
 }
 
-func (gs *GameState) SetLagTime(lagTime time.Duration) {
+func (gs *GameState) SetLagTime(lagTime int64) {
 	gs.LagTime = lagTime
 }
 
-func (gs *GameState) GetLagTime() time.Duration {
+func (gs *GameState) GetLagTime() int64 {
 	return gs.LagTime
 }
 
@@ -95,13 +97,13 @@ func (gs *GameState) GetRobot(id int, team Team) *Robot {
 }
 
 // Constructor for game state
-func NewGameState() *GameState {
+func NewGameState(capasity int) *GameState {
 	gs := &GameState{}
 
-	gs.Ball = NewBall()
+	gs.Ball = NewBall(capasity)
 	for i := 0; i < TEAM_SIZE; i++ {
-		gs.Blue_team[i] = NewRobot(i, Blue)
-		gs.Yellow_team[i] = NewRobot(i, Yellow)
+		gs.Blue_team[i] = NewRobot(i, Blue, capasity)
+		gs.Yellow_team[i] = NewRobot(i, Yellow, capasity)
 	}
 
 	return gs
