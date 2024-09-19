@@ -148,9 +148,10 @@ func initCommands(robotId int) {
                 message: "Moving forward",
                 run: func() action.Action {
                     robotStopped = false
-                    return &action.Move{
+                    return &action.MoveRemote{
                         Id:        robotId,
                         Direction: mat.NewVecDense(2, []float64{0.0, 1.0}),
+                        Speed:     speed,
                     }
                 },
             },
@@ -158,9 +159,10 @@ func initCommands(robotId int) {
                 message: "Moving left",
                 run: func() action.Action {
                     robotStopped = false
-                    return &action.Move{
+                    return &action.MoveRemote{
                         Id:        robotId,
                         Direction: mat.NewVecDense(2, []float64{-1.0, 0.0}),
+                        Speed:     speed,
                     }
                 },
             },
@@ -168,9 +170,10 @@ func initCommands(robotId int) {
                 message: "Moving backward",
                 run: func() action.Action {
                     robotStopped = false
-                    return &action.Move{
+                    return &action.MoveRemote{
                         Id:        robotId,
                         Direction: mat.NewVecDense(2, []float64{0.0, -1.0}),
+                        Speed:     speed,
                     }
                 },
             },
@@ -178,9 +181,10 @@ func initCommands(robotId int) {
                 message: "Moving right",
                 run: func() action.Action {
                     robotStopped = false
-                    return &action.Move{
+                    return &action.MoveRemote{
                         Id:        robotId,
                         Direction: mat.NewVecDense(2, []float64{1.0, 0.0}),
+                        Speed:     speed,
                     }
                 },
             },
@@ -206,8 +210,9 @@ func initCommands(robotId int) {
                 message: "Rotating left",
                 run: func() action.Action {
                     robotStopped = false
-                    return &action.Kick{
+                    return &action.Rotate{
                         Id: robotId,
+                        AngularVel: -speed,
                     }
                 },
             },
@@ -215,19 +220,21 @@ func initCommands(robotId int) {
                 message: "Rotating right",
                 run: func() action.Action {
                     robotStopped = false
-                    return &action.Kick{
+                    return &action.Rotate{
                         Id: robotId,
+                        AngularVel: speed,
                     }
                 },
             },
             'r': {
                 message: "Speed decreased",
                 run: func() action.Action {
-                    speed -= 1
+                    if speed >= 1 {
+                        speed -= 1
+                    }
                     fmt.Println(speed)
                     return &action.Kick{
                         Id:        robotId,
-                        KickSpeed: speed,
                     }
                 },
             },
@@ -238,7 +245,6 @@ func initCommands(robotId int) {
                     fmt.Println(speed)
                     return &action.Kick{
                         Id:        robotId,
-                        KickSpeed: speed,
                     }
                 },
             },
