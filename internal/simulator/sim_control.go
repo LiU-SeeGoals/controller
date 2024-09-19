@@ -1,9 +1,10 @@
-package config
+package simulator
 
 import (
 	"fmt"
 
 	"github.com/LiU-SeeGoals/controller/internal/client"
+	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/helper"
 	"github.com/LiU-SeeGoals/proto_go/simulation"
 )
@@ -15,7 +16,7 @@ type simControl struct {
 }
 
 func NewSimControl() *simControl {
-	simClient := client.NewSimClient(GetSimControlAddress())
+	simClient := client.NewSimClient(config.GetSimControlAddress())
 	simClient.Init()
 	return &simControl{
 		client: simClient,

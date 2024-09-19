@@ -21,6 +21,8 @@ type SSLConnection struct {
 	addr *net.UDPAddr
 	// Read buffer
 	buff []byte
+	// SSL lets not heap allocate this every time
+	packet ssl_vision.SSL_WrapperPacket
 }
 
 // Create a new SSL vision receiver.
@@ -56,7 +58,6 @@ func (r *SSLConnection) Connect() {
 //
 // Parsed packets are transferred using packetChan.
 func (r *SSLConnection) Receive(packetChan chan *ssl_vision.SSL_WrapperPacket) {
-	var packet *ssl_vision.SSL_WrapperPacket
 	for {
 		sz, err := r.conn.Read(r.buff)
 		if err != nil {
@@ -64,13 +65,13 @@ func (r *SSLConnection) Receive(packetChan chan *ssl_vision.SSL_WrapperPacket) {
 			continue
 		}
 
-		err = proto.Unmarshal(r.buff[:sz], packet)
+		err = proto.Unmarshal(r.buff[:sz], &r.packet)
 		if err != nil {
 			fmt.Printf("Unable to unmarshal packet: %s", err)
 			continue
 		}
 
-		packetChan <- packet
+		packetChan <- &r.packet
 	}
 }
 
@@ -85,10 +86,11 @@ type GameState interface {
 	SetBall(x, y, z float64)
 }
 
-func (reciver *SSLReceiver) UpdateGamestate(gs *GameState) {
-	var packet *ssl_vision.SSL_WrapperPacket
-
-	packet = <-reciver.ssl_channel
+func (receiver *SSLReceiver) UpdateGamestate(gs GameState) {
+	packet, ok := <-receiver.ssl_channel
+	if !ok {
+		return
+	}
 	detect := packet.GetDetection()
 
 	for _, robot := range detect.GetRobotsBlue() {
