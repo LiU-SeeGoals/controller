@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-const TEAM_SIZE = 11
+const TEAM_SIZE = 6
 
 type GameState struct {
 	Blue_team   [TEAM_SIZE]*Robot

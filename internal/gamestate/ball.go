@@ -76,10 +76,6 @@ func (b *Ball) UpdateVelocity() {
 		b.vel.SetVec(0, v_x)
 		b.vel.SetVec(1, v_y)
 		b.vel.SetVec(2, v_w)
-	} else {
-		b.vel.SetVec(0, 0)
-		b.vel.SetVec(1, 0)
-		b.vel.SetVec(2, 0)
 	}
 }
 

@@ -94,10 +94,6 @@ func (r *Robot) UpdateVelocity() {
 		r.vel.SetVec(0, v_x)
 		r.vel.SetVec(1, v_y)
 		r.vel.SetVec(2, v_w)
-	} else {
-		r.vel.SetVec(0, 0)
-		r.vel.SetVec(1, 0)
-		r.vel.SetVec(2, 0)
 	}
 }
 
