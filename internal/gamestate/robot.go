@@ -35,7 +35,40 @@ func NewRobot(id int, team Team, history_capasity int) *Robot {
 		history:          list.New(),
 		history_capacity: history_capasity,
 		vel:              mat.NewVecDense(3, []float64{0, 0, 0}), // in mm/s
-		max_speed:        0,
+		max_speed:        1,                                      // in mm/s
+	}
+}
+
+func (r *Robot) copy(clone *Robot) {
+	clone.id = r.id
+	clone.team = r.team
+	clone.history_capacity = r.history_capacity
+	clone.vel.SetVec(0, r.vel.AtVec(0))
+	clone.vel.SetVec(1, r.vel.AtVec(1))
+	clone.vel.SetVec(2, r.vel.AtVec(2))
+	clone.max_speed = r.max_speed
+
+	if clone.history.Len() < r.history.Len() {
+		clone.history = list.New()
+
+		for e := r.history.Front(); e != nil; e = e.Next() {
+			robot := e.Value.(*RobotPos)
+			clone.history.PushBack(&RobotPos{
+				pos:  robot.pos,
+				time: robot.time,
+			})
+		}
+	} else {
+		for f, t := r.history.Front(), clone.history.Front(); f != nil; f, t = f.Next(), t.Next() {
+			robot := f.Value.(*RobotPos)
+			cloneRobot := t.Value.(*RobotPos)
+
+			cloneRobot.pos.SetVec(0, robot.pos.AtVec(0))
+			cloneRobot.pos.SetVec(1, robot.pos.AtVec(1))
+			cloneRobot.pos.SetVec(2, robot.pos.AtVec(2))
+
+			cloneRobot.time = robot.time
+		}
 	}
 }
 
@@ -56,6 +89,19 @@ func (r *Robot) SetPositionTime(x, y, w float64, time int64) {
 		pos := mat.NewVecDense(3, []float64{x, y, w})
 		r.history.PushFront(&RobotPos{pos, time})
 	}
+}
+
+func (r *Robot) UpdatePositionTime(x, y, w float64, time int64) {
+	if r.history.Len() == 0 {
+		r.SetPositionTime(x, y, w, time)
+		return
+	}
+
+	robot := r.history.Front().Value.(*RobotPos)
+	robot.pos.SetVec(0, x)
+	robot.pos.SetVec(1, y)
+	robot.pos.SetVec(2, w)
+	robot.time = time
 }
 
 func (r *Robot) GetPositionTime() (*mat.VecDense, int64) {
@@ -99,6 +145,10 @@ func (r *Robot) UpdateVelocity() {
 
 func (r *Robot) GetVelocity() *mat.VecDense {
 	return r.vel
+}
+
+func (r *Robot) GetSpeed() float64 {
+	return r.max_speed
 }
 
 func (r *Robot) String() string {

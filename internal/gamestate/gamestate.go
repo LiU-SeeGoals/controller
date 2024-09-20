@@ -13,11 +13,19 @@ type GameState struct {
 
 	// Holds ball data
 	Ball *Ball
-	// Holds field data
-	Field *Field
 
 	MessageReceived int64
 	LagTime         int64
+}
+
+func (gs *GameState) copy(clone *GameState) {
+	gs.Ball.copy(clone.Ball)
+	for i := 0; i < TEAM_SIZE; i++ {
+		gs.Blue_team[i].copy(clone.Blue_team[i])
+		gs.Yellow_team[i].copy(clone.Yellow_team[i])
+	}
+	clone.MessageReceived = gs.MessageReceived
+	clone.LagTime = gs.LagTime
 }
 
 type GameStateDTO struct {
@@ -55,6 +63,14 @@ func (gs *GameState) SetBlueRobot(robotId uint32, x, y, w float64, time int64) {
 	gs.Blue_team[robotId].UpdateVelocity()
 }
 
+func (gs *GameState) UpdateYellowRobot(robotId uint32, x, y, w float64, time int64) {
+	gs.Yellow_team[robotId].UpdatePositionTime(x, y, w, time)
+}
+
+func (gs *GameState) UpdateBlueRobot(robotId uint32, x, y, w float64, time int64) {
+	gs.Blue_team[robotId].UpdatePositionTime(x, y, w, time)
+}
+
 // Updates position of robots and balls to their actual position
 func (gs *GameState) SetBall(x, y, z float64, time int64) {
 	gs.Ball.SetPositionTime(x, y, z, time)
@@ -87,6 +103,14 @@ func (gs *GameState) GetTeam(team Team) [TEAM_SIZE]*Robot {
 	} else {
 		return gs.Blue_team
 	}
+}
+
+func (gs *GameState) GetYellowRobots() [TEAM_SIZE]*Robot {
+	return gs.Yellow_team
+}
+
+func (gs *GameState) GetBlueRobots() [TEAM_SIZE]*Robot {
+	return gs.Blue_team
 }
 
 func (gs *GameState) GetRobot(id int, team Team) *Robot {

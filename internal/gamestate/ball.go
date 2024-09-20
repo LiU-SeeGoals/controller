@@ -25,6 +25,36 @@ func NewBall(history_capacity int) *Ball {
 	}
 }
 
+func (b *Ball) copy(clone *Ball) {
+	clone.history_capacity = b.history_capacity
+	clone.vel.SetVec(0, b.vel.AtVec(0))
+	clone.vel.SetVec(1, b.vel.AtVec(1))
+	clone.vel.SetVec(2, b.vel.AtVec(2))
+
+	if clone.history.Len() < b.history.Len() {
+		clone.history = list.New()
+
+		for e := b.history.Front(); e != nil; e = e.Next() {
+			ball := e.Value.(*BallPos)
+			clone.history.PushBack(&BallPos{
+				pos:  ball.pos,
+				time: ball.time,
+			})
+		}
+	} else {
+		for f, t := b.history.Front(), clone.history.Front(); f != nil; f, t = f.Next(), t.Next() {
+			ball := f.Value.(*BallPos)
+			cloneBall := t.Value.(*BallPos)
+
+			cloneBall.pos.SetVec(0, ball.pos.AtVec(0))
+			cloneBall.pos.SetVec(1, ball.pos.AtVec(1))
+			cloneBall.pos.SetVec(2, ball.pos.AtVec(2))
+
+			cloneBall.time = ball.time
+		}
+	}
+}
+
 func (b *Ball) SetPositionTime(x, y, w float64, time int64) {
 	if b.history.Len() >= b.history_capacity {
 		element := b.history.Back()

@@ -19,7 +19,7 @@ type Ai struct {
 func NewAi(team gamestate.Team) *Ai {
 	ai := &Ai{
 		team:        team,
-		ugglan:      NewPreCalculator(9, 6),
+		ugglan:      NewPreCalculator(9000, 6000, 1000), // Field length, field width, zone size
 		strutsen:    NewPlayFinder(),
 		hackspetten: NewRoleAssigner(),
 		fiskmasen:   NewRoleExecutor(),
@@ -31,7 +31,7 @@ func NewAi(team gamestate.Team) *Ai {
 func (ai *Ai) CreateActions(gamestate *gamestate.GameState) []action.Action {
 
 	gameAnalysis := ai.ugglan.Analyse(gamestate)
-	plays := ai.strutsen.FindStrategy(gameAnalysis)
+	plays := ai.strutsen.FindStrategy(gamestate, gameAnalysis)
 	roles := ai.hackspetten.AssignRoles(plays)
 	actions := ai.fiskmasen.GetActions(roles, gamestate)
 
