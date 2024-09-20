@@ -17,7 +17,7 @@ type Ai struct {
 func NewAi(team gamestate.Team) *Ai {
 	ai := &Ai{
 		team:      team,
-		ugglan:    NewPreCalculator(9000, 6000, 100), // Field length, field width, zone size
+		ugglan:    NewPreCalculator(9000, 6000, 100, team), // Field length, field width, zone size
 		strutsen:  NewPlayFinder(),
 		fiskmasen: NewRoleExecutor(),
 	}
@@ -25,11 +25,11 @@ func NewAi(team gamestate.Team) *Ai {
 }
 
 // Decides on new actions for the robots
-func (ai *Ai) CreateActions(gamestate *gamestate.GameState) ([]action.Action, float64) {
+func (ai *Ai) CreateActions(gamestate *gamestate.GameState) ([]action.Action, float64, float64) {
 
 	gameAnalysis := ai.ugglan.Analyse(gamestate)
-	score := ai.strutsen.FindStrategy(gamestate, gameAnalysis)
+	score, antScore := ai.strutsen.FindStrategy(gamestate, gameAnalysis)
 	actions := ai.fiskmasen.GetActions(gamestate, gameAnalysis)
-	return actions, score
+	return actions, score, antScore
 
 }

@@ -20,18 +20,17 @@ func fieldControleScore(field [][]Zone, fun func(*Zone) float64) float64 {
 	for i := 0; i < len(field); i++ {
 		for j := 0; j < len(field[i]); j++ {
 			if fun(&field[i][j]) > 0 {
-				posetive++
+				posetive += 1
 			} else {
-				negative++
+				negative += 1
 			}
 		}
 	}
-
 	return posetive / (posetive + negative)
 
 }
 
-func (pf *StrategyFinder) FindStrategy(gamestateObj *gamestate.GameState, gameAnalysis *GameAnalysis) float64 {
+func (pf *StrategyFinder) FindStrategy(gamestateObj *gamestate.GameState, gameAnalysis *GameAnalysis) (float64, float64) {
 	currTimeFunc := func(zone *Zone) float64 {
 		return zone.timeAdvantage
 	}
@@ -40,14 +39,13 @@ func (pf *StrategyFinder) FindStrategy(gamestateObj *gamestate.GameState, gameAn
 		return zone.anticipatedTimeAdvantage
 	}
 	anticipatedScore := 0.0
-
 	currentScore := fieldControleScore(gameAnalysis.zones, currTimeFunc)
 	gamestateObj.ResetAnticipetedPositions()
 
 	myTeam := gamestateObj.GetTeam(gameAnalysis.team)
 	for _, value := range rand.Perm(len(myTeam)) {
-		// try this max 10 times
-		for i := 0; i < 10; i++ {
+		// try this max X times
+		for i := 0; i < 3; i++ {
 			robot := myTeam[value]
 			pos := robot.GetPosition()
 			x := pos.AtVec(0)
@@ -66,7 +64,6 @@ func (pf *StrategyFinder) FindStrategy(gamestateObj *gamestate.GameState, gameAn
 			}
 			robot.ResetAnticipatePosition()
 		}
-		break
 	}
-	return anticipatedScore
+	return currentScore, anticipatedScore
 }

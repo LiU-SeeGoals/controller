@@ -1,6 +1,7 @@
 package ai
 
 import (
+	// "fmt"
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
 	"gonum.org/v1/gonum/mat"
@@ -38,6 +39,7 @@ func (re *RoleExecutor) GetActions(gs *gamestate.GameState, gameAnalysis *GameAn
 		if destX == act.Pos.AtVec(0) && destY == act.Pos.AtVec(1) {
 			continue
 		}
+		// fmt.Println("Robot", act.Id, "moving to", destX, destY, "from", act.Pos.AtVec(0), act.Pos.AtVec(1))
 		actionList = append(actionList, &act)
 	}
 

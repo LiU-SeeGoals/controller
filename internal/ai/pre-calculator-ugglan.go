@@ -26,18 +26,19 @@ type GameAnalysis struct {
 }
 
 // Constructor for the PreCalculator
-func NewPreCalculator(fieldLength, fieldWidth, zoneSize float32) *PreCalculator {
+func NewPreCalculator(fieldLength, fieldWidth, zoneSize float32, team gamestate.Team) *PreCalculator {
 	pc := &PreCalculator{
-		analysis: newAnalysis(fieldLength, fieldWidth, zoneSize),
+		analysis: newAnalysis(fieldLength, fieldWidth, zoneSize, team),
 	}
 	return pc
 }
 
 // GameAnalysis constructor
-func newAnalysis(fieldLength, fieldWidth, zoneSize float32) *GameAnalysis {
+func newAnalysis(fieldLength, fieldWidth, zoneSize float32, team gamestate.Team) *GameAnalysis {
 	analysis := GameAnalysis{}
 	higth := int(fieldLength / zoneSize)
 	width := int(fieldWidth / zoneSize)
+	analysis.team = team
 	analysis.fieldLength = fieldLength
 	analysis.fieldWidth = fieldWidth
 	analysis.zoneSize = zoneSize
@@ -62,7 +63,7 @@ func (an *GameAnalysis) calculateTime(robots [gamestate.TEAM_SIZE]*gamestate.Rob
 		// Calculate the distance to the zone
 		robotPos := fun(robot)
 		zonePos := mat.NewVecDense(2, []float64{float64(posX), float64(posY)})
-		distance := mat.Norm(robotPos, 2) - mat.Norm(zonePos, 2)
+		distance := math.Abs(mat.Norm(robotPos, 2) - mat.Norm(zonePos, 2))
 		// Calculate the time to reach the zone
 		curr_time := distance / robot.GetSpeed()
 		if time > curr_time {
@@ -75,6 +76,7 @@ func (an *GameAnalysis) calculateTime(robots [gamestate.TEAM_SIZE]*gamestate.Rob
 func (an *GameAnalysis) calculateTimeAdvantage(gamestateObj *gamestate.GameState, i, j int, fun func(*gamestate.Robot) *mat.VecDense) float64 {
 	timeYellow := an.calculateTime(gamestateObj.GetYellowRobots(), i, j, fun)
 	timeBlue := an.calculateTime(gamestateObj.GetBlueRobots(), i, j, fun)
+
 	if an.team == gamestate.Yellow {
 		return timeYellow - timeBlue
 	} else {
