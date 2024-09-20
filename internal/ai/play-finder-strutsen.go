@@ -1,6 +1,7 @@
 package ai
 
 import (
+	"math"
 	"math/rand"
 
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
@@ -51,9 +52,10 @@ func (pf *StrategyFinder) FindStrategy(gamestateObj *gamestate.GameState, gameAn
 			x := pos.AtVec(0)
 			y := pos.AtVec(1)
 			w := pos.AtVec(2)
-			// TODO: anticipe position in a circle around the robot not a square
-			dX := (rand.Float64() - 0.5) * 2 * robot.GetSpeed()
-			dY := (rand.Float64() - 0.5) * 2 * robot.GetSpeed()
+
+			dX := math.Cos(w) * robot.GetSpeed()
+			dY := math.Sin(w) * robot.GetSpeed()
+
 			robot.SetAnticipatedPosition(x+dX, y+dY, w)
 
 			gameAnalysis.updateAntisipetedTimeAdvantage(gamestateObj)
