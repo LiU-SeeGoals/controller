@@ -18,16 +18,6 @@ type GameState struct {
 	LagTime         int64
 }
 
-func (gs *GameState) copy(clone *GameState) {
-	gs.Ball.copy(clone.Ball)
-	for i := 0; i < TEAM_SIZE; i++ {
-		gs.Blue_team[i].copy(clone.Blue_team[i])
-		gs.Yellow_team[i].copy(clone.Yellow_team[i])
-	}
-	clone.MessageReceived = gs.MessageReceived
-	clone.LagTime = gs.LagTime
-}
-
 type GameStateDTO struct {
 	RobotPositions [2 * TEAM_SIZE]RobotDTO
 	BallPosition   BallDTO
@@ -75,6 +65,13 @@ func (gs *GameState) UpdateBlueRobot(robotId uint32, x, y, w float64, time int64
 func (gs *GameState) SetBall(x, y, z float64, time int64) {
 	gs.Ball.SetPositionTime(x, y, z, time)
 	gs.Ball.UpdateVelocity()
+}
+
+func (gs *GameState) ResetAnticipetedPositions() {
+	for i := 0; i < TEAM_SIZE; i++ {
+		gs.Blue_team[i].ResetAnticipatePosition()
+		gs.Yellow_team[i].ResetAnticipatePosition()
+	}
 }
 
 func (gs *GameState) SetMessageReceivedTime(time int64) {
@@ -144,12 +141,12 @@ func (gs *GameState) String() string {
 	for i := 0; i < TEAM_SIZE; i++ {
 		gs_str += "robot: {" + gs.Yellow_team[i].String() + " },\n"
 	}
-	for _, line := range gs.Field.FieldLines {
-		gs_str += fmt.Sprintf("line: {%s}\n", line.String())
-	}
-	for _, arc := range gs.Field.FieldArcs {
-		gs_str += fmt.Sprintf("arc: {%s}\n", arc.String())
-	}
+	// for _, line := range gs.Field.FieldLines {
+	// 	gs_str += fmt.Sprintf("line: {%s}\n", line.String())
+	// }
+	// for _, arc := range gs.Field.FieldArcs {
+	// 	gs_str += fmt.Sprintf("arc: {%s}\n", arc.String())
+	// }
 	gs_str += "}"
 	return gs_str
 }

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/ai"
@@ -28,18 +29,19 @@ func main() {
 	presentBlue := []int{0, 1, 2, 3, 4, 5}
 	sim_controller.SetPresentRobots(presentYellow, presentBlue)
 
-	terminal_messages := []string{"message 1", "message 2"}
 	ssl_receiver.InitGameState(gs, 0)
 	start_time := time.Now().UnixMilli()
 	for {
 		play_time := time.Now().UnixMilli() - start_time
 		ssl_receiver.UpdateGamestate(gs, play_time)
 
-		blue_actions := ai_blue.CreateActions(gs)
-		yellow_actions := ai_yellow.CreateActions(gs)
+		blue_actions, score_blue := ai_blue.CreateActions(gs)
+		yellow_actions, score_yellow := ai_yellow.CreateActions(gs)
 
 		sim_client_blue.SendActions(blue_actions)
 		sim_client_yellow.SendActions(yellow_actions)
+
+		terminal_messages := []string{fmt.Sprintf("Blue score: %.2f", score_blue), fmt.Sprintf("Yellow score: %.2f", score_yellow)}
 
 		webserver.UpdateWebGUI(gs, blue_actions, terminal_messages)
 	}
