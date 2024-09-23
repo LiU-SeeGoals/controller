@@ -78,9 +78,9 @@ func (an *GameAnalysis) calculateTimeAdvantage(gamestateObj *gamestate.GameState
 	timeBlue := an.calculateTime(gamestateObj.GetBlueRobots(), i, j, fun)
 
 	if an.team == gamestate.Yellow {
-		return timeYellow - timeBlue
-	} else {
 		return timeBlue - timeYellow
+	} else {
+		return timeYellow - timeBlue
 	}
 
 }

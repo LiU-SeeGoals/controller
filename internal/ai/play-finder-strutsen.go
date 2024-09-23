@@ -53,8 +53,10 @@ func (pf *StrategyFinder) FindStrategy(gamestateObj *gamestate.GameState, gameAn
 			y := pos.AtVec(1)
 			w := pos.AtVec(2)
 
-			dX := math.Cos(w) * robot.GetSpeed()
-			dY := math.Sin(w) * robot.GetSpeed()
+			rand_num := rand.Float64()
+
+			dX := math.Cos(rand_num) * robot.GetSpeed()
+			dY := math.Sin(rand_num) * robot.GetSpeed()
 
 			robot.SetAnticipatedPosition(x+dX, y+dY, w)
 
