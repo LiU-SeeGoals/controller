@@ -60,8 +60,10 @@ func (an *GameAnalysis) calculateTime(robots [gamestate.TEAM_SIZE]*gamestate.Rob
 	for _, robot := range robots {
 		// Calculate the distance to the zone
 		robotPos := fun(robot)
-		zonePos := mat.NewVecDense(2, []float64{float64(posX), float64(posY)})
-		distance := math.Abs(mat.Norm(robotPos, 2) - mat.Norm(zonePos, 2))
+		rX := robotPos.AtVec(0)
+		rY := robotPos.AtVec(1)
+		zoneToRobot := mat.NewVecDense(2, []float64{float64(posX) - rX, float64(posY) - rY})
+		distance := mat.Norm(zoneToRobot, 2)
 		// Calculate the time to reach the zone
 		curr_time := distance / robot.GetSpeed()
 		if time > curr_time {

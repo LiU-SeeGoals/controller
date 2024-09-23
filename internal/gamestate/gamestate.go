@@ -46,17 +46,21 @@ func (gs *GameState) ToJson() []byte {
 func (gs *GameState) SetYellowRobot(robotId uint32, x, y, w float64, time int64) {
 	gs.Yellow_team[robotId].SetPositionTime(x, y, w, time)
 	gs.Yellow_team[robotId].UpdateVelocity()
+	gs.Yellow_team[robotId].UpdateMaxSpeed()
+
 }
 
 func (gs *GameState) SetBlueRobot(robotId uint32, x, y, w float64, time int64) {
 	gs.Blue_team[robotId].SetPositionTime(x, y, w, time)
 	gs.Blue_team[robotId].UpdateVelocity()
+	gs.Blue_team[robotId].UpdateMaxSpeed()
 }
 
 // Updates position of robots and balls to their actual position
 func (gs *GameState) SetBall(x, y, z float64, time int64) {
 	gs.Ball.SetPositionTime(x, y, z, time)
 	gs.Ball.UpdateVelocity()
+	gs.Ball.UpdateMaxSpeed()
 }
 
 func (gs *GameState) ResetAnticipetedPositions() {

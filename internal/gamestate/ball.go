@@ -87,6 +87,13 @@ func (b *Ball) UpdateVelocity() {
 	}
 }
 
+func (b *Ball) UpdateMaxSpeed() {
+	speed := mat.Norm(b.vel, 2)
+	if speed > b.maxSpeed {
+		b.maxSpeed = speed
+	}
+}
+
 func (b *Ball) GetVelocity() *mat.VecDense {
 	return b.vel
 }
