@@ -3,8 +3,11 @@ package ai
 import (
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/client"
+	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
+	"github.com/LiU-SeeGoals/controller/internal/height_map"
 	"github.com/LiU-SeeGoals/controller/internal/webserver"
+	"github.com/LiU-SeeGoals/proto_go/simulation"
 	"gonum.org/v1/gonum/mat"
 )
 
@@ -15,11 +18,12 @@ type Ai struct {
 	strutsen     *StrategyFinder
 	hackspetten  *RoleAssigner
 	fiskmasen    *RoleExecutor
+	sim_control  *config.SimControl
 }
 
 // Constructor for the ai, initializes the client
 // and the different components used in the decision pipeline
-func NewAi(addr string, gamestateObj *gamestate.GameState) *Ai {
+func NewAi(addr string, gamestateObj *gamestate.GameState, sim_control *config.SimControl) *Ai {
 	ai := &Ai{
 		ugglan:      NewPreCalculator(9, 6),
 		strutsen:    NewPlayFinder(),
@@ -28,6 +32,7 @@ func NewAi(addr string, gamestateObj *gamestate.GameState) *Ai {
 
 		gamestateObj: gamestateObj,
 		client:       client.NewSimClient(addr),
+		sim_control:  sim_control,
 	}
 	ai.client.Init()
 	return ai
@@ -58,35 +63,51 @@ func (ai *Ai) manualControl() []action.Action {
 // Decides on new actions for the robots, then send them out with the use of the client
 // and broadcast the gamestate through the webserver to Gameviewer
 func (ai *Ai) CreateAndSendActions() {
-	calculatedActions := ai.decisionPipeline() // Calculate new actions
+	// calculatedActions := ai.decisionPipeline() // Calculate new actions
 
-	manualActions := ai.manualControl() // Manual control
+	// manualActions := ai.manualControl() // Manual control
 
-	// TODO: Replace calculated actions with the manual ones
-	// for the relevant robots. Automatic control should probably
-	// be disabled for some time for a robot that has received
-	actions := calculatedActions
-	if len(manualActions) > 0 {
-		actions = manualActions
+	// // TODO: Replace calculated actions with the manual ones
+	// // for the relevant robots. Automatic control should probably
+	// // be disabled for some time for a robot that has received
+	// actions := calculatedActions
+	// if len(manualActions) > 0 {
+	// 	actions = manualActions
+	// }
+	heightMaps := []height_map.HeightMap{
+		height_map.HeightMapEnemyGauss{},
+		// height_map.HeightMapAwayFromEdge{},
+
 	}
 
-	actions = ai.GenerateMoveActions([]int{0, 1}, []struct{ x, y float64 }{{x: 0.0, y: 0.0}, {x: 0.0, y: 0.0}})
+	// Set initial position (x, y), radius r, and number of samples s
+	r := float32(5)
+	s := 36
+
+	// Call FindLowestHeight to get the best position
+	bestX, bestY := height_map.FindLowestHeight(0, r, s, heightMaps, ai.gamestateObj)
+	// fmt.Println(bestX/1000, bestY/1000)
+
+	ai.sim_control.TeleportRobot(bestX, bestY, 0, simulation.Team_YELLOW)
+
+	actions := ai.GenerateMoveActions([]int{0}, []struct{ x, y float64 }{{x: float64(bestX), y: float64(bestY)}})
+	// actions := ai.GenerateMoveActions([]int{0}, []struct{ x, y float64 }{{x: float64(1000), y: float64(1000)}})
 	ai.client.SendActions(actions) // Send actions
 
 	// Make it correct type for the website
-	actionTDO := make([]action.ActionDTO, len(actions))
-	for i, obj := range actions {
-		actionTDO[i] = obj.ToDTO()
-	}
-	terminal_messages := []string{"message 1", "message 2"}
-	var gamestateDTO = ai.gamestateObj.ToDTO()
-	var websiteMessage = webserver.WebsiteDTO{
-		RobotPositions: gamestateDTO.RobotPositions,
-		BallPosition:   gamestateDTO.BallPosition,
-		RobotActions:   actionTDO,
-		TerminalLog:    terminal_messages,
-	}
-	webserver.BroadcastGameState(websiteMessage)
+	// actionTDO := make([]action.ActionDTO, len(actions))
+	// for i, obj := range actions {
+	// 	actionTDO[i] = obj.ToDTO()
+	// }
+	// terminal_messages := []string{"message 1", "message 2"}
+	// var gamestateDTO = ai.gamestateObj.ToDTO()
+	// var websiteMessage = webserver.WebsiteDTO{
+	// 	RobotPositions: gamestateDTO.RobotPositions,
+	// 	BallPosition:   gamestateDTO.BallPosition,
+	// 	RobotActions:   actionTDO,
+	// 	TerminalLog:    terminal_messages,
+	// }
+	// webserver.BroadcastGameState(websiteMessage)
 
 }
 
