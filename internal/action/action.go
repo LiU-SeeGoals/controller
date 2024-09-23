@@ -8,14 +8,6 @@ import (
 	"gonum.org/v1/gonum/mat"
 )
 
-// import (
-// 	"math"
-
-// 	"github.com/LiU-SeeGoals/controller/internal/datatypes"
-// 	"github.com/LiU-SeeGoals/controller/internal/proto/basestation"
-// 	"gonum.org/v1/gonum/mat"
-// )
-
 type Action interface {
 	TranslateReal() *robot_action.Command
 	// Translates an action to parameters defined for sim
@@ -83,7 +75,19 @@ type Move struct {
 	Direction *mat.VecDense // 2D vector, first value is x, second is y
 }
 
+// Same as move but with the speed embedded, should only be usable
+// when remote controlling the robot
+type MoveRemote struct {
+	Id        int
+	Direction *mat.VecDense // 2D vector, first value is x, second is y
+	Speed     int
+}
+
 type Init struct {
+	Id int
+}
+
+type Ping struct {
 	Id int
 }
 
@@ -271,6 +275,22 @@ func (i *Init) TranslateSim() *simulation.RobotCommand {
 	}
 }
 
+// Do nothing, only implemented to satisfy interface
+func (i *Ping) TranslateSim() *simulation.RobotCommand {
+	id := uint32(i.Id)
+	return &simulation.RobotCommand{
+		Id: &id,
+	}
+}
+
+// Do nothing, only implemented to satisfy interface
+func (i *MoveRemote) TranslateSim() *simulation.RobotCommand {
+	id := uint32(i.Id)
+	return &simulation.RobotCommand{
+		Id: &id,
+	}
+}
+
 //----------------------------------------------------------------------------------------------
 // TranslateReal
 //----------------------------------------------------------------------------------------------
@@ -340,6 +360,27 @@ func (s *Move) TranslateReal() *robot_action.Command {
 	return command
 }
 
+func (s *Ping) TranslateReal() *robot_action.Command {
+	command := &robot_action.Command{
+		CommandId: robot_action.ActionType_PING,
+		RobotId:   int32(s.Id),
+	}
+	return command
+}
+
+func (s *MoveRemote) TranslateReal() *robot_action.Command {
+	command := &robot_action.Command{
+		CommandId: robot_action.ActionType_MOVE_ACTION,
+		RobotId:   int32(s.Id),
+		Direction: &robot_action.Vector2D{
+			X: int32(s.Direction.AtVec(0)),
+			Y: int32(s.Direction.AtVec(1)),
+		},
+		KickSpeed: int32(s.Speed),
+	}
+	return command
+}
+
 //----------------------------------------------------------------------------------------------
 // ToDTO
 //----------------------------------------------------------------------------------------------
@@ -395,5 +436,19 @@ func (s *Move) ToDTO() ActionDTO {
 		DestX:  int32(s.Direction.AtVec(0)),
 		DestY:  int32(s.Direction.AtVec(1)),
 		DestW:  0,
+	}
+}
+
+// Do nothing, only implemented to satisfy interface
+func (s *Ping) ToDTO() ActionDTO {
+	return ActionDTO{
+		Id: s.Id,
+	}
+}
+
+// Do nothing, only implemented to satisfy interface
+func (s *MoveRemote) ToDTO() ActionDTO {
+	return ActionDTO{
+		Id: s.Id,
 	}
 }

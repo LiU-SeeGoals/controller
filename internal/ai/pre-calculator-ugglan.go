@@ -43,12 +43,10 @@ func newAnalysis(fieldLength, fieldWidth, zoneSize float32, team gamestate.Team)
 	analysis.fieldWidth = fieldWidth
 	analysis.zoneSize = zoneSize
 	zones := make([][]Zone, higth)
-	predictions := make([][]Zone, higth)
 
 	// Initialize the zones
 	for i := 0; i < higth; i++ {
 		zones[i] = make([]Zone, width)
-		predictions[i] = make([]Zone, width)
 	}
 	analysis.zones = zones
 	return &analysis

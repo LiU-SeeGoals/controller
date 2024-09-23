@@ -31,5 +31,4 @@ func (ai *Ai) CreateActions(gamestate *gamestate.GameState) ([]action.Action, fl
 	score, antScore := ai.strutsen.FindStrategy(gamestate, gameAnalysis)
 	actions := ai.fiskmasen.GetActions(gamestate, gameAnalysis)
 	return actions, score, antScore
-
 }

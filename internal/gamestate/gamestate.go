@@ -53,14 +53,6 @@ func (gs *GameState) SetBlueRobot(robotId uint32, x, y, w float64, time int64) {
 	gs.Blue_team[robotId].UpdateVelocity()
 }
 
-func (gs *GameState) UpdateYellowRobot(robotId uint32, x, y, w float64, time int64) {
-	gs.Yellow_team[robotId].UpdatePositionTime(x, y, w, time)
-}
-
-func (gs *GameState) UpdateBlueRobot(robotId uint32, x, y, w float64, time int64) {
-	gs.Blue_team[robotId].UpdatePositionTime(x, y, w, time)
-}
-
 // Updates position of robots and balls to their actual position
 func (gs *GameState) SetBall(x, y, z float64, time int64) {
 	gs.Ball.SetPositionTime(x, y, z, time)

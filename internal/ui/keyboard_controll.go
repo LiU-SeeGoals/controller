@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"gonum.org/v1/gonum/mat"
+    "gonum.org/v1/gonum/mat"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/client"
@@ -17,12 +17,24 @@ var (
 	prevChar rune
 )
 
+var (
+    clientType int = 0
+    commands map[rune]command
+    speed int = 0
+    robotStopped bool = false
+)
+
+type command struct {
+    message string
+    run func() action.Action
+}
+
 func main() {
-	port := "127.0.0.1:20011"
-	client := askForClient(port)
-	client.Init()
-	robotId := askForRobotId()
-	listenKeyboard(robotId, client)
+    clientHost := "127.0.0.1:20011"
+    client := askForClient(clientHost)
+    client.Init()
+    initCommands(askForRobotId())
+    listenKeyboard(client)
 }
 
 // Client for base station or for sim
@@ -46,16 +58,17 @@ func askForClient(port string) client.Client {
 }
 
 func askForRobotId() int {
-	fmt.Println("Please enter the robot ID (write nothing for id=0): ")
-	var robotId string
-	fmt.Scanln(&robotId)
-	id, err := strconv.Atoi(robotId)
-	if err != nil {
-		fmt.Println("Setting Robot ID to 0.")
-		return 0
-	}
-	fmt.Println("Robot ID is: ", id)
-	return id
+    var robotId string
+
+    fmt.Println("Please enter the robot ID (defaults to 0): ")
+    fmt.Scanln(&robotId)
+    id, err := strconv.Atoi(robotId)
+    if err != nil {
+        fmt.Println("Setting Robot ID to 0.")
+        id = 0
+    }
+    fmt.Println("Robot ID is: ", id)
+    return id
 }
 
 func sendCommand(robotId int, char rune, client client.Client) {
@@ -122,17 +135,24 @@ func listenKeyboard(robotId int, client client.Client) {
 	fmt.Println("Use WASD to control the robot, L to stop all movement, K to kick.")
 	fmt.Println("Press <ESC> to exit.")
 
-	for {
-		char, key, err := keyboard.GetKey()
-		if err != nil {
-			panic(err)
-		}
+    // Send continous pings if we're remote controlling
+    if clientType == remote_control {
+        go sendPing(client)
+    }
 
 		if key == keyboard.KeyEsc {
 			break
 		}
 
-		sendCommand(robotId, char, client)
-		time.Sleep(100 * time.Millisecond)
-	}
+        if key == keyboard.KeyEsc {
+            break
+        } else if key == keyboard.KeySpace {
+            // translate space to "stop" command
+            char = 'l'
+        }
+
+        sendCommand(char, client)
+
+        time.Sleep(time.Millisecond)
+    }
 }
