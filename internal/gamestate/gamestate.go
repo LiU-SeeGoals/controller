@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-const TEAM_SIZE = 12
+const TEAM_SIZE = 6
 
 type GameState struct {
 	Blue_team   [TEAM_SIZE]*Robot
@@ -13,8 +13,9 @@ type GameState struct {
 
 	// Holds ball data
 	Ball *Ball
-	// Holds field data
-	Field *Field
+
+	MessageReceived int64
+	LagTime         int64
 }
 
 type GameStateDTO struct {
@@ -42,17 +43,43 @@ func (gs *GameState) ToJson() []byte {
 	return gameStateJson
 }
 
-func (gs *GameState) SetRobot(robotId uint32, x, y, w float64, team Team) {
-	if team == Blue {
-		gs.Blue_team[robotId].SetPosition(x, y, w)
-	} else {
-		gs.Yellow_team[robotId].SetPosition(x, y, w)
-	}
+func (gs *GameState) SetYellowRobot(robotId uint32, x, y, w float64, time int64) {
+	gs.Yellow_team[robotId].SetPositionTime(x, y, w, time)
+	gs.Yellow_team[robotId].UpdateVelocity()
+}
+
+func (gs *GameState) SetBlueRobot(robotId uint32, x, y, w float64, time int64) {
+	gs.Blue_team[robotId].SetPositionTime(x, y, w, time)
+	gs.Blue_team[robotId].UpdateVelocity()
 }
 
 // Updates position of robots and balls to their actual position
-func (gs *GameState) SetBall(x, y, z float64) {
-	gs.Ball.SetPosition(x, y, z)
+func (gs *GameState) SetBall(x, y, z float64, time int64) {
+	gs.Ball.SetPositionTime(x, y, z, time)
+	gs.Ball.UpdateVelocity()
+}
+
+func (gs *GameState) ResetAnticipetedPositions() {
+	for i := 0; i < TEAM_SIZE; i++ {
+		gs.Blue_team[i].ResetAnticipatePosition()
+		gs.Yellow_team[i].ResetAnticipatePosition()
+	}
+}
+
+func (gs *GameState) SetMessageReceivedTime(time int64) {
+	gs.MessageReceived = time
+
+}
+func (gs *GameState) GetMessageReceivedTime() int64 {
+	return gs.MessageReceived
+}
+
+func (gs *GameState) SetLagTime(lagTime int64) {
+	gs.LagTime = lagTime
+}
+
+func (gs *GameState) GetLagTime() int64 {
+	return gs.LagTime
 }
 
 func (gs *GameState) GetBall() *Ball {
@@ -67,6 +94,14 @@ func (gs *GameState) GetTeam(team Team) [TEAM_SIZE]*Robot {
 	}
 }
 
+func (gs *GameState) GetYellowRobots() [TEAM_SIZE]*Robot {
+	return gs.Yellow_team
+}
+
+func (gs *GameState) GetBlueRobots() [TEAM_SIZE]*Robot {
+	return gs.Blue_team
+}
+
 func (gs *GameState) GetRobot(id int, team Team) *Robot {
 	if team == Blue {
 		return gs.Blue_team[id]
@@ -75,13 +110,13 @@ func (gs *GameState) GetRobot(id int, team Team) *Robot {
 }
 
 // Constructor for game state
-func NewGameState() *GameState {
+func NewGameState(capasity int) *GameState {
 	gs := &GameState{}
 
-	gs.Ball = NewBall()
+	gs.Ball = NewBall(capasity)
 	for i := 0; i < TEAM_SIZE; i++ {
-		gs.Blue_team[i] = NewRobot(i, Blue)
-		gs.Yellow_team[i] = NewRobot(i, Yellow)
+		gs.Blue_team[i] = NewRobot(i, Blue, capasity)
+		gs.Yellow_team[i] = NewRobot(i, Yellow, capasity)
 	}
 
 	return gs
@@ -98,12 +133,12 @@ func (gs *GameState) String() string {
 	for i := 0; i < TEAM_SIZE; i++ {
 		gs_str += "robot: {" + gs.Yellow_team[i].String() + " },\n"
 	}
-	for _, line := range gs.Field.FieldLines {
-		gs_str += fmt.Sprintf("line: {%s}\n", line.String())
-	}
-	for _, arc := range gs.Field.FieldArcs {
-		gs_str += fmt.Sprintf("arc: {%s}\n", arc.String())
-	}
+	// for _, line := range gs.Field.FieldLines {
+	// 	gs_str += fmt.Sprintf("line: {%s}\n", line.String())
+	// }
+	// for _, arc := range gs.Field.FieldArcs {
+	// 	gs_str += fmt.Sprintf("arc: {%s}\n", arc.String())
+	// }
 	gs_str += "}"
 	return gs_str
 }

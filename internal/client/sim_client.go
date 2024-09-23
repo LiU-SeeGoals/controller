@@ -27,10 +27,13 @@ func NewSimClient(addr string) *SimClient {
 		panic(err)
 	}
 
-	return &SimClient{
+	sim_client := &SimClient{
 		conn: nil,
 		addr: udpAddr,
 	}
+	sim_client.Init()
+
+	return sim_client
 }
 
 // Connect/subscribe receiver to UDP multicast.

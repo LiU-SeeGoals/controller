@@ -8,14 +8,6 @@ import (
 	"gonum.org/v1/gonum/mat"
 )
 
-// import (
-// 	"math"
-
-// 	"github.com/LiU-SeeGoals/controller/internal/datatypes"
-// 	"github.com/LiU-SeeGoals/controller/internal/proto/basestation"
-// 	"gonum.org/v1/gonum/mat"
-// )
-
 type Action interface {
 	TranslateReal() *robot_action.Command
 	// Translates an action to parameters defined for sim
@@ -88,7 +80,7 @@ type Move struct {
 type MoveRemote struct {
 	Id        int
 	Direction *mat.VecDense // 2D vector, first value is x, second is y
-    Speed     int
+	Speed     int
 }
 
 type Init struct {
@@ -96,7 +88,7 @@ type Init struct {
 }
 
 type Ping struct {
-    Id int
+	Id int
 }
 
 //------------------------------------------------------------------//
@@ -384,7 +376,7 @@ func (s *MoveRemote) TranslateReal() *robot_action.Command {
 			X: int32(s.Direction.AtVec(0)),
 			Y: int32(s.Direction.AtVec(1)),
 		},
-        KickSpeed: int32(s.Speed),
+		KickSpeed: int32(s.Speed),
 	}
 	return command
 }
@@ -450,13 +442,13 @@ func (s *Move) ToDTO() ActionDTO {
 // Do nothing, only implemented to satisfy interface
 func (s *Ping) ToDTO() ActionDTO {
 	return ActionDTO{
-		Id:     s.Id,
+		Id: s.Id,
 	}
 }
 
 // Do nothing, only implemented to satisfy interface
 func (s *MoveRemote) ToDTO() ActionDTO {
 	return ActionDTO{
-		Id:     s.Id,
+		Id: s.Id,
 	}
 }

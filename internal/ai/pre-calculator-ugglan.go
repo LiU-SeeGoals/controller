@@ -7,155 +7,109 @@ import (
 	"gonum.org/v1/gonum/mat"
 )
 
-const NUM_ROWS = 3
-const NUM_COLS = 3
-const NUM_CHANNELS = 3
-
 type PreCalculator struct {
 	analysis *GameAnalysis
 }
 
+type Zone struct {
+	timeAdvantage            float64 // time advantage of the zone
+	anticipatedTimeAdvantage float64 // anticipated time advantage of the zone
+}
+
+// Struct to hold the analysis of the gamestate
+type GameAnalysis struct {
+	team        gamestate.Team
+	zones       [][]Zone // 2D array of zones
+	fieldLength float32
+	fieldWidth  float32
+	zoneSize    float32
+}
+
 // Constructor for the PreCalculator
-func NewPreCalculator(fieldLength, fieldWidth int32) *PreCalculator {
+func NewPreCalculator(fieldLength, fieldWidth, zoneSize float32, team gamestate.Team) *PreCalculator {
 	pc := &PreCalculator{
-		analysis: newAnalysis(fieldLength, fieldWidth),
+		analysis: newAnalysis(fieldLength, fieldWidth, zoneSize, team),
 	}
 	return pc
 }
 
 // GameAnalysis constructor
-func newAnalysis(fieldLength, fieldWidth int32) *GameAnalysis {
+func newAnalysis(fieldLength, fieldWidth, zoneSize float32, team gamestate.Team) *GameAnalysis {
 	analysis := GameAnalysis{}
-	zones := [NUM_ROWS * NUM_COLS]Zone{}
-	analysis.zoneLength = float32(fieldLength) / float32(NUM_COLS)
-	analysis.zoneWidth = float32(fieldWidth) / float32(NUM_ROWS)
+	higth := int(fieldLength / zoneSize)
+	width := int(fieldWidth / zoneSize)
+	analysis.team = team
+	analysis.fieldLength = fieldLength
+	analysis.fieldWidth = fieldWidth
+	analysis.zoneSize = zoneSize
+	zones := make([][]Zone, higth)
 
 	// Initialize the zones
-	for i := 0; i < NUM_ROWS; i++ {
-		for j := 0; j < NUM_COLS; j++ {
-			x := float64(j) * float64(fieldLength) / float64(NUM_COLS)
-			y := float64(i) * float64(fieldWidth) / float64(NUM_ROWS)
-			id := i*NUM_COLS + j
-			zones[id] = *newZone(id, *mat.NewVecDense(2, []float64{x, y}))
-		}
+	for i := 0; i < higth; i++ {
+		zones[i] = make([]Zone, width)
 	}
 	analysis.zones = zones
-
 	return &analysis
 }
 
-// Helper function to get the adjacent zones of a given zone
-func adjacentZones(id int) [4]int {
-	directions := [4]int{-1, 1, -NUM_COLS, NUM_COLS}
-	adjacentZones := [4]int{}
-	for i, direction := range directions {
-		// Check if the adjacent zone is in of bounds
-		if id+direction >= 0 || id+direction < NUM_ROWS*NUM_COLS {
-			adjacentZones[i] = id + direction
+func (an *GameAnalysis) calculateTime(robots [gamestate.TEAM_SIZE]*gamestate.Robot, i, j int, fun func(*gamestate.Robot) *mat.VecDense) float64 {
+	time := math.Inf(1)
+	// midel of the playfield in 0,0 so the zone need to be adjusted to the correct position
+	posX := float32(i)*an.zoneSize - an.fieldLength/2 + an.zoneSize/2
+	posY := float32(j)*an.zoneSize - an.fieldWidth/2 + an.zoneSize/2
+	for _, robot := range robots {
+		// Calculate the distance to the zone
+		robotPos := fun(robot)
+		zonePos := mat.NewVecDense(2, []float64{float64(posX), float64(posY)})
+		distance := math.Abs(mat.Norm(robotPos, 2) - mat.Norm(zonePos, 2))
+		// Calculate the time to reach the zone
+		curr_time := distance / robot.GetSpeed()
+		if time > curr_time {
+			time = curr_time
 		}
 	}
-	return adjacentZones
+	return time
 }
 
-// Zone Constructor
-func newZone(id int, centerCoordinates mat.VecDense) *Zone {
-	zone := Zone{
-		id:                 id,
-		yellow_robots:      nil,
-		blue_robots:        nil,
-		controlProbability: 0.0,
-		centerCoordinates:  centerCoordinates,
-		adjacentZones:      adjacentZones(id),
-	}
-	return &zone
-}
+func (an *GameAnalysis) calculateTimeAdvantage(gamestateObj *gamestate.GameState, i, j int, fun func(*gamestate.Robot) *mat.VecDense) float64 {
+	timeYellow := an.calculateTime(gamestateObj.GetYellowRobots(), i, j, fun)
+	timeBlue := an.calculateTime(gamestateObj.GetBlueRobots(), i, j, fun)
 
-// Channel constructor
-func newChannel(id int, associatedZones [NUM_COLS]int) *Channel {
-	channel := Channel{
-		id:              id,
-		AssociatedZones: associatedZones,
-		robots:          nil,
-	}
-	return &channel
-}
-
-// The pitch is divied into 9 zones, numbered 0-8, starting from the defensive
-// end to the attacking end, and from (goalkeepers perspective) left to right across the field.
-type Zone struct {
-	id                 int                // id of the zone, 0-8
-	blue_robots        []*gamestate.Robot // blue robots in the zone
-	yellow_robots      []*gamestate.Robot // yellow robots in the zone
-	controlProbability float64            // probability of maintaining control of the ball in this zone
-	centerCoordinates  mat.VecDense       // coordinates of the center of the zone
-	adjacentZones      [4]int             // array of adjacent zones ids
-	width              float32            // width of the Zone
-	length             float32            // height of the Zone
-}
-
-// The pitch is divided into 3 channels, left wing(0), center channel(1), and right wing(2).
-type Channel struct {
-	id                 int                // id of channel. 0: left wing, 1: center channel, 2: right wing
-	AssociatedZones    [NUM_COLS]int      // IDs of zones that fall within this channel
-	robots             []*gamestate.Robot // robots in the channel
-	controlProbability float64            // probability of maintaining control of the ball in this channel
-}
-
-// Struct to hold the analysis of the gamestate
-type GameAnalysis struct {
-	zones         [NUM_ROWS * NUM_COLS]Zone // The pitch is divided into 9 zones, 3 rows and 3 columns
-	channels      [NUM_CHANNELS]Channel     // The pitch is divided into 3 channels
-	inPossession  bool                      // true if the team is in possession of the ball
-	zoneLength    float32                   // length of each zoneLength
-	zoneWidth     float32                   // width of each zoneWidth
-	channelWidth  float32                   // width of each channelWidth
-	channelLength float32                   // length of each channelLength
-}
-
-// BROKEN
-func (an *GameAnalysis) updateZones(gamestateObj *gamestate.GameState) {
-
-	// Reset the zones
-	for i := 0; i < NUM_ROWS*NUM_COLS; i++ {
-		an.zones[i].yellow_robots = []*gamestate.Robot{}
-		an.zones[i].blue_robots = []*gamestate.Robot{}
-		an.zones[i].controlProbability = 0.49
-	}
-	// count blue robots in each zone and add them to the zone
-	for _, robot := range gamestateObj.Blue_team {
-		col := math.Floor(robot.GetPosition().AtVec(0) / float64(an.zoneLength))
-		row := math.Floor(robot.GetPosition().AtVec(1) / float64(an.zoneWidth))
-		an.zones[int(row)*NUM_COLS+int(col)].blue_robots = append(an.zones[int(row)*NUM_COLS+int(col)].blue_robots, robot)
+	if an.team == gamestate.Yellow {
+		return timeBlue - timeYellow
+	} else {
+		return timeYellow - timeBlue
 	}
 
-	// count yellow robots in each zone
-	for _, robot := range gamestateObj.Yellow_team {
-		col := math.Floor(robot.GetPosition().AtVec(0) / float64(an.zoneLength))
-		row := math.Floor(robot.GetPosition().AtVec(1) / float64(an.zoneWidth))
-		an.zones[int(row)*NUM_COLS+int(col)].yellow_robots = append(an.zones[int(row)*NUM_COLS+int(col)].yellow_robots, robot)
+}
+
+func (an *GameAnalysis) updateTimeAdvantage(gamestateObj *gamestate.GameState) {
+	pos_func := func(r *gamestate.Robot) *mat.VecDense {
+		return r.GetPosition()
 	}
 
-	// calculate the proportion of robots in each zone
-	for i := range an.zones {
-		blueCount := len(an.zones[i].blue_robots)
-		yellowCount := len(an.zones[i].yellow_robots)
-		totalRobots := blueCount + yellowCount
-		if totalRobots > 0 {
-			if blueCount == 0 && yellowCount != 0 {
-				an.zones[i].controlProbability = 1.0
-			} else {
-				an.zones[i].controlProbability = float64(yellowCount) / float64(totalRobots)
-			}
-		} else {
-			an.zones[i].controlProbability = 0.49
+	for i := 0; i < len(an.zones); i++ {
+		for j := 0; j < len(an.zones[i]); j++ {
+			// Calculate the time advantage of the zone
+			an.zones[i][j].timeAdvantage = an.calculateTimeAdvantage(gamestateObj, i, j, pos_func)
+		}
+	}
+}
+
+func (an *GameAnalysis) updateAntisipetedTimeAdvantage(gamestateObj *gamestate.GameState) {
+	anticipate_func := func(r *gamestate.Robot) *mat.VecDense {
+		return r.GetAnticipatedPosition()
+	}
+	for i := 0; i < len(an.zones); i++ {
+		for j := 0; j < len(an.zones[i]); j++ {
+			// Calculate the time advantage of the zone
+			an.zones[i][j].anticipatedTimeAdvantage = an.calculateTimeAdvantage(gamestateObj, i, j, anticipate_func)
 		}
 	}
 }
 
 func (pc *PreCalculator) Analyse(gamestateObj *gamestate.GameState) *GameAnalysis {
-	// pc.analysis.updateZones(gamestateObj)
-	// pc.updateChannels(gamestateObj)
-	// pc.updatePossession(gamestateObj)
+	pc.analysis.updateTimeAdvantage(gamestateObj)
 
 	return pc.analysis
 }

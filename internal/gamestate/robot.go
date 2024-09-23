@@ -1,11 +1,9 @@
 package gamestate
 
 import (
+	"container/list"
 	"fmt"
 
-	"time"
-
-	"github.com/LiU-SeeGoals/controller/internal/action"
 	"gonum.org/v1/gonum/mat"
 )
 
@@ -16,95 +14,184 @@ const (
 	Yellow
 )
 
+type RobotPos struct {
+	pos  *mat.VecDense
+	time int64
+}
+
 type Robot struct {
-	id          int
-	team        Team
-	pos         *mat.VecDense
-	prevPos     *mat.VecDense
-	lastUpdated time.Time
-	vel         *mat.VecDense
-	action      action.Action
+	id              int
+	team            Team
+	history         *list.List
+	historyCapacity int
+	vel             *mat.VecDense // in mm/s
+	anticipatePos   *mat.VecDense // in mm
+	maxSpeed        float64       // in mm/s
 }
 
-func NewRobot(id int, team Team) *Robot {
+func NewRobot(id int, team Team, history_capasity int) *Robot {
 	return &Robot{
-		id:   id,
-		team: team,
-		pos:  mat.NewVecDense(3, []float64{0, 0, 0}), // in mm
-		vel:  mat.NewVecDense(3, []float64{0, 0, 0}), // in mm/s
+		id:              id,
+		team:            team,
+		history:         list.New(),
+		historyCapacity: history_capasity,
+		vel:             mat.NewVecDense(3, []float64{0, 0, 0}), // in mm/s
+		anticipatePos:   mat.NewVecDense(3, []float64{0, 0, 0}), // in mm
+		maxSpeed:        10,                                     // in mm/s
 	}
 }
 
-func (r *Robot) SetPosition(x, y, w float64) {
-	// Store the current time
-	currentTime := time.Now()
+func (r *Robot) SetPositionTime(x, y, w float64, time int64) {
+	if r.history.Len() >= r.historyCapacity {
+		element := r.history.Back()
+		r.history.Remove(element)
 
-	// Calculate the time difference in seconds
-	timeDiff := currentTime.Sub(r.lastUpdated).Milliseconds()
+		robot := element.Value.(*RobotPos)
 
-	if timeDiff > 0 {
-		// Calculate the change in position for x and y
-		deltaX := x - r.pos.AtVec(0)
-		deltaY := y - r.pos.AtVec(1)
-		deltaW := w - r.pos.AtVec(2)
+		robot.pos.SetVec(0, x)
+		robot.pos.SetVec(1, y)
+		robot.pos.SetVec(2, w)
+		robot.time = time
 
-		// Calculate the velocity components
-		velocityX := deltaX / (float64(timeDiff) * 1000)
-		velocityY := deltaY / (float64(timeDiff) * 1000)
-		velocityW := deltaW / (float64(timeDiff) * 1000)
+		r.history.PushFront(robot)
+	} else {
+		pos := mat.NewVecDense(3, []float64{x, y, w})
+		r.history.PushFront(&RobotPos{pos, time})
+	}
+}
 
-		// Update the velocity using setVelocity
-		r.setVelocity(velocityX, velocityY, velocityW)
-
-		r.pos.SetVec(0, x)
-		r.pos.SetVec(1, y)
-		r.pos.SetVec(2, w)
+func (r *Robot) UpdatePositionTime(x, y, w float64, time int64) {
+	if r.history.Len() == 0 {
+		r.SetPositionTime(x, y, w, time)
+		return
 	}
 
-	// Update the lastUpdated time
-	r.lastUpdated = currentTime
+	robot := r.history.Front().Value.(*RobotPos)
+	robot.pos.SetVec(0, x)
+	robot.pos.SetVec(1, y)
+	robot.pos.SetVec(2, w)
+	robot.time = time
+}
+
+func (r *Robot) GetPositionTime() (*mat.VecDense, int64) {
+	if r.history.Len() == 0 {
+		return nil, 0
+	}
+
+	element := r.history.Front()
+	robot := element.Value.(*RobotPos)
+	return robot.pos, robot.time
 }
 
 func (r *Robot) GetPosition() *mat.VecDense {
-	return r.pos
+	pos, _ := r.GetPositionTime()
+	return pos
 }
 
-func (r *Robot) setVelocity(v_x, v_y, v_w float64) {
-	r.vel.SetVec(0, v_x)
-	r.vel.SetVec(1, v_y)
-	r.vel.SetVec(2, v_w)
+func (r *Robot) SetAnticipatedPosition(x, y, w float64) {
+	r.anticipatePos.SetVec(0, x)
+	r.anticipatePos.SetVec(1, y)
+	r.anticipatePos.SetVec(2, w)
+}
+
+func (r *Robot) GetAnticipatedPosition() *mat.VecDense {
+	return r.anticipatePos
+}
+
+func (r *Robot) UpdateVelocity() {
+	if r.history.Len() < 2 {
+		return
+	}
+
+	robot1 := r.history.Front().Value.(*RobotPos)
+	robot2 := r.history.Front().Next().Value.(*RobotPos)
+
+	dt := float64(robot2.time - robot1.time)
+	if dt > 0 {
+		dx := robot2.pos.AtVec(0) - robot1.pos.AtVec(0)
+		dy := robot2.pos.AtVec(1) - robot1.pos.AtVec(1)
+		dw := robot2.pos.AtVec(2) - robot1.pos.AtVec(2)
+
+		vX := dx / dt
+		vY := dy / dt
+		vW := dw / dt
+
+		r.vel.SetVec(0, vX)
+		r.vel.SetVec(1, vY)
+		r.vel.SetVec(2, vW)
+
+		speed := mat.Norm(r.vel, 2)
+		if speed > r.maxSpeed {
+			r.maxSpeed = speed
+		}
+	}
+}
+
+func (r *Robot) GetVelocity() *mat.VecDense {
+	return r.vel
+}
+
+func (r *Robot) GetSpeed() float64 {
+	return r.maxSpeed
 }
 
 func (r *Robot) String() string {
-	x := r.pos.AtVec(0)
-	y := r.pos.AtVec(1)
-	w := r.pos.AtVec(2)
 
-	v_x := r.pos.AtVec(0)
-	v_y := r.pos.AtVec(1)
-	v_w := r.pos.AtVec(2)
+	pos := r.GetPosition()
+	x := pos.AtVec(0)
+	y := pos.AtVec(1)
+	w := pos.AtVec(2)
+
+	vel := r.GetVelocity()
+	vX := vel.AtVec(0)
+	vY := vel.AtVec(1)
+	vW := vel.AtVec(2)
 
 	posString := fmt.Sprintf("(%f, %f, %f)", x, y, w)
-	velString := fmt.Sprintf("(%f, %f, %f)", v_x, v_y, v_w)
+	velString := fmt.Sprintf("(%f, %f, %f)", vX, vY, vW)
 
 	return fmt.Sprintf("id: %d, pos: %s, vel: %s", r.id, posString, velString)
 }
 
 func (r *Robot) ToDTO() RobotDTO {
+	pos := r.GetPosition()
+	if pos == nil {
+		return RobotDTO{
+			Id:   r.id,
+			Team: r.team,
+			PosX: 0,
+			PosY: 0,
+			PosW: 0,
+			VelX: 0,
+			VelY: 0,
+			VelW: 0,
+		}
+
+	}
+
+	vel := r.GetVelocity()
+
 	return RobotDTO{
 		Id:   r.id,
 		Team: r.team,
-		PosX: int(r.pos.AtVec(0)),
-		PosY: int(r.pos.AtVec(1)),
-		PosW: r.pos.AtVec(2),
-		VelX: r.vel.AtVec(0),
-		VelY: r.vel.AtVec(1),
-		VelW: r.vel.AtVec(2),
+		PosX: int(pos.AtVec(0)),
+		PosY: int(pos.AtVec(1)),
+		PosW: pos.AtVec(2),
+		VelX: vel.AtVec(0),
+		VelY: vel.AtVec(1),
+		VelW: vel.AtVec(2),
 	}
 }
 
 func (r *Robot) GetID() int {
 	return r.id
+}
+
+func (r *Robot) ResetAnticipatePosition() {
+	currPos := r.GetPosition()
+	r.anticipatePos.SetVec(0, currPos.AtVec(0))
+	r.anticipatePos.SetVec(1, currPos.AtVec(1))
+	r.anticipatePos.SetVec(2, currPos.AtVec(2))
 }
 
 type RobotDTO struct {

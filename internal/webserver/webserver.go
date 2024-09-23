@@ -186,10 +186,25 @@ func GetIncoming() []action.ActionDTO {
 }
 
 // Broadcasts the game state to all connected clients
-func BroadcastGameState(message WebsiteDTO) {
+func Broadcasts(message WebsiteDTO) {
 	gameStateJson := toJson(message)
 	webserver := getInstance()
 	webserver.gameStateQueueMutex.Lock()
 	webserver.gameStatePacketQueue = append(webserver.gameStatePacketQueue, gameStateJson)
 	webserver.gameStateQueueMutex.Unlock()
+}
+
+func UpdateWebGUI(gs *gamestate.GameState, actions []action.Action, terminal_messages []string) {
+	var gamestate_DTO = gs.ToDTO()
+	var actionTDO = make([]action.ActionDTO, len(actions))
+	for i, obj := range actions {
+		actionTDO[i] = obj.ToDTO()
+	}
+	var websiteMessage = WebsiteDTO{
+		RobotPositions: gamestate_DTO.RobotPositions,
+		BallPosition:   gamestate_DTO.BallPosition,
+		RobotActions:   actionTDO,
+		TerminalLog:    terminal_messages,
+	}
+	Broadcasts(websiteMessage)
 }
