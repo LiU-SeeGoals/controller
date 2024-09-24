@@ -53,17 +53,18 @@ func (pf *StrategyFinder) FindStrategy(gamestateObj *gamestate.GameState, gameAn
 			y := pos.AtVec(1)
 			w := pos.AtVec(2)
 
-			rand_num := rand.Float64()
+			randNum := rand.Float64()
+			randSpeed := rand.Float64()
 
-			dX := math.Cos(rand_num) * robot.GetSpeed()
-			dY := math.Sin(rand_num) * robot.GetSpeed()
+			dX := math.Cos(randNum) * robot.GetSpeed() * randSpeed
+			dY := math.Sin(randNum) * robot.GetSpeed() * randSpeed
 
 			robot.SetAnticipatedPosition(x+dX, y+dY, w)
 
 			gameAnalysis.updateAntisipetedTimeAdvantage(gamestateObj)
 			anticipatedScore = fieldControleScore(gameAnalysis.zones, anticipatedTimeFunc)
 
-			if anticipatedScore > currentScore {
+			if anticipatedScore > currentScore*1.1 {
 				return currentScore, anticipatedScore
 			}
 			robot.ResetAnticipatePosition()

@@ -37,7 +37,7 @@ func NewRobot(id int, team Team, history_capasity int) *Robot {
 		historyCapacity: history_capasity,
 		vel:             mat.NewVecDense(3, []float64{0, 0, 0}), // in mm/s
 		anticipatePos:   mat.NewVecDense(3, []float64{0, 0, 0}), // in mm
-		maxSpeed:        100,                                    // in mm/s
+		maxSpeed:        1000,                                   // in mm/s
 	}
 }
 
