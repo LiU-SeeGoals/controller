@@ -46,7 +46,7 @@ func (pf *StrategyFinder) FindStrategy(gamestateObj *gamestate.GameState, gameAn
 	myTeam := gamestateObj.GetTeam(gameAnalysis.team)
 	for _, value := range rand.Perm(len(myTeam)) {
 		// try this max X times
-		for i := 0; i < 3; i++ {
+		for i := 0; i < 10; i++ {
 			robot := myTeam[value]
 			pos := robot.GetPosition()
 			x := pos.AtVec(0)
@@ -64,10 +64,10 @@ func (pf *StrategyFinder) FindStrategy(gamestateObj *gamestate.GameState, gameAn
 			anticipatedScore = fieldControleScore(gameAnalysis.zones, anticipatedTimeFunc)
 
 			if anticipatedScore > currentScore {
-				break
+				return currentScore, anticipatedScore
 			}
 			robot.ResetAnticipatePosition()
 		}
 	}
-	return currentScore, anticipatedScore
+	return currentScore, currentScore
 }
