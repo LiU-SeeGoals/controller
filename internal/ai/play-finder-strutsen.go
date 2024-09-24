@@ -54,7 +54,7 @@ func (pf *StrategyFinder) FindStrategy(gamestateObj *gamestate.GameState, gameAn
 			w := pos.AtVec(2)
 
 			randNum := rand.Float64()
-			randSpeed := rand.Float64()
+			randSpeed := rand.Float64() * 10
 
 			dX := math.Cos(randNum) * robot.GetSpeed() * randSpeed
 			dY := math.Sin(randNum) * robot.GetSpeed() * randSpeed
