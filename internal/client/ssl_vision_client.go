@@ -1,4 +1,4 @@
-package receiver
+package client
 
 import (
 	"fmt"
@@ -75,7 +75,7 @@ func (r *SSLConnection) Receive(packetChan chan *ssl_vision.SSL_WrapperPacket) {
 	}
 }
 
-type SSLReceiver struct {
+type SSLVisionClient struct {
 	ssl         *SSLConnection
 	ssl_channel chan *ssl_vision.SSL_WrapperPacket
 }
@@ -125,7 +125,7 @@ func update_lag_time(gs GameState, play_time int64) {
 	gs.SetLagTime(lag_time)
 }
 
-func (receiver *SSLReceiver) InitGameState(gs GameState, play_time int64) {
+func (receiver *SSLVisionClient) InitGameState(gs GameState, play_time int64) {
 	packet, ok := <-receiver.ssl_channel
 	if !ok {
 		fmt.Println("SSL Channel closed")
@@ -134,7 +134,7 @@ func (receiver *SSLReceiver) InitGameState(gs GameState, play_time int64) {
 	unpack(packet, gs, play_time)
 }
 
-func (receiver *SSLReceiver) UpdateGamestate(gs GameState, play_time int64) {
+func (receiver *SSLVisionClient) UpdateGamestate(gs GameState, play_time int64) {
 	packet, ok := <-receiver.ssl_channel
 	if !ok {
 		fmt.Println("SSL Channel closed")
@@ -143,7 +143,7 @@ func (receiver *SSLReceiver) UpdateGamestate(gs GameState, play_time int64) {
 	unpack(packet, gs, play_time)
 }
 
-func (receiver *SSLReceiver) UpdateGamestateNB(gs GameState, play_time int64) {
+func (receiver *SSLVisionClient) UpdateGamestateNB(gs GameState, play_time int64) {
 	// // none-blocking receive
 	select {
 	case packet := <-receiver.ssl_channel:
@@ -156,13 +156,13 @@ func (receiver *SSLReceiver) UpdateGamestateNB(gs GameState, play_time int64) {
 
 // Start a SSL Vision receiver, returns a channel from
 // which SSL wrapper packets can be obtained.
-func (receiver *SSLReceiver) Connect() {
+func (receiver *SSLVisionClient) Connect() {
 	receiver.ssl.Connect()
 	go receiver.ssl.Receive(receiver.ssl_channel)
 }
 
-func NewSSLReceiver(sslReceiverAddress string) *SSLReceiver {
-	receiver := &SSLReceiver{
+func NewSSLVisionClient(sslReceiverAddress string) *SSLVisionClient {
+	receiver := &SSLVisionClient{
 		ssl:         NewSSLConnection(sslReceiverAddress),
 		ssl_channel: make(chan *ssl_vision.SSL_WrapperPacket),
 	}

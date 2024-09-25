@@ -1,4 +1,4 @@
-package webserver
+package client
 
 import (
 	"encoding/json"
