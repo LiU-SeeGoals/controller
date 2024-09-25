@@ -121,3 +121,46 @@ func (sc *simControl) RobotStartPositionConfig1(numberOfRobots int) {
 func (sc *simControl) RobotStartPositionConfig2(numberOfRobots int) {
 	fmt.Println("Not yet implemented")
 }
+
+func (sc *simControl) TeleportRobot(x float32, y float32, id uint32, team simulation.Team) {
+	fmt.Println(x, y)
+	// Set default values for orientation and velocities
+	orientation := float32(0.0) // Approx. 45 degrees in radians
+	vx := float32(0.0)          // Velocity towards x-axis
+	vy := float32(0.0)          // Velocity towards y-axis
+	vAngular := float32(0.0)    // Angular velocity
+	present := true             // Teleport indicates the robot is present
+
+	// Create the robot ID structure
+	robotId := simulation.SimRobotId{
+		Id:   &id,
+		Team: &team,
+	}
+
+	// Create the TeleportRobot structure with the new position and parameters
+	teleportRobot := &simulation.TeleportRobot{
+		Id:          &robotId,
+		X:           &x,
+		Y:           &y,
+		Orientation: &orientation,
+		VX:          &vx,
+		VY:          &vy,
+		VAngular:    &vAngular,
+		Present:     &present,
+	}
+
+	// Prepare the command with the single robot teleportation
+	simControl := &simulation.SimulatorControl{
+		TeleportRobot:   []*simulation.TeleportRobot{teleportRobot},
+		TeleportBall:    nil,
+		SimulationSpeed: nil,
+	}
+
+	simCommand := &simulation.SimulatorCommand{
+		Control: simControl,
+		Config:  nil,
+	}
+
+	// Send the command to teleport the robot
+	sc.client.Send(simCommand)
+}

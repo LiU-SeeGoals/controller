@@ -9,6 +9,7 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/gamestate"
 	"github.com/LiU-SeeGoals/controller/internal/simulator"
+	"github.com/LiU-SeeGoals/proto_go/simulation"
 )
 
 func main() {
@@ -23,9 +24,13 @@ func main() {
 
 	sim_controller := simulator.NewSimControl()
 
-	presentYellow := []int{0, 1, 2, 3, 4, 5}
-	presentBlue := []int{0, 1, 2, 3, 4, 5}
+	// Some sim setup for debugging ai behaviour
+	presentYellow := []int{0, 1}
+	presentBlue := []int{0}
 	sim_controller.SetPresentRobots(presentYellow, presentBlue)
+	sim_controller.TeleportRobot(0.1, 0.5, 0, simulation.Team_YELLOW)
+	sim_controller.TeleportRobot(-0.5, -0.5, 1, simulation.Team_YELLOW)
+	sim_controller.TeleportRobot(0, 0, 0, simulation.Team_BLUE)
 
 	ssl_receiver.InitGameState(gs, 0)
 	start_time := time.Now().UnixMilli()
