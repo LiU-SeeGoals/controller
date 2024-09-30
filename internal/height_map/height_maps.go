@@ -3,19 +3,17 @@ package height_map
 import (
 	"fmt"
 	"math"
-
-	"github.com/LiU-SeeGoals/controller/internal/gamestate"
 )
 
 type HeightMap interface {
 	// x and y is the cordinate to avaluate the height
 	// gamestate gives the context
-	CalculateHeight(x float32, y float32, gs *gamestate.GameState) float32
+	CalculateHeight(x float32, y float32, gs *state.GameState) float32
 }
 
 type HeightMapEnemyGauss struct{}
 
-func (h HeightMapEnemyGauss) CalculateHeight(x float32, y float32, gs *gamestate.GameState) float32 {
+func (h HeightMapEnemyGauss) CalculateHeight(x float32, y float32, gs *state.GameState) float32 {
 	// All enemy robots (blue team) create a positive Gaussian distribution
 	gaussHeight := float32(0)
 	stdDev := float64(1000) // Standard deviation is 1000
@@ -41,7 +39,7 @@ func (h HeightMapEnemyGauss) CalculateHeight(x float32, y float32, gs *gamestate
 
 type HeightMapDonut struct{}
 
-func (h HeightMapEnemyGauss) HeightMapDonut(x float32, y float32, gs *gamestate.GameState) float32 {
+func (h HeightMapEnemyGauss) HeightMapDonut(x float32, y float32, gs *state.GameState) float32 {
 	// Around the robot closest to the ball in our team (yellow),
 	// create a negative donut shaped distrobution at x distance
 	return 0.5
@@ -49,7 +47,7 @@ func (h HeightMapEnemyGauss) HeightMapDonut(x float32, y float32, gs *gamestate.
 
 type HeightMapAwayFromEdge struct{}
 
-func (h HeightMapEnemyGauss) HeightMapAwayFromEdge(x float32, y float32, gs *gamestate.GameState) float32 {
+func (h HeightMapEnemyGauss) HeightMapAwayFromEdge(x float32, y float32, gs *state.GameState) float32 {
 	// It is often not advantagues to be close to the corneds of the playing field,
 	// this creates incentive to not be close to corners.
 	// The playing field is (-3,-4.5) to (3,4.5) in dimentions
@@ -65,7 +63,7 @@ func distanceSquared(x1, y1, x2, y2 float32) float32 {
 }
 
 // Function to find the best (x, y) based on height maps with float64 precision
-func FindLowestHeight(id int, r float32, s int, heightMaps []HeightMap, gs *gamestate.GameState) (float32, float32) {
+func FindLowestHeight(id int, r float32, s int, heightMaps []HeightMap, gs *state.GameState) (float32, float32) {
 	// Convert r to float64 for higher precision in the calculations
 	r64 := float64(r)
 

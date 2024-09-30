@@ -3,8 +3,6 @@ package ai
 import (
 	"math"
 	"math/rand"
-
-	"github.com/LiU-SeeGoals/controller/internal/gamestate"
 )
 
 func NewPlayFinder() *StrategyFinder {
@@ -31,7 +29,7 @@ func fieldControleScore(field [][]Zone, fun func(*Zone) float64) float64 {
 
 }
 
-func (pf *StrategyFinder) FindStrategy(gamestateObj *gamestate.GameState, gameAnalysis *GameAnalysis) (float64, float64) {
+func (pf *StrategyFinder) FindStrategy(gamestateObj *state.GameState, gameAnalysis *GameAnalysis) (float64, float64) {
 	currTimeFunc := func(zone *Zone) float64 {
 		return zone.timeAdvantage
 	}

@@ -1,4 +1,4 @@
-package gamestate
+package state
 
 import (
 	"encoding/json"
@@ -8,6 +8,7 @@ import (
 const TEAM_SIZE = 6
 
 type GameState struct {
+	Valid       bool
 	Blue_team   [TEAM_SIZE]*Robot
 	Yellow_team [TEAM_SIZE]*Robot
 

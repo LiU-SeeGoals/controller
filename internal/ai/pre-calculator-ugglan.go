@@ -3,7 +3,6 @@ package ai
 import (
 	"math"
 
-	"github.com/LiU-SeeGoals/controller/internal/gamestate"
 	"gonum.org/v1/gonum/mat"
 )
 
@@ -18,7 +17,7 @@ type Zone struct {
 
 // Struct to hold the analysis of the gamestate
 type GameAnalysis struct {
-	team        gamestate.Team
+	team        state.Team
 	zones       [][]Zone // 2D array of zones
 	fieldLength float32
 	fieldWidth  float32
@@ -26,7 +25,7 @@ type GameAnalysis struct {
 }
 
 // Constructor for the PreCalculator
-func NewPreCalculator(fieldLength, fieldWidth, zoneSize float32, team gamestate.Team) *PreCalculator {
+func NewPreCalculator(fieldLength, fieldWidth, zoneSize float32, team state.Team) *PreCalculator {
 	pc := &PreCalculator{
 		analysis: newAnalysis(fieldLength, fieldWidth, zoneSize, team),
 	}
@@ -34,7 +33,7 @@ func NewPreCalculator(fieldLength, fieldWidth, zoneSize float32, team gamestate.
 }
 
 // GameAnalysis constructor
-func newAnalysis(fieldLength, fieldWidth, zoneSize float32, team gamestate.Team) *GameAnalysis {
+func newAnalysis(fieldLength, fieldWidth, zoneSize float32, team state.Team) *GameAnalysis {
 	analysis := GameAnalysis{}
 	higth := int(fieldLength / zoneSize)
 	width := int(fieldWidth / zoneSize)
@@ -52,7 +51,7 @@ func newAnalysis(fieldLength, fieldWidth, zoneSize float32, team gamestate.Team)
 	return &analysis
 }
 
-func (an *GameAnalysis) calculateTime(robots [gamestate.TEAM_SIZE]*gamestate.Robot, i, j int, fun func(*gamestate.Robot) *mat.VecDense) float64 {
+func (an *GameAnalysis) calculateTime(robots [state.TEAM_SIZE]*state.Robot, i, j int, fun func(*state.Robot) *mat.VecDense) float64 {
 	time := math.Inf(1)
 	// midel of the playfield in 0,0 so the zone need to be adjusted to the correct position
 	posX := float32(i)*an.zoneSize - an.fieldLength/2 + an.zoneSize/2
@@ -73,11 +72,11 @@ func (an *GameAnalysis) calculateTime(robots [gamestate.TEAM_SIZE]*gamestate.Rob
 	return time
 }
 
-func (an *GameAnalysis) calculateTimeAdvantage(gamestateObj *gamestate.GameState, i, j int, fun func(*gamestate.Robot) *mat.VecDense) float64 {
+func (an *GameAnalysis) calculateTimeAdvantage(gamestateObj *state.GameState, i, j int, fun func(*state.Robot) *mat.VecDense) float64 {
 	timeYellow := an.calculateTime(gamestateObj.GetYellowRobots(), i, j, fun)
 	timeBlue := an.calculateTime(gamestateObj.GetBlueRobots(), i, j, fun)
 
-	if an.team == gamestate.Yellow {
+	if an.team == state.Yellow {
 		return timeBlue - timeYellow
 	} else {
 		return timeYellow - timeBlue
@@ -85,8 +84,8 @@ func (an *GameAnalysis) calculateTimeAdvantage(gamestateObj *gamestate.GameState
 
 }
 
-func (an *GameAnalysis) updateTimeAdvantage(gamestateObj *gamestate.GameState) {
-	pos_func := func(r *gamestate.Robot) *mat.VecDense {
+func (an *GameAnalysis) updateTimeAdvantage(gamestateObj *state.GameState) {
+	pos_func := func(r *state.Robot) *mat.VecDense {
 		return r.GetPosition()
 	}
 
@@ -98,8 +97,8 @@ func (an *GameAnalysis) updateTimeAdvantage(gamestateObj *gamestate.GameState) {
 	}
 }
 
-func (an *GameAnalysis) updateAntisipetedTimeAdvantage(gamestateObj *gamestate.GameState) {
-	anticipate_func := func(r *gamestate.Robot) *mat.VecDense {
+func (an *GameAnalysis) updateAntisipetedTimeAdvantage(gamestateObj *state.GameState) {
+	anticipate_func := func(r *state.Robot) *mat.VecDense {
 		return r.GetAnticipatedPosition()
 	}
 	for i := 0; i < len(an.zones); i++ {
@@ -110,7 +109,7 @@ func (an *GameAnalysis) updateAntisipetedTimeAdvantage(gamestateObj *gamestate.G
 	}
 }
 
-func (pc *PreCalculator) Analyse(gamestateObj *gamestate.GameState) *GameAnalysis {
+func (pc *PreCalculator) Analyse(gamestateObj *state.GameState) *GameAnalysis {
 	pc.analysis.updateTimeAdvantage(gamestateObj)
 
 	return pc.analysis

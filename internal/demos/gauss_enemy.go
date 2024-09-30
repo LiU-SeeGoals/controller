@@ -7,19 +7,18 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/ai"
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/config"
-	"github.com/LiU-SeeGoals/controller/internal/gamestate"
 	"github.com/LiU-SeeGoals/controller/internal/simulator"
 	"github.com/LiU-SeeGoals/proto_go/simulation"
 )
 
 func GaussEnemy() {
-	gs := gamestate.NewGameState(3)
+	gs := state.NewGameState(3)
 	ssl_receiver := client.NewSSLVisionClient(config.GetSSLClientAddress())
 
-	ai_blue := ai.NewAi(gamestate.Blue)
+	ai_blue := ai.NewAi(state.Blue)
 	sim_client_blue := client.NewSimClient(config.GetSimBlueTeamAddress())
 
-	ai_yellow := ai.NewAi(gamestate.Yellow)
+	ai_yellow := ai.NewAi(state.Yellow)
 	sim_client_yellow := client.NewSimClient(config.GetSimYellowTeamAddress())
 
 	sim_controller := simulator.NewSimControl()

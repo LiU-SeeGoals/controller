@@ -3,7 +3,6 @@ package ai
 import (
 	// "fmt"
 	"github.com/LiU-SeeGoals/controller/internal/action"
-	"github.com/LiU-SeeGoals/controller/internal/gamestate"
 	"gonum.org/v1/gonum/mat"
 )
 
@@ -18,7 +17,7 @@ func NewRoleExecutor() *RoleExecutor {
 	return re
 }
 
-func (re *RoleExecutor) GetActions(gs *gamestate.GameState, gameAnalysis *GameAnalysis) []action.Action {
+func (re *RoleExecutor) GetActions(gs *state.GameState, gameAnalysis *GameAnalysis) []action.Action {
 
 	var actionList []action.Action
 
