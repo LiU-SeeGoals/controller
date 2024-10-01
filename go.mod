@@ -11,7 +11,7 @@ require (
 )
 
 require (
-	github.com/LiU-SeeGoals/proto_go v0.1.3-0.20240717164152-af5850e7d20c
+	github.com/LiU-SeeGoals/proto_go v0.1.3-0.20241001104422-d22d0b80f9cb
 	github.com/caarlos0/env/v10 v10.0.0
 	github.com/eiannone/keyboard v0.0.0-20220611211555-0d226195f203
 	github.com/gorilla/websocket v1.5.1

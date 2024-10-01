@@ -6,6 +6,7 @@ import (
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/proto_go/simulation"
+	"github.com/LiU-SeeGoals/proto_go/gc"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -83,9 +84,9 @@ func (client *SimClient) Send(msg proto.Message) (int, error) {
 func (client *SimClient) SendTestMessage() (int, error) {
 	// fmt.Println("Sending message")
 	idNum := uint32(3)
-	team := simulation.Team_BLUE
+	team := gc.Team_BLUE
 
-	id := simulation.SimRobotId{
+	id := gc.RobotId{
 		Id:   &idNum,
 		Team: &team,
 	}
