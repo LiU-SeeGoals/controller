@@ -7,6 +7,7 @@ import (
 
 type SlowBrainGO struct {
 	team 			state.Team
+	gameAnalysis 	state.GameAnalysis
 	incomingGameState <-chan state.GameState
 	outgoingPlan      chan<- state.GamePlan
 }
@@ -14,6 +15,7 @@ type SlowBrainGO struct {
 func NewSlowBrainGO(incoming <-chan state.GameState, outgoing chan<- state.GamePlan, team state.Team) *SlowBrainGO {
 	sb := &SlowBrainGO{
 		team: 			  team,
+		gameAnalysis:    state.GameAnalysis{},
 		incomingGameState: incoming,
 		outgoingPlan:      outgoing,
 	}
@@ -40,5 +42,7 @@ func (sb *SlowBrainGO) Run() {
 }
 
 func (sb *SlowBrainGO) GetPlan(gameState *state.GameState) state.GamePlan {
+	gameAnalysis.Update(gameState, sb.team)
+
 
 

@@ -45,31 +45,18 @@ func (gs *GameState) ToJson() []byte {
 	return gameStateJson
 }
 
-func (gs *GameState) SetYellowRobot(robotId uint32, x, y, w float64, time int64) {
+func (gs *GameState) SetYellowRobot(robotId uint32, x, y, w float32, time int64) {
 	gs.Yellow_team[robotId].SetPositionTime(x, y, w, time)
-	gs.Yellow_team[robotId].UpdateVelocity()
-	gs.Yellow_team[robotId].UpdateMaxSpeed()
 
 }
 
-func (gs *GameState) SetBlueRobot(robotId uint32, x, y, w float64, time int64) {
+func (gs *GameState) SetBlueRobot(robotId uint32, x, y, w float32, time int64) {
 	gs.Blue_team[robotId].SetPositionTime(x, y, w, time)
-	gs.Blue_team[robotId].UpdateVelocity()
-	gs.Blue_team[robotId].UpdateMaxSpeed()
 }
 
 // Updates position of robots and balls to their actual position
-func (gs *GameState) SetBall(x, y, z float64, time int64) {
+func (gs *GameState) SetBall(x, y, z float32, time int64) {
 	gs.Ball.SetPositionTime(x, y, z, time)
-	gs.Ball.UpdateVelocity()
-	gs.Ball.UpdateMaxSpeed()
-}
-
-func (gs *GameState) ResetAnticipetedPositions() {
-	for i := 0; i < TEAM_SIZE; i++ {
-		gs.Blue_team[i].ResetAnticipatePosition()
-		gs.Yellow_team[i].ResetAnticipatePosition()
-	}
 }
 
 func (gs *GameState) SetMessageReceivedTime(time int64) {
@@ -80,20 +67,20 @@ func (gs *GameState) GetMessageReceivedTime() int64 {
 	return gs.MessageReceived
 }
 
-func (gs *GameState) SetLagTime(lagTime int64) {
-	gs.LagTime = lagTime
-}
-
-func (gs *GameState) GetLagTime() int64 {
-	return gs.LagTime
-}
-
 func (gs *GameState) GetBall() *Ball {
 	return gs.Ball
 }
 
 func (gs *GameState) GetTeam(team Team) [TEAM_SIZE]*Robot {
 	if team == Yellow {
+		return gs.Yellow_team
+	} else {
+		return gs.Blue_team
+	}
+}
+
+func (gs *GameState) GetOtherTeam(team Team) [TEAM_SIZE]*Robot {
+	if team != Yellow {
 		return gs.Yellow_team
 	} else {
 		return gs.Blue_team
@@ -118,6 +105,9 @@ func (gs *GameState) GetRobot(id int, team Team) *Robot {
 // Constructor for game state
 func NewGameState(capasity int) *GameState {
 	gs := &GameState{}
+	gs.Valid = true
+	gs.fieldLength = 9000 // TODO: Get from geometry
+	gs.fieldWidth = 6000  // TODO: Get from geometry
 
 	gs.Ball = NewBall(capasity)
 	for i := 0; i < TEAM_SIZE; i++ {
