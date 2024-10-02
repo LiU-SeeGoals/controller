@@ -1,12 +1,11 @@
 package state
 
+type Zone struct {
+	scores []float32
+}
 type GameAnalisys struct {
-	Blue_team   [TEAM_SIZE]*Robot
-	Yellow_team [TEAM_SIZE]*Robot
-
-	// Holds ball data
-	Ball *Ball
-
-	MessageReceived int64
-	LagTime         int64
+	team      state.Team
+	myTeam    [][]Zone // 2D array of zones
+	otherTeam [][]Zone // 2D array of zones
+	zoneSize  float32
 }

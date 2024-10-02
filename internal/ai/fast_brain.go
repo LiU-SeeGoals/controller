@@ -5,41 +5,45 @@ import (
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/state"
+	"gonum.org/v1/gonum/mat"
 )
 
 type FastBrainGO struct {
+	team              state.Team
 	incomingGameState <-chan state.GameState
 	incomingGamePlan  <-chan state.GamePlan
 	outgoingActions   chan<- []action.Action
-	gameState         state.GameState
-	gamePlan          state.GamePlan
 }
 
-func NewFastBrainGO(incomingGameState <-chan state.GameState, incomingGamePlan <-chan state.GamePlan, outgoingActions chan<- []action.Action) *FastBrainGO {
+func NewFastBrainGO(incomingGameState <-chan state.GameState, incomingGamePlan <-chan state.GamePlan, outgoingActions chan<- []action.Action, team state.Team) *FastBrainGO {
 
 	fb := &FastBrainGO{
+		team:              team,
 		incomingGameState: incomingGameState,
 		incomingGamePlan:  incomingGamePlan,
 		outgoingActions:   outgoingActions,
-		gameState:         state.GameState{},
-		gamePlan:          state.GamePlan{},
 	}
 	go fb.Run()
 	return fb
 }
 
 func (fb *FastBrainGO) Run() {
+	gameState := state.GameState{}
+	gamePlan := state.GamePlan{}
 	for {
-		// We will recive the game state more often than the game plan
+		// We will reive the game state more often than the game plan
+		// so we wait for the gameState to update and work with the latest game plan
+
+		gameState = <-fb.incomingGameState
+
 		select {
-		case fb.gameState = <-fb.incomingGameState:
-		case fb.gamePlan = <-fb.incomingGamePlan:
+		case gamePlan = <-fb.incomingGamePlan:
 		default:
 
 		}
 
 		// Wait for the game to start
-		if !fb.gameState.Valid || !fb.gamePlan.Valid {
+		if !gameState.Valid || !gamePlan.Valid {
 			time.Sleep(10 * time.Millisecond)
 			continue
 		}

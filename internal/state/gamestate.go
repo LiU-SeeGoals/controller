@@ -16,7 +16,8 @@ type GameState struct {
 	Ball *Ball
 
 	MessageReceived int64
-	LagTime         int64
+	fieldLength     float32
+	fieldWidth      float32
 }
 
 type GameStateDTO struct {

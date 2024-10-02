@@ -3,6 +3,7 @@ package ai
 import (
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/helper"
+	"github.com/LiU-SeeGoals/controller/internal/state"
 )
 
 type Ai struct {
@@ -43,7 +44,7 @@ func (ai *Ai) GetActions(gamestate *state.GameState) []action.Action {
 	// Send the game state to the fast brain
 	ai.gameStateSenderFB <- *gamestate
 
-	// Get the actions from the fast brain
+	// Get the actions from the fast brain, this will block until the fast brain has decided on actions
 	actions := <-ai.actionReciver
 
 	return actions
