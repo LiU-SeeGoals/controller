@@ -4,14 +4,10 @@ import (
 	"fmt"
 	"net"
 
+	"github.com/LiU-SeeGoals/controller/internal/gamestatus"
 	"github.com/LiU-SeeGoals/proto_go/gc"
 	"google.golang.org/protobuf/proto"
 )
-
-// const (
-// 	// Read buffer size
-// 	READ_BUFFER_SIZE = 8192
-// )
 
 // SSL Vision receiver
 type GCConnection struct {
@@ -78,6 +74,9 @@ func (r *GCConnection) Receive(packetChan chan *gc.Referee) {
 type GCReceiver struct {
 	gc         *GCConnection
 	gc_channel chan *gc.Referee
+	// A random UUID of the source that is kept constant at the source while running
+	// If multiple sources are broadcasting to the same network, this id can be used to identify individual sources
+	SourceIdentifier string
 }
 
 // Start a SSL Vision receiver, returns a channel from
@@ -96,15 +95,87 @@ func NewGCReceiver(sslReceiverAddress string) *GCReceiver {
 	return receiver
 }
 
-// Test printing out packets
-func (receiver *GCReceiver) PrintPackets() {
-	for {
-		packet, ok := <-receiver.gc_channel
-		if !ok {
-			fmt.Println("GC Channel closed")
-			return
-		}
-		fmt.Println(packet)
+func (receiver *GCReceiver) InitGameStatus(gs *gamestatus.GameStatus) {
+	packet, ok := <-receiver.gc_channel
+
+	if !ok {
+		fmt.Println("GC Channel closed")
+		return
 	}
+	receiver.SourceIdentifier = packet.GetSourceIdentifier()
 }
 
+
+// Test printing out packets
+func (receiver *GCReceiver) UpdateGameStatus(gs *gamestatus.GameStatus) {
+	packet, ok := <-receiver.gc_channel
+
+	if packet.GetSourceIdentifier() != receiver.SourceIdentifier {
+		return
+	}
+
+	if !ok {
+		fmt.Println("GC Channel closed")
+		return
+	}
+
+	gs.SetGameEvent(gamestatus.RefCommand(packet.GetCommand().Number()),
+		packet.GetCommandTimestamp(),
+		float64(packet.GetDesignatedPosition().GetX()),
+		float64(packet.GetDesignatedPosition().GetY()),
+		gamestatus.RefCommand(packet.GetCommand().Number()),
+		packet.GetCurrentActionTimeRemaining())
+
+	gs.SetGameStatus(gamestatus.GameStage(packet.GetStage().Number()),
+		gamestatus.MatchType(packet.GetMatchType().Number()),
+		packet.GetPacketTimestamp(),
+		packet.GetStageTimeLeft(),
+		packet.GetCommandCounter(),
+		packet.GetBlueTeamOnPositiveHalf(),
+		packet.GetStatusMessage())
+
+	// yellow team
+	gs.SetTeamInfo(
+		true,
+		packet.Yellow.GetName(),
+		packet.Yellow.GetScore(),
+		packet.Yellow.GetRedCards(),
+		packet.Yellow.GetYellowCards(),
+		packet.Yellow.GetTimeouts(),
+		packet.Yellow.GetTimeoutTime(),
+		packet.Yellow.GetGoalkeeper(),
+		packet.Yellow.GetFoulCounter(),
+		packet.Yellow.GetBallPlacementFailures(),
+		packet.Yellow.GetMaxAllowedBots(),
+		packet.Yellow.GetBotSubstitutionsLeft(),
+		packet.Yellow.GetBotSubstitutionTimeLeft(),
+		packet.Yellow.GetYellowCardTimes(),
+		packet.Yellow.GetCanPlaceBall(),
+		packet.Yellow.GetBotSubstitutionIntent(),
+		packet.Yellow.GetBallPlacementFailuresReached(),
+		packet.Yellow.GetBotSubstitutionAllowed(),
+	)
+
+	// blue team
+	gs.SetTeamInfo(
+		false,
+		packet.Blue.GetName(),
+		packet.Blue.GetScore(),
+		packet.Blue.GetRedCards(),
+		packet.Blue.GetYellowCards(),
+		packet.Blue.GetTimeouts(),
+		packet.Blue.GetTimeoutTime(),
+		packet.Blue.GetGoalkeeper(),
+		packet.Blue.GetFoulCounter(),
+		packet.Blue.GetBallPlacementFailures(),
+		packet.Blue.GetMaxAllowedBots(),
+		packet.Blue.GetBotSubstitutionsLeft(),
+		packet.Blue.GetBotSubstitutionTimeLeft(),
+		packet.Blue.GetYellowCardTimes(),
+		packet.Blue.GetCanPlaceBall(),
+		packet.Blue.GetBotSubstitutionIntent(),
+		packet.Blue.GetBallPlacementFailuresReached(),
+		packet.Blue.GetBotSubstitutionAllowed(),
+	)
+
+}
