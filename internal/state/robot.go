@@ -7,6 +7,7 @@ import (
 
 type Team int8
 type ID uint8
+type RobotTeam [TEAM_SIZE]*Robot
 
 const (
 	Blue Team = iota
@@ -81,7 +82,7 @@ func (r *Robot) GetVelocity() Position {
 
 	for e := r.history.Front().Next(); e != nil; e = e.Next() {
 		robot2 := e.Value.(*RobotPos)
-		dPos := robot2.pos.Sub(&robot.pos)
+		dPos := robot2.pos.Sub(robot.pos)
 		dt := float32(robot2.time - robot.time)
 		// TODO: lets add exponential decay so that the most recent deltas have more weight
 		sum_deltas = sum_deltas.Add(dPos.Scale(1 / dt))

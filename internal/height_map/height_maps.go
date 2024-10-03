@@ -3,32 +3,31 @@ package height_map
 import (
 	"fmt"
 	"math"
+
+	"github.com/LiU-SeeGoals/controller/internal/state"
 )
 
-type HeightMap interface {
-	// x and y is the cordinate to avaluate the height
-	// gamestate gives the context
-	CalculateHeight(x float32, y float32, gs *state.GameState) float32
+type HeightMap func(x float32, y float32, robots *state.RobotAnalysisTeam) float32
+
+type HeightMapGauss struct {
+	std float32
 }
 
-type HeightMapEnemyGauss struct{}
-
-func (h HeightMapEnemyGauss) CalculateHeight(x float32, y float32, gs *state.GameState) float32 {
+func (h HeightMapGauss) CalculateHeight(x float32, y float32, robots *state.RobotAnalysisTeam) float32 {
 	// All enemy robots (blue team) create a positive Gaussian distribution
 	gaussHeight := float32(0)
-	stdDev := float64(1000) // Standard deviation is 1000
 
-	for _, robot := range gs.Blue_team {
-		if robot != nil && robot.GetPosition() != nil {
-			// Get the robot's position
-			robotX := float32(robot.GetPosition().At(0, 0))
-			robotY := float32(robot.GetPosition().At(1, 0))
+	for _, robot := range robots {
+		if robot.IsActive() {
+			pos := robot.GetPosition()
+			robotX := pos.X
+			robotY := pos.Y
 
 			// Gaussian falloff based on distance to the robot
 			distanceSq := distanceSquared(x, y, robotX, robotY)
 
 			// Gaussian with standard deviation 1000: adjust the denominator to 2 * stdDev^2
-			gaussianValue := float32(math.Exp(-float64(distanceSq) / (2 * stdDev * stdDev)))
+			gaussianValue := float32(math.Exp(-float64(distanceSq) / float64(2*h.std*h.std)))
 
 			gaussHeight += gaussianValue
 		}
@@ -39,7 +38,7 @@ func (h HeightMapEnemyGauss) CalculateHeight(x float32, y float32, gs *state.Gam
 
 type HeightMapDonut struct{}
 
-func (h HeightMapEnemyGauss) HeightMapDonut(x float32, y float32, gs *state.GameState) float32 {
+func (h HeightMapGauss) HeightMapDonut(x float32, y float32, robots *state.RobotAnalysisTeam) float32 {
 	// Around the robot closest to the ball in our team (yellow),
 	// create a negative donut shaped distrobution at x distance
 	return 0.5
@@ -47,11 +46,36 @@ func (h HeightMapEnemyGauss) HeightMapDonut(x float32, y float32, gs *state.Game
 
 type HeightMapAwayFromEdge struct{}
 
-func (h HeightMapEnemyGauss) HeightMapAwayFromEdge(x float32, y float32, gs *state.GameState) float32 {
+func (h HeightMapGauss) HeightMapAwayFromEdge(x float32, y float32, robots *state.RobotAnalysisTeam) float32 {
 	// It is often not advantagues to be close to the corneds of the playing field,
 	// this creates incentive to not be close to corners.
 	// The playing field is (-3,-4.5) to (3,4.5) in dimentions
 	return 0.5
+}
+
+type TimeAdvantage struct {
+	retrieve_func func(r *state.RobotAnalysis) state.Position
+}
+
+func (ta *TimeAdvantage) CalculateTimeAdvantage(x float32, y float32, robots *state.RobotAnalysisTeam) float32 {
+	time := math.MaxFloat32
+
+	for _, robot := range robots {
+		if !robot.Active {
+			continue
+		}
+		// Calculate the distance to the zone
+		pos := ta.retrieve_func(&robot)
+		pos.X = x - pos.X
+		pos.Y = y - pos.Y
+		distance := pos.Norm()
+		// Calculate the time to reach the zone
+		curr_time := distance / robot.MaxMoveSpeed
+		if time > curr_time {
+			time = curr_time
+		}
+	}
+	return time
 }
 
 //------------------------------------------------------//

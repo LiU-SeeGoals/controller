@@ -2,20 +2,29 @@ package ai
 
 import (
 	"time"
+
 	"github.com/LiU-SeeGoals/controller/internal/state"
+	"github.com/LiU-SeeGoals/controller/internal/height_map"
+
 )
 
 type SlowBrainGO struct {
-	team 			state.Team
-	gameAnalysis 	state.GameAnalysis
+	team              state.Team
+	gameAnalysis      *state.GameAnalysis
 	incomingGameState <-chan state.GameState
 	outgoingPlan      chan<- state.GamePlan
+	myScoringFunctions []HeightMap
+	otherScoringFunctions []HeightMap
 }
 
 func NewSlowBrainGO(incoming <-chan state.GameState, outgoing chan<- state.GamePlan, team state.Team) *SlowBrainGO {
+	myScoringFunctions := []HeightMap{
+
+
+
 	sb := &SlowBrainGO{
-		team: 			  team,
-		gameAnalysis:    state.GameAnalysis{},
+		team:              team,
+		gameAnalysis:      state.NewGameAnalysis(9000, 6000, 100, team),
 		incomingGameState: incoming,
 		outgoingPlan:      outgoing,
 	}
@@ -42,7 +51,6 @@ func (sb *SlowBrainGO) Run() {
 }
 
 func (sb *SlowBrainGO) GetPlan(gameState *state.GameState) state.GamePlan {
-	gameAnalysis.Update(gameState, sb.team)
+	sb.gameAnalysis.Update(gameState)
 
-
-
+}

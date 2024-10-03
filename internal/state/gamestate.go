@@ -5,14 +5,13 @@ import (
 	"fmt"
 )
 
-const TEAM_SIZE = 6
+const TEAM_SIZE ID = 6
 
 type GameState struct {
 	Valid       bool
-	Blue_team   [TEAM_SIZE]*Robot
-	Yellow_team [TEAM_SIZE]*Robot
+	Blue_team   *RobotTeam
+	Yellow_team *RobotTeam
 
-	// Holds ball data
 	Ball *Ball
 
 	MessageReceived int64
@@ -27,10 +26,11 @@ type GameStateDTO struct {
 
 func (gs *GameState) ToDTO() *GameStateDTO {
 	gameStateDTO := GameStateDTO{}
-	for i := 0; i < TEAM_SIZE; i++ {
+	var i ID
+	for i = 0; i < TEAM_SIZE; i++ {
 		gameStateDTO.RobotPositions[i] = gs.GetRobot(i, Blue).ToDTO()
 	}
-	for i := 0; i < TEAM_SIZE; i++ {
+	for i = 0; i < TEAM_SIZE; i++ {
 		gameStateDTO.RobotPositions[TEAM_SIZE+i] = gs.GetRobot(i, Yellow).ToDTO()
 	}
 	gameStateDTO.BallPosition = gs.Ball.ToDTO()
@@ -71,7 +71,7 @@ func (gs *GameState) GetBall() *Ball {
 	return gs.Ball
 }
 
-func (gs *GameState) GetTeam(team Team) [TEAM_SIZE]*Robot {
+func (gs *GameState) GetTeam(team Team) *RobotTeam {
 	if team == Yellow {
 		return gs.Yellow_team
 	} else {
@@ -79,7 +79,7 @@ func (gs *GameState) GetTeam(team Team) [TEAM_SIZE]*Robot {
 	}
 }
 
-func (gs *GameState) GetOtherTeam(team Team) [TEAM_SIZE]*Robot {
+func (gs *GameState) GetOtherTeam(team Team) *RobotTeam {
 	if team != Yellow {
 		return gs.Yellow_team
 	} else {
@@ -87,15 +87,15 @@ func (gs *GameState) GetOtherTeam(team Team) [TEAM_SIZE]*Robot {
 	}
 }
 
-func (gs *GameState) GetYellowRobots() [TEAM_SIZE]*Robot {
+func (gs *GameState) GetYellowRobots() *RobotTeam {
 	return gs.Yellow_team
 }
 
-func (gs *GameState) GetBlueRobots() [TEAM_SIZE]*Robot {
+func (gs *GameState) GetBlueRobots() *RobotTeam {
 	return gs.Blue_team
 }
 
-func (gs *GameState) GetRobot(id int, team Team) *Robot {
+func (gs *GameState) GetRobot(id ID, team Team) *Robot {
 	if team == Blue {
 		return gs.Blue_team[id]
 	}
@@ -110,7 +110,8 @@ func NewGameState(capasity int) *GameState {
 	gs.fieldWidth = 6000  // TODO: Get from geometry
 
 	gs.Ball = NewBall(capasity)
-	for i := 0; i < TEAM_SIZE; i++ {
+	var i ID
+	for i = 0; i < TEAM_SIZE; i++ {
 		gs.Blue_team[i] = NewRobot(i, Blue, capasity)
 		gs.Yellow_team[i] = NewRobot(i, Yellow, capasity)
 	}
@@ -122,11 +123,12 @@ func NewGameState(capasity int) *GameState {
 // String representation of game state
 func (gs *GameState) String() string {
 	gs_str := "{\n blue team: {\n"
-	for i := 0; i < TEAM_SIZE; i++ {
+	var i ID
+	for i = 0; i < TEAM_SIZE; i++ {
 		gs_str += "robot: {" + gs.Blue_team[i].String() + " },\n"
 	}
 	gs_str += "},\n yellow team: {\n"
-	for i := 0; i < TEAM_SIZE; i++ {
+	for i = 0; i < TEAM_SIZE; i++ {
 		gs_str += "robot: {" + gs.Yellow_team[i].String() + " },\n"
 	}
 	// for _, line := range gs.Field.FieldLines {

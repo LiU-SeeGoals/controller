@@ -1,31 +1,40 @@
 package state
 
 type Zone struct {
-	scores []float32
+	Scores []float32
 }
 
 type TeamAnalysis struct {
 	Robots   [TEAM_SIZE]RobotAnalysis
-	zoneSize float32
-	zones    [][]Zone
+	ZoneSize float32
+	Zones    [][]Zone
 }
 
 type RobotAnalysis struct {
-	active           bool
+	Active           bool
 	id               ID
 	position         Position
 	destination      Position
 	velocity         Position
-	maxMoveSpeed     float32 // mm/s
-	maxRotationSpeed float32 // rad/s
+	MaxMoveSpeed     float32 // mm/s
+	MaxRotationSpeed float32 // rad/s
 	acceleration     float32 // mm/s^2
 	deceleration     float32 // mm/s^2
+}
+
+type BallAnalysis struct {
+	position    Position
+	velocity    Position
+	destination Position
 }
 type GameAnalysis struct {
 	team      Team
 	myTeam    TeamAnalysis
 	otherTeam TeamAnalysis
+	ball      BallAnalysis
 }
+
+type RobotAnalysisTeam [TEAM_SIZE]RobotAnalysis
 
 func calMoveSpeed(robot *Robot) float32 {
 	velocity := robot.GetVelocity()
@@ -46,20 +55,20 @@ func calDeceleration(robot *Robot) float32 {
 	return -calAcceleration(robot)
 }
 
-func updateTeam(gameStateTeam [TEAM_SIZE]*Robot, teamAnalysis *TeamAnalysis) {
+func updateTeam(gameStateTeam *RobotTeam, teamAnalysis *TeamAnalysis) {
 	for _, robot := range gameStateTeam {
 		rAn := &teamAnalysis.Robots[robot.GetID()]
 		if robot.IsActive() {
-			rAn.active = true
+			rAn.Active = true
 			rAn.id = robot.GetID()
 			rAn.position = robot.GetPosition()
 			rAn.velocity = robot.GetVelocity()
 
-			if speed := calMoveSpeed(robot); speed > rAn.maxMoveSpeed {
-				rAn.maxMoveSpeed = speed
+			if speed := calMoveSpeed(robot); speed > rAn.MaxMoveSpeed {
+				rAn.MaxMoveSpeed = speed
 			}
-			if rotationSpeed := calRotationSpeed(robot); rotationSpeed > rAn.maxRotationSpeed {
-				rAn.maxRotationSpeed = rotationSpeed
+			if rotationSpeed := calRotationSpeed(robot); rotationSpeed > rAn.MaxRotationSpeed {
+				rAn.MaxRotationSpeed = rotationSpeed
 			}
 			if acceleration := calAcceleration(robot); acceleration > rAn.acceleration {
 				rAn.acceleration = acceleration
@@ -69,17 +78,37 @@ func updateTeam(gameStateTeam [TEAM_SIZE]*Robot, teamAnalysis *TeamAnalysis) {
 			}
 
 		} else {
-			rAn.active = false
+			rAn.Active = false
 		}
 	}
 }
 
-func (analysis *GameAnalysis) Update(gameState *GameState, team Team) {
-	zoneSize := 100
-	updateTeam(gameState.GetTeam(team), &analysis.myTeam)
-	updateTeam(gameState.GetOtherTeam(team), &analysis.otherTeam)
-	analysis.team = team
-	analysis.myTeam.zoneSize = float32(zoneSize)
-	analysis.otherTeam.zoneSize = float32(zoneSize)
+func updateBall(gameStateBall *Ball, ballAnalysis *BallAnalysis) {
+	ballAnalysis.position = gameStateBall.GetPosition()
+	ballAnalysis.velocity = gameStateBall.GetVelocity()
+}
 
+func NewGameAnalysis(fieldLength, fieldWidth, ZoneSize float32, team Team) *GameAnalysis {
+	analysis := GameAnalysis{}
+	hight := int(fieldLength / ZoneSize)
+	width := int(fieldWidth / ZoneSize)
+	analysis.team = team
+	analysis.myTeam.ZoneSize = ZoneSize
+	analysis.otherTeam.ZoneSize = ZoneSize
+	analysis.myTeam.Zones = make([][]Zone, hight)
+	analysis.otherTeam.Zones = make([][]Zone, hight)
+
+	// Initialize the Zones
+	for i := 0; i < hight; i++ {
+		analysis.myTeam.Zones[i] = make([]Zone, width)
+		analysis.otherTeam.Zones[i] = make([]Zone, width)
+	}
+	return &analysis
+}
+
+func (analysis *GameAnalysis) Update(gameState *GameState) {
+	updateTeam(gameState.GetTeam(analysis.team), &analysis.myTeam)
+	updateTeam(gameState.GetOtherTeam(analysis.team), &analysis.otherTeam)
+	updateBall(gameState.GetBall(), &analysis.ball)
+	// TODO: Update Zones
 }
