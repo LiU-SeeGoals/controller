@@ -103,17 +103,17 @@ func (gs *GameState) GetRobot(id ID, team Team) *Robot {
 }
 
 // Constructor for game state
-func NewGameState(capasity int) *GameState {
+func NewGameState(capacity int) *GameState {
 	gs := &GameState{}
 	gs.Valid = true
 	gs.fieldLength = 9000 // TODO: Get from geometry
 	gs.fieldWidth = 6000  // TODO: Get from geometry
 
-	gs.Ball = NewBall(capasity)
+	gs.Ball = NewBall(capacity)
 	var i ID
 	for i = 0; i < TEAM_SIZE; i++ {
-		gs.Blue_team[i] = NewRobot(i, Blue, capasity)
-		gs.Yellow_team[i] = NewRobot(i, Yellow, capasity)
+		gs.Blue_team[i] = NewRobot(i, Blue, capacity)
+		gs.Yellow_team[i] = NewRobot(i, Yellow, capacity)
 	}
 
 	return gs

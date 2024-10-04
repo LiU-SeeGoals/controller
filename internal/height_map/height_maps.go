@@ -54,25 +54,31 @@ func (h HeightMapGauss) HeightMapAwayFromEdge(x float32, y float32, robots *stat
 }
 
 type TimeAdvantage struct {
-	retrieve_func func(r *state.RobotAnalysis) state.Position
+	retrieveFunc func(r *state.RobotAnalysis) state.Position
+}
+
+func NewTimeAdvantage(retrieveFunc func(r *state.RobotAnalysis) state.Position) *TimeAdvantage {
+	return &TimeAdvantage{
+		retrieveFunc: retrieveFunc,
+	}
 }
 
 func (ta *TimeAdvantage) CalculateTimeAdvantage(x float32, y float32, robots *state.RobotAnalysisTeam) float32 {
-	time := math.MaxFloat32
+	time := float32(math.MaxFloat32)
 
 	for _, robot := range robots {
-		if !robot.Active {
+		if !robot.IsActive() {
 			continue
 		}
 		// Calculate the distance to the zone
-		pos := ta.retrieve_func(&robot)
+		pos := ta.retrieveFunc(&robot)
 		pos.X = x - pos.X
 		pos.Y = y - pos.Y
 		distance := pos.Norm()
 		// Calculate the time to reach the zone
-		curr_time := distance / robot.MaxMoveSpeed
-		if time > curr_time {
-			time = curr_time
+		currTime := distance / robot.GetMaxMoveSpeed()
+		if time > currTime {
+			time = currTime
 		}
 	}
 	return time

@@ -2,6 +2,7 @@ package state
 
 type Zone struct {
 	Scores []float32
+	Score  float32
 }
 
 type TeamAnalysis struct {
@@ -11,15 +12,55 @@ type TeamAnalysis struct {
 }
 
 type RobotAnalysis struct {
-	Active           bool
+	active           bool
 	id               ID
 	position         Position
 	destination      Position
 	velocity         Position
-	MaxMoveSpeed     float32 // mm/s
-	MaxRotationSpeed float32 // rad/s
+	maxMoveSpeed     float32 // mm/s
+	maxRotationSpeed float32 // rad/s
 	acceleration     float32 // mm/s^2
 	deceleration     float32 // mm/s^2
+}
+
+func (r *RobotAnalysis) IsActive() bool {
+	return r.active
+}
+
+func (r *RobotAnalysis) GetID() ID {
+	return r.id
+}
+
+func (r *RobotAnalysis) GetPosition() Position {
+	return r.position
+}
+
+func (r *RobotAnalysis) GetDestination() Position {
+	return r.destination
+}
+
+func (r *RobotAnalysis) GetVelocity() Position {
+	return r.velocity
+}
+
+func (r *RobotAnalysis) GetMaxMoveSpeed() float32 {
+	return r.maxMoveSpeed
+}
+
+func (r *RobotAnalysis) GetMaxRotationSpeed() float32 {
+	return r.maxRotationSpeed
+}
+
+func (r *RobotAnalysis) GetAcceleration() float32 {
+	return r.acceleration
+}
+
+func (r *RobotAnalysis) GetDeceleration() float32 {
+	return r.deceleration
+}
+
+func (r *RobotAnalysis) SetDestination(destination Position) {
+	r.destination = destination
 }
 
 type BallAnalysis struct {
@@ -27,11 +68,34 @@ type BallAnalysis struct {
 	velocity    Position
 	destination Position
 }
+
+func (b *BallAnalysis) GetPosition() Position {
+	return b.position
+}
+
+func (b *BallAnalysis) GetVelocity() Position {
+	return b.velocity
+}
+
+func (b *BallAnalysis) GetDestination() Position {
+	return b.destination
+}
+
+func (b *BallAnalysis) SetDestination(destination Position) {
+	b.destination = destination
+}
+
+type FieldInfo struct {
+	Length float32
+	Width  float32
+}
+
 type GameAnalysis struct {
 	team      Team
-	myTeam    TeamAnalysis
-	otherTeam TeamAnalysis
-	ball      BallAnalysis
+	MyTeam    TeamAnalysis
+	OtherTeam TeamAnalysis
+	Ball      BallAnalysis
+	FieldInfo FieldInfo
 }
 
 type RobotAnalysisTeam [TEAM_SIZE]RobotAnalysis
@@ -59,16 +123,16 @@ func updateTeam(gameStateTeam *RobotTeam, teamAnalysis *TeamAnalysis) {
 	for _, robot := range gameStateTeam {
 		rAn := &teamAnalysis.Robots[robot.GetID()]
 		if robot.IsActive() {
-			rAn.Active = true
+			rAn.active = true
 			rAn.id = robot.GetID()
 			rAn.position = robot.GetPosition()
 			rAn.velocity = robot.GetVelocity()
 
-			if speed := calMoveSpeed(robot); speed > rAn.MaxMoveSpeed {
-				rAn.MaxMoveSpeed = speed
+			if speed := calMoveSpeed(robot); speed > rAn.maxMoveSpeed {
+				rAn.maxMoveSpeed = speed
 			}
-			if rotationSpeed := calRotationSpeed(robot); rotationSpeed > rAn.MaxRotationSpeed {
-				rAn.MaxRotationSpeed = rotationSpeed
+			if rotationSpeed := calRotationSpeed(robot); rotationSpeed > rAn.maxRotationSpeed {
+				rAn.maxRotationSpeed = rotationSpeed
 			}
 			if acceleration := calAcceleration(robot); acceleration > rAn.acceleration {
 				rAn.acceleration = acceleration
@@ -78,7 +142,7 @@ func updateTeam(gameStateTeam *RobotTeam, teamAnalysis *TeamAnalysis) {
 			}
 
 		} else {
-			rAn.Active = false
+			rAn.active = false
 		}
 	}
 }
@@ -93,22 +157,24 @@ func NewGameAnalysis(fieldLength, fieldWidth, ZoneSize float32, team Team) *Game
 	hight := int(fieldLength / ZoneSize)
 	width := int(fieldWidth / ZoneSize)
 	analysis.team = team
-	analysis.myTeam.ZoneSize = ZoneSize
-	analysis.otherTeam.ZoneSize = ZoneSize
-	analysis.myTeam.Zones = make([][]Zone, hight)
-	analysis.otherTeam.Zones = make([][]Zone, hight)
+	analysis.MyTeam.ZoneSize = ZoneSize
+	analysis.OtherTeam.ZoneSize = ZoneSize
+	analysis.FieldInfo.Length = fieldLength
+	analysis.FieldInfo.Width = fieldWidth
+	analysis.MyTeam.Zones = make([][]Zone, hight)
+	analysis.OtherTeam.Zones = make([][]Zone, hight)
 
 	// Initialize the Zones
 	for i := 0; i < hight; i++ {
-		analysis.myTeam.Zones[i] = make([]Zone, width)
-		analysis.otherTeam.Zones[i] = make([]Zone, width)
+		analysis.MyTeam.Zones[i] = make([]Zone, width)
+		analysis.OtherTeam.Zones[i] = make([]Zone, width)
 	}
 	return &analysis
 }
 
 func (analysis *GameAnalysis) Update(gameState *GameState) {
-	updateTeam(gameState.GetTeam(analysis.team), &analysis.myTeam)
-	updateTeam(gameState.GetOtherTeam(analysis.team), &analysis.otherTeam)
-	updateBall(gameState.GetBall(), &analysis.ball)
+	updateTeam(gameState.GetTeam(analysis.team), &analysis.MyTeam)
+	updateTeam(gameState.GetOtherTeam(analysis.team), &analysis.OtherTeam)
+	updateBall(gameState.GetBall(), &analysis.Ball)
 	// TODO: Update Zones
 }

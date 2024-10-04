@@ -128,7 +128,6 @@ func (r *Robot) IsActive() bool {
 func (r *Robot) String() string {
 
 	pos := r.GetPosition()
-
 	vel := r.GetVelocity()
 
 	posString := fmt.Sprintf("(%f, %f, %f)", pos.X, pos.Y, pos.Angel)
