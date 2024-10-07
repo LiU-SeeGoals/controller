@@ -14,6 +14,17 @@ const (
 	Yellow
 )
 
+func (t Team) String() string {
+	switch t {
+	case Blue:
+		return "Blue"
+	case Yellow:
+		return "Yellow"
+	default:
+		return "Unknown"
+	}
+}
+
 type RobotPos struct {
 	pos  *mat.VecDense
 	time int64

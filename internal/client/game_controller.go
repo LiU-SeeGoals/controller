@@ -1,4 +1,4 @@
-package receiver
+package client
 
 import (
 	"fmt"
@@ -71,7 +71,7 @@ func (r *GCConnection) Receive(packetChan chan *gc.Referee) {
 	}
 }
 
-type GCReceiver struct {
+type GCClient struct {
 	gc         *GCConnection
 	gc_channel chan *gc.Referee
 	// A random UUID of the source that is kept constant at the source while running
@@ -81,13 +81,13 @@ type GCReceiver struct {
 
 // Start a SSL Vision receiver, returns a channel from
 // which SSL wrapper packets can be obtained.
-func (receiver *GCReceiver) Connect() {
+func (receiver *GCClient) Connect() {
 	receiver.gc.Connect()
 	go receiver.gc.Receive(receiver.gc_channel)
 }
 
-func NewGCReceiver(sslReceiverAddress string) *GCReceiver {
-	receiver := &GCReceiver{
+func NewGCClient(sslReceiverAddress string) *GCClient {
+	receiver := &GCClient{
 		gc:         NewGCConnection(sslReceiverAddress),
 		gc_channel: make(chan *gc.Referee),
 	}
@@ -95,7 +95,7 @@ func NewGCReceiver(sslReceiverAddress string) *GCReceiver {
 	return receiver
 }
 
-func (receiver *GCReceiver) InitGameStatus(gs *gamestatus.GameStatus) {
+func (receiver *GCClient) InitGameStatus(gs *gamestatus.GameStatus) {
 	packet, ok := <-receiver.gc_channel
 
 	if !ok {
@@ -107,7 +107,7 @@ func (receiver *GCReceiver) InitGameStatus(gs *gamestatus.GameStatus) {
 
 
 // Test printing out packets
-func (receiver *GCReceiver) UpdateGameStatus(gs *gamestatus.GameStatus) {
+func (receiver *GCClient) UpdateGameStatus(gs *gamestatus.GameStatus) {
 	packet, ok := <-receiver.gc_channel
 
 	if packet.GetSourceIdentifier() != receiver.SourceIdentifier {

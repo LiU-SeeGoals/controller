@@ -8,12 +8,17 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/config"
 	state "github.com/LiU-SeeGoals/controller/internal/gamestate"
+	"github.com/LiU-SeeGoals/controller/internal/gamestatus"
 	"github.com/LiU-SeeGoals/controller/internal/simulator"
 )
 
 func SimulatedAnnealing() {
 	gs := state.NewGameState(3)
 	ssl_receiver := client.NewSSLVisionClient(config.GetSSLClientAddress())
+
+	status := gamestatus.NewGameStatus()
+	gc_receiver := client.NewGCClient(config.GetGCClientAddress())
+	gc_receiver.InitGameStatus(status)
 
 	ai_blue := ai.NewAi(state.Blue)
 	sim_client_blue := client.NewSimClient(config.GetSimBlueTeamAddress())
@@ -31,6 +36,8 @@ func SimulatedAnnealing() {
 	ssl_receiver.InitGameState(gs, 0)
 	start_time := time.Now().UnixMilli()
 	for {
+		gc_receiver.UpdateGameStatus(status)
+		fmt.Println(status)
 		play_time := time.Now().UnixMilli() - start_time
 		ssl_receiver.UpdateGamestate(gs, play_time)
 
