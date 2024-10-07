@@ -134,6 +134,12 @@ func GetInstance() *Config {
 }
 
 // GetSSLClientAddress returns the SSL client address from the config.
+func GetGCClientAddress() string {
+	cfg := GetInstance()
+	return fmt.Sprintf("%s:%s", cfg.GC.Address, cfg.GC.Port)
+}
+
+// GetSSLClientAddress returns the SSL client address from the config.
 func GetSSLClientAddress() string {
 	cfg := GetInstance()
 	return fmt.Sprintf("%s:%s", cfg.SSLVision.Address, cfg.SSLVision.Port)

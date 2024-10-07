@@ -11,7 +11,7 @@ require (
 )
 
 require (
-	github.com/LiU-SeeGoals/proto_go v0.1.3-0.20240717164152-af5850e7d20c
+	github.com/LiU-SeeGoals/proto_go v0.1.3-0.20241001130039-d2d8519ef393
 	github.com/caarlos0/env/v10 v10.0.0
 	github.com/eiannone/keyboard v0.0.0-20220611211555-0d226195f203
 	github.com/gorilla/websocket v1.5.1
@@ -23,7 +23,4 @@ require (
 
 require golang.org/x/sys v0.17.0 // indirect
 
-require (
-	github.com/golang/protobuf v1.5.0 // indirect
-	golang.org/x/net v0.21.0 // indirect
-)
+require golang.org/x/net v0.21.0 // indirect
