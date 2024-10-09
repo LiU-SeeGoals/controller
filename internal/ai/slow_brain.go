@@ -72,6 +72,7 @@ func (sb *SlowBrainGO) Run() {
 	for {
 		gameState = <-sb.incomingGameState
 
+		time.Sleep(1 * time.Second) // TODO: Remove this
 		// Wait for the game to start
 		if !gameState.IsValid() {
 			fmt.Println("SlowBrainGO: Invalid game state")

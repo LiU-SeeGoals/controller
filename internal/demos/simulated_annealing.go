@@ -1,6 +1,7 @@
 package demos
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/ai"
@@ -31,6 +32,7 @@ func SimulatedAnnealing() {
 	start_time := time.Now().UnixMilli()
 	for {
 		play_time := time.Now().UnixMilli() - start_time
+		fmt.Println("play_time: ", play_time)
 		ssl_receiver.UpdateGamestate(gs, play_time)
 
 		blue_actions := ai_blue.GetActions(gs)
@@ -41,6 +43,8 @@ func SimulatedAnnealing() {
 
 		terminal_messages := []string{"Simulated Annealing"}
 
-		client.UpdateWebGUI(gs, blue_actions, terminal_messages)
+		if len(blue_actions) > 0 {
+			client.UpdateWebGUI(gs, blue_actions, terminal_messages)
+		}
 	}
 }

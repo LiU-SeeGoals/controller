@@ -137,6 +137,9 @@ func (r *Robot) String() string {
 }
 
 func (r *Robot) ToDTO() RobotDTO {
+	if !r.active {
+		return RobotDTO{}
+	}
 	pos := r.GetPosition()
 	vel := r.GetVelocity()
 
