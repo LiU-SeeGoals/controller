@@ -22,8 +22,8 @@ func NewAi(team state.Team) *Ai {
 	gameStateSenderFB, gameStateRecivrerFB := helper.NB_KeepLatestChan[state.GameState]()
 	gamePlanSender, gamePlanRecivrer := helper.NB_KeepLatestChan[state.GamePlan]()
 	actionReciver := make(chan []action.Action)
-	slowBrain := NewSlowBrainGO(gameStateRecivrerSB, gamePlanSender)
-	fastBrain := NewFastBrainGO(gameStateRecivrerFB, gamePlanRecivrer, actionReciver)
+	slowBrain := NewSlowBrainGO(gameStateRecivrerSB, gamePlanSender, team)
+	fastBrain := NewFastBrainGO(gameStateRecivrerFB, gamePlanRecivrer, actionReciver, team)
 	ai := &Ai{
 		team:              team,
 		slow_brain:        slowBrain,

@@ -1,13 +1,13 @@
 package demos
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/ai"
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/simulator"
+	"github.com/LiU-SeeGoals/controller/internal/state"
 	"github.com/LiU-SeeGoals/proto_go/simulation"
 )
 
@@ -37,13 +37,13 @@ func GaussEnemy() {
 		play_time := time.Now().UnixMilli() - start_time
 		ssl_receiver.UpdateGamestate(gs, play_time)
 
-		blue_actions, score_blue, antBlue := ai_blue.CreateActions(gs)
-		yellow_actions, score_yellow, antYellow := ai_yellow.CreateActions(gs)
+		blue_actions := ai_blue.GetActions(gs)
+		yellow_actions := ai_yellow.GetActions(gs)
 
 		sim_client_blue.SendActions(blue_actions)
 		sim_client_yellow.SendActions(yellow_actions)
 
-		terminal_messages := []string{fmt.Sprintf("Blue score: %.2f AnticipatedScore: %.2f", score_blue, antBlue), fmt.Sprintf("Yellow score: %.2f AnticipatedScore: %.2f", score_yellow, antYellow)}
+		terminal_messages := []string{"Gauss Enemy"}
 
 		client.UpdateWebGUI(gs, blue_actions, terminal_messages)
 	}

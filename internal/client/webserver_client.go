@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
+	"github.com/LiU-SeeGoals/controller/internal/state"
 	"github.com/gorilla/websocket"
 )
 

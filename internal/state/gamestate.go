@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-const TEAM_SIZE ID = 6
+const TEAM_SIZE ID = 11
 
 type GameState struct {
 	Valid       bool
@@ -45,13 +45,21 @@ func (gs *GameState) ToJson() []byte {
 	return gameStateJson
 }
 
-func (gs *GameState) SetYellowRobot(robotId uint32, x, y, w float32, time int64) {
-	gs.Yellow_team[robotId].SetPositionTime(x, y, w, time)
+func (gs *GameState) SetValid(valid bool) {
+	gs.Valid = valid
+}
+
+func (gs *GameState) IsValid() bool {
+	return gs.Valid
+}
+
+func (gs *GameState) SetYellowRobot(robotId uint32, x, y, angel float32, time int64) {
+	gs.Yellow_team[robotId].SetPositionTime(x, y, angel, time)
 
 }
 
-func (gs *GameState) SetBlueRobot(robotId uint32, x, y, w float32, time int64) {
-	gs.Blue_team[robotId].SetPositionTime(x, y, w, time)
+func (gs *GameState) SetBlueRobot(robotId uint32, x, y, angel float32, time int64) {
+	gs.Blue_team[robotId].SetPositionTime(x, y, angel, time)
 }
 
 // Updates position of robots and balls to their actual position
@@ -104,19 +112,21 @@ func (gs *GameState) GetRobot(id ID, team Team) *Robot {
 
 // Constructor for game state
 func NewGameState(capacity int) *GameState {
-	gs := &GameState{}
+	gs := GameState{}
 	gs.Valid = true
 	gs.fieldLength = 9000 // TODO: Get from geometry
 	gs.fieldWidth = 6000  // TODO: Get from geometry
 
 	gs.Ball = NewBall(capacity)
 	var i ID
+	gs.Blue_team = new(RobotTeam)
+	gs.Yellow_team = new(RobotTeam)
 	for i = 0; i < TEAM_SIZE; i++ {
 		gs.Blue_team[i] = NewRobot(i, Blue, capacity)
 		gs.Yellow_team[i] = NewRobot(i, Yellow, capacity)
 	}
 
-	return gs
+	return &gs
 
 }
 

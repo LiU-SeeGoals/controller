@@ -1,15 +1,18 @@
 package ai
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/height_map"
+	"github.com/LiU-SeeGoals/controller/internal/search"
 	"github.com/LiU-SeeGoals/controller/internal/state"
 )
 
 type SlowBrainGO struct {
 	team                 state.Team
 	gameAnalysis         *state.GameAnalysis
+	gameSearch           *search.FindRngBestScore
 	incomingGameState    <-chan state.GameState
 	outgoingPlan         chan<- state.GamePlan
 	myAccumulatedFunc    height_map.HeightMap
@@ -28,7 +31,7 @@ func NewSlowBrainGO(incoming <-chan state.GameState, outgoing chan<- state.GameP
 	myTimeAdvantage := height_map.NewTimeAdvantage(destFunc)
 	otherTimeAdvantage := height_map.NewTimeAdvantage(posFunc)
 
-	myAccumulatedFunc := func(x float32, y float32, robots *state.RobotAnalysisTeam) float32 {
+	myAccumulatedFunc := func(x float32, y float32, robots state.RobotAnalysisTeam) float32 {
 		scoreFuncs := []height_map.HeightMap{
 			myTimeAdvantage.CalculateTimeAdvantage,
 		}
@@ -39,7 +42,7 @@ func NewSlowBrainGO(incoming <-chan state.GameState, outgoing chan<- state.GameP
 		return accumulated
 	}
 
-	otherAccumulatedFunc := func(x float32, y float32, robots *state.RobotAnalysisTeam) float32 {
+	otherAccumulatedFunc := func(x float32, y float32, robots state.RobotAnalysisTeam) float32 {
 		scoreFuncs := []height_map.HeightMap{
 			otherTimeAdvantage.CalculateTimeAdvantage,
 		}
@@ -49,10 +52,12 @@ func NewSlowBrainGO(incoming <-chan state.GameState, outgoing chan<- state.GameP
 		}
 		return accumulated
 	}
-
+	gameAnalysis := state.NewGameAnalysis(9000, 6000, 100, team)
+	gameSearch := search.NewFindRngBestScore(team, myAccumulatedFunc, 0.1, 100, 9)
 	sb := &SlowBrainGO{
 		team:                 team,
-		gameAnalysis:         state.NewGameAnalysis(9000, 6000, 100, team),
+		gameAnalysis:         gameAnalysis,
+		gameSearch:           gameSearch,
 		incomingGameState:    incoming,
 		outgoingPlan:         outgoing,
 		myAccumulatedFunc:    myAccumulatedFunc,
@@ -68,8 +73,9 @@ func (sb *SlowBrainGO) Run() {
 		gameState = <-sb.incomingGameState
 
 		// Wait for the game to start
-		if gameState.Valid == false {
-			time.Sleep(100 * time.Millisecond)
+		if !gameState.IsValid() {
+			fmt.Println("SlowBrainGO: Invalid game state")
+			time.Sleep(10 * time.Millisecond)
 			continue
 		}
 
@@ -78,10 +84,24 @@ func (sb *SlowBrainGO) Run() {
 
 		// Send the plan to the fast brain
 		sb.outgoingPlan <- plan
+		fmt.Println("SlowBrainGO: Sent plan")
 	}
 }
 
 func (sb *SlowBrainGO) GetPlan(gameState *state.GameState) state.GamePlan {
-	sb.gameAnalysis.Update(gameState)
+	sb.gameAnalysis.UpdateState(gameState)
+	sb.gameAnalysis.UpdateMyZones(sb.myAccumulatedFunc)
+	sb.gameAnalysis.UpdateOtherZones(sb.otherAccumulatedFunc)
+	sb.gameSearch.FindRngBestScore(sb.myAccumulatedFunc, sb.gameAnalysis.MyTeam, sb.gameAnalysis)
+	gamePlan := state.GamePlan{}
+	gamePlan.Team = sb.team
+	for _, robot := range sb.gameAnalysis.MyTeam.Robots {
+		gamePlan.Instructions = append(gamePlan.Instructions, state.RobotMove{
+			Id:       robot.GetID(),
+			Position: robot.GetDestination(),
+		})
+	}
+	gamePlan.Valid = true
+	return gamePlan
 
 }

@@ -1,6 +1,7 @@
 package ai
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
@@ -44,6 +45,7 @@ func (fb *FastBrainGO) Run() {
 
 		// Wait for the game to start
 		if !gameState.Valid || !gamePlan.Valid {
+			fmt.Println("FastBrainGO: Invalid game state")
 			time.Sleep(10 * time.Millisecond)
 			continue
 		}
@@ -53,28 +55,33 @@ func (fb *FastBrainGO) Run() {
 
 		// Send the actions to the AI
 		fb.outgoingActions <- actions
+		fmt.Println("FastBrainGO: Sent actions")
+
 	}
 }
 
-func (fb *FastBrainGO) GetActions(gs *state.GameState, gameAnalysis *state.GamePlan) []action.Action {
+func (fb *FastBrainGO) GetActions(gs *state.GameState, gamePlan *state.GamePlan) []action.Action {
 
 	var actionList []action.Action
 
-	myTeam := gs.GetTeam(gameAnalysis.team)
+	myTeam := gs.GetTeam(gamePlan.Team)
+	Instructions := gamePlan.Instructions
 
-	for _, robot := range myTeam {
+	for _, inst := range Instructions {
 
 		act := action.MoveTo{}
-		act.Pos = robot.GetPosition()
-		act.Id = robot.GetID()
+		act.Id = act.Id
 
-		anticipatePosition := robot.GetAnticipatedPosition()
-		destX := anticipatePosition.AtVec(0)
-		destY := anticipatePosition.AtVec(1)
-		act.Dest = mat.NewVecDense(3, []float64{destX, destY, 0})
+		robot := myTeam[inst.Id]
+
+		pos := robot.GetPosition()
+
+		act.Pos = mat.NewVecDense(3, []float64{float64(pos.X), float64(pos.Y), 0})
+		dest := inst.Position
+		act.Dest = mat.NewVecDense(3, []float64{float64(dest.X), float64(dest.Y), 0})
 
 		act.Dribble = true // Assuming all moves require dribbling
-		if destX == act.Pos.AtVec(0) && destY == act.Pos.AtVec(1) {
+		if act.Dest.AtVec(0) == act.Pos.AtVec(0) && act.Dest.AtVec(1) == act.Pos.AtVec(1) {
 			continue
 		}
 		// fmt.Println("Robot", act.Id, "moving to", destX, destY, "from", act.Pos.AtVec(0), act.Pos.AtVec(1))

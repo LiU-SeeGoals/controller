@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net"
 
+	"github.com/LiU-SeeGoals/controller/internal/state"
 	"github.com/LiU-SeeGoals/proto_go/ssl_vision"
 	"google.golang.org/protobuf/proto"
 )
@@ -80,52 +81,37 @@ type SSLVisionClient struct {
 	ssl_channel chan *ssl_vision.SSL_WrapperPacket
 }
 
-type GameState interface {
-	SetYellowRobot(robotId uint32, x, y, w float64, time int64)
-	SetBlueRobot(robotId uint32, x, y, w float64, time int64)
-	SetBall(x, y, z float64, time int64)
-	SetMessageReceivedTime(time int64)
-	SetLagTime(lagTime int64)
-	GetMessageReceivedTime() int64
-}
-
-func unpack(packet *ssl_vision.SSL_WrapperPacket, gs GameState, play_time int64) {
+func unpack(packet *ssl_vision.SSL_WrapperPacket, gs *state.GameState, play_time int64) {
 	detect := packet.GetDetection()
 	gs.SetMessageReceivedTime(play_time)
-	gs.SetLagTime(0)
 
 	for _, robot := range detect.GetRobotsBlue() {
-		x := float64(robot.GetX())
-		y := float64(robot.GetY())
-		w := float64(*robot.Orientation)
+		x := robot.GetX()
+		y := robot.GetY()
+		angel := *robot.Orientation
 
-		gs.SetYellowRobot(robot.GetRobotId(), x, y, w, play_time)
+		gs.SetYellowRobot(robot.GetRobotId(), x, y, angel, play_time)
 	}
 
 	for _, robot := range detect.GetRobotsYellow() {
-		x := float64(robot.GetX())
-		y := float64(robot.GetY())
-		w := float64(*robot.Orientation)
+		x := robot.GetX()
+		y := robot.GetY()
+		angel := *robot.Orientation
 
-		gs.SetBlueRobot(robot.GetRobotId(), x, y, w, play_time)
+		gs.SetBlueRobot(robot.GetRobotId(), x, y, angel, play_time)
 	}
 
 	for _, ball := range detect.GetBalls() {
-		x := float64(ball.GetX())
-		y := float64(ball.GetY())
-		z := float64(ball.GetZ())
+		x := ball.GetX()
+		y := ball.GetY()
+		z := ball.GetZ()
 
 		gs.SetBall(x, y, z, play_time)
 	}
+	gs.SetValid(true)
 }
 
-func update_lag_time(gs GameState, play_time int64) {
-	time := gs.GetMessageReceivedTime()
-	lag_time := play_time - time
-	gs.SetLagTime(lag_time)
-}
-
-func (receiver *SSLVisionClient) InitGameState(gs GameState, play_time int64) {
+func (receiver *SSLVisionClient) InitGameState(gs *state.GameState, play_time int64) {
 	packet, ok := <-receiver.ssl_channel
 	if !ok {
 		fmt.Println("SSL Channel closed")
@@ -134,24 +120,13 @@ func (receiver *SSLVisionClient) InitGameState(gs GameState, play_time int64) {
 	unpack(packet, gs, play_time)
 }
 
-func (receiver *SSLVisionClient) UpdateGamestate(gs GameState, play_time int64) {
+func (receiver *SSLVisionClient) UpdateGamestate(gs *state.GameState, play_time int64) {
 	packet, ok := <-receiver.ssl_channel
 	if !ok {
 		fmt.Println("SSL Channel closed")
 		return
 	}
 	unpack(packet, gs, play_time)
-}
-
-func (receiver *SSLVisionClient) UpdateGamestateNB(gs GameState, play_time int64) {
-	// // none-blocking receive
-	select {
-	case packet := <-receiver.ssl_channel:
-		unpack(packet, gs, play_time)
-	default:
-		update_lag_time(gs, play_time)
-	}
-
 }
 
 // Start a SSL Vision receiver, returns a channel from

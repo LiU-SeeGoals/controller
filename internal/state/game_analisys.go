@@ -98,7 +98,7 @@ type GameAnalysis struct {
 	FieldInfo FieldInfo
 }
 
-type RobotAnalysisTeam [TEAM_SIZE]RobotAnalysis
+type RobotAnalysisTeam []RobotAnalysis
 
 func calMoveSpeed(robot *Robot) float32 {
 	velocity := robot.GetVelocity()
@@ -152,13 +152,13 @@ func updateBall(gameStateBall *Ball, ballAnalysis *BallAnalysis) {
 	ballAnalysis.velocity = gameStateBall.GetVelocity()
 }
 
-func NewGameAnalysis(fieldLength, fieldWidth, ZoneSize float32, team Team) *GameAnalysis {
+func NewGameAnalysis(fieldLength, fieldWidth, zoneSize float32, team Team) *GameAnalysis {
 	analysis := GameAnalysis{}
-	hight := int(fieldLength / ZoneSize)
-	width := int(fieldWidth / ZoneSize)
+	hight := int(fieldLength / zoneSize)
+	width := int(fieldWidth / zoneSize)
 	analysis.team = team
-	analysis.MyTeam.ZoneSize = ZoneSize
-	analysis.OtherTeam.ZoneSize = ZoneSize
+	analysis.MyTeam.ZoneSize = zoneSize
+	analysis.OtherTeam.ZoneSize = zoneSize
 	analysis.FieldInfo.Length = fieldLength
 	analysis.FieldInfo.Width = fieldWidth
 	analysis.MyTeam.Zones = make([][]Zone, hight)
@@ -172,9 +172,28 @@ func NewGameAnalysis(fieldLength, fieldWidth, ZoneSize float32, team Team) *Game
 	return &analysis
 }
 
-func (analysis *GameAnalysis) Update(gameState *GameState) {
+func (analysis *GameAnalysis) UpdateState(gameState *GameState) {
 	updateTeam(gameState.GetTeam(analysis.team), &analysis.MyTeam)
 	updateTeam(gameState.GetOtherTeam(analysis.team), &analysis.OtherTeam)
 	updateBall(gameState.GetBall(), &analysis.Ball)
-	// TODO: Update Zones
+}
+
+func updateZone(team TeamAnalysis, fieldInfo FieldInfo, zoneSize float32, scoringFunc func(x float32, y float32, robots RobotAnalysisTeam) float32) {
+	// Update the zones
+	for i := 0; i < len(team.Zones); i++ {
+		for j := 0; j < len(team.Zones[i]); j++ {
+			// middle of the playing field in 0,0 so the zone need to be adjusted to the correct position
+			x := float32(i)*zoneSize - fieldInfo.Length/2 + zoneSize/2
+			y := float32(j)*zoneSize - fieldInfo.Width/2 + zoneSize/2
+			team.Zones[i][j].Score = scoringFunc(x, y, team.Robots[:])
+		}
+	}
+}
+
+func (analysis *GameAnalysis) UpdateMyZones(scoringFunc func(x float32, y float32, robots RobotAnalysisTeam) float32) {
+	updateZone(analysis.MyTeam, analysis.FieldInfo, analysis.MyTeam.ZoneSize, scoringFunc)
+}
+
+func (analysis *GameAnalysis) UpdateOtherZones(scoringFunc func(x float32, y float32, robots RobotAnalysisTeam) float32) {
+	updateZone(analysis.OtherTeam, analysis.FieldInfo, analysis.OtherTeam.ZoneSize, scoringFunc)
 }
