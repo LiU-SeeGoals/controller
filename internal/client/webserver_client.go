@@ -24,6 +24,9 @@ type WebServer struct {
 
 	websocketupgrader *websocket.Upgrader
 
+	logPacketQueue []([]byte)
+	logQueueMutex  sync.Mutex
+
 	gameStatePacketQueue []([]byte)
 	incomingActions      []action.ActionDTO
 	gameStateQueueMutex  sync.Mutex
@@ -53,6 +56,7 @@ func startWebServer() {
 	http.HandleFunc("/ws", webserverInstance.handleGameStateRequest)
 	go http.ListenAndServe(":8080", nil)
 	go webserverInstance.sendGameState()
+	go webserverInstance.sendLog()
 	go webserverInstance.receiveData()
 	fmt.Println("server online")
 }
@@ -79,6 +83,34 @@ func (server *WebServer) handleGameStateRequest(w http.ResponseWriter, r *http.R
 	fmt.Println("making a connection")
 	fmt.Println(len(server.websocketConnections))
 	fmt.Print("done serving client")
+}
+
+// Method to send the game state to all connected clients
+func (server *WebServer) sendLog() {
+	var logJSON []byte
+	for {
+		if len(server.logPacketQueue) == 0 {
+			time.Sleep(time.Millisecond * 10) // Sleep for a short period
+			continue
+		}
+
+		server.logQueueMutex.Lock()
+		logJSON = server.logPacketQueue[0]
+		server.logPacketQueue = server.logPacketQueue[1:]
+		server.logQueueMutex.Unlock()
+
+		// Creating a copy of the connections. This prevents locking other threads if the connection takes too long
+		server.websocketConnectionsMutex.Lock()
+		connectionsCopy := make([]*websocket.Conn, len(server.websocketConnections))
+		copy(connectionsCopy, server.websocketConnections)
+		server.websocketConnectionsMutex.Unlock()
+
+		for _, ws := range connectionsCopy {
+			ws.WriteMessage(websocket.TextMessage, logJSON)
+			// fmt.Println("written msg")
+
+		}
+	}
 }
 
 // Method to send the game state to all connected clients
@@ -183,6 +215,15 @@ func GetIncoming() []action.ActionDTO {
 	copy(actionsCopy, webserver.incomingActions)
 	webserver.incomingActions = nil // Empty the incomingActions slice
 	return actionsCopy
+}
+
+func UpdateWebLog(logs []byte) {
+	fmt.Println("Updating web log")
+	webserver := getInstance()
+	webserver.logQueueMutex.Lock()
+	webserver.logPacketQueue = append(webserver.logPacketQueue, []byte(logs))
+	webserver.logQueueMutex.Unlock()
+
 }
 
 // Broadcasts the game state to all connected clients
