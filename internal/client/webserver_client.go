@@ -24,9 +24,6 @@ type WebServer struct {
 
 	websocketupgrader *websocket.Upgrader
 
-	logPacketQueue []([]byte)
-	logQueueMutex  sync.Mutex
-
 	gameStatePacketQueue []([]byte)
 	incomingActions      []action.ActionDTO
 	gameStateQueueMutex  sync.Mutex
@@ -56,7 +53,6 @@ func startWebServer() {
 	http.HandleFunc("/ws", webserverInstance.handleGameStateRequest)
 	go http.ListenAndServe(":8080", nil)
 	go webserverInstance.sendGameState()
-	go webserverInstance.sendLog()
 	go webserverInstance.receiveData()
 	fmt.Println("server online")
 }
@@ -83,34 +79,6 @@ func (server *WebServer) handleGameStateRequest(w http.ResponseWriter, r *http.R
 	fmt.Println("making a connection")
 	fmt.Println(len(server.websocketConnections))
 	fmt.Print("done serving client")
-}
-
-// Method to send the logs to all connected clients
-func (server *WebServer) sendLog() {
-	var logJSON []byte
-	for {
-		if len(server.logPacketQueue) == 0 {
-			time.Sleep(time.Millisecond * 10) // Sleep for a short period
-			continue
-		}
-
-		server.logQueueMutex.Lock()
-		logJSON = server.logPacketQueue[0]
-		server.logPacketQueue = server.logPacketQueue[1:]
-		server.logQueueMutex.Unlock()
-
-		// Creating a copy of the connections. This prevents locking other threads if the connection takes too long
-		server.websocketConnectionsMutex.Lock()
-		connectionsCopy := make([]*websocket.Conn, len(server.websocketConnections))
-		copy(connectionsCopy, server.websocketConnections)
-		server.websocketConnectionsMutex.Unlock()
-
-		for _, ws := range connectionsCopy {
-			ws.WriteMessage(websocket.TextMessage, logJSON)
-			// fmt.Println("written msg")
-
-		}
-	}
 }
 
 // Method to send the game state to all connected clients
@@ -218,44 +186,6 @@ func GetIncoming() []action.ActionDTO {
 	return actionsCopy
 }
 
-// Log message structure with type field
-type LogMessage struct {
-	Type string `json:"type"` // The log type field (e.g., "info", "error")
-	Log  map[string]interface{} `json:"log"`  // The actual log message
-}
-
-// Sends logs to the webGUI
-func UpdateWebLog(log []byte) {
-	webserver := getInstance()
-
-	// Convert the log byte slice into a map (JSON object)
-	var logData map[string]interface{}
-	if err := json.Unmarshal(log, &logData); err != nil {
-		fmt.Println("Failed to unmarshal log message:", err)
-		return
-	}
-
-	// Create the log message struct
-	logEntry := LogMessage{
-		Type: "log",
-		Log:  logData, // The actual log content
-	}
-
-	// Convert the logEntry struct to a JSON byte slice
-	logBytes, err := json.Marshal(logEntry)
-	if err != nil {
-		// Handle error in marshaling the log message
-		return
-	}
-
-	// Lock the mutex to protect access to the log queue
-	webserver.logQueueMutex.Lock()
-	defer webserver.logQueueMutex.Unlock()
-
-	// Add the log entry to the log queue
-	webserver.logPacketQueue = append(webserver.logPacketQueue, logBytes)
-}
-
 // Broadcasts the game state to all connected clients
 func Broadcasts(message WebsiteDTO) {
 	gameStateJson := toJson(message)
@@ -265,7 +195,7 @@ func Broadcasts(message WebsiteDTO) {
 	webserver.gameStateQueueMutex.Unlock()
 }
 
-func UpdateWebGUI(gs *gamestate.GameState, actions []action.Action, terminal_messages []string) {
+func UpdateWebGUI(gs *gamestate.GameState, actions []action.Action) {
 	fmt.Println("Updating web GUI")
 	var gamestate_DTO = gs.ToDTO()
 	var actionTDO = make([]action.ActionDTO, len(actions))
@@ -273,11 +203,9 @@ func UpdateWebGUI(gs *gamestate.GameState, actions []action.Action, terminal_mes
 		actionTDO[i] = obj.ToDTO()
 	}
 	var websiteMessage = WebsiteDTO{
-		Type:           "gamestate",
 		RobotPositions: gamestate_DTO.RobotPositions,
 		BallPosition:   gamestate_DTO.BallPosition,
 		RobotActions:   actionTDO,
-		TerminalLog:    terminal_messages,
 	}
 	Broadcasts(websiteMessage)
 }

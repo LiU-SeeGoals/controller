@@ -3,7 +3,8 @@ package demos
 import (
 	"fmt"
 	"time"
-
+	
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/ai"
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/config"
@@ -41,8 +42,9 @@ func SimulatedAnnealing() {
 		sim_client_yellow.SendActions(yellow_actions)
 
 		terminal_messages := []string{fmt.Sprintf("Blue score: %.2f AnticipatedScore: %.2f", score_blue, antBlue), fmt.Sprintf("Yellow score: %.2f AnticipatedScore: %.2f", score_yellow, antYellow)}
+		LoggerS.Info(terminal_messages)
 
-		client.UpdateWebGUI(gs, blue_actions, terminal_messages)
+		client.UpdateWebGUI(gs, blue_actions)
 		fmt.Printf("Blue/Yellow score: %.2f/%.2f, Anticipated score: %.2f/%.2f\n", score_blue, score_yellow, antBlue, antYellow)
 	}
 }
