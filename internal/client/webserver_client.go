@@ -85,7 +85,7 @@ func (server *WebServer) handleGameStateRequest(w http.ResponseWriter, r *http.R
 	fmt.Print("done serving client")
 }
 
-// Method to send the game state to all connected clients
+// Method to send the logs to all connected clients
 func (server *WebServer) sendLog() {
 	var logJSON []byte
 	for {
@@ -191,6 +191,7 @@ func (server *WebServer) receiveData() {
 // and the functions under handles all of it so multiple instances are not created
 
 type WebsiteDTO struct {
+	Type           string `json:"type"` // The log type field (e.g., "info", "error")
 	RobotPositions [2 * gamestate.TEAM_SIZE]gamestate.RobotDTO
 	BallPosition   gamestate.BallDTO
 	RobotActions   []action.ActionDTO
@@ -217,13 +218,42 @@ func GetIncoming() []action.ActionDTO {
 	return actionsCopy
 }
 
-func UpdateWebLog(logs []byte) {
-	fmt.Println("Updating web log")
-	webserver := getInstance()
-	webserver.logQueueMutex.Lock()
-	webserver.logPacketQueue = append(webserver.logPacketQueue, []byte(logs))
-	webserver.logQueueMutex.Unlock()
+// Log message structure with type field
+type LogMessage struct {
+	Type string `json:"type"` // The log type field (e.g., "info", "error")
+	Log  map[string]interface{} `json:"log"`  // The actual log message
+}
 
+// Sends logs to the webGUI
+func UpdateWebLog(log []byte) {
+	webserver := getInstance()
+
+	// Convert the log byte slice into a map (JSON object)
+	var logData map[string]interface{}
+	if err := json.Unmarshal(log, &logData); err != nil {
+		fmt.Println("Failed to unmarshal log message:", err)
+		return
+	}
+
+	// Create the log message struct
+	logEntry := LogMessage{
+		Type: "log",
+		Log:  logData, // The actual log content
+	}
+
+	// Convert the logEntry struct to a JSON byte slice
+	logBytes, err := json.Marshal(logEntry)
+	if err != nil {
+		// Handle error in marshaling the log message
+		return
+	}
+
+	// Lock the mutex to protect access to the log queue
+	webserver.logQueueMutex.Lock()
+	defer webserver.logQueueMutex.Unlock()
+
+	// Add the log entry to the log queue
+	webserver.logPacketQueue = append(webserver.logPacketQueue, logBytes)
 }
 
 // Broadcasts the game state to all connected clients
@@ -236,12 +266,14 @@ func Broadcasts(message WebsiteDTO) {
 }
 
 func UpdateWebGUI(gs *gamestate.GameState, actions []action.Action, terminal_messages []string) {
+	fmt.Println("Updating web GUI")
 	var gamestate_DTO = gs.ToDTO()
 	var actionTDO = make([]action.ActionDTO, len(actions))
 	for i, obj := range actions {
 		actionTDO[i] = obj.ToDTO()
 	}
 	var websiteMessage = WebsiteDTO{
+		Type:           "gamestate",
 		RobotPositions: gamestate_DTO.RobotPositions,
 		BallPosition:   gamestate_DTO.BallPosition,
 		RobotActions:   actionTDO,
