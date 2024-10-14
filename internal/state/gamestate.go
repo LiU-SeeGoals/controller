@@ -53,13 +53,13 @@ func (gs *GameState) IsValid() bool {
 	return gs.Valid
 }
 
-func (gs *GameState) SetYellowRobot(robotId uint32, x, y, angel float32, time int64) {
-	gs.Yellow_team[robotId].SetPositionTime(x, y, angel, time)
+func (gs *GameState) SetYellowRobot(robotId uint32, x, y, angle float32, time int64) {
+	gs.Yellow_team[robotId].SetPositionTime(x, y, angle, time)
 
 }
 
-func (gs *GameState) SetBlueRobot(robotId uint32, x, y, angel float32, time int64) {
-	gs.Blue_team[robotId].SetPositionTime(x, y, angel, time)
+func (gs *GameState) SetBlueRobot(robotId uint32, x, y, angle float32, time int64) {
+	gs.Blue_team[robotId].SetPositionTime(x, y, angle, time)
 }
 
 // Updates position of robots and balls to their actual position

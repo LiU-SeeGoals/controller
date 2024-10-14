@@ -36,7 +36,7 @@ func NewRobot(id ID, team Team, history_capasity int) *Robot {
 	}
 }
 
-func (r *Robot) SetPositionTime(x, y, angel float32, time int64) {
+func (r *Robot) SetPositionTime(x, y, angle float32, time int64) {
 	if r.history.Len() >= r.historyCapacity {
 		element := r.history.Back()
 		r.history.Remove(element)
@@ -45,12 +45,12 @@ func (r *Robot) SetPositionTime(x, y, angel float32, time int64) {
 
 		robot.pos.X = x
 		robot.pos.Y = y
-		robot.pos.Angel = angel
+		robot.pos.Angle = angle
 		robot.time = time
 
 		r.history.PushFront(robot)
 	} else {
-		pos := Position{x, y, 0, angel}
+		pos := Position{x, y, 0, angle}
 		r.history.PushFront(&RobotPos{pos, time})
 	}
 }
@@ -130,8 +130,8 @@ func (r *Robot) String() string {
 	pos := r.GetPosition()
 	vel := r.GetVelocity()
 
-	posString := fmt.Sprintf("(%f, %f, %f)", pos.X, pos.Y, pos.Angel)
-	velString := fmt.Sprintf("(%f, %f, %f)", vel.X, vel.Y, vel.Angel)
+	posString := fmt.Sprintf("(%f, %f, %f)", pos.X, pos.Y, pos.Angle)
+	velString := fmt.Sprintf("(%f, %f, %f)", vel.X, vel.Y, vel.Angle)
 
 	return fmt.Sprintf("id: %d, pos: %s, vel: %s", r.id, posString, velString)
 }
@@ -148,10 +148,10 @@ func (r *Robot) ToDTO() RobotDTO {
 		Team:     r.team,
 		X:        pos.X,
 		Y:        pos.Y,
-		Angel:    pos.Angel,
+		Angle:    pos.Angle,
 		VelX:     vel.X,
 		VelY:     vel.Y,
-		VelAngel: vel.Angel,
+		VelAngle: vel.Angle,
 	}
 }
 
@@ -164,8 +164,8 @@ type RobotDTO struct {
 	Team     Team
 	X        float32
 	Y        float32
-	Angel    float32
+	Angle    float32
 	VelX     float32
 	VelY     float32
-	VelAngel float32
+	VelAngle float32
 }

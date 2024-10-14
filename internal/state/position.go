@@ -8,7 +8,7 @@ type Position struct {
 	X     float32
 	Y     float32
 	Z     float32
-	Angel float32
+	Angle float32
 }
 
 func (p *Position) Add(other Position) Position {
@@ -16,7 +16,7 @@ func (p *Position) Add(other Position) Position {
 		X:     p.X + other.X,
 		Y:     p.Y + other.Y,
 		Z:     p.Z + other.Z,
-		Angel: p.Angel + other.Angel,
+		Angle: p.Angle + other.Angle,
 	}
 }
 
@@ -25,7 +25,7 @@ func (p *Position) Sub(other Position) Position {
 		X:     p.X - other.X,
 		Y:     p.Y - other.Y,
 		Z:     p.Z - other.Z,
-		Angel: p.Angel - other.Angel,
+		Angle: p.Angle - other.Angle,
 	}
 }
 
@@ -38,7 +38,7 @@ func (p *Position) Scale(scalar float32) Position {
 		X:     p.X * scalar,
 		Y:     p.Y * scalar,
 		Z:     p.Z * scalar,
-		Angel: p.Angel * scalar,
+		Angle: p.Angle * scalar,
 	}
 }
 
@@ -48,6 +48,6 @@ func (p *Position) Normalize() Position {
 		X:     p.X / norm,
 		Y:     p.Y / norm,
 		Z:     p.Z / norm,
-		Angel: p.Angel / norm,
+		Angle: p.Angle / norm,
 	}
 }

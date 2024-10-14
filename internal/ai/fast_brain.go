@@ -79,9 +79,9 @@ func (fb *FastBrainGO) GetActions(gs *state.GameState, gamePlan *state.GamePlan)
 
 		pos := robot.GetPosition()
 
-		act.Pos = mat.NewVecDense(3, []float64{float64(pos.X), float64(pos.Y), float64(pos.Angel)})
+		act.Pos = mat.NewVecDense(3, []float64{float64(pos.X), float64(pos.Y), float64(pos.Angle)})
 		dest := inst.Position
-		act.Dest = mat.NewVecDense(3, []float64{float64(dest.X), float64(dest.Y), float64(dest.Angel)})
+		act.Dest = mat.NewVecDense(3, []float64{float64(dest.X), float64(dest.Y), float64(dest.Angle)})
 
 		act.Dribble = true // Assuming all moves require dribbling
 		if act.Dest.AtVec(0) == act.Pos.AtVec(0) && act.Dest.AtVec(1) == act.Pos.AtVec(1) {

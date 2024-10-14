@@ -107,7 +107,7 @@ func calMoveSpeed(robot *Robot) float32 {
 
 func calRotationSpeed(robot *Robot) float32 {
 	velocity := robot.GetVelocity()
-	return velocity.Angel
+	return velocity.Angle
 }
 
 func calAcceleration(robot *Robot) float32 {
