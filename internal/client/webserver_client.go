@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
-	"github.com/LiU-SeeGoals/controller/internal/gamestate"
+	"github.com/LiU-SeeGoals/controller/internal/state"
 	"github.com/gorilla/websocket"
 )
 
@@ -159,8 +159,8 @@ func (server *WebServer) receiveData() {
 // and the functions under handles all of it so multiple instances are not created
 
 type WebsiteDTO struct {
-	RobotPositions [2 * gamestate.TEAM_SIZE]gamestate.RobotDTO
-	BallPosition   gamestate.BallDTO
+	RobotPositions [2 * state.TEAM_SIZE]state.RobotDTO
+	BallPosition   state.BallDTO
 	RobotActions   []action.ActionDTO
 	TerminalLog    []string
 }
@@ -186,7 +186,7 @@ func GetIncoming() []action.ActionDTO {
 }
 
 // Broadcasts the game state to all connected clients
-func Broadcasts(message WebsiteDTO) {
+func BroadcastGameState(message WebsiteDTO) {
 	gameStateJson := toJson(message)
 	webserver := getInstance()
 	webserver.gameStateQueueMutex.Lock()
@@ -194,7 +194,7 @@ func Broadcasts(message WebsiteDTO) {
 	webserver.gameStateQueueMutex.Unlock()
 }
 
-func UpdateWebGUI(gs *gamestate.GameState, actions []action.Action, terminal_messages []string) {
+func UpdateWebGUI(gs *state.GameState, actions []action.Action, terminal_messages []string) {
 	var gamestate_DTO = gs.ToDTO()
 	var actionTDO = make([]action.ActionDTO, len(actions))
 	for i, obj := range actions {
@@ -206,5 +206,5 @@ func UpdateWebGUI(gs *gamestate.GameState, actions []action.Action, terminal_mes
 		RobotActions:   actionTDO,
 		TerminalLog:    terminal_messages,
 	}
-	Broadcasts(websiteMessage)
+	BroadcastGameState(websiteMessage)
 }

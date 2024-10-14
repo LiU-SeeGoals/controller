@@ -7,12 +7,12 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/ai"
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/config"
-	state "github.com/LiU-SeeGoals/controller/internal/gamestate"
 	"github.com/LiU-SeeGoals/controller/internal/simulator"
+	"github.com/LiU-SeeGoals/controller/internal/state"
 )
 
 func SimulatedAnnealing() {
-	gs := state.NewGameState(3)
+	gs := state.NewGameState(10)
 	ssl_receiver := client.NewSSLVisionClient(config.GetSSLClientAddress())
 
 	ai_blue := ai.NewAi(state.Blue)
@@ -28,23 +28,23 @@ func SimulatedAnnealing() {
 	presentBlue := []int{0, 1, 2, 3, 4, 5}
 	sim_controller.SetPresentRobots(presentYellow, presentBlue)
 
-	sim_controller.RobotStartPositionConfig1(len(presentYellow))
-
 	ssl_receiver.InitGameState(gs, 0)
 	start_time := time.Now().UnixMilli()
 	for {
 		play_time := time.Now().UnixMilli() - start_time
+		fmt.Println("play_time: ", play_time)
 		ssl_receiver.UpdateGamestate(gs, play_time)
 
-		blue_actions, score_blue, antBlue := ai_blue.CreateActions(gs)
-		yellow_actions, score_yellow, antYellow := ai_yellow.CreateActions(gs)
+		blue_actions := ai_blue.GetActions(gs)
+		yellow_actions := ai_yellow.GetActions(gs)
 
 		sim_client_blue.SendActions(blue_actions)
 		sim_client_yellow.SendActions(yellow_actions)
 
-		terminal_messages := []string{fmt.Sprintf("Blue score: %.2f AnticipatedScore: %.2f", score_blue, antBlue), fmt.Sprintf("Yellow score: %.2f AnticipatedScore: %.2f", score_yellow, antYellow)}
+		terminal_messages := []string{"Simulated Annealing"}
 
-		client.UpdateWebGUI(gs, blue_actions, terminal_messages)
-		fmt.Printf("Blue/Yellow score: %.2f/%.2f, Anticipated score: %.2f/%.2f\n", score_blue, score_yellow, antBlue, antYellow)
+		if len(blue_actions) > 0 {
+			client.UpdateWebGUI(gs, blue_actions, terminal_messages)
+		}
 	}
 }

@@ -2,50 +2,50 @@ package ai
 
 import (
 	"github.com/LiU-SeeGoals/controller/internal/action"
-	"github.com/LiU-SeeGoals/controller/internal/gamestate"
+	"github.com/LiU-SeeGoals/controller/internal/helper"
+	"github.com/LiU-SeeGoals/controller/internal/state"
 )
 
 type Ai struct {
-	team      gamestate.Team
-	ugglan    *PreCalculator
-	strutsen  *StrategyFinder
-	fiskmasen *RoleExecutor
+	team              state.Team
+	slow_brain        *SlowBrainGO
+	fast_brain        *FastBrainGO
+	gameStateSenderSB chan<- state.GameState
+	gameStateSenderFB chan<- state.GameState
+	actionReceiver    chan []action.Action
 }
 
 // Constructor for the ai, initializes the client
 // and the different components used in the decision pipeline
-func NewAi(team gamestate.Team) *Ai {
+func NewAi(team state.Team) *Ai {
+	gameStateSenderSB, gameStateReceiverSB := helper.NB_KeepLatestChan[state.GameState]()
+	gameStateSenderFB, gameStateReceiverFB := helper.NB_KeepLatestChan[state.GameState]()
+	gamePlanSender, gamePlanReceiver := helper.NB_KeepLatestChan[state.GamePlan]()
+	actionReceiver := make(chan []action.Action)
+	slowBrain := NewSlowBrain(gameStateReceiverSB, gamePlanSender, team)
+	fastBrain := NewFastBrain(gameStateReceiverFB, gamePlanReceiver, actionReceiver, team)
 	ai := &Ai{
-		team:      team,
-		ugglan:    NewPreCalculator(9000, 6000, 100, team), // Field length, field width, zone size
-		strutsen:  NewPlayFinder(),
-		fiskmasen: NewRoleExecutor(),
+		team:              team,
+		slow_brain:        slowBrain,
+		fast_brain:        fastBrain,
+		gameStateSenderSB: gameStateSenderSB,
+		gameStateSenderFB: gameStateSenderFB,
+		actionReceiver:    actionReceiver,
 	}
 	return ai
 }
 
 // Decides on new actions for the robots
-func (ai *Ai) CreateActions(gamestate *gamestate.GameState) ([]action.Action, float64, float64) {
+func (ai *Ai) GetActions(gamestate *state.GameState) []action.Action {
 
-	// Code by jakob. Not working and should probably not be here,
-	// but as a temporary merge it is here now :)
-	// If you know where this snipped belong, please edit :)
+	// Send the game state copy to the slow brain
+	ai.gameStateSenderSB <- *gamestate
 
-	// heightMaps := []height_map.HeightMap{
-	// 	height_map.HeightMapEnemyGauss{},
-	// }
-	// // Call FindLowestHeight to get the best position
-	// bestX, bestY := height_map.FindLowestHeight(0, float32(5), 36, heightMaps, ai.gamestateObj)
-	// // fmt.Println(bestX/1000, bestY/1000)
+	// Send the game state to the fast brain
+	ai.gameStateSenderFB <- *gamestate
 
-	// ai.sim_control.TeleportRobot(bestX, bestY, 0, simulation.Team_YELLOW)
+	// Get the actions from the fast brain, this will block until the fast brain has decided on actions
+	actions := <-ai.actionReceiver
 
-	// actions := ai.GenerateMoveActions([]int{0}, []struct{ x, y float64 }{{x: float64(bestX), y: float64(bestY)}})
-	// // actions := ai.GenerateMoveActions([]int{0}, []struct{ x, y float64 }{{x: float64(1000), y: float64(1000)}})
-	// ai.client.SendActions(actions) // Send actions
-
-	gameAnalysis := ai.ugglan.Analyse(gamestate)
-	score, antScore := ai.strutsen.FindStrategy(gamestate, gameAnalysis)
-	actions := ai.fiskmasen.GetActions(gamestate, gameAnalysis)
-	return actions, score, antScore
+	return actions
 }
