@@ -18,12 +18,12 @@ type Ai struct {
 // Constructor for the ai, initializes the client
 // and the different components used in the decision pipeline
 func NewAi(team state.Team) *Ai {
-	gameStateSenderSB, gameStateRecivrerSB := helper.NB_KeepLatestChan[state.GameState]()
-	gameStateSenderFB, gameStateRecivrerFB := helper.NB_KeepLatestChan[state.GameState]()
-	gamePlanSender, gamePlanRecivrer := helper.NB_KeepLatestChan[state.GamePlan]()
+	gameStateSenderSB, gameStateReceiverSB := helper.NB_KeepLatestChan[state.GameState]()
+	gameStateSenderFB, gameStateReceiverFB := helper.NB_KeepLatestChan[state.GameState]()
+	gamePlanSender, gamePlanReceiver := helper.NB_KeepLatestChan[state.GamePlan]()
 	actionReceiver := make(chan []action.Action)
-	slowBrain := NewSlowBrain(gameStateRecivrerSB, gamePlanSender, team)
-	fastBrain := NewFastBrain(gameStateRecivrerFB, gamePlanRecivrer, actionReceiver, team)
+	slowBrain := NewSlowBrain(gameStateReceiverSB, gamePlanSender, team)
+	fastBrain := NewFastBrain(gameStateReceiverFB, gamePlanReceiver, actionReceiver, team)
 	ai := &Ai{
 		team:              team,
 		slow_brain:        slowBrain,

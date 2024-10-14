@@ -186,7 +186,7 @@ func GetIncoming() []action.ActionDTO {
 }
 
 // Broadcasts the game state to all connected clients
-func Broadcasts(message WebsiteDTO) {
+func BroadcastGameState(message WebsiteDTO) {
 	gameStateJson := toJson(message)
 	webserver := getInstance()
 	webserver.gameStateQueueMutex.Lock()
@@ -206,5 +206,5 @@ func UpdateWebGUI(gs *state.GameState, actions []action.Action, terminal_message
 		RobotActions:   actionTDO,
 		TerminalLog:    terminal_messages,
 	}
-	Broadcasts(websiteMessage)
+	BroadcastGameState(websiteMessage)
 }
