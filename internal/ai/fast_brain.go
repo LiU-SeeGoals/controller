@@ -16,16 +16,17 @@ type FastBrainGO struct {
 	outgoingActions   chan<- []action.Action
 }
 
-func NewFastBrainGO(incomingGameState <-chan state.GameState, incomingGamePlan <-chan state.GamePlan, outgoingActions chan<- []action.Action, team state.Team) *FastBrainGO {
+func NewFastBrain[FB FastBrainGO](incomingGameState <-chan state.GameState, incomingGamePlan <-chan state.GamePlan, outgoingActions chan<- []action.Action, team state.Team) *FastBrainGO {
 
-	fb := &FastBrainGO{
+	fb := FastBrainGO{
 		team:              team,
 		incomingGameState: incomingGameState,
 		incomingGamePlan:  incomingGamePlan,
 		outgoingActions:   outgoingActions,
 	}
+
 	go fb.Run()
-	return fb
+	return &fb
 }
 
 func (fb *FastBrainGO) Run() {

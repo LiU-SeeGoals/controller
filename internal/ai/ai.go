@@ -12,7 +12,7 @@ type Ai struct {
 	fast_brain        *FastBrainGO
 	gameStateSenderSB chan<- state.GameState
 	gameStateSenderFB chan<- state.GameState
-	actionReciver     chan []action.Action
+	actionReceiver    chan []action.Action
 }
 
 // Constructor for the ai, initializes the client
@@ -21,16 +21,16 @@ func NewAi(team state.Team) *Ai {
 	gameStateSenderSB, gameStateRecivrerSB := helper.NB_KeepLatestChan[state.GameState]()
 	gameStateSenderFB, gameStateRecivrerFB := helper.NB_KeepLatestChan[state.GameState]()
 	gamePlanSender, gamePlanRecivrer := helper.NB_KeepLatestChan[state.GamePlan]()
-	actionReciver := make(chan []action.Action)
-	slowBrain := NewSlowBrainGO(gameStateRecivrerSB, gamePlanSender, team)
-	fastBrain := NewFastBrainGO(gameStateRecivrerFB, gamePlanRecivrer, actionReciver, team)
+	actionReceiver := make(chan []action.Action)
+	slowBrain := NewSlowBrain(gameStateRecivrerSB, gamePlanSender, team)
+	fastBrain := NewFastBrain(gameStateRecivrerFB, gamePlanRecivrer, actionReceiver, team)
 	ai := &Ai{
 		team:              team,
 		slow_brain:        slowBrain,
 		fast_brain:        fastBrain,
 		gameStateSenderSB: gameStateSenderSB,
 		gameStateSenderFB: gameStateSenderFB,
-		actionReciver:     actionReciver,
+		actionReceiver:    actionReceiver,
 	}
 	return ai
 }
@@ -45,7 +45,7 @@ func (ai *Ai) GetActions(gamestate *state.GameState) []action.Action {
 	ai.gameStateSenderFB <- *gamestate
 
 	// Get the actions from the fast brain, this will block until the fast brain has decided on actions
-	actions := <-ai.actionReciver
+	actions := <-ai.actionReceiver
 
 	return actions
 }

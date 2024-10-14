@@ -19,7 +19,7 @@ type SlowBrainGO struct {
 	otherAccumulatedFunc height_map.HeightMap
 }
 
-func NewSlowBrainGO(incoming <-chan state.GameState, outgoing chan<- state.GamePlan, team state.Team) *SlowBrainGO {
+func NewSlowBrain[SB SlowBrainGO](incoming <-chan state.GameState, outgoing chan<- state.GamePlan, team state.Team) *SlowBrainGO {
 	posFunc := func(r *state.RobotAnalysis) state.Position {
 		return r.GetPosition()
 	}
