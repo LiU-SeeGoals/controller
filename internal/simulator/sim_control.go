@@ -115,7 +115,33 @@ func (sc *simControl) SetRobotDimentions() {
 }
 
 func (sc *simControl) RobotStartPositionConfig1(numberOfRobots int) {
-	fmt.Println("Not yet implemented")
+  generateCoordinates := func(x, min_y, max_y float32) [][2]float32 {
+    coords := make([][2]float32, numberOfRobots)
+    step := (max_y - min_y) / float32(numberOfRobots - 1)
+    for i := 0; i < numberOfRobots; i++ {
+      y := min_y + step * float32(i)
+      coords[i] = [2]float32{x, y}
+    }
+    return coords
+  }
+
+  blueCoords := generateCoordinates(1, -2, 2)
+  yellowCoords := generateCoordinates(-1, -2, 2)
+
+  for robot_id := 0; robot_id < numberOfRobots; robot_id++ {
+    x_blue := blueCoords[robot_id][0]
+    y_blue := blueCoords[robot_id][1]
+    id := uint32(robot_id)
+    team := simulation.Team_BLUE
+    sc.TeleportRobot(x_blue, y_blue, id, team)
+
+    x_yellow := yellowCoords[robot_id][0]
+    y_yellow := yellowCoords[robot_id][1]
+    id = uint32(robot_id)
+    team = simulation.Team_YELLOW
+    sc.TeleportRobot(x_yellow, y_yellow, id, team)
+  }
+
 }
 
 func (sc *simControl) RobotStartPositionConfig2(numberOfRobots int) {
