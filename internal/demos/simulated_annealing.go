@@ -40,7 +40,6 @@ func SimulatedAnnealing() {
 		sim_client_blue.SendActions(blue_actions)
 		sim_client_yellow.SendActions(yellow_actions)
 
-		client.RunPythonHelloWorld()
 		client.SendGameState(gs)
 
 		terminal_messages := []string{fmt.Sprintf("Blue score: %.2f AnticipatedScore: %.2f", score_blue, antBlue), fmt.Sprintf("Yellow score: %.2f AnticipatedScore: %.2f", score_yellow, antYellow)}

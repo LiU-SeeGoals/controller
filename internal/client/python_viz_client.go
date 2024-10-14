@@ -2,7 +2,7 @@ package client
 
 import (
 	"bytes"
-	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 
@@ -18,7 +18,7 @@ func RunPythonHelloWorld() {
 		if resp.StatusCode == http.StatusOK {
 			bodyBytes, err := io.ReadAll(resp.Body)
 			if err != nil {
-				// println(err->)
+				fmt.Println(err)
 			}
 			bodyString := string(bodyBytes)
 			println(bodyString)
@@ -27,21 +27,19 @@ func RunPythonHelloWorld() {
 }
 
 func SendGameState(gs *gamestate.GameState) {
-	output, err := json.Marshal(gs)
-	if err != nil {
-		// TODO: Do something
-	}
-	println(string(output))
-
+	output := gs.ToJson()
 	reader := bytes.NewReader(output)
-	// _, err :=
-	http.Post("http://controller-python:5000/update_game_state/", "application/json", reader)
+	resp, err := http.Post("http://controller-python:5000/update_game_state/", "application/json", reader)
 
 	if err != nil {
-		// TODO: Do something
+		fmt.Println(err)
+	} else {
+		defer resp.Body.Close()
+		bodyBytes, err := io.ReadAll(resp.Body)
+		if err != nil {
+			fmt.Println(err)
+		} else {
+			print(string(bodyBytes))
+		}
 	}
-
-	// bodyBytes, err := io.ReadAll(resp.Body)
-
-	// print(string(bodyBytes))
 }
