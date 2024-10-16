@@ -1,8 +1,7 @@
 package action
 
 import (
-	"math"
-
+	"github.com/LiU-SeeGoals/controller/internal/state"
 	"github.com/LiU-SeeGoals/proto_go/robot_action"
 	"github.com/LiU-SeeGoals/proto_go/simulation"
 	"gonum.org/v1/gonum/mat"
@@ -43,9 +42,9 @@ type MoveTo struct {
 	// The id of the robot.
 	Id int
 	// Current position of Robot, vector contains (x,y,w)
-	Pos *mat.VecDense
+	Pos state.Position
 	// Goal destination of Robot, vector contains (x,y,w)
-	Dest *mat.VecDense
+	Dest state.Position
 	// Decides if the robot should dribble while moving
 	Dribble bool
 }
@@ -124,63 +123,26 @@ func (s *Stop) TranslateSim() *simulation.RobotCommand {
 func (mv *MoveTo) TranslateSim() *simulation.RobotCommand {
 
 	id := uint32(mv.Id)
-	diff := mat.NewVecDense(3, nil)
-	diff.SubVec(mv.Dest, mv.Pos)
+	diff := mv.Dest.Sub(&mv.Pos)
 
 	dribblerSpeed := float32(0)
 	if mv.Dribble {
 		dribblerSpeed = 100 // in rpm, adjust as needed
 	}
 
-	goalAngle := math.Atan2(diff.AtVec(1), diff.AtVec(0))
-	currAngle := mv.Pos.AtVec(2)
-	inPosition := false
-
-	if math.Abs(diff.AtVec(0)) < 50 && math.Abs(diff.AtVec(1)) < 50 {
-		inPosition = true
-		goalAngle = mv.Dest.AtVec(2)
-
-	}
-
-	// Normalize an angle to be within -π to π
-	normalizeAngle := func(angle float64) float64 {
-		angle = math.Mod(angle+math.Pi, 2*math.Pi)
-		if angle < 0 {
-			angle += 2 * math.Pi
-		}
-		return angle - math.Pi
-	}
-
-	// Calculate difference between current angle and goal angle
-	angleDiff := normalizeAngle(goalAngle - currAngle)
-
-	// Set angular velocity
-	angular := float32(0)
-	if angleDiff > 0.2 {
-		angular = 2 // Adjust this value as necessary
-	} else if angleDiff < -0.2 {
-		angular = -2 // Adjust this value as necessary
-	}
-
-	// Set forward speed
-	forward := float32(0)
-	if math.Abs(angleDiff) < 0.3 && !inPosition {
-		forward = 1 // Move forward when facing the goal
-	}
-
-	left := float32(0)
+	dir := diff
 
 	// Create the local velocity command
-	localVel := &simulation.MoveLocalVelocity{
-		Forward: &forward,
-		Left:    &left,
-		Angular: &angular,
+	vel := &simulation.MoveGlobalVelocity{
+		X:       &dir.X,
+		Y:       &dir.Y,
+		Angular: &dir.Angle,
 	}
 
 	// Create the move command and assign the local velocity to the oneof field
 	moveCommand := &simulation.RobotMoveCommand{
-		Command: &simulation.RobotMoveCommand_LocalVelocity{
-			LocalVelocity: localVel,
+		Command: &simulation.RobotMoveCommand_GlobalVelocity{
+			GlobalVelocity: vel,
 		},
 	}
 
@@ -326,14 +288,14 @@ func (mt *MoveTo) TranslateReal() *robot_action.Command {
 		CommandId: robot_action.ActionType_MOVE_TO_ACTION,
 		RobotId:   int32(mt.Id),
 		Pos: &robot_action.Vector3D{
-			X: int32(mt.Pos.AtVec(0)),
-			Y: int32(mt.Pos.AtVec(1)),
-			W: float32(mt.Pos.AtVec(2)),
+			X: int32(mt.Pos.X),
+			Y: int32(mt.Pos.Y),
+			W: float32(mt.Pos.Angle),
 		},
 		Dest: &robot_action.Vector3D{
-			X: int32(mt.Dest.AtVec(0)),
-			Y: int32(mt.Dest.AtVec(1)),
-			W: float32(mt.Dest.AtVec(2)),
+			X: int32(mt.Dest.X),
+			Y: int32(mt.Dest.Y),
+			W: float32(mt.Dest.Angle),
 		},
 	}
 	return command_move
@@ -389,12 +351,12 @@ func (m *MoveTo) ToDTO() ActionDTO {
 	return ActionDTO{
 		Action:  robot_action.ActionType_MOVE_TO_ACTION,
 		Id:      m.Id,
-		PosX:    int32(m.Pos.AtVec(0)),
-		PosY:    int32(m.Pos.AtVec(1)),
-		PosW:    float32(m.Pos.AtVec(2)),
-		DestX:   int32(m.Dest.AtVec(0)),
-		DestY:   int32(m.Dest.AtVec(1)),
-		DestW:   float32(m.Dest.AtVec(2)),
+		PosX:    int32(m.Pos.X),
+		PosY:    int32(m.Pos.Y),
+		PosW:    float32(m.Pos.Angle),
+		DestX:   int32(m.Dest.X),
+		DestY:   int32(m.Dest.Y),
+		DestW:   float32(m.Dest.Angle),
 		Dribble: m.Dribble,
 	}
 }

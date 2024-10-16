@@ -8,7 +8,7 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/state"
 )
 
-type FindRngBestScore struct {
+type FindBestScore struct {
 	team        state.Team
 	scoringFunc func(x float32, y float32, robots state.RobotAnalysisTeam) float32
 	alpha       float32
@@ -16,14 +16,14 @@ type FindRngBestScore struct {
 	samples     int
 }
 
-func NewFindRngBestScore(
+func NewFindBestScore(
 	team state.Team,
 	scoringFunc func(x float32, y float32, robots state.RobotAnalysisTeam) float32,
 	alpha float32,
 	radius float32,
 	samples int,
-) *FindRngBestScore {
-	return &FindRngBestScore{
+) *FindBestScore {
+	return &FindBestScore{
 		team:        team,
 		scoringFunc: scoringFunc,
 		alpha:       alpha,
@@ -52,17 +52,18 @@ func scoreHighest(an *state.GameAnalysis) float32 {
 	return myScore / (myScore + otherScore)
 }
 
-func (frbs *FindRngBestScore) FindRngBestScore(hightFunc height_map.HeightMap, robotTeam state.TeamAnalysis, gameAnalysis *state.GameAnalysis) {
+func (frbs *FindBestScore) FindBestScore(hightFunc height_map.HeightMap, robotTeam *state.TeamAnalysis, gameAnalysis *state.GameAnalysis) {
 	// Variables to track the best position and the minimum height
 	bestScore := scoreHighest(gameAnalysis)
 
-	robots := robotTeam.Robots
-	for _, robot := range robots {
+	robots := &robotTeam.Robots
+	for idx, _ := range robots {
+		robot := &robots[idx]
 		robotPos := robot.GetPosition()
-		robot.SetDestination(robotPos)
+		robot.SetDestination(&robotPos)
 	}
 	for _, value := range rand.Perm(len(robots)) {
-		robot := robots[value]
+		robot := &robots[value]
 		pos := robot.GetPosition()
 		x := pos.X
 		y := pos.Y
@@ -77,7 +78,7 @@ func (frbs *FindRngBestScore) FindRngBestScore(hightFunc height_map.HeightMap, r
 			dest := robot.GetDestination()
 			dest.X = xSample
 			dest.Y = ySample
-			robot.SetDestination(dest)
+			robot.SetDestination(&dest)
 
 			gameAnalysis.UpdateMyZones(frbs.scoringFunc)
 			score := scoreHighest(gameAnalysis)
@@ -86,7 +87,7 @@ func (frbs *FindRngBestScore) FindRngBestScore(hightFunc height_map.HeightMap, r
 			} else {
 				dest.X = x
 				dest.Y = y
-				robot.SetDestination(dest)
+				robot.SetDestination(&dest)
 			}
 		}
 	}
