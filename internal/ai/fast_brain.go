@@ -6,7 +6,6 @@ import (
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/state"
-	"gonum.org/v1/gonum/mat"
 )
 
 type FastBrainGO struct {
@@ -16,7 +15,7 @@ type FastBrainGO struct {
 	outgoingActions   chan<- []action.Action
 }
 
-func NewFastBrain[FB FastBrainGO](incomingGameState <-chan state.GameState, incomingGamePlan <-chan state.GamePlan, outgoingActions chan<- []action.Action, team state.Team) *FastBrainGO {
+func NewFastBrain(incomingGameState <-chan state.GameState, incomingGamePlan <-chan state.GamePlan, outgoingActions chan<- []action.Action, team state.Team) *FastBrainGO {
 
 	fb := FastBrainGO{
 		team:              team,
@@ -70,24 +69,23 @@ func (fb *FastBrainGO) GetActions(gs *state.GameState, gamePlan *state.GamePlan)
 	myTeam := gs.GetTeam(gamePlan.Team)
 	Instructions := gamePlan.Instructions
 
-	for _, inst := range Instructions {
+	for idx, _ := range Instructions {
+		inst := &Instructions[idx]
+		robot := &myTeam[inst.Id]
 
+		if !robot.IsActive() {
+			continue
+		}
 		act := action.MoveTo{}
 		act.Id = int(inst.Id)
 
-		robot := myTeam[inst.Id]
-
 		pos := robot.GetPosition()
 
-		act.Pos = mat.NewVecDense(3, []float64{float64(pos.X), float64(pos.Y), float64(pos.Angle)})
-		dest := inst.Position
-		act.Dest = mat.NewVecDense(3, []float64{float64(dest.X), float64(dest.Y), float64(dest.Angle)})
+		act.Pos = pos
+		act.Dest = inst.Position
 
 		act.Dribble = true // Assuming all moves require dribbling
-		if act.Dest.AtVec(0) == act.Pos.AtVec(0) && act.Dest.AtVec(1) == act.Pos.AtVec(1) {
-			continue
-		}
-		// fmt.Println("Robot", act.Id, "moving to", destX, destY, "from", act.Pos.AtVec(0), act.Pos.AtVec(1))
+		fmt.Println("Robot", act.Id, "moving to", act.Dest.ToDTO())
 		actionList = append(actionList, &act)
 	}
 

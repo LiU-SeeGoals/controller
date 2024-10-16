@@ -90,15 +90,15 @@ func unpack(packet *ssl_vision.SSL_WrapperPacket, gs *state.GameState, play_time
 		y := robot.GetY()
 		angle := *robot.Orientation
 
-		gs.SetYellowRobot(robot.GetRobotId(), x, y, angle, play_time)
+		gs.SetBlueRobot(robot.GetRobotId(), x, y, angle, play_time)
 	}
 
 	for _, robot := range detect.GetRobotsYellow() {
 		x := robot.GetX()
 		y := robot.GetY()
 		angle := *robot.Orientation
+		gs.SetYellowRobot(robot.GetRobotId(), x, y, angle, play_time)
 
-		gs.SetBlueRobot(robot.GetRobotId(), x, y, angle, play_time)
 	}
 
 	for _, ball := range detect.GetBalls() {

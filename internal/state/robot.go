@@ -7,11 +7,12 @@ import (
 
 type Team int8
 type ID uint8
-type RobotTeam [TEAM_SIZE]*Robot
+type RobotTeam [TEAM_SIZE]Robot
 
 const (
-	Blue Team = iota
-	Yellow
+	UNKNOWN Team = 0
+	Yellow  Team = 1
+	Blue    Team = 2
 )
 
 type RobotPos struct {
@@ -27,8 +28,9 @@ type Robot struct {
 	historyCapacity int
 }
 
-func NewRobot(id ID, team Team, history_capasity int) *Robot {
-	return &Robot{
+func NewRobot(id ID, team Team, history_capasity int) Robot {
+	return Robot{
+		active:          false,
 		id:              id,
 		team:            team,
 		history:         list.New(),
@@ -37,6 +39,7 @@ func NewRobot(id ID, team Team, history_capasity int) *Robot {
 }
 
 func (r *Robot) SetPositionTime(x, y, angle float32, time int64) {
+	r.active = true
 	if r.history.Len() >= r.historyCapacity {
 		element := r.history.Back()
 		r.history.Remove(element)
@@ -55,7 +58,7 @@ func (r *Robot) SetPositionTime(x, y, angle float32, time int64) {
 	}
 }
 
-func (r *Robot) GetPositionTime() (Position, int64) {
+func (r Robot) GetPositionTime() (Position, int64) {
 	if r.history.Len() == 0 {
 		panic("No position in history")
 	}
@@ -65,12 +68,12 @@ func (r *Robot) GetPositionTime() (Position, int64) {
 	return robot.pos, robot.time
 }
 
-func (r *Robot) GetPosition() Position {
+func (r Robot) GetPosition() Position {
 	pos, _ := r.GetPositionTime()
 	return pos
 }
 
-func (r *Robot) GetVelocity() Position {
+func (r Robot) GetVelocity() Position {
 	if r.history.Len() < 2 {
 		return Position{0, 0, 0, 0}
 	}
@@ -82,15 +85,16 @@ func (r *Robot) GetVelocity() Position {
 
 	for e := r.history.Front().Next(); e != nil; e = e.Next() {
 		robot2 := e.Value.(*RobotPos)
-		dPos := robot2.pos.Sub(robot.pos)
+		dPos := robot2.pos.Sub(&robot.pos)
 		dt := float32(robot2.time - robot.time)
 		// TODO: lets add exponential decay so that the most recent deltas have more weight
-		sum_deltas = sum_deltas.Add(dPos.Scale(1 / dt))
+		scaled := dPos.Scale(1 / dt)
+		sum_deltas = sum_deltas.Add(&scaled)
 	}
 	return sum_deltas.Scale(1 / float32(r.history.Len()-1))
 }
 
-func (r *Robot) GetAcceleration() float32 {
+func (r Robot) GetAcceleration() float32 {
 	if r.history.Len() < 3 {
 		return float32(0) // Not enough data points to calculate acceleration
 	}
@@ -102,8 +106,8 @@ func (r *Robot) GetAcceleration() float32 {
 		robot2 := s.Value.(*RobotPos)
 		robot3 := t.Value.(*RobotPos)
 
-		vel1 := robot2.pos.Sub(robot1.pos)
-		vel2 := robot3.pos.Sub(robot2.pos)
+		vel1 := robot2.pos.Sub(&robot1.pos)
+		vel2 := robot3.pos.Sub(&robot2.pos)
 
 		dist1 := vel1.Norm()
 		dist2 := vel2.Norm()
@@ -121,11 +125,11 @@ func (r *Robot) SetActive(active bool) {
 	r.active = active
 }
 
-func (r *Robot) IsActive() bool {
+func (r Robot) IsActive() bool {
 	return r.active
 }
 
-func (r *Robot) String() string {
+func (r Robot) String() string {
 
 	pos := r.GetPosition()
 	vel := r.GetVelocity()
@@ -136,7 +140,7 @@ func (r *Robot) String() string {
 	return fmt.Sprintf("id: %d, pos: %s, vel: %s", r.id, posString, velString)
 }
 
-func (r *Robot) ToDTO() RobotDTO {
+func (r Robot) ToDTO() RobotDTO {
 	if !r.active {
 		return RobotDTO{}
 	}
@@ -155,7 +159,7 @@ func (r *Robot) ToDTO() RobotDTO {
 	}
 }
 
-func (r *Robot) GetID() ID {
+func (r Robot) GetID() ID {
 	return r.id
 }
 

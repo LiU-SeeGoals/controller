@@ -12,14 +12,14 @@ import (
 type SlowBrainGO struct {
 	team                 state.Team
 	gameAnalysis         *state.GameAnalysis
-	gameSearch           *search.FindRngBestScore
+	gameSearch           *search.FindBestScore
 	incomingGameState    <-chan state.GameState
 	outgoingPlan         chan<- state.GamePlan
 	myAccumulatedFunc    height_map.HeightMap
 	otherAccumulatedFunc height_map.HeightMap
 }
 
-func NewSlowBrain[SB SlowBrainGO](incoming <-chan state.GameState, outgoing chan<- state.GamePlan, team state.Team) *SlowBrainGO {
+func NewSlowBrain(incoming <-chan state.GameState, outgoing chan<- state.GamePlan, team state.Team) *SlowBrainGO {
 	posFunc := func(r *state.RobotAnalysis) state.Position {
 		return r.GetPosition()
 	}
@@ -53,7 +53,7 @@ func NewSlowBrain[SB SlowBrainGO](incoming <-chan state.GameState, outgoing chan
 		return accumulated
 	}
 	gameAnalysis := state.NewGameAnalysis(9000, 6000, 100, team)
-	gameSearch := search.NewFindRngBestScore(team, myAccumulatedFunc, 0.1, 100, 9)
+	gameSearch := search.NewFindBestScore(team, myAccumulatedFunc, 0.1, 100, 9)
 	sb := &SlowBrainGO{
 		team:                 team,
 		gameAnalysis:         gameAnalysis,
@@ -84,6 +84,7 @@ func (sb *SlowBrainGO) Run() {
 		plan := sb.GetPlan(&gameState)
 
 		// Send the plan to the fast brain
+		// fmt.Println(plan.ToDTO())
 		sb.outgoingPlan <- plan
 		fmt.Println("SlowBrainGO: Sent plan")
 	}
@@ -93,7 +94,7 @@ func (sb *SlowBrainGO) GetPlan(gameState *state.GameState) state.GamePlan {
 	sb.gameAnalysis.UpdateState(gameState)
 	sb.gameAnalysis.UpdateMyZones(sb.myAccumulatedFunc)
 	sb.gameAnalysis.UpdateOtherZones(sb.otherAccumulatedFunc)
-	sb.gameSearch.FindRngBestScore(sb.myAccumulatedFunc, sb.gameAnalysis.MyTeam, sb.gameAnalysis)
+	sb.gameSearch.FindBestScore(sb.myAccumulatedFunc, &sb.gameAnalysis.MyTeam, sb.gameAnalysis)
 	gamePlan := state.GamePlan{}
 	gamePlan.Team = sb.team
 	for _, robot := range sb.gameAnalysis.MyTeam.Robots {

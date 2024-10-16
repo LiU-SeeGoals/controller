@@ -64,9 +64,10 @@ func (b *Ball) GetVelocity() Position {
 
 	for e := b.history.Front().Next(); e != nil; e = e.Next() {
 		ball2 := e.Value.(*BallPos)
-		dPos := ball2.pos.Sub(ball.pos)
+		dPos := ball2.pos.Sub(&ball.pos)
 		dt := float32(ball2.time - ball.time)
-		sum_deltas = sum_deltas.Add(dPos.Scale(1 / dt))
+		scaled := dPos.Scale(1 / dt)
+		sum_deltas = sum_deltas.Add(&scaled)
 	}
 	return sum_deltas.Scale(1 / float32(b.history.Len()-1))
 
