@@ -141,7 +141,7 @@ func RotateToTarget(currentX, currentY, targetX, targetY, currentDirection float
 		rotationNeeded += 2 * math.Pi
 	}
 
-	return -rotationNeeded
+	return rotationNeeded
 }
 
 func (mv *MoveTo) TranslateSim() *simulation.RobotCommand {
@@ -150,26 +150,25 @@ func (mv *MoveTo) TranslateSim() *simulation.RobotCommand {
 	// center := state.Position{X: 0, Y: 0, Angle: 0}
 
 	speed := float32(1)
-	angleSpeed := float32(10)
+	angleSpeed := float32(0.1)
 	// Angular velocity counter-clockwise [rad/s]
 	angleDiff := RotateToTarget(mv.Pos.X, mv.Pos.Y, mv.Dest.X, mv.Dest.Y, mv.Pos.Angle)
-	if angleDiff > 0 {
-		angleSpeed = -angleSpeed
-	}
+	// if angleDiff > 0 {
+	// 	angleSpeed = -angleSpeed
+	// }
 
-	// fmt.Println(" angleDiff: ", angleDiff, " current_angle: ", mv.Pos.Angle, " angleSpeed: ", angleSpeed)
-	// Create the local velocity command
-	// Create the local velocity command
+	angle := angleDiff / angleSpeed
 
 	// Velocity forward [m/s] (towards the dribbler)
 	forward := speed
+
 	// Velocity to the left [m/s]
 	left := float32(0)
 
 	localVel := &simulation.MoveLocalVelocity{
 		Forward: &forward,
 		Left:    &left,
-		Angular: &angleSpeed,
+		Angular: &angle,
 	}
 
 	// Create the move command and assign the local velocity to the oneof field

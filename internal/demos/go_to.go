@@ -22,7 +22,7 @@ func GoTo() {
 
 	// Some sim setup for debugging ai behaviour
 	presentYellow := []int{1, 4}
-	presentBlue := []int{3, 2}
+	presentBlue := []int{2}
 	sim_controller.SetPresentRobots(presentYellow, presentBlue)
 
 	ssl_receiver.InitGameState(gs, 0)
