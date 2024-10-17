@@ -71,7 +71,15 @@ func (r *SSLConnection) Receive(packetChan chan *ssl_vision.SSL_WrapperPacket) {
 			fmt.Printf("Unable to unmarshal packet: %s", err)
 			continue
 		}
-
+		// Clear the channel if something is there
+		fmt.Println("Received packet")
+		fmt.Println("size", len(packetChan))
+		if len(packetChan) > 0 {
+			select {
+			case <-packetChan:
+			default:
+			}
+		}
 		packetChan <- &r.packet
 	}
 }
@@ -88,7 +96,8 @@ func unpack(packet *ssl_vision.SSL_WrapperPacket, gs *state.GameState, play_time
 	for _, robot := range detect.GetRobotsBlue() {
 		x := robot.GetX()
 		y := robot.GetY()
-		angle := *robot.Orientation
+		angle := robot.GetOrientation()
+		fmt.Println("Robot", robot.GetRobotId(), "x:", x, "y:", y, "angle:", angle)
 
 		gs.SetBlueRobot(robot.GetRobotId(), x, y, angle, play_time)
 	}
@@ -96,7 +105,7 @@ func unpack(packet *ssl_vision.SSL_WrapperPacket, gs *state.GameState, play_time
 	for _, robot := range detect.GetRobotsYellow() {
 		x := robot.GetX()
 		y := robot.GetY()
-		angle := *robot.Orientation
+		angle := robot.GetOrientation()
 		gs.SetYellowRobot(robot.GetRobotId(), x, y, angle, play_time)
 
 	}

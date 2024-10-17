@@ -123,20 +123,41 @@ func (s *Stop) TranslateSim() *simulation.RobotCommand {
 
 }
 
+func RotateToTarget(currentX, currentY, targetX, targetY, currentDirection float32) float32 {
+	dx := targetX - currentX
+	dy := targetY - currentY
+
+	targetDirection := float32(math.Atan2(float64(dy), float64(dx)))
+
+	rotationNeeded := targetDirection - currentDirection
+
+	fmt.Println("targetDirection: ", targetDirection, " currentDirection: ", currentDirection, " rotationNeeded: ", rotationNeeded)
+
+	// Normalize the result to be between -π and π
+	for rotationNeeded > math.Pi {
+		rotationNeeded -= 2 * math.Pi
+	}
+	for rotationNeeded < -math.Pi {
+		rotationNeeded += 2 * math.Pi
+	}
+
+	return -rotationNeeded
+}
+
 func (mv *MoveTo) TranslateSim() *simulation.RobotCommand {
 
 	id := uint32(mv.Id)
-	diff := mv.Dest.Sub(&mv.Pos).Normalize()
+	// center := state.Position{X: 0, Y: 0, Angle: 0}
 
 	speed := float32(1)
-
-	dirX := diff.X * speed
-	dirY := diff.Y * speed
-	target_angel := math.Atan2(float64(dirY), float64(dirX))
+	angleSpeed := float32(10)
 	// Angular velocity counter-clockwise [rad/s]
-	dirAngle := float32(float64(mv.Pos.Angle) - target_angel)
+	angleDiff := RotateToTarget(mv.Pos.X, mv.Pos.Y, mv.Dest.X, mv.Dest.Y, mv.Pos.Angle)
+	if angleDiff > 0 {
+		angleSpeed = -angleSpeed
+	}
 
-	fmt.Println("dirX: ", dirX, " dirY: ", dirY, " dirAngle: ", dirAngle)
+	// fmt.Println(" angleDiff: ", angleDiff, " current_angle: ", mv.Pos.Angle, " angleSpeed: ", angleSpeed)
 	// Create the local velocity command
 	// Create the local velocity command
 
@@ -148,7 +169,7 @@ func (mv *MoveTo) TranslateSim() *simulation.RobotCommand {
 	localVel := &simulation.MoveLocalVelocity{
 		Forward: &forward,
 		Left:    &left,
-		Angular: &dirAngle,
+		Angular: &angleSpeed,
 	}
 
 	// Create the move command and assign the local velocity to the oneof field

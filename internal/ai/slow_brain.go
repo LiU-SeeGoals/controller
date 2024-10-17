@@ -97,7 +97,8 @@ func (sb *SlowBrainGO) GetPlan(gameState *state.GameState) state.GamePlan {
 	sb.gameSearch.FindBestScore(sb.myAccumulatedFunc, &sb.gameAnalysis.MyTeam, sb.gameAnalysis)
 	gamePlan := state.GamePlan{}
 	gamePlan.Team = sb.team
-	for _, robot := range sb.gameAnalysis.MyTeam.Robots {
+	for idx, _ := range sb.gameAnalysis.MyTeam.Robots {
+		robot := &sb.gameAnalysis.MyTeam.Robots[idx]
 		gamePlan.Instructions = append(gamePlan.Instructions, state.RobotMove{
 			Id:       robot.GetID(),
 			Position: robot.GetDestination(),
