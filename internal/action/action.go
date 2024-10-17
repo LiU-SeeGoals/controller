@@ -1,6 +1,9 @@
 package action
 
 import (
+	"fmt"
+	"math"
+
 	"github.com/LiU-SeeGoals/controller/internal/state"
 	"github.com/LiU-SeeGoals/proto_go/robot_action"
 	"github.com/LiU-SeeGoals/proto_go/simulation"
@@ -123,34 +126,42 @@ func (s *Stop) TranslateSim() *simulation.RobotCommand {
 func (mv *MoveTo) TranslateSim() *simulation.RobotCommand {
 
 	id := uint32(mv.Id)
-	diff := mv.Dest.Sub(&mv.Pos)
+	diff := mv.Dest.Sub(&mv.Pos).Normalize()
 
-	dribblerSpeed := float32(0)
-	if mv.Dribble {
-		dribblerSpeed = 100 // in rpm, adjust as needed
-	}
+	speed := float32(1)
 
-	dir := diff
+	dirX := diff.X * speed
+	dirY := diff.Y * speed
+	target_angel := math.Atan2(float64(dirY), float64(dirX))
+	// Angular velocity counter-clockwise [rad/s]
+	dirAngle := float32(float64(mv.Pos.Angle) - target_angel)
 
+	fmt.Println("dirX: ", dirX, " dirY: ", dirY, " dirAngle: ", dirAngle)
 	// Create the local velocity command
-	vel := &simulation.MoveGlobalVelocity{
-		X:       &dir.X,
-		Y:       &dir.Y,
-		Angular: &dir.Angle,
+	// Create the local velocity command
+
+	// Velocity forward [m/s] (towards the dribbler)
+	forward := speed
+	// Velocity to the left [m/s]
+	left := float32(0)
+
+	localVel := &simulation.MoveLocalVelocity{
+		Forward: &forward,
+		Left:    &left,
+		Angular: &dirAngle,
 	}
 
 	// Create the move command and assign the local velocity to the oneof field
 	moveCommand := &simulation.RobotMoveCommand{
-		Command: &simulation.RobotMoveCommand_GlobalVelocity{
-			GlobalVelocity: vel,
+		Command: &simulation.RobotMoveCommand_LocalVelocity{
+			LocalVelocity: localVel,
 		},
 	}
 
 	// Create the robot command with the move command
 	return &simulation.RobotCommand{
-		Id:            &id,
-		MoveCommand:   moveCommand,
-		DribblerSpeed: &dribblerSpeed,
+		Id:          &id,
+		MoveCommand: moveCommand,
 	}
 }
 

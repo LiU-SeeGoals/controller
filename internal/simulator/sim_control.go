@@ -2,6 +2,7 @@ package simulator
 
 import (
 	"fmt"
+	"math"
 
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/config"
@@ -31,10 +32,18 @@ func (sc *simControl) TurnOnCameraRealism() {
 	fmt.Println("Not yet implemented")
 }
 
+func centerCircle(number int, radius float32) (float32, float32) {
+	total_slots := 11 * 2
+	angle_step := 2 * math.Pi / float64(total_slots)
+
+	angle := angle_step * float64(number)
+	x := float32(math.Cos(angle)) * radius
+	y := float32(math.Sin(angle)) * radius
+	return x, y
+}
+
 func (sc *simControl) SetPresentRobots(presentYellow []int, presentBlue []int) {
 	TOTAL_ROBOTS := 11
-	x := float32(1.0)           // X-coordinate
-	y := float32(1.0)           // Y-coordinate
 	orientation := float32(0.0) // Approx. 45 degrees in radians
 	vx := float32(0.0)          // Velocity towards x-axis
 	vy := float32(0.0)          // Velocity towards y-axis
@@ -54,6 +63,8 @@ func (sc *simControl) SetPresentRobots(presentYellow []int, presentBlue []int) {
 			Id:   &idNum,
 			Team: &team,
 		}
+
+		x, y := centerCircle(i, 1.0)
 
 		teleportRobot := &simulation.TeleportRobot{
 			Id:          &id,
@@ -81,6 +92,8 @@ func (sc *simControl) SetPresentRobots(presentYellow []int, presentBlue []int) {
 			Id:   &idNum,
 			Team: &team,
 		}
+
+		x, y := centerCircle(i+TOTAL_ROBOTS, 1.0)
 
 		teleportRobot := &simulation.TeleportRobot{
 			Id:          &id,
@@ -115,32 +128,32 @@ func (sc *simControl) SetRobotDimentions() {
 }
 
 func (sc *simControl) RobotStartPositionConfig1(numberOfRobots int) {
-  generateCoordinates := func(x, min_y, max_y float32) [][2]float32 {
-    coords := make([][2]float32, numberOfRobots)
-    step := (max_y - min_y) / float32(numberOfRobots - 1)
-    for i := 0; i < numberOfRobots; i++ {
-      y := min_y + step * float32(i)
-      coords[i] = [2]float32{x, y}
-    }
-    return coords
-  }
+	generateCoordinates := func(x, min_y, max_y float32) [][2]float32 {
+		coords := make([][2]float32, numberOfRobots)
+		step := (max_y - min_y) / float32(numberOfRobots-1)
+		for i := 0; i < numberOfRobots; i++ {
+			y := min_y + step*float32(i)
+			coords[i] = [2]float32{x, y}
+		}
+		return coords
+	}
 
-  blueCoords := generateCoordinates(1, -2, 2)
-  yellowCoords := generateCoordinates(-1, -2, 2)
+	blueCoords := generateCoordinates(1, -2, 2)
+	yellowCoords := generateCoordinates(-1, -2, 2)
 
-  for robot_id := 0; robot_id < numberOfRobots; robot_id++ {
-    x_blue := blueCoords[robot_id][0]
-    y_blue := blueCoords[robot_id][1]
-    id := uint32(robot_id)
-    team := simulation.Team_BLUE
-    sc.TeleportRobot(x_blue, y_blue, id, team)
+	for robot_id := 0; robot_id < numberOfRobots; robot_id++ {
+		x_blue := blueCoords[robot_id][0]
+		y_blue := blueCoords[robot_id][1]
+		id := uint32(robot_id)
+		team := simulation.Team_BLUE
+		sc.TeleportRobot(x_blue, y_blue, id, team)
 
-    x_yellow := yellowCoords[robot_id][0]
-    y_yellow := yellowCoords[robot_id][1]
-    id = uint32(robot_id)
-    team = simulation.Team_YELLOW
-    sc.TeleportRobot(x_yellow, y_yellow, id, team)
-  }
+		x_yellow := yellowCoords[robot_id][0]
+		y_yellow := yellowCoords[robot_id][1]
+		id = uint32(robot_id)
+		team = simulation.Team_YELLOW
+		sc.TeleportRobot(x_yellow, y_yellow, id, team)
+	}
 
 }
 
