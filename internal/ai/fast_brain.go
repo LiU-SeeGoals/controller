@@ -83,7 +83,7 @@ func (fb *FastBrainGO) GetActions(gs *state.GameState, gamePlan *state.GamePlan)
 		act.Dest = inst.Position
 
 		act.Dribble = true // Assuming all moves require dribbling
-		fmt.Println("Robot", act.Id, "moving from", act.Pos.ToDTO(), "\n               to  ", act.Dest.ToDTO())
+		// fmt.Println("Robot", act.Id, "moving from", act.Pos.ToDTO(), "\n               to  ", act.Dest.ToDTO())
 		actionList = append(actionList, &act)
 	}
 
