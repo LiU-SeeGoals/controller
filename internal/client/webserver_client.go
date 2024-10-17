@@ -186,15 +186,34 @@ func GetIncoming() []action.ActionDTO {
 	return actionsCopy
 }
 
-// Broadcasts the game state to all connected clients
-func Broadcasts(message WebsiteDTO) {
-	gameStateJson := toJson(message)
+// Broadcasts a json message to all connected clients
+func broadcasts(messageJson []byte) {
 	webserver := getInstance()
 	webserver.gameStateQueueMutex.Lock()
-	webserver.gameStatePacketQueue = append(webserver.gameStatePacketQueue, gameStateJson)
+	webserver.gameStatePacketQueue = append(webserver.gameStatePacketQueue, messageJson)
 	webserver.gameStateQueueMutex.Unlock()
 }
 
+type logMessageDTO struct {
+	Type      string      `json:"type"`
+	Log       interface{} `json:"log"` // The log message can be any JSON
+}
+
+// wraps log message in a json object and broadcasts it to all connected clients
+func UpdateWebLog(log []byte) {
+	var logMessage = logMessageDTO{
+		Type:      "log",
+		Log:       json.RawMessage(log), // Pass the log as raw JSON
+	}
+
+	messageJson, err := json.Marshal(logMessage)
+	if err != nil {
+		fmt.Println("The LogMessageDTO packet could not be marshalled to JSON.")
+	}
+	broadcasts(messageJson)
+}
+
+// jsonifies gamestate and actions, then broadcasts it to all connected clients
 func UpdateWebGUI(gs *gamestate.GameState, actions []action.Action) {
 	fmt.Println("Updating web GUI")
 	var gamestate_DTO = gs.ToDTO()
@@ -203,9 +222,10 @@ func UpdateWebGUI(gs *gamestate.GameState, actions []action.Action) {
 		actionTDO[i] = obj.ToDTO()
 	}
 	var websiteMessage = WebsiteDTO{
+		Type:           "gamestate",
 		RobotPositions: gamestate_DTO.RobotPositions,
 		BallPosition:   gamestate_DTO.BallPosition,
 		RobotActions:   actionTDO,
 	}
-	Broadcasts(websiteMessage)
+	broadcasts(toJson(websiteMessage))
 }
