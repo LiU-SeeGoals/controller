@@ -1,6 +1,9 @@
 package action
 
 import (
+	"fmt"
+	"math"
+
 	"github.com/LiU-SeeGoals/controller/internal/state"
 	"github.com/LiU-SeeGoals/proto_go/robot_action"
 	"github.com/LiU-SeeGoals/proto_go/simulation"
@@ -120,37 +123,66 @@ func (s *Stop) TranslateSim() *simulation.RobotCommand {
 
 }
 
+func RotateToTarget(currentX, currentY, targetX, targetY, currentDirection float32) float32 {
+	dx := targetX - currentX
+	dy := targetY - currentY
+
+	targetDirection := float32(math.Atan2(float64(dy), float64(dx)))
+
+	rotationNeeded := targetDirection - currentDirection
+
+	fmt.Println("targetDirection: ", targetDirection, " currentDirection: ", currentDirection, " rotationNeeded: ", rotationNeeded)
+
+	// Normalize the result to be between -π and π
+	for rotationNeeded > math.Pi {
+		rotationNeeded -= 2 * math.Pi
+	}
+	for rotationNeeded < -math.Pi {
+		rotationNeeded += 2 * math.Pi
+	}
+
+	return -rotationNeeded
+}
+
 func (mv *MoveTo) TranslateSim() *simulation.RobotCommand {
 
 	id := uint32(mv.Id)
-	diff := mv.Dest.Sub(&mv.Pos)
+	// center := state.Position{X: 0, Y: 0, Angle: 0}
 
-	dribblerSpeed := float32(0)
-	if mv.Dribble {
-		dribblerSpeed = 100 // in rpm, adjust as needed
+	speed := float32(1)
+	angleSpeed := float32(10)
+	// Angular velocity counter-clockwise [rad/s]
+	angleDiff := RotateToTarget(mv.Pos.X, mv.Pos.Y, mv.Dest.X, mv.Dest.Y, mv.Pos.Angle)
+	if angleDiff > 0 {
+		angleSpeed = -angleSpeed
 	}
 
-	dir := diff
-
+	// fmt.Println(" angleDiff: ", angleDiff, " current_angle: ", mv.Pos.Angle, " angleSpeed: ", angleSpeed)
 	// Create the local velocity command
-	vel := &simulation.MoveGlobalVelocity{
-		X:       &dir.X,
-		Y:       &dir.Y,
-		Angular: &dir.Angle,
+	// Create the local velocity command
+
+	// Velocity forward [m/s] (towards the dribbler)
+	forward := speed
+	// Velocity to the left [m/s]
+	left := float32(0)
+
+	localVel := &simulation.MoveLocalVelocity{
+		Forward: &forward,
+		Left:    &left,
+		Angular: &angleSpeed,
 	}
 
 	// Create the move command and assign the local velocity to the oneof field
 	moveCommand := &simulation.RobotMoveCommand{
-		Command: &simulation.RobotMoveCommand_GlobalVelocity{
-			GlobalVelocity: vel,
+		Command: &simulation.RobotMoveCommand_LocalVelocity{
+			LocalVelocity: localVel,
 		},
 	}
 
 	// Create the robot command with the move command
 	return &simulation.RobotCommand{
-		Id:            &id,
-		MoveCommand:   moveCommand,
-		DribblerSpeed: &dribblerSpeed,
+		Id:          &id,
+		MoveCommand: moveCommand,
 	}
 }
 

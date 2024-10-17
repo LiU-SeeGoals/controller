@@ -75,9 +75,10 @@ func (frbs *FindBestScore) FindBestScore(hightFunc height_map.HeightMap, robotTe
 			xSample := x + frbs.radius*float32(math.Cos(angle))
 			ySample := y + frbs.radius*float32(math.Sin(angle))
 
-			dest := robot.GetDestination()
+			dest := robot.GetPosition()
 			dest.X = xSample
 			dest.Y = ySample
+			dest.Angle = 0
 			robot.SetDestination(&dest)
 
 			gameAnalysis.UpdateMyZones(frbs.scoringFunc)

@@ -42,7 +42,7 @@ func (fb *FastBrainGO) Run() {
 		default:
 
 		}
-		time.Sleep(1 * time.Second) // TODO: Remove this
+		// time.Sleep(1 * time.Second) // TODO: Remove this
 
 		// Wait for the game to start
 		if !gameState.Valid || !gamePlan.Valid {
@@ -79,13 +79,11 @@ func (fb *FastBrainGO) GetActions(gs *state.GameState, gamePlan *state.GamePlan)
 		act := action.MoveTo{}
 		act.Id = int(inst.Id)
 
-		pos := robot.GetPosition()
-
-		act.Pos = pos
+		act.Pos = robot.GetPosition()
 		act.Dest = inst.Position
 
 		act.Dribble = true // Assuming all moves require dribbling
-		fmt.Println("Robot", act.Id, "moving to", act.Dest.ToDTO())
+		fmt.Println("Robot", act.Id, "moving from", act.Pos.ToDTO(), "\n               to  ", act.Dest.ToDTO())
 		actionList = append(actionList, &act)
 	}
 
