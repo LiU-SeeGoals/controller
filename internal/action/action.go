@@ -1,7 +1,6 @@
 package action
 
 import (
-	"fmt"
 	"math"
 
 	"github.com/LiU-SeeGoals/controller/internal/state"
@@ -131,7 +130,7 @@ func RotateToTarget(currentX, currentY, targetX, targetY, currentDirection float
 
 	rotationNeeded := targetDirection - currentDirection
 
-	fmt.Println("targetDirection: ", targetDirection, " currentDirection: ", currentDirection, " rotationNeeded: ", rotationNeeded)
+	// fmt.Println("targetDirection: ", targetDirection, " currentDirection: ", currentDirection, " rotationNeeded: ", rotationNeeded)
 
 	// Normalize the result to be between -π and π
 	for rotationNeeded > math.Pi {
@@ -149,7 +148,7 @@ func (mv *MoveTo) TranslateSim() *simulation.RobotCommand {
 	id := uint32(mv.Id)
 	// center := state.Position{X: 0, Y: 0, Angle: 0}
 
-	speed := float32(1)
+	speed := float32(0.5)
 	angleSpeed := float32(0.1)
 	// Angular velocity counter-clockwise [rad/s]
 	angleDiff := RotateToTarget(mv.Pos.X, mv.Pos.Y, mv.Dest.X, mv.Dest.Y, mv.Pos.Angle)

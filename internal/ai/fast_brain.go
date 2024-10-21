@@ -15,17 +15,19 @@ type FastBrainGO struct {
 	outgoingActions   chan<- []action.Action
 }
 
-func NewFastBrain(incomingGameState <-chan state.GameState, incomingGamePlan <-chan state.GamePlan, outgoingActions chan<- []action.Action, team state.Team) *FastBrainGO {
+func NewFastBrainGO() FastBrainGO {
+	return FastBrainGO{}
+}
 
-	fb := FastBrainGO{
-		team:              team,
-		incomingGameState: incomingGameState,
-		incomingGamePlan:  incomingGamePlan,
-		outgoingActions:   outgoingActions,
-	}
+func (fb *FastBrainGO) Init(incomingGameState <-chan state.GameState, incomingGamePlan <-chan state.GamePlan, outgoingActions chan<- []action.Action, team state.Team) {
+
+	fb.incomingGameState = incomingGameState
+	fb.incomingGamePlan = incomingGamePlan
+	fb.outgoingActions = outgoingActions
+	fb.team = team
+	//
 
 	go fb.Run()
-	return &fb
 }
 
 func (fb *FastBrainGO) Run() {
@@ -83,7 +85,7 @@ func (fb *FastBrainGO) GetActions(gs *state.GameState, gamePlan *state.GamePlan)
 		act.Dest = inst.Position
 
 		act.Dribble = true // Assuming all moves require dribbling
-		// fmt.Println("Robot", act.Id, "moving from", act.Pos.ToDTO(), "\n               to  ", act.Dest.ToDTO())
+		fmt.Println("Robot", act.Id, "moving from", act.Pos.ToDTO(), "\n               to  ", act.Dest.ToDTO())
 		actionList = append(actionList, &act)
 	}
 

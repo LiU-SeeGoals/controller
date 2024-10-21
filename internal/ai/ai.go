@@ -6,10 +6,18 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/state"
 )
 
+type SlowBrain interface {
+	Init(incoming <-chan state.GameState, outgoing chan<- state.GamePlan, team state.Team)
+}
+
+type FastBrain interface {
+	Init(incoming <-chan state.GameState, incomingPlan <-chan state.GamePlan, outgoing chan<- []action.Action, team state.Team)
+}
+
 type Ai struct {
 	team              state.Team
-	slow_brain        *SlowBrainGO
-	fast_brain        *FastBrainGO
+	slow_brain        SlowBrain
+	fast_brain        FastBrain
 	gameStateSenderSB chan<- state.GameState
 	gameStateSenderFB chan<- state.GameState
 	actionReceiver    chan []action.Action
@@ -17,13 +25,13 @@ type Ai struct {
 
 // Constructor for the ai, initializes the client
 // and the different components used in the decision pipeline
-func NewAi(team state.Team) *Ai {
+func NewAi(team state.Team, slowBrain SlowBrain, fastBrain FastBrain) *Ai {
 	gameStateSenderSB, gameStateReceiverSB := helper.NB_KeepLatestChan[state.GameState]()
 	gameStateSenderFB, gameStateReceiverFB := helper.NB_KeepLatestChan[state.GameState]()
 	gamePlanSender, gamePlanReceiver := helper.NB_KeepLatestChan[state.GamePlan]()
 	actionReceiver := make(chan []action.Action)
-	slowBrain := NewSlowBrain(gameStateReceiverSB, gamePlanSender, team)
-	fastBrain := NewFastBrain(gameStateReceiverFB, gamePlanReceiver, actionReceiver, team)
+	slowBrain.Init(gameStateReceiverSB, gamePlanSender, team)
+	fastBrain.Init(gameStateReceiverFB, gamePlanReceiver, actionReceiver, team)
 	ai := &Ai{
 		team:              team,
 		slow_brain:        slowBrain,

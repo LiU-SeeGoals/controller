@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	demos.GoTo()
+	demos.Scenario()
 }
