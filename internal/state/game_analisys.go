@@ -153,6 +153,28 @@ func updateBall(gameStateBall *Ball, ballAnalysis *BallAnalysis) {
 	ballAnalysis.velocity = gameStateBall.GetVelocity()
 }
 
+// TODO: Implement this function
+// func (an *GameAnalysis) updateBallDistances(gamestateObj *gamestate.GameState) {
+// 	// Reset the distances
+// 	an.distancesToBall = []float32{}
+
+// 	// Get the position of the ball
+// 	ball := gamestateObj.Ball.GetPosition()
+// 	ballX := ball.AtVec(0)
+// 	ballY := ball.AtVec(1)
+
+// 	// Calculate the distances of the robots to the ball, storing them in order based on the robot id
+// 	for _, robot := range gamestateObj.GetTeam(an.team) {
+// 		robotX := robot.GetPosition().AtVec(0)
+// 		robotY := robot.GetPosition().AtVec(1)
+
+// 		distance := float32(math.Sqrt(
+// 			math.Pow(robotX - ballX, 2) +
+// 			math.Pow(robotY - ballY, 2)))
+// 		an.distancesToBall = append(an.distancesToBall, distance)
+// 	}
+// }
+
 func NewTeamAnalysis(fieldLength, fieldWidth, zoneSize float32) *TeamAnalysis {
 	teamAnalysis := TeamAnalysis{}
 	teamAnalysis.Robots = [TEAM_SIZE]RobotAnalysis{}

@@ -72,8 +72,7 @@ func (r *SSLConnection) Receive(packetChan chan *ssl_vision.SSL_WrapperPacket) {
 			continue
 		}
 		// Clear the channel if something is there
-		fmt.Println("Received packet")
-		fmt.Println("size", len(packetChan))
+		// fmt.Println("Received packet")
 		if len(packetChan) > 0 {
 			select {
 			case <-packetChan:
@@ -97,7 +96,7 @@ func unpack(packet *ssl_vision.SSL_WrapperPacket, gs *state.GameState, play_time
 		x := robot.GetX()
 		y := robot.GetY()
 		angle := robot.GetOrientation()
-		fmt.Println("Robot", robot.GetRobotId(), "x:", x, "y:", y, "angle:", angle)
+		// fmt.Println("Robot", robot.GetRobotId(), "x:", x, "y:", y, "angle:", angle)
 
 		gs.SetBlueRobot(robot.GetRobotId(), x, y, angle, play_time)
 	}

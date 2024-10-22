@@ -19,7 +19,11 @@ type SlowBrainGO struct {
 	otherAccumulatedFunc height_map.HeightMap
 }
 
-func NewSlowBrain(incoming <-chan state.GameState, outgoing chan<- state.GamePlan, team state.Team) *SlowBrainGO {
+func NewSlowBrainGO() SlowBrainGO {
+	return SlowBrainGO{}
+}
+
+func (sb *SlowBrainGO) Init(incoming <-chan state.GameState, outgoing chan<- state.GamePlan, team state.Team) {
 	posFunc := func(r *state.RobotAnalysis) state.Position {
 		return r.GetPosition()
 	}
@@ -54,17 +58,15 @@ func NewSlowBrain(incoming <-chan state.GameState, outgoing chan<- state.GamePla
 	}
 	gameAnalysis := state.NewGameAnalysis(9000, 6000, 100, team)
 	gameSearch := search.NewFindBestScore(team, myAccumulatedFunc, 0.1, 100, 9)
-	sb := &SlowBrainGO{
-		team:                 team,
-		gameAnalysis:         gameAnalysis,
-		gameSearch:           gameSearch,
-		incomingGameState:    incoming,
-		outgoingPlan:         outgoing,
-		myAccumulatedFunc:    myAccumulatedFunc,
-		otherAccumulatedFunc: otherAccumulatedFunc,
-	}
+	sb.team = team
+	sb.incomingGameState = incoming
+	sb.outgoingPlan = outgoing
+	sb.myAccumulatedFunc = myAccumulatedFunc
+	sb.otherAccumulatedFunc = otherAccumulatedFunc
+	sb.gameAnalysis = gameAnalysis
+	sb.gameSearch = gameSearch
+
 	go sb.Run()
-	return sb
 }
 
 func (sb *SlowBrainGO) Run() {
