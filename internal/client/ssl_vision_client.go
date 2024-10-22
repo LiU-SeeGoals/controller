@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net"
 
+	"github.com/LiU-SeeGoals/controller/internal/helper"
 	"github.com/LiU-SeeGoals/controller/internal/state"
 	"github.com/LiU-SeeGoals/proto_go/ssl_vision"
 	"google.golang.org/protobuf/proto"
@@ -71,21 +72,14 @@ func (r *SSLConnection) Receive(packetChan chan *ssl_vision.SSL_WrapperPacket) {
 			fmt.Printf("Unable to unmarshal packet: %s", err)
 			continue
 		}
-		// Clear the channel if something is there
-		// fmt.Println("Received packet")
-		if len(packetChan) > 0 {
-			select {
-			case <-packetChan:
-			default:
-			}
-		}
 		packetChan <- &r.packet
 	}
 }
 
 type SSLVisionClient struct {
-	ssl         *SSLConnection
-	ssl_channel chan *ssl_vision.SSL_WrapperPacket
+	ssl             *SSLConnection
+	ssl_channel_in  chan *ssl_vision.SSL_WrapperPacket
+	ssl_channel_out chan *ssl_vision.SSL_WrapperPacket
 }
 
 func unpack(packet *ssl_vision.SSL_WrapperPacket, gs *state.GameState, play_time int64) {
@@ -120,7 +114,7 @@ func unpack(packet *ssl_vision.SSL_WrapperPacket, gs *state.GameState, play_time
 }
 
 func (receiver *SSLVisionClient) InitGameState(gs *state.GameState, play_time int64) {
-	packet, ok := <-receiver.ssl_channel
+	packet, ok := <-receiver.ssl_channel_out
 	if !ok {
 		fmt.Println("SSL Channel closed")
 		return
@@ -129,7 +123,7 @@ func (receiver *SSLVisionClient) InitGameState(gs *state.GameState, play_time in
 }
 
 func (receiver *SSLVisionClient) UpdateGamestate(gs *state.GameState, play_time int64) {
-	packet, ok := <-receiver.ssl_channel
+	packet, ok := <-receiver.ssl_channel_out
 	if !ok {
 		fmt.Println("SSL Channel closed")
 		return
@@ -141,13 +135,15 @@ func (receiver *SSLVisionClient) UpdateGamestate(gs *state.GameState, play_time 
 // which SSL wrapper packets can be obtained.
 func (receiver *SSLVisionClient) Connect() {
 	receiver.ssl.Connect()
-	go receiver.ssl.Receive(receiver.ssl_channel)
+	go receiver.ssl.Receive(receiver.ssl_channel_in)
 }
 
 func NewSSLVisionClient(sslReceiverAddress string) *SSLVisionClient {
+	ssl_channel_in, ssl_channel_out := helper.NB_KeepLatestChan[*ssl_vision.SSL_WrapperPacket]()
 	receiver := &SSLVisionClient{
-		ssl:         NewSSLConnection(sslReceiverAddress),
-		ssl_channel: make(chan *ssl_vision.SSL_WrapperPacket),
+		ssl:             NewSSLConnection(sslReceiverAddress),
+		ssl_channel_in:  ssl_channel_in,
+		ssl_channel_out: ssl_channel_out,
 	}
 	receiver.Connect()
 	return receiver
