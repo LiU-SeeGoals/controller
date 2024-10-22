@@ -15,12 +15,12 @@ func Scenario() {
 	gs := state.NewGameState(10)
 	ssl_receiver := client.NewSSLVisionClient(config.GetSSLClientAddress())
 
-	slowBrainBlue := ai.NewScenarioSlowBrain(10)
+	slowBrainBlue := ai.NewScenarioSlowBrain(5)
 	fastBrainBlue := ai.NewFastBrainGO()
 
 	aiBlue := ai.NewAi(state.Blue, &slowBrainBlue, &fastBrainBlue)
 
-	slowBrainYellow := ai.NewScenarioSlowBrain(15)
+	slowBrainYellow := ai.NewScenarioSlowBrain(-5)
 	fastBrainYellow := ai.NewFastBrainGO()
 
 	aiYellow := ai.NewAi(state.Yellow, &slowBrainYellow, &fastBrainYellow)
@@ -48,10 +48,10 @@ func Scenario() {
 		simClientBlue.SendActions(blue_actions)
 		simClientYellow.SendActions(yellow_actions)
 
-		terminal_messages := []string{"Scenario"}
+		// terminal_messages := []string{"Scenario"}
 
-		if len(blue_actions) > 0 {
-			client.UpdateWebGUI(gs, blue_actions, terminal_messages)
-		}
+		// if len(blue_actions) > 0 {
+		// 	client.UpdateWebGUI(gs, blue_actions, terminal_messages)
+		// }
 	}
 }

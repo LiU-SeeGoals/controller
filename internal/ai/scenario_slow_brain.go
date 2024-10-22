@@ -91,6 +91,8 @@ func (sb ScenarioSlowBrain) Run() {
 			})
 		}
 
+		plan.Team = sb.team
+
 		plan.Valid = true
 
 		sb.outgoingPlan <- plan
