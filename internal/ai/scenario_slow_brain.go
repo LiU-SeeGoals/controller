@@ -46,22 +46,22 @@ func (sb ScenarioSlowBrain) Run() {
 		{
 			{X: sb.scale * 100, Y: sb.scale * 100},
 			{X: sb.scale * 200, Y: sb.scale * 200},
-			{X: sb.scale * 300, Y: sb.scale * 300},
+			// {X: sb.scale * 300, Y: sb.scale * 300},
 		},
 		{
 			{X: sb.scale * 100, Y: sb.scale * -100},
 			{X: sb.scale * 200, Y: sb.scale * -200},
-			{X: sb.scale * 300, Y: sb.scale * -300},
-		},
-		{
-			{X: sb.scale * -100, Y: sb.scale * -100},
-			{X: sb.scale * -200, Y: sb.scale * -200},
-			{X: sb.scale * -300, Y: sb.scale * -300},
+			// {X: sb.scale * 300, Y: sb.scale * -300},
 		},
 		{
 			{X: sb.scale * -100, Y: sb.scale * 100},
 			{X: sb.scale * -200, Y: sb.scale * 200},
-			{X: sb.scale * -300, Y: sb.scale * 300},
+			// {X: sb.scale * -300, Y: sb.scale * 300},
+		},
+		{
+			{X: sb.scale * -100, Y: sb.scale * -100},
+			{X: sb.scale * -200, Y: sb.scale * -200},
+			// {X: sb.scale * -300, Y: sb.scale * -300},
 		},
 	}
 
