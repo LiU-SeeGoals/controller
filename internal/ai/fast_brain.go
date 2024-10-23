@@ -15,8 +15,8 @@ type FastBrainGO struct {
 	outgoingActions   chan<- []action.Action
 }
 
-func NewFastBrainGO() FastBrainGO {
-	return FastBrainGO{}
+func NewFastBrainGO() *FastBrainGO {
+	return &FastBrainGO{}
 }
 
 func (fb *FastBrainGO) Init(incomingGameState <-chan state.GameState, incomingGamePlan <-chan state.GamePlan, outgoingActions chan<- []action.Action, team state.Team) {
@@ -76,9 +76,8 @@ func (fb *FastBrainGO) GetActions(gs *state.GameState, gamePlan *state.GamePlan)
 
 	Instructions := gamePlan.Instructions
 
-	for idx, _ := range Instructions {
-		inst := &Instructions[idx]
-		robot := &myTeam[inst.Id]
+	for _, inst := range Instructions {
+		robot := myTeam[inst.Id]
 
 		if !robot.IsActive() {
 			continue

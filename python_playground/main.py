@@ -1,13 +1,14 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from gamestate import GameState
 
 app = Flask(__name__)
 CORS(app)
 
 @app.route('/slowBrain', methods=['POST'])
 def slow_brin():
-    data = request.get_json()
-    print(data)
+    gamestate = GameState(request.get_json())
+    print(gamestate)
     plan = {
         "Instructions": [
             {"Id": 0, 

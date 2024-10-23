@@ -19,8 +19,8 @@ type SlowBrainPy struct {
 	ip_address        string
 }
 
-func NewSlowBrainPy(ip_address string) SlowBrainPy {
-	return SlowBrainPy{ip_address: ip_address}
+func NewSlowBrainPy(ip_address string) *SlowBrainPy {
+	return &SlowBrainPy{ip_address: ip_address}
 }
 
 func (sb *SlowBrainPy) Init(incoming <-chan state.GameState, outgoing chan<- state.GamePlan, team state.Team) {
@@ -100,7 +100,7 @@ func (sb SlowBrainPy) Run() {
 				Z:     scenario.Position[2],
 				Angle: scenario.Position[3],
 			}
-			plan.Instructions = append(plan.Instructions, state.RobotMove{
+			plan.Instructions = append(plan.Instructions, &state.RobotMove{
 				Id:       robot.GetID(),
 				Position: position,
 			})

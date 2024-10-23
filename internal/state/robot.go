@@ -7,7 +7,7 @@ import (
 
 type Team int8
 type ID uint8
-type RobotTeam [TEAM_SIZE]Robot
+type RobotTeam [TEAM_SIZE]*Robot
 
 const (
 	UNKNOWN Team = 0
@@ -28,8 +28,8 @@ type Robot struct {
 	historyCapacity int
 }
 
-func NewRobot(id ID, team Team, history_capasity int) Robot {
-	return Robot{
+func NewRobot(id ID, team Team, history_capasity int) *Robot {
+	return &Robot{
 		active:          false,
 		id:              id,
 		team:            team,
@@ -58,7 +58,7 @@ func (r *Robot) SetPositionTime(x, y, angle float32, time int64) {
 	}
 }
 
-func (r Robot) GetPositionTime() (Position, int64) {
+func (r *Robot) GetPositionTime() (Position, int64) {
 	if r.history.Len() == 0 {
 		panic("No position in history")
 	}
@@ -68,12 +68,12 @@ func (r Robot) GetPositionTime() (Position, int64) {
 	return robot.pos, robot.time
 }
 
-func (r Robot) GetPosition() Position {
+func (r *Robot) GetPosition() Position {
 	pos, _ := r.GetPositionTime()
 	return pos
 }
 
-func (r Robot) GetVelocity() Position {
+func (r *Robot) GetVelocity() Position {
 	if r.history.Len() < 2 {
 		return Position{0, 0, 0, 0}
 	}
@@ -94,7 +94,7 @@ func (r Robot) GetVelocity() Position {
 	return sum_deltas.Scale(1 / float32(r.history.Len()-1))
 }
 
-func (r Robot) GetAcceleration() float32 {
+func (r *Robot) GetAcceleration() float32 {
 	if r.history.Len() < 3 {
 		return float32(0) // Not enough data points to calculate acceleration
 	}
@@ -125,11 +125,11 @@ func (r *Robot) SetActive(active bool) {
 	r.active = active
 }
 
-func (r Robot) IsActive() bool {
+func (r *Robot) IsActive() bool {
 	return r.active
 }
 
-func (r Robot) String() string {
+func (r *Robot) String() string {
 
 	pos := r.GetPosition()
 	vel := r.GetVelocity()
@@ -140,7 +140,7 @@ func (r Robot) String() string {
 	return fmt.Sprintf("id: %d, pos: %s, vel: %s", r.id, posString, velString)
 }
 
-func (r Robot) ToDTO() RobotDTO {
+func (r *Robot) ToDTO() RobotDTO {
 	if !r.active {
 		return RobotDTO{}
 	}
@@ -159,7 +159,7 @@ func (r Robot) ToDTO() RobotDTO {
 	}
 }
 
-func (r Robot) GetID() ID {
+func (r *Robot) GetID() ID {
 	return r.id
 }
 

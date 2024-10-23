@@ -12,7 +12,7 @@ type Position struct {
 	Angle float32
 }
 
-func (p Position) Add(other *Position) Position {
+func (p *Position) Add(other *Position) Position {
 	return Position{
 		X:     p.X + other.X,
 		Y:     p.Y + other.Y,
@@ -21,7 +21,7 @@ func (p Position) Add(other *Position) Position {
 	}
 }
 
-func (p Position) Sub(other *Position) Position {
+func (p *Position) Sub(other *Position) Position {
 	return Position{
 		X:     p.X - other.X,
 		Y:     p.Y - other.Y,
@@ -30,11 +30,11 @@ func (p Position) Sub(other *Position) Position {
 	}
 }
 
-func (p Position) Norm() float32 {
+func (p *Position) Norm() float32 {
 	return float32(math.Sqrt(float64(p.X*p.X + p.Y*p.Y + p.Z*p.Z)))
 }
 
-func (p Position) Scale(scalar float32) Position {
+func (p *Position) Scale(scalar float32) Position {
 	return Position{
 		X:     p.X * scalar,
 		Y:     p.Y * scalar,
@@ -43,7 +43,7 @@ func (p Position) Scale(scalar float32) Position {
 	}
 }
 
-func (p Position) Normalize() Position {
+func (p *Position) Normalize() Position {
 	norm := p.Norm()
 	return Position{
 		X:     p.X / norm,
@@ -53,6 +53,6 @@ func (p Position) Normalize() Position {
 	}
 }
 
-func (p Position) ToDTO() string {
+func (p *Position) ToDTO() string {
 	return fmt.Sprintf("(%f, %f, %f, %f)", p.X, p.Y, p.Z, p.Angle)
 }

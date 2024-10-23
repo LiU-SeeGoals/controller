@@ -49,7 +49,7 @@ func (gs *GameState) SetValid(valid bool) {
 	gs.Valid = valid
 }
 
-func (gs GameState) IsValid() bool {
+func (gs *GameState) IsValid() bool {
 	return gs.Valid
 }
 
@@ -71,15 +71,15 @@ func (gs *GameState) SetMessageReceivedTime(time int64) {
 	gs.MessageReceived = time
 
 }
-func (gs GameState) GetMessageReceivedTime() int64 {
+func (gs *GameState) GetMessageReceivedTime() int64 {
 	return gs.MessageReceived
 }
 
-func (gs GameState) GetBall() *Ball {
+func (gs *GameState) GetBall() *Ball {
 	return gs.Ball
 }
 
-func (gs GameState) GetTeam(team Team) *RobotTeam {
+func (gs *GameState) GetTeam(team Team) *RobotTeam {
 	if team == Yellow {
 		return gs.Yellow_team
 	} else {
@@ -87,7 +87,7 @@ func (gs GameState) GetTeam(team Team) *RobotTeam {
 	}
 }
 
-func (gs GameState) GetOtherTeam(team Team) *RobotTeam {
+func (gs *GameState) GetOtherTeam(team Team) *RobotTeam {
 	if team != Yellow {
 		return gs.Yellow_team
 	} else {
@@ -95,19 +95,19 @@ func (gs GameState) GetOtherTeam(team Team) *RobotTeam {
 	}
 }
 
-func (gs GameState) GetYellowRobots() *RobotTeam {
+func (gs *GameState) GetYellowRobots() *RobotTeam {
 	return gs.Yellow_team
 }
 
-func (gs GameState) GetBlueRobots() *RobotTeam {
+func (gs *GameState) GetBlueRobots() *RobotTeam {
 	return gs.Blue_team
 }
 
-func (gs GameState) GetRobot(id ID, team Team) *Robot {
+func (gs *GameState) GetRobot(id ID, team Team) *Robot {
 	if team == Blue {
-		return &gs.Blue_team[id]
+		return gs.Blue_team[id]
 	}
-	return &gs.Yellow_team[id]
+	return gs.Yellow_team[id]
 }
 
 // Constructor for game state

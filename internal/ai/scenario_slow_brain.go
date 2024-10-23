@@ -14,8 +14,8 @@ type ScenarioSlowBrain struct {
 	scale             float32
 }
 
-func NewScenarioSlowBrain(scale float32) ScenarioSlowBrain {
-	return ScenarioSlowBrain{scale: scale}
+func NewScenarioSlowBrain(scale float32) *ScenarioSlowBrain {
+	return &ScenarioSlowBrain{scale: scale}
 }
 
 func (sb *ScenarioSlowBrain) Init(incoming <-chan state.GameState, outgoing chan<- state.GamePlan, team state.Team) {
@@ -85,7 +85,7 @@ func (sb ScenarioSlowBrain) Run() {
 		plan := state.GamePlan{}
 		for idx, scenario_pos := range scenario {
 			robot := gameState.GetRobot(state.ID(idx), sb.team)
-			plan.Instructions = append(plan.Instructions, state.RobotMove{
+			plan.Instructions = append(plan.Instructions, &state.RobotMove{
 				Id:       robot.GetID(),
 				Position: scenario_pos,
 			})

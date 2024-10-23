@@ -10,15 +10,15 @@ type RobotMove struct {
 type GamePlan struct {
 	Valid        bool
 	Team         Team
-	Instructions []RobotMove
+	Instructions []*RobotMove
 }
 
-func NewGamePlan() GamePlan {
+func NewGamePlan() *GamePlan {
 	gp := GamePlan{}
-	return gp
+	return &gp
 }
 
-func (gp GamePlan) ToDTO() string {
+func (gp *GamePlan) ToDTO() string {
 	dto := fmt.Sprintf("GamePlan{Valid: %t, Team: %d, Instructions: [", gp.Valid, gp.Team)
 	for _, instruction := range gp.Instructions {
 		dto += instruction.ToDTO() + ", "
@@ -27,7 +27,7 @@ func (gp GamePlan) ToDTO() string {
 	return dto
 }
 
-func (rm RobotMove) ToDTO() string {
+func (rm *RobotMove) ToDTO() string {
 	dto := fmt.Sprintf("RobotMove{Id: %d, Position: %s}", rm.Id, rm.Position.ToDTO())
 	return dto
 }

@@ -70,7 +70,7 @@ func (ta *TimeAdvantage) CalculateTimeAdvantage(x float32, y float32, robots sta
 			continue
 		}
 		// Calculate the distance to the zone
-		pos := ta.retrieveFunc(&robot)
+		pos := ta.retrieveFunc(robot)
 		pos.X = x - pos.X
 		pos.Y = y - pos.Y
 		distance := pos.Norm()

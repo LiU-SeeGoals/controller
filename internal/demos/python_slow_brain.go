@@ -18,12 +18,12 @@ func PythonSlowBrain() {
 	slowBrainBlue := ai.NewSlowBrainPy("http://192.168.1.44:5000/slowBrain")
 	fastBrainBlue := ai.NewFastBrainGO()
 
-	aiBlue := ai.NewAi(state.Blue, &slowBrainBlue, &fastBrainBlue)
+	aiBlue := ai.NewAi(state.Blue, slowBrainBlue, fastBrainBlue)
 
 	slowBrainYellow := ai.NewScenarioSlowBrain(-5)
 	fastBrainYellow := ai.NewFastBrainGO()
 
-	aiYellow := ai.NewAi(state.Yellow, &slowBrainYellow, &fastBrainYellow)
+	aiYellow := ai.NewAi(state.Yellow, slowBrainYellow, fastBrainYellow)
 
 	simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress())
 	simClientYellow := client.NewSimClient(config.GetSimYellowTeamAddress())

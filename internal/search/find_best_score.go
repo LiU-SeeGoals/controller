@@ -57,13 +57,12 @@ func (frbs *FindBestScore) FindBestScore(hightFunc height_map.HeightMap, robotTe
 	bestScore := scoreHighest(gameAnalysis)
 
 	robots := &robotTeam.Robots
-	for idx, _ := range robots {
-		robot := &robots[idx]
+	for _, robot := range robots {
 		robotPos := robot.GetPosition()
 		robot.SetDestination(&robotPos)
 	}
 	for _, value := range rand.Perm(len(robots)) {
-		robot := &robots[value]
+		robot := robots[value]
 		pos := robot.GetPosition()
 		x := pos.X
 		y := pos.Y
