@@ -1,25 +1,43 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from gamestate import GameState
+from models import SeeGoalsDNN
+import torch
+import pathlib
 
 app = Flask(__name__)
 CORS(app)
 
+model = SeeGoalsDNN(num_players_per_team=2)
+if pathlib.Path(model.path).exists():
+    print("Loading model")
+    model.load_state_dict(torch.load(model.path))
+    model.eval()
+
 @app.route('/slowBrain', methods=['POST'])
 def slow_brin():
     gamestate = GameState(request.get_json())
-    print(gamestate)
-    plan = {
-        "Instructions": [
-            {"Id": 0, 
-             "Position": [0, 0, 0, 0],
-            },
-            {"Id": 1,
-             "Position": [0, 0, 0, 0],
-            },
-        ]
+    my_team = gamestate.blue_teams
+    enemy_team = gamestate.yellow_teams
+    ball = gamestate.ball
+    scale = 100
+    output = model(my_team.to_torch().unsqueeze(0), enemy_team.to_torch().unsqueeze(0), ball.to_torch().unsqueeze(0)) * scale
+    instructions = []
 
+    for pred, robot in zip(output[0], my_team.robots.values()):
+        dx, dy = pred.tolist()
+        dest = [robot.position.x + dx, robot.position.y + dy, 0, 0]
+
+        instructions.append({
+            "Id": robot.id,
+            "Position": dest
+        })
+    
+
+    plan = {
+        "Instructions": instructions,
     }
+    print(plan)
     return jsonify(plan), 200
 
 if __name__ == '__main__':

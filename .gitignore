@@ -30,3 +30,4 @@ go.work
 *.pb*
 venv
 *.pyc
+*.pth
