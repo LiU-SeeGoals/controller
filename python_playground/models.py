@@ -17,10 +17,11 @@ class FourierFeatureEncoding:
 
 
 class SeeGoalsDNN(nn.Module):
-    def __init__(self, num_frequencies=2, 
+    def __init__(self, num_frequencies=10, 
                  num_players_per_team=5, 
                  num_output_features=2, 
                  num_hidden_layers=2,
+                 hidden_layer_size=128,
                  field_hight=9000,
                  field_width=7000,
                  ):
@@ -29,18 +30,19 @@ class SeeGoalsDNN(nn.Module):
         self.num_players_per_team = num_players_per_team
         self.freq_bands = torch.linspace(1.0, 2 ** (num_frequencies - 1), num_frequencies, requires_grad=False)
         if field_width > field_hight:
-            self.norm_factor=torch.tensor([field_hight, field_hight], requires_grad=False)
+            self.norm_factor=torch.tensor([field_hight, field_hight], requires_grad=False).float()
         else:
-            self.norm_factor=torch.tensor([field_width, field_width], requires_grad=False)
+            self.norm_factor=torch.tensor([field_width, field_width], requires_grad=False).float()
+        self.norm_factor *= 0.5
         
         input_size = (num_players_per_team * 2 * 2) + 2  # my team + enemy team + ball position
         enriched_size = input_size * num_frequencies * 2
         self.layers = nn.Sequential(
-            nn.Linear(enriched_size, 128),
-            nn.BatchNorm1d(128),
+            nn.Linear(enriched_size, hidden_layer_size),
+            nn.BatchNorm1d(hidden_layer_size),
             nn.ReLU(),
-            *[nn.Sequential(nn.Linear(128, 128), nn.BatchNorm1d(128), nn.ReLU()) for _ in range(num_hidden_layers)],
-            nn.Linear(128, num_players_per_team * num_output_features), 
+            *[nn.Sequential(nn.Linear(hidden_layer_size, hidden_layer_size), nn.BatchNorm1d(hidden_layer_size), nn.ReLU()) for _ in range(num_hidden_layers)],
+            nn.Linear(hidden_layer_size, num_players_per_team * num_output_features), 
             nn.Tanh()
         )
         self.path = f"see_goals_dnn_{num_frequencies}_{num_players_per_team}_{num_output_features}_{num_hidden_layers}_{field_hight}_{field_width}.pth"

@@ -19,6 +19,7 @@ start = time.perf_counter()
 @app.route('/slowBrainBlue', methods=['POST'])
 def slow_brin_blue():
     gamestate = GameState(request.get_json())
+    print(gamestate)
     my_team = gamestate.blue_teams
     enemy_team = gamestate.yellow_teams
     ball = gamestate.ball
