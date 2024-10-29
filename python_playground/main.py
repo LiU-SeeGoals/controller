@@ -9,6 +9,8 @@ import time
 app = Flask(__name__)
 CORS(app)
 
+
+
 model = SeeGoalsDNN(num_players_per_team=2)
 if pathlib.Path(model.path).exists():
     print("Loading model")

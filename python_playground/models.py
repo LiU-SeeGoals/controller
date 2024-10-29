@@ -23,7 +23,7 @@ class SeeGoalsDNN(nn.Module):
                  num_hidden_layers=3,
                  hidden_layer_size=128,
                  field_hight=9000,
-                 field_width=7000,
+                 field_width=6000,
                  ):
         super().__init__()
         self.num_frequencies = num_frequencies

@@ -4,18 +4,18 @@ from models import SeeGoalsDNN
 
 
 
-def apply_force_based_on_distance(ball, team):
+def apply_force_based_on_distance(ball, team, scale=100):
     """Apply a force to the ball based on the distance to the team."""
     # Compute vectors from team players to the ball
-    vec = ball - team
-    max_force = 100
+    vec = team - ball
+    max_force = 10
     decrease_factor = 0.999
     dist = torch.norm(vec, dim=2)  
     # Compute scaling factor based on the distance
     force = (max_force * (decrease_factor ** dist)).unsqueeze(2)
     team_force = torch.mean(force, dim=1).unsqueeze(1)
     # Update ball positions by adding the computed force
-    new_pos_ball = ball + (vec / dist.unsqueeze(2)) * team_force
+    new_pos_ball = ball + ((vec / dist.unsqueeze(2)) * team_force) * scale
     return new_pos_ball
 
 def ball_to_target_loss(my_team, delta, ball, target = torch.tensor([0.0, 0.0])):
@@ -29,7 +29,7 @@ def ball_to_target_loss(my_team, delta, ball, target = torch.tensor([0.0, 0.0]))
     predicted_positions = my_team + delta * scale  
     original_team_to_ball = torch.mean(torch.norm(my_team - ball, dim=2), dim=1)
     predicted_team_to_ball = torch.mean(torch.norm(predicted_positions - ball, dim=2), dim=1)
-    ball_pos_after_force = apply_force_based_on_distance(ball, predicted_positions)  
+    ball_pos_after_force = apply_force_based_on_distance(ball, predicted_positions, scale)  
     ball_dist_after_force = torch.norm(ball_pos_after_force - target, dim=2) 
 
     # Compute the loss as the mean difference in distances
@@ -41,7 +41,7 @@ def ball_to_target_loss(my_team, delta, ball, target = torch.tensor([0.0, 0.0]))
     
 def train(model = None, 
         field_hight = 9000,
-        field_width = 7000,
+        field_width = 6000,
         players_per_team = 2,
         batch_size = 256,
         lr = 0.0001,
