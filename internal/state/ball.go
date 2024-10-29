@@ -41,6 +41,9 @@ func (b *Ball) SetPositionTime(x, y, z float32, time int64) {
 }
 
 func (b *Ball) GetPositionTime() (Position, int64) {
+	if b.history.Len() == 0 {
+		panic("No position in history")
+	}
 	ball := b.history.Front().Value.(*BallPos)
 
 	return ball.pos, ball.time

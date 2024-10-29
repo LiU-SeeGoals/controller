@@ -108,10 +108,19 @@ func (sc *simControl) SetPresentRobots(presentYellow []int, presentBlue []int) {
 
 		robotList = append(robotList, teleportRobot)
 	}
+	zero := float32(0.0)
+	ball := &simulation.TeleportBall{
+		X:  &zero,
+		Y:  &zero,
+		Z:  &zero,
+		Vx: &zero,
+		Vy: &zero,
+		Vz: &zero,
+	}
 
 	simControl := &simulation.SimulatorControl{
 		TeleportRobot:   robotList,
-		TeleportBall:    nil,
+		TeleportBall:    ball,
 		SimulationSpeed: nil,
 	}
 

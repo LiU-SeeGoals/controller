@@ -29,7 +29,11 @@ class SeeGoalsDNN(nn.Module):
         self.num_frequencies = num_frequencies
         self.num_players_per_team = num_players_per_team
         self.freq_bands = torch.linspace(1.0, 2 ** (num_frequencies - 1), num_frequencies, requires_grad=False)
-        self.norm_factor=torch.tensor([field_hight, field_hight], requires_grad=False).float()
+        if field_hight > field_width:
+            self.norm_factor=torch.tensor([field_hight, field_hight], requires_grad=False).float()
+        else:
+            self.norm_factor=torch.tensor([field_width, field_width], requires_grad=False).float()
+            
         input_size = (num_players_per_team * 2 * 2) + 2  # my team + enemy team + ball position
         enriched_size = input_size * num_frequencies * 2
         self.layers = nn.Sequential(

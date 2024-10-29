@@ -52,6 +52,7 @@ type PyResponse struct {
 
 func (sb SlowBrainPy) Run() {
 	var gameState state.GameState
+	gameState.SetValid(false)
 
 	for {
 		gameState = <-sb.incomingGameState
