@@ -149,7 +149,7 @@ func (mv *MoveTo) TranslateSim() *simulation.RobotCommand {
 	// center := state.Position{X: 0, Y: 0, Angle: 0}
 
 	speed := float32(0.5)
-	angleSpeed := float32(0.1)
+	angleSpeed := float32(0.05)
 	// Angular velocity counter-clockwise [rad/s]
 	angleDiff := RotateToTarget(mv.Pos.X, mv.Pos.Y, mv.Dest.X, mv.Dest.Y, mv.Pos.Angle)
 	// if angleDiff > 0 {

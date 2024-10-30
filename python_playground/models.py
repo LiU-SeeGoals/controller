@@ -22,17 +22,18 @@ class SeeGoalsDNN(nn.Module):
                  num_output_features=2,
                  num_hidden_layers=3,
                  hidden_layer_size=128,
-                 field_hight=9000,
-                 field_width=6000,
+                 field_hight=9500,
+                 field_width=6500,
                  ):
         super().__init__()
         self.num_frequencies = num_frequencies
         self.num_players_per_team = num_players_per_team
         self.freq_bands = torch.linspace(1.0, 2 ** (num_frequencies - 1), num_frequencies, requires_grad=False)
         if field_hight > field_width:
-            self.norm_factor=torch.tensor([field_hight, field_hight], requires_grad=False).float()
+            self.norm_factor=torch.tensor([field_hight, field_hight], requires_grad=False).float() * 0.5
         else:
-            self.norm_factor=torch.tensor([field_width, field_width], requires_grad=False).float()
+            self.norm_factor=torch.tensor([field_width, field_width], requires_grad=False).float() * 0.5
+            
             
         input_size = (num_players_per_team * 2 * 2) + 2  # my team + enemy team + ball position
         enriched_size = input_size * num_frequencies * 2
@@ -44,7 +45,7 @@ class SeeGoalsDNN(nn.Module):
             nn.Linear(hidden_layer_size, num_players_per_team * num_output_features),
             # nn.Tanh()
         )
-        self.path = f"see_goals_dnn_{num_frequencies}_{num_players_per_team}_{num_output_features}_{num_hidden_layers}_{field_hight}_{field_width}.pth"
+        self.path = f"see_goals_dnn_{num_frequencies}_{num_players_per_team}_{num_output_features}_{num_hidden_layers}.pth"
 
 
     def fourier_encode(self, x):
