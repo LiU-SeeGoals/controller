@@ -25,7 +25,7 @@ def slow_brin_blue():
     my_team = gamestate.blue_teams
     enemy_team = gamestate.yellow_teams
     ball = gamestate.ball
-    scale = 100
+    scale = 1000
     output = model(my_team.to_torch().unsqueeze(0), enemy_team.to_torch().unsqueeze(0), ball.to_torch().unsqueeze(0)) * scale
     instructions = []
 
