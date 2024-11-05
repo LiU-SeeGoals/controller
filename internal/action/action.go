@@ -150,10 +150,17 @@ func (mv *MoveTo) TranslateSim() *simulation.RobotCommand {
 	id := uint32(mv.Id)
 	// center := state.Position{X: 0, Y: 0, Angle: 0}
 
-	speed := float32(0.5)
 	angleSpeed := float32(0.05)
 	// Angular velocity counter-clockwise [rad/s]
 	angleDiff := RotateToTarget(mv.Pos.X, mv.Pos.Y, mv.Dest.X, mv.Dest.Y, mv.Pos.Angle)
+
+	dx := float64(mv.Pos.X - mv.Dest.X)
+	dy := float64(mv.Pos.Y - mv.Dest.Y)
+	distance := math.Sqrt(dx*dx + dy*dy)
+	maxSpeed := float64(0.5)
+	DeAccDistance := float64(300) // The distance from target robot start to deaccelerate (measured in mm)
+	speed := float32(math.Min(maxSpeed, (maxSpeed/DeAccDistance)*distance))
+
 	// if angleDiff > 0 {
 	// 	angleSpeed = -angleSpeed
 	// }
