@@ -49,6 +49,8 @@ type MoveTo struct {
 	Dest state.Position
 	// Decides if the robot should dribble while moving
 	Dribble bool
+	// We need to know ID AND team to know how to update the pos
+	Team state.Team
 }
 
 type Dribble struct {

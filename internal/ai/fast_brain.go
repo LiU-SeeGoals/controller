@@ -33,6 +33,7 @@ func (fb *FastBrainGO) Init(incomingGameState <-chan state.GameState, incomingGa
 func (fb *FastBrainGO) Run() {
 	gameState := state.GameState{}
 	gamePlan := state.GamePlan{}
+
 	for {
 		// We will reive the game state more often than the game plan
 		// so we wait for the gameState to update and work with the latest game plan
@@ -84,6 +85,7 @@ func (fb *FastBrainGO) GetActions(gs *state.GameState, gamePlan *state.GamePlan)
 		}
 		act := action.MoveTo{}
 		act.Id = int(inst.Id)
+		act.Team = fb.team
 
 		act.Pos = robot.GetPosition()
 		act.Dest = inst.Position
