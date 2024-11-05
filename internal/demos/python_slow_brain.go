@@ -25,14 +25,14 @@ func PythonSlowBrain() {
 
 	aiYellow := ai.NewAi(state.Yellow, slowBrainYellow, fastBrainYellow)
 
-	simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress())
-	simClientYellow := client.NewSimClient(config.GetSimYellowTeamAddress())
+	simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress(), gs)
+	simClientYellow := client.NewSimClient(config.GetSimYellowTeamAddress(), gs)
 
 	simController := simulator.NewSimControl()
 
 	// Some sim setup for debugging ai behaviour
 	presentYellow := []int{0, 1}
-	presentBlue := []int{0, 1}
+	presentBlue := []int{}
 	simController.SetPresentRobots(presentYellow, presentBlue)
 
 	ssl_receiver.InitGameState(gs, 0)
