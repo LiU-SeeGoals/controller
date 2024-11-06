@@ -38,6 +38,11 @@ func (m *MoveToTest) Run() []*state.RobotMove {
 			{Id: 0, Position: state.Position{X: 1000, Y: 1000}},
 			{Id: 1, Position: state.Position{X: -1000, Y: -1000}},
 		}
+	} else if m.at_state == 1 {
+		return []*state.RobotMove{
+			{Id: 0, Position: state.Position{X: 0, Y: 0}},
+			{Id: 1, Position: state.Position{X: 0, Y: 0}},
+		}
 	} else {
 		return []*state.RobotMove{
 			{Id: 0, Position: state.Position{X: -1000, Y: -1000}},
@@ -59,15 +64,23 @@ func (m *MoveToTest) Archived(gs *state.GameState) bool {
 			m.at_state = 1
 		}
 	} else if m.at_state == 1 {
+		target0 := state.Position{X: 0, Y: 0}
+		target1 := state.Position{X: 0, Y: 0}
+		diff0 := target0.Sub(&robot0_pos)
+		diff1 := target1.Sub(&robot1_pos)
+		if diff0.Norm() < 200 && diff1.Norm() < 200 {
+			m.at_state = 2
+		}
+	} else if m.at_state == 2 {
 		target0 := state.Position{X: -1000, Y: -1000}
 		target1 := state.Position{X: 1000, Y: 1000}
 		diff0 := target0.Sub(&robot0_pos)
 		diff1 := target1.Sub(&robot1_pos)
 		if diff0.Norm() < 100 && diff1.Norm() < 100 {
-			m.at_state = 2
+			m.at_state = 3
 		}
 	}
-	return m.at_state == 2
+	return m.at_state == 3
 }
 
 func (sb ScenarioSlowBrain) Run() {
