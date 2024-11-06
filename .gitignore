@@ -31,3 +31,4 @@ go.work
 venv
 *.pyc
 *.pth
+*.mp4

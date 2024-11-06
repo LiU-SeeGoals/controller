@@ -15,7 +15,7 @@ func PythonSlowBrain() {
 	gs := state.NewGameState(10)
 	ssl_receiver := client.NewSSLVisionClient(config.GetSSLClientAddress())
 
-	slowBrainBlue := ai.NewSlowBrainPy("http://192.168.1.44:5000/slowBrainBlue")
+	slowBrainBlue := ai.NewSlowBrainPy("http://10.240.211.153:5000/slowBrainBlue")
 	fastBrainBlue := ai.NewFastBrainGO()
 
 	aiBlue := ai.NewAi(state.Blue, slowBrainBlue, fastBrainBlue)
