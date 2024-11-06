@@ -25,8 +25,8 @@ func Scenario() {
 
 	aiYellow := ai.NewAi(state.Yellow, slowBrainYellow, fastBrainYellow)
 
-	simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress())
-	simClientYellow := client.NewSimClient(config.GetSimYellowTeamAddress())
+	simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress(), gs)
+	simClientYellow := client.NewSimClient(config.GetSimYellowTeamAddress(), gs)
 
 	simController := simulator.NewSimControl()
 

@@ -150,7 +150,6 @@ func (mv *MoveTo) TranslateSim() *simulation.RobotCommand {
 	id := uint32(mv.Id)
 	// center := state.Position{X: 0, Y: 0, Angle: 0}
 
-	angleSpeed := float32(0.05)
 	// Angular velocity counter-clockwise [rad/s]
 	angleDiff := RotateToTarget(mv.Pos.X, mv.Pos.Y, mv.Dest.X, mv.Dest.Y, mv.Pos.Angle)
 
@@ -164,13 +163,16 @@ func (mv *MoveTo) TranslateSim() *simulation.RobotCommand {
 	// if angleDiff > 0 {
 	// 	angleSpeed = -angleSpeed
 	// }
+	maxAngleSpeed := float64(2)
+	deAccAngleDistance := float64(0.5) // The distance from target robot start to deaccelerate (measured in rad)
+	angle := float32(math.Min(maxAngleSpeed, (maxAngleSpeed/deAccAngleDistance)*float64(angleDiff)))
 
-	angle := angleDiff / angleSpeed
+	// angle := angleDiff / angleSpeed
 
 	// Velocity forward [m/s] (towards the dribbler)
 	forward := speed
 
-	// Velocity to the left [m/s]
+	// Velocity to the left [m/s]gs
 	left := float32(0)
 
 	localVel := &simulation.MoveLocalVelocity{
