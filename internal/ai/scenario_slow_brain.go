@@ -69,6 +69,7 @@ func (m *MoveToTest) Archived(gs *state.GameState) bool {
 		diff0 := target0.Sub(&robot0_pos)
 		diff1 := target1.Sub(&robot1_pos)
 		if diff0.Norm() < 200 && diff1.Norm() < 200 {
+			fmt.Println("norms are", diff0.Norm(), diff1.Norm())
 			m.at_state = 2
 		}
 	} else if m.at_state == 2 {

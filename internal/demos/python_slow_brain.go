@@ -1,7 +1,6 @@
 package demos
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/ai"
@@ -39,7 +38,7 @@ func PythonSlowBrain() {
 	start_time := time.Now().UnixMilli()
 	for {
 		playTime := time.Now().UnixMilli() - start_time
-		fmt.Println("playTime: ", playTime)
+		// fmt.Println("playTime: ", playTime)
 		ssl_receiver.UpdateGamestate(gs, playTime)
 
 		blue_actions := aiBlue.GetActions(gs)

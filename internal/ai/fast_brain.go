@@ -60,7 +60,7 @@ func (fb *FastBrainGO) Run() {
 
 		// Send the actions to the AI
 		fb.outgoingActions <- actions
-		fmt.Println("FastBrainGO: Sent actions")
+		// fmt.Println("FastBrainGO: Sent actions")
 
 	}
 }
