@@ -20,7 +20,7 @@ func PythonSlowBrain() {
 
 	aiBlue := ai.NewAi(state.Blue, slowBrainBlue, fastBrainBlue)
 
-	slowBrainYellow := ai.NewScenarioSlowBrain(-5)
+	slowBrainYellow := ai.NewScenarioSlowBrain(-5, -1)
 	fastBrainYellow := ai.NewFastBrainGO()
 
 	aiYellow := ai.NewAi(state.Yellow, slowBrainYellow, fastBrainYellow)
