@@ -32,21 +32,21 @@ type MoveToTest struct {
 	at_state int // 0 for init, 1 for goal
 }
 
-func (m *MoveToTest) Run() []*state.RobotMove {
+func (m *MoveToTest) Run() []*state.Instruction {
 	if m.at_state == 0 {
-		return []*state.RobotMove{
-			{Id: 0, Position: state.Position{X: 1000, Y: 1000}},
-			{Id: 1, Position: state.Position{X: -1000, Y: -1000}},
+		return []*state.Instruction{
+			{Type: state.MoveToPosition, Id: 0, Position: state.Position{X: 1000, Y: 1000}},
+			{Type: state.MoveToPosition, Id: 1, Position: state.Position{X: -1000, Y: -1000}},
 		}
 	} else if m.at_state == 1 {
-		return []*state.RobotMove{
-			{Id: 0, Position: state.Position{X: 0, Y: 0}},
-			{Id: 1, Position: state.Position{X: 0, Y: 0}},
+		return []*state.Instruction{
+			{Type: state.MoveToPosition, Id: 0, Position: state.Position{X: 100, Y: 100}},
+			{Type: state.MoveToPosition, Id: 1, Position: state.Position{X: -100, Y: -100}},
 		}
 	} else {
-		return []*state.RobotMove{
-			{Id: 0, Position: state.Position{X: -1000, Y: -1000}},
-			{Id: 1, Position: state.Position{X: 1000, Y: 1000}},
+		return []*state.Instruction{
+			{Type: state.MoveToPosition, Id: 0, Position: state.Position{X: -1000, Y: -1000}},
+			{Type: state.MoveToPosition, Id: 1, Position: state.Position{X: 1000, Y: 1000}},
 		}
 	}
 }
@@ -64,12 +64,12 @@ func (m *MoveToTest) Archived(gs *state.GameState) bool {
 			m.at_state = 1
 		}
 	} else if m.at_state == 1 {
-		target0 := state.Position{X: 0, Y: 0}
-		target1 := state.Position{X: 0, Y: 0}
+		target0 := state.Position{X: 100, Y: 100}
+		target1 := state.Position{X: -100, Y: -100}
 		diff0 := target0.Sub(&robot0_pos)
 		diff1 := target1.Sub(&robot1_pos)
-		if diff0.Norm() < 200 && diff1.Norm() < 200 {
-			fmt.Println("norms are", diff0.Norm(), diff1.Norm())
+		if diff0.Norm() < 100 && diff1.Norm() < 100 {
+			// fmt.Println("norms are", diff0.Norm(), diff1.Norm())
 			m.at_state = 2
 		}
 	} else if m.at_state == 2 {
