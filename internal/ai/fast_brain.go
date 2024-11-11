@@ -2,10 +2,12 @@ package ai
 
 import (
 	"fmt"
+	"math"
 	"time"
-	"gonum.org/v1/gonum/mat"
+
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/state"
+	"gonum.org/v1/gonum/mat"
 )
 
 type FastBrainGO struct {
@@ -88,73 +90,121 @@ func (fb *FastBrainGO) GetActions(gs *state.GameState, gamePlan *state.GamePlan)
 		act.Team = fb.team
 
 		act.Pos = robot.GetPosition()
-
+		// dest := foo(act.Pos, inst.Position, *gs)
 		act.Dest = inst.Position
 
 		act.Dribble = true // Assuming all moves require dribbling
 		// fmt.Println("Team ", fb.team, ",Robot", act.Id, "moving:\n from", act.Pos.ToDTO(), "\n   to", act.Dest.ToDTO())
-		fmt.Println("Velocity: ", robot.GetVelocity())
+		// fmt.Println("Velocity: ", robot.GetVelocity())
 		actionList = append(actionList, &act)
 	}
-
 	return actionList
 }
 
+func foo(pos state.Position, goaltemp state.Position, gs state.GameState) {
+	// Define grid dimensions
+	gridWidth := int(math.Abs(float64(goaltemp.X)-float64(pos.X)))
+	gridHeight := int(math.Abs(float64(goaltemp.Y)-float64(pos.Y)))
 
-func foo() {
-	X := mat.NewDense(3, 3, []float64{0, 0, 0, 0, 0, 0, 0, 0, 0})
-	Y := mat.NewDense(3, 3, []float64{0, 0, 0, 0, 0, 0, 0, 0, 0})
-	
-	s := 7.0
+	// Define parameters
+	// alpha := 50.0
+	// beta := 50.0
+	s := 15.0
 	r := 2.0
 
-	// Creating two evenly spaced arrays ranging from -10 to 10
-	var x, y []float64
-	for i := -10; i < 10; i++ {
-		x = append(x, float64(i))
-		y = append(y, float64(i))
+	// Goal and obstacle coordinates
+	goal := [2]float64{float64(goaltemp.X), float64(goaltemp.Y)}
+	obstacle := [2]float64{3, 3}
+
+	// Create X and Y arrays based on grid dimensions
+	x := make([]float64, gridWidth)
+	y := make([]float64, gridHeight)
+	for i := 0; i < gridWidth; i++ {
+		x[i] = float64(i)
+	}
+	for j := 0; j < gridHeight; j++ {
+		y[j] = float64(j)
 	}
 
-	// Creating the meshgrid
-	size := len(x)
-	X := make([][]float64, size)
-	Y := make([][]float64, size)
-	delx := make([][]float64, size)
-	dely := make([][]float64, size)
-
-	for i := range X {
-		X[i] = make([]float64, size)
-		Y[i] = make([]float64, size)
-		delx[i] = make([]float64, size)
-		dely[i] = make([]float64, size)
-		for j := range X[i] {
-			X[i][j] = x[j]
-			Y[i][j] = y[i]
-			delx[i][j] = 0
-			dely[i][j] = 0
+	// Create meshgrid for X, Y
+	X := mat.NewDense(gridHeight, gridWidth, nil)
+	Y := mat.NewDense(gridHeight, gridWidth, nil)
+	for i := 0; i < gridHeight; i++ {
+		for j := 0; j < gridWidth; j++ {
+			X.Set(i, j, x[j])
+			Y.Set(i, j, y[i])
 		}
 	}
 
-	// Filling delx and dely arrays based on the conditions
-	for i := 0; i < size; i++ {
-		for j := 0; j < size; j++ {
-			d := math.Sqrt(X[i][j]*X[i][j] + Y[i][j]*Y[i][j])
-			theta := math.Atan2(Y[i][j], X[i][j])
+	// Initialize delx, dely matrices
+	delx := mat.NewDense(gridHeight, gridWidth, nil)
+	dely := mat.NewDense(gridHeight, gridWidth, nil)
 
-			if d < r {
-				delx[i][j] = 0
-				dely[i][j] = 0
-			} else if d > r+s {
-				delx[i][j] = -50 * s * math.Cos(theta)
-				dely[i][j] = -50 * s * math.Sin(theta)
+	// Iterate over the grid
+	for i := 0; i < gridHeight; i++ {
+		for j := 0; j < gridWidth; j++ {
+			xVal := X.At(i, j)
+			yVal := Y.At(i, j)
+
+			// Calculate distances
+			dGoal := math.Sqrt(math.Pow(goal[0]-xVal, 2) + math.Pow(goal[1]-yVal, 2))
+			dObstacle := math.Sqrt(math.Pow(obstacle[0]-xVal, 2) + math.Pow(obstacle[1]-yVal, 2))
+
+			// Calculate angles
+			thetaGoal := math.Atan2(goal[1]-yVal, goal[0]-xVal)
+			thetaObstacle := math.Atan2(obstacle[1]-yVal, obstacle[0]-xVal)
+
+			// Apply conditions to calculate delx, dely based on obstacle and goal distances
+			if dObstacle < r {
+				delx.Set(i, j, math.Copysign(1, math.Cos(thetaObstacle)))
+				dely.Set(i, j, math.Copysign(1, math.Sin(thetaObstacle)))
+			} else if dObstacle > r+s {
+				delx.Set(i, j, 50*s*math.Cos(thetaObstacle))
+				dely.Set(i, j, 50*s*math.Sin(thetaGoal))
 			} else {
-				delx[i][j] = -50 * (d - r) * math.Cos(theta)
-				dely[i][j] = -50 * (d - r) * math.Sin(theta)
+				delx.Set(i, j, -120*(s+r-dObstacle)*math.Cos(thetaObstacle))
+				dely.Set(i, j, -120*(s+r-dObstacle)*math.Sin(thetaObstacle))
+			}
+
+			if dGoal < r+s {
+				delxVal := delx.At(i, j)
+				if delxVal != 0 {
+					delx.Set(i, j, delxVal+(50*(dGoal-r)*math.Cos(thetaGoal)))
+					dely.Set(i, j, dely.At(i, j)+(50*(dGoal-r)*math.Sin(thetaGoal)))
+				} else {
+					delx.Set(i, j, 50*(dGoal-r)*math.Cos(thetaGoal))
+					dely.Set(i, j, 50*(dGoal-r)*math.Sin(thetaGoal))
+				}
+			} else {
+				delxVal := delx.At(i, j)
+				if delxVal != 0 {
+					delx.Set(i, j, delxVal+50*s*math.Cos(thetaGoal))
+					dely.Set(i, j, dely.At(i, j)+50*s*math.Sin(thetaGoal))
+				} else {
+					delx.Set(i, j, 50*s*math.Cos(thetaGoal))
+					dely.Set(i, j, 50*s*math.Sin(thetaGoal))
+				}
 			}
 		}
 	}
 
 
 
+
+	// Print final delx and dely matrices for debugging
+	fmt.Println("delx matrix:")
+	matPrint(delx)
+	fmt.Println("\ndely matrix:")
+	matPrint(dely)
+
+	
+
+	// You may use a visualization library in Go like gonum/plot to visualize these results.
+}
+
+// Helper function to print matrices for debugging
+func matPrint(X mat.Matrix) {
+	fa := mat.Formatted(X, mat.Prefix(""), mat.Excerpt(5))
+	fmt.Printf("%v\n", fa)
 }
 
