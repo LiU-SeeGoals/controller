@@ -5,6 +5,7 @@ import (
 
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/helper"
+	"github.com/LiU-SeeGoals/proto_go/gc"
 	"github.com/LiU-SeeGoals/proto_go/simulation"
 )
 
@@ -48,8 +49,8 @@ func (sc *simControl) SetPresentRobots(presentYellow []int, presentBlue []int) {
 		}
 
 		idNum := uint32(i)
-		team := simulation.Team_YELLOW
-		id := simulation.SimRobotId{
+		team := gc.Team_YELLOW
+		id := gc.RobotId{
 			Id:   &idNum,
 			Team: &team,
 		}
@@ -75,8 +76,8 @@ func (sc *simControl) SetPresentRobots(presentYellow []int, presentBlue []int) {
 		}
 
 		idNum := uint32(i)
-		team := simulation.Team_BLUE
-		id := simulation.SimRobotId{
+		team := gc.Team_BLUE
+		id := gc.RobotId{
 			Id:   &idNum,
 			Team: &team,
 		}
