@@ -5,6 +5,7 @@ import (
 	"math"
 	"time"
 
+	"go get -u gonum.org/v1/plot/..."
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/state"
 	"gonum.org/v1/gonum/mat"
