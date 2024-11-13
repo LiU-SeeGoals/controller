@@ -7,6 +7,12 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/state"
 )
 
+const (
+	RUNNING int = iota
+	COMPLETE
+	TIME_EXPIRED
+)
+
 type ScenarioSlowBrain struct {
 	team              state.Team
 	incomingGameState <-chan state.GameState
@@ -27,12 +33,76 @@ func (sb *ScenarioSlowBrain) Init(incoming <-chan state.GameState, outgoing chan
 	go sb.Run()
 }
 
+func (sb ScenarioSlowBrain) Run() {
+	var gameState state.GameState
+	gameState.SetValid(false)
+
+	scenarios := []*MoveToTest{}
+	scenarios = append(scenarios, NewMoveToTest(sb.team))
+	scenario_index := 0
+	if sb.run_scenario >= 0 {
+		scenario_index = sb.run_scenario
+	}
+
+	for {
+		gameState = <-sb.incomingGameState
+
+		if !gameState.IsValid() {
+			fmt.Println("ScenarioSlowBrain: Invalid game state")
+			time.Sleep(10 * time.Millisecond)
+			continue
+		}
+
+		scenario := scenarios[scenario_index]
+		game_state := scenario.Archived(&gameState)
+		if game_state == COMPLETE {
+			fmt.Println("Scenario", scenario_index, "completed")
+		} else if game_state == TIME_EXPIRED {
+			fmt.Println("Scenario", scenario_index, "time expired")
+		}
+		if game_state != RUNNING {
+			scenario_index++
+			if scenario_index >= len(scenarios) || sb.run_scenario >= 0 {
+				panic("ScenarioSlowBrain: No more scenarios") // TODO: Handle this better
+			}
+			scenario = scenarios[scenario_index]
+		}
+
+		inst := scenario.Run()
+
+		plan := state.GamePlan{}
+		plan.Instructions = inst
+
+		plan.Team = sb.team
+
+		plan.Valid = true
+
+		sb.outgoingPlan <- plan
+
+	}
+
+}
+
 type MoveToTest struct {
 	team     state.Team
-	at_state int // 0 for init, 1 for goal
+	at_state int
+	start    time.Time
+	max_time time.Duration
+}
+
+func NewMoveToTest(team state.Team) *MoveToTest {
+	return &MoveToTest{
+		team:     team,
+		max_time: 20 * time.Second,
+		at_state: -1,
+	}
 }
 
 func (m *MoveToTest) Run() []*state.Instruction {
+	if m.at_state == -1 {
+		m.start = time.Now()
+		m.at_state = 0
+	}
 	if m.at_state == 0 {
 		return []*state.Instruction{
 			{Type: state.MoveToPosition, Id: 0, Position: state.Position{X: 1000, Y: 1000}},
@@ -51,7 +121,7 @@ func (m *MoveToTest) Run() []*state.Instruction {
 	}
 }
 
-func (m *MoveToTest) Archived(gs *state.GameState) bool {
+func (m *MoveToTest) Archived(gs *state.GameState) int {
 	robot0_pos := gs.GetRobot(state.ID(0), m.team).GetPosition()
 	robot1_pos := gs.GetRobot(state.ID(1), m.team).GetPosition()
 
@@ -81,50 +151,15 @@ func (m *MoveToTest) Archived(gs *state.GameState) bool {
 			m.at_state = 3
 		}
 	}
-	return m.at_state == 3
-}
-
-func (sb ScenarioSlowBrain) Run() {
-	var gameState state.GameState
-	gameState.SetValid(false)
-
-	scenarios := []MoveToTest{}
-	scenarios = append(scenarios, MoveToTest{team: sb.team, at_state: 0})
-	scenario_index := 0
-	if sb.run_scenario >= 0 {
-		scenario_index = sb.run_scenario
+	if m.at_state == 3 {
+		return COMPLETE
+	}
+	if m.at_state >= 0 {
+		fmt.Println("Time expired", time.Since(m.start))
+		if time.Since(m.start) > m.max_time {
+			return TIME_EXPIRED
+		}
 	}
 
-	for {
-		gameState = <-sb.incomingGameState
-
-		if !gameState.IsValid() {
-			fmt.Println("ScenarioSlowBrain: Invalid game state")
-			time.Sleep(10 * time.Millisecond)
-			continue
-		}
-
-		scenario := &scenarios[scenario_index]
-
-		if scenario.Archived(&gameState) {
-			scenario_index++
-			if scenario_index >= len(scenarios) || sb.run_scenario >= 0 {
-				panic("ScenarioSlowBrain: No more scenarios") // TODO: Handle this better
-			}
-			scenario = &scenarios[scenario_index]
-		}
-
-		inst := scenario.Run()
-
-		plan := state.GamePlan{}
-		plan.Instructions = inst
-
-		plan.Team = sb.team
-
-		plan.Valid = true
-
-		sb.outgoingPlan <- plan
-
-	}
-
+	return RUNNING
 }
