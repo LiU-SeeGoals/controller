@@ -29,3 +29,6 @@ go.work
 # protobuf files
 *.pb*
 venv
+*.pyc
+*.pth
+*.mp4
