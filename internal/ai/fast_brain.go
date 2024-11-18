@@ -87,16 +87,8 @@ func (fb *FastBrainGO) instructionToAction(inst *state.Instruction, gs *state.Ga
 		return fb.moveToPosition(inst, gs)
 	} else if inst.Type == state.MoveToBall {
 		fmt.Println("FastBrainGO: MoveToBall not implemented")
-	} else if inst.Type == state.MoveToBallFacePosition {
-		fmt.Println("FastBrainGO: MoveToBallFacePosition not implemented")
-	} else if inst.Type == state.MoveToBallFacePlayer {
-		fmt.Println("FastBrainGO: MoveToBallFacePlayer not implemented")
 	} else if inst.Type == state.MoveWithBallToPosition {
 		fmt.Println("FastBrainGO: MoveWithBallToPosition not implemented")
-	} else if inst.Type == state.MoveWithBallToPlayer {
-		fmt.Println("FastBrainGO: MoveWithBallToPlayer not implemented")
-	} else if inst.Type == state.MoveWithBallToGoal {
-		fmt.Println("FastBrainGO: MoveWithBallToGoal not implemented")
 	} else if inst.Type == state.KickToPlayer {
 		fmt.Println("FastBrainGO: KickToPlayer not implemented")
 	} else if inst.Type == state.KickToGoal {
@@ -107,10 +99,6 @@ func (fb *FastBrainGO) instructionToAction(inst *state.Instruction, gs *state.Ga
 		fmt.Println("FastBrainGO: ReceiveBallFromPlayer not implemented")
 	} else if inst.Type == state.ReceiveBallAtPosition {
 		fmt.Println("FastBrainGO: ReceiveBallAtPosition not implemented")
-	} else if inst.Type == state.MeetBallFromPlayer {
-		fmt.Println("FastBrainGO: MeetBallFromPlayer not implemented")
-	} else if inst.Type == state.InterceptBall {
-		fmt.Println("FastBrainGO: InterceptBall not implemented")
 	} else if inst.Type == state.BlockEnemyPlayerFromPosition {
 		fmt.Println("FastBrainGO: BlockEnemyPlayerFromPosition not implemented")
 	} else if inst.Type == state.BlockEnemyPlayerFromBall {
