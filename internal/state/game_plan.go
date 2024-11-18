@@ -5,29 +5,22 @@ import "fmt"
 type InstructionType int
 
 const (
-	MoveToPosition         InstructionType = 0 // Move to a specific position (static)
-	MoveToBall             InstructionType = 1 // Move to the ball (dynamic)
-	MoveToBallFacePosition InstructionType = 2 // Move to the ball and face a specific position (static)
-	MoveToBallFacePlayer   InstructionType = 3 // Move to the ball and face a specific player (dynamic)
+	MoveToPosition InstructionType = 0 // Move to a specific position (static)
+	MoveToBall     InstructionType = 1 // Move to the ball (dynamic)
 
-	MoveWithBallToPosition InstructionType = 4 // Move with the ball to a specific position (static)
-	MoveWithBallToPlayer   InstructionType = 5 // Move with the ball to a specific player (dynamic)
-	MoveWithBallToGoal     InstructionType = 6 // Move with the ball to some open space in the goal (dynamic)
+	MoveWithBallToPosition InstructionType = 2 // Move with the ball to a specific position (static)
 
-	KickToPlayer   InstructionType = 7 // Kick the ball to a specific player (dynamic)
-	KickToGoal     InstructionType = 8 // Kick the ball to some open space in the goal (dynamic)
-	KickToPosition InstructionType = 9 // Kick the ball to a specific position (static)
+	KickToPlayer   InstructionType = 3 // Kick the ball to a specific player (dynamic)
+	KickToGoal     InstructionType = 4 // Kick the ball to some open space in the goal (dynamic)
+	KickToPosition InstructionType = 5 // Kick the ball to a specific position (static)
 
-	ReceiveBallFromPlayer InstructionType = 10 // Receive the ball from a specific player (dynamic). Before a kick is made, adjust the position to have a better chance of receiving the ball.
-	ReceiveBallAtPosition InstructionType = 11 // Receive the ball at a expected position (dynamic). Make to be at the expected position when the ball is kicked. But adjust the position to have a better chance of receiving the ball after the kick.
+	ReceiveBallFromPlayer InstructionType = 6 // Receive the ball from a specific player (dynamic). Before a kick is made, adjust the position to have a better chance of receiving the ball.
+	ReceiveBallAtPosition InstructionType = 7 // Receive the ball at a expected position (dynamic). Make to be at the expected position when the ball is kicked. But adjust the position to have a better chance of receiving the ball after the kick.
 
-	MeetBallFromPlayer InstructionType = 12 // Meet the ball (try to minimize the distance to the ball) from a specific player (dynamic)
-	InterceptBall      InstructionType = 13 // Intercept the ball (try to minimize the distance to the ball) (dynamic)
-
-	BlockEnemyPlayerFromPosition InstructionType = 14 // Body block an enemy player from a specific position (dynamic)
-	BlockEnemyPlayerFromBall     InstructionType = 15 // Body block an enemy player from the ball (dynamic)
-	BlockEnemyPlayerFromGoal     InstructionType = 16 // Body block an enemy player from the goal (dynamic). Make sure that the enemy does not have a clear shot at the goal.
-	BlockEnemyPlayerFromPlayer   InstructionType = 17 // Body block an enemy player from a specific player (dynamic)
+	BlockEnemyPlayerFromPosition InstructionType = 8  // Body block an enemy player from a specific position (dynamic)
+	BlockEnemyPlayerFromBall     InstructionType = 9  // Body block an enemy player from the ball (dynamic)
+	BlockEnemyPlayerFromGoal     InstructionType = 10 // Body block an enemy player from the goal (dynamic). Make sure that the enemy does not have a clear shot at the goal.
+	BlockEnemyPlayerFromPlayer   InstructionType = 11 // Body block an enemy player from a specific player (dynamic)
 )
 
 type Instruction struct {

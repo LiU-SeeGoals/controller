@@ -33,11 +33,16 @@ func (sb *ScenarioSlowBrain) Init(incoming <-chan state.GameState, outgoing chan
 	go sb.Run()
 }
 
+type ScenarioTest interface {
+	Run() []*state.Instruction
+	Archived(*state.GameState) int
+}
+
 func (sb ScenarioSlowBrain) Run() {
 	var gameState state.GameState
 	gameState.SetValid(false)
 
-	scenarios := []*MoveToTest{}
+	scenarios := []ScenarioTest{}
 	scenarios = append(scenarios, NewMoveToTest(sb.team))
 	scenario_index := 0
 	if sb.run_scenario >= 0 {
