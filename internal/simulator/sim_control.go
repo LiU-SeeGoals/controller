@@ -7,8 +7,8 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/helper"
-	"github.com/LiU-SeeGoals/proto_go/simulation"
 	"github.com/LiU-SeeGoals/proto_go/gc"
+	"github.com/LiU-SeeGoals/proto_go/simulation"
 )
 
 // The simulator have a lot of things that can be configured.
@@ -155,13 +155,13 @@ func (sc *simControl) RobotStartPositionConfig1(numberOfRobots int) {
 		x_blue := blueCoords[robot_id][0]
 		y_blue := blueCoords[robot_id][1]
 		id := uint32(robot_id)
-		team := simulation.Team_BLUE
+		team := gc.Team_BLUE
 		sc.TeleportRobot(x_blue, y_blue, id, team)
 
 		x_yellow := yellowCoords[robot_id][0]
 		y_yellow := yellowCoords[robot_id][1]
 		id = uint32(robot_id)
-		team = simulation.Team_YELLOW
+		team = gc.Team_YELLOW
 		sc.TeleportRobot(x_yellow, y_yellow, id, team)
 	}
 
