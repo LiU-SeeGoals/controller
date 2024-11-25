@@ -12,6 +12,7 @@ const (
 	COMPLETE
 	TIME_EXPIRED
 	ERROR
+  FAILED
 )
 
 type ScenarioSlowBrain struct {
@@ -44,9 +45,11 @@ func (sb ScenarioSlowBrain) Run() {
 	gameState.SetValid(false)
 
 	scenarios := []ScenarioTest{}
+  scenarios = append(scenarios, NewMoveToBallTest(sb.team))
 	scenarios = append(scenarios, NewMoveToTest(sb.team))
 	scenarios = append(scenarios, NewObstacleAvoidanceTest(sb.team))
 	scenarios = append(scenarios, NewRealTest(sb.team))
+  
 	scenario_index := 0
 	if sb.run_scenario >= 0 {
 		scenario_index = sb.run_scenario
@@ -67,7 +70,9 @@ func (sb ScenarioSlowBrain) Run() {
 			fmt.Println("Scenario", scenario_index, "completed")
 		} else if game_state == TIME_EXPIRED {
 			fmt.Println("Scenario", scenario_index, "time expired")
-		}
+		} else if game_state == FAILED {
+      fmt.Println("Scenario", scenario_index, "failed")
+    }
 		if game_state != RUNNING {
 			scenario_index++
 			if scenario_index >= len(scenarios) || sb.run_scenario >= 0 {
@@ -88,7 +93,67 @@ func (sb ScenarioSlowBrain) Run() {
 		sb.outgoingPlan <- plan
 
 	}
+}
 
+type MoveToBallTest struct {
+  team      state.Team
+  at_state  int
+  start     time.Time
+  max_time  time.Duration
+}
+
+func NewMoveToBallTest(team state.Team) *MoveToBallTest {
+  return &MoveToBallTest{
+    team:     team,
+    max_time: 20 * time.Second,
+    at_state: -1,
+  }
+}
+
+func (m *MoveToBallTest) Run() []*state.Instruction {
+  if m.at_state == -1 {
+    m.start = time.Now()
+    m.at_state = 0
+  }
+  if m.at_state == 0 {
+    return []*state.Instruction{
+        {Type: state.MoveToBall, Id: 0},
+    }
+  } else {
+    return []*state.Instruction{
+      {Type: state.MoveToBall, Id: 0},
+    }
+  }
+}
+
+func (m *MoveToBallTest) Archived(gs *state.GameState) int {
+	robot_pos := gs.GetRobot(state.ID(0), m.team).GetPosition()
+  ball_pos := gs.GetBall().GetPosition()
+
+	if m.at_state == 0 {
+		diff0 := ball_pos.Sub(&robot_pos)
+		if diff0.Norm() < 100 {
+			m.at_state = 1
+		}
+	} else if m.at_state == 1 {
+		diff0 := ball_pos.Sub(&robot_pos)
+		if diff0.Norm() > 100 {
+			m.at_state = 2
+		}
+	}
+	if m.at_state >= 0 {
+		fmt.Println("Time expired", time.Since(m.start))
+		if time.Since(m.start) > m.max_time {
+      if m.at_state == 0 {
+        return TIME_EXPIRED
+      } else if m.at_state == 1 {
+          return COMPLETE
+      } else {
+          return FAILED
+      }
+    }
+  }
+	return RUNNING
 }
 
 // --------------------------Real Test--------------------------------

@@ -86,12 +86,28 @@ func (fb *FastBrainGO) moveToPosition(inst *info.Instruction, gs *info.GameState
 	return &act
 }
 
+func (fb *FastBrainGO) moveToBall(inst *state.Instruction, gs *state.GameState) action.Action {
+  myTeam := gs.GetTeam(fb.team)
+  robot := myTeam[inst.Id]
+  if !robot.IsActive() {
+    return nil
+  }
+  act := action.MoveTo{}
+  act.Id = int(robot.GetID())
+  act.Team = fb.team
+  act.Pos = robot.GetPosition()
+  act.Dest = gs.GetBall().GetPosition()
+  act.Dribble = false
+  return &act
+}
+
+
 // TODO: can we make this nicer?
 func (fb *FastBrainGO) instructionToAction(inst *info.Instruction, gs *info.GameState) action.Action {
 	if inst.Type == info.MoveToPosition {
 		return fb.moveToPosition(inst, gs)
 	} else if inst.Type == info.MoveToBall {
-		fmt.Println("FastBrainGO: MoveToBall not implemented")
+		return fb.moveToBall(inst, gs)
 	} else if inst.Type == info.MoveWithBallToPosition {
 		fmt.Println("FastBrainGO: MoveWithBallToPosition not implemented")
 	} else if inst.Type == info.KickToPlayer {
