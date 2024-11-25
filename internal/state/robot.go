@@ -15,6 +15,17 @@ const (
 	Blue    Team = 2
 )
 
+func (t Team) String() string {
+	switch t {
+	case Yellow:
+		return "Yellow"
+	case Blue:
+		return "Blue"
+	default:
+		return "UNKNOWN"
+	}
+}
+
 type RobotPos struct {
 	pos  Position
 	time int64
