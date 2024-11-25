@@ -23,7 +23,7 @@ const (
 // robotPos is the current position of the robot
 // goal is the destination position
 // gs is the current game state, contains the positions of all robots ie. the obstacles
-func getObstacleFreeDest(robot *state.Robot, goal state.Position, gs state.GameState) state.Position {
+func avoidObstacles(robot *state.Robot, goal state.Position, gs state.GameState) state.Position {
 
 	// Matrix to hold the potential in the local neighborhood
 	localGrid := mat.NewDense(localSize, localSize, nil)
