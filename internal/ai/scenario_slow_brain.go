@@ -44,24 +44,24 @@ func (sb ScenarioSlowBrain) Run() {
 	scenario_index := 0
 	scenarios := [][]state.Position{
 		{
-			{X: sb.scale * 100, Y: sb.scale * 100},
-			{X: sb.scale * 200, Y: sb.scale * 200},
-			// {X: sb.scale * 300, Y: sb.scale * 300},
+			{X: -4000, Y: 2500},
+			// {X: 200, Y: 200},
+			// {X: 300, Y: 300},
 		},
 		{
-			{X: sb.scale * 100, Y: sb.scale * -100},
-			{X: sb.scale * 200, Y: sb.scale * -200},
-			// {X: sb.scale * 300, Y: sb.scale * -300},
+			{X: 4000, Y: 2500},
+			// {X: 200, Y: -200},
+			// {X: 300, Y: -300},
 		},
 		{
-			{X: sb.scale * -100, Y: sb.scale * 100},
-			{X: sb.scale * -200, Y: sb.scale * 200},
-			// {X: sb.scale * -300, Y: sb.scale * 300},
+			{X: 4000, Y: -2500},
+			// {X: -200, Y: 200},
+			// {X: -300, Y: 300},
 		},
 		{
-			{X: sb.scale * -100, Y: sb.scale * -100},
-			{X: sb.scale * -200, Y: sb.scale * -200},
-			// {X: sb.scale * -300, Y: sb.scale * -300},
+			{X: -4000, Y: -2500},
+			// {X: -200, Y: -200},
+			// {X: -300, Y: -300},
 		},
 	}
 
@@ -83,12 +83,28 @@ func (sb ScenarioSlowBrain) Run() {
 		}
 
 		plan := state.GamePlan{}
-		for idx, scenario_pos := range scenario {
-			robot := gameState.GetRobot(state.ID(idx), sb.team)
+		// for idx, scenario_pos := range scenario {
+		// 	robot := gameState.GetRobot(state.ID(idx), sb.team)
+		// 	plan.Instructions = append(plan.Instructions, &state.RobotMove{
+		// 		Id:       robot.GetID(),
+		// 		Position: scenario_pos,
+		// 	})
+		// }
+
+		if sb.team == state.Blue {
 			plan.Instructions = append(plan.Instructions, &state.RobotMove{
-				Id:       robot.GetID(),
-				Position: scenario_pos,
+				Id:       0,
+				Position: state.Position{X: 10000, Y: 0},
 			})
+
+		} else if sb.team == state.Yellow {
+			plan.Instructions = append(plan.Instructions, &state.RobotMove{
+				Id:       0,
+				//Position: scenario[0],//
+				Position: gameState.GetBlueRobots()[0].GetPosition(),
+				// Position: state.Position{X: 9000, Y: 60000},
+			})
+
 		}
 
 		plan.Team = sb.team
