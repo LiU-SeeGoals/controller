@@ -16,14 +16,14 @@ const (
 )
 
 func (t Team) String() string {
-    switch t {
-    case Yellow:
-        return "Yellow"
-    case Blue:
-        return "Blue"
-    default:
-        return "UNKNOWN"
-    }
+	switch t {
+	case Yellow:
+		return "Yellow"
+	case Blue:
+		return "Blue"
+	default:
+		return "UNKNOWN"
+	}
 }
 
 type RobotPos struct {

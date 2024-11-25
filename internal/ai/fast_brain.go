@@ -1,8 +1,10 @@
 package ai
 
 import (
+	"encoding/json"
 	"fmt"
 	"math"
+	"net"
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
@@ -112,9 +114,9 @@ const (
 	fieldWidth  = 6000 // Width of the field in mm
 	cellSize    = 200  // Size of each cell in mm
 	kAtt        = 1.0  // Attractive potential constant
-	kRep        = 2.0  // Repulsive potential constant
-	d0          = 3.0  // Distance at which repulsive potential is 0
-	localSize   = 3    // Size of the local neighborhood
+	kRep        = 25.0  // Repulsive potential constant
+	d0          = 5.0  // Distance at which repulsive potential is 0
+	localSize   = 5    // Size of the local neighborhood
 )
 
 // robotPos is the current position of the robot
@@ -137,15 +139,22 @@ func getObstacleFreeDest(robot *state.Robot, goal state.Position, gs state.GameS
 
 		// Compute the repulsive potential
 		repulsive := computeRepulsivePotential(x, y, obstacles, d0, kRep)
+		// repulsive = 0.0
 
 		return attractive + repulsive
 	}, localGrid)
 
-	minPotentialRow, minPotentialCol, _ := argmin(localGrid)
+	// Send the local grid to the Python script
+	sendLocalGrid(localGrid)
+
+	// minPotentialRow, minPotentialCol, _ := argmin(localGrid)
+	minPotentialRow, minPotentialCol, _ := argminNeighbors(localGrid, int(math.Floor(localSize/2)), int(math.Floor(localSize/2)))
 
 	// Calculate the offsets relative to the robot’s current position
-	offsetX := float32(minPotentialRow-1) * cellSize
-	offsetY := float32(minPotentialCol-1) * cellSize
+	centerOffset := int(math.Floor(localSize / 2))
+
+	offsetX := float32(minPotentialRow-centerOffset) * cellSize
+	offsetY := float32(minPotentialCol-centerOffset) * cellSize
 
 	// Apply the offsets to the robot’s current position to get the new destination
 	newX := robot.GetPosition().X + offsetX
@@ -156,38 +165,83 @@ func getObstacleFreeDest(robot *state.Robot, goal state.Position, gs state.GameS
 
 func getObstacles(gs state.GameState, id state.ID) []state.Position {
 
-	robots := append(gs.Blue_team[:], gs.Yellow_team[:]...)
-	obstacles := make([]state.Position, len(robots)+1)
-	for i, robot := range robots {
+	var obstacles []state.Position
+	for _, robot := range gs.Yellow_team {
 
-		// skip self
-		if robot.GetID() != id {
-			obstacles[i] = robot.GetPosition()
+		// Hardcoded to avoid the inactive robots
+		if robot.GetID() == 0 {
+			obstacles = append(obstacles, robot.GetPosition())
 		}
 	}
+
+	// Handle own team avoiding
+	// for _, robot := range gs.Blue_team {
+	//
+	// 	// Avoid self
+	// 	if robot.GetID() != id {
+	// 		obstacles = append(obstacles, robot.GetPosition())
+	// 	}
+	// }
 	return obstacles
 }
 
 func computeAttractivePotential(x, y, goalX, goalY float32) float64 {
-	dx := math.Abs(float64(x - goalX))
-	dy := math.Abs(float64(y - goalY))
+	dx := float64(x - goalX)
+	dy := float64(y - goalY)
 	return 0.5 * kAtt * math.Sqrt(math.Pow(dx, 2)+math.Pow(dy, 2))
 }
 
 // calculateRepulsivePotential calculates the repulsive potential from obstacles
 func computeRepulsivePotential(x, y float32, obstacles []state.Position, d0, kRep float64) float64 {
 	repulsive := 0.0
+	fmt.Println("nr of obstacles", len(obstacles))
 	for _, obstacle := range obstacles {
+		fmt.Println("Obstacle\n", obstacle)
 		obstacleX, obstacleY := obstacle.X/cellSize, obstacle.Y/cellSize
-		dx := math.Abs(float64(x - obstacleX))
-		dy := math.Abs(float64(y - obstacleY))
+		fmt.Println("Obstacle", obstacleX, obstacleY)
+		fmt.Println("Robot", x, y)
+
+		dx := float64(x - obstacleX)
+		dy := float64(y - obstacleY)
 
 		distance := math.Sqrt(dx*dx + dy*dy)
-		if distance < d0 {
-			repulsive += 0.5 * kRep * math.Pow(1/distance-1/d0, 2)
+		if distance < 2 {
+			repulsive += 100
+		} else if distance < d0 && distance != 0 {
+			repulsive += 0.5 * kRep * math.Pow((1/distance)-(1/d0), 2)
 		}
 	}
 	return repulsive
+}
+
+func argminNeighbors(m *mat.Dense, row, col int) (int, int, float64) {
+	minValue := math.MaxFloat64
+	minRow, minCol := -1, -1
+
+	rows, cols := m.Dims()
+
+	// Define the relative positions of the 8 neighbors
+	directions := [][2]int{
+		{-1, -1}, {-1, 0}, {-1, 1}, // Top-left, Top, Top-right
+		{0, -1}, {0, 1}, // Left,       Right
+		{1, -1}, {1, 0}, {1, 1}, // Bottom-left, Bottom, Bottom-right
+	}
+
+	for _, d := range directions {
+		neighborRow := row + d[0]
+		neighborCol := col + d[1]
+
+		// Check bounds
+		if neighborRow >= 0 && neighborRow < rows && neighborCol >= 0 && neighborCol < cols {
+			val := m.At(neighborRow, neighborCol)
+			if val < minValue {
+				minValue = val
+				minRow, minCol = neighborRow, neighborCol
+			}
+		}
+	}
+
+	return minRow, minCol, minValue
 }
 
 func argmin(m *mat.Dense) (int, int, float64) {
@@ -205,4 +259,61 @@ func argmin(m *mat.Dense) (int, int, float64) {
 		}
 	}
 	return minRow, minCol, minValue
+}
+
+var listener net.Listener
+var conn net.Conn
+
+func init() {
+	// Start the server to listen for incoming connections
+	var err error
+	listener, err = net.Listen("tcp", ":5000") // Bind to port 5000
+	if err != nil {
+		fmt.Printf("Error starting server: %v\n", err)
+		return
+	}
+
+	// Accept connections in a goroutine to allow non-blocking operations
+	go func() {
+		for {
+			fmt.Println("Waiting for Python client to connect...")
+			conn, err = listener.Accept()
+			if err != nil {
+				fmt.Printf("Error accepting connection: %v\n", err)
+				continue
+			}
+			fmt.Println("Python client connected.")
+		}
+	}()
+}
+
+func sendLocalGrid(localGrid *mat.Dense) {
+	if conn == nil {
+		fmt.Println("No active connection to send data")
+		return
+	}
+
+	rows, cols := localGrid.Dims()
+	data := make([][]float64, rows)
+	for i := 0; i < rows; i++ {
+		row := make([]float64, cols)
+		for j := 0; j < cols; j++ {
+			row[j] = localGrid.At(i, j)
+		}
+		data[i] = row
+	}
+
+	// Serialize to JSON
+	jsonData, err := json.Marshal(data)
+	if err != nil {
+		fmt.Printf("Error serializing localGrid: %v\n", err)
+		return
+	}
+
+	// Send the JSON data followed by a newline
+	_, err = conn.Write(append(jsonData, '\n')) // Append newline for framing
+	if err != nil {
+		fmt.Printf("Error sending localGrid: %v\n", err)
+		conn = nil // Reset connection if sending fails
+	}
 }

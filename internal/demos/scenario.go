@@ -31,8 +31,8 @@ func Scenario() {
 	simController := simulator.NewSimControl()
 
 	// Some sim setup for debugging ai behaviour
-	presentYellow := []int{0, 1}
-	presentBlue := []int{0, 1}
+	presentYellow := []int{0}
+	presentBlue := []int{0}
 	simController.SetPresentRobots(presentYellow, presentBlue)
 
 	ssl_receiver.InitGameState(gs, 0)
