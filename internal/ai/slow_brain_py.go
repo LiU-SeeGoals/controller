@@ -101,7 +101,8 @@ func (sb SlowBrainPy) Run() {
 				Z:     scenario.Position[2],
 				Angle: scenario.Position[3],
 			}
-			plan.Instructions = append(plan.Instructions, &state.RobotMove{
+			plan.Instructions = append(plan.Instructions, &state.Instruction{
+				Type:     state.MoveToPosition,
 				Id:       robot.GetID(),
 				Position: position,
 			})

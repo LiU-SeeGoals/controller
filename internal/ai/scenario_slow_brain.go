@@ -7,15 +7,22 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/state"
 )
 
+const (
+	RUNNING int = iota
+	COMPLETE
+	TIME_EXPIRED
+)
+
 type ScenarioSlowBrain struct {
 	team              state.Team
 	incomingGameState <-chan state.GameState
 	outgoingPlan      chan<- state.GamePlan
 	scale             float32
+	run_scenario      int // -1 for all
 }
 
-func NewScenarioSlowBrain(scale float32) *ScenarioSlowBrain {
-	return &ScenarioSlowBrain{scale: scale}
+func NewScenarioSlowBrain(scale float32, run_scenario int) *ScenarioSlowBrain {
+	return &ScenarioSlowBrain{scale: scale, run_scenario: run_scenario}
 }
 
 func (sb *ScenarioSlowBrain) Init(incoming <-chan state.GameState, outgoing chan<- state.GamePlan, team state.Team) {
@@ -26,43 +33,20 @@ func (sb *ScenarioSlowBrain) Init(incoming <-chan state.GameState, outgoing chan
 	go sb.Run()
 }
 
-func (sb ScenarioSlowBrain) scenarioArchived(gameState *state.GameState, scenario []state.Position) bool {
-	for idx, scenario_pos := range scenario {
-		robot := gameState.GetRobot(state.ID(idx), sb.team)
-		pos := robot.GetPosition()
-		diff := scenario_pos.Sub(&pos)
-		if diff.Norm() > 100 {
-			return false
-		}
-	}
-	return true
+type ScenarioTest interface {
+	Run() []*state.Instruction
+	Archived(*state.GameState) int
 }
 
 func (sb ScenarioSlowBrain) Run() {
 	var gameState state.GameState
 	gameState.SetValid(false)
+
+	scenarios := []ScenarioTest{}
+	scenarios = append(scenarios, NewMoveToTest(sb.team))
 	scenario_index := 0
-	scenarios := [][]state.Position{
-		{
-			{X: -4000, Y: 2500},
-			// {X: 200, Y: 200},
-			// {X: 300, Y: 300},
-		},
-		{
-			{X: 4000, Y: 2500},
-			// {X: 200, Y: -200},
-			// {X: 300, Y: -300},
-		},
-		{
-			{X: 4000, Y: -2500},
-			// {X: -200, Y: 200},
-			// {X: -300, Y: 300},
-		},
-		{
-			{X: -4000, Y: -2500},
-			// {X: -200, Y: -200},
-			// {X: -300, Y: -300},
-		},
+	if sb.run_scenario >= 0 {
+		scenario_index = sb.run_scenario
 	}
 
 	for {
@@ -75,37 +59,24 @@ func (sb ScenarioSlowBrain) Run() {
 		}
 
 		scenario := scenarios[scenario_index]
-
-		if sb.scenarioArchived(&gameState, scenario) {
-			fmt.Println("Scenario archived: ", scenario)
-			scenario_index = (scenario_index + 1) % len(scenarios)
+		game_state := scenario.Archived(&gameState)
+		if game_state == COMPLETE {
+			fmt.Println("Scenario", scenario_index, "completed")
+		} else if game_state == TIME_EXPIRED {
+			fmt.Println("Scenario", scenario_index, "time expired")
+		}
+		if game_state != RUNNING {
+			scenario_index++
+			if scenario_index >= len(scenarios) || sb.run_scenario >= 0 {
+				panic("ScenarioSlowBrain: No more scenarios") // TODO: Handle this better
+			}
 			scenario = scenarios[scenario_index]
 		}
 
+		inst := scenario.Run()
+
 		plan := state.GamePlan{}
-		// for idx, scenario_pos := range scenario {
-		// 	robot := gameState.GetRobot(state.ID(idx), sb.team)
-		// 	plan.Instructions = append(plan.Instructions, &state.RobotMove{
-		// 		Id:       robot.GetID(),
-		// 		Position: scenario_pos,
-		// 	})
-		// }
-
-		if sb.team == state.Blue {
-			plan.Instructions = append(plan.Instructions, &state.RobotMove{
-				Id:       0,
-				Position: state.Position{X: 10000, Y: 0},
-			})
-
-		} else if sb.team == state.Yellow {
-			plan.Instructions = append(plan.Instructions, &state.RobotMove{
-				Id:       0,
-				//Position: scenario[0],//
-				Position: gameState.GetBlueRobots()[0].GetPosition(),
-				// Position: state.Position{X: 9000, Y: 60000},
-			})
-
-		}
+		plan.Instructions = inst
 
 		plan.Team = sb.team
 
@@ -115,4 +86,85 @@ func (sb ScenarioSlowBrain) Run() {
 
 	}
 
+}
+
+type MoveToTest struct {
+	team     state.Team
+	at_state int
+	start    time.Time
+	max_time time.Duration
+}
+
+func NewMoveToTest(team state.Team) *MoveToTest {
+	return &MoveToTest{
+		team:     team,
+		max_time: 20 * time.Second,
+		at_state: -1,
+	}
+}
+
+func (m *MoveToTest) Run() []*state.Instruction {
+	if m.at_state == -1 {
+		m.start = time.Now()
+		m.at_state = 0
+	}
+	if m.at_state == 0 {
+		return []*state.Instruction{
+			{Type: state.MoveToPosition, Id: 0, Position: state.Position{X: 1000, Y: 1000}},
+			{Type: state.MoveToPosition, Id: 1, Position: state.Position{X: -1000, Y: -1000}},
+		}
+	} else if m.at_state == 1 {
+		return []*state.Instruction{
+			{Type: state.MoveToPosition, Id: 0, Position: state.Position{X: 100, Y: 100}},
+			{Type: state.MoveToPosition, Id: 1, Position: state.Position{X: -100, Y: -100}},
+		}
+	} else {
+		return []*state.Instruction{
+			{Type: state.MoveToPosition, Id: 0, Position: state.Position{X: -1000, Y: -1000}},
+			{Type: state.MoveToPosition, Id: 1, Position: state.Position{X: 1000, Y: 1000}},
+		}
+	}
+}
+
+func (m *MoveToTest) Archived(gs *state.GameState) int {
+	robot0_pos := gs.GetRobot(state.ID(0), m.team).GetPosition()
+	robot1_pos := gs.GetRobot(state.ID(1), m.team).GetPosition()
+
+	if m.at_state == 0 {
+		target0 := state.Position{X: 1000, Y: 1000}
+		target1 := state.Position{X: -1000, Y: -1000}
+		diff0 := target0.Sub(&robot0_pos)
+		diff1 := target1.Sub(&robot1_pos)
+		if diff0.Norm() < 100 && diff1.Norm() < 100 {
+			m.at_state = 1
+		}
+	} else if m.at_state == 1 {
+		target0 := state.Position{X: 100, Y: 100}
+		target1 := state.Position{X: -100, Y: -100}
+		diff0 := target0.Sub(&robot0_pos)
+		diff1 := target1.Sub(&robot1_pos)
+		if diff0.Norm() < 100 && diff1.Norm() < 100 {
+			// fmt.Println("norms are", diff0.Norm(), diff1.Norm())
+			m.at_state = 2
+		}
+	} else if m.at_state == 2 {
+		target0 := state.Position{X: -1000, Y: -1000}
+		target1 := state.Position{X: 1000, Y: 1000}
+		diff0 := target0.Sub(&robot0_pos)
+		diff1 := target1.Sub(&robot1_pos)
+		if diff0.Norm() < 100 && diff1.Norm() < 100 {
+			m.at_state = 3
+		}
+	}
+	if m.at_state == 3 {
+		return COMPLETE
+	}
+	if m.at_state >= 0 {
+		fmt.Println("Time expired", time.Since(m.start))
+		if time.Since(m.start) > m.max_time {
+			return TIME_EXPIRED
+		}
+	}
+
+	return RUNNING
 }

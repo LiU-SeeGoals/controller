@@ -7,6 +7,7 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/helper"
+	"github.com/LiU-SeeGoals/proto_go/gc"
 	"github.com/LiU-SeeGoals/proto_go/simulation"
 )
 
@@ -58,8 +59,8 @@ func (sc *simControl) SetPresentRobots(presentYellow []int, presentBlue []int) {
 		}
 
 		idNum := uint32(i)
-		team := simulation.Team_YELLOW
-		id := simulation.SimRobotId{
+		team := gc.Team_YELLOW
+		id := gc.RobotId{
 			Id:   &idNum,
 			Team: &team,
 		}
@@ -87,8 +88,8 @@ func (sc *simControl) SetPresentRobots(presentYellow []int, presentBlue []int) {
 		}
 
 		idNum := uint32(i)
-		team := simulation.Team_BLUE
-		id := simulation.SimRobotId{
+		team := gc.Team_BLUE
+		id := gc.RobotId{
 			Id:   &idNum,
 			Team: &team,
 		}
@@ -154,13 +155,13 @@ func (sc *simControl) RobotStartPositionConfig1(numberOfRobots int) {
 		x_blue := blueCoords[robot_id][0]
 		y_blue := blueCoords[robot_id][1]
 		id := uint32(robot_id)
-		team := simulation.Team_BLUE
+		team := gc.Team_BLUE
 		sc.TeleportRobot(x_blue, y_blue, id, team)
 
 		x_yellow := yellowCoords[robot_id][0]
 		y_yellow := yellowCoords[robot_id][1]
 		id = uint32(robot_id)
-		team = simulation.Team_YELLOW
+		team = gc.Team_YELLOW
 		sc.TeleportRobot(x_yellow, y_yellow, id, team)
 	}
 
@@ -170,7 +171,7 @@ func (sc *simControl) RobotStartPositionConfig2(numberOfRobots int) {
 	fmt.Println("Not yet implemented")
 }
 
-func (sc *simControl) TeleportRobot(x float32, y float32, id uint32, team simulation.Team) {
+func (sc *simControl) TeleportRobot(x float32, y float32, id uint32, team gc.Team) {
 	fmt.Println(x, y)
 	// Set default values for orientation and velocities
 	orientation := float32(0.0) // Approx. 45 degrees in radians
@@ -180,7 +181,7 @@ func (sc *simControl) TeleportRobot(x float32, y float32, id uint32, team simula
 	present := true             // Teleport indicates the robot is present
 
 	// Create the robot ID structure
-	robotId := simulation.SimRobotId{
+	robotId := gc.RobotId{
 		Id:   &id,
 		Team: &team,
 	}

@@ -1,7 +1,6 @@
 package demos
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/ai"
@@ -20,7 +19,7 @@ func PythonSlowBrain() {
 
 	aiBlue := ai.NewAi(state.Blue, slowBrainBlue, fastBrainBlue)
 
-	slowBrainYellow := ai.NewScenarioSlowBrain(-5)
+	slowBrainYellow := ai.NewScenarioSlowBrain(-5, -1)
 	fastBrainYellow := ai.NewFastBrainGO()
 
 	aiYellow := ai.NewAi(state.Yellow, slowBrainYellow, fastBrainYellow)
@@ -39,7 +38,7 @@ func PythonSlowBrain() {
 	start_time := time.Now().UnixMilli()
 	for {
 		playTime := time.Now().UnixMilli() - start_time
-		fmt.Println("playTime: ", playTime)
+		// fmt.Println("playTime: ", playTime)
 		ssl_receiver.UpdateGamestate(gs, playTime)
 
 		blue_actions := aiBlue.GetActions(gs)
