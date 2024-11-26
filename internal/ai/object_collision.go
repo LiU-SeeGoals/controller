@@ -87,17 +87,19 @@ func addWallObstacles(obstacles []state.Position) []state.Position {
 func getObstacles(gs state.GameState, id state.ID) []state.Position {
 
 	var obstacles []state.Position
-	for _, robot := range gs.Yellow_team {
-		obstacles = append(obstacles, robot.GetPosition())
-	}
 
 	// Handle own team avoiding
-	for _, robot := range gs.Blue_team {
+	for _, robot := range gs.Yellow_team {
 		// Avoid self
 		if robot.GetID() != id {
 			obstacles = append(obstacles, robot.GetPosition())
 		}
 	}
+
+	for _, robot := range gs.Blue_team {
+			obstacles = append(obstacles, robot.GetPosition())
+	}
+
 	return obstacles
 }
 
@@ -110,12 +112,8 @@ func computeAttractivePotential(x, y, goalX, goalY float32) float64 {
 // calculateRepulsivePotential calculates the repulsive potential from obstacles
 func computeRepulsivePotential(x, y float32, obstacles []state.Position, d0, kRep float64) float64 {
 	repulsive := 0.0
-	fmt.Println("nr of obstacles", len(obstacles))
 	for _, obstacle := range obstacles {
-		fmt.Println("Obstacle\n", obstacle)
 		obstacleX, obstacleY := obstacle.X/cellSize, obstacle.Y/cellSize
-		fmt.Println("Obstacle", obstacleX, obstacleY)
-		fmt.Println("Robot", x, y)
 
 		dx := float64(x - obstacleX)
 		dy := float64(y - obstacleY)
