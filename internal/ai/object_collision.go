@@ -20,49 +20,93 @@ const (
 	localSize   = 5    // Size of the local neighborhood
 )
 
-// robotPos is the current position of the robot
-// goal is the destination position
-// gs is the current game state, contains the positions of all robots ie. the obstacles
-func avoidObstacles(robot *state.Robot, goal state.Position, gs state.GameState) state.Position {
 
-	// Matrix to hold the potential in the local neighborhood
-	localGrid := mat.NewDense(localSize, localSize, nil)
+func avoidCollision(robot *state.Robot, goal state.Position, gs *state.GameState) state.Position {
+	nearestRobot := getNearestRobot(gs, robot)
+	robot_pos := robot.GetPosition()
+	
+	potential_force := computePotentialForce(robot_pos, goal) // Potential force to move towards goal
+	gyroscopic_force := computeGyroscopicForce(robot, nearestRobot) // Gyroscopic force to steer away from obstacle
+	dampning_force := computeDampningForce(robot, nearestRobot) // Dampning force to reduce speed when approaching target
+	
+	pg_force := potential_force.Add(&gyroscopic_force)
+	total_force := pg_force.Add(&dampning_force)
 
-	obstacles := getObstacles(gs, robot.GetID())
-	obstacles = addWallObstacles(obstacles)
+	return state.Position{X: robot_pos.X+total_force.X, Y: robot_pos.Y+total_force.Y}
+}
 
-	localGrid.Apply(func(i, j int, v float64) float64 {
-		centerOffset := int(math.Floor(localSize / 2))
-		x := robot.GetPosition().X/cellSize + float32(i-centerOffset)
-		y := robot.GetPosition().Y/cellSize + float32(j-centerOffset)
+func computePotentialForce(robot_pos state.Position, goal state.Position) state.Position {
+	// Try 0.5*||robot_pos-goal||^2
+	scaling := float32(0.5)
+	direction := goal.Sub(&robot_pos)
+	force := direction.Scale(scaling)
+	return force
+}
 
-		// Compute the attractive potential
-		attractive := computeAttractivePotential(x, y, goal.X/cellSize, goal.Y/cellSize)
+func computeGyroscopicForce(robot, other_robot *state.Robot) state.Position {
+	robot_pos := robot.GetPosition()
+	other_pos := other_robot.GetPosition()
+	if other_robot == nil {
+		return state.Position{Y: 0, X: 0, Z: 0, Angle: 0}
+	}
 
-		// Compute the repulsive potential
-		repulsive := computeRepulsivePotential(x, y, obstacles, d0, kRep)
-		// repulsive = 0.0
+	relative_position := other_pos.Sub(&robot_pos)
+	cross_product := robot_pos.Cross2D(&relative_position)
+	
+	var S *mat.Dense
+	if cross_product > 0 {
+		S = mat.NewDense(2, 2, []float64{0, -1, 1, 0})
+	} else {
+		S = mat.NewDense(2, 2, []float64{0, 1, -1, 0})
+	}
+	
+	vel := robot.GetVelocity() 
+	vel_vector := mat.NewDense(2, 1, []float64{float64(vel.X), float64(vel.Y)})
 
-		return attractive + repulsive
-	}, localGrid)
+	gyroscopic_force := mat.NewDense(2, 1, nil)
+	gyroscopic_force.Mul(S, vel_vector)
+	
+	fmt.Println("gyroscopic_force", gyroscopic_force)
+	return state.Position{X: float32(gyroscopic_force.At(0, 0)), Y: float32(gyroscopic_force.At(1, 0))}
 
-	// Send the local grid to the Python script
-	// sendLocalGrid(localGrid)
+}
 
-	// minPotentialRow, minPotentialCol, _ := argmin(localGrid)
-	minPotentialRow, minPotentialCol, _ := argminNeighbors(localGrid, int(math.Floor(localSize/2)), int(math.Floor(localSize/2)))
+func computeDampningForce(robot, other_robot *state.Robot) state.Position {
+	return state.Position{X: 0, Y: 0}
+}
 
-	// Calculate the offsets relative to the robot’s current position
-	centerOffset := int(math.Floor(localSize / 2))
+func getNearestRobot(gs *state.GameState, robot *state.Robot) *state.Robot {
+	detection_radius := float32(300.0)
+	minDistance := float32(math.MaxFloat32)
+	var nearestRobot *state.Robot
+	robot_pos := robot.GetPosition()
 
-	offsetX := float32(minPotentialRow-centerOffset) * cellSize
-	offsetY := float32(minPotentialCol-centerOffset) * cellSize
+	for _, other_robot := range gs.GetTeam(robot.GetTeam()) {
+		// Ignore self
+		if robot.GetID() == other_robot.GetID(){
+			continue
+		}
 
-	// Apply the offsets to the robot’s current position to get the new destination
-	newX := robot.GetPosition().X + offsetX
-	newY := robot.GetPosition().Y + offsetY
+		other_robot_pos := other_robot.GetPosition()
+		distance := robot_pos.Distance(&other_robot_pos)
 
-	return state.Position{X: newX, Y: newY}
+		if distance < minDistance && distance < detection_radius {
+			minDistance = distance
+			nearestRobot = other_robot
+		}
+	}
+
+	for _, other_robot := range gs.GetOtherTeam(robot.GetTeam()) {
+		other_robot_pos := other_robot.GetPosition()
+		distance := robot_pos.Distance(&other_robot_pos)
+
+		if distance < minDistance {
+			minDistance = distance
+			nearestRobot = other_robot
+		}
+	}
+
+	return nearestRobot
 }
 
 func addWallObstacles(obstacles []state.Position) []state.Position {
@@ -83,6 +127,7 @@ func addWallObstacles(obstacles []state.Position) []state.Position {
 	return obstacles
 
 }
+
 
 func getObstacles(gs state.GameState, id state.ID) []state.Position {
 

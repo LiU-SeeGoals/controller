@@ -100,6 +100,7 @@ type ObstacleAvoidanceTest struct {
 	instructionSet [][]state.Instruction
 }
 
+// Robot ids must range from 0 to team_size
 func NewObstacleAvoidanceTest(team state.Team) *ObstacleAvoidanceTest {
 	team_size := 4
 	var instSet [][]state.Instruction
@@ -170,22 +171,12 @@ func (m *ObstacleAvoidanceTest) Archived(gs *state.GameState) int {
 	for id, at_state := range m.at_states {
 		target := m.instructionSet[id][at_state].Position
 		robot := gs.GetRobot(state.ID(id), m.team)
-		if atPosition(robot, target) {
+		if robot.AtPosition(target, 100) {
 			nr_states := len(m.instructionSet[id])
 			m.at_states[id] = (at_state + 1) % nr_states // Cycle through the states
 		}
 	}
 	return RUNNING
-}
-
-func atPosition(robot *state.Robot, position state.Position) bool {
-
-	robot_pos := robot.GetPosition()
-	diff0 := position.Sub(&robot_pos)
-	if diff0.Norm() < 100 {
-		return true
-	}
-	return false
 }
 
 // --------------------------MoveToTest----------------------------------------

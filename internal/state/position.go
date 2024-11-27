@@ -38,6 +38,11 @@ func (p *Position) Norm() float32 {
 	return float32(math.Sqrt(float64(p.X*p.X + p.Y*p.Y + p.Z*p.Z)))
 }
 
+func (p *Position) Distance(other *Position) float32 {
+	diff := p.Sub(other)
+	return diff.Norm()
+}
+
 func (p *Position) Scale(scalar float32) Position {
 	return Position{
 		X:     p.X * scalar,
@@ -45,6 +50,10 @@ func (p *Position) Scale(scalar float32) Position {
 		Z:     p.Z * scalar,
 		Angle: p.Angle * scalar,
 	}
+}
+
+func (p *Position) Cross2D(other *Position) float32 {
+	return p.X*other.Y - p.Y*other.X
 }
 
 func (p *Position) Normalize() Position {

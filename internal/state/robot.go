@@ -49,6 +49,10 @@ func NewRobot(id ID, team Team, history_capasity int) *Robot {
 	}
 }
 
+func (r *Robot) GetTeam() Team{
+	return r.team
+}
+
 func (r *Robot) SetPositionTime(x, y, angle float32, time int64) {
 	r.active = true
 	if r.history.Len() >= r.historyCapacity {
@@ -138,6 +142,18 @@ func (r *Robot) SetActive(active bool) {
 
 func (r *Robot) IsActive() bool {
 	return r.active
+}
+
+// Check if the robot is at the target position
+// return true if the robot is within "tolerance" 
+// mm of the target position
+func (r *Robot) AtPosition(target Position, tolerance float32) bool {
+	robot_pos := r.GetPosition()
+	diff0 := target.Sub(&robot_pos)
+	if diff0.Norm() < tolerance {
+		return true
+	}
+	return false
 }
 
 func (r *Robot) String() string {
