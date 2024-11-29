@@ -22,35 +22,45 @@ const (
 
 
 func avoidCollision(robot *state.Robot, goal state.Position, gs *state.GameState) state.Position {
+	// if robot.GetID() == 0 {
+	// 	fmt.Println(robot.GetVelocity())
+	// }
 	nearestRobot := getNearestRobot(gs, robot)
 	robot_pos := robot.GetPosition()
 	
 	potential_force := computePotentialForce(robot_pos, goal) // Potential force to move towards goal
 	gyroscopic_force := computeGyroscopicForce(robot, nearestRobot) // Gyroscopic force to steer away from obstacle
 	dampning_force := computeDampningForce(robot, nearestRobot) // Dampning force to reduce speed when approaching target
+	fmt.Println("potential_force", potential_force)
+	fmt.Println("gyroscopic_force", gyroscopic_force)
+	fmt.Println("dampning_force", dampning_force)
 	
 	pg_force := potential_force.Add(&gyroscopic_force)
 	total_force := pg_force.Add(&dampning_force)
+	fmt.Println("total_force", total_force)
 
 	return state.Position{X: robot_pos.X+total_force.X, Y: robot_pos.Y+total_force.Y}
 }
 
 func computePotentialForce(robot_pos state.Position, goal state.Position) state.Position {
 	// Try 0.5*||robot_pos-goal||^2
-	scaling := float32(0.5)
-	direction := goal.Sub(&robot_pos)
-	force := direction.Scale(scaling)
-	return force
+	attractive_force := goal.Sub(&robot_pos)
+	magn_attractive_force := attractive_force.Norm()
+	if magn_attractive_force > 2000 {
+		attractive_force = attractive_force.Scale(2000/magn_attractive_force)
+	}
+	return attractive_force
 }
 
 func computeGyroscopicForce(robot, other_robot *state.Robot) state.Position {
 	robot_pos := robot.GetPosition()
-	other_pos := other_robot.GetPosition()
 	if other_robot == nil {
-		return state.Position{Y: 0, X: 0, Z: 0, Angle: 0}
+		return state.Position{Y: 0, X: 0}
 	}
+	other_pos := other_robot.GetPosition()
 
 	relative_position := other_pos.Sub(&robot_pos)
+
 	cross_product := robot_pos.Cross2D(&relative_position)
 	
 	var S *mat.Dense
@@ -61,22 +71,32 @@ func computeGyroscopicForce(robot, other_robot *state.Robot) state.Position {
 	}
 	
 	vel := robot.GetVelocity() 
+	vel = vel.Scale(1500)
 	vel_vector := mat.NewDense(2, 1, []float64{float64(vel.X), float64(vel.Y)})
 
 	gyroscopic_force := mat.NewDense(2, 1, nil)
 	gyroscopic_force.Mul(S, vel_vector)
 	
-	fmt.Println("gyroscopic_force", gyroscopic_force)
 	return state.Position{X: float32(gyroscopic_force.At(0, 0)), Y: float32(gyroscopic_force.At(1, 0))}
 
 }
 
 func computeDampningForce(robot, other_robot *state.Robot) state.Position {
-	return state.Position{X: 0, Y: 0}
+	if other_robot == nil {
+		return state.Position{Y: 0, X: 0}
+	}
+
+	robot_pos := robot.GetPosition()
+	other_pos := other_robot.GetPosition()
+	distance := robot_pos.Distance(&other_pos)
+
+	vel := robot.GetVelocity()
+	breaking_force := vel.Scale(-1000/(distance*distance))
+	return breaking_force
 }
 
 func getNearestRobot(gs *state.GameState, robot *state.Robot) *state.Robot {
-	detection_radius := float32(300.0)
+	detection_radius := float32(1000.0)
 	minDistance := float32(math.MaxFloat32)
 	var nearestRobot *state.Robot
 	robot_pos := robot.GetPosition()
@@ -100,7 +120,7 @@ func getNearestRobot(gs *state.GameState, robot *state.Robot) *state.Robot {
 		other_robot_pos := other_robot.GetPosition()
 		distance := robot_pos.Distance(&other_robot_pos)
 
-		if distance < minDistance {
+		if distance < minDistance && distance < detection_radius {
 			minDistance = distance
 			nearestRobot = other_robot
 		}
