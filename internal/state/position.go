@@ -12,6 +12,10 @@ type Position struct {
 	Angle float32
 }
 
+func (p *Position) String() string {
+	return fmt.Sprintf("(%f, %f, %f, %f)", p.X, p.Y, p.Z, p.Angle)
+}
+
 func (p *Position) Add(other *Position) Position {
 	return Position{
 		X:     p.X + other.X,
