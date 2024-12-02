@@ -3,6 +3,7 @@ package ai
 import (
 	"fmt"
 	"time"
+  "math"
 
 	"github.com/LiU-SeeGoals/controller/internal/info"
 )
@@ -45,22 +46,24 @@ func (sb ScenarioSlowBrain) Run() {
 	gameState.SetValid(false)
 
 	scenarios := []ScenarioTest{}
-  scenarios = append(scenarios, NewMoveToBallTest(sb.team))
 	scenarios = append(scenarios, NewMoveToTest(sb.team))
 	scenarios = append(scenarios, NewObstacleAvoidanceTest(sb.team))
 	scenarios = append(scenarios, NewRealTest(sb.team))
+	// scenarios = append(scenarios, NewObstacleAvoidanceTest(sb.team))
+  scenarios = append(scenarios, NewMoveToBallTest(sb.team))
   
 	scenario_index := 0
 	if sb.run_scenario >= 0 {
 		scenario_index = sb.run_scenario
 	}
 
+    fmt.Println("Running scenarios")
 	for {
 		gameState = <-sb.incomingGameState
 
 		if !gameState.IsValid() {
 			fmt.Println("ScenarioSlowBrain: Invalid game state")
-			time.Sleep(10 * time.Millisecond)
+			time.Sleep(40 * time.Millisecond)
 			continue
 		}
 
@@ -105,7 +108,7 @@ type MoveToBallTest struct {
 func NewMoveToBallTest(team state.Team) *MoveToBallTest {
   return &MoveToBallTest{
     team:     team,
-    max_time: 20 * time.Second,
+    max_time: 30 * time.Second,
     at_state: -1,
   }
 }
@@ -129,26 +132,37 @@ func (m *MoveToBallTest) Run() []*state.Instruction {
 func (m *MoveToBallTest) Archived(gs *state.GameState) int {
 	robot_pos := gs.GetRobot(state.ID(0), m.team).GetPosition()
   ball_pos := gs.GetBall().GetPosition()
+  ball_pos.Sub(&robot_pos)
+
+	dx := float64(robot_pos.X - ball_pos.X)
+	dy := float64(robot_pos.Y - ball_pos.Y)
+  distance := math.Sqrt(math.Pow(dx, 2) + math.Pow(dy, 2))
 
 	if m.at_state == 0 {
-		diff0 := ball_pos.Sub(&robot_pos)
-		if diff0.Norm() < 100 {
+    fmt.Println("Robot is at", robot_pos.X, robot_pos.Y)
+    fmt.Println("Ball is at", ball_pos.X, robot_pos.Y)
+    fmt.Println("In state 0 (going to ball). Distance to ball is", distance)
+		if distance < 200 {
 			m.at_state = 1
 		}
 	} else if m.at_state == 1 {
 		diff0 := ball_pos.Sub(&robot_pos)
-		if diff0.Norm() > 100 {
+    fmt.Println("In state 1 (at ball). Distance to ball is", diff0.Norm())
+		if distance > 200 {
 			m.at_state = 2
 		}
 	}
+
 	if m.at_state >= 0 {
-		fmt.Println("Time expired", time.Since(m.start))
 		if time.Since(m.start) > m.max_time {
       if m.at_state == 0 {
+        fmt.Println("did not reach ball")
         return TIME_EXPIRED
       } else if m.at_state == 1 {
+        fmt.Println("Reached ball and stayed there! :D")
           return COMPLETE
       } else {
+        fmt.Println("Reached ball but then lost it :(")
           return FAILED
       }
     }
