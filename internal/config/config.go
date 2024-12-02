@@ -50,8 +50,8 @@ type ConfigSSLVision struct {
 }
 
 type ConfigReal struct {
-	REAL_ADDR                  string `env:"REAL_ADDR,required"`
-	REAL_YELLOW_TEAM_SEND_PORT string `env:"REAL_YELLOW_TEAM_SEND_PORT,required"`
+	BASESTATION_ADDR string `env:"BASESTATION_ADDR,required"`
+	BASESTATION_PORT string `env:"BASESTATION_PORT,required"`
 }
 
 // Config struct for sim
@@ -169,13 +169,13 @@ func GetSimYellowTeamAddress() string {
 	return fmt.Sprintf("%s:%s", cfg.Sim.Address, cfg.Sim.YellowControllerPort)
 }
 
-func GetRealYellowTeamAddress() string {
+func GetBasestationAddress() string {
 	cfg := GetInstance()
-	return fmt.Sprintf("%s:%s", cfg.Sim.Address, cfg.Sim.YellowControllerPort)
+	return fmt.Sprintf("%s:%s", cfg.Real.BASESTATION_ADDR, cfg.Real.BASESTATION_PORT)
 }
 
 // GetSSLClientAddress returns the SSL client address from the config.
 func GetSSLClientAddressReal() string {
 	cfg := GetInstance()
-	return fmt.Sprintf("%s:%s", cfg.Real.REAL_ADDR, cfg.Real.REAL_YELLOW_TEAM_SEND_PORT)
+	return fmt.Sprintf("%s:%s", cfg.SSLVision.Address, cfg.SSLVision.VizPort)
 }

@@ -30,12 +30,11 @@ func Scenario() {
 
 	simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress(), gs)
 
-
 	simController := simulator.NewSimControl()
 
 	// Some sim setup for debugging ai behaviour
-	presentYellow := []int{0,1,2,3}
-	presentBlue := []int{0,1,2}
+	presentYellow := []int{0, 1, 2, 3}
+	presentBlue := []int{0, 1, 2}
 	simController.SetPresentRobots(presentYellow, presentBlue)
 
 	ssl_receiver.InitGameState(gs, 0)
