@@ -31,18 +31,6 @@ func (sb *SlowBrainPy) Init(incoming <-chan state.GameState, outgoing chan<- sta
 	go sb.Run()
 }
 
-// resp = {
-// 	"instructions": [
-// 		{"id": 0,
-// 		 "position": [0, 0, 0, 0],
-// 		},
-// 		{"id": 1,
-// 		 "position": [0, 0, 0, 0],
-// 		},
-// 	]
-
-// }
-
 type PyResponse struct {
 	Instructions []struct {
 		Id       int

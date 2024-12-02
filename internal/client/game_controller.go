@@ -105,7 +105,6 @@ func (receiver *GCClient) InitGameStatus(gs *gamestatus.GameStatus) {
 	receiver.SourceIdentifier = packet.GetSourceIdentifier()
 }
 
-
 // Test printing out packets
 func (receiver *GCClient) UpdateGameStatus(gs *gamestatus.GameStatus) {
 	packet, ok := <-receiver.gc_channel

@@ -1,11 +1,13 @@
 package demos
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/ai"
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/config"
+	"github.com/LiU-SeeGoals/controller/internal/gamestatus"
 	"github.com/LiU-SeeGoals/controller/internal/simulator"
 	"github.com/LiU-SeeGoals/controller/internal/state"
 )
@@ -35,12 +37,16 @@ func PythonSlowBrain() {
 	simController.SetPresentRobots(presentYellow, presentBlue)
 
 	ssl_receiver.InitGameState(gs, 0)
+	referee := client.NewGCClient(config.GetGCClientAddress())
+	gamestatus := gamestatus.NewGameStatus()
+
 	start_time := time.Now().UnixMilli()
 	for {
 		playTime := time.Now().UnixMilli() - start_time
 		// fmt.Println("playTime: ", playTime)
 		ssl_receiver.UpdateGamestate(gs, playTime)
-
+		referee.UpdateGameStatus(gamestatus)
+		fmt.Println(gamestatus)
 		blue_actions := aiBlue.GetActions(gs)
 		yellow_actions := aiYellow.GetActions(gs)
 
