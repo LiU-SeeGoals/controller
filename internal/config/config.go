@@ -23,6 +23,8 @@ type Config struct {
 	// SSL vision config
 	SSLVision ConfigSSLVision
 
+	Real ConfigReal
+
 	// Sim config
 	Sim ConfigSim
 
@@ -40,10 +42,16 @@ type ConfigSSLVision struct {
 	Address string `env:"SSL_VISION_MULTICAST_ADDR,required"`
 
 	// Tracker, detection, and geometry packets.
-	Port string `env:"SSL_VISION_MAIN_PORT,required"`
+	Port      string `env:"SSL_SIM_VISION_MAIN_PORT,required"`
+	Port_real string `env:"SSL_REAL_VISION_MAIN_PORT,required"`
 
 	// Visualization packets.
 	VizPort string `env:"SSL_VISION_VIZ_PORT,required"`
+}
+
+type ConfigReal struct {
+	REAL_ADDR                  string `env:"REAL_ADDR,required"`
+	REAL_YELLOW_TEAM_SEND_PORT string `env:"REAL_YELLOW_TEAM_SEND_PORT,required"`
 }
 
 // Config struct for sim
@@ -159,4 +167,15 @@ func GetSimBlueTeamAddress() string {
 func GetSimYellowTeamAddress() string {
 	cfg := GetInstance()
 	return fmt.Sprintf("%s:%s", cfg.Sim.Address, cfg.Sim.YellowControllerPort)
+}
+
+func GetRealYellowTeamAddress() string {
+	cfg := GetInstance()
+	return fmt.Sprintf("%s:%s", cfg.Sim.Address, cfg.Sim.YellowControllerPort)
+}
+
+// GetSSLClientAddress returns the SSL client address from the config.
+func GetSSLClientAddressReal() string {
+	cfg := GetInstance()
+	return fmt.Sprintf("%s:%s", cfg.Real.REAL_ADDR, cfg.Real.REAL_YELLOW_TEAM_SEND_PORT)
 }
