@@ -1,4 +1,4 @@
-package gamestatus
+package state
 
 import (
 	"fmt"
@@ -149,7 +149,7 @@ func (gs *GameStatus) SetGameStatus(
 	timeLeft int64,
 	counter uint32,
 	positiveHalf bool,
-	message string,) {
+	message string) {
 
 	gs.gameStage = stage
 	gs.matchType = matchType

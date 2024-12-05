@@ -16,6 +16,8 @@ type GameState struct {
 
 	Field *Field
 
+	Status *GameStatus
+
 	MessageReceived int64
 }
 
@@ -141,7 +143,7 @@ func NewGameState(capacity int) *GameState {
 		gs.Yellow_team[i] = NewRobot(i, Yellow, capacity)
 	}
 	gs.Field = NewField()
-
+	gs.Status = NewGameStatus()
 	return &gs
 
 }

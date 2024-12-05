@@ -1,4 +1,4 @@
-package gamestatus
+package state
 
 import "fmt"
 
@@ -78,4 +78,3 @@ func (gs GameStage) String() string {
 		return fmt.Sprintf("Unknown GameStage (%d)", gs)
 	}
 }
-

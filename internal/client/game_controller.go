@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net"
 
-	"github.com/LiU-SeeGoals/controller/internal/gamestatus"
+	"github.com/LiU-SeeGoals/controller/internal/state"
 	"github.com/LiU-SeeGoals/proto_go/gc"
 	"google.golang.org/protobuf/proto"
 )
@@ -95,7 +95,7 @@ func NewGCClient(sslReceiverAddress string) *GCClient {
 	return receiver
 }
 
-func (receiver *GCClient) InitGameStatus(gs *gamestatus.GameStatus) {
+func (receiver *GCClient) InitGameStatus(gs *state.GameStatus) {
 	packet, ok := <-receiver.gc_channel
 
 	if !ok {
@@ -106,7 +106,7 @@ func (receiver *GCClient) InitGameStatus(gs *gamestatus.GameStatus) {
 }
 
 // Test printing out packets
-func (receiver *GCClient) UpdateGameStatus(gs *gamestatus.GameStatus) {
+func (receiver *GCClient) UpdateGameStatus(gs *state.GameStatus) {
 	packet, ok := <-receiver.gc_channel
 
 	if packet.GetSourceIdentifier() != receiver.SourceIdentifier {
@@ -118,15 +118,15 @@ func (receiver *GCClient) UpdateGameStatus(gs *gamestatus.GameStatus) {
 		return
 	}
 
-	gs.SetGameEvent(gamestatus.RefCommand(packet.GetCommand().Number()),
+	gs.SetGameEvent(state.RefCommand(packet.GetCommand().Number()),
 		packet.GetCommandTimestamp(),
 		float64(packet.GetDesignatedPosition().GetX()),
 		float64(packet.GetDesignatedPosition().GetY()),
-		gamestatus.RefCommand(packet.GetCommand().Number()),
+		state.RefCommand(packet.GetCommand().Number()),
 		packet.GetCurrentActionTimeRemaining())
 
-	gs.SetGameStatus(gamestatus.GameStage(packet.GetStage().Number()),
-		gamestatus.MatchType(packet.GetMatchType().Number()),
+	gs.SetGameStatus(state.GameStage(packet.GetStage().Number()),
+		state.MatchType(packet.GetMatchType().Number()),
 		packet.GetPacketTimestamp(),
 		packet.GetStageTimeLeft(),
 		packet.GetCommandCounter(),
@@ -177,4 +177,26 @@ func (receiver *GCClient) UpdateGameStatus(gs *gamestatus.GameStatus) {
 		packet.Blue.GetBotSubstitutionAllowed(),
 	)
 
+}
+
+type SSLClient struct {
+	vision  *SSLVisionClient
+	referee *GCClient
+}
+
+func NewSSLClient(sslReceiverAddressVision, sslReceiverAddressGCC string) *SSLClient {
+	return &SSLClient{
+		vision:  NewSSLVisionClient(sslReceiverAddressVision),
+		referee: NewGCClient(sslReceiverAddressGCC),
+	}
+}
+
+func (client *SSLClient) InitState(gs *state.GameState, play_time int64) {
+	client.vision.InitGameState(gs, play_time)
+	client.referee.InitGameStatus(gs.Status)
+}
+
+func (client *SSLClient) UpdateState(gs *state.GameState, play_time int64) {
+	client.vision.UpdateGamestate(gs, play_time)
+	client.referee.UpdateGameStatus(gs.Status)
 }

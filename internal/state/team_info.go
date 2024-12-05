@@ -1,4 +1,4 @@
-package gamestatus
+package state
 
 import (
 	"fmt"
@@ -162,4 +162,3 @@ func (t *TeamInfo) SetBotSubstitutionTimeLeft(botSubstitutionTimeLeft uint32) {
 func NewTeamInfo() *TeamInfo {
 	return &TeamInfo{}
 }
-

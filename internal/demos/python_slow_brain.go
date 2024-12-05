@@ -7,14 +7,13 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/ai"
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/config"
-	"github.com/LiU-SeeGoals/controller/internal/gamestatus"
 	"github.com/LiU-SeeGoals/controller/internal/simulator"
 	"github.com/LiU-SeeGoals/controller/internal/state"
 )
 
 func PythonSlowBrain() {
 	gs := state.NewGameState(10)
-	ssl_receiver := client.NewSSLVisionClient(config.GetSSLClientAddress())
+	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddress(), config.GetGCClientAddress())
 
 	slowBrainBlue := ai.NewSlowBrainPy("http://10.240.211.153:5000/slowBrainBlue")
 	fastBrainBlue := ai.NewFastBrainGO()
@@ -36,17 +35,14 @@ func PythonSlowBrain() {
 	presentBlue := []int{}
 	simController.SetPresentRobots(presentYellow, presentBlue)
 
-	ssl_receiver.InitGameState(gs, 0)
-	referee := client.NewGCClient(config.GetGCClientAddress())
-	gamestatus := gamestatus.NewGameStatus()
+	ssl_receiver.InitState(gs, 0)
 
 	start_time := time.Now().UnixMilli()
 	for {
 		playTime := time.Now().UnixMilli() - start_time
 		// fmt.Println("playTime: ", playTime)
-		ssl_receiver.UpdateGamestate(gs, playTime)
-		referee.UpdateGameStatus(gamestatus)
-		fmt.Println(gamestatus)
+		ssl_receiver.UpdateState(gs, playTime)
+		fmt.Println(gs.Status)
 		blue_actions := aiBlue.GetActions(gs)
 		yellow_actions := aiYellow.GetActions(gs)
 

@@ -1,4 +1,4 @@
-package gamestatus
+package state
 
 import (
 	"fmt"
@@ -56,7 +56,7 @@ type GameEvent struct {
 	// millimetres and correspond to SSL-Vision coordinates. These are
 	// present (in the case of a ball placement command) or
 	// absent (in the case of any other command).
-	DesignatedPosition *mat.VecDense 
+	DesignatedPosition *mat.VecDense
 	// The command that will be issued after the current stoppage and ball placement to continue the game.
 	next_command RefCommand
 	// The time in microseconds that is remaining until the current action times out
@@ -67,7 +67,6 @@ type GameEvent struct {
 	//  * kickoff, penalty kick, force start
 	//  * ball placement
 	current_action_time_remaining int64
-
 
 	// All game events that were detected since the last RUNNING state.
 	// Will be cleared as soon as the game is continued.
@@ -192,4 +191,3 @@ func (ge *GameEvent) GetCurrentActionTimeRemaining() int64 {
 func (ge *GameEvent) SetCurrentActionTimeRemaining(timeRemaining int64) {
 	ge.current_action_time_remaining = timeRemaining
 }
-

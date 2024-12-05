@@ -1,4 +1,4 @@
-package gamestatus
+package state
 
 import "fmt"
 

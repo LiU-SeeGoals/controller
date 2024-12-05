@@ -38,3 +38,19 @@ func pipe[M any](from <-chan M, to chan M) {
 
 	}
 }
+
+func NB_Send[M any](c chan *M, v *M) {
+	select {
+	case c <- v:
+	default:
+		<-c
+		c <- v
+	}
+}
+
+func NB_Receive[M any](from chan *M, v *M) {
+	select {
+	case v = <-from:
+	default:
+	}
+}

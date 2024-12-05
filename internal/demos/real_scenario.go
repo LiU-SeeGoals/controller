@@ -11,7 +11,7 @@ import (
 
 func RealScenario() {
 	gs := state.NewGameState(10)
-	ssl_receiver := client.NewSSLVisionClient(config.GetSSLClientAddressReal())
+	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddress(), config.GetGCClientAddress())
 
 	// Yellow team
 	slowBrainYellow := ai.NewScenarioSlowBrain(1, 2)
@@ -21,12 +21,12 @@ func RealScenario() {
 
 	clientYellow := client.NewBaseStationClient(config.GetBasestationAddress())
 
-	ssl_receiver.InitGameState(gs, 0)
+	ssl_receiver.InitState(gs, 0)
 	start_time := time.Now().UnixMilli()
 	for {
 		playTime := time.Now().UnixMilli() - start_time
 
-		ssl_receiver.UpdateGamestate(gs, playTime)
+		ssl_receiver.UpdateState(gs, playTime)
 
 		yellow_actions := aiYellow.GetActions(gs)
 		clientYellow.SendActions(yellow_actions)

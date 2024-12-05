@@ -13,7 +13,7 @@ import (
 
 func Scenario() {
 	gs := state.NewGameState(10)
-	ssl_receiver := client.NewSSLVisionClient(config.GetSSLClientAddress())
+	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddress(), config.GetGCClientAddress())
 
 	// Yellow team
 	slowBrainYellow := ai.NewScenarioSlowBrain(1, 1)
@@ -38,12 +38,12 @@ func Scenario() {
 	presentBlue := []int{0, 1, 2, 3}
 	simController.SetPresentRobots(presentYellow, presentBlue)
 
-	ssl_receiver.InitGameState(gs, 0)
+	ssl_receiver.InitState(gs, 0)
 	start_time := time.Now().UnixMilli()
 	for {
 		playTime := time.Now().UnixMilli() - start_time
 		// fmt.Println("playTime: ", playTime)
-		ssl_receiver.UpdateGamestate(gs, playTime)
+		ssl_receiver.UpdateState(gs, playTime)
 		fmt.Println(gs)
 
 		yellow_actions := aiYellow.GetActions(gs)
