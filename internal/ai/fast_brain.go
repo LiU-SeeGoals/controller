@@ -76,11 +76,12 @@ func (fb *FastBrainGO) moveToPosition(inst *state.Instruction, gs *state.GameSta
 	act.Id = int(robot.GetID())
 	act.Team = fb.team
 	act.Pos = robot.GetPosition()
-	if fb.team == state.Yellow {
-		act.Dest = avoidObstacles(robot, inst.Position, *gs)
-	} else {
-		act.Dest = inst.Position
-	}
+	act.Dest = inst.Position
+	// if fb.team == state.Yellow {
+	// 	act.Dest = avoidObstacles(robot, inst.Position, *gs)
+	// } else {
+	// 	act.Dest = inst.Position
+	// }
 	act.Dribble = false
 	return &act
 }

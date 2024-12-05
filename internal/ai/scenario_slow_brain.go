@@ -46,6 +46,7 @@ func (sb ScenarioSlowBrain) Run() {
 	scenarios := []ScenarioTest{}
 	scenarios = append(scenarios, NewMoveToTest(sb.team))
 	scenarios = append(scenarios, NewObstacleAvoidanceTest(sb.team))
+	scenarios = append(scenarios, NewRealTest(sb.team))
 	scenario_index := 0
 	if sb.run_scenario >= 0 {
 		scenario_index = sb.run_scenario
@@ -90,6 +91,55 @@ func (sb ScenarioSlowBrain) Run() {
 
 }
 
+// --------------------------Real Test--------------------------------
+type RealTest struct {
+	team           state.Team
+	at_state       int
+	start          time.Time
+	max_time       time.Duration
+	instructionSet []*state.Instruction
+}
+
+func NewRealTest(team state.Team) *RealTest {
+
+	instSet := []*state.Instruction{
+		{Type: state.MoveToPosition, Id: 5, Position: state.Position{X: -2000, Y: 0}},
+		{Type: state.MoveToPosition, Id: 5, Position: state.Position{X: 2000, Y: 0}},
+	}
+
+	return &RealTest{
+		team:           team,
+		max_time:       600 * time.Second,
+		at_state:       0,
+		instructionSet: instSet,
+	}
+}
+
+func (m *RealTest) Run() []*state.Instruction {
+
+	return []*state.Instruction{m.instructionSet[m.at_state]}
+}
+
+func (m *RealTest) Archived(gs *state.GameState) int {
+	// if len(gs.Yellow_team) != 4 {
+	// 	fmt.Println("Yellow team has", len(gs.Yellow_team), "4 required")
+	// 	return ERROR
+	// } else if len(gs.Blue_team) != 3 {
+	// 	fmt.Println("Blue team has", len(gs.Blue_team), "3 required")
+	// 	return ERROR
+	// }
+
+	// This assumes that the robot ids range from 0 to m.team_size
+	target := m.instructionSet[m.at_state].Position
+	robot := gs.GetRobot(state.ID(5), m.team)
+
+	if atPosition(robot, target) {
+		m.at_state = (m.at_state + 1) % 2 // Cycle through the states
+	}
+
+	return RUNNING
+}
+
 // --------------------------Obstacle avoidance--------------------------------
 type ObstacleAvoidanceTest struct {
 	team           state.Team
@@ -113,7 +163,7 @@ func NewObstacleAvoidanceTest(team state.Team) *ObstacleAvoidanceTest {
 				{Type: state.MoveToPosition, Id: 1, Position: state.Position{X: 640, Y: -1000}},
 				{Type: state.MoveToPosition, Id: 1, Position: state.Position{X: 640, Y: 1000}},
 			},
-			{
+			{ // --------------------------Obstacle avoidance--------------------------------
 				{Type: state.MoveToPosition, Id: 2, Position: state.Position{X: 1925, Y: -1000}},
 				{Type: state.MoveToPosition, Id: 2, Position: state.Position{X: 1925, Y: 1000}},
 			},
@@ -121,7 +171,13 @@ func NewObstacleAvoidanceTest(team state.Team) *ObstacleAvoidanceTest {
 
 				{Type: state.MoveToPosition, Id: 3, Position: state.Position{X: 3210, Y: -1000}},
 				{Type: state.MoveToPosition, Id: 3, Position: state.Position{X: 3210, Y: 1000}},
-			}}
+			},
+			{
+
+				{Type: state.MoveToPosition, Id: 3, Position: state.Position{X: 3210, Y: -1000}},
+				{Type: state.MoveToPosition, Id: 3, Position: state.Position{X: 3210, Y: 1000}},
+			},
+		}
 	} else {
 		instSet = [][]state.Instruction{
 			{
