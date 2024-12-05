@@ -1,6 +1,7 @@
 package demos
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/ai"
@@ -30,12 +31,11 @@ func Scenario() {
 
 	simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress(), gs)
 
-
 	simController := simulator.NewSimControl()
 
 	// Some sim setup for debugging ai behaviour
-	presentYellow := []int{0,1,2,3}
-	presentBlue := []int{0,1,2}
+	presentYellow := []int{0, 1, 2, 3, 4}
+	presentBlue := []int{0, 1, 2, 3}
 	simController.SetPresentRobots(presentYellow, presentBlue)
 
 	ssl_receiver.InitGameState(gs, 0)
@@ -44,6 +44,7 @@ func Scenario() {
 		playTime := time.Now().UnixMilli() - start_time
 		// fmt.Println("playTime: ", playTime)
 		ssl_receiver.UpdateGamestate(gs, playTime)
+		fmt.Println(gs)
 
 		yellow_actions := aiYellow.GetActions(gs)
 		simClientYellow.SendActions(yellow_actions)

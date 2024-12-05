@@ -14,9 +14,9 @@ type GameState struct {
 
 	Ball *Ball
 
+	Field *Field
+
 	MessageReceived int64
-	fieldLength     float32
-	fieldWidth      float32
 }
 
 type GameStateDTO struct {
@@ -71,6 +71,23 @@ func (gs *GameState) SetMessageReceivedTime(time int64) {
 	gs.MessageReceived = time
 
 }
+
+func (gs *GameState) SetField(length, width, goalWidth, goalDepth, boundaryWidth, penaltyWidth, penaltyDepth int32) {
+	gs.Field.FieldLength = length
+	gs.Field.FieldWidth = width
+	gs.Field.GoalWidth = goalWidth
+	gs.Field.GoalDepth = goalDepth
+	gs.Field.BoundaryWidth = boundaryWidth
+	gs.Field.PenaltyAreaWidth = penaltyWidth
+	gs.Field.PenaltyAreaDepth = penaltyDepth
+}
+func (gs *GameState) AddFieldLine(name string, x1, y1, x2, y2, thickness float32, lineType int) {
+	gs.Field.SetLine(name, x1, y1, x2, y2, thickness, FieldShape(lineType))
+}
+
+func (gs *GameState) AddFieldArc(name string, centerX, centerY, radius, angle1, angle2, thickness float32, shape int) {
+	gs.Field.SetArc(name, centerX, centerY, radius, angle1, angle2, thickness, FieldShape(shape))
+}
 func (gs *GameState) GetMessageReceivedTime() int64 {
 	return gs.MessageReceived
 }
@@ -114,8 +131,6 @@ func (gs *GameState) GetRobot(id ID, team Team) *Robot {
 func NewGameState(capacity int) *GameState {
 	gs := GameState{}
 	gs.Valid = true
-	gs.fieldLength = 9000 // TODO: Get from geometry
-	gs.fieldWidth = 6000  // TODO: Get from geometry
 
 	gs.Ball = NewBall(capacity)
 	var i ID
@@ -125,6 +140,7 @@ func NewGameState(capacity int) *GameState {
 		gs.Blue_team[i] = NewRobot(i, Blue, capacity)
 		gs.Yellow_team[i] = NewRobot(i, Yellow, capacity)
 	}
+	gs.Field = NewField()
 
 	return &gs
 
