@@ -132,7 +132,6 @@ func (m *MoveToBallTest) Run() []*state.Instruction {
 func (m *MoveToBallTest) Archived(gs *state.GameState) int {
 	robot_pos := gs.GetRobot(state.ID(0), m.team).GetPosition()
   ball_pos := gs.GetBall().GetPosition()
-  ball_pos.Sub(&robot_pos)
 
 	dx := float64(robot_pos.X - ball_pos.X)
 	dy := float64(robot_pos.Y - ball_pos.Y)
@@ -146,12 +145,13 @@ func (m *MoveToBallTest) Archived(gs *state.GameState) int {
 			m.at_state = 1
 		}
 	} else if m.at_state == 1 {
-		diff0 := ball_pos.Sub(&robot_pos)
-    fmt.Println("In state 1 (at ball). Distance to ball is", diff0.Norm())
+    fmt.Println("In state 1 (at ball). Distance to ball is", distance)
 		if distance > 200 {
 			m.at_state = 2
 		}
-	}
+	} else {
+    fmt.Println("In state 2. Distance to ball is", distance)
+  }
 
 	if m.at_state >= 0 {
 		if time.Since(m.start) > m.max_time {
