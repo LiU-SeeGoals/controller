@@ -6,7 +6,7 @@ import (
 	"math"
 	"net"
 
-	"github.com/LiU-SeeGoals/controller/internal/state"
+	"github.com/LiU-SeeGoals/controller/internal/info"
 	"gonum.org/v1/gonum/mat"
 )
 
@@ -23,7 +23,7 @@ const (
 // robotPos is the current position of the robot
 // goal is the destination position
 // gs is the current game state, contains the positions of all robots ie. the obstacles
-func avoidObstacles(robot *state.Robot, goal state.Position, gs state.GameState) state.Position {
+func avoidObstacles(robot *info.Robot, goal info.Position, gs info.GameState) info.Position {
 
 	// Matrix to hold the potential in the local neighborhood
 	localGrid := mat.NewDense(localSize, localSize, nil)
@@ -62,10 +62,10 @@ func avoidObstacles(robot *state.Robot, goal state.Position, gs state.GameState)
 	newX := robot.GetPosition().X + offsetX
 	newY := robot.GetPosition().Y + offsetY
 
-	return state.Position{X: newX, Y: newY}
+	return info.Position{X: newX, Y: newY}
 }
 
-func addWallObstacles(obstacles []state.Position) []state.Position {
+func addWallObstacles(obstacles []info.Position) []info.Position {
 
 	// Add the walls as obstacles
 	padding := 800
@@ -73,20 +73,20 @@ func addWallObstacles(obstacles []state.Position) []state.Position {
 	halfFieldLength := (fieldLength + padding) / 2
 	robotRadius := 50
 	for x := -halfFieldLength - robotRadius; x < halfFieldLength+robotRadius; x += 2 * robotRadius {
-		obstacles = append(obstacles, state.Position{X: float32(x), Y: float32(halfFieldWidth)})
-		obstacles = append(obstacles, state.Position{X: float32(x), Y: float32(-halfFieldWidth)})
+		obstacles = append(obstacles, info.Position{X: float32(x), Y: float32(halfFieldWidth)})
+		obstacles = append(obstacles, info.Position{X: float32(x), Y: float32(-halfFieldWidth)})
 	}
 	for y := -halfFieldWidth - robotRadius; y < halfFieldWidth+robotRadius; y += 2 * robotRadius {
-		obstacles = append(obstacles, state.Position{X: float32(halfFieldLength), Y: float32(y)})
-		obstacles = append(obstacles, state.Position{X: float32(-halfFieldLength), Y: float32(y)})
+		obstacles = append(obstacles, info.Position{X: float32(halfFieldLength), Y: float32(y)})
+		obstacles = append(obstacles, info.Position{X: float32(-halfFieldLength), Y: float32(y)})
 	}
 	return obstacles
 
 }
 
-func getObstacles(gs state.GameState, id state.ID) []state.Position {
+func getObstacles(gs info.GameState, id info.ID) []info.Position {
 
-	var obstacles []state.Position
+	var obstacles []info.Position
 
 	// Handle own team avoiding
 	for _, robot := range gs.Yellow_team {
@@ -97,7 +97,7 @@ func getObstacles(gs state.GameState, id state.ID) []state.Position {
 	}
 
 	for _, robot := range gs.Blue_team {
-			obstacles = append(obstacles, robot.GetPosition())
+		obstacles = append(obstacles, robot.GetPosition())
 	}
 
 	return obstacles
@@ -110,7 +110,7 @@ func computeAttractivePotential(x, y, goalX, goalY float32) float64 {
 }
 
 // calculateRepulsivePotential calculates the repulsive potential from obstacles
-func computeRepulsivePotential(x, y float32, obstacles []state.Position, d0, kRep float64) float64 {
+func computeRepulsivePotential(x, y float32, obstacles []info.Position, d0, kRep float64) float64 {
 	repulsive := 0.0
 	for _, obstacle := range obstacles {
 		obstacleX, obstacleY := obstacle.X/cellSize, obstacle.Y/cellSize

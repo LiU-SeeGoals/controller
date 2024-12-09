@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
-	"github.com/LiU-SeeGoals/controller/internal/state"
+	"github.com/LiU-SeeGoals/controller/internal/info"
 	"github.com/gorilla/websocket"
 )
 
@@ -159,8 +159,8 @@ func (server *WebServer) receiveData() {
 // and the functions under handles all of it so multiple instances are not created
 
 type WebsiteDTO struct {
-	RobotPositions [2 * state.TEAM_SIZE]state.RobotDTO
-	BallPosition   state.BallDTO
+	RobotPositions [2 * info.TEAM_SIZE]info.RobotDTO
+	BallPosition   info.BallDTO
 	RobotActions   []action.ActionDTO
 	TerminalLog    []string
 }
@@ -194,7 +194,7 @@ func BroadcastGameState(message WebsiteDTO) {
 	webserver.gameStateQueueMutex.Unlock()
 }
 
-func UpdateWebGUI(gs *state.GameState, actions []action.Action, terminal_messages []string) {
+func UpdateWebGUI(gs *info.GameState, actions []action.Action, terminal_messages []string) {
 	var gamestate_DTO = gs.ToDTO()
 	var actionTDO = make([]action.ActionDTO, len(actions))
 	for i, obj := range actions {

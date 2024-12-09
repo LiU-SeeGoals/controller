@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"net"
 
-	"github.com/LiU-SeeGoals/controller/internal/state"
+	"github.com/LiU-SeeGoals/controller/internal/helper"
+	"github.com/LiU-SeeGoals/controller/internal/info"
 	"github.com/LiU-SeeGoals/proto_go/gc"
 	"google.golang.org/protobuf/proto"
 )
@@ -67,11 +68,12 @@ func (r *GCConnection) Receive(packetChan chan *gc.Referee) {
 			continue
 		}
 
-		packetChan <- &r.packet
+		helper.NB_Send[gc.Referee](packetChan, &r.packet)
+
 	}
 }
 
-type GCClient struct {
+type SSLRefereeClient struct {
 	gc         *GCConnection
 	gc_channel chan *gc.Referee
 	// A random UUID of the source that is kept constant at the source while running
@@ -81,13 +83,13 @@ type GCClient struct {
 
 // Start a SSL Vision receiver, returns a channel from
 // which SSL wrapper packets can be obtained.
-func (receiver *GCClient) Connect() {
+func (receiver *SSLRefereeClient) Connect() {
 	receiver.gc.Connect()
 	go receiver.gc.Receive(receiver.gc_channel)
 }
 
-func NewGCClient(sslReceiverAddress string) *GCClient {
-	receiver := &GCClient{
+func NewSSLRefereeClient(sslReceiverAddress string) *SSLRefereeClient {
+	receiver := &SSLRefereeClient{
 		gc:         NewGCConnection(sslReceiverAddress),
 		gc_channel: make(chan *gc.Referee),
 	}
@@ -95,38 +97,25 @@ func NewGCClient(sslReceiverAddress string) *GCClient {
 	return receiver
 }
 
-func (receiver *GCClient) InitGameStatus(gs *state.GameStatus) {
-	packet, ok := <-receiver.gc_channel
-
+func (receiver *SSLRefereeClient) handlePacket(packet *gc.Referee, ok bool, gi *info.GameInfo) {
 	if !ok {
 		fmt.Println("GC Channel closed")
 		return
 	}
-	receiver.SourceIdentifier = packet.GetSourceIdentifier()
-}
-
-// Test printing out packets
-func (receiver *GCClient) UpdateGameStatus(gs *state.GameStatus) {
-	packet, ok := <-receiver.gc_channel
 
 	if packet.GetSourceIdentifier() != receiver.SourceIdentifier {
 		return
 	}
 
-	if !ok {
-		fmt.Println("GC Channel closed")
-		return
-	}
-
-	gs.SetGameEvent(state.RefCommand(packet.GetCommand().Number()),
+	gi.Status.SetGameEvent(info.RefCommand(packet.GetCommand().Number()),
 		packet.GetCommandTimestamp(),
 		float64(packet.GetDesignatedPosition().GetX()),
 		float64(packet.GetDesignatedPosition().GetY()),
-		state.RefCommand(packet.GetCommand().Number()),
+		info.RefCommand(packet.GetCommand().Number()),
 		packet.GetCurrentActionTimeRemaining())
 
-	gs.SetGameStatus(state.GameStage(packet.GetStage().Number()),
-		state.MatchType(packet.GetMatchType().Number()),
+	gi.Status.SetGameStatus(info.GameStage(packet.GetStage().Number()),
+		info.MatchType(packet.GetMatchType().Number()),
 		packet.GetPacketTimestamp(),
 		packet.GetStageTimeLeft(),
 		packet.GetCommandCounter(),
@@ -134,7 +123,7 @@ func (receiver *GCClient) UpdateGameStatus(gs *state.GameStatus) {
 		packet.GetStatusMessage())
 
 	// yellow team
-	gs.SetTeamInfo(
+	gi.Status.SetTeamInfo(
 		true,
 		packet.Yellow.GetName(),
 		packet.Yellow.GetScore(),
@@ -156,7 +145,7 @@ func (receiver *GCClient) UpdateGameStatus(gs *state.GameStatus) {
 	)
 
 	// blue team
-	gs.SetTeamInfo(
+	gi.Status.SetTeamInfo(
 		false,
 		packet.Blue.GetName(),
 		packet.Blue.GetScore(),
@@ -176,27 +165,13 @@ func (receiver *GCClient) UpdateGameStatus(gs *state.GameStatus) {
 		packet.Blue.GetBallPlacementFailuresReached(),
 		packet.Blue.GetBotSubstitutionAllowed(),
 	)
-
 }
 
-type SSLClient struct {
-	vision  *SSLVisionClient
-	referee *GCClient
-}
-
-func NewSSLClient(sslReceiverAddressVision, sslReceiverAddressGCC string) *SSLClient {
-	return &SSLClient{
-		vision:  NewSSLVisionClient(sslReceiverAddressVision),
-		referee: NewGCClient(sslReceiverAddressGCC),
+// Test printing out packets
+func (receiver *SSLRefereeClient) UpdateGameInfo(gi *info.GameInfo) {
+	select {
+	case packet, ok := <-receiver.gc_channel:
+		receiver.handlePacket(packet, ok, gi)
+	default:
 	}
-}
-
-func (client *SSLClient) InitState(gs *state.GameState, play_time int64) {
-	client.vision.InitGameState(gs, play_time)
-	client.referee.InitGameStatus(gs.Status)
-}
-
-func (client *SSLClient) UpdateState(gs *state.GameState, play_time int64) {
-	client.vision.UpdateGamestate(gs, play_time)
-	client.referee.UpdateGameStatus(gs.Status)
 }

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/LiU-SeeGoals/controller/internal/state"
+	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
 const (
@@ -15,9 +15,9 @@ const (
 )
 
 type ScenarioSlowBrain struct {
-	team              state.Team
-	incomingGameState <-chan state.GameState
-	outgoingPlan      chan<- state.GamePlan
+	team              info.Team
+	incomingGameState <-chan info.GameState
+	outgoingPlan      chan<- info.GamePlan
 	scale             float32
 	run_scenario      int // -1 for all
 }
@@ -26,7 +26,7 @@ func NewScenarioSlowBrain(scale float32, run_scenario int) *ScenarioSlowBrain {
 	return &ScenarioSlowBrain{scale: scale, run_scenario: run_scenario}
 }
 
-func (sb *ScenarioSlowBrain) Init(incoming <-chan state.GameState, outgoing chan<- state.GamePlan, team state.Team) {
+func (sb *ScenarioSlowBrain) Init(incoming <-chan info.GameState, outgoing chan<- info.GamePlan, team info.Team) {
 	sb.incomingGameState = incoming
 	sb.outgoingPlan = outgoing
 	sb.team = team
@@ -35,12 +35,12 @@ func (sb *ScenarioSlowBrain) Init(incoming <-chan state.GameState, outgoing chan
 }
 
 type ScenarioTest interface {
-	Run() []*state.Instruction
-	Archived(*state.GameState) int
+	Run() []*info.Instruction
+	Archived(*info.GameState) int
 }
 
 func (sb ScenarioSlowBrain) Run() {
-	var gameState state.GameState
+	var gameState info.GameState
 	gameState.SetValid(false)
 
 	scenarios := []ScenarioTest{}
@@ -78,7 +78,7 @@ func (sb ScenarioSlowBrain) Run() {
 
 		inst := scenario.Run()
 
-		plan := state.GamePlan{}
+		plan := info.GamePlan{}
 		plan.Instructions = inst
 
 		plan.Team = sb.team
@@ -93,18 +93,18 @@ func (sb ScenarioSlowBrain) Run() {
 
 // --------------------------Real Test--------------------------------
 type RealTest struct {
-	team           state.Team
+	team           info.Team
 	at_state       int
 	start          time.Time
 	max_time       time.Duration
-	instructionSet []*state.Instruction
+	instructionSet []*info.Instruction
 }
 
-func NewRealTest(team state.Team) *RealTest {
+func NewRealTest(team info.Team) *RealTest {
 
-	instSet := []*state.Instruction{
-		{Type: state.MoveToPosition, Id: 5, Position: state.Position{X: -2000, Y: 0}},
-		{Type: state.MoveToPosition, Id: 5, Position: state.Position{X: 2000, Y: 0}},
+	instSet := []*info.Instruction{
+		{Type: info.MoveToPosition, Id: 5, Position: info.Position{X: -2000, Y: 0}},
+		{Type: info.MoveToPosition, Id: 5, Position: info.Position{X: 2000, Y: 0}},
 	}
 
 	return &RealTest{
@@ -115,12 +115,12 @@ func NewRealTest(team state.Team) *RealTest {
 	}
 }
 
-func (m *RealTest) Run() []*state.Instruction {
+func (m *RealTest) Run() []*info.Instruction {
 
-	return []*state.Instruction{m.instructionSet[m.at_state]}
+	return []*info.Instruction{m.instructionSet[m.at_state]}
 }
 
-func (m *RealTest) Archived(gs *state.GameState) int {
+func (m *RealTest) Archived(gs *info.GameState) int {
 	// if len(gs.Yellow_team) != 4 {
 	// 	fmt.Println("Yellow team has", len(gs.Yellow_team), "4 required")
 	// 	return ERROR
@@ -131,7 +131,7 @@ func (m *RealTest) Archived(gs *state.GameState) int {
 
 	// This assumes that the robot ids range from 0 to m.team_size
 	target := m.instructionSet[m.at_state].Position
-	robot := gs.GetRobot(state.ID(5), m.team)
+	robot := gs.GetRobot(info.ID(5), m.team)
 
 	if atPosition(robot, target) {
 		m.at_state = (m.at_state + 1) % 2 // Cycle through the states
@@ -142,55 +142,55 @@ func (m *RealTest) Archived(gs *state.GameState) int {
 
 // --------------------------Obstacle avoidance--------------------------------
 type ObstacleAvoidanceTest struct {
-	team           state.Team
+	team           info.Team
 	team_size      int
 	at_states      []int
 	start          time.Time
 	max_time       time.Duration
-	instructionSet [][]state.Instruction
+	instructionSet [][]info.Instruction
 }
 
-func NewObstacleAvoidanceTest(team state.Team) *ObstacleAvoidanceTest {
+func NewObstacleAvoidanceTest(team info.Team) *ObstacleAvoidanceTest {
 	team_size := 4
-	var instSet [][]state.Instruction
-	if team == state.Yellow {
-		instSet = [][]state.Instruction{
+	var instSet [][]info.Instruction
+	if team == info.Yellow {
+		instSet = [][]info.Instruction{
 			{
-				{Type: state.MoveToPosition, Id: 0, Position: state.Position{X: -4000, Y: 0}},
-				{Type: state.MoveToPosition, Id: 0, Position: state.Position{X: 4000, Y: 0}},
+				{Type: info.MoveToPosition, Id: 0, Position: info.Position{X: -4000, Y: 0}},
+				{Type: info.MoveToPosition, Id: 0, Position: info.Position{X: 4000, Y: 0}},
 			},
 			{
-				{Type: state.MoveToPosition, Id: 1, Position: state.Position{X: 640, Y: -1000}},
-				{Type: state.MoveToPosition, Id: 1, Position: state.Position{X: 640, Y: 1000}},
+				{Type: info.MoveToPosition, Id: 1, Position: info.Position{X: 640, Y: -1000}},
+				{Type: info.MoveToPosition, Id: 1, Position: info.Position{X: 640, Y: 1000}},
 			},
 			{ // --------------------------Obstacle avoidance--------------------------------
-				{Type: state.MoveToPosition, Id: 2, Position: state.Position{X: 1925, Y: -1000}},
-				{Type: state.MoveToPosition, Id: 2, Position: state.Position{X: 1925, Y: 1000}},
+				{Type: info.MoveToPosition, Id: 2, Position: info.Position{X: 1925, Y: -1000}},
+				{Type: info.MoveToPosition, Id: 2, Position: info.Position{X: 1925, Y: 1000}},
 			},
 			{
 
-				{Type: state.MoveToPosition, Id: 3, Position: state.Position{X: 3210, Y: -1000}},
-				{Type: state.MoveToPosition, Id: 3, Position: state.Position{X: 3210, Y: 1000}},
+				{Type: info.MoveToPosition, Id: 3, Position: info.Position{X: 3210, Y: -1000}},
+				{Type: info.MoveToPosition, Id: 3, Position: info.Position{X: 3210, Y: 1000}},
 			},
 			{
 
-				{Type: state.MoveToPosition, Id: 3, Position: state.Position{X: 3210, Y: -1000}},
-				{Type: state.MoveToPosition, Id: 3, Position: state.Position{X: 3210, Y: 1000}},
+				{Type: info.MoveToPosition, Id: 3, Position: info.Position{X: 3210, Y: -1000}},
+				{Type: info.MoveToPosition, Id: 3, Position: info.Position{X: 3210, Y: 1000}},
 			},
 		}
 	} else {
-		instSet = [][]state.Instruction{
+		instSet = [][]info.Instruction{
 			{
-				{Type: state.MoveToPosition, Id: 0, Position: state.Position{X: -3215, Y: 1000}},
-				{Type: state.MoveToPosition, Id: 0, Position: state.Position{X: -3215, Y: -1000}},
+				{Type: info.MoveToPosition, Id: 0, Position: info.Position{X: -3215, Y: 1000}},
+				{Type: info.MoveToPosition, Id: 0, Position: info.Position{X: -3215, Y: -1000}},
 			},
 			{
-				{Type: state.MoveToPosition, Id: 1, Position: state.Position{X: -1930, Y: -1000}},
-				{Type: state.MoveToPosition, Id: 1, Position: state.Position{X: -1930, Y: 1000}},
+				{Type: info.MoveToPosition, Id: 1, Position: info.Position{X: -1930, Y: -1000}},
+				{Type: info.MoveToPosition, Id: 1, Position: info.Position{X: -1930, Y: 1000}},
 			},
 			{
-				{Type: state.MoveToPosition, Id: 2, Position: state.Position{X: -645, Y: -1000}},
-				{Type: state.MoveToPosition, Id: 2, Position: state.Position{X: -645, Y: 1000}},
+				{Type: info.MoveToPosition, Id: 2, Position: info.Position{X: -645, Y: -1000}},
+				{Type: info.MoveToPosition, Id: 2, Position: info.Position{X: -645, Y: 1000}},
 			}}
 	}
 	nr_robots := len(instSet)
@@ -203,8 +203,8 @@ func NewObstacleAvoidanceTest(team state.Team) *ObstacleAvoidanceTest {
 	}
 }
 
-func (m *ObstacleAvoidanceTest) Run() []*state.Instruction {
-	var instructions []*state.Instruction
+func (m *ObstacleAvoidanceTest) Run() []*info.Instruction {
+	var instructions []*info.Instruction
 
 	// This assumes that the robot ids range from 0 to m.team_size
 	for id, at_state := range m.at_states {
@@ -213,7 +213,7 @@ func (m *ObstacleAvoidanceTest) Run() []*state.Instruction {
 	return instructions
 }
 
-func (m *ObstacleAvoidanceTest) Archived(gs *state.GameState) int {
+func (m *ObstacleAvoidanceTest) Archived(gs *info.GameState) int {
 	// if len(gs.Yellow_team) != 4 {
 	// 	fmt.Println("Yellow team has", len(gs.Yellow_team), "4 required")
 	// 	return ERROR
@@ -225,7 +225,7 @@ func (m *ObstacleAvoidanceTest) Archived(gs *state.GameState) int {
 	// This assumes that the robot ids range from 0 to m.team_size
 	for id, at_state := range m.at_states {
 		target := m.instructionSet[id][at_state].Position
-		robot := gs.GetRobot(state.ID(id), m.team)
+		robot := gs.GetRobot(info.ID(id), m.team)
 		if atPosition(robot, target) {
 			nr_states := len(m.instructionSet[id])
 			m.at_states[id] = (at_state + 1) % nr_states // Cycle through the states
@@ -234,7 +234,7 @@ func (m *ObstacleAvoidanceTest) Archived(gs *state.GameState) int {
 	return RUNNING
 }
 
-func atPosition(robot *state.Robot, position state.Position) bool {
+func atPosition(robot *info.Robot, position info.Position) bool {
 
 	robot_pos := robot.GetPosition()
 	diff0 := position.Sub(&robot_pos)
@@ -246,13 +246,13 @@ func atPosition(robot *state.Robot, position state.Position) bool {
 
 // --------------------------MoveToTest----------------------------------------
 type MoveToTest struct {
-	team     state.Team
+	team     info.Team
 	at_state int
 	start    time.Time
 	max_time time.Duration
 }
 
-func NewMoveToTest(team state.Team) *MoveToTest {
+func NewMoveToTest(team info.Team) *MoveToTest {
 	return &MoveToTest{
 		team:     team,
 		max_time: 20 * time.Second,
@@ -260,44 +260,44 @@ func NewMoveToTest(team state.Team) *MoveToTest {
 	}
 }
 
-func (m *MoveToTest) Run() []*state.Instruction {
+func (m *MoveToTest) Run() []*info.Instruction {
 	if m.at_state == -1 {
 		m.start = time.Now()
 		m.at_state = 0
 	}
 	if m.at_state == 0 {
-		return []*state.Instruction{
-			{Type: state.MoveToPosition, Id: 0, Position: state.Position{X: 1000, Y: 1000}},
-			{Type: state.MoveToPosition, Id: 1, Position: state.Position{X: -1000, Y: -1000}},
+		return []*info.Instruction{
+			{Type: info.MoveToPosition, Id: 0, Position: info.Position{X: 1000, Y: 1000}},
+			{Type: info.MoveToPosition, Id: 1, Position: info.Position{X: -1000, Y: -1000}},
 		}
 	} else if m.at_state == 1 {
-		return []*state.Instruction{
-			{Type: state.MoveToPosition, Id: 0, Position: state.Position{X: 100, Y: 100}},
-			{Type: state.MoveToPosition, Id: 1, Position: state.Position{X: -100, Y: -100}},
+		return []*info.Instruction{
+			{Type: info.MoveToPosition, Id: 0, Position: info.Position{X: 100, Y: 100}},
+			{Type: info.MoveToPosition, Id: 1, Position: info.Position{X: -100, Y: -100}},
 		}
 	} else {
-		return []*state.Instruction{
-			{Type: state.MoveToPosition, Id: 0, Position: state.Position{X: -1000, Y: -1000}},
-			{Type: state.MoveToPosition, Id: 1, Position: state.Position{X: 1000, Y: 1000}},
+		return []*info.Instruction{
+			{Type: info.MoveToPosition, Id: 0, Position: info.Position{X: -1000, Y: -1000}},
+			{Type: info.MoveToPosition, Id: 1, Position: info.Position{X: 1000, Y: 1000}},
 		}
 	}
 }
 
-func (m *MoveToTest) Archived(gs *state.GameState) int {
-	robot0_pos := gs.GetRobot(state.ID(0), m.team).GetPosition()
-	robot1_pos := gs.GetRobot(state.ID(1), m.team).GetPosition()
+func (m *MoveToTest) Archived(gs *info.GameState) int {
+	robot0_pos := gs.GetRobot(info.ID(0), m.team).GetPosition()
+	robot1_pos := gs.GetRobot(info.ID(1), m.team).GetPosition()
 
 	if m.at_state == 0 {
-		target0 := state.Position{X: 1000, Y: 1000}
-		target1 := state.Position{X: -1000, Y: -1000}
+		target0 := info.Position{X: 1000, Y: 1000}
+		target1 := info.Position{X: -1000, Y: -1000}
 		diff0 := target0.Sub(&robot0_pos)
 		diff1 := target1.Sub(&robot1_pos)
 		if diff0.Norm() < 100 && diff1.Norm() < 100 {
 			m.at_state = 1
 		}
 	} else if m.at_state == 1 {
-		target0 := state.Position{X: 100, Y: 100}
-		target1 := state.Position{X: -100, Y: -100}
+		target0 := info.Position{X: 100, Y: 100}
+		target1 := info.Position{X: -100, Y: -100}
 		diff0 := target0.Sub(&robot0_pos)
 		diff1 := target1.Sub(&robot1_pos)
 		if diff0.Norm() < 100 && diff1.Norm() < 100 {
@@ -305,8 +305,8 @@ func (m *MoveToTest) Archived(gs *state.GameState) int {
 			m.at_state = 2
 		}
 	} else if m.at_state == 2 {
-		target0 := state.Position{X: -1000, Y: -1000}
-		target1 := state.Position{X: 1000, Y: 1000}
+		target0 := info.Position{X: -1000, Y: -1000}
+		target1 := info.Position{X: 1000, Y: 1000}
 		diff0 := target0.Sub(&robot0_pos)
 		diff1 := target1.Sub(&robot1_pos)
 		if diff0.Norm() < 100 && diff1.Norm() < 100 {

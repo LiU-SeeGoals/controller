@@ -5,7 +5,7 @@ import (
 	"net"
 
 	"github.com/LiU-SeeGoals/controller/internal/helper"
-	"github.com/LiU-SeeGoals/controller/internal/state"
+	"github.com/LiU-SeeGoals/controller/internal/info"
 	"github.com/LiU-SeeGoals/proto_go/ssl_vision"
 	"google.golang.org/protobuf/proto"
 )
@@ -72,19 +72,19 @@ func (r *SSLConnection) Receive(packetChan chan *ssl_vision.SSL_WrapperPacket) {
 			fmt.Printf("Unable to unmarshal packet: %s", err)
 			continue
 		}
-		packetChan <- &r.packet
+		// packetChan <- &r.packet
+		helper.NB_Send[ssl_vision.SSL_WrapperPacket](packetChan, &r.packet)
 	}
 }
 
 type SSLVisionClient struct {
-	ssl             *SSLConnection
-	ssl_channel_in  chan *ssl_vision.SSL_WrapperPacket
-	ssl_channel_out chan *ssl_vision.SSL_WrapperPacket
+	ssl         *SSLConnection
+	ssl_channel chan *ssl_vision.SSL_WrapperPacket
 }
 
-func unpack(packet *ssl_vision.SSL_WrapperPacket, gs *state.GameState, play_time int64) {
+func unpack(packet *ssl_vision.SSL_WrapperPacket, gi *info.GameInfo, play_time int64) {
 	detect := packet.GetDetection()
-	gs.SetMessageReceivedTime(play_time)
+	gi.State.SetMessageReceivedTime(play_time)
 
 	for _, robot := range detect.GetRobotsBlue() {
 		x := robot.GetX()
@@ -92,7 +92,7 @@ func unpack(packet *ssl_vision.SSL_WrapperPacket, gs *state.GameState, play_time
 		angle := robot.GetOrientation()
 		fmt.Println("Robot", robot.GetRobotId(), "x:", x, "y:", y, "angle:", angle)
 
-		gs.SetBlueRobot(robot.GetRobotId(), x, y, angle, play_time)
+		gi.State.SetBlueRobot(robot.GetRobotId(), x, y, angle, play_time)
 	}
 
 	for _, robot := range detect.GetRobotsYellow() {
@@ -100,7 +100,7 @@ func unpack(packet *ssl_vision.SSL_WrapperPacket, gs *state.GameState, play_time
 		x := robot.GetX()
 		y := robot.GetY()
 		angle := robot.GetOrientation()
-		gs.SetYellowRobot(robot.GetRobotId(), x, y, angle, play_time)
+		gi.State.SetYellowRobot(robot.GetRobotId(), x, y, angle, play_time)
 
 	}
 
@@ -110,14 +110,14 @@ func unpack(packet *ssl_vision.SSL_WrapperPacket, gs *state.GameState, play_time
 		y := ball.GetY()
 		z := ball.GetZ()
 
-		gs.SetBall(x, y, z, play_time)
+		gi.State.SetBall(x, y, z, play_time)
 	}
-	gs.SetValid(true)
+	gi.State.SetValid(true)
 
 	geometry := packet.GetGeometry()
 	field := geometry.GetField()
 
-	gs.SetField(field.GetFieldLength(),
+	gi.Field.SetField(field.GetFieldLength(),
 		field.GetFieldWidth(),
 		field.GetGoalWidth(),
 		field.GetGoalDepth(),
@@ -126,45 +126,40 @@ func unpack(packet *ssl_vision.SSL_WrapperPacket, gs *state.GameState, play_time
 		field.GetPenaltyAreaWidth(),
 	)
 	for _, line := range field.GetFieldLines() {
-		gs.AddFieldLine(line.GetName(), line.GetP1().GetX(), line.GetP1().GetY(), line.GetP2().GetX(), line.GetP2().GetY(), line.GetThickness(), int(line.GetType()))
+		gi.Field.AddFieldLine(line.GetName(), line.GetP1().GetX(), line.GetP1().GetY(), line.GetP2().GetX(), line.GetP2().GetY(), line.GetThickness(), int(line.GetType()))
 	}
 	for _, arc := range field.GetFieldArcs() {
-		gs.AddFieldArc(arc.GetName(), arc.GetCenter().GetX(), arc.GetCenter().GetY(), arc.GetRadius(), arc.GetA1(), arc.GetA2(), arc.GetThickness(), int(arc.GetType()))
+		gi.Field.AddFieldArc(arc.GetName(), arc.GetCenter().GetX(), arc.GetCenter().GetY(), arc.GetRadius(), arc.GetA1(), arc.GetA2(), arc.GetThickness(), int(arc.GetType()))
 	}
 
 }
 
-func (receiver *SSLVisionClient) InitGameState(gs *state.GameState, play_time int64) {
-	packet, ok := <-receiver.ssl_channel_out
+func (receiver *SSLVisionClient) handlePacket(packet *ssl_vision.SSL_WrapperPacket, ok bool, gi *info.GameInfo, play_time int64) {
 	if !ok {
 		fmt.Println("SSL Channel closed")
 		return
 	}
-	unpack(packet, gs, play_time)
+
+	unpack(packet, gi, play_time)
 }
 
-func (receiver *SSLVisionClient) UpdateGamestate(gs *state.GameState, play_time int64) {
-	packet, ok := <-receiver.ssl_channel_out
-	if !ok {
-		fmt.Println("SSL Channel closed")
-		return
-	}
-	unpack(packet, gs, play_time)
+func (receiver *SSLVisionClient) UpdateGameInfo(gi *info.GameInfo, play_time int64) {
+	packet, ok := <-receiver.ssl_channel
+	receiver.handlePacket(packet, ok, gi, play_time)
 }
 
 // Start a SSL Vision receiver, returns a channel from
 // which SSL wrapper packets can be obtained.
 func (receiver *SSLVisionClient) Connect() {
 	receiver.ssl.Connect()
-	go receiver.ssl.Receive(receiver.ssl_channel_in)
+	go receiver.ssl.Receive(receiver.ssl_channel)
 }
 
 func NewSSLVisionClient(sslReceiverAddress string) *SSLVisionClient {
-	ssl_channel_in, ssl_channel_out := helper.NB_KeepLatestChan[*ssl_vision.SSL_WrapperPacket]()
+	ssl_channel := make(chan *ssl_vision.SSL_WrapperPacket)
 	receiver := &SSLVisionClient{
-		ssl:             NewSSLConnection(sslReceiverAddress),
-		ssl_channel_in:  ssl_channel_in,
-		ssl_channel_out: ssl_channel_out,
+		ssl:         NewSSLConnection(sslReceiverAddress),
+		ssl_channel: ssl_channel,
 	}
 	receiver.Connect()
 	return receiver

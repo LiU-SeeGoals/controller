@@ -43,8 +43,12 @@ func NB_Send[M any](c chan *M, v *M) {
 	select {
 	case c <- v:
 	default:
-		<-c
-		c <- v
+		select {
+		case <-c:
+			c <- v
+		default:
+			c <- v
+		}
 	}
 }
 

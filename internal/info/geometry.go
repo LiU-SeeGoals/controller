@@ -1,4 +1,4 @@
-package state
+package info
 
 import (
 	"fmt"
@@ -32,7 +32,7 @@ const (
 // but slight changes have been made for readability.
 // Please compare with the generated proto files if
 // anything is unclear.
-type Field struct {
+type GameField struct {
 	// Field length (distance between goal lines) in mm
 	FieldLength int32
 
@@ -85,8 +85,25 @@ type Field struct {
 	MaxRobotRadius float32
 }
 
-func NewField() *Field {
-	return &Field{}
+func NewGameField() *GameField {
+	return &GameField{}
+}
+
+func (gf *GameField) SetField(length, width, goalWidth, goalDepth, boundaryWidth, penaltyWidth, penaltyDepth int32) {
+	gf.FieldLength = length
+	gf.FieldWidth = width
+	gf.GoalWidth = goalWidth
+	gf.GoalDepth = goalDepth
+	gf.BoundaryWidth = boundaryWidth
+	gf.PenaltyAreaWidth = penaltyWidth
+	gf.PenaltyAreaDepth = penaltyDepth
+}
+func (gf *GameField) AddFieldLine(name string, x1, y1, x2, y2, thickness float32, lineType int) {
+	gf.SetLine(name, x1, y1, x2, y2, thickness, FieldShape(lineType))
+}
+
+func (gf *GameField) AddFieldArc(name string, centerX, centerY, radius, angle1, angle2, thickness float32, shape int) {
+	gf.SetArc(name, centerX, centerY, radius, angle1, angle2, thickness, FieldShape(shape))
 }
 
 type Point struct {
@@ -143,7 +160,7 @@ type CircularArc struct {
 }
 
 // Add a new line segment to Field object
-func (f *Field) SetLine(
+func (f *GameField) SetLine(
 	name string,
 	p1x float32,
 	p1y float32,
@@ -163,7 +180,7 @@ func (f *Field) SetLine(
 }
 
 // Adds a new arc to Field object
-func (f *Field) SetArc(
+func (f *GameField) SetArc(
 	name string,
 	centerX float32,
 	centerY float32,

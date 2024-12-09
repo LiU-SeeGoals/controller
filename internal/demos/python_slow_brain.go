@@ -7,26 +7,26 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/ai"
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/config"
+	"github.com/LiU-SeeGoals/controller/internal/info"
 	"github.com/LiU-SeeGoals/controller/internal/simulator"
-	"github.com/LiU-SeeGoals/controller/internal/state"
 )
 
 func PythonSlowBrain() {
-	gs := state.NewGameState(10)
-	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddress(), config.GetGCClientAddress())
+	gameInfo := info.NewGameInfo(10)
+	ssl_receiver := client.NewSSLClient()
 
 	slowBrainBlue := ai.NewSlowBrainPy("http://10.240.211.153:5000/slowBrainBlue")
 	fastBrainBlue := ai.NewFastBrainGO()
 
-	aiBlue := ai.NewAi(state.Blue, slowBrainBlue, fastBrainBlue)
+	aiBlue := ai.NewAi(info.Blue, slowBrainBlue, fastBrainBlue)
 
 	slowBrainYellow := ai.NewScenarioSlowBrain(-5, -1)
 	fastBrainYellow := ai.NewFastBrainGO()
 
-	aiYellow := ai.NewAi(state.Yellow, slowBrainYellow, fastBrainYellow)
+	aiYellow := ai.NewAi(info.Yellow, slowBrainYellow, fastBrainYellow)
 
-	simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress(), gs)
-	simClientYellow := client.NewSimClient(config.GetSimYellowTeamAddress(), gs)
+	simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress(), gameInfo)
+	simClientYellow := client.NewSimClient(config.GetSimYellowTeamAddress(), gameInfo)
 
 	simController := simulator.NewSimControl()
 
@@ -35,16 +35,14 @@ func PythonSlowBrain() {
 	presentBlue := []int{}
 	simController.SetPresentRobots(presentYellow, presentBlue)
 
-	ssl_receiver.InitState(gs, 0)
-
 	start_time := time.Now().UnixMilli()
 	for {
 		playTime := time.Now().UnixMilli() - start_time
 		// fmt.Println("playTime: ", playTime)
-		ssl_receiver.UpdateState(gs, playTime)
-		fmt.Println(gs.Status)
-		blue_actions := aiBlue.GetActions(gs)
-		yellow_actions := aiYellow.GetActions(gs)
+		ssl_receiver.UpdateState(gameInfo, playTime)
+		fmt.Println(gameInfo.Status)
+		blue_actions := aiBlue.GetActions(gameInfo)
+		yellow_actions := aiYellow.GetActions(gameInfo)
 
 		simClientBlue.SendActions(blue_actions)
 		simClientYellow.SendActions(yellow_actions)
@@ -52,7 +50,7 @@ func PythonSlowBrain() {
 		// terminal_messages := []string{"Scenario"}
 
 		// if len(blue_actions) > 0 {
-		// 	client.UpdateWebGUI(gs, blue_actions, terminal_messages)
+		// 	client.UpdateWebGUI(gi, blue_actions, terminal_messages)
 		// }
 	}
 }

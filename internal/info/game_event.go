@@ -1,4 +1,4 @@
-package state
+package info
 
 import (
 	"fmt"
@@ -68,10 +68,10 @@ type GameEvent struct {
 	//  * ball placement
 	current_action_time_remaining int64
 
-	// All game events that were detected since the last RUNNING state.
+	// All game events that were detected since the last RUNNING info.
 	// Will be cleared as soon as the game is continued.
 	// game_events GameEvent
-	// All proposed game events that were detected since the last RUNNING state.
+	// All proposed game events that were detected since the last RUNNING info.
 	// game_event_proposals GameEventProposalGroup
 
 }
