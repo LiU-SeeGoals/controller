@@ -47,10 +47,10 @@ func (sb ScenarioSlowBrain) Run() {
 
 	scenarios := []ScenarioTest{}
 	scenarios = append(scenarios, NewMoveToTest(sb.team))
+  scenarios = append(scenarios, NewMoveToBallTest(sb.team))
 	scenarios = append(scenarios, NewObstacleAvoidanceTest(sb.team))
 	scenarios = append(scenarios, NewRealTest(sb.team))
 	// scenarios = append(scenarios, NewObstacleAvoidanceTest(sb.team))
-  scenarios = append(scenarios, NewMoveToBallTest(sb.team))
   
 	scenario_index := 0
 	if sb.run_scenario >= 0 {
@@ -138,32 +138,27 @@ func (m *MoveToBallTest) Archived(gs *state.GameState) int {
   distance := math.Sqrt(math.Pow(dx, 2) + math.Pow(dy, 2))
 
 	if m.at_state == 0 {
-    fmt.Println("Robot is at", robot_pos.X, robot_pos.Y)
-    fmt.Println("Ball is at", ball_pos.X, robot_pos.Y)
-    fmt.Println("In state 0 (going to ball). Distance to ball is", distance)
-		if distance < 200 {
+		if distance < 500 {
 			m.at_state = 1
 		}
 	} else if m.at_state == 1 {
-    fmt.Println("In state 1 (at ball). Distance to ball is", distance)
-		if distance > 200 {
+		if distance > 500 {
+      fmt.Println("Failed with robot at (", robot_pos.X, robot_pos.Y, ") and ball at (", ball_pos.X, ball_pos.Y, ")")
 			m.at_state = 2
 		}
-	} else {
-    fmt.Println("In state 2. Distance to ball is", distance)
-  }
+	}
 
 	if m.at_state >= 0 {
 		if time.Since(m.start) > m.max_time {
       if m.at_state == 0 {
-        fmt.Println("did not reach ball")
+        fmt.Println("Did not reach ball")
         return TIME_EXPIRED
       } else if m.at_state == 1 {
         fmt.Println("Reached ball and stayed there! :D")
-          return COMPLETE
+        return COMPLETE
       } else {
         fmt.Println("Reached ball but then lost it :(")
-          return FAILED
+        return FAILED
       }
     }
   }
