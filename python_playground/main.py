@@ -18,6 +18,7 @@ if pathlib.Path(model.path).exists():
     model.eval()
 calls = 0
 start = time.perf_counter()
+
 @app.route('/slowBrainBlue', methods=['POST'])
 def slow_brin_blue():
     gamestate = GameState(request.get_json())

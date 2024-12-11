@@ -31,18 +31,6 @@ func (sb *SlowBrainPy) Init(incoming <-chan state.GameState, outgoing chan<- sta
 	go sb.Run()
 }
 
-// resp = {
-// 	"instructions": [
-// 		{"id": 0,
-// 		 "position": [0, 0, 0, 0],
-// 		},
-// 		{"id": 1,
-// 		 "position": [0, 0, 0, 0],
-// 		},
-// 	]
-
-// }
-
 type PyResponse struct {
 	Instructions []struct {
 		Id       int
@@ -101,7 +89,8 @@ func (sb SlowBrainPy) Run() {
 				Z:     scenario.Position[2],
 				Angle: scenario.Position[3],
 			}
-			plan.Instructions = append(plan.Instructions, &state.RobotMove{
+			plan.Instructions = append(plan.Instructions, &state.Instruction{
+				Type:     state.MoveToPosition,
 				Id:       robot.GetID(),
 				Position: position,
 			})

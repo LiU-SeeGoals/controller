@@ -13,40 +13,44 @@ import (
 
 func Scenario() {
 	gs := state.NewGameState(10)
-	ssl_receiver := client.NewSSLVisionClient(config.GetSSLClientAddress())
+	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddress(), config.GetGCClientAddress())
 
-	slowBrainBlue := ai.NewScenarioSlowBrain(5)
-	fastBrainBlue := ai.NewFastBrainGO()
-
-	aiBlue := ai.NewAi(state.Blue, slowBrainBlue, fastBrainBlue)
-
-	slowBrainYellow := ai.NewScenarioSlowBrain(-5)
+	// Yellow team
+	slowBrainYellow := ai.NewScenarioSlowBrain(1, 1)
 	fastBrainYellow := ai.NewFastBrainGO()
 
 	aiYellow := ai.NewAi(state.Yellow, slowBrainYellow, fastBrainYellow)
 
-	simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress())
-	simClientYellow := client.NewSimClient(config.GetSimYellowTeamAddress())
+	simClientYellow := client.NewSimClient(config.GetSimYellowTeamAddress(), gs)
+
+	// Blue team
+	slowBrainBlue := ai.NewScenarioSlowBrain(1, 1)
+	fastBrainBlue := ai.NewFastBrainGO()
+
+	aiBlue := ai.NewAi(state.Blue, slowBrainBlue, fastBrainBlue)
+
+	simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress(), gs)
 
 	simController := simulator.NewSimControl()
 
 	// Some sim setup for debugging ai behaviour
-	presentYellow := []int{0, 1}
-	presentBlue := []int{0, 1}
+	presentYellow := []int{0, 1, 2, 3, 4}
+	presentBlue := []int{0, 1, 2, 3}
 	simController.SetPresentRobots(presentYellow, presentBlue)
 
-	ssl_receiver.InitGameState(gs, 0)
+	ssl_receiver.InitState(gs, 0)
 	start_time := time.Now().UnixMilli()
 	for {
 		playTime := time.Now().UnixMilli() - start_time
-		fmt.Println("playTime: ", playTime)
-		ssl_receiver.UpdateGamestate(gs, playTime)
+		// fmt.Println("playTime: ", playTime)
+		ssl_receiver.UpdateState(gs, playTime)
+		fmt.Println(gs)
+
+		yellow_actions := aiYellow.GetActions(gs)
+		simClientYellow.SendActions(yellow_actions)
 
 		blue_actions := aiBlue.GetActions(gs)
-		yellow_actions := aiYellow.GetActions(gs)
-
 		simClientBlue.SendActions(blue_actions)
-		simClientYellow.SendActions(yellow_actions)
 
 		// terminal_messages := []string{"Scenario"}
 

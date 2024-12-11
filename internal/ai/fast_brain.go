@@ -33,6 +33,7 @@ func (fb *FastBrainGO) Init(incomingGameState <-chan state.GameState, incomingGa
 func (fb *FastBrainGO) Run() {
 	gameState := state.GameState{}
 	gamePlan := state.GamePlan{}
+
 	for {
 		// We will reive the game state more often than the game plan
 		// so we wait for the gameState to update and work with the latest game plan
@@ -59,16 +60,67 @@ func (fb *FastBrainGO) Run() {
 
 		// Send the actions to the AI
 		fb.outgoingActions <- actions
-		fmt.Println("FastBrainGO: Sent actions")
+		// fmt.Println("FastBrainGO: Sent actions")
 
 	}
+}
+
+func (fb *FastBrainGO) moveToPosition(inst *state.Instruction, gs *state.GameState) action.Action {
+	// todo: add collision avoidance
+	myTeam := gs.GetTeam(fb.team)
+	robot := myTeam[inst.Id]
+	if !robot.IsActive() {
+		return nil
+	}
+	act := action.MoveTo{}
+	act.Id = int(robot.GetID())
+	act.Team = fb.team
+	act.Pos = robot.GetPosition()
+	act.Dest = inst.Position
+	// if fb.team == state.Yellow {
+	// 	act.Dest = avoidObstacles(robot, inst.Position, *gs)
+	// } else {
+	// 	act.Dest = inst.Position
+	// }
+	act.Dribble = false
+	return &act
+}
+
+// TODO: can we make this nicer?
+func (fb *FastBrainGO) instructionToAction(inst *state.Instruction, gs *state.GameState) action.Action {
+	if inst.Type == state.MoveToPosition {
+		return fb.moveToPosition(inst, gs)
+	} else if inst.Type == state.MoveToBall {
+		fmt.Println("FastBrainGO: MoveToBall not implemented")
+	} else if inst.Type == state.MoveWithBallToPosition {
+		fmt.Println("FastBrainGO: MoveWithBallToPosition not implemented")
+	} else if inst.Type == state.KickToPlayer {
+		fmt.Println("FastBrainGO: KickToPlayer not implemented")
+	} else if inst.Type == state.KickToGoal {
+		fmt.Println("FastBrainGO: KickToGoal not implemented")
+	} else if inst.Type == state.KickToPosition {
+		fmt.Println("FastBrainGO: KickToPosition not implemented")
+	} else if inst.Type == state.ReceiveBallFromPlayer {
+		fmt.Println("FastBrainGO: ReceiveBallFromPlayer not implemented")
+	} else if inst.Type == state.ReceiveBallAtPosition {
+		fmt.Println("FastBrainGO: ReceiveBallAtPosition not implemented")
+	} else if inst.Type == state.BlockEnemyPlayerFromPosition {
+		fmt.Println("FastBrainGO: BlockEnemyPlayerFromPosition not implemented")
+	} else if inst.Type == state.BlockEnemyPlayerFromBall {
+		fmt.Println("FastBrainGO: BlockEnemyPlayerFromBall not implemented")
+	} else if inst.Type == state.BlockEnemyPlayerFromGoal {
+		fmt.Println("FastBrainGO: BlockEnemyPlayerFromGoal not implemented")
+	} else if inst.Type == state.BlockEnemyPlayerFromPlayer {
+		fmt.Println("FastBrainGO: BlockEnemyPlayerFromPlayer not implemented")
+	} else {
+		fmt.Println("FastBrainGO: not implemented")
+	}
+	return nil
 }
 
 func (fb *FastBrainGO) GetActions(gs *state.GameState, gamePlan *state.GamePlan) []action.Action {
 
 	var actionList []action.Action
-
-	myTeam := gs.GetTeam(fb.team)
 
 	if fb.team != gamePlan.Team {
 		panic("FastBrainGO: Team mismatch")
@@ -77,20 +129,10 @@ func (fb *FastBrainGO) GetActions(gs *state.GameState, gamePlan *state.GamePlan)
 	Instructions := gamePlan.Instructions
 
 	for _, inst := range Instructions {
-		robot := myTeam[inst.Id]
-
-		if !robot.IsActive() {
-			continue
+		action := fb.instructionToAction(inst, gs)
+		if action != nil {
+			actionList = append(actionList, action)
 		}
-		act := action.MoveTo{}
-		act.Id = int(inst.Id)
-
-		act.Pos = robot.GetPosition()
-		act.Dest = inst.Position
-
-		act.Dribble = true // Assuming all moves require dribbling
-		fmt.Println("Team ", fb.team, ",Robot", act.Id, "moving:\n from", act.Pos.ToDTO(), "\n   to", act.Dest.ToDTO())
-		actionList = append(actionList, &act)
 	}
 
 	return actionList

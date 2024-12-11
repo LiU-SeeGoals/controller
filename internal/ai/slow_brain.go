@@ -100,7 +100,8 @@ func (sb *SlowBrainGO) GetPlan(gameState *state.GameState) state.GamePlan {
 	gamePlan := state.GamePlan{}
 	gamePlan.Team = sb.team
 	for _, robot := range sb.gameAnalysis.MyTeam.Robots {
-		gamePlan.Instructions = append(gamePlan.Instructions, &state.RobotMove{
+		gamePlan.Instructions = append(gamePlan.Instructions, &state.Instruction{
+			Type:     state.MoveToPosition,
 			Id:       robot.GetID(),
 			Position: robot.GetDestination(),
 		})

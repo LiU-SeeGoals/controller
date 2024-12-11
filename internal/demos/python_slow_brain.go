@@ -13,35 +13,36 @@ import (
 
 func PythonSlowBrain() {
 	gs := state.NewGameState(10)
-	ssl_receiver := client.NewSSLVisionClient(config.GetSSLClientAddress())
+	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddress(), config.GetGCClientAddress())
 
-	slowBrainBlue := ai.NewSlowBrainPy("http://192.168.1.44:5000/slowBrainBlue")
+	slowBrainBlue := ai.NewSlowBrainPy("http://10.240.211.153:5000/slowBrainBlue")
 	fastBrainBlue := ai.NewFastBrainGO()
 
 	aiBlue := ai.NewAi(state.Blue, slowBrainBlue, fastBrainBlue)
 
-	slowBrainYellow := ai.NewScenarioSlowBrain(-5)
+	slowBrainYellow := ai.NewScenarioSlowBrain(-5, -1)
 	fastBrainYellow := ai.NewFastBrainGO()
 
 	aiYellow := ai.NewAi(state.Yellow, slowBrainYellow, fastBrainYellow)
 
-	simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress())
-	simClientYellow := client.NewSimClient(config.GetSimYellowTeamAddress())
+	simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress(), gs)
+	simClientYellow := client.NewSimClient(config.GetSimYellowTeamAddress(), gs)
 
 	simController := simulator.NewSimControl()
 
 	// Some sim setup for debugging ai behaviour
 	presentYellow := []int{0, 1}
-	presentBlue := []int{0, 1}
+	presentBlue := []int{}
 	simController.SetPresentRobots(presentYellow, presentBlue)
 
-	ssl_receiver.InitGameState(gs, 0)
+	ssl_receiver.InitState(gs, 0)
+
 	start_time := time.Now().UnixMilli()
 	for {
 		playTime := time.Now().UnixMilli() - start_time
-		fmt.Println("playTime: ", playTime)
-		ssl_receiver.UpdateGamestate(gs, playTime)
-
+		// fmt.Println("playTime: ", playTime)
+		ssl_receiver.UpdateState(gs, playTime)
+		fmt.Println(gs.Status)
 		blue_actions := aiBlue.GetActions(gs)
 		yellow_actions := aiYellow.GetActions(gs)
 

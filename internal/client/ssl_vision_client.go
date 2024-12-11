@@ -90,12 +90,13 @@ func unpack(packet *ssl_vision.SSL_WrapperPacket, gs *state.GameState, play_time
 		x := robot.GetX()
 		y := robot.GetY()
 		angle := robot.GetOrientation()
-		// fmt.Println("Robot", robot.GetRobotId(), "x:", x, "y:", y, "angle:", angle)
+		fmt.Println("Robot", robot.GetRobotId(), "x:", x, "y:", y, "angle:", angle)
 
 		gs.SetBlueRobot(robot.GetRobotId(), x, y, angle, play_time)
 	}
 
 	for _, robot := range detect.GetRobotsYellow() {
+		fmt.Println("Robot", robot.GetRobotId(), "x:", robot.GetX(), "y:", robot.GetY(), "angle:", robot.GetOrientation())
 		x := robot.GetX()
 		y := robot.GetY()
 		angle := robot.GetOrientation()
@@ -104,6 +105,7 @@ func unpack(packet *ssl_vision.SSL_WrapperPacket, gs *state.GameState, play_time
 	}
 
 	for _, ball := range detect.GetBalls() {
+		fmt.Println("Ball", ball.GetX(), ball.GetY(), ball.GetZ())
 		x := ball.GetX()
 		y := ball.GetY()
 		z := ball.GetZ()
@@ -111,6 +113,25 @@ func unpack(packet *ssl_vision.SSL_WrapperPacket, gs *state.GameState, play_time
 		gs.SetBall(x, y, z, play_time)
 	}
 	gs.SetValid(true)
+
+	geometry := packet.GetGeometry()
+	field := geometry.GetField()
+
+	gs.SetField(field.GetFieldLength(),
+		field.GetFieldWidth(),
+		field.GetGoalWidth(),
+		field.GetGoalDepth(),
+		field.GetBoundaryWidth(),
+		field.GetPenaltyAreaDepth(),
+		field.GetPenaltyAreaWidth(),
+	)
+	for _, line := range field.GetFieldLines() {
+		gs.AddFieldLine(line.GetName(), line.GetP1().GetX(), line.GetP1().GetY(), line.GetP2().GetX(), line.GetP2().GetY(), line.GetThickness(), int(line.GetType()))
+	}
+	for _, arc := range field.GetFieldArcs() {
+		gs.AddFieldArc(arc.GetName(), arc.GetCenter().GetX(), arc.GetCenter().GetY(), arc.GetRadius(), arc.GetA1(), arc.GetA2(), arc.GetThickness(), int(arc.GetType()))
+	}
+
 }
 
 func (receiver *SSLVisionClient) InitGameState(gs *state.GameState, play_time int64) {

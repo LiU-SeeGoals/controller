@@ -2,8 +2,6 @@ package state
 
 import (
 	"fmt"
-
-	"gonum.org/v1/gonum/mat"
 )
 
 // Enum type alias
@@ -87,6 +85,15 @@ type Field struct {
 	MaxRobotRadius float32
 }
 
+func NewField() *Field {
+	return &Field{}
+}
+
+type Point struct {
+	X float32
+	Y float32
+}
+
 // Holds line segment data
 //
 // Shape enum maps one to one
@@ -96,10 +103,10 @@ type LineSegment struct {
 	Name string
 
 	// Start point of line segment
-	P1 *mat.VecDense
+	P1 Point
 
 	// End point of line segment
-	P2 *mat.VecDense
+	P2 Point
 
 	// Thickness of line segment
 	Thickness float32
@@ -117,7 +124,7 @@ type CircularArc struct {
 	Name string
 
 	// Center point of circular arc
-	Center *mat.VecDense
+	Center Point
 
 	// Radius of arc
 	Radius float32
@@ -145,12 +152,10 @@ func (f *Field) SetLine(
 	thickness float32,
 	shape FieldShape) {
 
-	p1 := []float64{float64(p1x), float64(p1y)}
-	p2 := []float64{float64(p2x), float64(p2y)}
 	line := LineSegment{
 		Name:      name,
-		P1:        mat.NewVecDense(2, p1),
-		P2:        mat.NewVecDense(2, p2),
+		P1:        Point{X: p1x, Y: p1y},
+		P2:        Point{X: p2x, Y: p2y},
 		Thickness: float32(thickness),
 	}
 
@@ -168,11 +173,9 @@ func (f *Field) SetArc(
 	thickness float32,
 	shape FieldShape) {
 
-	center := []float64{float64(centerX), float64(centerY)}
-
 	arc := CircularArc{
 		Name:      name,
-		Center:    mat.NewVecDense(2, center),
+		Center:    Point{X: centerX, Y: centerY},
 		Radius:    radius,
 		A1:        angle1,
 		A2:        angle2,
@@ -184,18 +187,18 @@ func (f *Field) SetArc(
 
 // String representation of LineSegment
 func (l *LineSegment) String() string {
-	x1 := l.P1.AtVec(0)
-	y1 := l.P1.AtVec(1)
+	x1 := l.P1.X
+	y1 := l.P1.Y
 
-	x2 := l.P2.AtVec(0)
-	y2 := l.P2.AtVec(1)
+	x2 := l.P2.X
+	y2 := l.P2.Y
 	return fmt.Sprintf("name: %s, p1: {%f, %f}, p2: {%f, %f}", l.Name, x1, y1, x2, y2)
 }
 
 // String representation of CircularArc
 func (a *CircularArc) String() string {
-	x := a.Center.AtVec(0)
-	y := a.Center.AtVec(1)
+	x := a.Center.X
+	y := a.Center.Y
 
 	return fmt.Sprintf("name: %s, center: {%f, %f}, rad: %f, a1: %f, a2: %f", a.Name, x, y, a.Radius, a.A1, a.A2)
 }
