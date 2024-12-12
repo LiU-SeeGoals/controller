@@ -5,16 +5,16 @@ import (
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/height_map"
+	"github.com/LiU-SeeGoals/controller/internal/info"
 	"github.com/LiU-SeeGoals/controller/internal/search"
-	"github.com/LiU-SeeGoals/controller/internal/state"
 )
 
 type SlowBrainGO struct {
-	team                 state.Team
-	gameAnalysis         *state.GameAnalysis
+	team                 info.Team
+	gameAnalysis         *info.GameAnalysis
 	gameSearch           *search.FindBestScore
-	incomingGameState    <-chan state.GameState
-	outgoingPlan         chan<- state.GamePlan
+	incomingGameState    <-chan info.GameState
+	outgoingPlan         chan<- info.GamePlan
 	myAccumulatedFunc    height_map.HeightMap
 	otherAccumulatedFunc height_map.HeightMap
 }
@@ -23,19 +23,19 @@ func NewSlowBrainGO() *SlowBrainGO {
 	return &SlowBrainGO{}
 }
 
-func (sb *SlowBrainGO) Init(incoming <-chan state.GameState, outgoing chan<- state.GamePlan, team state.Team) {
-	posFunc := func(r *state.RobotAnalysis) state.Position {
+func (sb *SlowBrainGO) Init(incoming <-chan info.GameState, outgoing chan<- info.GamePlan, team info.Team) {
+	posFunc := func(r *info.RobotAnalysis) info.Position {
 		return r.GetPosition()
 	}
 
-	destFunc := func(r *state.RobotAnalysis) state.Position {
+	destFunc := func(r *info.RobotAnalysis) info.Position {
 		return r.GetDestination()
 	}
 
 	myTimeAdvantage := height_map.NewTimeAdvantage(destFunc)
 	otherTimeAdvantage := height_map.NewTimeAdvantage(posFunc)
 
-	myAccumulatedFunc := func(x float32, y float32, robots state.RobotAnalysisTeam) float32 {
+	myAccumulatedFunc := func(x float32, y float32, robots info.RobotAnalysisTeam) float32 {
 		scoreFuncs := []height_map.HeightMap{
 			myTimeAdvantage.CalculateTimeAdvantage,
 		}
@@ -46,7 +46,7 @@ func (sb *SlowBrainGO) Init(incoming <-chan state.GameState, outgoing chan<- sta
 		return accumulated
 	}
 
-	otherAccumulatedFunc := func(x float32, y float32, robots state.RobotAnalysisTeam) float32 {
+	otherAccumulatedFunc := func(x float32, y float32, robots info.RobotAnalysisTeam) float32 {
 		scoreFuncs := []height_map.HeightMap{
 			otherTimeAdvantage.CalculateTimeAdvantage,
 		}
@@ -56,7 +56,7 @@ func (sb *SlowBrainGO) Init(incoming <-chan state.GameState, outgoing chan<- sta
 		}
 		return accumulated
 	}
-	gameAnalysis := state.NewGameAnalysis(9000, 6000, 100, team)
+	gameAnalysis := info.NewGameAnalysis(9000, 6000, 100, team)
 	gameSearch := search.NewFindBestScore(team, myAccumulatedFunc, 0.1, 100, 9)
 	sb.team = team
 	sb.incomingGameState = incoming
@@ -70,7 +70,7 @@ func (sb *SlowBrainGO) Init(incoming <-chan state.GameState, outgoing chan<- sta
 }
 
 func (sb *SlowBrainGO) Run() {
-	var gameState state.GameState
+	var gameState info.GameState
 	for {
 		gameState = <-sb.incomingGameState
 
@@ -92,16 +92,16 @@ func (sb *SlowBrainGO) Run() {
 	}
 }
 
-func (sb *SlowBrainGO) GetPlan(gameState *state.GameState) state.GamePlan {
+func (sb *SlowBrainGO) GetPlan(gameState *info.GameState) info.GamePlan {
 	sb.gameAnalysis.UpdateState(gameState)
 	sb.gameAnalysis.UpdateMyZones(sb.myAccumulatedFunc)
 	sb.gameAnalysis.UpdateOtherZones(sb.otherAccumulatedFunc)
 	sb.gameSearch.FindBestScore(sb.myAccumulatedFunc, sb.gameAnalysis.MyTeam, sb.gameAnalysis)
-	gamePlan := state.GamePlan{}
+	gamePlan := info.GamePlan{}
 	gamePlan.Team = sb.team
 	for _, robot := range sb.gameAnalysis.MyTeam.Robots {
-		gamePlan.Instructions = append(gamePlan.Instructions, &state.Instruction{
-			Type:     state.MoveToPosition,
+		gamePlan.Instructions = append(gamePlan.Instructions, &info.Instruction{
+			Type:     info.MoveToPosition,
 			Id:       robot.GetID(),
 			Position: robot.GetDestination(),
 		})

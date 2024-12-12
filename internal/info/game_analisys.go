@@ -1,4 +1,4 @@
-package state
+package info
 
 type Zone struct {
 	Scores []float32
@@ -152,7 +152,7 @@ func updateBall(gameStateBall *Ball, ballAnalysis *BallAnalysis) {
 }
 
 // TODO: Implement this function
-// func (an *GameAnalysis) updateBallDistances(gamestateObj *gamestate.GameState) {
+// func (an *GameAnalysis) updateBallDistances(gamestateObj *gameinfo.GameState) {
 // 	// Reset the distances
 // 	an.distancesToBall = []float32{}
 

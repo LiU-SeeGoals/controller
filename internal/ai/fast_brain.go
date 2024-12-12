@@ -5,13 +5,13 @@ import (
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
-	"github.com/LiU-SeeGoals/controller/internal/state"
+	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
 type FastBrainGO struct {
-	team              state.Team
-	incomingGameState <-chan state.GameState
-	incomingGamePlan  <-chan state.GamePlan
+	team              info.Team
+	incomingGameState <-chan info.GameState
+	incomingGamePlan  <-chan info.GamePlan
 	outgoingActions   chan<- []action.Action
 }
 
@@ -19,7 +19,7 @@ func NewFastBrainGO() *FastBrainGO {
 	return &FastBrainGO{}
 }
 
-func (fb *FastBrainGO) Init(incomingGameState <-chan state.GameState, incomingGamePlan <-chan state.GamePlan, outgoingActions chan<- []action.Action, team state.Team) {
+func (fb *FastBrainGO) Init(incomingGameState <-chan info.GameState, incomingGamePlan <-chan info.GamePlan, outgoingActions chan<- []action.Action, team info.Team) {
 
 	fb.incomingGameState = incomingGameState
 	fb.incomingGamePlan = incomingGamePlan
@@ -31,8 +31,8 @@ func (fb *FastBrainGO) Init(incomingGameState <-chan state.GameState, incomingGa
 }
 
 func (fb *FastBrainGO) Run() {
-	gameState := state.GameState{}
-	gamePlan := state.GamePlan{}
+	gameState := info.GameState{}
+	gamePlan := info.GamePlan{}
 
 	for {
 		// We will reive the game state more often than the game plan
@@ -65,7 +65,7 @@ func (fb *FastBrainGO) Run() {
 	}
 }
 
-func (fb *FastBrainGO) moveToPosition(inst *state.Instruction, gs *state.GameState) action.Action {
+func (fb *FastBrainGO) moveToPosition(inst *info.Instruction, gs *info.GameState) action.Action {
 	// todo: add collision avoidance
 	myTeam := gs.GetTeam(fb.team)
 	robot := myTeam[inst.Id]
@@ -77,7 +77,7 @@ func (fb *FastBrainGO) moveToPosition(inst *state.Instruction, gs *state.GameSta
 	act.Team = fb.team
 	act.Pos = robot.GetPosition()
 	act.Dest = inst.Position
-	// if fb.team == state.Yellow {
+	// if fb.team == info.Yellow {
 	// 	act.Dest = avoidObstacles(robot, inst.Position, *gs)
 	// } else {
 	// 	act.Dest = inst.Position
@@ -87,30 +87,30 @@ func (fb *FastBrainGO) moveToPosition(inst *state.Instruction, gs *state.GameSta
 }
 
 // TODO: can we make this nicer?
-func (fb *FastBrainGO) instructionToAction(inst *state.Instruction, gs *state.GameState) action.Action {
-	if inst.Type == state.MoveToPosition {
+func (fb *FastBrainGO) instructionToAction(inst *info.Instruction, gs *info.GameState) action.Action {
+	if inst.Type == info.MoveToPosition {
 		return fb.moveToPosition(inst, gs)
-	} else if inst.Type == state.MoveToBall {
+	} else if inst.Type == info.MoveToBall {
 		fmt.Println("FastBrainGO: MoveToBall not implemented")
-	} else if inst.Type == state.MoveWithBallToPosition {
+	} else if inst.Type == info.MoveWithBallToPosition {
 		fmt.Println("FastBrainGO: MoveWithBallToPosition not implemented")
-	} else if inst.Type == state.KickToPlayer {
+	} else if inst.Type == info.KickToPlayer {
 		fmt.Println("FastBrainGO: KickToPlayer not implemented")
-	} else if inst.Type == state.KickToGoal {
+	} else if inst.Type == info.KickToGoal {
 		fmt.Println("FastBrainGO: KickToGoal not implemented")
-	} else if inst.Type == state.KickToPosition {
+	} else if inst.Type == info.KickToPosition {
 		fmt.Println("FastBrainGO: KickToPosition not implemented")
-	} else if inst.Type == state.ReceiveBallFromPlayer {
+	} else if inst.Type == info.ReceiveBallFromPlayer {
 		fmt.Println("FastBrainGO: ReceiveBallFromPlayer not implemented")
-	} else if inst.Type == state.ReceiveBallAtPosition {
+	} else if inst.Type == info.ReceiveBallAtPosition {
 		fmt.Println("FastBrainGO: ReceiveBallAtPosition not implemented")
-	} else if inst.Type == state.BlockEnemyPlayerFromPosition {
+	} else if inst.Type == info.BlockEnemyPlayerFromPosition {
 		fmt.Println("FastBrainGO: BlockEnemyPlayerFromPosition not implemented")
-	} else if inst.Type == state.BlockEnemyPlayerFromBall {
+	} else if inst.Type == info.BlockEnemyPlayerFromBall {
 		fmt.Println("FastBrainGO: BlockEnemyPlayerFromBall not implemented")
-	} else if inst.Type == state.BlockEnemyPlayerFromGoal {
+	} else if inst.Type == info.BlockEnemyPlayerFromGoal {
 		fmt.Println("FastBrainGO: BlockEnemyPlayerFromGoal not implemented")
-	} else if inst.Type == state.BlockEnemyPlayerFromPlayer {
+	} else if inst.Type == info.BlockEnemyPlayerFromPlayer {
 		fmt.Println("FastBrainGO: BlockEnemyPlayerFromPlayer not implemented")
 	} else {
 		fmt.Println("FastBrainGO: not implemented")
@@ -118,7 +118,7 @@ func (fb *FastBrainGO) instructionToAction(inst *state.Instruction, gs *state.Ga
 	return nil
 }
 
-func (fb *FastBrainGO) GetActions(gs *state.GameState, gamePlan *state.GamePlan) []action.Action {
+func (fb *FastBrainGO) GetActions(gs *info.GameState, gamePlan *info.GamePlan) []action.Action {
 
 	var actionList []action.Action
 

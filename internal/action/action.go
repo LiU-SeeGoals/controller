@@ -3,10 +3,11 @@ package action
 import (
 	"math"
 
-	"github.com/LiU-SeeGoals/controller/internal/state"
 	"github.com/LiU-SeeGoals/proto_go/robot_action"
 	"github.com/LiU-SeeGoals/proto_go/simulation"
 	"gonum.org/v1/gonum/mat"
+
+	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
 type Action interface {
@@ -44,13 +45,13 @@ type MoveTo struct {
 	// The id of the robot.
 	Id int
 	// Current position of Robot, vector contains (x,y,w)
-	Pos state.Position
+	Pos info.Position
 	// Goal destination of Robot, vector contains (x,y,w)
-	Dest state.Position
+	Dest info.Position
 	// Decides if the robot should dribble while moving
 	Dribble bool
 	// We need to know ID AND team to know how to update the pos
-	Team state.Team
+	Team info.Team
 }
 
 type Dribble struct {
@@ -148,7 +149,7 @@ func RotateToTarget(currentX, currentY, targetX, targetY, currentDirection float
 func (mv *MoveTo) TranslateSim() *simulation.RobotCommand {
 
 	id := uint32(mv.Id)
-	// center := state.Position{X: 0, Y: 0, Angle: 0}
+	// center := info.Position{X: 0, Y: 0, Angle: 0}
 
 	// Angular velocity counter-clockwise [rad/s]
 	angleDiff := RotateToTarget(mv.Pos.X, mv.Pos.Y, mv.Dest.X, mv.Dest.Y, mv.Pos.Angle)

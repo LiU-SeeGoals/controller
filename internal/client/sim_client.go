@@ -6,9 +6,9 @@ import (
 	"sync"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
-	"github.com/LiU-SeeGoals/controller/internal/state"
-	"github.com/LiU-SeeGoals/proto_go/simulation"
+	"github.com/LiU-SeeGoals/controller/internal/info"
 	"github.com/LiU-SeeGoals/proto_go/gc"
+	"github.com/LiU-SeeGoals/proto_go/simulation"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -22,13 +22,13 @@ type SimClient struct {
 
 	savedActions    []action.Action
 	actionListMutex sync.Mutex
-	gameState       *state.GameState
+	gameState       *info.GameState
 }
 
 // Create new sim client
 // Address should be <ip>:<port>
 // gameState is optionaly provided
-func NewSimClient(addr string, gs ...*state.GameState) *SimClient {
+func NewSimClient(addr string, gameInfo ...*info.GameInfo) *SimClient {
 	fmt.Println("Creating new SimClient with address: ", addr)
 	udpAddr, err := net.ResolveUDPAddr("udp", addr)
 	if err != nil {
@@ -42,8 +42,8 @@ func NewSimClient(addr string, gs ...*state.GameState) *SimClient {
 	}
 
 	// Set gamestate if provided
-	if len(gs) > 0 && gs[0] != nil {
-		sim_client.gameState = gs[0]
+	if len(gameInfo) > 0 && gameInfo[0] != nil {
+		sim_client.gameState = gameInfo[0].State
 	}
 	sim_client.Init()
 

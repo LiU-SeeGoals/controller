@@ -4,11 +4,11 @@ import (
 	"math"
 
 	"github.com/LiU-SeeGoals/controller/internal/height_map"
-	"github.com/LiU-SeeGoals/controller/internal/state"
+	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
 // Function to find the best (x, y) based on height maps with float64 precision
-func FindLowestHeight(x, y, r float32, s int, hightFunc height_map.HeightMap, robots state.RobotAnalysisTeam) (float32, float32) {
+func FindLowestHeight(x, y, r float32, s int, hightFunc height_map.HeightMap, robots info.RobotAnalysisTeam) (float32, float32) {
 	// Variables to track the best position and the minimum height
 	var bestX, bestY float32
 	minHeight := float32(math.MaxFloat32) // Start with a very high value

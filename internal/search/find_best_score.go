@@ -5,20 +5,20 @@ import (
 	"math/rand"
 
 	"github.com/LiU-SeeGoals/controller/internal/height_map"
-	"github.com/LiU-SeeGoals/controller/internal/state"
+	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
 type FindBestScore struct {
-	team        state.Team
-	scoringFunc func(x float32, y float32, robots state.RobotAnalysisTeam) float32
+	team        info.Team
+	scoringFunc func(x float32, y float32, robots info.RobotAnalysisTeam) float32
 	alpha       float32
 	radius      float32
 	samples     int
 }
 
 func NewFindBestScore(
-	team state.Team,
-	scoringFunc func(x float32, y float32, robots state.RobotAnalysisTeam) float32,
+	team info.Team,
+	scoringFunc func(x float32, y float32, robots info.RobotAnalysisTeam) float32,
 	alpha float32,
 	radius float32,
 	samples int,
@@ -32,7 +32,7 @@ func NewFindBestScore(
 	}
 }
 
-func scoreHighest(an *state.GameAnalysis) float32 {
+func scoreHighest(an *info.GameAnalysis) float32 {
 	myScore := float32(0)
 	otherScore := float32(0)
 
@@ -52,7 +52,7 @@ func scoreHighest(an *state.GameAnalysis) float32 {
 	return myScore / (myScore + otherScore)
 }
 
-func (frbs *FindBestScore) FindBestScore(hightFunc height_map.HeightMap, robotTeam *state.TeamAnalysis, gameAnalysis *state.GameAnalysis) {
+func (frbs *FindBestScore) FindBestScore(hightFunc height_map.HeightMap, robotTeam *info.TeamAnalysis, gameAnalysis *info.GameAnalysis) {
 	// Variables to track the best position and the minimum height
 	bestScore := scoreHighest(gameAnalysis)
 

@@ -4,27 +4,18 @@
 
 ## Overview
 ### What is the purpose of this repo?
-This is the repo containing the AI of the project. All the stratergies on how the robots will move and respond to opponents actions. This repo also is reponsible for the connections of our internal repos and external SSL repos.  
+This is the repo containing the planing and exciton if a football game. All the strategies on how the robots will move and respond to opponents actions. This repo also is responsible for the connections with the SSL vision and the referee and sending the action to our robots.  
 
 ## Setup 🚀
 
-Go to `https://github.com/LiU-SeeGoals/docker` and follow the setup in the README.md for running the code in docker containers.
+Go to `https://github.com/LiU-SeeGoals/seegoals` and follow the setup in the README.md for running the code in docker containers.
 
-After following the guide you should now have the containers running and the `controller` repo (this repo) running locally. Now you can go to the next step below.
+After following the guide you should have a shell open in a container in the  `controller` repo (this repo) running locally. 
 
 ### running main script
-Now the containers should be running. To run a program you need to enter the controller container. This can be done by running:
+To start the controller main program, go to 
 ```
-docker ps
-```
-Take note of the "container ID"
-Then run this command to enter the container:
-```
-docker exec -it {first 3 letters of container ID} sh
-```
-Now you are inside the container. To start the controller main program, go to 
-```
-~/cmd
+cd cmd
 ```
 And then run:
 ```
@@ -41,64 +32,27 @@ If you ever wonder where to put new files, please refer to it.
 
 This diagram describes how different part of the controller interacts with each other. It does not follow any specific diagram standard but is meant to give intuition on how the controller works. Each part in the diagram is described in more detail below.
 
-![Team logo](./images/controller_diagram.png)
+![Team logo](./images/systemet.drawio.svg)
 
 ### Receiver
-The Receiver in the diagram represent the SSLReceiver struct which is responsible for receiving packets from the SSL vision system and subscribing to its multicast address. The Receiver is indifferent to whether it's the real ssl system or the simulation. 
+The Receiver in the diagram represent the SSLReceiver struct which is responsible for receiving packets from the SSL vision and referee systems and subscribing to its multicast address. The Receiver is indifferent to whether it's the real ssl system or the simulation. 
 
-The packets received are serialized with protobuf and contains information about robot positions, ball position, field geometry etc. for e detailed list see [INSERT LINK TO PROTOBUF WIKI]. This information is not guaranteed to be correct, robots or the ball can be missing, this should be handled by the WordPredictor which is also the only owner of the receiver. 
+The packets received are serialized with protobuf and contains information about robot positions, ball position, field geometry etc. for e detailed list see [INSERT LINK TO PROTOBUF WIKI]. This information is not guaranteed to be correct, robots or the ball can be missing, this should be handled by the GameInfo which is source of truth for the gamestate.
 
-The receiver is housed in the Receiver package and is its only inhabitant.
 
-### WorldPredictor
-The WordPredictor is a package responsible for parsing the data received from the receiver, filling in missing information, like velocities and untracked objects, and updating the gamestate.
-
-The WordPredictor is initialized in the main loop and updated through the main loop. 
-
-### Gamestate
-The Gamestate is a package that houses structs that hold information of the current state of the game. It contains structs for the robots, the ball and the field which is the only information that the AI can use to make decisions. The Gamestate is updated by the WordPredictor.
-
-All structs in the Gamestate package are serializable which is necessary so that it can be sent to the GameViewer through the WebServer.
-
-One gamestate objects gets initialized in the main loop and given to the WordPredictor and AI as a pointer.
+### GameInfo
+The GameInfo is a struct that contains the source of truth for the gamestate, referee status and the field geometry. This is the only place where the gamestate is updated and should be the only place where the gamestate is read from. The gamestate is updated by the GameInfo when new packets are received from the Receiver. 
 
 ### AI
-The ai is a package consisting of six subdirectories, each of which are explained below. 
+The AI consists of a slow decision pipeline (slowBrain) and a fast decision pipeline (fastBrain). The slowBrain is responsible for making high level decisions like which strategy to use and which roles robots should have. The fastBrain is responsible for making low level decisions like acting on the roles that have been assigned to the robots, referee decisions, collision avoidance etc. 
 
-One of the six subdirectories is the ai ("ai in ai"", I know its confusing) which contains the decision pipeline and manages communication with other parts of the controller. It also have access to the gamestate which is used in the decision loop to decided what actions are assigned to which robot. The ai is initialized in the main loop and given a pointer to the gamestate, this is the only way the ai can get information about the game. 
-
-#### Decision pipeline
-The decision piplene consists of five stages, each stage being a function of an AI system that operates on a game state. The stages are sequential and represent a pipeline where each stage contributes to the final decision:
-
-```go
-gameAnalysis := ai.ugglan.Analyse(ai.gamestate)
-strategy := ai.strutsen.FindStrategy(gameAnalysis, ai.gamestate)
-roles := ai.hackspetten.AssignRoles(strategy, ai.gamestate)
-actions := ai.fiskmasen.GetActions(roles, ai.gamestate)
-```
-##### Ugglan
-In this stage, the system analyzes the current state of the gamestate and produces an analysis that helps inform future decisions. For example it can divide the pitch into zones and determine which team has control over each zone.
-
-##### Strutsen [NOT DECIDED]
-This stage is not yet implemented but will be responsible for finding the best strategy for the current gamestate. This could be a high level strategy like "attack" or "defend" or a more detailed strategy like "Robot 1 covers opponent 4, Robot 2 moves the ball up the field".
-
-##### Hackspetten [NOT DECIDED]
-The purpose of this stage depends on what the previous stage outputs. If Strutsen outputs a high level strategy, Hackspetten will decide which roles robots are assigned to fulfill this strategy. If Strutsen outputs a more detailed strategy, then there is no real purpose of this stage. 
-
-##### Fiskmåsen
-Fiskmåsen is responsible for figuring out what actions on a low level the robots should take to fulfill the roles they have been assigned. These are the actions that will be sent to the robots so they are really low level. They could for example be rotate x degrees, move in this direction, kick the ball etc. Any role related to movement will be put through Tornseglaren which is the pathfinder.
-
-##### Tornseglaren
-This is a Pathfinder.
 
 #### Communication
-The ai struct can communicate with other parts of the controller in three ways, it can send actions to robots through the client, it can send the gamestate and actions to the GameViewer through the WebServer and it can receive manual actions from the GameViewer through the WebServer.
+The AI communicates using channels. The AI component sends the gamestate to the slowBrain and fastBrain via channels. The fastBrain acts on the current gameplan and sends actions to the client. The slowBrain sends a new gameplan to the fastBrain when a new strategy is decided. One can think of the slowBrain as interrupting the fastBrain when a new strategy is needed, but the fastBrain is responsible for real-time decisions based on the current gameplan and gamestate.
 
-After the actions have been generated but before they are sent out to the robots through the client the ai checks if there are any manual actions that have been sent from the GameViewer. If there are any manual actions they are used instead of the generated actions. Finally the actions are sent to the client and the gamestate and actions are sent to the GameViewer.
-T
 
 ### WebServer
-Talks to the GameViewer, receives manual actions and sends gamestate and actions to the GameViewer.
+Todo
 
 ### Client
 This is where we send actions to the robots, the client is indifferent to whether it's the real robots or the simulation.

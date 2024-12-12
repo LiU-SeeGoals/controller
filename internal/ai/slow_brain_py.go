@@ -9,13 +9,13 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/LiU-SeeGoals/controller/internal/state"
+	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
 type SlowBrainPy struct {
-	team              state.Team
-	incomingGameState <-chan state.GameState
-	outgoingPlan      chan<- state.GamePlan
+	team              info.Team
+	incomingGameState <-chan info.GameState
+	outgoingPlan      chan<- info.GamePlan
 	ip_address        string
 }
 
@@ -23,7 +23,7 @@ func NewSlowBrainPy(ip_address string) *SlowBrainPy {
 	return &SlowBrainPy{ip_address: ip_address}
 }
 
-func (sb *SlowBrainPy) Init(incoming <-chan state.GameState, outgoing chan<- state.GamePlan, team state.Team) {
+func (sb *SlowBrainPy) Init(incoming <-chan info.GameState, outgoing chan<- info.GamePlan, team info.Team) {
 	sb.incomingGameState = incoming
 	sb.outgoingPlan = outgoing
 	sb.team = team
@@ -39,7 +39,7 @@ type PyResponse struct {
 }
 
 func (sb SlowBrainPy) Run() {
-	var gameState state.GameState
+	var gameState info.GameState
 	gameState.SetValid(false)
 
 	for {
@@ -78,19 +78,19 @@ func (sb SlowBrainPy) Run() {
 
 		// loop over the json["instructions"] response in the body and create a plan
 
-		plan := state.GamePlan{}
+		plan := info.GamePlan{}
 		for _, scenario := range pyResponse.Instructions {
 			idx := scenario.Id
 
-			robot := gameState.GetRobot(state.ID(idx), sb.team)
-			position := state.Position{
+			robot := gameState.GetRobot(info.ID(idx), sb.team)
+			position := info.Position{
 				X:     scenario.Position[0],
 				Y:     scenario.Position[1],
 				Z:     scenario.Position[2],
 				Angle: scenario.Position[3],
 			}
-			plan.Instructions = append(plan.Instructions, &state.Instruction{
-				Type:     state.MoveToPosition,
+			plan.Instructions = append(plan.Instructions, &info.Instruction{
+				Type:     info.MoveToPosition,
 				Id:       robot.GetID(),
 				Position: position,
 			})

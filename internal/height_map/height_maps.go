@@ -3,16 +3,16 @@ package height_map
 import (
 	"math"
 
-	"github.com/LiU-SeeGoals/controller/internal/state"
+	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
-type HeightMap func(x float32, y float32, robots state.RobotAnalysisTeam) float32
+type HeightMap func(x float32, y float32, robots info.RobotAnalysisTeam) float32
 
 type HeightMapGauss struct {
 	std float32
 }
 
-func (h HeightMapGauss) CalculateHeight(x float32, y float32, robots state.RobotAnalysisTeam) float32 {
+func (h HeightMapGauss) CalculateHeight(x float32, y float32, robots info.RobotAnalysisTeam) float32 {
 	// All enemy robots (blue team) create a positive Gaussian distribution
 	gaussHeight := float32(0)
 
@@ -37,7 +37,7 @@ func (h HeightMapGauss) CalculateHeight(x float32, y float32, robots state.Robot
 
 type HeightMapDonut struct{}
 
-func (h HeightMapGauss) HeightMapDonut(x float32, y float32, robots state.RobotAnalysisTeam) float32 {
+func (h HeightMapGauss) HeightMapDonut(x float32, y float32, robots info.RobotAnalysisTeam) float32 {
 	// Around the robot closest to the ball in our team (yellow),
 	// create a negative donut shaped distrobution at x distance
 	return 0.5
@@ -45,7 +45,7 @@ func (h HeightMapGauss) HeightMapDonut(x float32, y float32, robots state.RobotA
 
 type HeightMapAwayFromEdge struct{}
 
-func (h HeightMapGauss) HeightMapAwayFromEdge(x float32, y float32, robots *state.RobotAnalysisTeam) float32 {
+func (h HeightMapGauss) HeightMapAwayFromEdge(x float32, y float32, robots *info.RobotAnalysisTeam) float32 {
 	// It is often not advantagues to be close to the corneds of the playing field,
 	// this creates incentive to not be close to corners.
 	// The playing field is (-3,-4.5) to (3,4.5) in dimentions
@@ -53,16 +53,16 @@ func (h HeightMapGauss) HeightMapAwayFromEdge(x float32, y float32, robots *stat
 }
 
 type TimeAdvantage struct {
-	retrieveFunc func(r *state.RobotAnalysis) state.Position
+	retrieveFunc func(r *info.RobotAnalysis) info.Position
 }
 
-func NewTimeAdvantage(retrieveFunc func(r *state.RobotAnalysis) state.Position) *TimeAdvantage {
+func NewTimeAdvantage(retrieveFunc func(r *info.RobotAnalysis) info.Position) *TimeAdvantage {
 	return &TimeAdvantage{
 		retrieveFunc: retrieveFunc,
 	}
 }
 
-func (ta *TimeAdvantage) CalculateTimeAdvantage(x float32, y float32, robots state.RobotAnalysisTeam) float32 {
+func (ta *TimeAdvantage) CalculateTimeAdvantage(x float32, y float32, robots info.RobotAnalysisTeam) float32 {
 	time := float32(math.MaxFloat32)
 
 	for _, robot := range robots {
