@@ -29,6 +29,7 @@ type BaseStationClient struct {
 
 func NewBaseStationClient(address string) *BaseStationClient {
 	var err error = nil
+	fmt.Printf("address %s", address)
 	connection, _ := net.Dial("udp", address)
 	if err != nil {
 		fmt.Printf("Some error %v\n", err)
@@ -66,7 +67,8 @@ func (b *BaseStationClient) sendCommands() {
 
 		// Send the command
 		serializedCmd, _ := proto.Marshal(cmd) // Add error handling
-		b.sendMessage(serializedCmd)           // Add error handling
+		fmt.Printf("sending!")
+		b.sendMessage(serializedCmd) // Add error handling
 	}
 }
 

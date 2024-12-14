@@ -6,7 +6,6 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/state"
 	"github.com/LiU-SeeGoals/proto_go/robot_action"
 	"github.com/LiU-SeeGoals/proto_go/simulation"
-	"gonum.org/v1/gonum/mat"
 )
 
 type Action interface {
@@ -75,14 +74,14 @@ type Rotate struct {
 // the size of the vector sets the speed of the robot
 type Move struct {
 	Id        int
-	Direction *mat.VecDense // 2D vector, first value is x, second is y
+	Direction state.Position
 }
 
 // Same as move but with the speed embedded, should only be usable
 // when remote controlling the robot
 type MoveRemote struct {
 	Id        int
-	Direction *mat.VecDense // 2D vector, first value is x, second is y
+	Direction state.Position
 	Speed     int
 }
 
@@ -246,8 +245,8 @@ func (s *Move) TranslateSim() *simulation.RobotCommand {
 
 	id := uint32(s.Id)
 	angular := float32(0) // No angular velocity currently, adjust as needed
-	forward := float32(s.Direction.AtVec(0))
-	left := float32(s.Direction.AtVec(1))
+	forward := float32(s.Direction.X)
+	left := float32(s.Direction.Y)
 
 	// Create the local velocity command
 	localVel := &simulation.MoveLocalVelocity{
@@ -356,8 +355,8 @@ func (s *Move) TranslateReal() *robot_action.Command {
 		CommandId: robot_action.ActionType_MOVE_ACTION,
 		RobotId:   int32(s.Id),
 		Direction: &robot_action.Vector2D{
-			X: int32(s.Direction.AtVec(0)),
-			Y: int32(s.Direction.AtVec(1)),
+			X: int32(s.Direction.X),
+			Y: int32(s.Direction.Y),
 		},
 	}
 	return command
@@ -376,8 +375,8 @@ func (s *MoveRemote) TranslateReal() *robot_action.Command {
 		CommandId: robot_action.ActionType_MOVE_ACTION,
 		RobotId:   int32(s.Id),
 		Direction: &robot_action.Vector2D{
-			X: int32(s.Direction.AtVec(0)),
-			Y: int32(s.Direction.AtVec(1)),
+			X: int32(s.Direction.X),
+			Y: int32(s.Direction.Y),
 		},
 		KickSpeed: int32(s.Speed),
 	}
@@ -436,8 +435,8 @@ func (s *Move) ToDTO() ActionDTO {
 	return ActionDTO{
 		Action: robot_action.ActionType_MOVE_ACTION,
 		Id:     s.Id,
-		DestX:  int32(s.Direction.AtVec(0)),
-		DestY:  int32(s.Direction.AtVec(1)),
+		DestX:  int32(s.Direction.X),
+		DestY:  int32(s.Direction.Y),
 		DestW:  0,
 	}
 }

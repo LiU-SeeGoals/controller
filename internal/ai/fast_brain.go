@@ -72,17 +72,20 @@ func (fb *FastBrainGO) moveToPosition(inst *state.Instruction, gs *state.GameSta
 	if !robot.IsActive() {
 		return nil
 	}
-	act := action.MoveTo{}
+	act := action.Move{}
 	act.Id = int(robot.GetID())
-	act.Team = fb.team
-	act.Pos = robot.GetPosition()
-	act.Dest = inst.Position
-	// if fb.team == state.Yellow {
-	// 	act.Dest = avoidObstacles(robot, inst.Position, *gs)
-	// } else {
-	// 	act.Dest = inst.Position
-	// }
-	act.Dribble = false
+	act.Direction = inst.Position
+	// act.Speed = 1
+	// act.Id = int(robot.GetID())
+	// act.Team = fb.team
+	// // act.Pos = robot.GetPosition()
+	// act.Dest = inst.Position
+	// // if fb.team == state.Yellow {
+	// // 	act.Dest = avoidObstacles(robot, inst.Position, *gs)
+	// // } else {
+	// // 	act.Dest = inst.Position
+	// // }
+	// act.Dribble = false
 	return &act
 }
 
@@ -125,6 +128,11 @@ func (fb *FastBrainGO) GetActions(gs *state.GameState, gamePlan *state.GamePlan)
 	if fb.team != gamePlan.Team {
 		panic("FastBrainGO: Team mismatch")
 	}
+	speed := &action.Kick{
+		Id:        2,
+		KickSpeed: 1,
+	}
+	actionList = append(actionList, speed)
 
 	Instructions := gamePlan.Instructions
 

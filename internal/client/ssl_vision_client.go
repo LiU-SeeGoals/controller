@@ -90,13 +90,13 @@ func unpack(packet *ssl_vision.SSL_WrapperPacket, gs *state.GameState, play_time
 		x := robot.GetX()
 		y := robot.GetY()
 		angle := robot.GetOrientation()
-		fmt.Println("Robot", robot.GetRobotId(), "x:", x, "y:", y, "angle:", angle)
+		// fmt.Println("Robot", robot.GetRobotId(), "x:", x, "y:", y, "angle:", angle)
 
 		gs.SetBlueRobot(robot.GetRobotId(), x, y, angle, play_time)
 	}
 
 	for _, robot := range detect.GetRobotsYellow() {
-		fmt.Println("Robot", robot.GetRobotId(), "x:", robot.GetX(), "y:", robot.GetY(), "angle:", robot.GetOrientation())
+		// fmt.Println("Robot", robot.GetRobotId(), "x:", robot.GetX(), "y:", robot.GetY(), "angle:", robot.GetOrientation())
 		x := robot.GetX()
 		y := robot.GetY()
 		angle := robot.GetOrientation()
@@ -105,7 +105,7 @@ func unpack(packet *ssl_vision.SSL_WrapperPacket, gs *state.GameState, play_time
 	}
 
 	for _, ball := range detect.GetBalls() {
-		fmt.Println("Ball", ball.GetX(), ball.GetY(), ball.GetZ())
+		// fmt.Println("Ball", ball.GetX(), ball.GetY(), ball.GetZ())
 		x := ball.GetX()
 		y := ball.GetY()
 		z := ball.GetZ()
@@ -145,6 +145,7 @@ func (receiver *SSLVisionClient) InitGameState(gs *state.GameState, play_time in
 
 func (receiver *SSLVisionClient) UpdateGamestate(gs *state.GameState, play_time int64) {
 	packet, ok := <-receiver.ssl_channel_out
+
 	if !ok {
 		fmt.Println("SSL Channel closed")
 		return

@@ -44,7 +44,7 @@ This diagram describes how different part of the controller interacts with each 
 ![Team logo](./images/controller_diagram.png)
 
 ### Receiver
-The Receiver in the diagram represent the SSLReceiver struct which is responsible for receiving packets from the SSL vision system and subscribing to its multicast address. The Receiver is indifferent to whether it's the real ssl system or the simulation. 
+The Receiver in the diagram represent the SSLReceiver struct which is responsible for receiving packets from the SSL vision system and subscribing to its multicast address. The Receiver is indifferent to whether it's the real ssl system or the simulation.
 
 The packets received are serialized with protobuf and contains information about robot positions, ball position, field geometry etc. for e detailed list see [INSERT LINK TO PROTOBUF WIKI]. This information is not guaranteed to be correct, robots or the ball can be missing, this should be handled by the WordPredictor which is also the only owner of the receiver. 
 

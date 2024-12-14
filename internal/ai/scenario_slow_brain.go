@@ -103,8 +103,8 @@ type RealTest struct {
 func NewRealTest(team state.Team) *RealTest {
 
 	instSet := []*state.Instruction{
-		{Type: state.MoveToPosition, Id: 5, Position: state.Position{X: -2000, Y: 0}},
-		{Type: state.MoveToPosition, Id: 5, Position: state.Position{X: 2000, Y: 0}},
+		{Type: state.MoveToPosition, Id: 2, Position: state.Position{X: -2000, Y: 0}},
+		{Type: state.MoveToPosition, Id: 2, Position: state.Position{X: 2000, Y: 0}},
 	}
 
 	return &RealTest{
@@ -131,7 +131,7 @@ func (m *RealTest) Archived(gs *state.GameState) int {
 
 	// This assumes that the robot ids range from 0 to m.team_size
 	target := m.instructionSet[m.at_state].Position
-	robot := gs.GetRobot(state.ID(5), m.team)
+	robot := gs.GetRobot(state.ID(2), m.team)
 
 	if atPosition(robot, target) {
 		m.at_state = (m.at_state + 1) % 2 // Cycle through the states

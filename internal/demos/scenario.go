@@ -13,7 +13,9 @@ import (
 
 func Scenario() {
 	gs := state.NewGameState(10)
-	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddress(), config.GetGCClientAddress())
+	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddressReal(), config.GetGCClientAddress())
+	// fmt.Println(config.GetSSLClientAddress())
+	fmt.Println(config.GetSSLClientAddressReal())
 
 	// Yellow team
 	slowBrainYellow := ai.NewScenarioSlowBrain(1, 1)

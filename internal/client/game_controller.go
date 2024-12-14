@@ -96,8 +96,9 @@ func NewGCClient(sslReceiverAddress string) *GCClient {
 }
 
 func (receiver *GCClient) InitGameStatus(gs *state.GameStatus) {
+	fmt.Println("1")
 	packet, ok := <-receiver.gc_channel
-
+	fmt.Println("2")
 	if !ok {
 		fmt.Println("GC Channel closed")
 		return
@@ -192,6 +193,7 @@ func NewSSLClient(sslReceiverAddressVision, sslReceiverAddressGCC string) *SSLCl
 }
 
 func (client *SSLClient) InitState(gs *state.GameState, play_time int64) {
+
 	client.vision.InitGameState(gs, play_time)
 	client.referee.InitGameStatus(gs.Status)
 }

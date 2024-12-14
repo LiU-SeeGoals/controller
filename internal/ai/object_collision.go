@@ -1,10 +1,7 @@
 package ai
 
 import (
-	"encoding/json"
-	"fmt"
 	"math"
-	"net"
 
 	"github.com/LiU-SeeGoals/controller/internal/state"
 	"gonum.org/v1/gonum/mat"
@@ -97,7 +94,7 @@ func getObstacles(gs state.GameState, id state.ID) []state.Position {
 	}
 
 	for _, robot := range gs.Blue_team {
-			obstacles = append(obstacles, robot.GetPosition())
+		obstacles = append(obstacles, robot.GetPosition())
 	}
 
 	return obstacles
@@ -175,59 +172,59 @@ func argmin(m *mat.Dense) (int, int, float64) {
 	return minRow, minCol, minValue
 }
 
-var listener net.Listener
-var conn net.Conn
+// var listener net.Listener
+// var conn net.Conn
 
-func init() {
-	// Start the server to listen for incoming connections
-	var err error
-	listener, err = net.Listen("tcp", ":5000") // Bind to port 5000
-	if err != nil {
-		fmt.Printf("Error starting server: %v\n", err)
-		return
-	}
+// func init() {
+// 	// Start the server to listen for incoming connections
+// 	var err error
+// 	listener, err = net.Listen("tcp", ":5000") // Bind to port 5000
+// 	if err != nil {
+// 		fmt.Printf("Error starting server: %v\n", err)
+// 		return
+// 	}
 
-	// Accept connections in a goroutine to allow non-blocking operations
-	go func() {
-		for {
-			fmt.Println("Waiting for Python client to connect...")
-			conn, err = listener.Accept()
-			if err != nil {
-				fmt.Printf("Error accepting connection: %v\n", err)
-				continue
-			}
-			fmt.Println("Python client connected.")
-		}
-	}()
-}
+// 	// Accept connections in a goroutine to allow non-blocking operations
+// 	go func() {
+// 		for {
+// 			fmt.Println("Waiting for Python client to connect...")
+// 			conn, err = listener.Accept()
+// 			if err != nil {
+// 				fmt.Printf("Error accepting connection: %v\n", err)
+// 				continue
+// 			}
+// 			fmt.Println("Python client connected.")
+// 		}
+// 	}()
+// }
 
-func sendLocalGrid(localGrid *mat.Dense) {
-	if conn == nil {
-		fmt.Println("No active connection to send data")
-		return
-	}
+// func sendLocalGrid(localGrid *mat.Dense) {
+// 	if conn == nil {
+// 		fmt.Println("No active connection to send data")
+// 		return
+// 	}
 
-	rows, cols := localGrid.Dims()
-	data := make([][]float64, rows)
-	for i := 0; i < rows; i++ {
-		row := make([]float64, cols)
-		for j := 0; j < cols; j++ {
-			row[j] = localGrid.At(i, j)
-		}
-		data[i] = row
-	}
+// 	rows, cols := localGrid.Dims()
+// 	data := make([][]float64, rows)
+// 	for i := 0; i < rows; i++ {
+// 		row := make([]float64, cols)
+// 		for j := 0; j < cols; j++ {
+// 			row[j] = localGrid.At(i, j)
+// 		}
+// 		data[i] = row
+// 	}
 
-	// Serialize to JSON
-	jsonData, err := json.Marshal(data)
-	if err != nil {
-		fmt.Printf("Error serializing localGrid: %v\n", err)
-		return
-	}
+// 	// Serialize to JSON
+// 	jsonData, err := json.Marshal(data)
+// 	if err != nil {
+// 		fmt.Printf("Error serializing localGrid: %v\n", err)
+// 		return
+// 	}
 
-	// Send the JSON data followed by a newline
-	_, err = conn.Write(append(jsonData, '\n')) // Append newline for framing
-	if err != nil {
-		fmt.Printf("Error sending localGrid: %v\n", err)
-		conn = nil // Reset connection if sending fails
-	}
-}
+// 	// Send the JSON data followed by a newline
+// 	_, err = conn.Write(append(jsonData, '\n')) // Append newline for framing
+// 	if err != nil {
+// 		fmt.Printf("Error sending localGrid: %v\n", err)
+// 		conn = nil // Reset connection if sending fails
+// 	}
+// }
