@@ -86,7 +86,7 @@ func (fb *FastBrainGO) moveToPosition(inst *info.Instruction, gs *info.GameState
 	return &act
 }
 
-func (fb *FastBrainGO) moveToBall(inst *state.Instruction, gs *state.GameState) action.Action {
+func (fb *FastBrainGO) moveToBall(inst *info.Instruction, gs *info.GameState) action.Action {
   myTeam := gs.GetTeam(fb.team)
   robot := myTeam[inst.Id]
   if !robot.IsActive() {

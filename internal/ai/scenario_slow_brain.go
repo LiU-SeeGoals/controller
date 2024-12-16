@@ -99,13 +99,13 @@ func (sb ScenarioSlowBrain) Run() {
 }
 
 type MoveToBallTest struct {
-  team      state.Team
+  team      info.Team
   at_state  int
   start     time.Time
   max_time  time.Duration
 }
 
-func NewMoveToBallTest(team state.Team) *MoveToBallTest {
+func NewMoveToBallTest(team info.Team) *MoveToBallTest {
   return &MoveToBallTest{
     team:     team,
     max_time: 30 * time.Second,
@@ -113,24 +113,24 @@ func NewMoveToBallTest(team state.Team) *MoveToBallTest {
   }
 }
 
-func (m *MoveToBallTest) Run() []*state.Instruction {
+func (m *MoveToBallTest) Run() []*info.Instruction {
   if m.at_state == -1 {
     m.start = time.Now()
     m.at_state = 0
   }
   if m.at_state == 0 {
-    return []*state.Instruction{
-        {Type: state.MoveToBall, Id: 0},
+    return []*info.Instruction{
+        {Type: info.MoveToBall, Id: 0},
     }
   } else {
-    return []*state.Instruction{
-      {Type: state.MoveToBall, Id: 0},
+    return []*info.Instruction{
+      {Type: info.MoveToBall, Id: 0},
     }
   }
 }
 
-func (m *MoveToBallTest) Archived(gs *state.GameState) int {
-	robot_pos := gs.GetRobot(state.ID(0), m.team).GetPosition()
+func (m *MoveToBallTest) Archived(gs *info.GameState) int {
+	robot_pos := gs.GetRobot(info.ID(0), m.team).GetPosition()
   ball_pos := gs.GetBall().GetPosition()
 
 	dx := float64(robot_pos.X - ball_pos.X)
@@ -149,7 +149,7 @@ func (m *MoveToBallTest) Archived(gs *state.GameState) int {
 	}
 
 	if m.at_state >= 0 {
-		if time.Since(m.start) > m.max_time {
+		if time.Since(m.start) > m.max_time || m.at_state == 2 {
       if m.at_state == 0 {
         fmt.Println("Did not reach ball")
         return TIME_EXPIRED
