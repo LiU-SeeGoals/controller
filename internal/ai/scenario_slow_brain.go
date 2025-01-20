@@ -2,8 +2,8 @@ package ai
 
 import (
 	"fmt"
+	"math"
 	"time"
-  "math"
 
 	"github.com/LiU-SeeGoals/controller/internal/info"
 )
@@ -13,7 +13,7 @@ const (
 	COMPLETE
 	TIME_EXPIRED
 	ERROR
-  FAILED
+	FAILED
 )
 
 type ScenarioSlowBrain struct {
@@ -47,17 +47,17 @@ func (sb ScenarioSlowBrain) Run() {
 
 	scenarios := []ScenarioTest{}
 	scenarios = append(scenarios, NewMoveToTest(sb.team))
-  scenarios = append(scenarios, NewMoveToBallTest(sb.team))
+	scenarios = append(scenarios, NewMoveToBallTest(sb.team))
 	scenarios = append(scenarios, NewObstacleAvoidanceTest(sb.team))
 	scenarios = append(scenarios, NewRealTest(sb.team))
 	// scenarios = append(scenarios, NewObstacleAvoidanceTest(sb.team))
-  
+
 	scenario_index := 0
 	if sb.run_scenario >= 0 {
 		scenario_index = sb.run_scenario
 	}
 
-    fmt.Println("Running scenarios")
+	fmt.Println("Running scenarios")
 	for {
 		gameState = <-sb.incomingGameState
 
@@ -74,8 +74,8 @@ func (sb ScenarioSlowBrain) Run() {
 		} else if game_state == TIME_EXPIRED {
 			fmt.Println("Scenario", scenario_index, "time expired")
 		} else if game_state == FAILED {
-      fmt.Println("Scenario", scenario_index, "failed")
-    }
+			fmt.Println("Scenario", scenario_index, "failed")
+		}
 		if game_state != RUNNING {
 			scenario_index++
 			if scenario_index >= len(scenarios) || sb.run_scenario >= 0 {
@@ -99,43 +99,43 @@ func (sb ScenarioSlowBrain) Run() {
 }
 
 type MoveToBallTest struct {
-  team      info.Team
-  at_state  int
-  start     time.Time
-  max_time  time.Duration
+	team     info.Team
+	at_state int
+	start    time.Time
+	max_time time.Duration
 }
 
 func NewMoveToBallTest(team info.Team) *MoveToBallTest {
-  return &MoveToBallTest{
-    team:     team,
-    max_time: 30 * time.Second,
-    at_state: -1,
-  }
+	return &MoveToBallTest{
+		team:     team,
+		max_time: 30 * time.Second,
+		at_state: -1,
+	}
 }
 
 func (m *MoveToBallTest) Run() []*info.Instruction {
-  if m.at_state == -1 {
-    m.start = time.Now()
-    m.at_state = 0
-  }
-  if m.at_state == 0 {
-    return []*info.Instruction{
-        {Type: info.MoveToBall, Id: 0},
-    }
-  } else {
-    return []*info.Instruction{
-      {Type: info.MoveToBall, Id: 0},
-    }
-  }
+	if m.at_state == -1 {
+		m.start = time.Now()
+		m.at_state = 0
+	}
+	if m.at_state == 0 {
+		return []*info.Instruction{
+			{Type: info.MoveToBall, Id: 0},
+		}
+	} else {
+		return []*info.Instruction{
+			{Type: info.MoveToBall, Id: 0},
+		}
+	}
 }
 
 func (m *MoveToBallTest) Archived(gs *info.GameState) int {
 	robot_pos := gs.GetRobot(info.ID(0), m.team).GetPosition()
-  ball_pos := gs.GetBall().GetPosition()
+	ball_pos := gs.GetBall().GetPosition()
 
 	dx := float64(robot_pos.X - ball_pos.X)
 	dy := float64(robot_pos.Y - ball_pos.Y)
-  distance := math.Sqrt(math.Pow(dx, 2) + math.Pow(dy, 2))
+	distance := math.Sqrt(math.Pow(dx, 2) + math.Pow(dy, 2))
 
 	if m.at_state == 0 {
 		if distance < 500 {
@@ -143,25 +143,25 @@ func (m *MoveToBallTest) Archived(gs *info.GameState) int {
 		}
 	} else if m.at_state == 1 {
 		if distance > 500 {
-      fmt.Println("Failed with robot at (", robot_pos.X, robot_pos.Y, ") and ball at (", ball_pos.X, ball_pos.Y, ")")
+			fmt.Println("Failed with robot at (", robot_pos.X, robot_pos.Y, ") and ball at (", ball_pos.X, ball_pos.Y, ")")
 			m.at_state = 2
 		}
 	}
 
 	if m.at_state >= 0 {
 		if time.Since(m.start) > m.max_time || m.at_state == 2 {
-      if m.at_state == 0 {
-        fmt.Println("Did not reach ball")
-        return TIME_EXPIRED
-      } else if m.at_state == 1 {
-        fmt.Println("Reached ball and stayed there! :D")
-        return COMPLETE
-      } else {
-        fmt.Println("Reached ball but then lost it :(")
-        return FAILED
-      }
-    }
-  }
+			if m.at_state == 0 {
+				fmt.Println("Did not reach ball")
+				return TIME_EXPIRED
+			} else if m.at_state == 1 {
+				fmt.Println("Reached ball and stayed there! :D")
+				return COMPLETE
+			} else {
+				fmt.Println("Reached ball but then lost it :(")
+				return FAILED
+			}
+		}
+	}
 	return RUNNING
 }
 
