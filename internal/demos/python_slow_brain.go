@@ -47,10 +47,8 @@ func PythonSlowBrain() {
 		simClientBlue.SendActions(blue_actions)
 		simClientYellow.SendActions(yellow_actions)
 
-		// terminal_messages := []string{"Scenario"}
-
-		// if len(blue_actions) > 0 {
-		// 	client.UpdateWebGUI(gi, blue_actions, terminal_messages)
-		// }
+		// Communication to the GameViewer
+		terminal_messages := []string{"Scenario Python Slow Brain"}
+		client.UpdateWebGUI(gameInfo.State, yellow_actions, terminal_messages)
 	}
 }
