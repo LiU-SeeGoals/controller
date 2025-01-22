@@ -13,7 +13,7 @@ type SlowBrainGO struct {
 	team                 info.Team
 	gameAnalysis         *info.GameAnalysis
 	gameSearch           *search.FindBestScore
-	incomingGameState    <-chan info.GameState
+	incomingGameInfo    <-chan info.GameInfo
 	outgoingPlan         chan<- info.GamePlan
 	myAccumulatedFunc    height_map.HeightMap
 	otherAccumulatedFunc height_map.HeightMap
@@ -23,7 +23,7 @@ func NewSlowBrainGO() *SlowBrainGO {
 	return &SlowBrainGO{}
 }
 
-func (sb *SlowBrainGO) Init(incoming <-chan info.GameState, outgoing chan<- info.GamePlan, team info.Team) {
+func (sb *SlowBrainGO) Init(incoming <-chan info.GameInfo, outgoing chan<- info.GamePlan, team info.Team) {
 	posFunc := func(r *info.RobotAnalysis) info.Position {
 		return r.GetPosition()
 	}
@@ -59,7 +59,7 @@ func (sb *SlowBrainGO) Init(incoming <-chan info.GameState, outgoing chan<- info
 	gameAnalysis := info.NewGameAnalysis(9000, 6000, 100, team)
 	gameSearch := search.NewFindBestScore(team, myAccumulatedFunc, 0.1, 100, 9)
 	sb.team = team
-	sb.incomingGameState = incoming
+	sb.incomingGameInfo = incoming
 	sb.outgoingPlan = outgoing
 	sb.myAccumulatedFunc = myAccumulatedFunc
 	sb.otherAccumulatedFunc = otherAccumulatedFunc
@@ -70,20 +70,20 @@ func (sb *SlowBrainGO) Init(incoming <-chan info.GameState, outgoing chan<- info
 }
 
 func (sb *SlowBrainGO) Run() {
-	var gameState info.GameState
+	var gameInfo info.GameInfo
 	for {
-		gameState = <-sb.incomingGameState
+		gameInfo = <-sb.incomingGameInfo
 
 		time.Sleep(1 * time.Second) // TODO: Remove this
 		// Wait for the game to start
-		if !gameState.IsValid() {
+		if !gameInfo.State.IsValid() {
 			fmt.Println("SlowBrainGO: Invalid game state")
 			time.Sleep(10 * time.Millisecond)
 			continue
 		}
 
 		// Do some thinking
-		plan := sb.GetPlan(&gameState)
+		plan := sb.GetPlan(&gameInfo)
 
 		// Send the plan to the fast brain
 		// fmt.Println(plan.ToDTO())
@@ -92,8 +92,8 @@ func (sb *SlowBrainGO) Run() {
 	}
 }
 
-func (sb *SlowBrainGO) GetPlan(gameState *info.GameState) info.GamePlan {
-	sb.gameAnalysis.UpdateState(gameState)
+func (sb *SlowBrainGO) GetPlan(gameInfo *info.GameInfo) info.GamePlan {
+	sb.gameAnalysis.UpdateState(gameInfo.State)
 	sb.gameAnalysis.UpdateMyZones(sb.myAccumulatedFunc)
 	sb.gameAnalysis.UpdateOtherZones(sb.otherAccumulatedFunc)
 	sb.gameSearch.FindBestScore(sb.myAccumulatedFunc, sb.gameAnalysis.MyTeam, sb.gameAnalysis)

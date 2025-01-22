@@ -10,7 +10,7 @@ import (
 
 type FastBrainGO struct {
 	team              info.Team
-	incomingGameState <-chan info.GameState
+	incomingGameInfo <-chan info.GameInfo
 	incomingGamePlan  <-chan info.GamePlan
 	outgoingActions   chan<- []action.Action
 }
@@ -19,9 +19,9 @@ func NewFastBrainGO() *FastBrainGO {
 	return &FastBrainGO{}
 }
 
-func (fb *FastBrainGO) Init(incomingGameState <-chan info.GameState, incomingGamePlan <-chan info.GamePlan, outgoingActions chan<- []action.Action, team info.Team) {
+func (fb *FastBrainGO) Init(incomingGameInfo <-chan info.GameInfo, incomingGamePlan <-chan info.GamePlan, outgoingActions chan<- []action.Action, team info.Team) {
 
-	fb.incomingGameState = incomingGameState
+	fb.incomingGameInfo = incomingGameInfo
 	fb.incomingGamePlan = incomingGamePlan
 	fb.outgoingActions = outgoingActions
 	fb.team = team
@@ -31,14 +31,14 @@ func (fb *FastBrainGO) Init(incomingGameState <-chan info.GameState, incomingGam
 }
 
 func (fb *FastBrainGO) Run() {
-	gameState := info.GameState{}
+	gameInfo := info.GameInfo{}
 	gamePlan := info.GamePlan{}
 
 	for {
 		// We will reive the game state more often than the game plan
-		// so we wait for the gameState to update and work with the latest game plan
+		// so we wait for the gameInfo to update and work with the latest game plan
 
-		gameState = <-fb.incomingGameState
+		gameInfo = <-fb.incomingGameInfo
 
 		select {
 		case gamePlan = <-fb.incomingGamePlan:
@@ -48,7 +48,7 @@ func (fb *FastBrainGO) Run() {
 		// time.Sleep(1 * time.Second) // TODO: Remove this
 
 		// Wait for the game to start
-		if !gameState.Valid || !gamePlan.Valid {
+		if !gameInfo.State.Valid || !gamePlan.Valid {
 			fmt.Println("FastBrainGO: Invalid game state")
 			fb.outgoingActions <- []action.Action{}
 			time.Sleep(10 * time.Millisecond)
@@ -56,7 +56,7 @@ func (fb *FastBrainGO) Run() {
 		}
 
 		// Do some thinking
-		actions := fb.GetActions(&gameState, &gamePlan)
+		actions := fb.GetActions(&gameInfo, &gamePlan)
 
 		// Send the actions to the AI
 		fb.outgoingActions <- actions
@@ -65,9 +65,9 @@ func (fb *FastBrainGO) Run() {
 	}
 }
 
-func (fb *FastBrainGO) moveToPosition(inst *info.Instruction, gs *info.GameState) action.Action {
+func (fb *FastBrainGO) moveToPosition(inst *info.Instruction, gi *info.GameInfo) action.Action {
 	// todo: add collision avoidance
-	myTeam := gs.GetTeam(fb.team)
+	myTeam := gi.State.GetTeam(fb.team)
 	robot := myTeam[inst.Id]
 	if !robot.IsActive() {
 		return nil
@@ -78,7 +78,7 @@ func (fb *FastBrainGO) moveToPosition(inst *info.Instruction, gs *info.GameState
 	act.Pos = robot.GetPosition()
 	act.Dest = inst.Position
 	// if fb.team == info.Yellow {
-	// 	act.Dest = avoidObstacles(robot, inst.Position, *gs)
+	// 	act.Dest = avoidObstacles(robot, inst.Position, *gi)
 	// } else {
 	// 	act.Dest = inst.Position
 	// }
@@ -86,8 +86,8 @@ func (fb *FastBrainGO) moveToPosition(inst *info.Instruction, gs *info.GameState
 	return &act
 }
 
-func (fb *FastBrainGO) moveToBall(inst *info.Instruction, gs *info.GameState) action.Action {
-  myTeam := gs.GetTeam(fb.team)
+func (fb *FastBrainGO) moveToBall(inst *info.Instruction, gi *info.GameInfo) action.Action {
+  myTeam := gi.State.GetTeam(fb.team)
   robot := myTeam[inst.Id]
   if !robot.IsActive() {
     return nil
@@ -96,18 +96,18 @@ func (fb *FastBrainGO) moveToBall(inst *info.Instruction, gs *info.GameState) ac
   act.Id = int(robot.GetID())
   act.Team = fb.team
   act.Pos = robot.GetPosition()
-  act.Dest = gs.GetBall().GetPosition()
+  act.Dest = gi.State.GetBall().GetPosition()
   act.Dribble = false
   return &act
 }
 
 
 // TODO: can we make this nicer?
-func (fb *FastBrainGO) instructionToAction(inst *info.Instruction, gs *info.GameState) action.Action {
+func (fb *FastBrainGO) instructionToAction(inst *info.Instruction, gi *info.GameInfo) action.Action {
 	if inst.Type == info.MoveToPosition {
-		return fb.moveToPosition(inst, gs)
+		return fb.moveToPosition(inst, gi)
 	} else if inst.Type == info.MoveToBall {
-		return fb.moveToBall(inst, gs)
+		return fb.moveToBall(inst, gi)
 	} else if inst.Type == info.MoveWithBallToPosition {
 		fmt.Println("FastBrainGO: MoveWithBallToPosition not implemented")
 	} else if inst.Type == info.KickToPlayer {
@@ -134,7 +134,7 @@ func (fb *FastBrainGO) instructionToAction(inst *info.Instruction, gs *info.Game
 	return nil
 }
 
-func (fb *FastBrainGO) GetActions(gs *info.GameState, gamePlan *info.GamePlan) []action.Action {
+func (fb *FastBrainGO) GetActions(gs *info.GameInfo, gamePlan *info.GamePlan) []action.Action {
 
 	var actionList []action.Action
 

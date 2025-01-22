@@ -14,7 +14,7 @@ import (
 
 type SlowBrainPy struct {
 	team              info.Team
-	incomingGameState <-chan info.GameState
+	incomingGameInfo <-chan info.GameInfo
 	outgoingPlan      chan<- info.GamePlan
 	ip_address        string
 }
@@ -23,8 +23,8 @@ func NewSlowBrainPy(ip_address string) *SlowBrainPy {
 	return &SlowBrainPy{ip_address: ip_address}
 }
 
-func (sb *SlowBrainPy) Init(incoming <-chan info.GameState, outgoing chan<- info.GamePlan, team info.Team) {
-	sb.incomingGameState = incoming
+func (sb *SlowBrainPy) Init(incoming <-chan info.GameInfo, outgoing chan<- info.GamePlan, team info.Team) {
+	sb.incomingGameInfo = incoming
 	sb.outgoingPlan = outgoing
 	sb.team = team
 
@@ -39,20 +39,20 @@ type PyResponse struct {
 }
 
 func (sb SlowBrainPy) Run() {
-	var gameState info.GameState
-	gameState.SetValid(false)
+	var gameInfo info.GameInfo
+	gameInfo.State.SetValid(false)
 
 	for {
-		gameState = <-sb.incomingGameState
+		gameInfo = <-sb.incomingGameInfo
 
-		if !gameState.IsValid() {
+		if !gameInfo.State.IsValid() {
 			fmt.Println("ScenarioSlowBrain: Invalid game state")
 			time.Sleep(10 * time.Millisecond)
 			continue
 		}
 
 		resp, err := http.Post(sb.ip_address, "application/json",
-			bytes.NewBuffer(gameState.ToJson()))
+			bytes.NewBuffer(gameInfo.State.ToJson()))
 		if err != nil {
 			fmt.Println("Error in http.Get")
 			fmt.Println(err)
@@ -82,7 +82,7 @@ func (sb SlowBrainPy) Run() {
 		for _, scenario := range pyResponse.Instructions {
 			idx := scenario.Id
 
-			robot := gameState.GetRobot(info.ID(idx), sb.team)
+			robot := gameInfo.State.GetRobot(info.ID(idx), sb.team)
 			position := info.Position{
 				X:     scenario.Position[0],
 				Y:     scenario.Position[1],

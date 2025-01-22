@@ -18,7 +18,7 @@ const (
 
 type ScenarioSlowBrain struct {
 	team              info.Team
-	incomingGameState <-chan info.GameState
+	incomingGameInfo <-chan info.GameInfo
 	outgoingPlan      chan<- info.GamePlan
 	scale             float32
 	run_scenario      int // -1 for all
@@ -28,8 +28,8 @@ func NewScenarioSlowBrain(scale float32, run_scenario int) *ScenarioSlowBrain {
 	return &ScenarioSlowBrain{scale: scale, run_scenario: run_scenario}
 }
 
-func (sb *ScenarioSlowBrain) Init(incoming <-chan info.GameState, outgoing chan<- info.GamePlan, team info.Team) {
-	sb.incomingGameState = incoming
+func (sb *ScenarioSlowBrain) Init(incoming <-chan info.GameInfo, outgoing chan<- info.GamePlan, team info.Team) {
+	sb.incomingGameInfo = incoming
 	sb.outgoingPlan = outgoing
 	sb.team = team
 
@@ -38,12 +38,13 @@ func (sb *ScenarioSlowBrain) Init(incoming <-chan info.GameState, outgoing chan<
 
 type ScenarioTest interface {
 	Run() []*info.Instruction
-	Archived(*info.GameState) int
+	Archived(*info.GameInfo) int
 }
 
 func (sb ScenarioSlowBrain) Run() {
-	var gameState info.GameState
-	gameState.SetValid(false)
+	// var gameInfo info.GameInfo
+	gameInfo := *info.NewGameInfo(10)
+	gameInfo.State.SetValid(false)
 
 	scenarios := []ScenarioTest{}
 	scenarios = append(scenarios, NewMoveToTest(sb.team))
@@ -59,16 +60,16 @@ func (sb ScenarioSlowBrain) Run() {
 
 	fmt.Println("Running scenarios")
 	for {
-		gameState = <-sb.incomingGameState
+		gameInfo = <-sb.incomingGameInfo
 
-		if !gameState.IsValid() {
+		if !gameInfo.State.IsValid() {
 			fmt.Println("ScenarioSlowBrain: Invalid game state")
 			time.Sleep(40 * time.Millisecond)
 			continue
 		}
 
 		scenario := scenarios[scenario_index]
-		game_state := scenario.Archived(&gameState)
+		game_state := scenario.Archived(&gameInfo)
 		if game_state == COMPLETE {
 			fmt.Println("Scenario", scenario_index, "completed")
 		} else if game_state == TIME_EXPIRED {
@@ -129,9 +130,9 @@ func (m *MoveToBallTest) Run() []*info.Instruction {
 	}
 }
 
-func (m *MoveToBallTest) Archived(gs *info.GameState) int {
-	robot_pos := gs.GetRobot(info.ID(0), m.team).GetPosition()
-	ball_pos := gs.GetBall().GetPosition()
+func (m *MoveToBallTest) Archived(gi *info.GameInfo) int {
+	robot_pos := gi.State.GetRobot(info.ID(0), m.team).GetPosition()
+	ball_pos := gi.State.GetBall().GetPosition()
 
 	dx := float64(robot_pos.X - ball_pos.X)
 	dy := float64(robot_pos.Y - ball_pos.Y)
@@ -194,7 +195,7 @@ func (m *RealTest) Run() []*info.Instruction {
 	return []*info.Instruction{m.instructionSet[m.at_state]}
 }
 
-func (m *RealTest) Archived(gs *info.GameState) int {
+func (m *RealTest) Archived(gi *info.GameInfo) int {
 	// if len(gs.Yellow_team) != 4 {
 	// 	fmt.Println("Yellow team has", len(gs.Yellow_team), "4 required")
 	// 	return ERROR
@@ -205,7 +206,7 @@ func (m *RealTest) Archived(gs *info.GameState) int {
 
 	// This assumes that the robot ids range from 0 to m.team_size
 	target := m.instructionSet[m.at_state].Position
-	robot := gs.GetRobot(info.ID(5), m.team)
+	robot := gi.State.GetRobot(info.ID(5), m.team)
 
 	if atPosition(robot, target) {
 		m.at_state = (m.at_state + 1) % 2 // Cycle through the states
@@ -287,7 +288,7 @@ func (m *ObstacleAvoidanceTest) Run() []*info.Instruction {
 	return instructions
 }
 
-func (m *ObstacleAvoidanceTest) Archived(gs *info.GameState) int {
+func (m *ObstacleAvoidanceTest) Archived(gs *info.GameInfo) int {
 	// if len(gs.Yellow_team) != 4 {
 	// 	fmt.Println("Yellow team has", len(gs.Yellow_team), "4 required")
 	// 	return ERROR
@@ -299,7 +300,7 @@ func (m *ObstacleAvoidanceTest) Archived(gs *info.GameState) int {
 	// This assumes that the robot ids range from 0 to m.team_size
 	for id, at_state := range m.at_states {
 		target := m.instructionSet[id][at_state].Position
-		robot := gs.GetRobot(info.ID(id), m.team)
+		robot := gs.State.GetRobot(info.ID(id), m.team)
 		if atPosition(robot, target) {
 			nr_states := len(m.instructionSet[id])
 			m.at_states[id] = (at_state + 1) % nr_states // Cycle through the states
@@ -357,9 +358,9 @@ func (m *MoveToTest) Run() []*info.Instruction {
 	}
 }
 
-func (m *MoveToTest) Archived(gs *info.GameState) int {
-	robot0_pos := gs.GetRobot(info.ID(0), m.team).GetPosition()
-	robot1_pos := gs.GetRobot(info.ID(1), m.team).GetPosition()
+func (m *MoveToTest) Archived(gs *info.GameInfo) int {
+	robot0_pos := gs.State.GetRobot(info.ID(0), m.team).GetPosition()
+	robot1_pos := gs.State.GetRobot(info.ID(1), m.team).GetPosition()
 
 	if m.at_state == 0 {
 		target0 := info.Position{X: 1000, Y: 1000}

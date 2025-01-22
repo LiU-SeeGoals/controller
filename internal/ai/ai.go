@@ -7,37 +7,37 @@ import (
 )
 
 type SlowBrain interface {
-	Init(incoming <-chan info.GameState, outgoing chan<- info.GamePlan, team info.Team)
+	Init(incoming <-chan info.GameInfo, outgoing chan<- info.GamePlan, team info.Team)
 }
 
 type FastBrain interface {
-	Init(incoming <-chan info.GameState, incomingPlan <-chan info.GamePlan, outgoing chan<- []action.Action, team info.Team)
+	Init(incoming <-chan info.GameInfo, incomingPlan <-chan info.GamePlan, outgoing chan<- []action.Action, team info.Team)
 }
 
 type Ai struct {
 	team              info.Team
 	slow_brain        SlowBrain
 	fast_brain        FastBrain
-	gameStateSenderSB chan<- info.GameState
-	gameStateSenderFB chan<- info.GameState
+	gameInfoSenderSB chan<- info.GameInfo
+	gameInfoSenderFB chan<- info.GameInfo
 	actionReceiver    chan []action.Action
 }
 
 // Constructor for the ai, initializes the client
 // and the different components used in the decision pipeline
 func NewAi(team info.Team, slowBrain SlowBrain, fastBrain FastBrain) *Ai {
-	gameStateSenderSB, gameStateReceiverSB := helper.NB_KeepLatestChan[info.GameState]()
-	gameStateSenderFB, gameStateReceiverFB := helper.NB_KeepLatestChan[info.GameState]()
+	gameInfoSenderSB, gameInfoReceiverSB := helper.NB_KeepLatestChan[info.GameInfo]()
+	gameInfoSenderFB, gameInfoReceiverFB := helper.NB_KeepLatestChan[info.GameInfo]()
 	gamePlanSender, gamePlanReceiver := helper.NB_KeepLatestChan[info.GamePlan]()
 	actionReceiver := make(chan []action.Action)
-	slowBrain.Init(gameStateReceiverSB, gamePlanSender, team)
-	fastBrain.Init(gameStateReceiverFB, gamePlanReceiver, actionReceiver, team)
+	slowBrain.Init(gameInfoReceiverSB, gamePlanSender, team)
+	fastBrain.Init(gameInfoReceiverFB, gamePlanReceiver, actionReceiver, team)
 	ai := &Ai{
 		team:              team,
 		slow_brain:        slowBrain,
 		fast_brain:        fastBrain,
-		gameStateSenderSB: gameStateSenderSB,
-		gameStateSenderFB: gameStateSenderFB,
+		gameInfoSenderSB: gameInfoSenderSB,
+		gameInfoSenderFB: gameInfoSenderFB,
 		actionReceiver:    actionReceiver,
 	}
 	return ai
@@ -47,10 +47,10 @@ func NewAi(team info.Team, slowBrain SlowBrain, fastBrain FastBrain) *Ai {
 func (ai *Ai) GetActions(gi *info.GameInfo) []action.Action {
 
 	// Send the game state copy to the slow brain
-	ai.gameStateSenderSB <- *gi.State
+	ai.gameInfoSenderSB <- *gi
 
 	// Send the game state to the fast brain
-	ai.gameStateSenderFB <- *gi.State
+	ai.gameInfoSenderFB <- *gi
 
 	// Get the actions from the fast brain, this will block until the fast brain has decided on actions
 	actions := <-ai.actionReceiver
