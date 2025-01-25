@@ -2,6 +2,7 @@ package ai
 
 import (
 	"fmt"
+	"math"
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
@@ -87,20 +88,48 @@ func (fb *FastBrainGO) moveToPosition(inst *info.Instruction, gs *info.GameState
 }
 
 func (fb *FastBrainGO) moveToBall(inst *info.Instruction, gs *info.GameState) action.Action {
-  myTeam := gs.GetTeam(fb.team)
-  robot := myTeam[inst.Id]
-  if !robot.IsActive() {
-    return nil
-  }
-  act := action.MoveTo{}
-  act.Id = int(robot.GetID())
-  act.Team = fb.team
-  act.Pos = robot.GetPosition()
-  act.Dest = gs.GetBall().GetPosition()
-  act.Dribble = false
-  return &act
+	myTeam := gs.GetTeam(fb.team)
+	robot := myTeam[inst.Id]
+	if !robot.IsActive() {
+		return nil
+	}
+	act := action.MoveTo{}
+	act.Id = int(robot.GetID())
+	act.Team = fb.team
+	act.Pos = robot.GetPosition()
+	act.Dest = gs.GetBall().GetPosition()
+	act.Dribble = false
+	return &act
 }
 
+func (fb *FastBrainGO) moveWithBallToPosition(inst *info.Instruction, gs *info.GameState) action.Action {
+	myTeam := gs.GetTeam(fb.team)
+	robot := myTeam[inst.Id]
+	if !robot.IsActive() {
+		return nil
+	}
+
+	robotPos := robot.GetPosition()
+	ballPos, _ := gs.GetBall().GetPositionTime()
+	dx := float64(robotPos.X - ballPos.X)
+	dy := float64(robotPos.Y - ballPos.Y)
+	distance := math.Sqrt(math.Pow(dx, 2) + math.Pow(dy, 2))
+
+	act := action.MoveTo{}
+	act.Id = int(robot.GetID())
+	act.Team = fb.team
+	act.Pos = robot.GetPosition()
+	act.Dribble = true
+	act.Dest = inst.Position
+
+	// Reduce distance when its possible to estimte invisible ball
+	if distance > 1500 {
+		act.Dest = ballPos
+	} else {
+		act.Dest = inst.Position
+	}
+	return &act
+}
 
 // TODO: can we make this nicer?
 func (fb *FastBrainGO) instructionToAction(inst *info.Instruction, gs *info.GameState) action.Action {
@@ -109,7 +138,8 @@ func (fb *FastBrainGO) instructionToAction(inst *info.Instruction, gs *info.Game
 	} else if inst.Type == info.MoveToBall {
 		return fb.moveToBall(inst, gs)
 	} else if inst.Type == info.MoveWithBallToPosition {
-		fmt.Println("FastBrainGO: MoveWithBallToPosition not implemented")
+		return fb.moveWithBallToPosition(inst, gs)
+		//fmt.Println("FastBrainGO: MoveWithBallToPosition not implemented")
 	} else if inst.Type == info.KickToPlayer {
 		fmt.Println("FastBrainGO: KickToPlayer not implemented")
 	} else if inst.Type == info.KickToGoal {
