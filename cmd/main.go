@@ -5,5 +5,6 @@ import (
 )
 
 func main() {
-	demos.PythonSlowBrain()
+	//demos.PythonSlowBrain()
+	demos.Scenario()
 }

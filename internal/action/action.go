@@ -176,6 +176,11 @@ func (mv *MoveTo) TranslateSim() *simulation.RobotCommand {
 	// Velocity to the left [m/s]gs
 	left := float32(0)
 
+	dribblerSpeed := float32(0)
+	if mv.Dribble {
+		dribblerSpeed = 100 // in rpm, adjust as needed
+	}
+
 	localVel := &simulation.MoveLocalVelocity{
 		Forward: &forward,
 		Left:    &left,
@@ -191,8 +196,9 @@ func (mv *MoveTo) TranslateSim() *simulation.RobotCommand {
 
 	// Create the robot command with the move command
 	return &simulation.RobotCommand{
-		Id:          &id,
-		MoveCommand: moveCommand,
+		Id:            &id,
+		MoveCommand:   moveCommand,
+		DribblerSpeed: &dribblerSpeed,
 	}
 }
 

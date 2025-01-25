@@ -16,7 +16,7 @@ func Scenario() {
 	ssl_receiver := client.NewSSLClient()
 
 	// Yellow team
-	slowBrainYellow := ai.NewScenarioSlowBrain(1, 1)
+	slowBrainYellow := ai.NewScenarioSlowBrain(1, 4)
 	fastBrainYellow := ai.NewFastBrainGO()
 
 	aiYellow := ai.NewAi(info.Yellow, slowBrainYellow, fastBrainYellow)
@@ -24,18 +24,18 @@ func Scenario() {
 	simClientYellow := client.NewSimClient(config.GetSimYellowTeamAddress(), gameInfo)
 
 	// Blue team
-	slowBrainBlue := ai.NewScenarioSlowBrain(1, 1)
-	fastBrainBlue := ai.NewFastBrainGO()
+	//slowBrainBlue := ai.NewScenarioSlowBrain(1, 4)
+	//fastBrainBlue := ai.NewFastBrainGO()
 
-	aiBlue := ai.NewAi(info.Blue, slowBrainBlue, fastBrainBlue)
+	//aiBlue := ai.NewAi(info.Blue, slowBrainBlue, fastBrainBlue)
 
-	simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress(), gameInfo)
+	//simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress(), gameInfo)
 
 	simController := simulator.NewSimControl()
 
 	// Some sim setup for debugging ai behaviour
-	presentYellow := []int{0, 1, 2, 3, 4}
-	presentBlue := []int{0, 1, 2, 3}
+	presentYellow := []int{0, 1, 2, 3}
+	presentBlue := []int{}
 	simController.SetPresentRobots(presentYellow, presentBlue)
 
 	start_time := time.Now().UnixMilli()
@@ -48,8 +48,8 @@ func Scenario() {
 		yellow_actions := aiYellow.GetActions(gameInfo)
 		simClientYellow.SendActions(yellow_actions)
 
-		blue_actions := aiBlue.GetActions(gameInfo)
-		simClientBlue.SendActions(blue_actions)
+		//blue_actions := aiBlue.GetActions(gameInfo)
+		//simClientBlue.SendActions(blue_actions)
 
 		// terminal_messages := []string{"Scenario"}
 
