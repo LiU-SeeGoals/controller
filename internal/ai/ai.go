@@ -1,44 +1,62 @@
 package ai
 
 import (
+	"sync"
+
 	"github.com/LiU-SeeGoals/controller/internal/action"
+	ai "github.com/LiU-SeeGoals/controller/internal/ai/activity"
 	"github.com/LiU-SeeGoals/controller/internal/helper"
 	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
 type SlowBrain interface {
-	Init(incoming <-chan info.GameInfo, outgoing chan<- info.GamePlan, team info.Team)
+	Init(incoming <-chan info.GameInfo, activities *[]ai.Activity, lock *sync.Mutex, team info.Team)
 }
 
 type FastBrain interface {
-	Init(incoming <-chan info.GameInfo, incomingPlan <-chan info.GamePlan, outgoing chan<- []action.Action, team info.Team)
+	Init(incoming <-chan info.GameInfo,
+		activities *[]ai.Activity,
+		lock *sync.Mutex,
+		outgoing chan<- []action.Action,
+		team info.Team,
+	)
 }
 
 type Ai struct {
-	team              info.Team
-	slow_brain        SlowBrain
-	fast_brain        FastBrain
+	team             info.Team
+	slow_brain       SlowBrain
+	fast_brain       FastBrain
 	gameInfoSenderSB chan<- info.GameInfo
 	gameInfoSenderFB chan<- info.GameInfo
-	actionReceiver    chan []action.Action
+	actionReceiver   chan []action.Action
+	activities       *[]ai.Activity // Shared slice of Activity
+	activity_lock    *sync.Mutex    // Shared mutex for synchronization
 }
 
-// Constructor for the ai, initializes the client
-// and the different components used in the decision pipeline
+// Constructor for the AI
 func NewAi(team info.Team, slowBrain SlowBrain, fastBrain FastBrain) *Ai {
+	// Create a shared slice of Activity and a mutex
+	activities := &[]ai.Activity{}
+	lock := &sync.Mutex{}
+
 	gameInfoSenderSB, gameInfoReceiverSB := helper.NB_KeepLatestChan[info.GameInfo]()
 	gameInfoSenderFB, gameInfoReceiverFB := helper.NB_KeepLatestChan[info.GameInfo]()
-	gamePlanSender, gamePlanReceiver := helper.NB_KeepLatestChan[info.GamePlan]()
 	actionReceiver := make(chan []action.Action)
-	slowBrain.Init(gameInfoReceiverSB, gamePlanSender, team)
-	fastBrain.Init(gameInfoReceiverFB, gamePlanReceiver, actionReceiver, team)
+
+	// Initialize SlowBrain and FastBrain with the shared resources
+	slowBrain.Init(gameInfoReceiverSB, activities, lock, team)
+	fastBrain.Init(gameInfoReceiverFB, activities, lock, actionReceiver, team)
+
+	// Construct the AI object
 	ai := &Ai{
-		team:              team,
-		slow_brain:        slowBrain,
-		fast_brain:        fastBrain,
+		team:             team,
+		slow_brain:       slowBrain,
+		fast_brain:       fastBrain,
+		activities:       activities,
 		gameInfoSenderSB: gameInfoSenderSB,
 		gameInfoSenderFB: gameInfoSenderFB,
-		actionReceiver:    actionReceiver,
+		activity_lock:    lock,
+		actionReceiver:   actionReceiver,
 	}
 	return ai
 }
