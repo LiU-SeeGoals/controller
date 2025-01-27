@@ -1,10 +1,10 @@
 package demos
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/ai"
+	slow_brain "github.com/LiU-SeeGoals/controller/internal/ai/slow_brain"
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/info"
@@ -16,7 +16,7 @@ func Scenario() {
 	ssl_receiver := client.NewSSLClient()
 
 	// Yellow team
-	slowBrainYellow := ai.NewScenarioSlowBrain(1, 1)
+	slowBrainYellow := slow_brain.NewSlowBrain1(info.Yellow)
 	fastBrainYellow := ai.NewFastBrainGO()
 
 	aiYellow := ai.NewAi(info.Yellow, slowBrainYellow, fastBrainYellow)
@@ -24,12 +24,12 @@ func Scenario() {
 	simClientYellow := client.NewSimClient(config.GetSimYellowTeamAddress(), gameInfo)
 
 	// Blue team
-	slowBrainBlue := ai.NewScenarioSlowBrain(1, 1)
-	fastBrainBlue := ai.NewFastBrainGO()
+	// slowBrainBlue := slow_brain.NewSlowBrain1(info.Blue)
+	// fastBrainBlue := ai.NewFastBrainGO()
 
-	aiBlue := ai.NewAi(info.Blue, slowBrainBlue, fastBrainBlue)
+	// aiBlue := ai.NewAi(info.Blue, slowBrainBlue, fastBrainBlue)
 
-	simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress(), gameInfo)
+	// simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress(), gameInfo)
 
 	simController := simulator.NewSimControl()
 
@@ -43,13 +43,13 @@ func Scenario() {
 		playTime := time.Now().UnixMilli() - start_time
 		// fmt.Println("playTime: ", playTime)
 		ssl_receiver.UpdateState(gameInfo, playTime)
-		fmt.Println(gameInfo)
+		//fmt.Println(gameInfo)
 
 		yellow_actions := aiYellow.GetActions(gameInfo)
 		simClientYellow.SendActions(yellow_actions)
 
-		blue_actions := aiBlue.GetActions(gameInfo)
-		simClientBlue.SendActions(blue_actions)
+		//blue_actions := aiBlue.GetActions(gameInfo)
+		//simClientBlue.SendActions(blue_actions)
 
 		// terminal_messages := []string{"Scenario"}
 

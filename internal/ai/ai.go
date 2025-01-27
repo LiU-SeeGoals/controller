@@ -1,6 +1,7 @@
 package ai
 
 import (
+	"fmt"
 	"sync"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
@@ -72,6 +73,9 @@ func (ai *Ai) GetActions(gi *info.GameInfo) []action.Action {
 
 	// Get the actions from the fast brain, this will block until the fast brain has decided on actions
 	actions := <-ai.actionReceiver
-
+	if len(actions) > 0 {
+		fmt.Println(actions[0])
+	}
+	//fmt.Println(actions[0])
 	return actions
 }
