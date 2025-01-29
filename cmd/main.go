@@ -6,5 +6,6 @@ import (
 
 func main() {
 	//demos.PythonSlowBrain()
-	demos.Scenario()
+	//demos.Scenario()
+	demos.Goalie()
 }
