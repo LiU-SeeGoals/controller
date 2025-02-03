@@ -26,6 +26,7 @@ const (
 type Instruction struct {
 	Type     InstructionType
 	Id       ID
+	OtherId  ID
 	Position Position
 }
 

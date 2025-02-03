@@ -51,6 +51,7 @@ func (sb ScenarioSlowBrain) Run() {
 	scenarios = append(scenarios, NewObstacleAvoidanceTest(sb.team))
 	scenarios = append(scenarios, NewRealTest(sb.team))
 	scenarios = append(scenarios, NewMoveWithBallToPositionTest(sb.team))
+	scenarios = append(scenarios, NewKickToPlayerTest(sb.team))
 	// scenarios = append(scenarios, NewObstacleAvoidanceTest(sb.team))
 
 	scenario_index := 0
@@ -462,6 +463,90 @@ func (m *MoveWithBallToPositionTest) Archived(gs *info.GameState) int {
 	} else if m.at_state == 1 {
 		if distancePos < 500 {
 			m.at_state = 2
+		}
+	}
+
+	return RUNNING
+}
+
+// -------------- Kick ball to player -------------------------------------//
+
+type KickToPlayerTest struct {
+	team     info.Team
+	at_state int
+	start    time.Time
+	max_time time.Duration
+}
+
+func NewKickToPlayerTest(team info.Team) *KickToPlayerTest {
+	return &KickToPlayerTest{
+		team:     team,
+		max_time: 30 * time.Second,
+		at_state: -1,
+	}
+}
+
+func (m *KickToPlayerTest) Run() []*info.Instruction {
+	if m.at_state == -1 {
+		m.start = time.Now()
+		m.at_state = 0
+	}
+
+	if m.at_state == 0 {
+		return []*info.Instruction{
+			{Type: info.MoveToBall, Id: 0},
+			{Type: info.MoveToPosition, Id: 1, Position: info.Position{X: -1500, Y: 1500}},
+			//{Type: info.MoveToPosition, Id: 1, Position: info.Position{X: 2000, Y: 1500}},
+			//{Type: info.MoveToPosition, Id: 1, Position: info.Position{X: -3000, Y: -2000}},
+		}
+	} else if m.at_state == 1 {
+		return []*info.Instruction{
+			{Type: info.MoveWithBallToPosition, Id: 0, Position: info.Position{X: -3000, Y: -1000}},
+		}
+	} else if m.at_state == 2 {
+		return []*info.Instruction{
+			{Type: info.KickToPlayer, Id: 0, OtherId: 1},
+		}
+	} else {
+		return []*info.Instruction{
+			{Type: info.MoveToPosition, Id: 0, Position: info.Position{X: 0, Y: 0}},
+		}
+	}
+}
+
+func (m *KickToPlayerTest) Archived(gs *info.GameState) int {
+	robot_pos0 := gs.GetRobot(info.ID(0), m.team).GetPosition()
+	robot_pos1 := gs.GetRobot(info.ID(1), m.team).GetPosition()
+	ball_pos := gs.GetBall().GetPosition()
+
+	dxBall0 := float64(robot_pos0.X - ball_pos.X)
+	dyBall0 := float64(robot_pos0.Y - ball_pos.Y)
+	distanceBall0 := math.Sqrt(math.Pow(dxBall0, 2) + math.Pow(dyBall0, 2))
+
+	dxPos0 := float64(robot_pos0.X - (-3000))
+	dyPos0 := float64(robot_pos0.Y - (-1000))
+	distancePos0 := math.Sqrt(math.Pow(dxPos0, 2) + math.Pow(dyPos0, 2))
+
+	// The position of the reciver
+	dxPos1 := float64(robot_pos1.X - (-1500))
+	dyPos1 := float64(robot_pos1.Y - (1500))
+	distancePos1 := math.Sqrt(math.Pow(dxPos1, 2) + math.Pow(dyPos1, 2))
+
+	dxBall1 := float64(robot_pos1.X - ball_pos.X)
+	dyBall1 := float64(robot_pos1.Y - ball_pos.Y)
+	distanceBall1 := math.Sqrt(math.Pow(dxBall1, 2) + math.Pow(dyBall1, 2))
+
+	if m.at_state == 0 {
+		if distanceBall0 < 100 {
+			m.at_state = 1
+		}
+	} else if m.at_state == 1 {
+		if distancePos0 < 100 && distancePos1 < 100 {
+			m.at_state = 2
+		}
+	} else if m.at_state == 2 {
+		if distanceBall1 < 500 {
+			m.at_state = 3
 		}
 	}
 

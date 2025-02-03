@@ -16,7 +16,7 @@ func Scenario() {
 	ssl_receiver := client.NewSSLClient()
 
 	// Yellow team
-	slowBrainYellow := ai.NewScenarioSlowBrain(1, 4)
+	slowBrainYellow := ai.NewScenarioSlowBrain(1, 5)
 	fastBrainYellow := ai.NewFastBrainGO()
 
 	aiYellow := ai.NewAi(info.Yellow, slowBrainYellow, fastBrainYellow)
@@ -34,7 +34,7 @@ func Scenario() {
 	simController := simulator.NewSimControl()
 
 	// Some sim setup for debugging ai behaviour
-	presentYellow := []int{0, 1, 2, 3}
+	presentYellow := []int{0, 1}
 	presentBlue := []int{}
 	simController.SetPresentRobots(presentYellow, presentBlue)
 
