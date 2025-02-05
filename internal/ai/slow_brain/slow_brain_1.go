@@ -51,8 +51,8 @@ func (m *SlowBrain1) run() {
 	index := 0
 
 	for {
-		// Again, block or sleep so we don't spin forever:
-		time.Sleep(500 * time.Millisecond)
+		// No need for slow brain to be fast
+		time.Sleep(100 * time.Millisecond)
 
 		//fmt.Println("slow, number of activities:", len(*m.activities))
 		if len(*m.activities) == 0 {

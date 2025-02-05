@@ -43,7 +43,7 @@ func (fb *FastBrainGO) Init(
 func (fb *FastBrainGO) Run() {
 	for {
 		// For example, throttle the loop slightly to avoid busy-loop:
-		time.Sleep(50 * time.Millisecond) // or read from fb.incomingGameInfo if event-driven
+		time.Sleep(1 * time.Millisecond) // or read from fb.incomingGameInfo if event-driven
 
 		gameInfo := <-fb.incomingGameInfo
 		// Make a snapshot of current activities under lock
