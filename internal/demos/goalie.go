@@ -1,6 +1,7 @@
 package demos
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/ai"
@@ -10,30 +11,21 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/simulator"
 )
 
-func Scenario() {
+func Goalie() {
 	gameInfo := info.NewGameInfo(10)
 	ssl_receiver := client.NewSSLClient()
 
-	// Yellow team
-	slowBrainYellow := ai.NewScenarioSlowBrain(1, 4)
+	slowBrainYellow := ai.NewScenarioSlowBrain(-5, 5)
 	fastBrainYellow := ai.NewFastBrainGO()
 
 	aiYellow := ai.NewAi(info.Yellow, slowBrainYellow, fastBrainYellow)
 
 	simClientYellow := client.NewSimClient(config.GetSimYellowTeamAddress(), gameInfo)
 
-	// Blue team
-	//slowBrainBlue := ai.NewScenarioSlowBrain(1, 4)
-	//fastBrainBlue := ai.NewFastBrainGO()
-
-	//aiBlue := ai.NewAi(info.Blue, slowBrainBlue, fastBrainBlue)
-
-	//simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress(), gameInfo)
-
 	simController := simulator.NewSimControl()
 
 	// Some sim setup for debugging ai behaviour
-	presentYellow := []int{0, 1, 2, 3}
+	presentYellow := []int{0, 1}
 	presentBlue := []int{}
 	simController.SetPresentRobots(presentYellow, presentBlue)
 
@@ -42,18 +34,15 @@ func Scenario() {
 		playTime := time.Now().UnixMilli() - start_time
 		// fmt.Println("playTime: ", playTime)
 		ssl_receiver.UpdateState(gameInfo, playTime)
-		//fmt.Println(gameInfo)
-
+		fmt.Println(gameInfo.Status)
+		
 		yellow_actions := aiYellow.GetActions(gameInfo)
+
+		
 		simClientYellow.SendActions(yellow_actions)
 
-		//blue_actions := aiBlue.GetActions(gameInfo)
-		//simClientBlue.SendActions(blue_actions)
-
-		// terminal_messages := []string{"Scenario"}
-
-		// if len(blue_actions) > 0 {
-		// 	client.UpdateWebGUI(gameInfo, blue_actions, terminal_messages)
-		// }
+		// Communication to the GameViewer
+		terminal_messages := []string{"Scenario Python Slow Brain"}
+		client.UpdateWebGUI(gameInfo.State, yellow_actions, terminal_messages)
 	}
 }

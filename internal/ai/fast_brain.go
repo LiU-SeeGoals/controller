@@ -3,6 +3,7 @@ package ai
 import (
 	"fmt"
 	"sync"
+
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
