@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/ai"
+	slow_brain "github.com/LiU-SeeGoals/controller/internal/ai/slow_brain"
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/info"
@@ -15,7 +16,7 @@ func Scenario() {
 	ssl_receiver := client.NewSSLClient()
 
 	// Yellow team
-	slowBrainYellow := ai.NewScenarioSlowBrain(1, 4)
+	slowBrainYellow := slow_brain.NewSlowBrain1(info.Yellow)
 	fastBrainYellow := ai.NewFastBrainGO()
 
 	aiYellow := ai.NewAi(info.Yellow, slowBrainYellow, fastBrainYellow)
@@ -23,18 +24,18 @@ func Scenario() {
 	simClientYellow := client.NewSimClient(config.GetSimYellowTeamAddress(), gameInfo)
 
 	// Blue team
-	//slowBrainBlue := ai.NewScenarioSlowBrain(1, 4)
-	//fastBrainBlue := ai.NewFastBrainGO()
+	// slowBrainBlue := slow_brain.NewSlowBrain1(info.Blue)
+	// fastBrainBlue := ai.NewFastBrainGO()
 
-	//aiBlue := ai.NewAi(info.Blue, slowBrainBlue, fastBrainBlue)
+	// aiBlue := ai.NewAi(info.Blue, slowBrainBlue, fastBrainBlue)
 
-	//simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress(), gameInfo)
+	// simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress(), gameInfo)
 
 	simController := simulator.NewSimControl()
 
 	// Some sim setup for debugging ai behaviour
-	presentYellow := []int{0, 1, 2, 3}
-	presentBlue := []int{}
+	presentYellow := []int{0, 1, 2, 3, 4}
+	presentBlue := []int{0, 1, 2, 3}
 	simController.SetPresentRobots(presentYellow, presentBlue)
 
 	start_time := time.Now().UnixMilli()

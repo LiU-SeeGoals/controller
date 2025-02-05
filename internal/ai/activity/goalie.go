@@ -1,4 +1,27 @@
-func (fb *FastBrainGO) Goalie(inst *info.Instruction, gs *info.GameState) action.Action {
+package ai
+
+import (
+	"fmt"
+
+	"github.com/LiU-SeeGoals/controller/internal/action"
+	"github.com/LiU-SeeGoals/controller/internal/info"
+)
+
+type Goalie struct {
+	team            info.Team
+	id              info.ID
+	target_position info.Position
+}
+
+func NewGoalie(team info.Team, id info.ID, dest info.Position) *MoveToPosition {
+	return &MoveToPosition{
+		team:            team,
+		id:              id,
+		target_position: dest,
+	}
+}
+
+func (fb *Goalie) GetAction(inst *info.Instruction, gs *info.GameState) action.Action {
 	// todo: add collision avoidance
 	myTeam := gs.GetTeam(fb.team)
 	robot := myTeam[inst.Id]

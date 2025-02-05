@@ -1,20 +1,48 @@
+package ai
 
-type Goalie struct {
-	team     info.Team
-	at_state int
-	start    time.Time
-	max_time time.Duration
+import (
+	"fmt"
+	"math"
+	"sync"
+	"time"
+
+	ai "github.com/LiU-SeeGoals/controller/internal/ai/activity"
+	"github.com/LiU-SeeGoals/controller/internal/info"
+)
+
+type TestGoalie struct {
+	SlowBrainComposition
+	at_state      int
+	start         time.Time
+	max_time      time.Duration
+	activities    *[]ai.Activity // <-- pointer to the slice
+	activity_lock *sync.Mutex    // shared mutex for synchronization
 }
 
-func NewGoalie(team info.Team) *Goalie {
-	return &Goalie{
-		team:     team,
-		max_time: 30 * time.Second,
-		at_state: -1,
+func NewTestGoalie(team info.Team) *SlowBrain1 {
+	return &SlowBrain1{
+		SlowBrainComposition: SlowBrainComposition{
+			team: team,
+		},
 	}
 }
 
-func (g *Goalie) Run() []*info.Instruction {
+func (m *TestGoalie) Init(
+	incoming <-chan info.GameInfo,
+	activities *[]ai.Activity,
+	lock *sync.Mutex,
+	team info.Team,
+) {
+	m.incomingGameInfo = incoming
+	m.activities = activities // store pointer directly
+	m.activity_lock = lock
+	m.team = team
+	m.start = time.Now()
+
+	go m.run()
+}
+
+func (g *TestGoalie) run() []*info.Instruction {
 	if g.at_state == -1 {
 		g.start = time.Now()
 		g.at_state = 0
@@ -50,7 +78,7 @@ func (g *Goalie) Run() []*info.Instruction {
 
 }
 
-func (g *Goalie) Archived(gs *info.GameState) int {
+func (g *TestGoalie) Archived(gs *info.GameState) int {
 	robot_pos := gs.GetRobot(info.ID(1), g.team).GetPosition()
 	ball_pos := gs.GetBall().GetPosition()
 
