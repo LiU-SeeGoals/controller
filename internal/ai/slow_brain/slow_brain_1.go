@@ -11,11 +11,9 @@ import (
 
 type SlowBrain1 struct {
 	SlowBrainComposition
-	at_state      int
-	start         time.Time
-	max_time      time.Duration
-	activities    *[]ai.Activity // <-- pointer to the slice
-	activity_lock *sync.Mutex    // shared mutex for synchronization
+	at_state int
+	start    time.Time
+	max_time time.Duration
 }
 
 func NewSlowBrain1(team info.Team) *SlowBrain1 {

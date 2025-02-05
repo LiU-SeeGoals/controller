@@ -49,3 +49,8 @@ func (fb *MoveWithBallToPosition) GetAction(inst *info.Instruction, gs *info.Gam
 	}
 	return &act
 }
+
+func (fb *MoveWithBallToPosition) Achieved(*info.GameInfo) bool {
+	// Need to be implemented
+	return false
+}

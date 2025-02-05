@@ -1,6 +1,7 @@
 package ai
 
 import (
+	"sync"
 	"time"
 
 	ai "github.com/LiU-SeeGoals/controller/internal/ai/activity"
@@ -21,15 +22,17 @@ type SlowBrainComposition struct {
 	scale            float32
 	run_scenario     int // -1 for all
 	start            time.Time
+	activities       *[]ai.Activity // <-- pointer to the slice
+	activity_lock    *sync.Mutex    // shared mutex for synchronization
 }
 
-func (m *SlowBrain1) ClearActivities() {
+func (m *SlowBrainComposition) ClearActivities() {
 	m.activity_lock.Lock()
 	defer m.activity_lock.Unlock()
 	*m.activities = []ai.Activity{}
 }
 
-func (m *SlowBrain1) AddActivity(activity ai.Activity) {
+func (m *SlowBrainComposition) AddActivity(activity ai.Activity) {
 	m.activity_lock.Lock()
 	defer m.activity_lock.Unlock()
 	*m.activities = append(*m.activities, activity)
