@@ -21,6 +21,8 @@ const (
 	BlockEnemyPlayerFromBall     InstructionType = 9  // Body block an enemy player from the ball (dynamic)
 	BlockEnemyPlayerFromGoal     InstructionType = 10 // Body block an enemy player from the goal (dynamic). Make sure that the enemy does not have a clear shot at the goal.
 	BlockEnemyPlayerFromPlayer   InstructionType = 11 // Body block an enemy player from a specific player (dynamic)
+
+	Goalie	InstructionType = 12 //Goalie instruction
 )
 
 type Instruction struct {

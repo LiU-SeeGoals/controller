@@ -5,6 +5,9 @@ import (
 )
 
 func main() {
+<<<<<<< HEAD
 	//demos.PythonSlowBrain()
+=======
+>>>>>>> dev
 	demos.Scenario()
 }

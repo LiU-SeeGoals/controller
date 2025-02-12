@@ -3,66 +3,82 @@ package ai
 import (
 	"fmt"
 	"math"
+	"sync"
+
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
+	ai "github.com/LiU-SeeGoals/controller/internal/ai/activity"
 	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
 type FastBrainGO struct {
-	team              info.Team
-	incomingGameState <-chan info.GameState
-	incomingGamePlan  <-chan info.GamePlan
-	outgoingActions   chan<- []action.Action
+	team             info.Team
+	incomingGameInfo <-chan info.GameInfo
+	outgoingActions  chan<- []action.Action
+	activities       *[]ai.Activity // <-- pointer to a slice
+	activity_lock    *sync.Mutex    // shared mutex for synchronization
 }
 
 func NewFastBrainGO() *FastBrainGO {
 	return &FastBrainGO{}
 }
 
-func (fb *FastBrainGO) Init(incomingGameState <-chan info.GameState, incomingGamePlan <-chan info.GamePlan, outgoingActions chan<- []action.Action, team info.Team) {
-
-	fb.incomingGameState = incomingGameState
-	fb.incomingGamePlan = incomingGamePlan
-	fb.outgoingActions = outgoingActions
+func (fb *FastBrainGO) Init(
+	incoming <-chan info.GameInfo,
+	activities *[]ai.Activity,
+	lock *sync.Mutex,
+	outgoing chan<- []action.Action,
+	team info.Team,
+) {
+	fb.incomingGameInfo = incoming
+	fb.outgoingActions = outgoing
 	fb.team = team
-	//
+	fb.activity_lock = lock
+
+	// Store the pointer directly
+	fb.activities = activities
 
 	go fb.Run()
 }
 
 func (fb *FastBrainGO) Run() {
-	gameState := info.GameState{}
-	gamePlan := info.GamePlan{}
-
 	for {
-		// We will reive the game state more often than the game plan
-		// so we wait for the gameState to update and work with the latest game plan
+		// For example, throttle the loop slightly to avoid busy-loop:
+		time.Sleep(1 * time.Millisecond) // or read from fb.incomingGameInfo if event-driven
 
-		gameState = <-fb.incomingGameState
+		gameInfo := <-fb.incomingGameInfo
+		// Make a snapshot of current activities under lock
+		fb.activity_lock.Lock()
+		activitiesCopy := make([]ai.Activity, len(*fb.activities))
+		copy(activitiesCopy, *fb.activities)
+		fb.activity_lock.Unlock()
 
-		select {
-		case gamePlan = <-fb.incomingGamePlan:
-		default:
-
+		var actions []action.Action
+		for i := range activitiesCopy {
+			// If done, remove it from the *shared* slice
+			if activitiesCopy[i].Achieved(&gameInfo) {
+				fmt.Println("sucessful action")
+				fb.activity_lock.Lock()
+				// find it in the real slice (not in the copy!)
+				for j, realAct := range *fb.activities {
+					if realAct == activitiesCopy[i] {
+						*fb.activities = append(
+							(*fb.activities)[:j],
+							(*fb.activities)[j+1:]...,
+						)
+						break
+					}
+				}
+				fb.activity_lock.Unlock()
+			} else {
+				// Otherwise, get an action
+				actions = append(actions, activitiesCopy[i].GetAction(&gameInfo))
+			}
 		}
-		// time.Sleep(1 * time.Second) // TODO: Remove this
 
-		// Wait for the game to start
-		if !gameState.Valid || !gamePlan.Valid {
-			fmt.Println("FastBrainGO: Invalid game state")
-			fb.outgoingActions <- []action.Action{}
-			time.Sleep(10 * time.Millisecond)
-			continue
-		}
-
-		// Do some thinking
-		actions := fb.GetActions(&gameState, &gamePlan)
-
-		// Send the actions to the AI
+		// Send actions
 		fb.outgoingActions <- actions
-		// fmt.Println("FastBrainGO: Sent actions")
-
 	}
 }
 
