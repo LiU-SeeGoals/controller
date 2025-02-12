@@ -179,6 +179,58 @@ func (fb *FastBrainGO) kickToPlayer(inst *info.Instruction, gs *info.GameState) 
 		kickAct.KickSpeed = int(math.Min(math.Max(float64(kickSpeed), 1), 5))
 		return kickAct
 	}
+
+	//Needs to add that is doesn't kick if there is an obsicle
+}
+
+func (fb *FastBrainGO) receiveBallFromPlayer(inst *info.Instruction, gs *info.GameState) action.Action {
+	myTeam := gs.GetTeam(fb.team)
+	robotReceiver := myTeam[inst.Id]
+	if !robotReceiver.IsActive() {
+		return nil
+	}
+	robotKicker := myTeam[inst.OtherId]
+	receiverPos := robotReceiver.GetPosition()
+	kickerPos := robotKicker.GetPosition()
+
+	ballPos, _ := gs.GetBall().GetPositionTime()
+	dxBall := float64(receiverPos.X - ballPos.X)
+	dyBall := float64(receiverPos.Y - ballPos.Y)
+	distanceBall := math.Sqrt(math.Pow(dxBall, 2) + math.Pow(dyBall, 2))
+
+	dx := float64(kickerPos.X - receiverPos.X)
+	dy := float64(kickerPos.Y - receiverPos.Y)
+	distance := math.Sqrt(math.Pow(dx, 2) + math.Pow(dy, 2))
+
+	if distanceBall < (distance / 3) {
+		moveAction := fb.moveToBall(inst, gs)
+		moveAction.(*action.MoveTo).Dribble = true
+		return moveAction
+	}
+
+	targetAngle := math.Atan2(math.Abs(dyBall), math.Abs(dxBall))
+	if dx > 0 {
+		targetAngle = math.Pi - targetAngle
+	}
+	if dy > 0 {
+		targetAngle = -targetAngle
+	}
+
+	//because opposit angle
+	if targetAngle > 0 {
+		targetAngle -= math.Pi
+	} else {
+		targetAngle += math.Pi
+	}
+
+	//Rotate towards the kicker
+	newInst := *inst
+	newInst.Position = info.Position{X: receiverPos.X, Y: receiverPos.Y, Z: receiverPos.Z, Angle: float32(targetAngle)}
+	fmt.Println(newInst.Position)
+	return fb.moveToPosition(&newInst, gs)
+
+	//Also needs to fix so that it moves out of the way if there is an obsticle
+
 }
 
 // TODO: can we make this nicer?
@@ -191,13 +243,13 @@ func (fb *FastBrainGO) instructionToAction(inst *info.Instruction, gs *info.Game
 		return fb.moveWithBallToPosition(inst, gs)
 	} else if inst.Type == info.KickToPlayer {
 		return fb.kickToPlayer(inst, gs)
-		//fmt.Println("FastBrainGO: KickToPlayer not implemented")
 	} else if inst.Type == info.KickToGoal {
 		fmt.Println("FastBrainGO: KickToGoal not implemented")
 	} else if inst.Type == info.KickToPosition {
 		fmt.Println("FastBrainGO: KickToPosition not implemented")
 	} else if inst.Type == info.ReceiveBallFromPlayer {
-		fmt.Println("FastBrainGO: ReceiveBallFromPlayer not implemented")
+		return fb.receiveBallFromPlayer(inst, gs)
+		//fmt.Println("FastBrainGO: ReceiveBallFromPlayer not implemented")
 	} else if inst.Type == info.ReceiveBallAtPosition {
 		fmt.Println("FastBrainGO: ReceiveBallAtPosition not implemented")
 	} else if inst.Type == info.BlockEnemyPlayerFromPosition {

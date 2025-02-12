@@ -495,6 +495,7 @@ func (m *KickToPlayerTest) Run() []*info.Instruction {
 	if m.at_state == 0 {
 		return []*info.Instruction{
 			{Type: info.MoveToBall, Id: 0},
+			//{Type: info.MoveToPosition, Id: 2, Position: info.Position{X: -2250, Y: 250}},
 			{Type: info.MoveToPosition, Id: 1, Position: info.Position{X: -1500, Y: 1500}},
 			//{Type: info.MoveToPosition, Id: 1, Position: info.Position{X: 2000, Y: 1500}},
 			//{Type: info.MoveToPosition, Id: 1, Position: info.Position{X: -3000, Y: -2000}},
@@ -506,10 +507,12 @@ func (m *KickToPlayerTest) Run() []*info.Instruction {
 	} else if m.at_state == 2 {
 		return []*info.Instruction{
 			{Type: info.KickToPlayer, Id: 0, OtherId: 1},
+			{Type: info.ReceiveBallFromPlayer, Id: 1, OtherId: 0},
 		}
 	} else {
 		return []*info.Instruction{
 			{Type: info.MoveToPosition, Id: 0, Position: info.Position{X: 0, Y: 0}},
+			{Type: info.ReceiveBallFromPlayer, Id: 1, OtherId: 0},
 		}
 	}
 }
