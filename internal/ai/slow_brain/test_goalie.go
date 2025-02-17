@@ -1,6 +1,7 @@
 package ai
 
 import (
+	"fmt"
 	"sync"
 	"time"
 
@@ -15,8 +16,8 @@ type TestGoalie struct {
 	max_time time.Duration
 }
 
-func NewTestGoalie(team info.Team) *SlowBrain1 {
-	return &SlowBrain1{
+func NewTestGoalie(team info.Team) *TestGoalie {
+	return &TestGoalie{
 		SlowBrainComposition: SlowBrainComposition{
 			team: team,
 		},
@@ -40,6 +41,7 @@ func (m *TestGoalie) Init(
 
 func (g *TestGoalie) run() {
 	for {
+		fmt.Println("TestGoalie running")
 		// No need for slow brain to be fast
 		time.Sleep(100 * time.Millisecond)
 
