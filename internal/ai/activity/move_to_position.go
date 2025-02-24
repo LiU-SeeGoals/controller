@@ -8,6 +8,7 @@ import (
 )
 
 type MoveToPosition struct {
+	ActivityComposition
 	team            info.Team
 	id              info.ID
 	target_position info.Position
@@ -40,11 +41,4 @@ func (m *MoveToPosition) Achieved(gi *info.GameInfo) bool {
 	angle_diff := math.Abs(float64(curr_pos.Angle - m.target_position.Angle))
 	angle_achieved := angle_diff <= angle_threshold
 	return distance_achieved && angle_achieved
-}
-
-func calculateDistance(p1, p2 info.Position) float32 {
-	dx := p1.X - p2.X
-	dy := p1.Y - p2.Y
-	dz := p1.Z - p2.Z
-	return float32(math.Sqrt(float64(dx*dx + dy*dy + dz*dz)))
 }
