@@ -55,7 +55,7 @@ func (m *SlowBrain1) run() {
 		//fmt.Println("slow, number of activities:", len(*m.activities))
 		if len(*m.activities) == 0 {
 			fmt.Println("done with action: ", m.team)
-			m.AddActivity(ai.NewMoveToPosition(m.team, 2, way_points[index]))
+			m.AddActivity(ai.NewMoveToPosition(m.team, 0, way_points[index]))
 			index = (index + 1) % len(way_points)
 		}
 	}

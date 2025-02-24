@@ -12,6 +12,12 @@ import (
 )
 
 func Scenario() {
+	// This avoid the "No position in history" error for robots
+	presentYellow := []int{0, 1, 2, 3, 4, 5,6 , 7 , 8, 9 ,10}
+	presentBlue := []int{0, 1, 2, 3, 4, 5, 6 ,7, 8, 9 ,10}
+	simController := simulator.NewSimControl()
+	simController.SetPresentRobots(presentYellow, presentBlue)
+
 	gameInfo := info.NewGameInfo(10)
 	ssl_receiver := client.NewSSLClient()
 
@@ -32,11 +38,10 @@ func Scenario() {
 
 	// simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress(), gameInfo)
 
-	simController := simulator.NewSimControl()
 
 	// Some sim setup for debugging ai behaviour
-	presentYellow := []int{0, 1, 2, 3, 4}
-	presentBlue := []int{0, 1, 2, 3}
+	presentYellow = []int{0, 1}
+	presentBlue = []int{}
 	simController.SetPresentRobots(presentYellow, presentBlue)
 
 	start_time := time.Now().UnixMilli()
