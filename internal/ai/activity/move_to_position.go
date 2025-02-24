@@ -1,6 +1,7 @@
 package ai
 
 import (
+	"fmt"
 	"math"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
@@ -9,12 +10,12 @@ import (
 
 type MoveToPosition struct {
 	GenericComposition
-	team            info.Team
-	id              info.ID
+	MovementComposition
 	target_position info.Position
 }
 
 func NewMoveToPosition(team info.Team, id info.ID, dest info.Position) *MoveToPosition {
+	fmt.Println("NewMoveToPosition", id)
 	return &MoveToPosition{
 		GenericComposition: GenericComposition{
 			team: team,
@@ -28,8 +29,17 @@ func (m *MoveToPosition) GetAction(gi *info.GameInfo) action.Action {
 	act := action.MoveTo{}
 	act.Id = int(m.id)
 	act.Team = m.team
+	// robot := gi.State.GetTeam(m.team)[m.id]
 	act.Pos = gi.State.GetTeam(m.team)[m.id].GetPosition()
+	// if m.team == info.Yellow {
+	// 	robot := gi.State.GetTeam(m.team)[m.id]
+	// 	target_position := m.avoidCollision(robot, m.target_position, gi.State)
+	// 	act.Dest = target_position
+	// } else {
+	// 	act.Dest = m.target_position
+	// }
 	act.Dest = m.target_position
+
 	act.Dribble = false
 	return &act
 }
