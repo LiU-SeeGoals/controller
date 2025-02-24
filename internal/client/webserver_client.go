@@ -8,6 +8,7 @@ import (
 	"sync"
 	"time"
 
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/info"
 	"github.com/gorilla/websocket"
@@ -58,7 +59,8 @@ func startWebServer() {
 	go webserverInstance.sendGameState()
 	go webserverInstance.sendLog()
 	go webserverInstance.receiveData()
-	fmt.Println("server online")
+	// fmt.Println("server online")
+	Logger.Info("Webserver online")
 }
 
 func (server *WebServer) getUpgrader() *websocket.Upgrader {
@@ -80,9 +82,10 @@ func (server *WebServer) handleGameStateRequest(w http.ResponseWriter, r *http.R
 	server.websocketConnectionsMutex.Lock()
 	defer server.websocketConnectionsMutex.Unlock() // unlock after function returns
 	server.websocketConnections = append(server.websocketConnections, ws)
-	fmt.Println("making a connection")
-	fmt.Println(len(server.websocketConnections))
-	fmt.Print("done serving client")
+	// fmt.Println("making a connection")
+	// fmt.Println(len(server.websocketConnections))
+	// fmt.Print("done serving client")
+	Logger.Info("Client connected")
 }
 
 // Method to send the game state to all connected clients
@@ -200,7 +203,8 @@ type WebsiteDTO struct {
 func toJson(input WebsiteDTO) []byte {
 	output, err := json.Marshal(input)
 	if err != nil {
-		fmt.Println("The WebsiteDTO packet could not be marshalled to JSON.")
+		// fmt.Println("The WebsiteDTO packet could not be marshalled to JSON.")
+		Logger.Error("The WebsiteDTO packet could not be marshalled to JSON.")
 	}
 	return output
 }
@@ -218,7 +222,8 @@ func GetIncoming() []action.ActionDTO {
 }
 
 func UpdateWebLog(logs []byte) {
-	fmt.Println("Updating web log")
+	// fmt.Println("Updating web log")
+	Logger.Info("Updating web log")
 	webserver := getInstance()
 	webserver.logQueueMutex.Lock()
 	webserver.logPacketQueue = append(webserver.logPacketQueue, []byte(logs))

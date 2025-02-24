@@ -1,7 +1,6 @@
 package client
 
 import (
-	"fmt"
 	"math"
 	"net"
 	"strconv"
@@ -9,6 +8,7 @@ import (
 
 	"gonum.org/v1/gonum/mat"
 
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/proto_go/robot_action"
 	"google.golang.org/protobuf/proto"
@@ -117,7 +117,8 @@ func startServer(port int, commandChan chan<- *robot_action.Command) {
 	}
 	ser, err := net.ListenUDP("udp", &addr)
 	if err != nil {
-		fmt.Printf("Some error %v\n", err)
+		// fmt.Printf("Some error %v\n", err)
+		Logger.Errorf("Some error %v\n", err)
 		return
 	}
 	for {

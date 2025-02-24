@@ -1,10 +1,11 @@
 package simulator
 
 import (
-	"fmt"
+	// "fmt"
 	"math"
 
 	"github.com/LiU-SeeGoals/controller/internal/client"
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/helper"
 	"github.com/LiU-SeeGoals/proto_go/gc"
@@ -26,11 +27,13 @@ func NewSimControl() *simControl {
 }
 
 func (sc *simControl) TurnOffCameraRealism() {
-	fmt.Println("Not yet implemented")
+	// fmt.Println("Not yet implemented")
+	Logger.Error("TurnOffCameraRealism not yet implemented")
 }
 
 func (sc *simControl) TurnOnCameraRealism() {
-	fmt.Println("Not yet implemented")
+	// fmt.Println("Not yet implemented")
+	Logger.Error("TurnOnCameraRealism not yet implemented")
 }
 
 func centerCircle(number int, radius float32) (float32, float32) {
@@ -134,7 +137,8 @@ func (sc *simControl) SetPresentRobots(presentYellow []int, presentBlue []int) {
 }
 
 func (sc *simControl) SetRobotDimentions() {
-	fmt.Println("Not yet implemented")
+	// fmt.Println("Not yet implemented")
+	Logger.Error("SetRobotDimentions not yet implemented")
 }
 
 func (sc *simControl) RobotStartPositionConfig1(numberOfRobots int) {
@@ -168,11 +172,13 @@ func (sc *simControl) RobotStartPositionConfig1(numberOfRobots int) {
 }
 
 func (sc *simControl) RobotStartPositionConfig2(numberOfRobots int) {
-	fmt.Println("Not yet implemented")
+	// fmt.Println("Not yet implemented")
+	Logger.Error("RobotStartPositionConfig2 not yet implemented")
 }
 
 func (sc *simControl) TeleportRobot(x float32, y float32, id uint32, team gc.Team) {
-	fmt.Println(x, y)
+	// fmt.Println(x, y)
+	Logger.Info("Teleporting robot to x: %f, y: %f, id: %d, team: %d", x, y, id, team)
 	// Set default values for orientation and velocities
 	orientation := float32(0.0) // Approx. 45 degrees in radians
 	vx := float32(0.0)          // Velocity towards x-axis

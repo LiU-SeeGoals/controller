@@ -5,6 +5,7 @@ import (
 	"math"
 	"time"
 
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/info"
 )
@@ -50,7 +51,8 @@ func (fb *FastBrainGO) Run() {
 
 		// Wait for the game to start
 		if !gameState.Valid || !gamePlan.Valid {
-			fmt.Println("FastBrainGO: Invalid game state")
+			Logger.Warn("FastBrainGO: Invalid game state")
+			// fmt.Println("FastBrainGO: Invalid game state")
 			fb.outgoingActions <- []action.Action{}
 			time.Sleep(10 * time.Millisecond)
 			continue
@@ -162,7 +164,6 @@ func (fb *FastBrainGO) Goalie(inst *info.Instruction, gs *info.GameState) action
 		//angleGoalie := math.Atan(float64(dleftgoalie/2000))
 		//anglePose := math.Atan(float64(dleft/2000))
 
-	fmt.Println("BallPos", ballPos)	
 	if(ballPos.X <= 4000){ 	
 		if(shooterPos.Y <= 0){
 			if(shooterPos.Y <= -500){
@@ -210,27 +211,27 @@ func (fb *FastBrainGO) instructionToAction(inst *info.Instruction, gs *info.Game
 		return fb.moveWithBallToPosition(inst, gs)
 		//fmt.Println("FastBrainGO: MoveWithBallToPosition not implemented")
 	} else if inst.Type == info.KickToPlayer {
-		fmt.Println("FastBrainGO: KickToPlayer not implemented")
+		Logger.Error("FastBrainGO: KickToPlayer not implemented")
 	} else if inst.Type == info.KickToGoal {
-		fmt.Println("FastBrainGO: KickToGoal not implemented")
-	} else if inst.Type == info.KickToPosition {
-		fmt.Println("FastBrainGO: KickToPosition not implemented")
-	} else if inst.Type == info.ReceiveBallFromPlayer {
-		fmt.Println("FastBrainGO: ReceiveBallFromPlayer not implemented")
-	} else if inst.Type == info.ReceiveBallAtPosition {
-		fmt.Println("FastBrainGO: ReceiveBallAtPosition not implemented")
+		Logger.Error("FastBrainGO: KickToGoal not implemented")
+	} else if inst.Type == info.KickToPosition{
+		Logger.Error("FastBrainGO:KickToPosition not implemented")
+	} else if inst.Type == info.ReceiveBallFromPlayer{
+		Logger.Error("FastBrainGO:ReceiveBallFromPlayer not implemented")
+	} else if inst.Type == info.ReceiveBallAtPosition{
+		Logger.Error("FastBrainGO:ReceiveBallAtPosition not implemented")
 	} else if inst.Type == info.BlockEnemyPlayerFromPosition {
-		fmt.Println("FastBrainGO: BlockEnemyPlayerFromPosition not implemented")
+		Logger.Error("FastBrainGO: BlockEnemyPlayerFromPosition not implemented")
 	} else if inst.Type == info.BlockEnemyPlayerFromBall {
-		fmt.Println("FastBrainGO: BlockEnemyPlayerFromBall not implemented")
+		Logger.Error("FastBrainGO: BlockEnemyPlayerFromBall not implemented")
 	} else if inst.Type == info.BlockEnemyPlayerFromGoal {
-		fmt.Println("FastBrainGO: BlockEnemyPlayerFromGoal not implemented")
+		Logger.Error("FastBrainGO: BlockEnemyPlayerFromGoal not implemented")
 	} else if inst.Type == info.BlockEnemyPlayerFromPlayer {
-		fmt.Println("FastBrainGO: BlockEnemyPlayerFromPlayer not implemented")
+		Logger.Error("FastBrainGO: BlockEnemyPlayerFromPlayer not implemented")
 	} else if inst.Type == info.Goalie {
 		return fb.Goalie(inst, gs)
 	} else {
-		fmt.Println("FastBrainGO: not implemented")
+		Logger.Error("FastBrainGO: not implemented")
 	}
 	return nil
 }

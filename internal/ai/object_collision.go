@@ -7,6 +7,7 @@ import (
 	"net"
 
 	"github.com/LiU-SeeGoals/controller/internal/info"
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"gonum.org/v1/gonum/mat"
 )
 
@@ -183,27 +184,32 @@ func init() {
 	var err error
 	listener, err = net.Listen("tcp", ":5000") // Bind to port 5000
 	if err != nil {
-		fmt.Printf("Error starting server: %v\n", err)
+		// fmt.Printf("Error starting server: %v\n", err)
+		Logger.Errorf("Error starting server: %v\n", err)
 		return
 	}
 
 	// Accept connections in a goroutine to allow non-blocking operations
 	go func() {
 		for {
-			fmt.Println("Waiting for Python client to connect...")
+			// fmt.Println("Waiting for Python client to connect...")
+			Logger.Info("Waiting for Python client to connect...")
 			conn, err = listener.Accept()
 			if err != nil {
-				fmt.Printf("Error accepting connection: %v\n", err)
+				// fmt.Printf("Error accepting connection: %v\n", err)
+				Logger.Errorf("Error accepting connection: %v\n", err)
 				continue
 			}
-			fmt.Println("Python client connected.")
+			// fmt.Println("Python client connected.")
+			Logger.Info("Python client connected.")
 		}
 	}()
 }
 
 func sendLocalGrid(localGrid *mat.Dense) {
 	if conn == nil {
-		fmt.Println("No active connection to send data")
+		// fmt.Println("No active connection to send data")
+		Logger.Error("No active connection to send data")
 		return
 	}
 
@@ -220,14 +226,16 @@ func sendLocalGrid(localGrid *mat.Dense) {
 	// Serialize to JSON
 	jsonData, err := json.Marshal(data)
 	if err != nil {
-		fmt.Printf("Error serializing localGrid: %v\n", err)
+		// fmt.Printf("Error serializing localGrid: %v\n", err)
+		Logger.Errorf("Error serializing localGrid: %v\n", err)
 		return
 	}
 
 	// Send the JSON data followed by a newline
 	_, err = conn.Write(append(jsonData, '\n')) // Append newline for framing
 	if err != nil {
-		fmt.Printf("Error sending localGrid: %v\n", err)
+		// fmt.Printf("Error sending localGrid: %v\n", err)
+		Logger.Errorf("Error sending localGrid: %v\n", err)
 		conn = nil // Reset connection if sending fails
 	}
 }

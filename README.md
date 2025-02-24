@@ -24,6 +24,40 @@ go run main.go
 
 Now the main program have been started. 
 
+### Logging
+
+This project uses the [zap logger](https://pkg.go.dev/go.uber.org/zap). The logger is configured in the `logging` package, which is also the package you need to import to log something. The logger is used throughout the project and should be used for all logging, pushing a print to stdout will be punished by the gods. 
+
+The logs are written to a file in the root called log, you can view this file by running:
+```
+tail -f log
+```
+
+If you want to view a specific log level you can run:
+```
+tail -f log | grep INFO
+```
+
+if you want to view two or more log levels you can run:
+```
+tail -f log | grep -E 'INFO|ERROR'
+```
+
+To log something you can use the logger like this:
+```go
+package main
+
+import (
+    . "github.com/LiU-SeeGoals/controller/logging" // The dot is used avoid having to write logging.logger every time
+)
+
+func main() {
+    Logger.Info("Hello world")
+    Logger.Error("Hello world")
+    Logger.Debug("Hello world")
+    Logger.Warn("Hello world")
+}
+```
 
 ## Project Structure
 

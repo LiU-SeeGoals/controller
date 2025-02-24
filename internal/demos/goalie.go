@@ -1,9 +1,9 @@
 package demos
 
 import (
-	"fmt"
 	"time"
 
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/ai"
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/config"
@@ -34,7 +34,8 @@ func Goalie() {
 		playTime := time.Now().UnixMilli() - start_time
 		// fmt.Println("playTime: ", playTime)
 		ssl_receiver.UpdateState(gameInfo, playTime)
-		fmt.Println(gameInfo.Status)
+		// fmt.Println(gameInfo.Status)
+		Logger.Info(gameInfo.Status)
 		
 		yellow_actions := aiYellow.GetActions(gameInfo)
 

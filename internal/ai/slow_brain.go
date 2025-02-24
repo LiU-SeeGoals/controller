@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/height_map"
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/info"
 	"github.com/LiU-SeeGoals/controller/internal/search"
 )
@@ -77,7 +78,8 @@ func (sb *SlowBrainGO) Run() {
 		time.Sleep(1 * time.Second) // TODO: Remove this
 		// Wait for the game to start
 		if !gameState.IsValid() {
-			fmt.Println("SlowBrainGO: Invalid game state")
+			// fmt.Println("SlowBrainGO: Invalid game state")
+			Logger.Warn("SlowBrainGO: Invalid game state")
 			time.Sleep(10 * time.Millisecond)
 			continue
 		}
@@ -88,7 +90,8 @@ func (sb *SlowBrainGO) Run() {
 		// Send the plan to the fast brain
 		// fmt.Println(plan.ToDTO())
 		sb.outgoingPlan <- plan
-		fmt.Println("SlowBrainGO: Sent plan")
+		// fmt.Println("SlowBrainGO: Sent plan")
+		Logger.Info("SlowBrainGO: Sent plan")
 	}
 }
 

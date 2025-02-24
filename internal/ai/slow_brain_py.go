@@ -2,13 +2,13 @@ package ai
 
 import (
 	"bytes"
-	"fmt"
 
 	"encoding/json"
 	"io"
 	"net/http"
 	"time"
 
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
@@ -46,7 +46,8 @@ func (sb SlowBrainPy) Run() {
 		gameState = <-sb.incomingGameState
 
 		if !gameState.IsValid() {
-			fmt.Println("ScenarioSlowBrain: Invalid game state")
+			// fmt.Println("ScenarioSlowBrain: Invalid game state")
+			Logger.Warn("ScenarioSlowBrain: Invalid game state")
 			time.Sleep(10 * time.Millisecond)
 			continue
 		}
@@ -54,15 +55,17 @@ func (sb SlowBrainPy) Run() {
 		resp, err := http.Post(sb.ip_address, "application/json",
 			bytes.NewBuffer(gameState.ToJson()))
 		if err != nil {
-			fmt.Println("Error in http.Get")
-			fmt.Println(err)
+			// fmt.Println("Error in http.Get")
+			// fmt.Println(err)
+			Logger.Errorf("Error in http.Get: %v", err)
 			continue
 		}
 
 		body, err := io.ReadAll(resp.Body)
 		if err != nil {
-			fmt.Println("Error in io.ReadAll")
-			fmt.Println(err)
+			// fmt.Println("Error in io.ReadAll")
+			// fmt.Println(err)
+			Logger.Errorf("Error in io.ReadAll: %v", err)
 			continue
 		}
 
@@ -71,8 +74,9 @@ func (sb SlowBrainPy) Run() {
 		err = json.Unmarshal(body, &pyResponse)
 
 		if err != nil {
-			fmt.Println("Error in json.Unmarshal")
-			fmt.Println(err)
+			// fmt.Println("Error in json.Unmarshal")
+			// fmt.Println(err)
+			Logger.Errorf("Error in json.Unmarshal: %v", err)
 			continue
 		}
 

@@ -1,40 +1,69 @@
 package logger
 
 import (
-	"os"
-
-	"github.com/LiU-SeeGoals/controller/internal/client"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
+	"gopkg.in/natefinch/lumberjack.v2"
+	"os"
 )
 
 var (
-	Logger  *zap.Logger
-	LoggerS *zap.SugaredLogger
+	Logger *zap.SugaredLogger
 )
 
-// Implements io.Writer
-type WebWriter struct {}
-
-func (w *WebWriter) Write(p []byte) (n int, err error) {
-	client.UpdateWebLog(p)
-	return len(p), nil
-}
-
 func init() {
-	
-	// AddSync converts an io.Writer to a WriteSyncer. 
-	writeSyncer := zapcore.AddSync(&WebWriter{})
-	// Lock wraps a WriteSyncer in a mutex to make it safe for concurrent use. 
-	// In particular, *os.Files must be locked before use. 
-	writeSyncer = zapcore.Lock(writeSyncer)
-	
-	// NewMultiWriteSyncer creates a WriteSyncer that duplicates its writes 
-	// and sync calls, much like io.MultiWriter. 
-	mw := zapcore.NewMultiWriteSyncer(writeSyncer, os.Stdout)
-	
-	encoder := zapcore.NewJSONEncoder(zap.NewDevelopmentEncoderConfig()) // NewProductionEncoderConfig() also available
-	core := zapcore.NewCore(encoder, mw, zapcore.DebugLevel) // DebugLevel, InfoLevel, WarnLevel, ErrorLevel, DPanicLevel, PanicLevel, FatalLevel
-	Logger = zap.New(core)
-	LoggerS = Logger.Sugar() // Sugar wraps the Logger to provide a more ergonomic, but slightly slower, API.
+	// Configure log rotation using Lumberjack
+	logFile := zapcore.AddSync(&lumberjack.Logger{
+		Filename:   "../log",
+		MaxSize:    10,  // Max size in MB before rotating
+		MaxBackups: 5,   // Max number of old log files to keep
+		MaxAge:     30,  // Max number of days to retain old logs
+		Compress:   true, // Compress old logs (gzip)
+	})
+
+	// Create JSON encoder for file logs
+	encoderConfig := zap.NewProductionEncoderConfig()
+	encoderConfig.TimeKey = "timestamp"
+	encoderConfig.EncodeTime = zapcore.ISO8601TimeEncoder // Human-readable timestamp
+	fileEncoder := zapcore.NewJSONEncoder(encoderConfig)  // JSON format for logs
+
+	// Create console encoder (human-readable logs)
+	consoleEncoderConfig := zap.NewDevelopmentEncoderConfig()
+	consoleEncoderConfig.EncodeTime = zapcore.ISO8601TimeEncoder
+	consoleEncoder := zapcore.NewConsoleEncoder(consoleEncoderConfig)
+
+	// Set up cores for file and console logging
+	fileCore := zapcore.NewCore(fileEncoder, logFile, zapcore.DebugLevel)
+	consoleCore := zapcore.NewCore(consoleEncoder, zapcore.AddSync(os.Stdout), zapcore.DebugLevel)
+
+	// Combine file and console logging
+	logCore := zapcore.NewTee(fileCore, consoleCore)
+
+	// Create the logger
+	logger := zap.New(logCore, zap.AddCaller(), zap.AddStacktrace(zapcore.ErrorLevel))
+
+	// Convert to SugaredLogger
+	Logger = logger.Sugar()
+
+	// Example of setting a dynamic log level (optional)
+	// zap.ReplaceGlobals(logger) // Uncomment to replace the global Zap logger
 }
+
+/*
+	// Example: Custom Log Level (e.g., "NOTICE")
+	const NoticeLevel zapcore.Level = 1  // Between Debug (-1) and Info (0)
+	
+	// Define a custom level enabler
+	func CustomLevelEnabler(level zapcore.Level) bool {
+		return level == NoticeLevel || level >= zapcore.InfoLevel
+	}
+
+	// Example: Add custom level to the logger
+	customCore := zapcore.NewCore(fileEncoder, logFile, zap.LevelEnablerFunc(CustomLevelEnabler))
+	logCore := zapcore.NewTee(fileCore, consoleCore, customCore)
+
+	// Log a message with the custom level (if supported in your logger setup)
+	LoggerS.Desugar().Check(NoticeLevel, "This is a NOTICE level log").Write()
+*/
+
+
