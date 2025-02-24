@@ -9,8 +9,6 @@ import (
 
 type MoveWithBallToPosition struct {
 	GenericComposition
-	team            info.Team
-	id              info.ID
 	target_position info.Position
 }
 
