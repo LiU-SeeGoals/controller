@@ -8,6 +8,7 @@ import (
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	ai "github.com/LiU-SeeGoals/controller/internal/ai/activity"
+	ref "github.com/LiU-SeeGoals/controller/internal/ai/referee"
 	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
@@ -17,6 +18,7 @@ type FastBrainGO struct {
 	outgoingActions  chan<- []action.Action
 	activities       *[]ai.Activity // <-- pointer to a slice
 	activity_lock    *sync.Mutex    // shared mutex for synchronization
+	handle_referee   *ref.HandleReferee
 }
 
 func NewFastBrainGO() *FastBrainGO {
@@ -37,6 +39,7 @@ func (fb *FastBrainGO) Init(
 
 	// Store the pointer directly
 	fb.activities = activities
+	fb.handle_referee = ref.NewHandleReferee(team)
 
 	go fb.Run()
 }
@@ -47,6 +50,15 @@ func (fb *FastBrainGO) Run() {
 		time.Sleep(1 * time.Millisecond) // or read from fb.incomingGameInfo if event-driven
 
 		gameInfo := <-fb.incomingGameInfo
+
+		// check if there is a referee event
+		// refereeAction := fb.handle_referee.GetActions(&gameInfo)
+		// if refereeAction != nil {
+		// 	fmt.Println("referee action: ", gameInfo.Status.GetGameEvent().RefCommand)
+		// 	fb.outgoingActions <- refereeAction
+		// 	continue
+		// }
+
 		// Make a snapshot of current activities under lock
 		fb.activity_lock.Lock()
 		activitiesCopy := make([]ai.Activity, len(*fb.activities))
