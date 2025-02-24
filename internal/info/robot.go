@@ -105,6 +105,11 @@ func (r *Robot) GetVelocity() Position {
 	return sum_deltas.Scale(1 / float32(r.history.Len()-1))
 }
 
+// GetTeam returns the team of the robot
+func (r *Robot) GetTeam() Team {
+    return r.team
+}
+
 func (r *Robot) GetAcceleration() float32 {
 	if r.history.Len() < 3 {
 		return float32(0) // Not enough data points to calculate acceleration
