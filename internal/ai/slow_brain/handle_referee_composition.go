@@ -1,12 +1,13 @@
 package ai
 
 import (
-	"github.com/LiU-SeeGoals/controller/internal/action"
+	ai "github.com/LiU-SeeGoals/controller/internal/ai/activity"
 	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
 type HandleReferee struct {
-	team info.Team
+	team     info.Team
+	prev_ref info.RefCommand
 }
 
 func NewHandleReferee(team info.Team) *HandleReferee {
@@ -15,66 +16,60 @@ func NewHandleReferee(team info.Team) *HandleReferee {
 	}
 }
 
-func (m *HandleReferee) GetActions(gi *info.GameInfo) []action.Action {
+func (m *HandleReferee) GetRefereeActivities(gi *info.GameInfo) []ai.Activity {
 	switch gi.Status.GetGameEvent().RefCommand {
 	case info.HALT:
 		// Implement HALT logic
-		return m.createStopActions(gi)
+		return m.createStopActivities(gi)
 	case info.STOP:
 		// Implement STOP logic
-		return m.createStopActions(gi)
-	case info.NORMAL_START:
-		// Implement NORMAL_START logic
-		return m.createStopActions(gi)
-	case info.FORCE_START:
-		// Implement FORCE_START logic
-		return m.createStopActions(gi)
+		return m.createStopActivities(gi)
 	case info.PREPARE_KICKOFF_YELLOW:
 		// Implement PREPARE_KICKOFF_YELLOW logic
-		return m.createStopActions(gi)
+		return m.createStopActivities(gi)
 	case info.PREPARE_KICKOFF_BLUE:
 		// Implement PREPARE_KICKOFF_BLUE logic
-		return m.createStopActions(gi)
+		return m.createStopActivities(gi)
 	case info.PREPARE_PENALTY_YELLOW:
 		// Implement PREPARE_PENALTY_YELLOW logic
-		return m.createStopActions(gi)
+		return m.createStopActivities(gi)
 	case info.PREPARE_PENALTY_BLUE:
 		// Implement PREPARE_PENALTY_BLUE logic
-		return m.createStopActions(gi)
+		return m.createStopActivities(gi)
 	case info.DIRECT_FREE_YELLOW:
 		// Implement DIRECT_FREE_YELLOW logic
-		return m.createStopActions(gi)
+		return m.createStopActivities(gi)
 	case info.DIRECT_FREE_BLUE:
 		// Implement DIRECT_FREE_BLUE logic
-		return m.createStopActions(gi)
+		return m.createStopActivities(gi)
 	case info.INDIRECT_FREE_YELLOW:
 		// Implement INDIRECT_FREE_YELLOW logic
-		return m.createStopActions(gi)
+		return m.createStopActivities(gi)
 	case info.INDIRECT_FREE_BLUE:
 		// Implement INDIRECT_FREE_BLUE logic
-		return m.createStopActions(gi)
+		return m.createStopActivities(gi)
 	case info.TIMEOUT_YELLOW:
 		// Implement TIMEOUT_YELLOW logic
-		return m.createStopActions(gi)
+		return m.createStopActivities(gi)
 	case info.TIMEOUT_BLUE:
 		// Implement TIMEOUT_BLUE logic
-		return m.createStopActions(gi)
+		return m.createStopActivities(gi)
 	case info.BALL_PLACEMENT_YELLOW:
 		// Implement BALL_PLACEMENT_YELLOW logic
-		return m.createStopActions(gi)
+		return m.createStopActivities(gi)
 	case info.BALL_PLACEMENT_BLUE:
 		// Implement BALL_PLACEMENT_BLUE logic
-		return m.createStopActions(gi)
+		return m.createStopActivities(gi)
 	default:
 		return nil
 	}
 }
 
-func (m *HandleReferee) createStopActions(gi *info.GameInfo) []action.Action {
-	var actions []action.Action
+func (m *HandleReferee) createStopActivities(gi *info.GameInfo) []ai.Activity {
+	var activities []ai.Activity
 	team := gi.State.GetTeam(m.team)
 	for id := range team {
-		actions = append(actions, &action.Stop{Id: int(id)})
+		activities = append(activities, ai.NewStop(info.ID(id)))
 	}
-	return actions
+	return activities
 }

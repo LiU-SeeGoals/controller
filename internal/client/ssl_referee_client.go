@@ -98,14 +98,15 @@ func NewSSLRefereeClient(sslReceiverAddress string) *SSLRefereeClient {
 }
 
 func (receiver *SSLRefereeClient) handlePacket(packet *gc.Referee, ok bool, gi *info.GameInfo) {
+
 	if !ok {
 		fmt.Println("GC Channel closed")
 		return
 	}
 
-	if packet.GetSourceIdentifier() != receiver.SourceIdentifier {
-		return
-	}
+	// if packet.GetSourceIdentifier() != receiver.SourceIdentifier {
+	// 	return
+	// }
 
 	gi.Status.SetGameEvent(info.RefCommand(packet.GetCommand().Number()),
 		packet.GetCommandTimestamp(),
