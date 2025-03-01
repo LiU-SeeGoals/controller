@@ -9,6 +9,16 @@ type Team int8
 type ID uint8
 type RobotTeam [TEAM_SIZE]*Robot
 
+func (rt *RobotTeam) ActiveRobots() RobotTeam {
+	activeRobots := RobotTeam{}
+	for i, robot := range rt {
+		if robot.IsActive() {
+			activeRobots[i] = robot
+		}
+	}
+	return activeRobots
+}
+
 const (
 	UNKNOWN Team = 0
 	Yellow  Team = 1

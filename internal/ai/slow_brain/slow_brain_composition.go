@@ -26,6 +26,12 @@ type SlowBrainComposition struct {
 	activity_lock    *sync.Mutex    // shared mutex for synchronization
 }
 
+// func (m *SlowBrainComposition) ClearActivities() {
+// 	m.activity_lock.Lock()
+// 	defer m.activity_lock.Unlock()
+// 	*m.activities = []ai.Activity{}
+// }
+
 func (m *SlowBrainComposition) ClearActivities() {
 	m.activity_lock.Lock()
 	defer m.activity_lock.Unlock()

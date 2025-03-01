@@ -53,11 +53,13 @@ func (gs *GameState) IsValid() bool {
 
 func (gs *GameState) SetYellowRobot(robotId uint32, x, y, angle float32, time int64) {
 	gs.Yellow_team[robotId].SetPositionTime(x, y, angle, time)
+	gs.Yellow_team[robotId].active = true
 
 }
 
 func (gs *GameState) SetBlueRobot(robotId uint32, x, y, angle float32, time int64) {
 	gs.Blue_team[robotId].SetPositionTime(x, y, angle, time)
+	gs.Blue_team[robotId].active = true
 }
 
 // Updates position of robots and balls to their actual position

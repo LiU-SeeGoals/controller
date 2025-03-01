@@ -9,8 +9,7 @@ import (
 
 type MoveToPosition struct {
 	GenericComposition
-	team            info.Team
-	id              info.ID
+	MovementComposition
 	target_position info.Position
 }
 
@@ -21,6 +20,7 @@ func NewMoveToPosition(team info.Team, id info.ID, dest info.Position) *MoveToPo
 			id:   id,
 		},
 		target_position: dest,
+		MovementComposition: MovementComposition{},
 	}
 }
 
@@ -28,16 +28,20 @@ func (m *MoveToPosition) GetAction(gi *info.GameInfo) action.Action {
 	act := action.MoveTo{}
 	act.Id = int(m.id)
 	act.Team = m.team
-	act.Pos = gi.State.GetTeam(m.team)[m.id].GetPosition()
-	act.Dest = m.target_position
+	robot := gi.State.GetTeam(m.team)[m.id]
+	act.Pos = robot.GetPosition()
+
+	act.Dest = m.AvoidCollision(robot, m.target_position, gi.State)
+
 	act.Dribble = false
+	// fmt.Println("MoveToPosition: ", m.target_position)
 	return &act
 }
 
 func (m *MoveToPosition) Achieved(gi *info.GameInfo) bool {
 	curr_pos := gi.State.GetTeam(m.team)[m.id].GetPosition()
-	distance_left := CalculateDistance(curr_pos, m.target_position)
-	const distance_threshold = 10
+	distance_left := curr_pos.Distance(&m.target_position)
+	const distance_threshold = 150
 	const angle_threshold = 0.1
 	distance_achieved := distance_left <= distance_threshold
 	angle_diff := math.Abs(float64(curr_pos.Angle - m.target_position.Angle))
