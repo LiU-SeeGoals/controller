@@ -52,6 +52,8 @@ type MoveTo struct {
 	Dribble bool
 	// We need to know ID AND team to know how to update the pos
 	Team info.Team
+	//
+	speed float32
 }
 
 type Dribble struct {

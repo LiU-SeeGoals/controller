@@ -41,6 +41,7 @@ func (m *SlowBrain1) Init(
 
 // This is the main loop of the AI in this slow brain
 func (m *SlowBrain1) run() {
+
 	way_points := []info.Position{
 		{X: 0, Y: 0, Z: 0, Angle: 0},
 		{X: 0, Y: 1000, Z: 0, Angle: 0},
@@ -55,7 +56,7 @@ func (m *SlowBrain1) run() {
 		//fmt.Println("slow, number of activities:", len(*m.activities))
 		if len(*m.activities) == 0 {
 			fmt.Println("done with action: ", m.team)
-			m.AddActivity(ai.NewMoveToPosition(m.team, 0, way_points[index]))
+			m.AddActivity(ai.NewMoveToPosition(m.team, 2, way_points[index]))
 			index = (index + 1) % len(way_points)
 		}
 	}

@@ -106,11 +106,11 @@ func (r *Robot) GetVelocity() Position {
 
 	for e := r.history.Front().Next(); e != nil; e = e.Next() {
 		robot2 := e.Value.(*RobotPos)
-		dPos := robot2.pos.Sub(&robot.pos)
+		dPos := robot2.pos.Sub(robot.pos)
 		dt := float32(robot2.time - robot.time)
 		// TODO: lets add exponential decay so that the most recent deltas have more weight
 		scaled := dPos.Scale(1 / dt)
-		sum_deltas = sum_deltas.Add(&scaled)
+		sum_deltas = sum_deltas.Add(scaled)
 	}
 	return sum_deltas.Scale(1 / float32(r.history.Len()-1))
 }
@@ -132,8 +132,8 @@ func (r *Robot) GetAcceleration() float32 {
 		robot2 := s.Value.(*RobotPos)
 		robot3 := t.Value.(*RobotPos)
 
-		vel1 := robot2.pos.Sub(&robot1.pos)
-		vel2 := robot3.pos.Sub(&robot2.pos)
+		vel1 := robot2.pos.Sub(robot1.pos)
+		vel2 := robot3.pos.Sub(robot2.pos)
 
 		dist1 := vel1.Norm()
 		dist2 := vel2.Norm()

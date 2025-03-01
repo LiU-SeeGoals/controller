@@ -1,6 +1,7 @@
 package ai
 
 import (
+	"fmt"
 	"math"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
@@ -19,7 +20,7 @@ func NewMoveToPosition(team info.Team, id info.ID, dest info.Position) *MoveToPo
 			team: team,
 			id:   id,
 		},
-		target_position: dest,
+		target_position:     dest,
 		MovementComposition: MovementComposition{},
 	}
 }
@@ -31,16 +32,16 @@ func (m *MoveToPosition) GetAction(gi *info.GameInfo) action.Action {
 	robot := gi.State.GetTeam(m.team)[m.id]
 	act.Pos = robot.GetPosition()
 
-	act.Dest = m.AvoidCollision(robot, m.target_position, gi.State)
+	act.Dest = m.Juggernaut(robot, m.target_position, gi.State)
 
 	act.Dribble = false
-	// fmt.Println("MoveToPosition: ", m.target_position)
+	fmt.Println("MoveToPosition: ", m.target_position)
 	return &act
 }
 
 func (m *MoveToPosition) Achieved(gi *info.GameInfo) bool {
 	curr_pos := gi.State.GetTeam(m.team)[m.id].GetPosition()
-	distance_left := curr_pos.Distance(&m.target_position)
+	distance_left := curr_pos.Distance(m.target_position)
 	const distance_threshold = 150
 	const angle_threshold = 0.1
 	distance_achieved := distance_left <= distance_threshold
