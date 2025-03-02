@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-const TEAM_SIZE ID = 11
+const TEAM_SIZE ID = 16
 
 type GameState struct {
 	Valid       bool
