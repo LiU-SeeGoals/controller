@@ -16,13 +16,18 @@ func NewHandleReferee(team info.Team) *HandleReferee {
 	}
 }
 
+// Link to rules:
+// https://robocup-ssl.github.io/ssl-rules/sslrules.html#_referee_commands
 func (m *HandleReferee) GetRefereeActivities(gi *info.GameInfo) []ai.Activity {
 	switch gi.Status.GetGameEvent().RefCommand {
 	case info.HALT:
-		// Implement HALT logic
+		// When the halt command is issued, no robot is allowed to move or manipulate the ball.
+		// There is a grace period of 2 seconds for the robots to brake.
 		return m.createStopActivities(gi)
 	case info.STOP:
-		// Implement STOP logic
+		// When the stop command is issued, all robots have to slow down to less than 1.5 m/s.
+		// Additionally, all robots have to keep at least 0.5 meters distance to the ball and
+		// are not allowed to manipulate the ball.
 		return m.createStopActivities(gi)
 	case info.PREPARE_KICKOFF_YELLOW:
 		// Implement PREPARE_KICKOFF_YELLOW logic

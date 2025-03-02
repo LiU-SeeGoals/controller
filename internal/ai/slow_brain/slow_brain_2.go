@@ -73,6 +73,7 @@ func (m *SlowBrain2) run() {
 			continue
 		}
 
+		// If we are EXITING the REFEREE state, we need to clear the activities
 		if m.at_state == REFEREE {
 			m.ClearActivities()
 			m.at_state = RUNNING
