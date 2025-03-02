@@ -15,6 +15,10 @@ type ReceiveBallAtPosition struct {
 	dribble_to_ball bool
 }
 
+func (rbap *ReceiveBallAtPosition) String() string {
+	return fmt.Sprintf("ReceiveBallAtPosition(%d, %d, %v)", rbap.team, rbap.id, rbap.target_position)
+}
+
 func NewReceiveBallAtPosition(team info.Team, id info.ID, dest info.Position) *ReceiveBallAtPosition {
 	return &ReceiveBallAtPosition{
 		team:            team,

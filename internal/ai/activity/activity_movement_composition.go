@@ -1,5 +1,60 @@
 package ai
 
+import (
+	"math"
+
+	"github.com/LiU-SeeGoals/controller/internal/action"
+	"github.com/LiU-SeeGoals/controller/internal/info"
+)
+
+type MovementComposition struct {
+	GenericComposition
+}
+
+func (fb *MovementComposition) MoveWithBallToPosition(pos info.Position, gi *info.GameInfo) action.Action {
+	myTeam := gi.State.GetTeam(fb.team)
+	robot := myTeam[fb.id]
+	if !robot.IsActive() {
+		return nil
+	}
+
+	robotPos := robot.GetPosition()
+	ballPos, _ := gi.State.GetBall().GetPositionTime()
+	dx := float64(robotPos.X - ballPos.X)
+	dy := float64(robotPos.Y - ballPos.Y)
+	distance := math.Sqrt(math.Pow(dx, 2) + math.Pow(dy, 2))
+
+	act := action.MoveTo{}
+	act.Id = int(robot.GetID())
+	act.Team = fb.team
+	act.Pos = robot.GetPosition()
+	act.Dribble = true
+	act.Dest = pos
+
+	// Reduce distance when its possible to estimte invisible ball
+	if distance > 1500 {
+		act.Dest = ballPos
+	} else {
+		act.Dest = pos
+	}
+	return &act
+}
+
+func (fb *MovementComposition) MoveToBall(gi *info.GameInfo) action.Action {
+	myTeam := gi.State.GetTeam(fb.team)
+	robot := myTeam[fb.id]
+	if !robot.IsActive() {
+		return nil
+	}
+	act := action.MoveTo{}
+	act.Id = int(robot.GetID())
+	act.Team = fb.team
+	act.Pos = robot.GetPosition()
+	act.Dest = gi.State.GetBall().GetPosition()
+	act.Dribble = false
+	return &act
+}
+
 // -----------------------------
 // Note: Not integrated with new code structure
 // -----------------------------

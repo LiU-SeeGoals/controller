@@ -1,11 +1,11 @@
 package ai
 
 import (
+	"fmt"
 	"math"
 	"time"
-	//"math/rand"
+
 	"github.com/LiU-SeeGoals/controller/internal/info"
-	. "github.com/LiU-SeeGoals/controller/internal/logger"
 )
 
 const (
@@ -51,7 +51,7 @@ func (sb ScenarioSlowBrain) Run() {
 	scenarios = append(scenarios, NewObstacleAvoidanceTest(sb.team))
 	scenarios = append(scenarios, NewRealTest(sb.team))
 	scenarios = append(scenarios, NewMoveWithBallToPositionTest(sb.team))
-	scenarios = append(scenarios, NewGoalie(sb.team))
+	scenarios = append(scenarios, NewKickToPlayerTest(sb.team))
 	// scenarios = append(scenarios, NewObstacleAvoidanceTest(sb.team))
 
 	scenario_index := 0
@@ -59,14 +59,12 @@ func (sb ScenarioSlowBrain) Run() {
 		scenario_index = sb.run_scenario
 	}
 
-	// fmt.Println("Running scenarios")
-	Logger.Info("Running scenarios")
+	fmt.Println("Running scenarios")
 	for {
 		gameState = <-sb.incomingGameState
 
 		if !gameState.IsValid() {
-			// fmt.Println("ScenarioSlowBrain: Invalid game state")
-			Logger.Warn("ScenarioSlowBrain: Invalid game state")
+			fmt.Println("ScenarioSlowBrain: Invalid game state")
 			time.Sleep(40 * time.Millisecond)
 			continue
 		}
@@ -74,21 +72,16 @@ func (sb ScenarioSlowBrain) Run() {
 		scenario := scenarios[scenario_index]
 		game_state := scenario.Archived(&gameState)
 		if game_state == COMPLETE {
-			// fmt.Println("Scenario", scenario_index, "completed")
-			Logger.Info("Scenario", scenario_index, "completed")
+			fmt.Println("Scenario", scenario_index, "completed")
 		} else if game_state == TIME_EXPIRED {
-			// fmt.Println("Scenario", scenario_index, "time expired")
-			Logger.Info("Scenario", scenario_index, "time expired")
+			fmt.Println("Scenario", scenario_index, "time expired")
 		} else if game_state == FAILED {
-			// fmt.Println("Scenario", scenario_index, "failed")
-			Logger.Info("Scenario", scenario_index, "failed")
+			fmt.Println("Scenario", scenario_index, "failed")
 		}
 		if game_state != RUNNING {
 			scenario_index++
 			if scenario_index >= len(scenarios) || sb.run_scenario >= 0 {
-				// panic("ScenarioSlowBrain: No more scenarios") // TODO: Handle this better
-				Logger.Panic("ScenarioSlowBrain: No more scenarios") //TODO Handle this better
-				
+				panic("ScenarioSlowBrain: No more scenarios") // TODO: Handle this better
 			}
 			scenario = scenarios[scenario_index]
 		}
@@ -152,8 +145,7 @@ func (m *MoveToBallTest) Archived(gs *info.GameState) int {
 		}
 	} else if m.at_state == 1 {
 		if distance > 500 {
-			// fmt.Println("Failed with robot at (", robot_pos.X, robot_pos.Y, ") and ball at (", ball_pos.X, ball_pos.Y, ")")
-			Logger.Info("Failed with robot at (", robot_pos.X, robot_pos.Y, ") and ball at (", ball_pos.X, ball_pos.Y, ")")
+			fmt.Println("Failed with robot at (", robot_pos.X, robot_pos.Y, ") and ball at (", ball_pos.X, ball_pos.Y, ")")
 			m.at_state = 2
 		}
 	}
@@ -161,16 +153,13 @@ func (m *MoveToBallTest) Archived(gs *info.GameState) int {
 	if m.at_state >= 0 {
 		if time.Since(m.start) > m.max_time || m.at_state == 2 {
 			if m.at_state == 0 {
-				// fmt.Println("Did not reach ball")
-				Logger.Info("Did not reach ball")
+				fmt.Println("Did not reach ball")
 				return TIME_EXPIRED
 			} else if m.at_state == 1 {
-				// fmt.Println("Reached ball and stayed there! :D")
-				Logger.Info("Reached ball and stayed there! :D")
+				fmt.Println("Reached ball and stayed there! :D")
 				return COMPLETE
 			} else {
-				// fmt.Println("Reached ball but then lost it :(")
-				Logger.Info("Reached ball but then lost it :(")
+				fmt.Println("Reached ball but then lost it :(")
 				return FAILED
 			}
 		}
@@ -405,8 +394,7 @@ func (m *MoveToTest) Archived(gs *info.GameState) int {
 		return COMPLETE
 	}
 	if m.at_state >= 0 {
-		// fmt.Println("Time expired", time.Since(m.start))
-		Logger.Info("Time expired", time.Since(m.start))
+		fmt.Println("Time expired", time.Since(m.start))
 		if time.Since(m.start) > m.max_time {
 			return TIME_EXPIRED
 		}
@@ -481,101 +469,90 @@ func (m *MoveWithBallToPositionTest) Archived(gs *info.GameState) int {
 	return RUNNING
 }
 
+// -------------- Kick ball to player -------------------------------------//
 
-// -------------- Goalie -------------------------------------//
-
-type Goalie struct {
+type KickToPlayerTest struct {
 	team     info.Team
 	at_state int
 	start    time.Time
 	max_time time.Duration
 }
 
-func NewGoalie(team info.Team) *Goalie {
-	return &Goalie{
+func NewKickToPlayerTest(team info.Team) *KickToPlayerTest {
+	return &KickToPlayerTest{
 		team:     team,
 		max_time: 30 * time.Second,
 		at_state: -1,
 	}
 }
 
-func (g *Goalie) Run() []*info.Instruction {
-	if g.at_state == -1 {
-		g.start = time.Now()
-		g.at_state = 0
-
-	}
-	
-	if g.at_state == 0 {
-		return []*info.Instruction{
-			{Type: info.MoveToPosition, Id: 0, Position: info.Position{X:4000, Y:0}},
-			{Type: info.MoveToBall, Id: 1},
-		}
-	} else if g.at_state == 1 {
-		return []*info.Instruction{
-			{Type: info.MoveWithBallToPosition, Id: 1, Position: info.Position{X: 2500, Y: 0}},
-			
-		}
-	} else if g.at_state == 2  {
-
-		return []*info.Instruction{
-
-			{Type:info.MoveWithBallToPosition, Id: 1, Position: info.Position{X: 3550, Y: 1000}},
-			{Type: info.Goalie, Id: 0},
-		}
-	}else if g.at_state == 3  {
-
-	 
-		return []*info.Instruction{
-
-			{Type:info.MoveWithBallToPosition, Id: 1, Position: info.Position{X: 3500, Y: -1000}},
-			{Type: info.Goalie, Id: 0},
-		}
-	}else {
-		return []*info.Instruction{
-		}
-	}
-
-	
+func (m *KickToPlayerTest) Run() []*info.Instruction {
+	return []*info.Instruction{}
+	// if m.at_state == -1 {
+	// 	m.start = time.Now()
+	// 	m.at_state = 0
+	// }
+	//
+	// if m.at_state == 0 {
+	// 	return []*info.Instruction{
+	// 		{Type: info.MoveToBall, Id: 0},
+	// 		//{Type: info.MoveToPosition, Id: 2, Position: info.Position{X: -2250, Y: 250}},
+	// 		{Type: info.MoveToPosition, Id: 1, Position: info.Position{X: -1500, Y: 1500}},
+	// 		//{Type: info.MoveToPosition, Id: 1, Position: info.Position{X: 2000, Y: 1500}},
+	// 		//{Type: info.MoveToPosition, Id: 1, Position: info.Position{X: -3000, Y: -2000}},
+	// 	}
+	// } else if m.at_state == 1 {
+	// 	return []*info.Instruction{
+	// 		{Type: info.MoveWithBallToPosition, Id: 0, Position: info.Position{X: -3000, Y: -1000}},
+	// 	}
+	// } else if m.at_state == 2 {
+	// 	return []*info.Instruction{
+	// 		{Type: info.KickToPlayer, Id: 0, OtherId: 1},
+	// 		{Type: info.ReceiveBallFromPlayer, Id: 1, OtherId: 0},
+	// 	}
+	// } else {
+	// 	return []*info.Instruction{
+	// 		{Type: info.MoveToPosition, Id: 0, Position: info.Position{X: 0, Y: 0}},
+	// 		{Type: info.ReceiveBallFromPlayer, Id: 1, OtherId: 0},
+	// 	}
+	// }
 }
 
-func (g *Goalie) Archived(gs *info.GameState) int {
-	robot_pos := gs.GetRobot(info.ID(1), g.team).GetPosition()
+func (m *KickToPlayerTest) Archived(gs *info.GameState) int {
+	robot_pos0 := gs.GetRobot(info.ID(0), m.team).GetPosition()
+	robot_pos1 := gs.GetRobot(info.ID(1), m.team).GetPosition()
 	ball_pos := gs.GetBall().GetPosition()
 
-	dxBall := float64(robot_pos.X - ball_pos.X)
-	dyBall := float64(robot_pos.Y - ball_pos.Y)
-	distanceBall := math.Sqrt(math.Pow(dxBall, 2) + math.Pow(dyBall, 2))
+	dxBall0 := float64(robot_pos0.X - ball_pos.X)
+	dyBall0 := float64(robot_pos0.Y - ball_pos.Y)
+	distanceBall0 := math.Sqrt(math.Pow(dxBall0, 2) + math.Pow(dyBall0, 2))
 
-	dxPos := float64(robot_pos.X - (2500))
-	dyPos := float64(robot_pos.Y)
-	distancePos := math.Sqrt(math.Pow(dxPos, 2) + math.Pow(dyPos, 2))
-	// fmt.Println("Gamestate:")
-	// fmt.Println(g.at_state)
-	Logger.Infof("Gamestate: %d", g.at_state)
-	if g.at_state == 0 {
-		if distanceBall < 1 {
-			g.at_state = 1
+	dxPos0 := float64(robot_pos0.X - (-3000))
+	dyPos0 := float64(robot_pos0.Y - (-1000))
+	distancePos0 := math.Sqrt(math.Pow(dxPos0, 2) + math.Pow(dyPos0, 2))
+
+	// The position of the reciver
+	dxPos1 := float64(robot_pos1.X - (-1500))
+	dyPos1 := float64(robot_pos1.Y - (1500))
+	distancePos1 := math.Sqrt(math.Pow(dxPos1, 2) + math.Pow(dyPos1, 2))
+
+	dxBall1 := float64(robot_pos1.X - ball_pos.X)
+	dyBall1 := float64(robot_pos1.Y - ball_pos.Y)
+	distanceBall1 := math.Sqrt(math.Pow(dxBall1, 2) + math.Pow(dyBall1, 2))
+
+	if m.at_state == 0 {
+		if distanceBall0 < 100 {
+			m.at_state = 1
 		}
-	}else if g.at_state == 1 {
-	
-		if distancePos < 100 {
-
-			g.at_state = 2
+	} else if m.at_state == 1 {
+		if distancePos0 < 100 && distancePos1 < 100 {
+			m.at_state = 2
 		}
-	}else if g.at_state == 2 {
-		if dyPos > 950 {
-
-			g.at_state = 3
-		}
-	}else if g.at_state == 3 {
-
-		if dyPos < -950 {
-
-			g.at_state = 2
+	} else if m.at_state == 2 {
+		if distanceBall1 < 500 {
+			m.at_state = 3
 		}
 	}
-	
 
 	return RUNNING
 }

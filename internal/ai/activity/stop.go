@@ -1,12 +1,17 @@
 package ai
 
 import (
+	"fmt"
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
 type Stop struct {
 	GenericComposition
+}
+
+func (m *Stop) String() string {
+	return fmt.Sprintf("Stop(%d)", m.id)
 }
 
 func NewStop(id info.ID) *Stop {

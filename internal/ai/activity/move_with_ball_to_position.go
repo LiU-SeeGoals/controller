@@ -1,6 +1,7 @@
 package ai
 
 import (
+	"fmt"
 	"math"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
@@ -10,6 +11,10 @@ import (
 type MoveWithBallToPosition struct {
 	GenericComposition
 	target_position info.Position
+}
+
+func (m *MoveWithBallToPosition) String() string {
+	return fmt.Sprintf("MoveWithBallToPosition(%d, %d, %v)", m.team, m.id, m.target_position)
 }
 
 func NewMoveWithBallToPosition(team info.Team, id info.ID, dest info.Position) *MoveWithBallToPosition {
@@ -22,26 +27,32 @@ func NewMoveWithBallToPosition(team info.Team, id info.ID, dest info.Position) *
 	}
 }
 
-func (m *MoveWithBallToPosition) GetAction(gi *info.GameInfo) action.Action {
-	robotPos := gi.State.GetTeam(m.team)[m.id].GetPosition()
+func (fb *MoveWithBallToPosition) GetAction(gi *info.GameInfo) action.Action {
 
-	ballPos := gi.State.GetBall().GetPosition()
+	myTeam := gi.State.GetTeam(fb.team)
+	robot := myTeam[fb.id]
+	if !robot.IsActive() {
+		return nil
+	}
+
+	robotPos := robot.GetPosition()
+	ballPos, _ := gi.State.GetBall().GetPositionTime()
 	dx := float64(robotPos.X - ballPos.X)
 	dy := float64(robotPos.Y - ballPos.Y)
 	distance := math.Sqrt(math.Pow(dx, 2) + math.Pow(dy, 2))
 
 	act := action.MoveTo{}
-	act.Id = int(m.id)
-	act.Team = m.team
-	act.Pos = robotPos
+	act.Id = int(robot.GetID())
+	act.Team = fb.team
+	act.Pos = robot.GetPosition()
 	act.Dribble = true
-	act.Dest = m.target_position
+	act.Dest = fb.target_position
 
 	// Reduce distance when its possible to estimte invisible ball
 	if distance > 1500 {
 		act.Dest = ballPos
 	} else {
-		act.Dest = m.target_position
+		act.Dest = fb.target_position
 	}
 	return &act
 }
@@ -49,8 +60,8 @@ func (m *MoveWithBallToPosition) GetAction(gi *info.GameInfo) action.Action {
 func (m *MoveWithBallToPosition) Achieved(gi *info.GameInfo) bool {
 	target_position := gi.State.GetBall().GetPosition()
 	curr_pos := gi.State.GetTeam(m.team)[m.id].GetPosition()
-	distance_left := CalculateDistance(curr_pos, target_position)
-	const distance_threshold = 10
+	distance_left := curr_pos.Distance(target_position)
+	const distance_threshold = 100
 	const angle_threshold = 0.1
 	distance_achieved := distance_left <= distance_threshold
 	angle_diff := math.Abs(float64(curr_pos.Angle - target_position.Angle))

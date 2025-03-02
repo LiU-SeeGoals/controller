@@ -16,6 +16,10 @@ type Goalie struct {
 	at_state int
 }
 
+func (g *Goalie) String() string {
+	return fmt.Sprintf("Goalie(%d, %d)", g.team, g.id)
+}
+
 // NewGoalie creates a new Goalie struct.
 func NewGoalie(team info.Team, id info.ID) *Goalie {
 	return &Goalie{
@@ -116,7 +120,7 @@ func (g *Goalie) findShooter(gi *info.GameInfo, ballPos info.Position) *info.Rob
 			continue
 		}
 		enemyPos := enemyRobot.GetPosition()
-		dist := CalculateDistance(enemyPos, ballPos)
+		dist := enemyPos.Distance(ballPos)
 		if dist <= shooterThreshold {
 			// Found a robot close enough to be considered "shooter"
 			return enemyRobot
