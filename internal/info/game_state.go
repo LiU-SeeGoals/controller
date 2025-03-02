@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-const TEAM_SIZE ID = 11
+const TEAM_SIZE ID = 16
 
 type GameState struct {
 	Valid       bool
@@ -53,7 +53,6 @@ func (gs *GameState) IsValid() bool {
 
 func (gs *GameState) SetYellowRobot(robotId uint32, x, y, angle float32, time int64) {
 	gs.Yellow_team[robotId].SetPositionTime(x, y, angle, time)
-
 }
 
 func (gs *GameState) SetBlueRobot(robotId uint32, x, y, angle float32, time int64) {

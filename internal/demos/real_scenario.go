@@ -34,7 +34,6 @@ package demos
 // }
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/ai"
@@ -59,19 +58,22 @@ func RealScenario() {
 	//simClientYellow := client.Ne(config.GetSimYellowTeamAddress(), gameInfo)
 
 	simClientYellow := client.NewBaseStationClient(config.GetBasestationAddress())
-	fmt.Println(config.GetBasestationAddress())
 
 	simClientYellow.Init()
 
 	start_time := time.Now().UnixMilli()
+	start := time.Now()
 	for {
-		time.Sleep(1000 * time.Millisecond)
+		time.Sleep(500 * time.Millisecond)
 
 		playTime := time.Now().UnixMilli() - start_time
 
 		ssl_receiver.UpdateState(gameInfo, playTime)
 		yellow_actions := aiYellow.GetActions(gameInfo)
-		simClientYellow.SendActions(yellow_actions)
+		if time.Since(start) > 500 {
+			simClientYellow.SendActions(yellow_actions)
+			start = time.Now()
+		}
 
 	}
 }
