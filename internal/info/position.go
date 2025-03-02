@@ -12,6 +12,14 @@ type Position struct {
 	Angle float32
 }
 
+//Disntance between two points
+func (p *Position) Distance(p2 Position) float32 {
+	dx := p.X - p2.X
+	dy := p.Y - p2.Y
+	dz := p.Z - p2.Z
+	return float32(math.Sqrt(float64(dx*dx + dy*dy + dz*dz)))
+}
+
 func (p *Position) String() string {
 	return fmt.Sprintf("(%f, %f, %f, %f)", p.X, p.Y, p.Z, p.Angle)
 }

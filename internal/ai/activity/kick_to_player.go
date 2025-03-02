@@ -1,6 +1,7 @@
 package ai
 
 import (
+	"fmt"
 	"math"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
@@ -8,18 +9,24 @@ import (
 )
 
 type KickToPlayer struct {
-	ActivityComposition
+	GenericComposition
+	MovementComposition
 	team     info.Team
 	id       info.ID
 	other_id info.ID
 }
 
+func (k *KickToPlayer) String() string {
+	return fmt.Sprintf("KickToPlayer(%d, %d, %d)", k.team, k.id, k.other_id)
+}
+
 func NewKickToPlayer(team info.Team, id info.ID, other_id info.ID) *KickToPlayer {
 	return &KickToPlayer{
-		ActivityComposition: ActivityComposition{
+		GenericComposition: GenericComposition{
 			team: team,
 			id:   id,
 		},
+		MovementComposition: MovementComposition{},
 		other_id: other_id,
 	}
 }
@@ -54,21 +61,26 @@ func (fb *KickToPlayer) GetAction(gi *info.GameInfo) action.Action {
 
 	// Rotate to target
 	if math.Abs(float64(kickerPos.Angle)-float64(targetAngle)) > 0.05 {
-		move := &MoveWithBallToPosition{
-			team: fb.team,
-			id:   fb.id,
-		}
+		// move := &MoveWithBallToPosition{
+		// 	GenericComposition: GenericComposition{
+		// 		team: fb.team,
+		// 		id:   fb.id,
+		// 	},
+		// 	target_position: info.Position{X: kickerPos.X, Y: kickerPos.Y, Z: kickerPos.Z, Angle: float32(targetAngle)},
+		// 	}
 		pos := info.Position{X: kickerPos.X, Y: kickerPos.Y, Z: kickerPos.Z, Angle: float32(targetAngle)}
-		return move.MoveWithBallToPosition(pos, gi)
+		move := NewMoveWithBallToPosition(fb.team, fb.id, pos)
+		return move.GetAction(gi)
 	}
 
 	// kick
 	if distanceBall > 90 {
-		move := &MoveToBall{
-			team: fb.team,
-			id:   fb.id,
-		}
-		return move.MoveToBall(gi)
+		// move := &MoveToBall{
+		// 	team: fb.team,
+		// 	id:   fb.id,
+		// }
+		move := NewMoveToBall(fb.team, fb.id)
+		return move.GetAction(gi)
 	} else {
 		kickAct := &action.Kick{}
 		kickAct.Id = int(robotKicker.GetID())
@@ -87,7 +99,7 @@ func (fb *KickToPlayer) GetAction(gi *info.GameInfo) action.Action {
 func (k *KickToPlayer) Achieved(gi *info.GameInfo) bool {
 	ballPos, _ := gi.State.GetBall().GetPositionTime()
 	receiverPos := gi.State.GetTeam(k.team)[k.other_id].GetPosition()
-	distance := calculateDistance(ballPos, receiverPos)
+	distance := ballPos.Distance(receiverPos)
 	const distance_threshold = 10
 	ballRecived := distance <= distance_threshold
 	return ballRecived

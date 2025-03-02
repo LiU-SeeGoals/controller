@@ -213,3 +213,32 @@ func (sc *simControl) TeleportRobot(x float32, y float32, id uint32, team gc.Tea
 	// Send the command to teleport the robot
 	sc.client.Send(simCommand)
 }
+
+func (sc *simControl) TeleportBall(x float32, y float32) {
+	fmt.Println(x, y)
+	// Set default values for orientation and velocities
+	zero := float32(0.0)
+	teleball := &simulation.TeleportBall{
+		X:  &x,
+		Y:  &y,
+		Z:  &zero,
+		Vx: &zero,
+		Vy: &zero,
+		Vz: &zero,
+	}
+
+	// Prepare the command with the single robot teleportation
+	simControl := &simulation.SimulatorControl{
+		TeleportRobot:   nil,
+		TeleportBall:    teleball,
+		SimulationSpeed: nil,
+	}
+
+	simCommand := &simulation.SimulatorCommand{
+		Control: simControl,
+		Config:  nil,
+	}
+
+	// Send the command to teleport the robot
+	sc.client.Send(simCommand)
+}

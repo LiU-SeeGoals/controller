@@ -1,40 +1,50 @@
 package ai
 
 import (
+	"fmt"
+	"math"
+
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
 type MoveToBall struct {
-	team            info.Team
-	id              info.ID
-	target_position info.Position
+	GenericComposition
+	MovementComposition
 }
 
-func NewMoveToBall(team info.Team, id info.ID, dest info.Position) *MoveToPosition {
-	return &MoveToPosition{
-		team:            team,
-		id:              id,
-		target_position: dest,
+func (m *MoveToBall) String() string {
+	return fmt.Sprintf("MoveToBall(%d, %d)", m.team, m.id)
+}
+
+func NewMoveToBall(team info.Team, id info.ID) *MoveToBall {
+	return &MoveToBall{
+		GenericComposition: GenericComposition{
+			team: team,
+			id:   id,
+		},
 	}
 }
 
-func (fb *MoveToBall) GetAction(inst *info.Instruction, gs *info.GameState) action.Action {
-	myTeam := gs.GetTeam(fb.team)
-	robot := myTeam[inst.Id]
-	if !robot.IsActive() {
-		return nil
-	}
-	act := action.MoveTo{}
-	act.Id = int(robot.GetID())
-	act.Team = fb.team
-	act.Pos = robot.GetPosition()
-	act.Dest = gs.GetBall().GetPosition()
-	act.Dribble = false
-	return &act
+func (m *MoveToBall) GetAction(gi *info.GameInfo) action.Action {
+	target_position := gi.State.GetBall().GetPosition()
+	// act := action.MoveTo{}
+	// act.Id = int(m.id)
+	// act.Team = m.team
+	// act.Pos = gi.State.GetTeam(m.team)[m.id].GetPosition()
+	// act.Dest = target_position
+	// act.Dribble = false
+	move := NewMoveToPosition(m.team, m.id, target_position)
+	return move.GetAction(gi)
 }
 
-func (m *MoveToBall) Achieved(gs *info.GameState) bool {
-	// Need to be implemented
-	return false
-}
+func (m *MoveToBall) Achieved(gi *info.GameInfo) bool {
+	target_position := gi.State.GetBall().GetPosition()
+	curr_pos := gi.State.GetTeam(m.team)[m.id].GetPosition()
+	distance_left := curr_pos.Distance(target_position)
+	const distance_threshold = 200
+	const angle_threshold = 0.1
+	distance_achieved := distance_left <= distance_threshold
+	angle_diff := math.Abs(float64(curr_pos.Angle - target_position.Angle))
+	angle_achieved := angle_diff <= angle_threshold
+	return distance_achieved && angle_achieved}

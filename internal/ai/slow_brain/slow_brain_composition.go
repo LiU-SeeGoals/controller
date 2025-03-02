@@ -14,6 +14,7 @@ const (
 	TIME_EXPIRED
 	ERROR
 	FAILED
+	REFEREE
 )
 
 type SlowBrainComposition struct {
@@ -36,4 +37,10 @@ func (m *SlowBrainComposition) AddActivity(activity ai.Activity) {
 	m.activity_lock.Lock()
 	defer m.activity_lock.Unlock()
 	*m.activities = append(*m.activities, activity)
+}
+
+func (m *SlowBrainComposition) ReplaceActivities(activity []ai.Activity) {
+	m.activity_lock.Lock()
+	defer m.activity_lock.Unlock()
+	*m.activities = activity
 }

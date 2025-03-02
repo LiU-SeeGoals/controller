@@ -7,151 +7,125 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
+// Goalie is the refactored keeper AI that follows a state machine (g.at_state)
+// and tries to position itself based on the ball and a potential "shooter."
 type Goalie struct {
-	team            info.Team
-	id              info.ID
-	target_position info.Position
+	GenericComposition
+	team     info.Team
+	id       info.ID
+	at_state int
 }
 
-func NewGoalie(team info.Team, id info.ID) *MoveToPosition {
-	return &MoveToPosition{
-		team: team,
-		id:   id,
+func (g *Goalie) String() string {
+	return fmt.Sprintf("Goalie(%d, %d)", g.team, g.id)
+}
+
+// NewGoalie creates a new Goalie struct.
+func NewGoalie(team info.Team, id info.ID) *Goalie {
+	return &Goalie{
+		GenericComposition: GenericComposition{
+			team: team,
+			id:   id,
+		},
+		at_state: 0, // initial state
 	}
 }
 
-func (fb *Goalie) GetAction(inst *info.Instruction, gs *info.GameState) action.Action {
-	// todo: add collision avoidance
-	myTeam := gs.GetTeam(fb.team)
-	robot := myTeam[inst.Id]
-	shooter := myTeam[1]
+// GetAction decides what the goalie should do each tick (frame), returning a single Action.
+func (g *Goalie) GetAction(gi *info.GameInfo) action.Action {
+	fmt.Println("Goalie")
 
-	robotPos := robot.GetPosition()
-	shooterPos := shooter.GetPosition()
-	if !robot.IsActive() {
-		return nil
+	myTeam := gi.State.GetTeam(g.team)
+	robot := myTeam[g.id]
+	ballPos := gi.State.GetBall().GetPosition()
+
+	// Prepare a MoveTo action for the goalie
+	act := action.MoveTo{
+		Id:   int(g.id),
+		Team: g.team,
+		Pos:  robot.GetPosition(), // current position
 	}
-	act := action.MoveTo{}
-	act.Id = int(robot.GetID())
-	act.Team = fb.team
-	act.Pos = robotPos
 
-	ballPos, _ := gs.GetBall().GetPositionTime()
+	// 1) Attempt to find the "shooter" from the opposing team
+	shooter := g.findShooter(gi, ballPos)
 
-	//dright := math.Abs(float64(shooterPos.Y - 500))
-
-	//drightgoalie := math.Abs(float64(shooterPos.Y - robotPos.Y))
-
-	//angleMiddle := math.Atan(float64(math.abs(shooterPos.Y)/2000))
-
-	//dleft := math.Abs(float64(shooterPos.Y + 500))
-	//dleftgoalie := math.Abs(float64(shooterPos.Y + i))
-
-	//angleGoalie := math.Atan(float64(dleftgoalie/2000))
-	//anglePose := math.Atan(float64(dleft/2000))
-
-	fmt.Println("BallPos", ballPos)
-	if ballPos.X <= 4000 {
-		if shooterPos.Y <= 0 {
-			if shooterPos.Y <= -500 {
-				act.Dest.Y = -350
-			} else if shooterPos.Y <= -350 {
-				act.Dest.Y = -250
-			} else if shooterPos.Y <= -250 {
-				act.Dest.Y = -150
+	// 2) If there is a shooter, replicate the logic:
+	//    - If ballPos.X <= 4000 => track shooter's Y
+	//    - Else => move closer to the ball
+	if shooter != nil {
+		shooterPos := shooter.GetPosition()
+		if ballPos.X <= 4000 {
+			if shooterPos.Y <= 0 {
+				// Shooter is on the negative side (top in some coordinate systems)
+				if shooterPos.Y <= -500 {
+					act.Dest.Y = -350
+				} else if shooterPos.Y <= -350 {
+					act.Dest.Y = -250
+				} else if shooterPos.Y <= -250 {
+					act.Dest.Y = -150
+				} else {
+					act.Dest.Y = shooterPos.Y
+				}
 			} else {
-				act.Dest.Y = shooterPos.Y
+				// Shooter is on the positive side (bottom in some coordinate systems)
+				if shooterPos.Y >= 500 {
+					act.Dest.Y = 350
+				} else if shooterPos.Y >= 350 {
+					act.Dest.Y = 250
+				} else if shooterPos.Y >= 250 {
+					act.Dest.Y = 150
+				} else {
+					act.Dest.Y = shooterPos.Y
+				}
 			}
-
+			act.Dest.X = 4000
 		} else {
-			if shooterPos.Y >= 500 {
-				act.Dest.Y = 350
-			} else if shooterPos.Y >= 350 {
-				act.Dest.Y = 250
-			} else if shooterPos.Y >= 250 {
-				act.Dest.Y = 150
-			} else {
-				act.Dest.Y = shooterPos.Y
-			}
+			// The ball is "right" of X=4000, move closer to the ball
+			act.Dest.X = ballPos.X + 25
+			act.Dest.Y = ballPos.Y
 		}
-
-		act.Dest.X = 4000
 	} else {
-
-		act.Dest.Y = ballPos.Y
+		// 3) If NO shooter is found, do the "else" logic from the original code
 		act.Dest.X = ballPos.X + 25
+		act.Dest.Y = ballPos.Y
 	}
-
-	// // next state
-	// if g.at_state == 0 {
-	// 	return []*info.Instruction{
-	// 		{Type: info.MoveToPosition, Id: 0, Position: info.Position{X: 4000, Y: 0}},
-	// 		{Type: info.MoveToBall, Id: 1},
-	// 	}
-	// } else if g.at_state == 1 {
-	// 	return []*info.Instruction{
-	// 		{Type: info.MoveWithBallToPosition, Id: 1, Position: info.Position{X: 2500, Y: 0}},
-	// 	}
-	// } else if g.at_state == 2 {
-
-	// 	return []*info.Instruction{
-
-	// 		{Type: info.MoveWithBallToPosition, Id: 1, Position: info.Position{X: 3550, Y: 1000}},
-	// 		{Type: info.Goalie, Id: 0},
-	// 	}
-	// } else if g.at_state == 3 {
-
-	// 	return []*info.Instruction{
-
-	// 		{Type: info.MoveWithBallToPosition, Id: 1, Position: info.Position{X: 3500, Y: -1000}},
-	// 		{Type: info.Goalie, Id: 0},
-	// 	}
-	// } else {
-	// 	return []*info.Instruction{}
-	// }
-
-	// // Check if current state is done
-	// robot_pos := gs.GetRobot(info.ID(1), g.team).GetPosition()
-	// ball_pos := gs.GetBall().GetPosition()
-
-	// dxBall := float64(robot_pos.X - ball_pos.X)
-	// dyBall := float64(robot_pos.Y - ball_pos.Y)
-	// distanceBall := math.Sqrt(math.Pow(dxBall, 2) + math.Pow(dyBall, 2))
-
-	// dxPos := float64(robot_pos.X - (2500))
-	// dyPos := float64(robot_pos.Y)
-	// distancePos := math.Sqrt(math.Pow(dxPos, 2) + math.Pow(dyPos, 2))
-	// fmt.Println("Gamestate:")
-	// fmt.Println(g.at_state)
-	// if g.at_state == 0 {
-	// 	if distanceBall < 1 {
-	// 		g.at_state = 1
-	// 	}
-	// } else if g.at_state == 1 {
-
-	// 	if distancePos < 100 {
-
-	// 		g.at_state = 2
-	// 	}
-	// } else if g.at_state == 2 {
-	// 	if dyPos > 950 {
-
-	// 		g.at_state = 3
-	// 	}
-	// } else if g.at_state == 3 {
-
-	// 	if dyPos < -950 {
-
-	// 		g.at_state = 2
-	// 	}
-	// }
 
 	act.Dribble = false
 	return &act
 }
 
-func (g *Goalie) Archived(gs *info.GameState) bool {
-	// The goalie is never done with its action
-	// This means that only slow brain can change the action
+// Achieved returns whether this action is "complete".
+// The goalie never really finishes, so we return false unless higher-level AI changes it.
+func (g *Goalie) Achieved(*info.GameInfo) bool {
 	return false
+}
+
+// findShooter checks the enemy team for any robot within a threshold distance of the ball.
+// If found, returns that robot and true. Otherwise returns nil and false.
+func (g *Goalie) findShooter(gi *info.GameInfo, ballPos info.Position) *info.Robot {
+	// If your game only has two teams (0 and 1), you can identify the opposing team as:
+	var enemyTeamID info.Team
+	if g.team == 0 {
+		enemyTeamID = 1
+	} else {
+		enemyTeamID = 0
+	}
+
+	enemyTeam := gi.State.GetTeam(enemyTeamID)
+	const shooterThreshold = 500.0 // the "X distance" within which a robot is considered the shooter
+
+	// Iterate over all robots in the enemy team
+	for _, enemyRobot := range enemyTeam {
+		if !enemyRobot.IsActive() {
+			continue
+		}
+		enemyPos := enemyRobot.GetPosition()
+		dist := enemyPos.Distance(ballPos)
+		if dist <= shooterThreshold {
+			// Found a robot close enough to be considered "shooter"
+			return enemyRobot
+		}
+	}
+	// No enemy robot is close enough
+	return nil
 }
