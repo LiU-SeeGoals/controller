@@ -14,8 +14,12 @@ type MoveToPosition struct {
 	target_position info.Position
 }
 
+
+func (m *MoveToPosition) String() string {
+	return fmt.Sprintf("MoveToPosition(%d, %d, %v)", m.team, m.id, m.target_position)
+}
+
 func NewMoveToPosition(team info.Team, id info.ID, dest info.Position) *MoveToPosition {
-	fmt.Println("NewMoveToPosition", id)
 	return &MoveToPosition{
 		GenericComposition: GenericComposition{
 			team: team,
@@ -29,15 +33,8 @@ func (m *MoveToPosition) GetAction(gi *info.GameInfo) action.Action {
 	act := action.MoveTo{}
 	act.Id = int(m.id)
 	act.Team = m.team
-	// robot := gi.State.GetTeam(m.team)[m.id]
-	act.Pos = gi.State.GetTeam(m.team)[m.id].GetPosition()
-	// if m.team == info.Yellow {
-	// 	robot := gi.State.GetTeam(m.team)[m.id]
-	// 	target_position := m.avoidCollision(robot, m.target_position, gi.State)
-	// 	act.Dest = target_position
-	// } else {
-	// 	act.Dest = m.target_position
-	// }
+	robot := gi.State.GetTeam(m.team)[m.id]
+	act.Pos = robot.GetPosition()
 	act.Dest = m.target_position
 
 	act.Dribble = false
@@ -46,7 +43,7 @@ func (m *MoveToPosition) GetAction(gi *info.GameInfo) action.Action {
 
 func (m *MoveToPosition) Achieved(gi *info.GameInfo) bool {
 	curr_pos := gi.State.GetTeam(m.team)[m.id].GetPosition()
-	distance_left := CalculateDistance(curr_pos, m.target_position)
+	distance_left := curr_pos.Distance(m.target_position)
 	const distance_threshold = 10
 	const angle_threshold = 0.1
 	distance_achieved := distance_left <= distance_threshold
