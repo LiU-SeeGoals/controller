@@ -34,6 +34,7 @@ package demos
 // }
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/ai"
@@ -46,33 +47,44 @@ import (
 
 func RealScenario() {
 	// This avoid the "No position in history" error for robots
+	fmt.Println("1")
 	presentYellow := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 	presentBlue := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 	simController := simulator.NewSimControl()
 	simController.SetPresentRobots(presentYellow, presentBlue)
+	fmt.Println("2")
 
 	gameInfo := info.NewGameInfo(10)
 	ssl_receiver := client.NewSSLClient()
 
 	// Yellow team
 	//slowBrainYellow := slow_brain.NewSlowBrain1(info.Yellow)
-	slowBrainYellow := slow_brain.NewSlowBrain2(info.Yellow)
+	slowBrainYellow := slow_brain.NewSlowBrain1(info.Yellow)
 	fastBrainYellow := ai.NewFastBrainGO()
+	fmt.Println("3")
 
 	aiYellow := ai.NewAi(info.Yellow, slowBrainYellow, fastBrainYellow)
+	simClientYellow := client.NewSimClient(config.GetSimYellowTeamAddress(), gameInfo)
 
-	simClientYellow := client.NewBaseStationClient(config.GetBasestationAddress())
+	//	simClientYellow := client.NewBaseStationClient(config.GetBasestationAddress())
 
 	// Some sim setup for debugging ai behaviour
 	presentYellow = []int{0, 1}
 	presentBlue = []int{}
 	simController.SetPresentRobots(presentYellow, presentBlue)
+	fmt.Println("4")
 
 	start_time := time.Now().UnixMilli()
 	for {
+		fmt.Println("5")
+
 		playTime := time.Now().UnixMilli() - start_time
+		fmt.Println("6")
+
 		ssl_receiver.UpdateState(gameInfo, playTime)
+		fmt.Println("7")
 		yellow_actions := aiYellow.GetActions(gameInfo)
 		simClientYellow.SendActions(yellow_actions)
+
 	}
 }

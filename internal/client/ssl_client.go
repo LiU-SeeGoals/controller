@@ -12,7 +12,7 @@ type SSLClient struct {
 
 func NewSSLClient() *SSLClient {
 	return &SSLClient{
-		vision:  NewSSLVisionClient(config.GetSSLClientAddress()),
+		vision:  NewSSLVisionClient(config.GetSSLClientAddressReal()),
 		referee: NewSSLRefereeClient(config.GetGCClientAddress()),
 	}
 }

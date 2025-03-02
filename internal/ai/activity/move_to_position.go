@@ -10,7 +10,7 @@ import (
 
 type MoveToPosition struct {
 	GenericComposition
-	MovementComposition
+	// MovementComposition
 	target_position info.Position
 }
 
