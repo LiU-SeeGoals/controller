@@ -10,11 +10,11 @@ import (
 
 type MoveToBall struct {
 	GenericComposition
-	MovementComposition
+	// MovementComposition
 }
 
 func (m *MoveToBall) String() string {
-	return fmt.Sprintf("MoveToBall(%d, %d)", m.team, m.id)
+	return fmt.Sprintf("(Robot %d, MoveToBall()", m.id)
 }
 
 func NewMoveToBall(team info.Team, id info.ID) *MoveToBall {

@@ -12,41 +12,48 @@ var (
 )
 
 func init() {
-	// Configure log rotation using Lumberjack
-	logFile := zapcore.AddSync(&lumberjack.Logger{
-		Filename:   "../log",
-		MaxSize:    10,  // Max size in MB before rotating
+	// Log rotation for JSON logs (structured)
+	jsonLogFile := zapcore.AddSync(&lumberjack.Logger{
+		Filename:   "../logs/log.json", // Structured logs in JSON format
+		MaxSize:    10,  // Max size in MB before rotation
 		MaxBackups: 5,   // Max number of old log files to keep
 		MaxAge:     30,  // Max number of days to retain old logs
 		Compress:   true, // Compress old logs (gzip)
 	})
 
-	// Create JSON encoder for file logs
-	encoderConfig := zap.NewProductionEncoderConfig()
-	encoderConfig.TimeKey = "timestamp"
-	encoderConfig.EncodeTime = zapcore.ISO8601TimeEncoder // Human-readable timestamp
-	fileEncoder := zapcore.NewJSONEncoder(encoderConfig)  // JSON format for logs
+	// Log rotation for human-readable logs
+	humanLogFile := zapcore.AddSync(&lumberjack.Logger{
+		Filename:   "../logs/readable.log", // Readable logs for easy debugging
+		MaxSize:    10,
+		MaxBackups: 5,
+		MaxAge:     30,
+		Compress:   true,
+	})
 
-	// Create console encoder (human-readable logs)
-	consoleEncoderConfig := zap.NewDevelopmentEncoderConfig()
-	consoleEncoderConfig.EncodeTime = zapcore.ISO8601TimeEncoder
-	consoleEncoder := zapcore.NewConsoleEncoder(consoleEncoderConfig)
+	// Create JSON encoder (structured logs)
+	jsonEncoderConfig := zap.NewProductionEncoderConfig()
+	jsonEncoderConfig.TimeKey = "timestamp"
+	jsonEncoderConfig.EncodeTime = zapcore.ISO8601TimeEncoder // Human-readable timestamp
+	jsonEncoder := zapcore.NewJSONEncoder(jsonEncoderConfig)
 
-	// Set up cores for file and console logging
-	fileCore := zapcore.NewCore(fileEncoder, logFile, zapcore.DebugLevel)
-	consoleCore := zapcore.NewCore(consoleEncoder, zapcore.AddSync(os.Stdout), zapcore.DebugLevel)
+	// Create human-readable encoder (console-style logs)
+	humanEncoderConfig := zap.NewDevelopmentEncoderConfig()
+	humanEncoderConfig.EncodeTime = zapcore.ISO8601TimeEncoder
+	humanEncoder := zapcore.NewConsoleEncoder(humanEncoderConfig) // Pretty-print logs
 
-	// Combine file and console logging
-	logCore := zapcore.NewTee(fileCore, consoleCore)
+	// Set up cores for logging
+	jsonCore := zapcore.NewCore(jsonEncoder, jsonLogFile, zapcore.DebugLevel) // JSON logs
+	humanCore := zapcore.NewCore(humanEncoder, humanLogFile, zapcore.DebugLevel) // Readable logs
+	consoleCore := zapcore.NewCore(humanEncoder, zapcore.AddSync(os.Stdout), zapcore.DebugLevel) // Console logs
+
+	// Combine all cores
+	logCore := zapcore.NewTee(jsonCore, humanCore, consoleCore)
 
 	// Create the logger
 	logger := zap.New(logCore, zap.AddCaller(), zap.AddStacktrace(zapcore.ErrorLevel))
 
 	// Convert to SugaredLogger
 	Logger = logger.Sugar()
-
-	// Example of setting a dynamic log level (optional)
-	// zap.ReplaceGlobals(logger) // Uncomment to replace the global Zap logger
 }
 
 /*

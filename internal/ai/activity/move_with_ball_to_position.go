@@ -14,7 +14,7 @@ type MoveWithBallToPosition struct {
 }
 
 func (m *MoveWithBallToPosition) String() string {
-	return fmt.Sprintf("MoveWithBallToPosition(%d, %d, %v)", m.team, m.id, m.target_position)
+	return fmt.Sprintf("Robot %d, MoveWithBallToPosition(%v)", m.id, m.target_position)
 }
 
 func NewMoveWithBallToPosition(team info.Team, id info.ID, dest info.Position) *MoveWithBallToPosition {

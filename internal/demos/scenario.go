@@ -22,7 +22,7 @@ func Scenario() {
 	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddress())
 
 	// Yellow team
-	slowBrainYellow := slow_brain.NewSlowBrainTest(info.Yellow)
+	slowBrainYellow := slow_brain.NewSlowBrain1(info.Yellow)
 	fastBrainYellow := ai.NewFastBrainGO()
 
 	aiYellow := ai.NewAi(info.Yellow, slowBrainYellow, fastBrainYellow)

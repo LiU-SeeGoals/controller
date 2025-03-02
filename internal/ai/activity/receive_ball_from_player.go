@@ -16,7 +16,7 @@ type ReceiveBallFromPlayer struct {
 }
 
 func (fb *ReceiveBallFromPlayer) String() string {
-	return fmt.Sprintf("ReceiveBallFromPlayer(%d, %d, %d)", fb.team, fb.id, fb.other_id)
+	return fmt.Sprintf("Robot %d, ReceiveBallFromPlayer(%d)", fb.id, fb.other_id)
 }
 
 func NewReceiveBallFromPlayer(team info.Team, id info.ID, other_id info.ID) *ReceiveBallFromPlayer {
