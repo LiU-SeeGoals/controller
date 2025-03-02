@@ -10,9 +10,9 @@ type SSLClient struct {
 	referee *SSLRefereeClient
 }
 
-func NewSSLClient() *SSLClient {
+func NewSSLClient(visionAddress string) *SSLClient {
 	return &SSLClient{
-		vision:  NewSSLVisionClient(config.GetSSLClientAddressReal()),
+		vision:  NewSSLVisionClient(visionAddress),
 		referee: NewSSLRefereeClient(config.GetGCClientAddress()),
 	}
 }

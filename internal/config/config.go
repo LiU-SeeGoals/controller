@@ -177,5 +177,5 @@ func GetBasestationAddress() string {
 // GetSSLClientAddress returns the SSL client address from the config.
 func GetSSLClientAddressReal() string {
 	cfg := GetInstance()
-	return fmt.Sprintf("%s:%s", cfg.SSLVision.Address, cfg.SSLVision.VizPort)
+	return fmt.Sprintf("%s:%s", cfg.SSLVision.Address, cfg.SSLVision.Port_real)
 }
