@@ -2,12 +2,12 @@ package client
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 	"sync"
 	"time"
 
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/info"
 	"github.com/gorilla/websocket"
@@ -23,6 +23,9 @@ type WebServer struct {
 	websocketConnectionsMutex sync.Mutex
 
 	websocketupgrader *websocket.Upgrader
+
+	logPacketQueue []([]byte)
+	logQueueMutex  sync.Mutex
 
 	gameStatePacketQueue []([]byte)
 	incomingActions      []action.ActionDTO
@@ -53,8 +56,10 @@ func startWebServer() {
 	http.HandleFunc("/ws", webserverInstance.handleGameStateRequest)
 	go http.ListenAndServe(":8080", nil)
 	go webserverInstance.sendGameState()
+	go webserverInstance.sendLog()
 	go webserverInstance.receiveData()
-	fmt.Println("server online")
+	// fmt.Println("server online")
+	Logger.Info("Webserver online")
 }
 
 func (server *WebServer) getUpgrader() *websocket.Upgrader {
@@ -76,9 +81,38 @@ func (server *WebServer) handleGameStateRequest(w http.ResponseWriter, r *http.R
 	server.websocketConnectionsMutex.Lock()
 	defer server.websocketConnectionsMutex.Unlock() // unlock after function returns
 	server.websocketConnections = append(server.websocketConnections, ws)
-	fmt.Println("making a connection")
-	fmt.Println(len(server.websocketConnections))
-	fmt.Print("done serving client")
+	// fmt.Println("making a connection")
+	// fmt.Println(len(server.websocketConnections))
+	// fmt.Print("done serving client")
+	Logger.Info("Client connected")
+}
+
+// Method to send the game state to all connected clients
+func (server *WebServer) sendLog() {
+	var logJSON []byte
+	for {
+		if len(server.logPacketQueue) == 0 {
+			time.Sleep(time.Millisecond * 10) // Sleep for a short period
+			continue
+		}
+
+		server.logQueueMutex.Lock()
+		logJSON = server.logPacketQueue[0]
+		server.logPacketQueue = server.logPacketQueue[1:]
+		server.logQueueMutex.Unlock()
+
+		// Creating a copy of the connections. This prevents locking other threads if the connection takes too long
+		server.websocketConnectionsMutex.Lock()
+		connectionsCopy := make([]*websocket.Conn, len(server.websocketConnections))
+		copy(connectionsCopy, server.websocketConnections)
+		server.websocketConnectionsMutex.Unlock()
+
+		for _, ws := range connectionsCopy {
+			ws.WriteMessage(websocket.TextMessage, logJSON)
+			// fmt.Println("written msg")
+
+		}
+	}
 }
 
 // Method to send the game state to all connected clients
@@ -168,7 +202,8 @@ type WebsiteDTO struct {
 func toJson(input WebsiteDTO) []byte {
 	output, err := json.Marshal(input)
 	if err != nil {
-		fmt.Println("The WebsiteDTO packet could not be marshalled to JSON.")
+		// fmt.Println("The WebsiteDTO packet could not be marshalled to JSON.")
+		Logger.Error("The WebsiteDTO packet could not be marshalled to JSON.")
 	}
 	return output
 }
@@ -183,6 +218,16 @@ func GetIncoming() []action.ActionDTO {
 	copy(actionsCopy, webserver.incomingActions)
 	webserver.incomingActions = nil // Empty the incomingActions slice
 	return actionsCopy
+}
+
+func UpdateWebLog(logs []byte) {
+	// fmt.Println("Updating web log")
+	Logger.Info("Updating web log")
+	webserver := getInstance()
+	webserver.logQueueMutex.Lock()
+	webserver.logPacketQueue = append(webserver.logPacketQueue, []byte(logs))
+	webserver.logQueueMutex.Unlock()
+
 }
 
 // Broadcasts the game state to all connected clients

@@ -6,6 +6,7 @@ import (
 
 	"time"
 
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	ai "github.com/LiU-SeeGoals/controller/internal/ai/activity"
 	"github.com/LiU-SeeGoals/controller/internal/info"
@@ -57,8 +58,9 @@ func (fb *FastBrainGO) Run() {
 		var actions []action.Action
 		for i := range activitiesCopy {
 			// If done, remove it from the *shared* slice
+			// activity := activitiesCopy[i]
 			if activitiesCopy[i].Achieved(&gameInfo) {
-				fmt.Println("sucessful action")
+				Logger.Info(fmt.Sprintf("Activity %v achieved", activitiesCopy[i]))
 				fb.activity_lock.Lock()
 				// find it in the real slice (not in the copy!)
 				for j, realAct := range *fb.activities {
@@ -73,6 +75,7 @@ func (fb *FastBrainGO) Run() {
 				fb.activity_lock.Unlock()
 			} else {
 				// Otherwise, get an action
+				Logger.Info(fmt.Sprintf("Activity %v running", activitiesCopy[i]))
 				actions = append(actions, activitiesCopy[i].GetAction(&gameInfo))
 			}
 		}

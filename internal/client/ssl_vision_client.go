@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net"
 
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/helper"
 	"github.com/LiU-SeeGoals/controller/internal/info"
 	"github.com/LiU-SeeGoals/proto_go/ssl_vision"
@@ -63,13 +64,15 @@ func (r *SSLConnection) Receive(packetChan chan *ssl_vision.SSL_WrapperPacket) {
 	for {
 		sz, err := r.conn.Read(r.buff)
 		if err != nil {
-			fmt.Printf("Unable to receive packet: %s", err)
+			// fmt.Printf("Unable to receive packet: %s", err)
+			Logger.Errorf("Unable to receive packet: %v", err)
 			continue
 		}
 
 		err = proto.Unmarshal(r.buff[:sz], &r.packet)
 		if err != nil {
-			fmt.Printf("Unable to unmarshal packet: %s", err)
+			// fmt.Printf("Unable to unmarshal packet: %s", err)
+			Logger.Errorf("Unable to unmarshal packet: %v", err)
 			continue
 		}
 		// packetChan <- &r.packet

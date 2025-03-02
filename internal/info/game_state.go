@@ -2,7 +2,7 @@ package info
 
 import (
 	"encoding/json"
-	"fmt"
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 )
 
 const TEAM_SIZE ID = 16
@@ -38,7 +38,8 @@ func (gs GameState) ToDTO() *GameStateDTO {
 func (gs GameState) ToJson() []byte {
 	gameStateJson, err := json.Marshal(gs.ToDTO())
 	if err != nil {
-		fmt.Println("The gamestate packet could not be marshalled to JSON.")
+		// fmt.Println("The gamestate packet could not be marshalled to JSON.")
+		Logger.Error("The gamestate packet could not be marshalled to JSON.")
 	}
 	return gameStateJson
 }

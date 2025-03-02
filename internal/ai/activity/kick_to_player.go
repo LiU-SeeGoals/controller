@@ -10,14 +10,14 @@ import (
 
 type KickToPlayer struct {
 	GenericComposition
-	MovementComposition
+	// MovementComposition
 	team     info.Team
 	id       info.ID
 	other_id info.ID
 }
 
 func (k *KickToPlayer) String() string {
-	return fmt.Sprintf("KickToPlayer(%d, %d, %d)", k.team, k.id, k.other_id)
+	return fmt.Sprintf("(Robot %d, KickToPlayer(%d))", k.id, k.other_id)
 }
 
 func NewKickToPlayer(team info.Team, id info.ID, other_id info.ID) *KickToPlayer {

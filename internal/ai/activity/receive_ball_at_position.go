@@ -16,7 +16,7 @@ type ReceiveBallAtPosition struct {
 }
 
 func (rbap *ReceiveBallAtPosition) String() string {
-	return fmt.Sprintf("ReceiveBallAtPosition(%d, %d, %v)", rbap.team, rbap.id, rbap.target_position)
+	return fmt.Sprintf("Robot %d, ReceiveBallAtPosition(%v)", rbap.id, rbap.target_position)
 }
 
 func NewReceiveBallAtPosition(team info.Team, id info.ID, dest info.Position) *ReceiveBallAtPosition {

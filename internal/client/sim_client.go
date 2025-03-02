@@ -5,6 +5,7 @@ import (
 	"net"
 	"sync"
 
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/info"
 	"github.com/LiU-SeeGoals/proto_go/gc"
@@ -29,10 +30,12 @@ type SimClient struct {
 // Address should be <ip>:<port>
 // gameState is optionaly provided
 func NewSimClient(addr string, gameInfo ...*info.GameInfo) *SimClient {
-	fmt.Println("Creating new SimClient with address: ", addr)
+	// fmt.Println("Creating new SimClient with address: ", addr)
+	Logger.Info("Creating new SimClient with address: ", addr)
 	udpAddr, err := net.ResolveUDPAddr("udp", addr)
 	if err != nil {
-		panic(err)
+		// panic(err)
+		Logger.Panicf("Unable to resolve UDP address: %v", err)
 	}
 
 	// Create the SimClient instance
@@ -72,7 +75,8 @@ func (client *SimClient) SendActions(actions []action.Action) {
 	// Ex. We send moveTo, then this action will be submitted all the time until
 	//     another action (Ex. Kick) is sent
 	if client.gameState == nil {
-		fmt.Println("Please provide gamestate in the sim_client constructor")
+		// fmt.Println("Please provide gamestate in the sim_client constructor")
+		Logger.Panic("Please provide gamestate in the sim_client constructor")
 	}
 	client.actionListMutex.Lock()
 

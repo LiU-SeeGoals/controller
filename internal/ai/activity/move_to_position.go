@@ -16,7 +16,7 @@ type MoveToPosition struct {
 
 
 func (m *MoveToPosition) String() string {
-	return fmt.Sprintf("MoveToPosition(%d, %d, %v)", m.team, m.id, m.target_position)
+	return fmt.Sprintf("(Robot %d, MoveToPosition(%v))", m.id, m.target_position)
 }
 
 func NewMoveToPosition(team info.Team, id info.ID, dest info.Position) *MoveToPosition {
