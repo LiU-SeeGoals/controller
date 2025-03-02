@@ -5,7 +5,7 @@ import (
 	. "github.com/LiU-SeeGoals/controller/internal/logger"
 )
 
-const TEAM_SIZE ID = 11
+const TEAM_SIZE ID = 16
 
 type GameState struct {
 	Valid       bool

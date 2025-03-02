@@ -3,8 +3,8 @@ package demos
 import (
 	"time"
 
-	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/ai"
+	slow_brain "github.com/LiU-SeeGoals/controller/internal/ai/slow_brain"
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/info"
@@ -12,11 +12,18 @@ import (
 )
 
 func Scenario() {
+	// This avoid the "No position in history" error for robots
+	presentYellow := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	presentBlue := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	simController := simulator.NewSimControl()
+	simController.SetPresentRobots(presentYellow, presentBlue)
+
 	gameInfo := info.NewGameInfo(10)
-	ssl_receiver := client.NewSSLClient()
+	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddress())
 
 	// Yellow team
-	slowBrainYellow := ai.NewScenarioSlowBrain(1, 4)
+	//slowBrainYellow := slow_brain.NewSlowBrain1(info.Yellow)
+	slowBrainYellow := slow_brain.NewSlowBrain1(info.Yellow)
 	fastBrainYellow := ai.NewFastBrainGO()
 
 	aiYellow := ai.NewAi(info.Yellow, slowBrainYellow, fastBrainYellow)
@@ -24,18 +31,16 @@ func Scenario() {
 	simClientYellow := client.NewSimClient(config.GetSimYellowTeamAddress(), gameInfo)
 
 	// Blue team
-	//slowBrainBlue := ai.NewScenarioSlowBrain(1, 4)
-	//fastBrainBlue := ai.NewFastBrainGO()
+	// slowBrainBlue := slow_brain.NewSlowBrain1(info.Blue)
+	// fastBrainBlue := ai.NewFastBrainGO()
 
-	//aiBlue := ai.NewAi(info.Blue, slowBrainBlue, fastBrainBlue)
+	// aiBlue := ai.NewAi(info.Blue, slowBrainBlue, fastBrainBlue)
 
-	//simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress(), gameInfo)
-
-	simController := simulator.NewSimControl()
+	// simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress(), gameInfo)
 
 	// Some sim setup for debugging ai behaviour
-	presentYellow := []int{0, 1, 2, 3}
-	presentBlue := []int{}
+	presentYellow = []int{0, 1}
+	presentBlue = []int{}
 	simController.SetPresentRobots(presentYellow, presentBlue)
 
 	start_time := time.Now().UnixMilli()
@@ -43,7 +48,7 @@ func Scenario() {
 		playTime := time.Now().UnixMilli() - start_time
 		// fmt.Println("playTime: ", playTime)
 		ssl_receiver.UpdateState(gameInfo, playTime)
-		Logger.Info(gameInfo.Status)
+		//fmt.Println(gameInfo)
 
 		yellow_actions := aiYellow.GetActions(gameInfo)
 		simClientYellow.SendActions(yellow_actions)

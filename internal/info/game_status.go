@@ -188,6 +188,10 @@ func (gs *GameStatus) GetStatusMessage() string {
 	return gs.status_message
 }
 
+func (gs *GameStatus) GetGameEvent() *GameEvent {
+	return gs.gameEvent
+}
+
 func (gs *GameStatus) GetTeamInfo(yellow bool) *TeamInfo {
 	teamInfo := gs.blueInfo
 
