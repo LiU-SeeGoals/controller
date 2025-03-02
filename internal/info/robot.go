@@ -73,7 +73,6 @@ func (r *Robot) SetPositionTime(x, y, angle float32, time int64) {
 func (r *Robot) GetPositionTime() (Position, int64) {
 	if r.history.Len() == 0 {
 		// panic("No position in history for robot " + fmt.Sprint(r.id) + " " + r.team.String())
-		Logger.Panic("No position in history for robot %d %s", r.id, r.team.String())
 	}
 
 	element := r.history.Front()

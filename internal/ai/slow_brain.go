@@ -1,7 +1,6 @@
 package ai
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/height_map"
