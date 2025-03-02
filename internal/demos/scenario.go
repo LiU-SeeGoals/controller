@@ -19,7 +19,7 @@ func Scenario() {
 	simController.SetPresentRobots(presentYellow, presentBlue)
 
 	gameInfo := info.NewGameInfo(10)
-	ssl_receiver := client.NewSSLClient()
+	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddress())
 
 	// Yellow team
 	//slowBrainYellow := slow_brain.NewSlowBrain1(info.Yellow)
