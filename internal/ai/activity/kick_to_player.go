@@ -26,7 +26,6 @@ func NewKickToPlayer(team info.Team, id info.ID, other_id info.ID) *KickToPlayer
 			team: team,
 			id:   id,
 		},
-		MovementComposition: MovementComposition{},
 		other_id: other_id,
 	}
 }
@@ -61,13 +60,6 @@ func (fb *KickToPlayer) GetAction(gi *info.GameInfo) action.Action {
 
 	// Rotate to target
 	if math.Abs(float64(kickerPos.Angle)-float64(targetAngle)) > 0.05 {
-		// move := &MoveWithBallToPosition{
-		// 	GenericComposition: GenericComposition{
-		// 		team: fb.team,
-		// 		id:   fb.id,
-		// 	},
-		// 	target_position: info.Position{X: kickerPos.X, Y: kickerPos.Y, Z: kickerPos.Z, Angle: float32(targetAngle)},
-		// 	}
 		pos := info.Position{X: kickerPos.X, Y: kickerPos.Y, Z: kickerPos.Z, Angle: float32(targetAngle)}
 		move := NewMoveWithBallToPosition(fb.team, fb.id, pos)
 		return move.GetAction(gi)
@@ -75,10 +67,6 @@ func (fb *KickToPlayer) GetAction(gi *info.GameInfo) action.Action {
 
 	// kick
 	if distanceBall > 90 {
-		// move := &MoveToBall{
-		// 	team: fb.team,
-		// 	id:   fb.id,
-		// }
 		move := NewMoveToBall(fb.team, fb.id)
 		return move.GetAction(gi)
 	} else {
