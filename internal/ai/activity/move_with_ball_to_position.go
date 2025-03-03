@@ -51,7 +51,7 @@ func (m *MoveWithBallToPosition) GetAction(gi *info.GameInfo) action.Action {
 func (m *MoveWithBallToPosition) Achieved(gi *info.GameInfo) bool {
 	target_position := gi.State.GetBall().GetPosition()
 	curr_pos := gi.State.GetTeam(m.team)[m.id].GetPosition()
-	distance_left := CalculateDistance(curr_pos, target_position)
+	distance_left := curr_pos.Distance(target_position)
 	const distance_threshold = 10
 	const angle_threshold = 0.1
 	distance_achieved := distance_left <= distance_threshold

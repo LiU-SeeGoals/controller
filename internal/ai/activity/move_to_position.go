@@ -32,7 +32,7 @@ func (m *MoveToPosition) GetAction(gi *info.GameInfo) action.Action {
 	robot := gi.State.GetTeam(m.team)[m.id]
 	act.Pos = robot.GetPosition()
 
-	act.Dest = m.Juggernaut(robot, m.target_position, gi.State)
+	act.Dest = m.AvoidCollision(robot, m.target_position, gi.State)
 
 	act.Dribble = false
 	fmt.Println("MoveToPosition: ", m.target_position)

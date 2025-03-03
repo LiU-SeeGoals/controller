@@ -11,10 +11,10 @@ import (
 type MovementComposition struct{}
 
 const ( // AvoidCollision constants
-	detectionRadius = float32(1000.0) // How close is "too close" to another robot (mm)
-	baseDamping     = float32(50.0)     // baseline damping
-	brakeDampingMax = float32(1000.0)    // max damping when very close
-	wGyroMax        = float32(0.0) // max gyroscopic gain
+	detectionRadius = float32(500.0) // How close is "too close" to another robot (mm)
+	baseDamping     = float32(10.0)     // baseline damping
+	brakeDampingMax = float32(100.0)    // max damping when very close
+	wGyroMax        = float32(1300.0) // max gyroscopic gain
 	stepClamp       = float32(2000.0) // maximum allowed step (mm)
 )
 
@@ -28,28 +28,28 @@ const ( // Juggernaut constants
 	detectionRadJuggernaut = float32(500.0) // detection radius for obstacles (mm)
 )
 
-// Dont care about obstacles being in the way, 
-// just slows down do avoid penalties.
-func (mc *MovementComposition) Juggernaut(robot *info.Robot, goal info.Position, gs *info.GameState) info.Position {
-	// Current state
-	obstacles := getObstacles(gs, robot)
-
-	slowDown := false
-	for _, obs := range obstacles {
-		dist := robot.GetPosition().Distance(obs)
-		if dist < detectionRadJuggernaut {
-			slowDown = true
-			break
-		}
-	}
-
-	if slowDown {
-		pos := goal.Sub(robot.GetPosition()).Normalize().Scale(300)
-		return pos
-	}
-
-	return goal
-}
+// // Dont care about obstacles being in the way, 
+// // just slows down do avoid penalties.
+// func (mc *MovementComposition) Juggernaut(robot *info.Robot, goal info.Position, gs *info.GameState) info.Position {
+// 	// Current state
+// 	obstacles := getObstacles(gs, robot)
+//
+// 	slowDown := false
+// 	for _, obs := range obstacles {
+// 		dist := robot.GetPosition().Distance(obs)
+// 		if dist < detectionRadJuggernaut {
+// 			slowDown = true
+// 			break
+// 		}
+// 	}
+//
+// 	if slowDown {
+// 		pos := goal.Sub(robot.GetPosition()).Normalize().Scale(300)
+// 		return pos
+// 	}
+//
+// 	return goal
+// }
 
 
 // SimpleAvoid: Just a force pulling the robot toward a goal,
@@ -130,6 +130,7 @@ func getObstacles(gs *info.GameState, robot *info.Robot) []info.Position {
 // AvoidCollision computes a single-step “waypoint” that points the robot
 // in the direction of the sum of potential, gyroscopic, and damping/braking forces.
 // Good for moving in a swarm with friendly robots.
+// Collision avoidance for multiple agent systems - Proceedings of the IEEE Conference on Decision and Control 
 func (mc *MovementComposition) AvoidCollision(robot *info.Robot, goal info.Position, gs *info.GameState) info.Position {
 	// Current position and velocity
 	robotPos := robot.GetPosition()
