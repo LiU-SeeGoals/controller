@@ -26,11 +26,18 @@ Now the main program have been started.
 
 ### Logging
 
-This project uses the [zap logger](https://pkg.go.dev/go.uber.org/zap). The logger is configured in the `logging` package, which is also the package you need to import to log something. The logger is used throughout the project and should be used for all logging, pushing a print to stdout will be punished by the gods. 
-
-The logs are written to a file in the root called log, you can view this file by running:
+ATTENTION: If you cant view the logs because of permission issues, its because docker created them as root. You can fix this by running:
 ```
-tail -f log
+sudo chown -R $USER logs
+```
+
+This project uses the [zap logger](https://pkg.go.dev/go.uber.org/zap). The logger is configured in the `logging` package, which is also the package you need to import to log something. The logger is used throughout the project and should be used for all logging.
+
+The logs are written to files in project_root/logs called readable.log and structured.log. The readable.log file is a human readable log file and the structured.log file is a structured log file. The structured log file is used for log analysis and can be used to create dashboards etc. The readable log file is used for debugging and should be used when you want to see the logs in a human readable format. The log files are automatically rotated when they reach a certain size.
+
+you can view this file by running:
+```
+tail -f logs/readable.log
 ```
 
 If you want to view a specific log level you can run:
@@ -41,6 +48,11 @@ tail -f log | grep INFO
 if you want to view two or more log levels you can run:
 ```
 tail -f log | grep -E 'INFO|ERROR'
+```
+
+Or if you want to view everything related to a specific robot you can run:
+```
+tail -f log | grep 'Robot 1'
 ```
 
 To log something you can use the logger like this:
@@ -58,6 +70,9 @@ func main() {
     Logger.Warn("Hello world")
 }
 ```
+
+
+
 
 ## Project Structure
 
