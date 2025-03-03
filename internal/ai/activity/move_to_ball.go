@@ -28,12 +28,6 @@ func NewMoveToBall(team info.Team, id info.ID) *MoveToBall {
 
 func (m *MoveToBall) GetAction(gi *info.GameInfo) action.Action {
 	target_position := gi.State.GetBall().GetPosition()
-	// act := action.MoveTo{}
-	// act.Id = int(m.id)
-	// act.Team = m.team
-	// act.Pos = gi.State.GetTeam(m.team)[m.id].GetPosition()
-	// act.Dest = target_position
-	// act.Dribble = false
 	move := NewMoveToPosition(m.team, m.id, target_position)
 	return move.GetAction(gi)
 }

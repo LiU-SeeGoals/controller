@@ -6,11 +6,13 @@ import (
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/info"
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 )
 
 type MoveWithBallToPosition struct {
 	GenericComposition
 	target_position info.Position
+	possession      bool
 }
 
 func (m *MoveWithBallToPosition) String() string {
@@ -27,6 +29,11 @@ func NewMoveWithBallToPosition(team info.Team, id info.ID, dest info.Position) *
 	}
 }
 
+// TODO: Assumes that ones the robot has been in possession of the ball,
+// it will keep it. It also doesnt support being initially in possession,
+// for it to do that we need to estimate which robot has possession of the ball.
+// But this might be enough to start work with other activities which depends
+// on ball manipulation.
 func (fb *MoveWithBallToPosition) GetAction(gi *info.GameInfo) action.Action {
 
 	myTeam := gi.State.GetTeam(fb.team)
@@ -37,22 +44,49 @@ func (fb *MoveWithBallToPosition) GetAction(gi *info.GameInfo) action.Action {
 
 	robotPos := robot.GetPosition()
 	ballPos, _ := gi.State.GetBall().GetPositionTime()
-	dx := float64(robotPos.X - ballPos.X)
-	dy := float64(robotPos.Y - ballPos.Y)
-	distance := math.Sqrt(math.Pow(dx, 2) + math.Pow(dy, 2))
+	// timeSinceUpdate := time.Now().UnixMilli() - updated
 
-	act := action.MoveTo{}
-	act.Id = int(robot.GetID())
-	act.Team = fb.team
-	act.Pos = robot.GetPosition()
-	act.Dribble = true
-	act.Dest = fb.target_position
+	// Check if ball position is upToDate
+	// it might be old if the ball is
+	// covered by the robot
+	// upToDate := true
+	// Logger.Debug("MoveWithBallToPosition: Time since update: %d", timeSinceUpdate)
+	// if timeSinceUpdate > 0 {
+	// 	upToDate = false
+	// }
 
-	// Reduce distance when its possible to estimte invisible ball
-	if distance > 1500 {
-		act.Dest = ballPos
-	} else {
-		act.Dest = fb.target_position
+	distance := robotPos.Distance(ballPos)
+
+	// If ball is far away and we are sure of
+	// its position, move to it
+	if distance > 100 && !fb.possession {
+		Logger.Debug("MoveWithBallToPosition: Ball is far away")
+
+		move := NewMoveToBall(fb.team, fb.id)
+		return move.GetAction(gi)
+
+	// If ball is close and we are not facing it
+	// move to face it
+	} else if !robot.FacingPosition(ballPos, 0.1) && !fb.possession {
+		Logger.Debug("MoveWithBallToPosition: Ball is close and not facing it")
+
+		dest := robotPos
+		dest.Angle = robotPos.AngleToPosition(ballPos)
+		move := NewMoveToPosition(fb.team, fb.id, dest)
+		return move.GetAction(gi)
+
+	}
+
+	Logger.Debug("MoveWithBallToPosition: Moving with ball to position")
+	// Passed all checks, is in possession
+	// move with ball to target position
+	fb.possession = true
+	act := action.MoveTo{
+		Id:      int(fb.id),
+		Team:    fb.team,
+		Pos:     robotPos,
+		Dest:    fb.target_position,
+		Dribble: true,
 	}
 	return &act
 }

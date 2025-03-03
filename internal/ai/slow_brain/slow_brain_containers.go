@@ -1,7 +1,6 @@
 package ai
 
 import (
-	"fmt"
 	"sync"
 	"time"
 
@@ -48,19 +47,9 @@ func (m *SlowBrainContainer) run() {
 		ai.NewMoveToPosition(m.team, 0, info.Position{X: 0, Y: 0, Z: 0, Angle: 0}),
 	}
 
-
-	for {
-		// No need for slow brain to be fast
-		time.Sleep(100 * time.Millisecond)
-
-
-		if len(*m.activities) == 0 {
-			fmt.Println("Adding activity")
-			// loop := ai.NewActivityLoop(0, activityList)
-			// m.AddActivity(loop)
-			queue := ai.NewActivityQueue(0, activityList)
-			m.AddActivity(queue)
-		}
-	}
+	queue := ai.NewActivityQueue(0, activityList)
+	m.AddActivity(queue)
+	// loop := ai.NewActivityLoop(0, activityList)
+	// m.AddActivity(loop)
 
 }

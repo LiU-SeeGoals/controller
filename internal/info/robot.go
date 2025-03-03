@@ -3,7 +3,7 @@ package info
 import (
 	"container/list"
 	"fmt"
-	
+	"math"
 )
 
 type Team int8
@@ -85,6 +85,21 @@ func (r *Robot) GetPosition() Position {
 	return pos
 }
 
+func (r *Robot) FacingPosition(pos Position, threshold float64) bool {
+
+	dx := pos.X - r.GetPosition().X
+	dy := pos.Y - r.GetPosition().Y
+
+	targetDirection := float32(math.Atan2(float64(dy), float64(dx)))
+	currentDirection := r.GetPosition().Angle
+	
+	angleDiff := math.Abs(float64(targetDirection - currentDirection))
+	if angleDiff < threshold {
+		return true
+	} else {
+		return false
+	}
+}
 func (r *Robot) GetVelocity() Position {
 	if r.history.Len() < 2 {
 		return Position{0, 0, 0, 0}

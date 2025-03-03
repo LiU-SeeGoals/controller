@@ -75,7 +75,7 @@ func (fb *FastBrainGO) Run() {
 				fb.activity_lock.Unlock()
 			} else {
 				// Otherwise, get an action
-				Logger.Info(fmt.Sprintf("Activity %v running", activitiesCopy[i]))
+				Logger.Info(fmt.Sprintf("Activity: %v running", activitiesCopy[i]))
 				actions = append(actions, activitiesCopy[i].GetAction(&gameInfo))
 			}
 		}
