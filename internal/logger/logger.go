@@ -4,7 +4,6 @@ import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"gopkg.in/natefinch/lumberjack.v2"
-	"os"
 )
 
 var (
@@ -44,10 +43,10 @@ func init() {
 	// Set up cores for logging
 	jsonCore := zapcore.NewCore(jsonEncoder, jsonLogFile, zapcore.DebugLevel) // JSON logs
 	humanCore := zapcore.NewCore(humanEncoder, humanLogFile, zapcore.DebugLevel) // Readable logs
-	consoleCore := zapcore.NewCore(humanEncoder, zapcore.AddSync(os.Stdout), zapcore.DebugLevel) // Console logs
+	// consoleCore := zapcore.NewCore(humanEncoder, zapcore.AddSync(os.Stdout), zapcore.DebugLevel) // Console logs
 
 	// Combine all cores
-	logCore := zapcore.NewTee(jsonCore, humanCore, consoleCore)
+	logCore := zapcore.NewTee(jsonCore, humanCore)//, consoleCore)
 
 	// Create the logger
 	logger := zap.New(logCore, zap.AddCaller(), zap.AddStacktrace(zapcore.ErrorLevel))
