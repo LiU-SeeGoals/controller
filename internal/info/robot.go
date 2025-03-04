@@ -27,12 +27,16 @@ func (t Team) String() string {
 	}
 }
 
-type RobotPos struct {
+type rawRobotPos struct {
 	pos  Position
 	time int64
 }
 
 type Robot struct {
+	rawRobot
+}
+
+type rawRobot struct {
 	active          bool
 	id              ID
 	team            Team
@@ -42,21 +46,23 @@ type Robot struct {
 
 func NewRobot(id ID, team Team, history_capasity int) *Robot {
 	return &Robot{
-		active:          false,
-		id:              id,
-		team:            team,
-		history:         list.New(),
-		historyCapacity: history_capasity,
+		rawRobot: rawRobot{
+			active:          false,
+			id:              id,
+			team:            team,
+			history:         list.New(),
+			historyCapacity: history_capasity,
+		},
 	}
 }
 
-func (r *Robot) SetPositionTime(x, y, angle float32, time int64) {
+func (r *rawRobot) SetPositionTime(x, y, angle float32, time int64) {
 	r.active = true
 	if r.history.Len() >= r.historyCapacity {
 		element := r.history.Back()
 		r.history.Remove(element)
 
-		robot := element.Value.(*RobotPos)
+		robot := element.Value.(*rawRobotPos)
 
 		robot.pos.X = x
 		robot.pos.Y = y
@@ -66,17 +72,22 @@ func (r *Robot) SetPositionTime(x, y, angle float32, time int64) {
 		r.history.PushFront(robot)
 	} else {
 		pos := Position{x, y, 0, angle}
-		r.history.PushFront(&RobotPos{pos, time})
+		r.history.PushFront(&rawRobotPos{pos, time})
 	}
 }
 
+<<<<<<< HEAD
 func (r *Robot) GetPositionTime() (Position, int64, error) {
+=======
+func (r *rawRobot) GetPositionTime() (Position, int64) {
+>>>>>>> 4eb4ea5 (embeded rawRobot and rawBall in Robot and Ball)
 	if r.history.Len() == 0 {
 		return Position{}, 0, fmt.Errorf("No position in history for robot %d %s", r.id, r.team.String())
 		// panic("No position in history for robot " + fmt.Sprint(r.id) + " " + r.team.String())
 	}
 
 	element := r.history.Front()
+<<<<<<< HEAD
 	robot := element.Value.(*RobotPos)
 	return robot.pos, robot.time, nil
 }
@@ -84,9 +95,18 @@ func (r *Robot) GetPositionTime() (Position, int64, error) {
 func (r *Robot) GetPosition() (Position, error) {
 	pos, _, err := r.GetPositionTime()
 	return pos, err
+=======
+	robot := element.Value.(*rawRobotPos)
+	return robot.pos, robot.time
 }
 
-func (r *Robot) FacingPosition(pos Position, threshold float64) bool {
+func (r *rawRobot) GetPosition() Position {
+	pos, _ := r.GetPositionTime()
+	return pos
+>>>>>>> 4eb4ea5 (embeded rawRobot and rawBall in Robot and Ball)
+}
+
+func (r *rawRobot) FacingPosition(pos Position, threshold float64) bool {
 
 	robotPos, err := r.GetPosition()
 	if err != nil {
@@ -97,8 +117,13 @@ func (r *Robot) FacingPosition(pos Position, threshold float64) bool {
 	dy := pos.Y - robotPos.Y
 
 	targetDirection := float32(math.Atan2(float64(dy), float64(dx)))
+<<<<<<< HEAD
 	currentDirection := robotPos.Angle
 	
+=======
+	currentDirection := r.GetPosition().Angle
+
+>>>>>>> 4eb4ea5 (embeded rawRobot and rawBall in Robot and Ball)
 	angleDiff := math.Abs(float64(targetDirection - currentDirection))
 	if angleDiff < threshold {
 		return true
@@ -112,12 +137,12 @@ func (r *Robot) GetVelocity() Position {
 	}
 
 	element := r.history.Front()
-	robot := element.Value.(*RobotPos)
+	robot := element.Value.(*rawRobotPos)
 
 	sum_deltas := Position{}
 
 	for e := r.history.Front().Next(); e != nil; e = e.Next() {
-		robot2 := e.Value.(*RobotPos)
+		robot2 := e.Value.(*rawRobotPos)
 		dPos := robot2.pos.Sub(&robot.pos)
 		dt := float32(robot2.time - robot.time)
 		// TODO: lets add exponential decay so that the most recent deltas have more weight
@@ -135,9 +160,9 @@ func (r *Robot) GetAcceleration() float32 {
 	accelerations := float32(0)
 	for f, s, t := r.history.Front(), r.history.Front().Next(), r.history.Front().Next().Next(); t != nil; f, s, t = f.Next(), s.Next(), t.Next() {
 
-		robot1 := f.Value.(*RobotPos)
-		robot2 := s.Value.(*RobotPos)
-		robot3 := t.Value.(*RobotPos)
+		robot1 := f.Value.(*rawRobotPos)
+		robot2 := s.Value.(*rawRobotPos)
+		robot3 := t.Value.(*rawRobotPos)
 
 		vel1 := robot2.pos.Sub(&robot1.pos)
 		vel2 := robot3.pos.Sub(&robot2.pos)
@@ -154,11 +179,11 @@ func (r *Robot) GetAcceleration() float32 {
 	return accelerations / float32(r.history.Len()-1)
 }
 
-func (r *Robot) SetActive(active bool) {
+func (r *rawRobot) SetActive(active bool) {
 	r.active = active
 }
 
-func (r *Robot) IsActive() bool {
+func (r *rawRobot) IsActive() bool {
 	return r.active
 }
 
@@ -197,7 +222,7 @@ func (r *Robot) ToDTO() RobotDTO {
 	}
 }
 
-func (r *Robot) GetID() ID {
+func (r *rawRobot) GetID() ID {
 	return r.id
 }
 
