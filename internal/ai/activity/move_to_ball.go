@@ -58,4 +58,10 @@ func (m *MoveToBall) Achieved(gi *info.GameInfo) bool {
 	distance_achieved := distance_left <= distance_threshold
 	angle_diff := math.Abs(float64(curr_pos.Angle - target_position.Angle))
 	angle_achieved := angle_diff <= angle_threshold
-	return distance_achieved && angle_achieved}
+	return distance_achieved && angle_achieved
+}
+
+func (m *MoveToBall) GetID() info.ID {
+	return m.id
+}
+

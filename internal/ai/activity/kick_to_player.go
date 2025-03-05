@@ -111,3 +111,8 @@ func (k *KickToPlayer) Achieved(gi *info.GameInfo) bool {
 	ballRecived := distance <= distance_threshold
 	return ballRecived
 }
+
+func (k *KickToPlayer) GetID() info.ID {
+	return k.id
+}
+

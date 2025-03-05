@@ -35,3 +35,8 @@ func (l *ActivityLoop) GetAction(gi *info.GameInfo) action.Action {
 func (l *ActivityLoop) Achieved(gi *info.GameInfo) bool {
 	return false
 }
+
+func (l *ActivityLoop) GetID() info.ID {
+	return l.id
+}
+

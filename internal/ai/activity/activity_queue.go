@@ -35,3 +35,7 @@ func (q *ActivityQueue) GetAction(gi *info.GameInfo) action.Action {
 func (q *ActivityQueue) Achieved(gi *info.GameInfo) bool {
 	return q.current == len(q.activities) - 1 && q.activities[q.current].Achieved(gi)
 }
+
+func (q *ActivityQueue) GetID() info.ID {
+	return q.id
+}
