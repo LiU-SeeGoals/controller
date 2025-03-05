@@ -33,3 +33,8 @@ func (m *Stop) Achieved(gi *info.GameInfo) bool {
 	// Will never automically be achieved
 	return false
 }
+
+func (m *Stop) GetID() info.ID {
+	return m.id
+}
+

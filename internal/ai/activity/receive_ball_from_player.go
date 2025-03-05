@@ -107,3 +107,9 @@ func (fb *ReceiveBallFromPlayer) Achieved(gi *info.GameInfo) bool {
 	ballRecived := distance <= distance_threshold
 	return ballRecived
 }
+
+// get id
+func (fb *ReceiveBallFromPlayer) GetID() info.ID {
+	return fb.id
+}
+

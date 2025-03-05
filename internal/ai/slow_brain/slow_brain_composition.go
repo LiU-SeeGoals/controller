@@ -23,24 +23,25 @@ type SlowBrainComposition struct {
 	scale            float32
 	run_scenario     int // -1 for all
 	start            time.Time
-	activities       *[]ai.Activity // <-- pointer to the slice
+	activities       *[info.TEAM_SIZE]ai.Activity // <-- pointer to the slice
 	activity_lock    *sync.Mutex    // shared mutex for synchronization
 }
 
 func (m *SlowBrainComposition) ClearActivities() {
 	m.activity_lock.Lock()
 	defer m.activity_lock.Unlock()
-	*m.activities = []ai.Activity{}
+	*m.activities = [info.TEAM_SIZE]ai.Activity{}
 }
 
 func (m *SlowBrainComposition) AddActivity(activity ai.Activity) {
 	m.activity_lock.Lock()
 	defer m.activity_lock.Unlock()
-	*m.activities = append(*m.activities, activity)
+	idx := activity.GetID()
+	m.activities[idx] = activity
 }
 
-func (m *SlowBrainComposition) ReplaceActivities(activity []ai.Activity) {
+func (m *SlowBrainComposition) ReplaceActivities(activities [info.TEAM_SIZE]ai.Activity) {
 	m.activity_lock.Lock()
 	defer m.activity_lock.Unlock()
-	*m.activities = activity
+	m.activities = &activities
 }

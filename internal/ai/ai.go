@@ -10,12 +10,12 @@ import (
 )
 
 type SlowBrain interface {
-	Init(incoming <-chan info.GameInfo, activities *[]ai.Activity, lock *sync.Mutex, team info.Team)
+	Init(incoming <-chan info.GameInfo, activities *[info.TEAM_SIZE]ai.Activity, lock *sync.Mutex, team info.Team)
 }
 
 type FastBrain interface {
 	Init(incoming <-chan info.GameInfo,
-		activities *[]ai.Activity,
+		activities *[info.TEAM_SIZE]ai.Activity,
 		lock *sync.Mutex,
 		outgoing chan<- []action.Action,
 		team info.Team,
@@ -29,14 +29,14 @@ type Ai struct {
 	gameInfoSenderSB chan<- info.GameInfo
 	gameInfoSenderFB chan<- info.GameInfo
 	actionReceiver   chan []action.Action
-	activities       *[]ai.Activity // Shared slice of Activity
+	activities       *[info.TEAM_SIZE]ai.Activity // Shared slice of Activity
 	activity_lock    *sync.Mutex    // Shared mutex for synchronization
 }
 
 // Constructor for the AI
 func NewAi(team info.Team, slowBrain SlowBrain, fastBrain FastBrain) *Ai {
 	// Create a shared slice of Activity and a mutex
-	activities := &[]ai.Activity{}
+	activities := &[info.TEAM_SIZE]ai.Activity{}
 	lock := &sync.Mutex{}
 
 	gameInfoSenderSB, gameInfoReceiverSB := helper.NB_KeepLatestChan[info.GameInfo]()

@@ -18,6 +18,11 @@ func (l *ActivityLoop) String() string {
 }
 
 func NewActivityLoop(id info.ID, activities []Activity) *ActivityLoop {
+	for _, a := range activities {
+		if a.GetID() != id {
+			panic("ActivityLoop: Activity ID does not match")
+		}
+	}
 	return &ActivityLoop{
 		activities: activities,
 		current:    0,
@@ -35,3 +40,8 @@ func (l *ActivityLoop) GetAction(gi *info.GameInfo) action.Action {
 func (l *ActivityLoop) Achieved(gi *info.GameInfo) bool {
 	return false
 }
+
+func (l *ActivityLoop) GetID() info.ID {
+	return l.id
+}
+

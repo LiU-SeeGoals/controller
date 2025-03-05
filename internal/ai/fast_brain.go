@@ -6,17 +6,17 @@ import (
 
 	"time"
 
-	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	ai "github.com/LiU-SeeGoals/controller/internal/ai/activity"
 	"github.com/LiU-SeeGoals/controller/internal/info"
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 )
 
 type FastBrainGO struct {
 	team             info.Team
 	incomingGameInfo <-chan info.GameInfo
 	outgoingActions  chan<- []action.Action
-	activities       *[]ai.Activity // <-- pointer to a slice
+	activities       *[info.TEAM_SIZE]ai.Activity // <-- pointer to a slice
 	activity_lock    *sync.Mutex    // shared mutex for synchronization
 }
 
@@ -26,7 +26,7 @@ func NewFastBrainGO() *FastBrainGO {
 
 func (fb *FastBrainGO) Init(
 	incoming <-chan info.GameInfo,
-	activities *[]ai.Activity,
+	activities *[info.TEAM_SIZE]ai.Activity,
 	lock *sync.Mutex,
 	outgoing chan<- []action.Action,
 	team info.Team,
@@ -51,30 +51,23 @@ func (fb *FastBrainGO) Run() {
 
 		// Make a snapshot of current activities under lock
 		fb.activity_lock.Lock()
-		activitiesCopy := make([]ai.Activity, len(*fb.activities))
-		copy(activitiesCopy, *fb.activities)
+		var activitiesCopy [info.TEAM_SIZE]ai.Activity
+		copy(activitiesCopy[:], (*fb.activities)[:])
 		fb.activity_lock.Unlock()
 
 		var actions []action.Action
-		for i := range activitiesCopy {
-			// If done, remove it from the *shared* slice
-			// activity := activitiesCopy[i]
-			if activitiesCopy[i].Achieved(&gameInfo) {
+		var i info.ID
+		for i = 0; i < info.TEAM_SIZE; i++ { // Loop through all activities
+			if activitiesCopy[i] == nil { continue } // Skip nil activities
+
+			if activitiesCopy[i].Achieved(&gameInfo) { // If achieved, remove it
+
 				Logger.Info(fmt.Sprintf("Activity %v achieved", activitiesCopy[i]))
 				fb.activity_lock.Lock()
-				// find it in the real slice (not in the copy!)
-				for j, realAct := range *fb.activities {
-					if realAct == activitiesCopy[i] {
-						*fb.activities = append(
-							(*fb.activities)[:j],
-							(*fb.activities)[j+1:]...,
-						)
-						break
-					}
-				}
+				fb.activities[i] = nil
 				fb.activity_lock.Unlock()
-			} else {
-				// Otherwise, get an action
+			} else { // Otherwise, get an action
+
 				Logger.Info(fmt.Sprintf("Activity: %v running", activitiesCopy[i]))
 				actions = append(actions, activitiesCopy[i].GetAction(&gameInfo))
 			}
