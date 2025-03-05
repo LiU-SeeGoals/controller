@@ -4,16 +4,14 @@ import (
 	"fmt"
 	"math"
 
-	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/info"
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 )
 
 type KickToPlayer struct {
 	GenericComposition
 	// MovementComposition
-	team     info.Team
-	id       info.ID
 	other_id info.ID
 }
 
@@ -32,6 +30,7 @@ func NewKickToPlayer(team info.Team, id info.ID, other_id info.ID) *KickToPlayer
 }
 
 func (fb *KickToPlayer) GetAction(gi *info.GameInfo) action.Action {
+
 	myTeam := gi.State.GetTeam(fb.team)
 	robotKicker := myTeam[fb.id]
 	if !robotKicker.IsActive() {
@@ -46,7 +45,6 @@ func (fb *KickToPlayer) GetAction(gi *info.GameInfo) action.Action {
 		Logger.Errorf("Position retrieval failed - Kicker: %v, Receiver: %v\n", err1, err2)
 		return NewStop(fb.id).GetAction(gi)
 	}
-	
 
 	dx := float64(kickerPos.X - recieverPos.X)
 	dy := float64(kickerPos.Y - recieverPos.Y)
@@ -73,6 +71,8 @@ func (fb *KickToPlayer) GetAction(gi *info.GameInfo) action.Action {
 	if math.Abs(float64(kickerPos.Angle)-float64(targetAngle)) > 0.05 {
 		pos := info.Position{X: kickerPos.X, Y: kickerPos.Y, Z: kickerPos.Z, Angle: float32(targetAngle)}
 		move := NewMoveWithBallToPosition(fb.team, fb.id, pos)
+
+		//fmt.Println("rotate")
 		return move.GetAction(gi)
 	}
 
@@ -88,6 +88,7 @@ func (fb *KickToPlayer) GetAction(gi *info.GameInfo) action.Action {
 		normDistance := float64(distance) / 10816
 		kickSpeed := 1 + int(4*normDistance)
 		kickAct.KickSpeed = int(math.Min(math.Max(float64(kickSpeed), 1), 5))
+		//fmt.Println("kick")
 		return kickAct
 	}
 

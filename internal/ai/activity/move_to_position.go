@@ -5,8 +5,8 @@ import (
 	"math"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
-	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/info"
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 )
 
 type MoveToPosition struct {
@@ -14,7 +14,6 @@ type MoveToPosition struct {
 	// MovementComposition
 	target_position info.Position
 }
-
 
 func (m *MoveToPosition) String() string {
 	return fmt.Sprintf("(Robot %d, MoveToPosition(%v))", m.id, m.target_position)
@@ -36,7 +35,7 @@ func (m *MoveToPosition) GetAction(gi *info.GameInfo) action.Action {
 	act.Team = m.team
 	robot := gi.State.GetTeam(m.team)[m.id]
 	robotPos, err := robot.GetPosition()
-	fmt.Println("Robot Position: ", robotPos)
+	//fmt.Println("Robot Position: ", robotPos)
 
 	if err != nil {
 		Logger.Errorf("Position retrieval failed - Robot: %v\n", err)
@@ -45,7 +44,6 @@ func (m *MoveToPosition) GetAction(gi *info.GameInfo) action.Action {
 
 	act.Pos = robotPos
 	act.Dest = m.target_position
-
 
 	act.Dribble = false
 	return &act

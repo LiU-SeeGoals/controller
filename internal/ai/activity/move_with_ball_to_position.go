@@ -71,15 +71,15 @@ func (fb *MoveWithBallToPosition) GetAction(gi *info.GameInfo) action.Action {
 	// its position, move to it
 	if distance > 100 && !fb.possession {
 		Logger.Debug("MoveWithBallToPosition: Ball is far away")
-
+		fmt.Println("Move")
 		move := NewMoveToBall(fb.team, fb.id)
 		return move.GetAction(gi)
 
-	// If ball is close and we are not facing it
-	// move to face it
+		// If ball is close and we are not facing it
+		// move to face it
 	} else if !robot.FacingPosition(ballPos, 0.1) && !fb.possession {
 		Logger.Debug("MoveWithBallToPosition: Ball is close and not facing it")
-
+		fmt.Println("Rotate")
 		dest := robotPos
 		dest.Angle = robotPos.AngleToPosition(ballPos)
 		move := NewMoveToPosition(fb.team, fb.id, dest)
@@ -114,7 +114,7 @@ func (m *MoveWithBallToPosition) Achieved(gi *info.GameInfo) bool {
 		return false
 	}
 	distance_left := curr_pos.Distance(target_position)
-	const distance_threshold = 100
+	const distance_threshold = 90
 	const angle_threshold = 0.1
 	distance_achieved := distance_left <= distance_threshold
 	angle_diff := math.Abs(float64(curr_pos.Angle - target_position.Angle))

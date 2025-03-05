@@ -2,11 +2,10 @@ package ai
 
 import (
 	"fmt"
-	"math"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
-	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/info"
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 )
 
 type MoveToBall struct {
@@ -53,9 +52,8 @@ func (m *MoveToBall) Achieved(gi *info.GameInfo) bool {
 		return false
 	}
 	distance_left := curr_pos.Distance(target_position)
-	const distance_threshold = 200
-	const angle_threshold = 0.1
+	const distance_threshold = 100
 	distance_achieved := distance_left <= distance_threshold
-	angle_diff := math.Abs(float64(curr_pos.Angle - target_position.Angle))
-	angle_achieved := angle_diff <= angle_threshold
-	return distance_achieved && angle_achieved}
+
+	return distance_achieved
+}
