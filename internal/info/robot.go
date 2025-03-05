@@ -3,7 +3,6 @@ package info
 import (
 	"container/list"
 	"fmt"
-	"math"
 )
 
 type Team int8
@@ -27,21 +26,8 @@ func (t Team) String() string {
 	}
 }
 
-type rawRobotPos struct {
-	pos  Position
-	time int64
-}
-
 type Robot struct {
 	rawRobot
-}
-
-type rawRobot struct {
-	active          bool
-	id              ID
-	team            Team
-	history         *list.List
-	historyCapacity int
 }
 
 func NewRobot(id ID, team Team, history_capasity int) *Robot {
@@ -56,81 +42,6 @@ func NewRobot(id ID, team Team, history_capasity int) *Robot {
 	}
 }
 
-func (r *rawRobot) SetPositionTime(x, y, angle float32, time int64) {
-	r.active = true
-	if r.history.Len() >= r.historyCapacity {
-		element := r.history.Back()
-		r.history.Remove(element)
-
-		robot := element.Value.(*rawRobotPos)
-
-		robot.pos.X = x
-		robot.pos.Y = y
-		robot.pos.Angle = angle
-		robot.time = time
-
-		r.history.PushFront(robot)
-	} else {
-		pos := Position{x, y, 0, angle}
-		r.history.PushFront(&rawRobotPos{pos, time})
-	}
-}
-
-<<<<<<< HEAD
-func (r *Robot) GetPositionTime() (Position, int64, error) {
-=======
-func (r *rawRobot) GetPositionTime() (Position, int64) {
->>>>>>> 4eb4ea5 (embeded rawRobot and rawBall in Robot and Ball)
-	if r.history.Len() == 0 {
-		return Position{}, 0, fmt.Errorf("No position in history for robot %d %s", r.id, r.team.String())
-		// panic("No position in history for robot " + fmt.Sprint(r.id) + " " + r.team.String())
-	}
-
-	element := r.history.Front()
-<<<<<<< HEAD
-	robot := element.Value.(*RobotPos)
-	return robot.pos, robot.time, nil
-}
-
-func (r *Robot) GetPosition() (Position, error) {
-	pos, _, err := r.GetPositionTime()
-	return pos, err
-=======
-	robot := element.Value.(*rawRobotPos)
-	return robot.pos, robot.time
-}
-
-func (r *rawRobot) GetPosition() Position {
-	pos, _ := r.GetPositionTime()
-	return pos
->>>>>>> 4eb4ea5 (embeded rawRobot and rawBall in Robot and Ball)
-}
-
-func (r *rawRobot) FacingPosition(pos Position, threshold float64) bool {
-
-	robotPos, err := r.GetPosition()
-	if err != nil {
-		return false
-	}
-
-	dx := pos.X - robotPos.X
-	dy := pos.Y - robotPos.Y
-
-	targetDirection := float32(math.Atan2(float64(dy), float64(dx)))
-<<<<<<< HEAD
-	currentDirection := robotPos.Angle
-	
-=======
-	currentDirection := r.GetPosition().Angle
-
->>>>>>> 4eb4ea5 (embeded rawRobot and rawBall in Robot and Ball)
-	angleDiff := math.Abs(float64(targetDirection - currentDirection))
-	if angleDiff < threshold {
-		return true
-	} else {
-		return false
-	}
-}
 func (r *Robot) GetVelocity() Position {
 	if r.history.Len() < 2 {
 		return Position{0, 0, 0, 0}
@@ -179,14 +90,6 @@ func (r *Robot) GetAcceleration() float32 {
 	return accelerations / float32(r.history.Len()-1)
 }
 
-func (r *rawRobot) SetActive(active bool) {
-	r.active = active
-}
-
-func (r *rawRobot) IsActive() bool {
-	return r.active
-}
-
 func (r *Robot) String() string {
 
 	pos, err := r.GetPosition()
@@ -220,10 +123,6 @@ func (r *Robot) ToDTO() RobotDTO {
 		VelY:     vel.Y,
 		VelAngle: vel.Angle,
 	}
-}
-
-func (r *rawRobot) GetID() ID {
-	return r.id
 }
 
 type RobotDTO struct {
