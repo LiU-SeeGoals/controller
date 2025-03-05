@@ -38,7 +38,7 @@ func NewSlowBrain2(team info.Team) *SlowBrain2 {
 
 func (m *SlowBrain2) Init(
 	incoming <-chan info.GameInfo,
-	activities *[]ai.Activity,
+	activities *[info.TEAM_SIZE]ai.Activity,
 	lock *sync.Mutex,
 	team info.Team,
 ) {
@@ -58,28 +58,34 @@ func (m *SlowBrain2) run() {
 		{X: 1000, Y: 0, Z: 0, Angle: 0},
 	}
 	index := 0
+	fmt.Println("slow brain 2: starting")
 
 	for {
 		// No need for slow brain to be fast
 		time.Sleep(100 * time.Millisecond)
 
 		gameInfo := <-m.incomingGameInfo
+		fmt.Println("slow brain 2: ")
 
 		referee_activities := m.GetRefereeActivities(&gameInfo)
 		fmt.Println("referee action: ", gameInfo.Status.GetGameEvent().RefCommand)
-		if referee_activities != nil {
-			m.ReplaceActivities(referee_activities)
-			m.at_state = REFEREE
-			continue
+
+		for _, act := range referee_activities {
+			if act != nil { // Check for a non-nil activity
+				fmt.Println("adding referee activity")
+				m.ReplaceActivities(referee_activities)
+				m.at_state = REFEREE
+			}
 		}
 
 		// If we are EXITING the REFEREE state, we need to clear the activities
 		if m.at_state == REFEREE {
+			fmt.Println("clearing activities")
 			m.ClearActivities()
 			m.at_state = RUNNING
 		}
 
-		if len(*m.activities) == 0 {
+		if m.activities[0] == nil {
 			fmt.Println("done with action: ", m.team)
 			m.AddActivity(ai.NewMoveToPosition(m.team, 0, way_points[index]))
 			index = (index + 1) % len(way_points)

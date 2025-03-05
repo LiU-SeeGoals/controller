@@ -36,7 +36,6 @@ func (m *MoveToPosition) GetAction(gi *info.GameInfo) action.Action {
 	act.Team = m.team
 	robot := gi.State.GetTeam(m.team)[m.id]
 	robotPos, err := robot.GetPosition()
-	fmt.Println("Robot Position: ", robotPos)
 
 	if err != nil {
 		Logger.Errorf("Position retrieval failed - Robot: %v\n", err)
@@ -65,3 +64,12 @@ func (m *MoveToPosition) Achieved(gi *info.GameInfo) bool {
 	angle_achieved := angle_diff <= angle_threshold
 	return distance_achieved && angle_achieved
 }
+
+func (m *MoveToPosition) SetTargetPosition(dest info.Position) {
+	m.target_position = dest
+}
+
+func (m *MoveToPosition) GetID() info.ID {
+	return m.id
+}
+

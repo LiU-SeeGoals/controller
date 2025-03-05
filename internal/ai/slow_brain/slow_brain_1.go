@@ -26,7 +26,7 @@ func NewSlowBrain1(team info.Team) *SlowBrain1 {
 
 func (m *SlowBrain1) Init(
 	incoming <-chan info.GameInfo,
-	activities *[]ai.Activity,
+	activities *[info.TEAM_SIZE]ai.Activity,
 	lock *sync.Mutex,
 	team info.Team,
 ) {
@@ -54,8 +54,10 @@ func (m *SlowBrain1) run() {
 		time.Sleep(100 * time.Millisecond)
 
 		//fmt.Println("slow, number of activities:", len(*m.activities))
-		if len(*m.activities) == 0 {
+
+		if m.activities[2] == nil {
 			fmt.Println("done with action: ", m.team)
+			time.Sleep(10000 * time.Millisecond)
 			m.AddActivity(ai.NewMoveToPosition(m.team, 2, way_points[index]))
 			index = (index + 1) % len(way_points)
 		}

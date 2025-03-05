@@ -26,7 +26,7 @@ func NewTestGoalie(team info.Team) *TestGoalie {
 
 func (m *TestGoalie) Init(
 	incoming <-chan info.GameInfo,
-	activities *[]ai.Activity,
+	activities *[info.TEAM_SIZE]ai.Activity,
 	lock *sync.Mutex,
 	team info.Team,
 ) {
@@ -46,7 +46,7 @@ func (g *TestGoalie) run() {
 		time.Sleep(100 * time.Millisecond)
 
 		// If there is no activity we add a goalie
-		if len(*g.activities) == 0 {
+		if g.activities[2] == nil {
 			g.AddActivity(ai.NewGoalie(g.team, 2))
 		}
 	}

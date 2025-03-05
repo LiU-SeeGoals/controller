@@ -25,7 +25,7 @@ func NewSlowBrainContainer(team info.Team) *SlowBrainContainer {
 
 func (m *SlowBrainContainer) Init(
 	incoming <-chan info.GameInfo,
-	activities *[]ai.Activity,
+	activities *[info.TEAM_SIZE]ai.Activity,
 	lock *sync.Mutex,
 	team info.Team,
 ) {
@@ -41,15 +41,20 @@ func (m *SlowBrainContainer) Init(
 // This is the main loop of the AI in this slow brain
 func (m *SlowBrainContainer) run() {
 
-	activityList := []ai.Activity{
+	activityLoop := []ai.Activity{
 		ai.NewMoveToPosition(m.team, 0, info.Position{X: 2000, Y: 0, Z: 0, Angle: 0}),
 		ai.NewMoveToPosition(m.team, 0, info.Position{X: 0, Y: 2000, Z: 0, Angle: 0}),
 		ai.NewMoveToPosition(m.team, 0, info.Position{X: 0, Y: 0, Z: 0, Angle: 0}),
 	}
+	activityQueue := []ai.Activity{
+		ai.NewMoveToPosition(m.team, 0, info.Position{X: 0, Y: 2000, Z: 0, Angle: 0}),
+		ai.NewMoveToPosition(m.team, 0, info.Position{X: 0, Y: 0, Z: 0, Angle: 0}),
+		ai.NewMoveToPosition(m.team, 0, info.Position{X: 2000, Y: 0, Z: 0, Angle: 0}),
+	}
 
-	queue := ai.NewActivityQueue(0, activityList)
+	queue := ai.NewActivityQueue(0, activityQueue)
 	m.AddActivity(queue)
-	// loop := ai.NewActivityLoop(0, activityList)
-	// m.AddActivity(loop)
+	loop := ai.NewActivityLoop(1, activityLoop)
+	m.AddActivity(loop)
 
 }
