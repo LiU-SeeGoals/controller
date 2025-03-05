@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
@@ -37,13 +38,26 @@ func (g *Goalie) GetAction(gi *info.GameInfo) action.Action {
 
 	myTeam := gi.State.GetTeam(g.team)
 	robot := myTeam[g.id]
-	ballPos := gi.State.GetBall().GetPosition()
+	robotPos, err := robot.GetPosition()
+
+	if err != nil {
+		Logger.Errorf("Position retrieval failed - Robot: %v\n", err)
+		return NewStop(g.id).GetAction(gi)
+	}
+
+	ballPos, err := gi.State.GetBall().GetPosition()
+
+	if err != nil {
+		Logger.Errorf("Ball position retrieval failed - Ball: %v\n", err)
+		return NewStop(g.id).GetAction(gi)
+	}
+
 
 	// Prepare a MoveTo action for the goalie
 	act := action.MoveTo{
 		Id:   int(g.id),
 		Team: g.team,
-		Pos:  robot.GetPosition(), // current position
+		Pos:  robotPos, // current position
 	}
 
 	// 1) Attempt to find the "shooter" from the opposing team
@@ -53,7 +67,7 @@ func (g *Goalie) GetAction(gi *info.GameInfo) action.Action {
 	//    - If ballPos.X <= 4000 => track shooter's Y
 	//    - Else => move closer to the ball
 	if shooter != nil {
-		shooterPos := shooter.GetPosition()
+		shooterPos, _ := shooter.GetPosition()
 		if ballPos.X <= 4000 {
 			if shooterPos.Y <= 0 {
 				// Shooter is on the negative side (top in some coordinate systems)
@@ -116,10 +130,10 @@ func (g *Goalie) findShooter(gi *info.GameInfo, ballPos info.Position) *info.Rob
 
 	// Iterate over all robots in the enemy team
 	for _, enemyRobot := range enemyTeam {
-		if !enemyRobot.IsActive() {
+		enemyPos, err := enemyRobot.GetPosition()
+		if err != nil {
 			continue
 		}
-		enemyPos := enemyRobot.GetPosition()
 		dist := enemyPos.Distance(ballPos)
 		if dist <= shooterThreshold {
 			// Found a robot close enough to be considered "shooter"

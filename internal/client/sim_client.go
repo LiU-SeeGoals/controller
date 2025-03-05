@@ -75,7 +75,7 @@ func (client *SimClient) SendActions(actions []action.Action) {
 	// Ex. We send moveTo, then this action will be submitted all the time until
 	//     another action (Ex. Kick) is sent
 	if client.gameState == nil {
-		// fmt.Println("Please provide gamestate in the sim_client constructor")
+		fmt.Println("Please provide gamestate in the sim_client constructor")
 		Logger.Panic("Please provide gamestate in the sim_client constructor")
 	}
 	client.actionListMutex.Lock()
@@ -120,7 +120,12 @@ func (client *SimClient) sendActionThread() {
 		// Make sure all the MoveTo actions is updated with current data
 		for i, act := range client.savedActions {
 			if a, ok := act.(*action.MoveTo); ok {
-				a.Pos = client.gameState.GetTeam(a.Team)[a.Id].GetPosition()
+				pos, err := client.gameState.GetTeam(a.Team)[a.Id].GetPosition()
+				if err != nil {
+					Logger.Errorf("Position retrieval failed - Robot: %v\n", err)
+					continue
+				}
+				a.Pos = pos
 				client.savedActions[i] = a
 			}
 		}

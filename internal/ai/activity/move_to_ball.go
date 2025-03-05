@@ -5,6 +5,7 @@ import (
 	"math"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
@@ -27,14 +28,30 @@ func NewMoveToBall(team info.Team, id info.ID) *MoveToBall {
 }
 
 func (m *MoveToBall) GetAction(gi *info.GameInfo) action.Action {
-	target_position := gi.State.GetBall().GetPosition()
+	target_position, err := gi.State.GetBall().GetPosition()
+
+	if err != nil {
+		Logger.Errorf("Position retrieval failed - Ball: %v\n", err)
+		return NewStop(m.id).GetAction(gi)
+	}
+
 	move := NewMoveToPosition(m.team, m.id, target_position)
 	return move.GetAction(gi)
 }
 
 func (m *MoveToBall) Achieved(gi *info.GameInfo) bool {
-	target_position := gi.State.GetBall().GetPosition()
-	curr_pos := gi.State.GetTeam(m.team)[m.id].GetPosition()
+	target_position, err := gi.State.GetBall().GetPosition()
+
+	if err != nil {
+		Logger.Errorf("Position retrieval failed - Ball: %v\n", err)
+		return false
+	}
+
+	curr_pos, err := gi.State.GetTeam(m.team)[m.id].GetPosition()
+	if err != nil {
+		Logger.Errorf("Position retrieval failed - Robot: %v\n", err)
+		return false
+	}
 	distance_left := curr_pos.Distance(target_position)
 	const distance_threshold = 200
 	const angle_threshold = 0.1

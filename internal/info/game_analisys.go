@@ -124,7 +124,8 @@ func updateTeam(gameStateTeam *RobotTeam, teamAnalysis *TeamAnalysis) {
 		if robot.IsActive() {
 			rAn.active = true
 			rAn.id = robot.GetID()
-			rAn.position = robot.GetPosition()
+			robotPos, _ := robot.GetPosition()
+			rAn.position = robotPos
 			rAn.velocity = robot.GetVelocity()
 
 			if speed := calMoveSpeed(robot); speed > rAn.maxMoveSpeed {
@@ -147,7 +148,8 @@ func updateTeam(gameStateTeam *RobotTeam, teamAnalysis *TeamAnalysis) {
 }
 
 func updateBall(gameStateBall *Ball, ballAnalysis *BallAnalysis) {
-	ballAnalysis.position = gameStateBall.GetPosition()
+	ballPos, _ := gameStateBall.GetPosition()
+	ballAnalysis.position = ballPos
 	ballAnalysis.velocity = gameStateBall.GetVelocity()
 }
 

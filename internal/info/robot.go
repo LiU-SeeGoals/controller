@@ -70,28 +70,34 @@ func (r *Robot) SetPositionTime(x, y, angle float32, time int64) {
 	}
 }
 
-func (r *Robot) GetPositionTime() (Position, int64) {
+func (r *Robot) GetPositionTime() (Position, int64, error) {
 	if r.history.Len() == 0 {
+		return Position{}, 0, fmt.Errorf("No position in history for robot %d %s", r.id, r.team.String())
 		// panic("No position in history for robot " + fmt.Sprint(r.id) + " " + r.team.String())
 	}
 
 	element := r.history.Front()
 	robot := element.Value.(*RobotPos)
-	return robot.pos, robot.time
+	return robot.pos, robot.time, nil
 }
 
-func (r *Robot) GetPosition() Position {
-	pos, _ := r.GetPositionTime()
-	return pos
+func (r *Robot) GetPosition() (Position, error) {
+	pos, _, err := r.GetPositionTime()
+	return pos, err
 }
 
 func (r *Robot) FacingPosition(pos Position, threshold float64) bool {
 
-	dx := pos.X - r.GetPosition().X
-	dy := pos.Y - r.GetPosition().Y
+	robotPos, err := r.GetPosition()
+	if err != nil {
+		return false
+	}
+
+	dx := pos.X - robotPos.X
+	dy := pos.Y - robotPos.Y
 
 	targetDirection := float32(math.Atan2(float64(dy), float64(dx)))
-	currentDirection := r.GetPosition().Angle
+	currentDirection := robotPos.Angle
 	
 	angleDiff := math.Abs(float64(targetDirection - currentDirection))
 	if angleDiff < threshold {
@@ -158,7 +164,12 @@ func (r *Robot) IsActive() bool {
 
 func (r *Robot) String() string {
 
-	pos := r.GetPosition()
+	pos, err := r.GetPosition()
+
+	if err != nil {
+		return ""
+	}
+
 	vel := r.GetVelocity()
 
 	posString := fmt.Sprintf("(%f, %f, %f)", pos.X, pos.Y, pos.Angle)
@@ -171,7 +182,7 @@ func (r *Robot) ToDTO() RobotDTO {
 	if !r.active {
 		return RobotDTO{}
 	}
-	pos := r.GetPosition()
+	pos, _ := r.GetPosition()
 	vel := r.GetVelocity()
 
 	return RobotDTO{

@@ -42,8 +42,18 @@ func (fb *MoveWithBallToPosition) GetAction(gi *info.GameInfo) action.Action {
 		return nil
 	}
 
-	robotPos := robot.GetPosition()
-	ballPos, _ := gi.State.GetBall().GetPositionTime()
+	robotPos, err1 := robot.GetPosition()
+
+	if err1 != nil {
+		Logger.Errorf("Position retrieval failed - Robot: %v\n", err1)
+		return NewStop(fb.id).GetAction(gi)
+	}
+
+	ballPos, _, err := gi.State.GetBall().GetPositionTime()
+	if err != nil {
+		Logger.Errorf("Position retrieval failed - Ball: %v\n", err)
+		return NewStop(fb.id).GetAction(gi)
+	}
 	// timeSinceUpdate := time.Now().UnixMilli() - updated
 
 	// Check if ball position is upToDate
@@ -92,8 +102,17 @@ func (fb *MoveWithBallToPosition) GetAction(gi *info.GameInfo) action.Action {
 }
 
 func (m *MoveWithBallToPosition) Achieved(gi *info.GameInfo) bool {
-	target_position := gi.State.GetBall().GetPosition()
-	curr_pos := gi.State.GetTeam(m.team)[m.id].GetPosition()
+	target_position, err := gi.State.GetBall().GetPosition()
+	if err != nil {
+		Logger.Errorf("Position retrieval failed - Ball: %v\n", err)
+		return false
+	}
+
+	curr_pos, err := gi.State.GetTeam(m.team)[m.id].GetPosition()
+	if err != nil {
+		Logger.Errorf("Position retrieval failed - Robot: %v\n", err)
+		return false
+	}
 	distance_left := curr_pos.Distance(target_position)
 	const distance_threshold = 100
 	const angle_threshold = 0.1

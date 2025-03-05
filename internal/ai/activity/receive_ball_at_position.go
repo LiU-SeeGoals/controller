@@ -5,6 +5,7 @@ import (
 	"math"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
@@ -37,9 +38,18 @@ func (rbap *ReceiveBallAtPosition) GetAction(gi *info.GameInfo) action.Action {
 		return nil
 	}
 
-	robotPos := robot.GetPosition()
+	robotPos, err1 := robot.GetPosition()
+	
+	if err1 != nil {
+		Logger.Errorf("Position retrieval failed - Robot: %v\n", err1)
+		return NewStop(rbap.id).GetAction(gi)
+	}
 
-	ballPos, _ := gi.State.GetBall().GetPositionTime()
+	ballPos, _, err := gi.State.GetBall().GetPositionTime()
+	if err != nil {
+		Logger.Errorf("Position retrieval failed - Ball: %v\n", err)
+		return NewStop(rbap.id).GetAction(gi)
+	}
 
 	dx := float64(robotPos.X - ballPos.X)
 	dy := float64(robotPos.Y - ballPos.Y)

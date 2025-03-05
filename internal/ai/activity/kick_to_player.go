@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math"
 
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/info"
 )
@@ -38,8 +39,14 @@ func (fb *KickToPlayer) GetAction(gi *info.GameInfo) action.Action {
 	}
 	robotReciever := myTeam[fb.other_id]
 
-	kickerPos := robotKicker.GetPosition()
-	recieverPos := robotReciever.GetPosition()
+	kickerPos, err1 := robotKicker.GetPosition()
+	recieverPos, err2 := robotReciever.GetPosition()
+
+	if err1 != nil || err2 != nil {
+		Logger.Errorf("Position retrieval failed - Kicker: %v, Receiver: %v\n", err1, err2)
+		return NewStop(fb.id).GetAction(gi)
+	}
+	
 
 	dx := float64(kickerPos.X - recieverPos.X)
 	dy := float64(kickerPos.Y - recieverPos.Y)
@@ -53,7 +60,11 @@ func (fb *KickToPlayer) GetAction(gi *info.GameInfo) action.Action {
 		targetAngle = -targetAngle
 	}
 
-	ballPos, _ := gi.State.GetBall().GetPositionTime()
+	ballPos, _, err := gi.State.GetBall().GetPositionTime()
+	if err != nil {
+		Logger.Errorf("Position retrieval failed - Ball: %v\n", err)
+		return NewStop(fb.id).GetAction(gi)
+	}
 	dxBall := float64(kickerPos.X - ballPos.X)
 	dyBall := float64(kickerPos.Y - ballPos.Y)
 	distanceBall := math.Sqrt(math.Pow(dxBall, 2) + math.Pow(dyBall, 2))
@@ -85,8 +96,16 @@ func (fb *KickToPlayer) GetAction(gi *info.GameInfo) action.Action {
 }
 
 func (k *KickToPlayer) Achieved(gi *info.GameInfo) bool {
-	ballPos, _ := gi.State.GetBall().GetPositionTime()
-	receiverPos := gi.State.GetTeam(k.team)[k.other_id].GetPosition()
+	ballPos, _, err := gi.State.GetBall().GetPositionTime()
+	if err != nil {
+		Logger.Errorf("Position retrieval failed - Ball: %v\n", err)
+		return false
+	}
+	receiverPos, err := gi.State.GetTeam(k.team)[k.other_id].GetPosition()
+	if err != nil {
+		Logger.Errorf("Position retrieval failed - Receiver: %v\n", err)
+		return false
+	}
 	distance := ballPos.Distance(receiverPos)
 	const distance_threshold = 10
 	ballRecived := distance <= distance_threshold

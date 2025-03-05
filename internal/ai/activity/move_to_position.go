@@ -5,6 +5,7 @@ import (
 	"math"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
@@ -34,15 +35,28 @@ func (m *MoveToPosition) GetAction(gi *info.GameInfo) action.Action {
 	act.Id = int(m.id)
 	act.Team = m.team
 	robot := gi.State.GetTeam(m.team)[m.id]
-	act.Pos = robot.GetPosition()
+	robotPos, err := robot.GetPosition()
+	fmt.Println("Robot Position: ", robotPos)
+
+	if err != nil {
+		Logger.Errorf("Position retrieval failed - Robot: %v\n", err)
+		return NewStop(m.id).GetAction(gi)
+	}
+
+	act.Pos = robotPos
 	act.Dest = m.target_position
+
 
 	act.Dribble = false
 	return &act
 }
 
 func (m *MoveToPosition) Achieved(gi *info.GameInfo) bool {
-	curr_pos := gi.State.GetTeam(m.team)[m.id].GetPosition()
+	curr_pos, err := gi.State.GetTeam(m.team)[m.id].GetPosition()
+	if err != nil {
+		Logger.Errorf("Position retrieval failed - Robot: %v\n", err)
+		return false
+	}
 	distance_left := curr_pos.Distance(m.target_position)
 	const distance_threshold = 10
 	const angle_threshold = 0.1

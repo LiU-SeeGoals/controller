@@ -2,6 +2,7 @@ package info
 
 import (
 	"container/list"
+	"errors"
 )
 
 type BallPos struct {
@@ -40,18 +41,18 @@ func (b *Ball) SetPositionTime(x, y, z float32, time int64) {
 	}
 }
 
-func (b *Ball) GetPositionTime() (Position, int64) {
+func (b *Ball) GetPositionTime() (Position, int64, error) {
 	if b.history.Len() == 0 {
-		panic("No position in history for ball")
+		return Position{}, 0, errors.New("No position in history for ball")
 	}
 	ball := b.history.Front().Value.(*BallPos)
 
-	return ball.pos, ball.time
+	return ball.pos, ball.time, nil
 }
 
-func (b *Ball) GetPosition() Position {
-	pos, _ := b.GetPositionTime()
-	return pos
+func (b *Ball) GetPosition() (Position, error) {
+	pos, _, err := b.GetPositionTime()
+	return pos, err
 }
 
 func (b *Ball) GetVelocity() Position {
@@ -77,7 +78,7 @@ func (b *Ball) GetVelocity() Position {
 }
 
 func (b *Ball) ToDTO() BallDTO {
-	pos := b.GetPosition()
+	pos, _ := b.GetPosition()
 	vel := b.GetVelocity()
 	return BallDTO{
 		PosX: pos.X,
