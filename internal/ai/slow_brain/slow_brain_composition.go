@@ -4,6 +4,7 @@ import (
 	"sync"
 	"time"
 
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	ai "github.com/LiU-SeeGoals/controller/internal/ai/activity"
 	"github.com/LiU-SeeGoals/controller/internal/info"
 )
@@ -20,27 +21,29 @@ const (
 type SlowBrainComposition struct {
 	team             info.Team
 	incomingGameInfo <-chan info.GameInfo
-	scale            float32
+	scale            float64
 	run_scenario     int // -1 for all
 	start            time.Time
-	activities       *[]ai.Activity // <-- pointer to the slice
+	activities       *[info.TEAM_SIZE]ai.Activity // <-- pointer to the slice
 	activity_lock    *sync.Mutex    // shared mutex for synchronization
 }
 
 func (m *SlowBrainComposition) ClearActivities() {
 	m.activity_lock.Lock()
 	defer m.activity_lock.Unlock()
-	*m.activities = []ai.Activity{}
+	*m.activities = [info.TEAM_SIZE]ai.Activity{}
 }
 
 func (m *SlowBrainComposition) AddActivity(activity ai.Activity) {
 	m.activity_lock.Lock()
 	defer m.activity_lock.Unlock()
-	*m.activities = append(*m.activities, activity)
+	idx := activity.GetID()
+	Logger.Infof("Adding activity %v", activity)
+	m.activities[idx] = activity
 }
 
-func (m *SlowBrainComposition) ReplaceActivities(activity []ai.Activity) {
+func (m *SlowBrainComposition) ReplaceActivities(activities [info.TEAM_SIZE]ai.Activity) {
 	m.activity_lock.Lock()
 	defer m.activity_lock.Unlock()
-	*m.activities = activity
+	m.activities = &activities
 }

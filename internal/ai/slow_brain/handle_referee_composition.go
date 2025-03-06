@@ -18,7 +18,7 @@ func NewHandleReferee(team info.Team) *HandleReferee {
 
 // Link to rules:
 // https://robocup-ssl.github.io/ssl-rules/sslrules.html#_referee_commands
-func (m *HandleReferee) GetRefereeActivities(gi *info.GameInfo) []ai.Activity {
+func (m *HandleReferee) GetRefereeActivities(gi *info.GameInfo) [info.TEAM_SIZE]ai.Activity {
 	switch gi.Status.GetGameEvent().RefCommand {
 	case info.HALT:
 		// When the halt command is issued, no robot is allowed to move or manipulate the ball.
@@ -65,16 +65,17 @@ func (m *HandleReferee) GetRefereeActivities(gi *info.GameInfo) []ai.Activity {
 	case info.BALL_PLACEMENT_BLUE:
 		// Implement BALL_PLACEMENT_BLUE logic
 		return m.createStopActivities(gi)
-	default:
-		return nil
+	default: 
+		var activities [info.TEAM_SIZE]ai.Activity
+		return activities
 	}
 }
 
-func (m *HandleReferee) createStopActivities(gi *info.GameInfo) []ai.Activity {
-	var activities []ai.Activity
-	team := gi.State.GetTeam(m.team)
-	for id := range team {
-		activities = append(activities, ai.NewStop(info.ID(id)))
+func (m *HandleReferee) createStopActivities(gi *info.GameInfo) [info.TEAM_SIZE]ai.Activity {
+	var activities [info.TEAM_SIZE]ai.Activity
+	var id info.ID
+	for id = 0; id < info.TEAM_SIZE; id++ {
+		activities[id] = ai.NewStop(id)
 	}
 	return activities
 }

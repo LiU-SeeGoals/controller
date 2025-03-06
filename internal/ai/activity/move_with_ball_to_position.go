@@ -121,3 +121,12 @@ func (m *MoveWithBallToPosition) Achieved(gi *info.GameInfo) bool {
 	angle_achieved := angle_diff <= angle_threshold
 	return distance_achieved && angle_achieved
 }
+
+func (m *MoveWithBallToPosition) SetTargetPosition(dest info.Position) {
+	m.target_position = dest
+}
+  
+func (m *MoveWithBallToPosition) GetID() info.ID {
+	return m.id
+}
+

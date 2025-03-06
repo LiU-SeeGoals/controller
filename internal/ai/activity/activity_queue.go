@@ -8,9 +8,9 @@ import (
 )
 
 type ActivityQueue struct {
+	GenericComposition
 	activities []Activity
 	current    int
-	id        info.ID
 }
 
 func (q *ActivityQueue) String() string {
@@ -18,7 +18,15 @@ func (q *ActivityQueue) String() string {
 }
 
 func NewActivityQueue(id info.ID, activities []Activity) *ActivityQueue {
+	for _, a := range activities {
+		if a.GetID() != id {
+			panic("ActivityLoop: Activity ID does not match")
+		}
+	}
 	return &ActivityQueue{
+		GenericComposition: GenericComposition{
+			id: id,
+		},
 		activities: activities,
 		current:    0,
 	}
@@ -34,4 +42,8 @@ func (q *ActivityQueue) GetAction(gi *info.GameInfo) action.Action {
 
 func (q *ActivityQueue) Achieved(gi *info.GameInfo) bool {
 	return q.current == len(q.activities) - 1 && q.activities[q.current].Achieved(gi)
+}
+
+func (q *ActivityQueue) GetID() info.ID {
+	return q.id
 }

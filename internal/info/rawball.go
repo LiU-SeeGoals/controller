@@ -16,7 +16,7 @@ type rawBall struct {
 }
 
 
-func (b *rawBall) SetPositionTime(x, y, z float32, time int64) {
+func (b *rawBall) SetPositionTime(x, y, z float64, time int64) {
 	if b.history.Len() >= b.historyCapacity {
 		element := b.history.Back()
 		b.history.Remove(element)

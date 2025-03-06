@@ -17,7 +17,7 @@ type rawRobot struct {
 	historyCapacity int
 }
 
-func (r *rawRobot) SetPositionTime(x, y, angle float32, time int64) {
+func (r *rawRobot) SetPositionTime(x, y, angle float64, time int64) {
 	r.active = true
 	if r.history.Len() >= r.historyCapacity {
 		element := r.history.Back()

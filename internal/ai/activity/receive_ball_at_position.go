@@ -80,3 +80,8 @@ func (rbap *ReceiveBallAtPosition) Achieved(gs *info.GameInfo) bool {
 	// Need to be implemented
 	return rbap.dribble_to_ball
 }
+
+func (rbap *ReceiveBallAtPosition) SetTargetPosition(dest info.Position) {
+	rbap.target_position = dest
+}
+ 

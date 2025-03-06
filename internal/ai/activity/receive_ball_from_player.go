@@ -82,7 +82,7 @@ func (fb *ReceiveBallFromPlayer) GetAction(gi *info.GameInfo) action.Action {
 		targetAngle += math.Pi
 	}
 
-	pos := info.Position{X: receiverPos.X, Y: receiverPos.Y, Z: receiverPos.Z, Angle: float32(targetAngle)}
+	pos := info.Position{X: receiverPos.X, Y: receiverPos.Y, Z: receiverPos.Z, Angle: float64(targetAngle)}
 	move := NewMoveWithBallToPosition(fb.team, fb.id, pos)
 	return move.GetAction(gi)//.MoveWithBallToPosition(pos, gi)
 
@@ -107,3 +107,9 @@ func (fb *ReceiveBallFromPlayer) Achieved(gi *info.GameInfo) bool {
 	ballRecived := distance <= distance_threshold
 	return ballRecived
 }
+
+// get id
+func (fb *ReceiveBallFromPlayer) GetID() info.ID {
+	return fb.id
+}
+

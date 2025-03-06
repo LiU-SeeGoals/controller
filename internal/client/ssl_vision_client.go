@@ -90,9 +90,9 @@ func unpack(packet *ssl_vision.SSL_WrapperPacket, gi *info.GameInfo, play_time i
 	gi.State.SetMessageReceivedTime(play_time)
 
 	for _, robot := range detect.GetRobotsBlue() {
-		x := robot.GetX()
-		y := robot.GetY()
-		angle := robot.GetOrientation()
+		x := float64(robot.GetX())
+		y := float64(robot.GetY())
+		angle := float64(robot.GetOrientation())
 		//fmt.Println("Robot", robot.GetRobotId(), "x:", x, "y:", y, "angle:", angle)
 
 		gi.State.SetBlueRobot(robot.GetRobotId(), x, y, angle, play_time)
@@ -100,18 +100,18 @@ func unpack(packet *ssl_vision.SSL_WrapperPacket, gi *info.GameInfo, play_time i
 
 	for _, robot := range detect.GetRobotsYellow() {
 		//fmt.Println("Robot", robot.GetRobotId(), "x:", robot.GetX(), "y:", robot.GetY(), "angle:", robot.GetOrientation())
-		x := robot.GetX()
-		y := robot.GetY()
-		angle := robot.GetOrientation()
+		x := float64(robot.GetX())
+		y := float64(robot.GetY())
+		angle := float64(robot.GetOrientation())
 		gi.State.SetYellowRobot(robot.GetRobotId(), x, y, angle, play_time)
 
 	}
 
 	for _, ball := range detect.GetBalls() {
 		//fmt.Println("Ball", ball.GetX(), ball.GetY(), ball.GetZ())
-		x := ball.GetX()
-		y := ball.GetY()
-		z := ball.GetZ()
+		x := float64(ball.GetX())
+		y := float64(ball.GetY())
+		z := float64(ball.GetZ())
 
 		gi.State.SetBall(x, y, z, play_time)
 	}
@@ -129,10 +129,10 @@ func unpack(packet *ssl_vision.SSL_WrapperPacket, gi *info.GameInfo, play_time i
 		field.GetPenaltyAreaWidth(),
 	)
 	for _, line := range field.GetFieldLines() {
-		gi.Field.AddFieldLine(line.GetName(), line.GetP1().GetX(), line.GetP1().GetY(), line.GetP2().GetX(), line.GetP2().GetY(), line.GetThickness(), int(line.GetType()))
+		gi.Field.AddFieldLine(line.GetName(), float64(line.GetP1().GetX()), float64(line.GetP1().GetY()), float64(line.GetP2().GetX()), float64(line.GetP2().GetY()), float64(line.GetThickness()), int(line.GetType()))
 	}
 	for _, arc := range field.GetFieldArcs() {
-		gi.Field.AddFieldArc(arc.GetName(), arc.GetCenter().GetX(), arc.GetCenter().GetY(), arc.GetRadius(), arc.GetA1(), arc.GetA2(), arc.GetThickness(), int(arc.GetType()))
+		gi.Field.AddFieldArc(arc.GetName(), float64(arc.GetCenter().GetX()), float64(arc.GetCenter().GetY()), float64(arc.GetRadius()), float64(arc.GetA1()), float64(arc.GetA2()), float64(arc.GetThickness()), int(arc.GetType()))
 	}
 
 }

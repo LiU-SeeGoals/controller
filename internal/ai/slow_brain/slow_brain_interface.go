@@ -10,7 +10,7 @@ import (
 type SlowBrain interface {
 	run()
 	Init(incoming <-chan info.GameInfo,
-		activities *[]ai.Activity,
+		activities *[info.TEAM_SIZE]ai.Activity,
 		lock *sync.Mutex,
 		team info.Team) bool
 }

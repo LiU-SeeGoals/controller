@@ -143,3 +143,7 @@ func (g *Goalie) findShooter(gi *info.GameInfo, ballPos info.Position) *info.Rob
 	// No enemy robot is close enough
 	return nil
 }
+
+func (g *Goalie) GetID() info.ID {
+	return g.id
+}

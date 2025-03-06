@@ -1,14 +1,14 @@
 package info
 
 type Zone struct {
-	Scores []float32
-	Score  float32
+	Scores []float64
+	Score  float64
 }
 
 type RobotAnalysisTeam [TEAM_SIZE]*RobotAnalysis
 type TeamAnalysis struct {
 	Robots   RobotAnalysisTeam
-	ZoneSize float32
+	ZoneSize float64
 	Zones    [][]Zone
 }
 
@@ -18,10 +18,10 @@ type RobotAnalysis struct {
 	position         Position
 	destination      Position
 	velocity         Position
-	maxMoveSpeed     float32 // mm/s
-	maxRotationSpeed float32 // rad/s
-	acceleration     float32 // mm/s^2
-	deceleration     float32 // mm/s^2
+	maxMoveSpeed     float64 // mm/s
+	maxRotationSpeed float64 // rad/s
+	acceleration     float64 // mm/s^2
+	deceleration     float64 // mm/s^2
 }
 
 func (r *RobotAnalysis) IsActive() bool {
@@ -44,19 +44,19 @@ func (r *RobotAnalysis) GetVelocity() Position {
 	return r.velocity
 }
 
-func (r *RobotAnalysis) GetMaxMoveSpeed() float32 {
+func (r *RobotAnalysis) GetMaxMoveSpeed() float64 {
 	return r.maxMoveSpeed
 }
 
-func (r *RobotAnalysis) GetMaxRotationSpeed() float32 {
+func (r *RobotAnalysis) GetMaxRotationSpeed() float64 {
 	return r.maxRotationSpeed
 }
 
-func (r *RobotAnalysis) GetAcceleration() float32 {
+func (r *RobotAnalysis) GetAcceleration() float64 {
 	return r.acceleration
 }
 
-func (r *RobotAnalysis) GetDeceleration() float32 {
+func (r *RobotAnalysis) GetDeceleration() float64 {
 	return r.deceleration
 }
 
@@ -87,8 +87,8 @@ func (b *BallAnalysis) SetDestination(destination *Position) {
 }
 
 type FieldInfo struct {
-	Length float32
-	Width  float32
+	Length float64
+	Width  float64
 }
 
 type GameAnalysis struct {
@@ -99,22 +99,22 @@ type GameAnalysis struct {
 	FieldInfo FieldInfo
 }
 
-func calMoveSpeed(robot *Robot) float32 {
+func calMoveSpeed(robot *Robot) float64 {
 	velocity := robot.GetVelocity()
 	return velocity.Norm()
 }
 
-func calRotationSpeed(robot *Robot) float32 {
+func calRotationSpeed(robot *Robot) float64 {
 	velocity := robot.GetVelocity()
 	return velocity.Angle
 }
 
-func calAcceleration(robot *Robot) float32 {
+func calAcceleration(robot *Robot) float64 {
 	acceleration := robot.GetAcceleration()
 	return acceleration
 }
 
-func calDeceleration(robot *Robot) float32 {
+func calDeceleration(robot *Robot) float64 {
 	return -calAcceleration(robot)
 }
 
@@ -156,7 +156,7 @@ func updateBall(gameStateBall *Ball, ballAnalysis *BallAnalysis) {
 // TODO: Implement this function
 // func (an *GameAnalysis) updateBallDistances(gamestateObj *gameinfo.GameState) {
 // 	// Reset the distances
-// 	an.distancesToBall = []float32{}
+// 	an.distancesToBall = []float64{}
 
 // 	// Get the position of the ball
 // 	ball := gamestateObj.Ball.GetPosition()
@@ -168,14 +168,14 @@ func updateBall(gameStateBall *Ball, ballAnalysis *BallAnalysis) {
 // 		robotX := robot.GetPosition().AtVec(0)
 // 		robotY := robot.GetPosition().AtVec(1)
 
-// 		distance := float32(math.Sqrt(
+// 		distance := float64(math.Sqrt(
 // 			math.Pow(robotX - ballX, 2) +
 // 			math.Pow(robotY - ballY, 2)))
 // 		an.distancesToBall = append(an.distancesToBall, distance)
 // 	}
 // }
 
-func NewTeamAnalysis(fieldLength, fieldWidth, zoneSize float32) *TeamAnalysis {
+func NewTeamAnalysis(fieldLength, fieldWidth, zoneSize float64) *TeamAnalysis {
 	teamAnalysis := TeamAnalysis{}
 	teamAnalysis.Robots = [TEAM_SIZE]*RobotAnalysis{}
 	var i ID
@@ -196,7 +196,7 @@ func NewTeamAnalysis(fieldLength, fieldWidth, zoneSize float32) *TeamAnalysis {
 	return &teamAnalysis
 }
 
-func NewGameAnalysis(fieldLength, fieldWidth, zoneSize float32, team Team) *GameAnalysis {
+func NewGameAnalysis(fieldLength, fieldWidth, zoneSize float64, team Team) *GameAnalysis {
 	analysis := GameAnalysis{}
 	analysis.team = team
 	analysis.MyTeam = NewTeamAnalysis(fieldLength, fieldWidth, zoneSize)
@@ -211,22 +211,22 @@ func (analysis *GameAnalysis) UpdateState(gameState *GameState) {
 	updateBall(gameState.GetBall(), analysis.Ball)
 }
 
-func updateZone(team *TeamAnalysis, fieldInfo FieldInfo, zoneSize float32, scoringFunc func(x float32, y float32, robots RobotAnalysisTeam) float32) {
+func updateZone(team *TeamAnalysis, fieldInfo FieldInfo, zoneSize float64, scoringFunc func(x float64, y float64, robots RobotAnalysisTeam) float64) {
 	// Update the zones
 	for i := 0; i < len(team.Zones); i++ {
 		for j := 0; j < len(team.Zones[i]); j++ {
 			// middle of the playing field in 0,0 so the zone need to be adjusted to the correct position
-			x := float32(i)*zoneSize - fieldInfo.Length/2 + zoneSize/2
-			y := float32(j)*zoneSize - fieldInfo.Width/2 + zoneSize/2
+			x := float64(i)*zoneSize - fieldInfo.Length/2 + zoneSize/2
+			y := float64(j)*zoneSize - fieldInfo.Width/2 + zoneSize/2
 			team.Zones[i][j].Score = scoringFunc(x, y, team.Robots)
 		}
 	}
 }
 
-func (analysis *GameAnalysis) UpdateMyZones(scoringFunc func(x float32, y float32, robots RobotAnalysisTeam) float32) {
+func (analysis *GameAnalysis) UpdateMyZones(scoringFunc func(x float64, y float64, robots RobotAnalysisTeam) float64) {
 	updateZone(analysis.MyTeam, analysis.FieldInfo, analysis.MyTeam.ZoneSize, scoringFunc)
 }
 
-func (analysis *GameAnalysis) UpdateOtherZones(scoringFunc func(x float32, y float32, robots RobotAnalysisTeam) float32) {
+func (analysis *GameAnalysis) UpdateOtherZones(scoringFunc func(x float64, y float64, robots RobotAnalysisTeam) float64) {
 	updateZone(analysis.OtherTeam, analysis.FieldInfo, analysis.OtherTeam.ZoneSize, scoringFunc)
 }

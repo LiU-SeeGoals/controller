@@ -6,10 +6,10 @@ import (
 )
 
 type Position struct {
-	X     float32
-	Y     float32
-	Z     float32
-	Angle float32
+	X     float64
+	Y     float64
+	Z     float64
+	Angle float64
 }
 
 func (p *Position) FacingPosition(target Position, threshold float64) bool {
@@ -17,7 +17,7 @@ func (p *Position) FacingPosition(target Position, threshold float64) bool {
 	dx := target.X - p.X
 	dy := target.Y - p.Y
 
-	targetDirection := float32(math.Atan2(float64(dy), float64(dx)))
+	targetDirection := math.Atan2(float64(dy), float64(dx))
 	currentDirection := p.Angle
 
 	angleDiff := math.Abs(float64(targetDirection - currentDirection))
@@ -28,18 +28,23 @@ func (p *Position) FacingPosition(target Position, threshold float64) bool {
 	}
 }
 
-func (p Position) AngleToPosition(p2 Position) float32 {
+func (p Position) AngleToPosition(p2 Position) float64 {
 	dx := p2.X - p.X
 	dy := p2.Y - p.Y
-	return float32(math.Atan2(float64(dy), float64(dx)))
+	return float64(math.Atan2(float64(dy), float64(dx)))
+}
+
+func (p Position) AngleDistance(p2 Position) float64 {
+	diff := p.AngleToPosition(p2) - p.Angle
+	return math.Abs(math.Remainder(diff, 2*math.Pi))
 }
 
 //Disntance between two points
-func (p Position) Distance(p2 Position) float32 {
+func (p Position) Distance(p2 Position) float64 {
 	dx := p.X - p2.X
 	dy := p.Y - p2.Y
 	dz := p.Z - p2.Z
-	return float32(math.Sqrt(float64(dx*dx + dy*dy + dz*dz)))
+	return float64(math.Sqrt(float64(dx*dx + dy*dy + dz*dz)))
 }
 
 func (p Position) String() string {
@@ -64,15 +69,15 @@ func (p Position) Sub(other *Position) Position {
 	}
 }
 
-func (p Position) Dot(other Position) float32 {
+func (p Position) Dot(other Position) float64 {
 	return p.X*other.X + p.Y*other.Y + p.Z*other.Z
 }
 
-func (p Position) Norm() float32 {
-	return float32(math.Sqrt(float64(p.X*p.X + p.Y*p.Y + p.Z*p.Z)))
+func (p Position) Norm() float64 {
+	return float64(math.Sqrt(float64(p.X*p.X + p.Y*p.Y + p.Z*p.Z)))
 }
 
-func (p Position) Scale(scalar float32) Position {
+func (p Position) Scale(scalar float64) Position {
 	return Position{
 		X:     p.X * scalar,
 		Y:     p.Y * scalar,
