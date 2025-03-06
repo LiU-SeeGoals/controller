@@ -77,12 +77,12 @@ type GameField struct {
 	// Is never set!
 	// Ball radius in mm
 	// (float type to represent sub-mm precision)
-	BallRadius float32
+	BallRadius float64
 
 	// Is never set!
 	// Max allowed robot radius in mm
 	// (float type to represent sub-mm precision)
-	MaxRobotRadius float32
+	MaxRobotRadius float64
 }
 
 func NewGameField() *GameField {
@@ -98,17 +98,17 @@ func (gf *GameField) SetField(length, width, goalWidth, goalDepth, boundaryWidth
 	gf.PenaltyAreaWidth = penaltyWidth
 	gf.PenaltyAreaDepth = penaltyDepth
 }
-func (gf *GameField) AddFieldLine(name string, x1, y1, x2, y2, thickness float32, lineType int) {
+func (gf *GameField) AddFieldLine(name string, x1, y1, x2, y2, thickness float64, lineType int) {
 	gf.SetLine(name, x1, y1, x2, y2, thickness, FieldShape(lineType))
 }
 
-func (gf *GameField) AddFieldArc(name string, centerX, centerY, radius, angle1, angle2, thickness float32, shape int) {
+func (gf *GameField) AddFieldArc(name string, centerX, centerY, radius, angle1, angle2, thickness float64, shape int) {
 	gf.SetArc(name, centerX, centerY, radius, angle1, angle2, thickness, FieldShape(shape))
 }
 
 type Point struct {
-	X float32
-	Y float32
+	X float64
+	Y float64
 }
 
 // Holds line segment data
@@ -126,7 +126,7 @@ type LineSegment struct {
 	P2 Point
 
 	// Thickness of line segment
-	Thickness float32
+	Thickness float64
 
 	// Type of shape
 	ShapeType FieldShape
@@ -144,16 +144,16 @@ type CircularArc struct {
 	Center Point
 
 	// Radius of arc
-	Radius float32
+	Radius float64
 
 	// Start arngle in counter-clockwise order
-	A1 float32
+	A1 float64
 
 	// End angle in counter-clockwise order
-	A2 float32
+	A2 float64
 
 	// Thickness of arc
-	Thickness float32
+	Thickness float64
 
 	// Type of shape
 	ShapeType FieldShape
@@ -162,18 +162,18 @@ type CircularArc struct {
 // Add a new line segment to Field object
 func (f *GameField) SetLine(
 	name string,
-	p1x float32,
-	p1y float32,
-	p2x float32,
-	p2y float32,
-	thickness float32,
+	p1x float64,
+	p1y float64,
+	p2x float64,
+	p2y float64,
+	thickness float64,
 	shape FieldShape) {
 
 	line := LineSegment{
 		Name:      name,
 		P1:        Point{X: p1x, Y: p1y},
 		P2:        Point{X: p2x, Y: p2y},
-		Thickness: float32(thickness),
+		Thickness: float64(thickness),
 	}
 
 	f.FieldLines = append(f.FieldLines, line)
@@ -182,12 +182,12 @@ func (f *GameField) SetLine(
 // Adds a new arc to Field object
 func (f *GameField) SetArc(
 	name string,
-	centerX float32,
-	centerY float32,
-	radius float32,
-	angle1 float32,
-	angle2 float32,
-	thickness float32,
+	centerX float64,
+	centerY float64,
+	radius float64,
+	angle1 float64,
+	angle2 float64,
+	thickness float64,
 	shape FieldShape) {
 
 	arc := CircularArc{

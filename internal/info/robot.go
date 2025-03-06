@@ -50,7 +50,7 @@ func NewRobot(id ID, team Team, history_capasity int) *Robot {
 	}
 }
 
-func (r *Robot) SetPositionTime(x, y, angle float32, time int64) {
+func (r *Robot) SetPositionTime(x, y, angle float64, time int64) {
 	r.active = true
 	if r.history.Len() >= r.historyCapacity {
 		element := r.history.Back()
@@ -96,7 +96,7 @@ func (r *Robot) FacingPosition(pos Position, threshold float64) bool {
 	dx := pos.X - robotPos.X
 	dy := pos.Y - robotPos.Y
 
-	targetDirection := float32(math.Atan2(float64(dy), float64(dx)))
+	targetDirection := float64(math.Atan2(float64(dy), float64(dx)))
 	currentDirection := robotPos.Angle
 	
 	angleDiff := math.Abs(float64(targetDirection - currentDirection))
@@ -119,20 +119,20 @@ func (r *Robot) GetVelocity() Position {
 	for e := r.history.Front().Next(); e != nil; e = e.Next() {
 		robot2 := e.Value.(*RobotPos)
 		dPos := robot2.pos.Sub(&robot.pos)
-		dt := float32(robot2.time - robot.time)
+		dt := float64(robot2.time - robot.time)
 		// TODO: lets add exponential decay so that the most recent deltas have more weight
 		scaled := dPos.Scale(1 / dt)
 		sum_deltas = sum_deltas.Add(&scaled)
 	}
-	return sum_deltas.Scale(1 / float32(r.history.Len()-1))
+	return sum_deltas.Scale(1 / float64(r.history.Len()-1))
 }
 
-func (r *Robot) GetAcceleration() float32 {
+func (r *Robot) GetAcceleration() float64 {
 	if r.history.Len() < 3 {
-		return float32(0) // Not enough data points to calculate acceleration
+		return float64(0) // Not enough data points to calculate acceleration
 	}
 
-	accelerations := float32(0)
+	accelerations := float64(0)
 	for f, s, t := r.history.Front(), r.history.Front().Next(), r.history.Front().Next().Next(); t != nil; f, s, t = f.Next(), s.Next(), t.Next() {
 
 		robot1 := f.Value.(*RobotPos)
@@ -145,13 +145,13 @@ func (r *Robot) GetAcceleration() float32 {
 		dist1 := vel1.Norm()
 		dist2 := vel2.Norm()
 
-		dt := float32(robot3.time - robot1.time)
+		dt := float64(robot3.time - robot1.time)
 
 		accelerations += (dist2 - dist1) / dt
 
 	}
 
-	return accelerations / float32(r.history.Len()-1)
+	return accelerations / float64(r.history.Len()-1)
 }
 
 func (r *Robot) SetActive(active bool) {
@@ -204,10 +204,10 @@ func (r *Robot) GetID() ID {
 type RobotDTO struct {
 	Id       ID
 	Team     Team
-	X        float32
-	Y        float32
-	Angle    float32
-	VelX     float32
-	VelY     float32
-	VelAngle float32
+	X        float64
+	Y        float64
+	Angle    float64
+	VelX     float64
+	VelY     float64
+	VelAngle float64
 }

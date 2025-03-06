@@ -8,9 +8,9 @@ import (
 )
 
 type ActivityLoop struct {
+	GenericComposition
 	activities []Activity
 	current    int
-	id        info.ID
 }
 
 func (l *ActivityLoop) String() string {
@@ -24,6 +24,9 @@ func NewActivityLoop(id info.ID, activities []Activity) *ActivityLoop {
 		}
 	}
 	return &ActivityLoop{
+		GenericComposition: GenericComposition{
+			id: id,
+		},
 		activities: activities,
 		current:    0,
 	}

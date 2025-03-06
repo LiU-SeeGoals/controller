@@ -22,7 +22,7 @@ func NewBall(historyCapacity int) *Ball {
 	}
 }
 
-func (b *Ball) SetPositionTime(x, y, z float32, time int64) {
+func (b *Ball) SetPositionTime(x, y, z float64, time int64) {
 	if b.history.Len() >= b.historyCapacity {
 		element := b.history.Back()
 		b.history.Remove(element)
@@ -69,11 +69,11 @@ func (b *Ball) GetVelocity() Position {
 	for e := b.history.Front().Next(); e != nil; e = e.Next() {
 		ball2 := e.Value.(*BallPos)
 		dPos := ball2.pos.Sub(&ball.pos)
-		dt := float32(ball2.time - ball.time)
+		dt := float64(ball2.time - ball.time)
 		scaled := dPos.Scale(1 / dt)
 		sum_deltas = sum_deltas.Add(&scaled)
 	}
-	return sum_deltas.Scale(1 / float32(b.history.Len()-1))
+	return sum_deltas.Scale(1 / float64(b.history.Len()-1))
 
 }
 
@@ -91,10 +91,10 @@ func (b *Ball) ToDTO() BallDTO {
 }
 
 type BallDTO struct {
-	PosX float32
-	PosY float32
-	PosZ float32
-	VelX float32
-	VelY float32
-	VelZ float32
+	PosX float64
+	PosY float64
+	PosZ float64
+	VelX float64
+	VelY float64
+	VelZ float64
 }

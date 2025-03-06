@@ -35,22 +35,22 @@ func (sb *SlowBrainGO) Init(incoming <-chan info.GameState, outgoing chan<- info
 	myTimeAdvantage := height_map.NewTimeAdvantage(destFunc)
 	otherTimeAdvantage := height_map.NewTimeAdvantage(posFunc)
 
-	myAccumulatedFunc := func(x float32, y float32, robots info.RobotAnalysisTeam) float32 {
+	myAccumulatedFunc := func(x float64, y float64, robots info.RobotAnalysisTeam) float64 {
 		scoreFuncs := []height_map.HeightMap{
 			myTimeAdvantage.CalculateTimeAdvantage,
 		}
-		accumulated := float32(0)
+		accumulated := float64(0)
 		for _, scoreFunc := range scoreFuncs {
 			accumulated += scoreFunc(x, y, robots)
 		}
 		return accumulated
 	}
 
-	otherAccumulatedFunc := func(x float32, y float32, robots info.RobotAnalysisTeam) float32 {
+	otherAccumulatedFunc := func(x float64, y float64, robots info.RobotAnalysisTeam) float64 {
 		scoreFuncs := []height_map.HeightMap{
 			otherTimeAdvantage.CalculateTimeAdvantage,
 		}
-		accumulated := float32(0)
+		accumulated := float64(0)
 		for _, scoreFunc := range scoreFuncs {
 			accumulated += scoreFunc(x, y, robots)
 		}

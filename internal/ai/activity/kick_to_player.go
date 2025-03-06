@@ -71,7 +71,7 @@ func (fb *KickToPlayer) GetAction(gi *info.GameInfo) action.Action {
 
 	// Rotate to target
 	if math.Abs(float64(kickerPos.Angle)-float64(targetAngle)) > 0.05 {
-		pos := info.Position{X: kickerPos.X, Y: kickerPos.Y, Z: kickerPos.Z, Angle: float32(targetAngle)}
+		pos := info.Position{X: kickerPos.X, Y: kickerPos.Y, Z: kickerPos.Z, Angle: float64(targetAngle)}
 		move := NewMoveWithBallToPosition(fb.team, fb.id, pos)
 		return move.GetAction(gi)
 	}

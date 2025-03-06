@@ -34,7 +34,7 @@ func (sb *SlowBrainPy) Init(incoming <-chan info.GameState, outgoing chan<- info
 type PyResponse struct {
 	Instructions []struct {
 		Id       int
-		Position []float32
+		Position []float64
 	}
 }
 

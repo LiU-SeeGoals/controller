@@ -52,17 +52,17 @@ func (gs *GameState) IsValid() bool {
 	return gs.Valid
 }
 
-func (gs *GameState) SetYellowRobot(robotId uint32, x, y, angle float32, time int64) {
+func (gs *GameState) SetYellowRobot(robotId uint32, x, y, angle float64, time int64) {
 	gs.Yellow_team[robotId].SetPositionTime(x, y, angle, time)
 
 }
 
-func (gs *GameState) SetBlueRobot(robotId uint32, x, y, angle float32, time int64) {
+func (gs *GameState) SetBlueRobot(robotId uint32, x, y, angle float64, time int64) {
 	gs.Blue_team[robotId].SetPositionTime(x, y, angle, time)
 }
 
 // Updates position of robots and balls to their actual position
-func (gs *GameState) SetBall(x, y, z float32, time int64) {
+func (gs *GameState) SetBall(x, y, z float64, time int64) {
 	gs.Ball.SetPositionTime(x, y, z, time)
 }
 

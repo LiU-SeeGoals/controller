@@ -6,15 +6,15 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
-type HeightMap func(x float32, y float32, robots info.RobotAnalysisTeam) float32
+type HeightMap func(x float64, y float64, robots info.RobotAnalysisTeam) float64
 
 type HeightMapGauss struct {
-	std float32
+	std float64
 }
 
-func (h HeightMapGauss) CalculateHeight(x float32, y float32, robots info.RobotAnalysisTeam) float32 {
+func (h HeightMapGauss) CalculateHeight(x float64, y float64, robots info.RobotAnalysisTeam) float64 {
 	// All enemy robots (blue team) create a positive Gaussian distribution
-	gaussHeight := float32(0)
+	gaussHeight := float64(0)
 
 	for _, robot := range robots {
 		if robot.IsActive() {
@@ -26,7 +26,7 @@ func (h HeightMapGauss) CalculateHeight(x float32, y float32, robots info.RobotA
 			distanceSq := distanceSquared(x, y, robotX, robotY)
 
 			// Gaussian with standard deviation 1000: adjust the denominator to 2 * stdDev^2
-			gaussianValue := float32(math.Exp(-float64(distanceSq) / float64(2*h.std*h.std)))
+			gaussianValue := float64(math.Exp(-float64(distanceSq) / float64(2*h.std*h.std)))
 
 			gaussHeight += gaussianValue
 		}
@@ -37,7 +37,7 @@ func (h HeightMapGauss) CalculateHeight(x float32, y float32, robots info.RobotA
 
 type HeightMapDonut struct{}
 
-func (h HeightMapGauss) HeightMapDonut(x float32, y float32, robots info.RobotAnalysisTeam) float32 {
+func (h HeightMapGauss) HeightMapDonut(x float64, y float64, robots info.RobotAnalysisTeam) float64 {
 	// Around the robot closest to the ball in our team (yellow),
 	// create a negative donut shaped distrobution at x distance
 	return 0.5
@@ -45,7 +45,7 @@ func (h HeightMapGauss) HeightMapDonut(x float32, y float32, robots info.RobotAn
 
 type HeightMapAwayFromEdge struct{}
 
-func (h HeightMapGauss) HeightMapAwayFromEdge(x float32, y float32, robots *info.RobotAnalysisTeam) float32 {
+func (h HeightMapGauss) HeightMapAwayFromEdge(x float64, y float64, robots *info.RobotAnalysisTeam) float64 {
 	// It is often not advantagues to be close to the corneds of the playing field,
 	// this creates incentive to not be close to corners.
 	// The playing field is (-3,-4.5) to (3,4.5) in dimentions
@@ -62,8 +62,8 @@ func NewTimeAdvantage(retrieveFunc func(r *info.RobotAnalysis) info.Position) *T
 	}
 }
 
-func (ta *TimeAdvantage) CalculateTimeAdvantage(x float32, y float32, robots info.RobotAnalysisTeam) float32 {
-	time := float32(math.MaxFloat32)
+func (ta *TimeAdvantage) CalculateTimeAdvantage(x float64, y float64, robots info.RobotAnalysisTeam) float64 {
+	time := float64(math.MaxFloat32)
 
 	for _, robot := range robots {
 		if !robot.IsActive() {
@@ -87,6 +87,6 @@ func (ta *TimeAdvantage) CalculateTimeAdvantage(x float32, y float32, robots inf
 //   		Helper functions							//
 //------------------------------------------------------//
 
-func distanceSquared(x1, y1, x2, y2 float32) float32 {
+func distanceSquared(x1, y1, x2, y2 float64) float64 {
 	return (x1-x2)*(x1-x2) + (y1-y2)*(y1-y2)
 }

@@ -8,9 +8,9 @@ import (
 )
 
 type ActivityQueue struct {
+	GenericComposition
 	activities []Activity
 	current    int
-	id        info.ID
 }
 
 func (q *ActivityQueue) String() string {
@@ -24,6 +24,9 @@ func NewActivityQueue(id info.ID, activities []Activity) *ActivityQueue {
 		}
 	}
 	return &ActivityQueue{
+		GenericComposition: GenericComposition{
+			id: id,
+		},
 		activities: activities,
 		current:    0,
 	}

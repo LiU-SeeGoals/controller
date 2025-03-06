@@ -10,17 +10,17 @@ import (
 
 type FindBestScore struct {
 	team        info.Team
-	scoringFunc func(x float32, y float32, robots info.RobotAnalysisTeam) float32
-	alpha       float32
-	radius      float32
+	scoringFunc func(x float64, y float64, robots info.RobotAnalysisTeam) float64
+	alpha       float64
+	radius      float64
 	samples     int
 }
 
 func NewFindBestScore(
 	team info.Team,
-	scoringFunc func(x float32, y float32, robots info.RobotAnalysisTeam) float32,
-	alpha float32,
-	radius float32,
+	scoringFunc func(x float64, y float64, robots info.RobotAnalysisTeam) float64,
+	alpha float64,
+	radius float64,
 	samples int,
 ) *FindBestScore {
 	return &FindBestScore{
@@ -32,9 +32,9 @@ func NewFindBestScore(
 	}
 }
 
-func scoreHighest(an *info.GameAnalysis) float32 {
-	myScore := float32(0)
-	otherScore := float32(0)
+func scoreHighest(an *info.GameAnalysis) float64 {
+	myScore := float64(0)
+	otherScore := float64(0)
 
 	myTeam := an.MyTeam
 	otherTeam := an.OtherTeam
@@ -71,8 +71,8 @@ func (frbs *FindBestScore) FindBestScore(hightFunc height_map.HeightMap, robotTe
 			angle := 2 * math.Pi * float64(i) / float64(frbs.samples)
 
 			// Compute new sample position (xSample, ySample) with float64 precision
-			xSample := x + frbs.radius*float32(math.Cos(angle))
-			ySample := y + frbs.radius*float32(math.Sin(angle))
+			xSample := x + frbs.radius*float64(math.Cos(angle))
+			ySample := y + frbs.radius*float64(math.Sin(angle))
 
 			dest := robot.GetPosition()
 			dest.X = xSample

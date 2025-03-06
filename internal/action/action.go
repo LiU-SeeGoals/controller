@@ -125,11 +125,11 @@ func (s *Stop) TranslateSim() *simulation.RobotCommand {
 
 }
 
-func RotateToTarget(currentX, currentY, targetX, targetY, currentDirection float32) float32 {
+func RotateToTarget(currentX, currentY, targetX, targetY, currentDirection float64) float64 {
 	dx := targetX - currentX
 	dy := targetY - currentY
 
-	targetDirection := float32(math.Atan2(float64(dy), float64(dx)))
+	targetDirection := math.Atan2(float64(dy), float64(dx))
 
 	rotationNeeded := targetDirection - currentDirection
 
