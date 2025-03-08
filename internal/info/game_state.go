@@ -2,6 +2,8 @@ package info
 
 import (
 	"encoding/json"
+	"math"
+
 	. "github.com/LiU-SeeGoals/controller/internal/logger"
 )
 
@@ -17,31 +19,101 @@ type GameState struct {
 	MessageReceived int64
 }
 
-type GameStateDTO struct {
-	RobotPositions [2 * TEAM_SIZE]RobotDTO
-	BallPosition   BallDTO
-}
+// Constructor for game state
+func NewGameState(capacity int) *GameState {
+	gs := GameState{}
+	gs.Valid = true
 
-func (gs GameState) ToDTO() *GameStateDTO {
-	gameStateDTO := GameStateDTO{}
+	gs.Ball = NewBall(capacity)
 	var i ID
+	gs.Blue_team = new(RobotTeam)
+	gs.Yellow_team = new(RobotTeam)
 	for i = 0; i < TEAM_SIZE; i++ {
-		gameStateDTO.RobotPositions[i] = gs.GetRobot(i, Blue).ToDTO()
+		gs.Blue_team[i] = NewRobot(i, Blue, capacity)
+		gs.Yellow_team[i] = NewRobot(i, Yellow, capacity)
 	}
-	for i = 0; i < TEAM_SIZE; i++ {
-		gameStateDTO.RobotPositions[TEAM_SIZE+i] = gs.GetRobot(i, Yellow).ToDTO()
-	}
-	gameStateDTO.BallPosition = gs.Ball.ToDTO()
-	return &gameStateDTO
+	return &gs
 }
 
-func (gs GameState) ToJson() []byte {
-	gameStateJson, err := json.Marshal(gs.ToDTO())
-	if err != nil {
-		// fmt.Println("The gamestate packet could not be marshalled to JSON.")
-		Logger.Error("The gamestate packet could not be marshalled to JSON.")
+func (gs *GameState) ClosestRobot(target Position) (*Robot, float64) {
+	shortestDistance := math.Inf(1)
+	var closestRobot *Robot
+
+	for _, robot := range gs.Blue_team {
+		robotPos, err := robot.GetPosition()
+		if err != nil { continue }
+
+		distance := robotPos.Distance(target)
+		if distance < shortestDistance {
+			shortestDistance = distance
+			closestRobot = robot
+		}
 	}
-	return gameStateJson
+	for _, robot := range gs.Yellow_team {
+		robotPos, err := robot.GetPosition()
+		if err != nil { continue }
+
+		distance := robotPos.Distance(target)
+		if distance < shortestDistance {
+			shortestDistance = distance
+			closestRobot = robot
+		}
+	}
+
+	return closestRobot, shortestDistance
+}
+
+// Should be called directly after inserting 
+// new data, recieved from ssl vision, into 
+// the game state
+func (gs *GameState) Update() {
+
+	// Update robot estimates
+	// Has to be done before updating ball possessor
+	for _, robot := range gs.Blue_team {
+		if !robot.IsActive() { continue }
+		// robot.Update()
+	}
+	for _, robot := range gs.Yellow_team {
+		if !robot.IsActive() { continue }
+		// robot.Update()
+	}
+
+	// Update ball estimate and possessor
+	// Has to be done after updating robot estimates
+
+	// TODO: Estimate ball position with the tracker
+	// handles differently based on whether we have
+	// a new ball measurement or not
+
+	ballPos, err := gs.Ball.GetPosition()
+	if err == nil {
+
+		closestToBall, ballDistance := gs.ClosestRobot(ballPos)
+
+		var facingBall bool
+		if ballDistance > math.Inf(1) {
+			facingBall = false
+		} else {
+			facingBall = closestToBall.Facing(ballPos)
+		}
+
+		// TODO: Check matching velocities
+		if ballDistance < 95 && facingBall { // WARN: Magic number
+			gs.Ball.SetPossessor(closestToBall)
+			// TODO: Set estimated position of ball to
+			// the position of dribbler on the robot
+
+		} else {
+			gs.Ball.SetPossessor(nil)
+			// TODO: Set estimated position of ball to
+			// the position of the ball tracker
+		}
+	} else {
+		Logger.Error("Ball position retrieval failed")
+	}
+
+
 }
 
 func (gs *GameState) SetValid(valid bool) {
@@ -54,7 +126,6 @@ func (gs *GameState) IsValid() bool {
 
 func (gs *GameState) SetYellowRobot(robotId uint32, x, y, angle float64, time int64) {
 	gs.Yellow_team[robotId].SetPositionTime(x, y, angle, time)
-
 }
 
 func (gs *GameState) SetBlueRobot(robotId uint32, x, y, angle float64, time int64) {
@@ -110,23 +181,6 @@ func (gs *GameState) GetRobot(id ID, team Team) *Robot {
 	return gs.Yellow_team[id]
 }
 
-// Constructor for game state
-func NewGameState(capacity int) *GameState {
-	gs := GameState{}
-	gs.Valid = true
-
-	gs.Ball = NewBall(capacity)
-	var i ID
-	gs.Blue_team = new(RobotTeam)
-	gs.Yellow_team = new(RobotTeam)
-	for i = 0; i < TEAM_SIZE; i++ {
-		gs.Blue_team[i] = NewRobot(i, Blue, capacity)
-		gs.Yellow_team[i] = NewRobot(i, Yellow, capacity)
-	}
-	return &gs
-
-}
-
 // String representation of game state
 func (gs *GameState) String() string {
 	gs_str := "{\n blue team: {\n"
@@ -146,4 +200,31 @@ func (gs *GameState) String() string {
 	// }
 	gs_str += "}"
 	return gs_str
+}
+
+type GameStateDTO struct {
+	RobotPositions [2 * TEAM_SIZE]RobotDTO
+	BallPosition   BallDTO
+}
+
+func (gs GameState) ToDTO() *GameStateDTO {
+	gameStateDTO := GameStateDTO{}
+	var i ID
+	for i = 0; i < TEAM_SIZE; i++ {
+		gameStateDTO.RobotPositions[i] = gs.GetRobot(i, Blue).ToDTO()
+	}
+	for i = 0; i < TEAM_SIZE; i++ {
+		gameStateDTO.RobotPositions[TEAM_SIZE+i] = gs.GetRobot(i, Yellow).ToDTO()
+	}
+	gameStateDTO.BallPosition = gs.Ball.ToDTO()
+	return &gameStateDTO
+}
+
+func (gs GameState) ToJson() []byte {
+	gameStateJson, err := json.Marshal(gs.ToDTO())
+	if err != nil {
+		// fmt.Println("The gamestate packet could not be marshalled to JSON.")
+		Logger.Error("The gamestate packet could not be marshalled to JSON.")
+	}
+	return gameStateJson
 }

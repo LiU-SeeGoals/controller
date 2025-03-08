@@ -14,8 +14,8 @@ func init() {
 	// Log rotation for JSON logs (structured)
 	jsonLogFile := zapcore.AddSync(&lumberjack.Logger{
 		Filename:   "../logs/structured.log", // Structured logs in JSON format
-		MaxSize:    10,  // Max size in MB before rotation
-		MaxBackups: 5,   // Max number of old log files to keep
+		MaxSize:    100,  // Max size in MB before rotation
+		MaxBackups: 1,   // Max number of old log files to keep
 		MaxAge:     30,  // Max number of days to retain old logs
 		Compress:   false, // Compress old logs (gzip)
 	})
@@ -23,8 +23,8 @@ func init() {
 	// Log rotation for human-readable logs
 	humanLogFile := zapcore.AddSync(&lumberjack.Logger{
 		Filename:   "../logs/readable.log", // Readable logs for easy debugging
-		MaxSize:    10,
-		MaxBackups: 5,
+		MaxSize:    100,
+		MaxBackups: 1,
 		MaxAge:     30,
 		Compress:   false,
 	})

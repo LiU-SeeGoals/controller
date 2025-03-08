@@ -3,6 +3,9 @@ package info
 import (
 	"container/list"
 	"fmt"
+
+	// . "github.com/LiU-SeeGoals/controller/internal/logger"
+	"github.com/LiU-SeeGoals/controller/internal/tracker"
 )
 
 type Team int8
@@ -28,6 +31,7 @@ func (t Team) String() string {
 
 type Robot struct {
 	rawRobot
+	tracker tracker.RobotTracker
 }
 
 func NewRobot(id ID, team Team, history_capasity int) *Robot {
@@ -40,6 +44,14 @@ func NewRobot(id ID, team Team, history_capasity int) *Robot {
 			historyCapacity: history_capasity,
 		},
 	}
+}
+
+func (r *Robot) Facing(target Position) bool {
+	pos, err := r.GetPosition()
+	if err != nil {
+		return false
+	}
+	return pos.FacingPosition(target, 0.1) // WARN: Magic number
 }
 
 func (r *Robot) GetVelocity() Position {

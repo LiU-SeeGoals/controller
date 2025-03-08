@@ -31,14 +31,12 @@ func (p Position) AngleToPosition(p2 Position) float64 {
 	return float64(math.Atan2(float64(dy), float64(dx)))
 }
 
-// - pi - pi = -2pi
-
 func (p Position) AngleDistance(p2 Position) float64 {
 	diff := p.Angle - p2.Angle
 	return math.Abs(math.Remainder(diff, 2*math.Pi))
 }
 
-//Disntance between two points
+// Disntance between two points
 func (p Position) Distance(p2 Position) float64 {
 	dx := p.X - p2.X
 	dy := p.Y - p2.Y

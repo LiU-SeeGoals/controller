@@ -2,20 +2,33 @@ package info
 
 import (
 	"container/list"
+	"github.com/LiU-SeeGoals/controller/internal/tracker"
 )
 
 type Ball struct {
 	rawBall
-	possessingRobot *Robot
+	possessor *Robot
+	tracker	 *tracker.BallTracker
 }
 
 func NewBall(historyCapacity int) *Ball {
+	tracker := tracker.NewBallTracker()
 	return &Ball{
 		rawBall: rawBall{
 			history:         list.New(),
 			historyCapacity: historyCapacity,
 		},
+		tracker: tracker,
+		possessor: nil,
 	}
+}
+
+func (b *Ball) SetPossessor(robot *Robot) {
+	b.possessor = robot
+}
+
+func (b *Ball) GetPossessor() *Robot {
+	return b.possessor
 }
 
 func (b *Ball) GetVelocity() Position {
@@ -40,6 +53,15 @@ func (b *Ball) GetVelocity() Position {
 
 }
 
+type BallDTO struct {
+	PosX float64
+	PosY float64
+	PosZ float64
+	VelX float64
+	VelY float64
+	VelZ float64
+}
+
 func (b *Ball) ToDTO() BallDTO {
 	pos, _ := b.GetPosition()
 	vel := b.GetVelocity()
@@ -53,11 +75,3 @@ func (b *Ball) ToDTO() BallDTO {
 	}
 }
 
-type BallDTO struct {
-	PosX float64
-	PosY float64
-	PosZ float64
-	VelX float64
-	VelY float64
-	VelZ float64
-}
