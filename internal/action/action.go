@@ -147,38 +147,49 @@ func RotateToTarget(currentX, currentY, targetX, targetY, currentDirection float
 }
 
 func (mv *MoveTo) TranslateSim() *simulation.RobotCommand {
-
 	id := uint32(mv.Id)
-	// center := info.Position{X: 0, Y: 0, Angle: 0}
 
 	// Angular velocity counter-clockwise [rad/s]
 	dx := float64(mv.Pos.X - mv.Dest.X)
 	dy := float64(mv.Pos.Y - mv.Dest.Y)
-	angleDiff := RotateToTarget(mv.Pos.X, mv.Pos.Y, mv.Dest.X, mv.Dest.Y, mv.Pos.Angle)
-	// Handle special case, since Atan2(0, 0) is undefined
-	if dx == 0 && dy == 0 {
-		angleDiff = mv.Dest.Angle - mv.Pos.Angle
-	}
+	angleDiff := mv.Dest.Angle - mv.Pos.Angle
 
+	if angleDiff > math.Pi {
+		angleDiff -= 2 * math.Pi
+	}
+	if angleDiff < -math.Pi {
+		angleDiff += 2 * math.Pi
+	}
 	distance := math.Sqrt(dx*dx + dy*dy)
 	maxSpeed := float64(0.5)
 	DeAccDistance := float64(300) // The distance from target robot start to deaccelerate (measured in mm)
 	speed := float32(math.Min(maxSpeed, (maxSpeed/DeAccDistance)*distance))
 
-	// if angleDiff > 0 {
-	// 	angleSpeed = -angleSpeed
-	// }
 	maxAngleSpeed := float64(2)
 	deAccAngleDistance := float64(0.5) // The distance from target robot start to deaccelerate (measured in rad)
 	angle := float32(math.Min(maxAngleSpeed, (maxAngleSpeed/deAccAngleDistance)*float64(angleDiff)))
+	
+	// Compute the target direction in global space
+	targetDirection := math.Atan2(-dy, -dx)
+	targetDirection = math.Mod(targetDirection+math.Pi, 2*math.Pi) - math.Pi
 
-	// angle := angleDiff / angleSpeed
+	moveAngle := targetDirection - mv.Pos.Angle
 
-	// Velocity forward [m/s] (towards the dribbler)
-	forward := speed
+	// Normalize moveAngle between -π and π
+	// if moveAngle > math.Pi {
+	// 	moveAngle -= 2 * math.Pi
+	// }
+	// if moveAngle < -math.Pi {
+	// 	moveAngle += 2 * math.Pi
+	// }
 
-	// Velocity to the left [m/s]gs
-	left := float32(0)
+	// Decompose movement into forward and leftward velocities
+	forward := speed * float32(math.Cos(moveAngle)) // Forward velocity
+	left := speed * float32(math.Sin(moveAngle))    // Leftward velocity
+
+	if dx == 0 && dy == 0 {
+		forward, left = 0, 0
+	}
 
 	dribblerSpeed := float32(0)
 	if mv.Dribble {

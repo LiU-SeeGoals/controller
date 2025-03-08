@@ -3,7 +3,6 @@ package info
 import (
 	"container/list"
 	"fmt"
-	"math"
 )
 
 type Team int8
@@ -27,97 +26,34 @@ func (t Team) String() string {
 	}
 }
 
-type RobotPos struct {
-	pos  Position
-	time int64
-}
-
 type Robot struct {
-	active          bool
-	id              ID
-	team            Team
-	history         *list.List
-	historyCapacity int
+	rawRobot
 }
 
 func NewRobot(id ID, team Team, history_capasity int) *Robot {
 	return &Robot{
-		active:          false,
-		id:              id,
-		team:            team,
-		history:         list.New(),
-		historyCapacity: history_capasity,
+		rawRobot: rawRobot{
+			active:          false,
+			id:              id,
+			team:            team,
+			history:         list.New(),
+			historyCapacity: history_capasity,
+		},
 	}
 }
 
-func (r *Robot) SetPositionTime(x, y, angle float64, time int64) {
-	r.active = true
-	if r.history.Len() >= r.historyCapacity {
-		element := r.history.Back()
-		r.history.Remove(element)
-
-		robot := element.Value.(*RobotPos)
-
-		robot.pos.X = x
-		robot.pos.Y = y
-		robot.pos.Angle = angle
-		robot.time = time
-
-		r.history.PushFront(robot)
-	} else {
-		pos := Position{x, y, 0, angle}
-		r.history.PushFront(&RobotPos{pos, time})
-	}
-}
-
-func (r *Robot) GetPositionTime() (Position, int64, error) {
-	if r.history.Len() == 0 {
-		return Position{}, 0, fmt.Errorf("No position in history for robot %d %s", r.id, r.team.String())
-		// panic("No position in history for robot " + fmt.Sprint(r.id) + " " + r.team.String())
-	}
-
-	element := r.history.Front()
-	robot := element.Value.(*RobotPos)
-	return robot.pos, robot.time, nil
-}
-
-func (r *Robot) GetPosition() (Position, error) {
-	pos, _, err := r.GetPositionTime()
-	return pos, err
-}
-
-func (r *Robot) FacingPosition(pos Position, threshold float64) bool {
-
-	robotPos, err := r.GetPosition()
-	if err != nil {
-		return false
-	}
-
-	dx := pos.X - robotPos.X
-	dy := pos.Y - robotPos.Y
-
-	targetDirection := float64(math.Atan2(float64(dy), float64(dx)))
-	currentDirection := robotPos.Angle
-	
-	angleDiff := math.Abs(float64(targetDirection - currentDirection))
-	if angleDiff < threshold {
-		return true
-	} else {
-		return false
-	}
-}
 func (r *Robot) GetVelocity() Position {
 	if r.history.Len() < 2 {
 		return Position{0, 0, 0, 0}
 	}
 
 	element := r.history.Front()
-	robot := element.Value.(*RobotPos)
+	robot := element.Value.(*rawRobotPos)
 
 	sum_deltas := Position{}
 
 	for e := r.history.Front().Next(); e != nil; e = e.Next() {
-		robot2 := e.Value.(*RobotPos)
+		robot2 := e.Value.(*rawRobotPos)
 		dPos := robot2.pos.Sub(&robot.pos)
 		dt := float64(robot2.time - robot.time)
 		// TODO: lets add exponential decay so that the most recent deltas have more weight
@@ -135,9 +71,9 @@ func (r *Robot) GetAcceleration() float64 {
 	accelerations := float64(0)
 	for f, s, t := r.history.Front(), r.history.Front().Next(), r.history.Front().Next().Next(); t != nil; f, s, t = f.Next(), s.Next(), t.Next() {
 
-		robot1 := f.Value.(*RobotPos)
-		robot2 := s.Value.(*RobotPos)
-		robot3 := t.Value.(*RobotPos)
+		robot1 := f.Value.(*rawRobotPos)
+		robot2 := s.Value.(*rawRobotPos)
+		robot3 := t.Value.(*rawRobotPos)
 
 		vel1 := robot2.pos.Sub(&robot1.pos)
 		vel2 := robot3.pos.Sub(&robot2.pos)
@@ -152,14 +88,6 @@ func (r *Robot) GetAcceleration() float64 {
 	}
 
 	return accelerations / float64(r.history.Len()-1)
-}
-
-func (r *Robot) SetActive(active bool) {
-	r.active = active
-}
-
-func (r *Robot) IsActive() bool {
-	return r.active
 }
 
 func (r *Robot) String() string {
@@ -195,10 +123,6 @@ func (r *Robot) ToDTO() RobotDTO {
 		VelY:     vel.Y,
 		VelAngle: vel.Angle,
 	}
-}
-
-func (r *Robot) GetID() ID {
-	return r.id
 }
 
 type RobotDTO struct {

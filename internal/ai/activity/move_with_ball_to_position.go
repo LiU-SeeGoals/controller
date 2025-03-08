@@ -42,10 +42,10 @@ func (fb *MoveWithBallToPosition) GetAction(gi *info.GameInfo) action.Action {
 		return nil
 	}
 
-	robotPos, err1 := robot.GetPosition()
+	robotPos, err := robot.GetPosition()
 
-	if err1 != nil {
-		Logger.Errorf("Position retrieval failed - Robot: %v\n", err1)
+	if err != nil {
+		Logger.Errorf("Position retrieval failed - Robot: %v\n", err)
 		return NewStop(fb.id).GetAction(gi)
 	}
 
@@ -77,7 +77,7 @@ func (fb *MoveWithBallToPosition) GetAction(gi *info.GameInfo) action.Action {
 
 	// If ball is close and we are not facing it
 	// move to face it
-	} else if !robot.FacingPosition(ballPos, 0.1) && !fb.possession {
+	} else if !robotPos.FacingPosition(ballPos, 0.1) && !fb.possession {
 		Logger.Debug("MoveWithBallToPosition: Ball is close and not facing it")
 
 		dest := robotPos

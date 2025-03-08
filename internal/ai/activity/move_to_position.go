@@ -2,7 +2,6 @@ package ai
 
 import (
 	"fmt"
-	"math"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	. "github.com/LiU-SeeGoals/controller/internal/logger"
@@ -57,11 +56,16 @@ func (m *MoveToPosition) Achieved(gi *info.GameInfo) bool {
 		return false
 	}
 	distance_left := curr_pos.Distance(m.target_position)
-	const distance_threshold = 10
+	const distance_threshold = 100
 	const angle_threshold = 0.1
 	distance_achieved := distance_left <= distance_threshold
-	angle_diff := math.Abs(float64(curr_pos.Angle - m.target_position.Angle))
+	// Logger.Debugf("Distance left: %v\n", distance_left)
+	// Logger.Debugf("Angle left: %v\n", curr_pos.AngleDistance(m.target_position))
+	// Logger.Debugf("Distance achieved: %v\n", distance_achieved)
+
+	angle_diff := curr_pos.AngleDistance(m.target_position)
 	angle_achieved := angle_diff <= angle_threshold
+	// Logger.Debugf("Angle achieved: %v\n", angle_achieved)
 	return distance_achieved && angle_achieved
 }
 
