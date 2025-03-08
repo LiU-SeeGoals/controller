@@ -14,10 +14,7 @@ type Position struct {
 
 func (p *Position) FacingPosition(target Position, threshold float64) bool {
 
-	dx := target.X - p.X
-	dy := target.Y - p.Y
-
-	targetDirection := math.Atan2(float64(dy), float64(dx))
+	targetDirection := p.AngleToPosition(target)
 	currentDirection := p.Angle
 
 	angleDiff := math.Abs(float64(targetDirection - currentDirection))
@@ -34,8 +31,10 @@ func (p Position) AngleToPosition(p2 Position) float64 {
 	return float64(math.Atan2(float64(dy), float64(dx)))
 }
 
+// - pi - pi = -2pi
+
 func (p Position) AngleDistance(p2 Position) float64 {
-	diff := p.AngleToPosition(p2) - p.Angle
+	diff := p.Angle - p2.Angle
 	return math.Abs(math.Remainder(diff, 2*math.Pi))
 }
 

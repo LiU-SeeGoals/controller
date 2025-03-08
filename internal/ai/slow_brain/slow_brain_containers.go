@@ -1,6 +1,7 @@
 package ai
 
 import (
+	"math"
 	"sync"
 	"time"
 
@@ -40,21 +41,36 @@ func (m *SlowBrainContainer) Init(
 
 // This is the main loop of the AI in this slow brain
 func (m *SlowBrainContainer) run() {
+	for {
+		// time.Sleep(100 * time.Millisecond)
 
-	activityLoop := []ai.Activity{
-		ai.NewMoveToPosition(m.team, 0, info.Position{X: 2000, Y: 0, Z: 0, Angle: 0}),
-		ai.NewMoveToPosition(m.team, 0, info.Position{X: 0, Y: 2000, Z: 0, Angle: 0}),
-		ai.NewMoveToPosition(m.team, 0, info.Position{X: 0, Y: 0, Z: 0, Angle: 0}),
-	}
-	activityQueue := []ai.Activity{
-		ai.NewMoveToPosition(m.team, 0, info.Position{X: 0, Y: 2000, Z: 0, Angle: 0}),
-		ai.NewMoveToPosition(m.team, 0, info.Position{X: 0, Y: 0, Z: 0, Angle: 0}),
-		ai.NewMoveToPosition(m.team, 0, info.Position{X: 2000, Y: 0, Z: 0, Angle: 0}),
-	}
+		// if m.activities[0] == nil {
+		//
+		// 	activityQueue := []ai.Activity{
+		// 		ai.NewMoveToPosition(m.team, 0, info.Position{X: 0, Y: 2000, Z: 0, Angle: 0}),
+		// 		ai.NewMoveToPosition(m.team, 0, info.Position{X: 0, Y: 0, Z: 0, Angle: 0}),
+		// 		ai.NewMoveToPosition(m.team, 0, info.Position{X: 2000, Y: 0, Z: 0, Angle: 0}),
+		// 	}
+		// 	queue := ai.NewActivityQueue(0, activityQueue)
+		// 	m.AddActivity(queue)
+		// }
 
-	queue := ai.NewActivityQueue(0, activityQueue)
-	m.AddActivity(queue)
-	loop := ai.NewActivityLoop(1, activityLoop)
-	m.AddActivity(loop)
+		if m.activities[1] == nil {
+
+			activityLoop := []ai.Activity{
+				ai.NewMoveToPosition(m.team, 1, info.Position{X: 2000, Y: 2000, Z: 0, Angle: -math.Pi}),
+				ai.NewMoveToPosition(m.team, 1, info.Position{X: -2000, Y: 2000, Z: 0, Angle: math.Pi}),
+				ai.NewMoveToPosition(m.team, 1, info.Position{X: -2000, Y: -2000, Z: 0, Angle: -math.Pi/2}),
+				ai.NewMoveToPosition(m.team, 1, info.Position{X: 2000, Y: -2000, Z: 0, Angle: math.Pi/2}),
+				ai.NewMoveToPosition(m.team, 1, info.Position{X: 2000, Y: 2000, Z: 0, Angle: -math.Pi/4}),
+				ai.NewMoveToPosition(m.team, 1, info.Position{X: -2000, Y: -2000, Z: 0, Angle: math.Pi/4}),
+				ai.NewMoveToPosition(m.team, 1, info.Position{X: 2000, Y: -2000, Z: 0, Angle: -math.Pi/2}),
+				ai.NewMoveToPosition(m.team, 1, info.Position{X: -2000, Y: 2000, Z: 0, Angle: math.Pi/4}),
+			}
+			loop := ai.NewActivityLoop(1, activityLoop)
+			m.AddActivity(loop)
+		}
+
+	}
 
 }
