@@ -46,12 +46,17 @@ func NewRobot(id ID, team Team, history_capasity int) *Robot {
 	}
 }
 
-func (r *Robot) Facing(target Position) bool {
+// NotImplemented
+// func (r *Robot) HasBall() bool {
+// 	return 
+// }
+
+func (r *Robot) Facing(target Position, threshold float64) bool {
 	pos, err := r.GetPosition()
 	if err != nil {
 		return false
 	}
-	return pos.FacingPosition(target, 0.1) // WARN: Magic number
+	return pos.FacingPosition(target, threshold) 
 }
 
 func (r *Robot) GetVelocity() Position {

@@ -2,7 +2,6 @@ package ai
 
 import (
 	"fmt"
-	"math"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/info"
@@ -11,12 +10,11 @@ import (
 
 type MoveWithBallToPosition struct {
 	GenericComposition
-	target_position info.Position
-	possession      bool
+	targetPosition info.Position
 }
 
 func (m *MoveWithBallToPosition) String() string {
-	return fmt.Sprintf("Robot %d, MoveWithBallToPosition(%v)", m.id, m.target_position)
+	return fmt.Sprintf("Robot %d, MoveWithBallToPosition(%v)", m.id, m.targetPosition)
 }
 
 func NewMoveWithBallToPosition(team info.Team, id info.ID, dest info.Position) *MoveWithBallToPosition {
@@ -25,108 +23,67 @@ func NewMoveWithBallToPosition(team info.Team, id info.ID, dest info.Position) *
 			team: team,
 			id:   id,
 		},
-		target_position: dest,
+		targetPosition: dest,
 	}
 }
 
-// TODO: Assumes that ones the robot has been in possession of the ball,
-// it will keep it. It also doesnt support being initially in possession,
-// for it to do that we need to estimate which robot has possession of the ball.
-// But this might be enough to start work with other activities which depends
-// on ball manipulation.
 func (fb *MoveWithBallToPosition) GetAction(gi *info.GameInfo) action.Action {
 
-	myTeam := gi.State.GetTeam(fb.team)
-	robot := myTeam[fb.id]
-	if !robot.IsActive() {
-		return nil
-	}
-
-	robotPos, err := robot.GetPosition()
-
+	robot := gi.State.GetRobot(fb.id, fb.team)
+	robotPosition, err := robot.GetPosition()
 	if err != nil {
 		Logger.Errorf("Position retrieval failed - Robot: %v\n", err)
 		return NewStop(fb.id).GetAction(gi)
 	}
-
-	ballPos, _, err := gi.State.GetBall().GetPositionTime()
-	if err != nil {
-		Logger.Errorf("Position retrieval failed - Ball: %v\n", err)
+	if !robot.IsActive() {
 		return NewStop(fb.id).GetAction(gi)
 	}
-	// timeSinceUpdate := time.Now().UnixMilli() - updated
 
-	// Check if ball position is upToDate
-	// it might be old if the ball is
-	// covered by the robot
-	// upToDate := true
-	// Logger.Debug("MoveWithBallToPosition: Time since update: %d", timeSinceUpdate)
-	// if timeSinceUpdate > 0 {
-	// 	upToDate = false
-	// }
+	ball := gi.State.GetBall()
 
-	distance := robotPos.Distance(ballPos)
-
-	// If ball is far away and we are sure of
-	// its position, move to it
-	if distance > 100 && !fb.possession {
-		Logger.Debug("MoveWithBallToPosition: Ball is far away")
+	// If we lost the ball, go get it
+	if ball.GetPossessor() != robot { // WARN: Magic number
+		Logger.Debug("MoveWithBallToPosition: Lost possession of ball")
 
 		move := NewMoveToBall(fb.team, fb.id)
 		return move.GetAction(gi)
-
-	// If ball is close and we are not facing it
-	// move to face it
-	} else if !robotPos.FacingPosition(ballPos, 0.1) && !fb.possession {
-		Logger.Debug("MoveWithBallToPosition: Ball is close and not facing it")
-
-		dest := robotPos
-		dest.Angle = robotPos.AngleToPosition(ballPos)
-		move := NewMoveToPosition(fb.team, fb.id, dest)
-		return move.GetAction(gi)
-
 	}
 
 	Logger.Debug("MoveWithBallToPosition: Moving with ball to position")
 	// Passed all checks, is in possession
 	// move with ball to target position
-	fb.possession = true
 	act := action.MoveTo{
 		Id:      int(fb.id),
 		Team:    fb.team,
-		Pos:     robotPos,
-		Dest:    fb.target_position,
+		Pos:     robotPosition,
+		Dest:    fb.targetPosition,
 		Dribble: true,
 	}
 	return &act
 }
 
 func (m *MoveWithBallToPosition) Achieved(gi *info.GameInfo) bool {
-	target_position, err := gi.State.GetBall().GetPosition()
+	ballPosition, err := gi.State.GetBall().GetPosition()
 	if err != nil {
 		Logger.Errorf("Position retrieval failed - Ball: %v\n", err)
 		return false
 	}
-
-	curr_pos, err := gi.State.GetTeam(m.team)[m.id].GetPosition()
+	robotPosition, err := gi.State.GetRobot(m.id, m.team).GetPosition()
 	if err != nil {
 		Logger.Errorf("Position retrieval failed - Robot: %v\n", err)
 		return false
 	}
-	distance_left := curr_pos.Distance(target_position)
+
+	distanceLeft := ballPosition.Distance(m.targetPosition)
 	const distance_threshold = 100
 	const angle_threshold = 0.1
-	distance_achieved := distance_left <= distance_threshold
-	angle_diff := math.Abs(float64(curr_pos.Angle - target_position.Angle))
+	distance_achieved := distanceLeft <= distance_threshold
+
+	angle_diff := robotPosition.AngleDistance(m.targetPosition)
 	angle_achieved := angle_diff <= angle_threshold
 	return distance_achieved && angle_achieved
 }
 
-func (m *MoveWithBallToPosition) SetTargetPosition(dest info.Position) {
-	m.target_position = dest
-}
-  
 func (m *MoveWithBallToPosition) GetID() info.ID {
 	return m.id
 }
-

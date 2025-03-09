@@ -95,11 +95,11 @@ func (gs *GameState) Update() {
 		if ballDistance > math.Inf(1) {
 			facingBall = false
 		} else {
-			facingBall = closestToBall.Facing(ballPos)
+			facingBall = closestToBall.Facing(ballPos, 0.5)// WARN: Magic number
 		}
 
 		// TODO: Check matching velocities
-		if ballDistance < 95 && facingBall { // WARN: Magic number
+		if ballDistance < 100 && facingBall { // WARN: Magic number
 			gs.Ball.SetPossessor(closestToBall)
 			// TODO: Set estimated position of ball to
 			// the position of dribbler on the robot
