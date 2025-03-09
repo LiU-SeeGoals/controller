@@ -2,11 +2,10 @@ package ai
 
 import (
 	"fmt"
-	"math"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
-	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/info"
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 )
 
 type MoveToBall struct {
@@ -28,14 +27,22 @@ func NewMoveToBall(team info.Team, id info.ID) *MoveToBall {
 }
 
 func (m *MoveToBall) GetAction(gi *info.GameInfo) action.Action {
-	target_position, err := gi.State.GetBall().GetPosition()
-
+	ballPos, err := gi.State.GetBall().GetPosition()
 	if err != nil {
 		Logger.Errorf("Position retrieval failed - Ball: %v\n", err)
 		return NewStop(m.id).GetAction(gi)
 	}
 
-	move := NewMoveToPosition(m.team, m.id, target_position)
+	robotPos, err := gi.State.GetRobot(m.id, m.team).GetPosition()
+	if err != nil {
+		Logger.Errorf("Position retrieval failed - Robot: %v\n", err)
+		return NewStop(m.id).GetAction(gi)
+	}
+
+	angleToBall := robotPos.AngleToPosition(ballPos)
+
+	target := info.Position{X: ballPos.X, Y: ballPos.Y, Z: 0, Angle: angleToBall}
+	move := NewMoveToPosition(m.team, m.id, target)
 	return move.GetAction(gi)
 }
 
@@ -53,10 +60,12 @@ func (m *MoveToBall) Achieved(gi *info.GameInfo) bool {
 		return false
 	}
 	distance_left := curr_pos.Distance(target_position)
-	const distance_threshold = 200
+	const distance_threshold = 90 // WARN: Magic number
 	const angle_threshold = 0.1
 	distance_achieved := distance_left <= distance_threshold
-	angle_diff := math.Abs(float64(curr_pos.Angle - target_position.Angle))
+
+	angleToBall := curr_pos.AngleToPosition(target_position)
+	angle_diff := curr_pos.AngleDistance(info.Position{ X: 0, Y: 0, Z: 0, Angle: angleToBall })
 	angle_achieved := angle_diff <= angle_threshold
 	return distance_achieved && angle_achieved
 }

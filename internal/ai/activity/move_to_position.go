@@ -59,13 +59,9 @@ func (m *MoveToPosition) Achieved(gi *info.GameInfo) bool {
 	const distance_threshold = 100
 	const angle_threshold = 0.1
 	distance_achieved := distance_left <= distance_threshold
-	// Logger.Debugf("Distance left: %v\n", distance_left)
-	// Logger.Debugf("Angle left: %v\n", curr_pos.AngleDistance(m.target_position))
-	// Logger.Debugf("Distance achieved: %v\n", distance_achieved)
 
 	angle_diff := curr_pos.AngleDistance(m.target_position)
 	angle_achieved := angle_diff <= angle_threshold
-	// Logger.Debugf("Angle achieved: %v\n", angle_achieved)
 	return distance_achieved && angle_achieved
 }
 

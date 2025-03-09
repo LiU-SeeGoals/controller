@@ -125,27 +125,6 @@ func (s *Stop) TranslateSim() *simulation.RobotCommand {
 
 }
 
-func RotateToTarget(currentX, currentY, targetX, targetY, currentDirection float64) float64 {
-	dx := targetX - currentX
-	dy := targetY - currentY
-
-	targetDirection := math.Atan2(float64(dy), float64(dx))
-
-	rotationNeeded := targetDirection - currentDirection
-
-	// fmt.Println("targetDirection: ", targetDirection, " currentDirection: ", currentDirection, " rotationNeeded: ", rotationNeeded)
-
-	// Normalize the result to be between -π and π
-	for rotationNeeded > math.Pi {
-		rotationNeeded -= 2 * math.Pi
-	}
-	for rotationNeeded < -math.Pi {
-		rotationNeeded += 2 * math.Pi
-	}
-
-	return rotationNeeded
-}
-
 func (mv *MoveTo) TranslateSim() *simulation.RobotCommand {
 	id := uint32(mv.Id)
 
@@ -160,6 +139,7 @@ func (mv *MoveTo) TranslateSim() *simulation.RobotCommand {
 	if angleDiff < -math.Pi {
 		angleDiff += 2 * math.Pi
 	}
+
 	distance := math.Sqrt(dx*dx + dy*dy)
 	maxSpeed := float64(0.5)
 	DeAccDistance := float64(300) // The distance from target robot start to deaccelerate (measured in mm)
@@ -175,21 +155,9 @@ func (mv *MoveTo) TranslateSim() *simulation.RobotCommand {
 
 	moveAngle := targetDirection - mv.Pos.Angle
 
-	// Normalize moveAngle between -π and π
-	// if moveAngle > math.Pi {
-	// 	moveAngle -= 2 * math.Pi
-	// }
-	// if moveAngle < -math.Pi {
-	// 	moveAngle += 2 * math.Pi
-	// }
-
 	// Decompose movement into forward and leftward velocities
 	forward := speed * float32(math.Cos(moveAngle)) // Forward velocity
 	left := speed * float32(math.Sin(moveAngle))    // Leftward velocity
-
-	if dx == 0 && dy == 0 {
-		forward, left = 0, 0
-	}
 
 	dribblerSpeed := float32(0)
 	if mv.Dribble {

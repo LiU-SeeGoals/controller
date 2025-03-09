@@ -115,7 +115,9 @@ func unpack(packet *ssl_vision.SSL_WrapperPacket, gi *info.GameInfo, play_time i
 
 		gi.State.SetBall(x, y, z, play_time)
 	}
+
 	gi.State.SetValid(true)
+	gi.State.Update()
 
 	geometry := packet.GetGeometry()
 	field := geometry.GetField()
