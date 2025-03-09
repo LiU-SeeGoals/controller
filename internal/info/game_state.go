@@ -175,10 +175,7 @@ func (gs *GameState) GetBlueRobots() *RobotTeam {
 }
 
 func (gs *GameState) GetRobot(id ID, team Team) *Robot {
-	if team == Blue {
-		return gs.Blue_team[id]
-	}
-	return gs.Yellow_team[id]
+	return gs.GetTeam(team)[id]
 }
 
 // String representation of game state

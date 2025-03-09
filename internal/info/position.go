@@ -28,7 +28,7 @@ func (p *Position) FacingPosition(target Position, threshold float64) bool {
 func (p Position) AngleToPosition(p2 Position) float64 {
 	dx := p2.X - p.X
 	dy := p2.Y - p.Y
-	return float64(math.Atan2(float64(dy), float64(dx)))
+	return math.Atan2(dy, dx)
 }
 
 func (p Position) AngleDistance(p2 Position) float64 {
