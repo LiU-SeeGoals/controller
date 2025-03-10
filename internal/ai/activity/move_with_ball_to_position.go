@@ -27,6 +27,9 @@ func NewMoveWithBallToPosition(team info.Team, id info.ID, dest info.Position) *
 	}
 }
 
+// Moves to a target position with ball in the direction of the target.
+// When robot is at the target position, it rotates to face the target angle.
+// If the robot is not the possessor of the ball, it moves to the ball.
 func (fb *MoveWithBallToPosition) GetAction(gi *info.GameInfo) action.Action {
 
 	robot := gi.State.GetRobot(fb.id, fb.team)
@@ -42,7 +45,8 @@ func (fb *MoveWithBallToPosition) GetAction(gi *info.GameInfo) action.Action {
 	ball := gi.State.GetBall()
 
 	// If we lost the ball, go get it
-	if ball.GetPossessor() != robot { // WARN: Magic number
+	if ball.GetPossessor() != robot { //
+
 		Logger.Debug("MoveWithBallToPosition: Lost possession of ball")
 
 		move := NewMoveToBall(fb.team, fb.id)
@@ -50,8 +54,25 @@ func (fb *MoveWithBallToPosition) GetAction(gi *info.GameInfo) action.Action {
 	}
 
 	Logger.Debug("MoveWithBallToPosition: Moving with ball to position")
-	// Passed all checks, is in possession
-	// move with ball to target position
+
+	// Move to target and keep the ball facing the direction in which
+	// we are moving to avoid dropping it.
+	targetDistance := robotPosition.Distance(fb.targetPosition)
+	if targetDistance > 100 { // WARN: Magic number
+		targetPosition := fb.targetPosition // Make a copy of target so we can change the angle
+		angleToTarget := robotPosition.AngleToPosition(fb.targetPosition)
+		targetPosition.Angle = angleToTarget
+		act := action.MoveTo{
+			Id:      int(fb.id),
+			Team:    fb.team,
+			Pos:     robotPosition,
+			Dest:    targetPosition,
+			Dribble: true,
+		}
+		return &act
+	}
+
+	// We are at target position, now rotate to target angle
 	act := action.MoveTo{
 		Id:      int(fb.id),
 		Team:    fb.team,
@@ -60,6 +81,7 @@ func (fb *MoveWithBallToPosition) GetAction(gi *info.GameInfo) action.Action {
 		Dribble: true,
 	}
 	return &act
+
 }
 
 func (m *MoveWithBallToPosition) Achieved(gi *info.GameInfo) bool {

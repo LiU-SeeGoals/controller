@@ -42,11 +42,11 @@ func Scenario() {
 	presentBlue = []int{0, 1, 2, 3, 4, 5, 6 ,7, 8, 9 ,10}
 	simController.SetPresentRobots(presentYellow, presentBlue)
 
-	start_time := time.Now().UnixMilli()
+	// start_time := time.Now().UnixMilli()
 	for {
-		playTime := time.Now().UnixMilli() - start_time
+		// playTime := time.Now().UnixMilli() - start_time
 		// fmt.Println("playTime: ", playTime)
-		ssl_receiver.UpdateState(gameInfo, playTime)
+		ssl_receiver.UpdateState(gameInfo, time.Now().UnixMilli())
 		//fmt.Println(gameInfo)
 
 		yellow_actions := aiYellow.GetActions(gameInfo)

@@ -46,7 +46,7 @@ func (fb *ReceiveBallFromPlayer) GetAction(gi *info.GameInfo) action.Action {
 		return NewStop(fb.id).GetAction(gi)
 	}
 
-	ballPos, _, err := gi.State.GetBall().GetPositionTime()
+	ballPos, err := gi.State.GetBall().GetPosition()
 	if err != nil {
 		Logger.Errorf("Position retrieval failed - Ball: %v\n", err)
 		return NewStop(fb.id).GetAction(gi)
@@ -91,7 +91,7 @@ func (fb *ReceiveBallFromPlayer) GetAction(gi *info.GameInfo) action.Action {
 }
 
 func (fb *ReceiveBallFromPlayer) Achieved(gi *info.GameInfo) bool {
-	ballPos, _, err := gi.State.GetBall().GetPositionTime()
+	ballPos, err := gi.State.GetBall().GetPosition()
 	if err != nil {
 		Logger.Errorf("Position retrieval failed - Ball: %v\n", err)
 		return false

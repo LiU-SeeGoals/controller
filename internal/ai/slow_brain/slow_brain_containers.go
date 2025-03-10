@@ -74,8 +74,9 @@ func (m *SlowBrainContainer) run() {
 		if m.activities[2] == nil {
 
 			activityLoop := []ai.Activity{
-				ai.NewMoveToBall(m.team, 2),
+				// ai.NewMoveToBall(m.team, 2),
 				ai.NewMoveWithBallToPosition(m.team, 2, info.Position{X: -2000, Y: 2000, Z: 0, Angle: math.Pi/4}),
+				ai.NewMoveWithBallToPosition(m.team, 2, info.Position{X: 2000, Y: 2000, Z: 0, Angle: math.Pi/4}),
 			}
 			loop := ai.NewActivityLoop(2, activityLoop)
 			m.AddActivity(loop)

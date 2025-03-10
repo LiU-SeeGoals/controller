@@ -7,8 +7,9 @@ import (
 
 type Ball struct {
 	rawBall
-	possessor *Robot
-	tracker	 *tracker.BallTracker
+	possessor         *Robot
+	tracker           *tracker.BallTracker
+	estimatedPosition Position
 }
 
 func NewBall(historyCapacity int) *Ball {
@@ -18,9 +19,19 @@ func NewBall(historyCapacity int) *Ball {
 			history:         list.New(),
 			historyCapacity: historyCapacity,
 		},
-		tracker: tracker,
+		tracker:   tracker,
 		possessor: nil,
 	}
+}
+
+// get position
+func (b *Ball) GetEstimatedPosition() (Position, error) {
+	return b.estimatedPosition, nil
+}
+
+// set position
+func (b *Ball) SetEstimatedPosition(pos Position) {
+	b.estimatedPosition = pos
 }
 
 func (b *Ball) SetPossessor(robot *Robot) {
@@ -74,4 +85,3 @@ func (b *Ball) ToDTO() BallDTO {
 		VelZ: vel.Z,
 	}
 }
-

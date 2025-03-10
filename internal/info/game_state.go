@@ -3,6 +3,7 @@ package info
 import (
 	"encoding/json"
 	"math"
+	"time"
 
 	. "github.com/LiU-SeeGoals/controller/internal/logger"
 )
@@ -41,7 +42,9 @@ func (gs *GameState) ClosestRobot(target Position) (*Robot, float64) {
 
 	for _, robot := range gs.Blue_team {
 		robotPos, err := robot.GetPosition()
-		if err != nil { continue }
+		if err != nil {
+			continue
+		}
 
 		distance := robotPos.Distance(target)
 		if distance < shortestDistance {
@@ -51,7 +54,9 @@ func (gs *GameState) ClosestRobot(target Position) (*Robot, float64) {
 	}
 	for _, robot := range gs.Yellow_team {
 		robotPos, err := robot.GetPosition()
-		if err != nil { continue }
+		if err != nil {
+			continue
+		}
 
 		distance := robotPos.Distance(target)
 		if distance < shortestDistance {
@@ -63,58 +68,95 @@ func (gs *GameState) ClosestRobot(target Position) (*Robot, float64) {
 	return closestRobot, shortestDistance
 }
 
-// Should be called directly after inserting 
-// new data, recieved from ssl vision, into 
+// Should be called directly after inserting
+// new data, recieved from ssl vision, into
 // the game state
 func (gs *GameState) Update() {
 
 	// Update robot estimates
 	// Has to be done before updating ball possessor
 	for _, robot := range gs.Blue_team {
-		if !robot.IsActive() { continue }
+		if !robot.IsActive() {
+			continue
+		}
 		// robot.Update()
 	}
 	for _, robot := range gs.Yellow_team {
-		if !robot.IsActive() { continue }
+		if !robot.IsActive() {
+			continue
+		}
 		// robot.Update()
 	}
 
 	// Update ball estimate and possessor
 	// Has to be done after updating robot estimates
 
-	// TODO: Estimate ball position with the tracker
-	// handles differently based on whether we have
-	// a new ball measurement or not
 
-	ballPos, err := gs.Ball.GetPosition()
-	if err == nil {
+	// --Ball possessor logic--
+	// If new ball reading:
+	//	estimate ball position
+	//	estimate any possessor
+	//	estimate if latest possessor has lost the ball
+	// if no new ball reading:
+	//	set ball position to position of latest possessor
 
-		closestToBall, ballDistance := gs.ClosestRobot(ballPos)
 
-		var facingBall bool
-		if ballDistance > math.Inf(1) {
-			facingBall = false
-		} else {
-			facingBall = closestToBall.Facing(ballPos, 0.5)// WARN: Magic number
-		}
+	ballPos, recieved, err := gs.Ball.GetPositionTime()
+	now := time.Now().UnixMilli()
+	if err == nil { // There is a ball
 
-		// TODO: Check matching velocities
-		if ballDistance < 100 && facingBall { // WARN: Magic number
-			gs.Ball.SetPossessor(closestToBall)
-			// TODO: Set estimated position of ball to
-			// the position of dribbler on the robot
+		// If the timestamp of the latest ball position is
+		// not old, we can check if any robot might be
+		// in control of it, ie the possessor.
+		if now-recieved < 100 { // WARN: Magic number, Position data is now-recieved ms old
 
-		} else {
-			gs.Ball.SetPossessor(nil)
-			// TODO: Set estimated position of ball to
-			// the position of the ball tracker
+			// Get the robot closest to the ball
+			closestToBall, ballDistance := gs.ClosestRobot(ballPos)
+
+			var facingBall bool
+			if ballDistance > math.Inf(1) { // ballDistance will be inf if there is no robot on the field
+				facingBall = false
+			} else {
+				facingBall = closestToBall.Facing(ballPos, 0.5) // WARN: Magic number
+			}
+
+			// I a robot is both facing the ball and in distance
+			// consider it the possessor of the ball
+			// TODO: Check matching velocities
+			if ballDistance < 90 && facingBall { // WARN: Magic number, mm 
+				gs.Ball.SetPossessor(closestToBall)
+
+			// If the closest robot is to far away
+			// set possessor to nil
+			} else if (ballDistance > 110 ) { // WARN: Magic number, mm
+				gs.Ball.SetPossessor(nil)
+
+			}
+		} else { 
+			// Ball position to old to use, best we can do is assume the lateset
+			// possessor still has it
+			if gs.Ball.GetPossessor() != nil {
+				// Set ball position to the position of the
+				// robot which had the ball last
+				possessorPos, _ := gs.Ball.GetPossessor().GetPosition()
+				possessorPos.X += 90 * math.Cos(possessorPos.Angle) // WARN: Magic number
+				possessorPos.Y += 90 * math.Sin(possessorPos.Angle) // WARN: Magic number
+				gs.Ball.SetEstimatedPosition(possessorPos)
+			}
 		}
 	} else {
-		Logger.Error("Ball position retrieval failed")
+		Logger.Errorf("Ball position retrieval failed: %v", err)
 	}
 
-
 }
+
+// func (gs *GameState) ControlledBall() (bool, *Robot) {
+//
+// }
+//
+// func (gs *GameState) FreeBall() bool{
+// 	
+// }
 
 func (gs *GameState) SetValid(valid bool) {
 	gs.Valid = valid

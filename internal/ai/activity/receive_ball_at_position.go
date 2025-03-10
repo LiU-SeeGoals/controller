@@ -45,7 +45,7 @@ func (rbap *ReceiveBallAtPosition) GetAction(gi *info.GameInfo) action.Action {
 		return NewStop(rbap.id).GetAction(gi)
 	}
 
-	ballPos, _, err := gi.State.GetBall().GetPositionTime()
+	ballPos, err := gi.State.GetBall().GetPosition()
 	if err != nil {
 		Logger.Errorf("Position retrieval failed - Ball: %v\n", err)
 		return NewStop(rbap.id).GetAction(gi)

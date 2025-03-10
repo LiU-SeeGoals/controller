@@ -60,7 +60,7 @@ func (fb *KickToPlayer) GetAction(gi *info.GameInfo) action.Action {
 		targetAngle = -targetAngle
 	}
 
-	ballPos, _, err := gi.State.GetBall().GetPositionTime()
+	ballPos, err := gi.State.GetBall().GetPosition()
 	if err != nil {
 		Logger.Errorf("Position retrieval failed - Ball: %v\n", err)
 		return NewStop(fb.id).GetAction(gi)
@@ -96,7 +96,7 @@ func (fb *KickToPlayer) GetAction(gi *info.GameInfo) action.Action {
 }
 
 func (k *KickToPlayer) Achieved(gi *info.GameInfo) bool {
-	ballPos, _, err := gi.State.GetBall().GetPositionTime()
+	ballPos, err := gi.State.GetBall().GetPosition()
 	if err != nil {
 		Logger.Errorf("Position retrieval failed - Ball: %v\n", err)
 		return false
