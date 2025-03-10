@@ -1,6 +1,7 @@
 package ai
 
 import (
+	"fmt"
 	"math"
 	"math/rand"
 	"time"
@@ -53,7 +54,7 @@ func NewMoveToPosition(team info.Team, id info.ID, dest info.Position) *MoveToPo
 		waypointThreshold:  50.0,   // mm to consider waypoint reached
 		fieldWidth:         6000.0, // Standard SSL field width in mm
 		fieldHeight:        4000.0, // Standard SSL field height in mm
-		completionDistance: 10.0,   // mm to consider the goal reached
+		completionDistance: 50.0,   // mm to consider the goal reached
 	}
 
 	return &MoveToPosition{
@@ -379,6 +380,12 @@ func (m *MoveToPosition) GetObstaclePositions(gi *info.GameInfo) []info.Position
 		}
 
 		pos, _ := robot.GetPosition()
+
+		// Skip robots at exactly (0,0) as they are likely removed from the field
+		if pos.X == 0 && pos.Y == 0 {
+			continue
+		}
+
 		obstacles = append(obstacles, pos)
 	}
 
@@ -460,7 +467,7 @@ func distanceBetween(pos1, pos2 info.Position) float64 {
 }
 
 func (m *MoveToPosition) String() string {
-	return "RRT-CollisionAvoidance"
+	return fmt.Sprintf("MoveToPosition: dest%s", m.final_destination)
 }
 
 func (m *MoveToPosition) GetID() info.ID {
