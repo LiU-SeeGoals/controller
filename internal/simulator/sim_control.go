@@ -5,9 +5,10 @@ import (
 	"math"
 
 	"github.com/LiU-SeeGoals/controller/internal/client"
-	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/helper"
+	"github.com/LiU-SeeGoals/controller/internal/info"
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/proto_go/gc"
 	"github.com/LiU-SeeGoals/proto_go/simulation"
 )
@@ -159,14 +160,12 @@ func (sc *simControl) RobotStartPositionConfig1(numberOfRobots int) {
 		x_blue := blueCoords[robot_id][0]
 		y_blue := blueCoords[robot_id][1]
 		id := uint32(robot_id)
-		team := gc.Team_BLUE
-		sc.TeleportRobot(x_blue, y_blue, id, team)
+		sc.TeleportRobot(x_blue, y_blue, id, info.Blue)
 
 		x_yellow := yellowCoords[robot_id][0]
 		y_yellow := yellowCoords[robot_id][1]
 		id = uint32(robot_id)
-		team = gc.Team_YELLOW
-		sc.TeleportRobot(x_yellow, y_yellow, id, team)
+		sc.TeleportRobot(x_yellow, y_yellow, id, info.Yellow)
 	}
 
 }
@@ -176,7 +175,9 @@ func (sc *simControl) RobotStartPositionConfig2(numberOfRobots int) {
 	Logger.Error("RobotStartPositionConfig2 not yet implemented")
 }
 
-func (sc *simControl) TeleportRobot(x float32, y float32, id uint32, team gc.Team) {
+func (sc *simControl) TeleportRobot(x float32, y float32, id uint32, team info.Team) {
+	// We take in x and y as milimeters in float64, simulator need float32 in meters
+
 	// fmt.Println(x, y)
 	Logger.Info("Teleporting robot to x: %f, y: %f, id: %d, team: %d", x, y, id, team)
 	// Set default values for orientation and velocities
@@ -186,12 +187,19 @@ func (sc *simControl) TeleportRobot(x float32, y float32, id uint32, team gc.Tea
 	vAngular := float32(0.0)    // Angular velocity
 	present := true             // Teleport indicates the robot is present
 
+	gc_team := gc.Team_BLUE
+	if team == info.Yellow {
+		gc_team = gc.Team_YELLOW
+	}
+
 	// Create the robot ID structure
 	robotId := gc.RobotId{
 		Id:   &id,
-		Team: &team,
+		Team: &gc_team,
 	}
 
+	x = x / 1000.0
+	y = y / 1000.0
 	// Create the TeleportRobot structure with the new position and parameters
 	teleportRobot := &simulation.TeleportRobot{
 		Id:          &robotId,

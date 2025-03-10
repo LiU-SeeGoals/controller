@@ -102,6 +102,10 @@ func (r *Robot) GetAcceleration() float64 {
 	return accelerations / float64(r.history.Len()-1)
 }
 
+func (r *Robot) GetTeam() Team {
+	return r.team
+}
+
 func (r *Robot) String() string {
 
 	pos, err := r.GetPosition()
