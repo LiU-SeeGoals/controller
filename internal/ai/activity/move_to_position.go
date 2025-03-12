@@ -461,7 +461,9 @@ func (m *MoveToPosition) SimplifyPath(path []info.Position, obstacles []info.Pos
 func (m *MoveToPosition) Achieved(gi *info.GameInfo) bool {
 	currPos, _ := gi.State.GetTeam(m.team)[m.id].GetPosition()
 	distanceLeft := distanceBetween(currPos, m.final_destination)
-	return distanceLeft <= m.rrtConfig.completionDistance
+	robot := gi.State.GetRobot(m.id, m.team)
+	
+	return distanceLeft <= m.rrtConfig.completionDistance && robot.Facing(m.final_destination, 0.1)
 }
 
 // Helper function to calculate distance between two positions
