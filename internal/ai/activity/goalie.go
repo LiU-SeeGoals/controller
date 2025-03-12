@@ -4,17 +4,22 @@ import (
 	"fmt"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
-	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
-// Goalie is the refactored keeper AI that follows a state machine (g.at_state)
-// and tries to position itself based on the ball and a potential "shooter."
+// Constants for goalie positioning
+const (
+	// Goalie position constraints - these will be adjusted based on team half
+	GOALIE_LINE_WIDTH       = 1000 // Width of the goalie's movement range (500 to each side)
+	GOALIE_DIST_FROM_CENTER = 4300 // Distance from center to goalie line
+	GOAL_BEHIND_DIST        = 5500 // Distance from center to position behind the goal
+)
+
 type Goalie struct {
 	GenericComposition
-	team     info.Team
-	id       info.ID
-	at_state int
+	team info.Team
+	id   info.ID
+	Activity
 }
 
 func (g *Goalie) String() string {
@@ -28,84 +33,95 @@ func NewGoalie(team info.Team, id info.ID) *Goalie {
 			team: team,
 			id:   id,
 		},
-		at_state: 0, // initial state
+		team: team,
+		id:   id,
 	}
+}
+
+// calculateInterceptionPoint determines where the goalie should position itself
+// based on the ball position, the "behind goal" reference point, and which half we're defending
+func (g *Goalie) calculateInterceptionPoint(ballPos info.Position, isPositiveHalf bool) info.Position {
+	// Determine goalie line X position and behind-goal X position based on which half we're defending
+	var goalieX, goalBehindX float64
+	var xMultiplier float64
+
+	if isPositiveHalf {
+		// We're defending the positive X side
+		xMultiplier = 1.0
+	} else {
+		// We're defending the negative X side
+		xMultiplier = -1.0
+	}
+
+	// Calculate actual coordinates based on which half we're defending
+	goalieX = xMultiplier * GOALIE_DIST_FROM_CENTER
+	goalBehindX = xMultiplier * GOAL_BEHIND_DIST
+	maxBottomY := float64(-GOALIE_LINE_WIDTH / 2)
+	maxTopY := float64(GOALIE_LINE_WIDTH / 2)
+
+	// If the ball is not detected or has invalid position, return center position
+	if ballPos.X == 0 && ballPos.Y == 0 && ballPos.Z == 0 {
+		return info.Position{X: goalieX, Y: 0, Z: 0, Angle: 0}
+	}
+
+	// Handle case where ball is directly in line with goal (to avoid division by zero)
+	if ballPos.Y == 0 {
+		return info.Position{X: goalieX, Y: 0, Z: 0, Angle: 0}
+	}
+
+	// Calculate slope of the line from ball to behind-goal position
+	// Formula: slope = (y2 - y1) / (x2 - x1)
+	// Where (x1,y1) is the ball position and (x2,y2) is the behind-goal position (goalBehindX, 0)
+	slope := (0 - ballPos.Y) / (goalBehindX - ballPos.X)
+
+	// Calculate the y-coordinate where the line intersects the goalie's movement line
+	// Using the point-slope formula: y - y1 = m(x - x1)
+	// Solving for y when x = goalieX
+	interceptY := ballPos.Y + slope*(goalieX-ballPos.X)
+
+	// For very small GOAL_
+
+	// If the result seems to be mirrored, negate the Y value to correct the direction
+	// This will make sure if the ball is on the left, the goalie moves left
+	interceptY = -interceptY
+
+	// Constrain the position to the max top/bottom boundaries
+	if interceptY < maxBottomY {
+		interceptY = maxBottomY
+	} else if interceptY > maxTopY {
+		interceptY = maxTopY
+	}
+
+	// Return the goalie position
+	return info.Position{X: goalieX, Y: -interceptY, Z: 0, Angle: 0}
 }
 
 // GetAction decides what the goalie should do each tick (frame), returning a single Action.
 func (g *Goalie) GetAction(gi *info.GameInfo) action.Action {
-	fmt.Println("Goalie")
-
-	myTeam := gi.State.GetTeam(g.team)
-	robot := myTeam[g.id]
-	robotPos, err := robot.GetPosition()
-
+	// Get ball position
+	ballPos, err := gi.State.GetBall().GetEstimatedPosition()
 	if err != nil {
-		Logger.Errorf("Position retrieval failed - Robot: %v\n", err)
-		return NewStop(g.id).GetAction(gi)
+		fmt.Println("Error getting ball position:")
+		// If there's an error getting ball position, stay at center
+		return NewMoveToPosition(g.team, g.id, info.Position{X: 0, Y: 0, Z: 0, Angle: 0}).GetAction(gi)
 	}
 
-	ballPos, err := gi.State.GetBall().GetPosition()
+	// Determine which half we're defending
+	// If we're the blue team and blue is on positive half, we defend positive half
+	// If we're the blue team and blue is not on positive half, we defend negative half
+	// If we're the yellow team and blue is on positive half, we defend negative half
+	// If we're the yellow team and blue is not on positive half, we defend positive half
+	isBlueTeam := g.team == info.Blue
+	isBlueOnPositiveHalf := gi.Status.GetBlueTeamOnPositiveHalf()
+	isDefendingPositiveHalf := (isBlueTeam && isBlueOnPositiveHalf) || (!isBlueTeam && !isBlueOnPositiveHalf)
 
-	if err != nil {
-		Logger.Errorf("Ball position retrieval failed - Ball: %v\n", err)
-		return NewStop(g.id).GetAction(gi)
-	}
+	// Calculate where goalie should be
+	goaliePos := g.calculateInterceptionPoint(ballPos, isDefendingPositiveHalf)
 
-
-	// Prepare a MoveTo action for the goalie
-	act := action.MoveTo{
-		Id:   int(g.id),
-		Team: g.team,
-		Pos:  robotPos, // current position
-	}
-
-	// 1) Attempt to find the "shooter" from the opposing team
-	shooter := g.findShooter(gi, ballPos)
-
-	// 2) If there is a shooter, replicate the logic:
-	//    - If ballPos.X <= 4000 => track shooter's Y
-	//    - Else => move closer to the ball
-	if shooter != nil {
-		shooterPos, _ := shooter.GetPosition()
-		if ballPos.X <= 4000 {
-			if shooterPos.Y <= 0 {
-				// Shooter is on the negative side (top in some coordinate systems)
-				if shooterPos.Y <= -500 {
-					act.Dest.Y = -350
-				} else if shooterPos.Y <= -350 {
-					act.Dest.Y = -250
-				} else if shooterPos.Y <= -250 {
-					act.Dest.Y = -150
-				} else {
-					act.Dest.Y = shooterPos.Y
-				}
-			} else {
-				// Shooter is on the positive side (bottom in some coordinate systems)
-				if shooterPos.Y >= 500 {
-					act.Dest.Y = 350
-				} else if shooterPos.Y >= 350 {
-					act.Dest.Y = 250
-				} else if shooterPos.Y >= 250 {
-					act.Dest.Y = 150
-				} else {
-					act.Dest.Y = shooterPos.Y
-				}
-			}
-			act.Dest.X = 4000
-		} else {
-			// The ball is "right" of X=4000, move closer to the ball
-			act.Dest.X = ballPos.X + 25
-			act.Dest.Y = ballPos.Y
-		}
-	} else {
-		// 3) If NO shooter is found, do the "else" logic from the original code
-		act.Dest.X = ballPos.X + 25
-		act.Dest.Y = ballPos.Y
-	}
-
-	act.Dribble = false
-	return &act
+	// Create move action to the calculated position
+	move := NewMoveToPosition(g.team, g.id, goaliePos)
+	act := move.GetAction(gi)
+	return act
 }
 
 // Achieved returns whether this action is "complete".
@@ -114,36 +130,6 @@ func (g *Goalie) Achieved(*info.GameInfo) bool {
 	return false
 }
 
-// findShooter checks the enemy team for any robot within a threshold distance of the ball.
-// If found, returns that robot and true. Otherwise returns nil and false.
-func (g *Goalie) findShooter(gi *info.GameInfo, ballPos info.Position) *info.Robot {
-	// If your game only has two teams (0 and 1), you can identify the opposing team as:
-	var enemyTeamID info.Team
-	if g.team == 0 {
-		enemyTeamID = 1
-	} else {
-		enemyTeamID = 0
-	}
-
-	enemyTeam := gi.State.GetTeam(enemyTeamID)
-	const shooterThreshold = 500.0 // the "X distance" within which a robot is considered the shooter
-
-	// Iterate over all robots in the enemy team
-	for _, enemyRobot := range enemyTeam {
-		enemyPos, err := enemyRobot.GetPosition()
-		if err != nil {
-			continue
-		}
-		dist := enemyPos.Distance(ballPos)
-		if dist <= shooterThreshold {
-			// Found a robot close enough to be considered "shooter"
-			return enemyRobot
-		}
-	}
-	// No enemy robot is close enough
-	return nil
-}
-
-func (g *Goalie) GetID() info.ID {
-	return g.id
+func (m *Goalie) GetID() info.ID {
+	return m.id
 }
