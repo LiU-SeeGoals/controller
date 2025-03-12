@@ -41,9 +41,25 @@ func (m *MoveToBall) GetAction(gi *info.GameInfo) action.Action {
 
 	angleToBall := robotPos.AngleToPosition(ballPos)
 
+	dribble := false
+	if ballPos.Distance(robotPos) < 120 {
+		dribble = true
+	}
+
 	target := info.Position{X: ballPos.X, Y: ballPos.Y, Z: 0, Angle: angleToBall}
-	move := NewMoveToPosition(m.team, m.id, target)
-	return move.GetAction(gi)
+	moveAction := NewMoveToPosition(m.team, m.id, target).GetMoveToAction(gi)
+	moveAction.Dest.Angle = angleToBall
+	act := action.MoveTo{
+		Id:   int(m.id),
+		Team: m.team,
+		Pos:  robotPos,
+		Dest: moveAction.Dest,
+
+		Dribble: dribble,
+	}
+	fmt.Println("possessor: ", gi.State.GetBall().GetPossessor())
+
+	return &act
 }
 
 func (m *MoveToBall) Achieved(gi *info.GameInfo) bool {
@@ -53,4 +69,3 @@ func (m *MoveToBall) Achieved(gi *info.GameInfo) bool {
 func (m *MoveToBall) GetID() info.ID {
 	return m.id
 }
-

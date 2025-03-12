@@ -64,25 +64,29 @@ func (fb *MoveWithBallToPosition) GetAction(gi *info.GameInfo) action.Action {
 	// we are moving to avoid dropping it.
 	targetDistance := robotPosition.Distance(fb.targetPosition)
 	if targetDistance > 100 { // WARN: Magic number
-		targetPosition := fb.targetPosition // Make a copy of target so we can change the angle
-		angleToTarget := robotPosition.AngleToPosition(fb.targetPosition)
-		targetPosition.Angle = angleToTarget
+		moveAction := NewMoveToPosition(fb.team, fb.id, fb.targetPosition).GetMoveToAction(gi) // Make a copy of target so we can change the angle
+
+		angleToTarget := robotPosition.AngleToPosition(moveAction.Dest)
+		moveAction.Dest.Angle = angleToTarget
+
 		act := action.MoveTo{
-			Id:      int(fb.id),
-			Team:    fb.team,
-			Pos:     robotPosition,
-			Dest:    targetPosition,
+			Id:   int(fb.id),
+			Team: fb.team,
+			Pos:  robotPosition,
+			Dest: moveAction.Dest,
+
 			Dribble: true,
 		}
+		// return &act
 		return &act
 	}
 
 	// We are at target position, now rotate to target angle
 	act := action.MoveTo{
-		Id:      int(fb.id),
-		Team:    fb.team,
-		Pos:     robotPosition,
-		Dest:    fb.targetPosition,
+		Id:   int(fb.id),
+		Team: fb.team,
+		Pos:  robotPosition,
+		Dest: fb.targetPosition,
 
 		Dribble: true,
 	}

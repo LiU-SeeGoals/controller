@@ -91,7 +91,9 @@ func (gs *GameState) Update() {
 	latestBallPos, _ := gs.Ball.GetPosition()
 	latestPossessor := gs.Ball.GetPossessor()
 	newPossessor := gs.FindBallPossessor()
+	
 	if gs.Ball.GetAge() < 50 { // Have a new ball measurement,  WARN: Magic number
+		// fmt.Println("New ball measurement")
 		gs.Ball.SetEstimatedPosition(latestBallPos)
 		if gs.LostBall(latestPossessor) { // We have a new measurement, so we can check if possessor has lost the ball
 			gs.Ball.SetPossessor(nil)
@@ -100,8 +102,10 @@ func (gs *GameState) Update() {
 		}
 	} else if latestPossessor != nil { // No new ball measurement, so we have to rely on the latest possessor
 
+		// fmt.Println("No new ball measurement but we have a possessor")
 		gs.Ball.SetEstimatedPosition(latestPossessor.DribblerPos())
 	} else if newPossessor != nil{ // A robot has arrived at the latest location of the ball
+		// fmt.Println("No new ball measurement but we have a new possessor")
 		gs.Ball.SetPossessor(newPossessor)
 		gs.Ball.SetEstimatedPosition(newPossessor.DribblerPos())
 
@@ -136,7 +140,7 @@ func (gs *GameState) FindBallPossessor() *Robot {
 	// fmt.Println("Ball pos: ", ballPos)
 	// est, _ := gs.Ball.GetEstimatedPosition()
 	// fmt.Println("Est. Ball pos:", est)
-	if ballDistance <= 90 && facingBall { // WARN: Magic number, mm
+	if ballDistance <= 100 && facingBall { // WARN: Magic number, mm
 		return closestToBall
 	}
 	return nil

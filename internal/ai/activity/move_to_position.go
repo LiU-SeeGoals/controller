@@ -11,7 +11,7 @@ import (
 )
 
 // RobotSafetyRadius defines the no-movement zone around each robot
-const RobotSafetyRadius = 300.0 // mm - increased for better safety margin
+const RobotSafetyRadius = 200.0 // mm - increased for better safety margin
 
 // MoveToPositionWithCollisionAvoidance handles collision avoidance using RRT
 type MoveToPosition struct {
@@ -50,7 +50,7 @@ func NewMoveToPosition(team info.Team, id info.ID, dest info.Position) *MoveToPo
 	rrtConfig := rrtConfiguration{
 		maxIterations:      1000,
 		stepSize:           150.0,  // mm per step (increased for more aggressive exploration)
-		goalBias:           0.2,    // 20% chance of sampling the goal directly (increased for more direct paths)
+		goalBias:           0.01,    // 20% chance of sampling the goal directly (increased for more direct paths)
 		waypointThreshold:  50.0,   // mm to consider waypoint reached
 		fieldWidth:         6000.0, // Standard SSL field width in mm
 		fieldHeight:        4000.0, // Standard SSL field height in mm
@@ -72,6 +72,11 @@ func NewMoveToPosition(team info.Team, id info.ID, dest info.Position) *MoveToPo
 
 // GetAction returns an action for the robot with RRT-based collision avoidance
 func (m *MoveToPosition) GetAction(gi *info.GameInfo) action.Action {
+	moveToAction := m.GetMoveToAction(gi)
+	return &moveToAction
+}
+
+func (m *MoveToPosition) GetMoveToAction(gi *info.GameInfo) action.MoveTo {
 	myRobot := gi.State.GetTeam(m.team)[m.id]
 	myPos, _ := myRobot.GetPosition()
 
@@ -141,7 +146,7 @@ func (m *MoveToPosition) GetAction(gi *info.GameInfo) action.Action {
 	act.Pos = myPos
 	act.Dest = targetPos
 	act.Dribble = false
-	return &act
+	return act
 }
 
 // CheckForSignificantChanges detects if obstacles have moved enough to require replanning
