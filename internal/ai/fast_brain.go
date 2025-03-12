@@ -62,13 +62,13 @@ func (fb *FastBrainGO) Run() {
 
 			if activitiesCopy[i].Achieved(&gameInfo) { // If achieved, remove it
 
-				Logger.Info(fmt.Sprintf("Activity %v achieved", activitiesCopy[i]))
+				Logger.Info(fmt.Sprintf("Activity achieved: %v ", activitiesCopy[i]))
 				fb.activity_lock.Lock()
 				fb.activities[i] = nil
 				fb.activity_lock.Unlock()
 			} else { // Otherwise, get an action
 
-				Logger.Info(fmt.Sprintf("Activity: %v running", activitiesCopy[i]))
+				Logger.Info(fmt.Sprintf("Activity running: %v", activitiesCopy[i]))
 				actions = append(actions, activitiesCopy[i].GetAction(&gameInfo))
 			}
 		}

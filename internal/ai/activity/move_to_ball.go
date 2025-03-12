@@ -27,7 +27,7 @@ func NewMoveToBall(team info.Team, id info.ID) *MoveToBall {
 }
 
 func (m *MoveToBall) GetAction(gi *info.GameInfo) action.Action {
-	ballPos, err := gi.State.GetBall().GetPosition()
+	ballPos, err := gi.State.GetBall().GetEstimatedPosition()
 	if err != nil {
 		Logger.Errorf("Position retrieval failed - Ball: %v\n", err)
 		return NewStop(m.id).GetAction(gi)
@@ -47,28 +47,6 @@ func (m *MoveToBall) GetAction(gi *info.GameInfo) action.Action {
 }
 
 func (m *MoveToBall) Achieved(gi *info.GameInfo) bool {
-	// target_position, err := gi.State.GetBall().GetPosition()
-	//
-	// if err != nil {
-	// 	Logger.Errorf("Position retrieval failed - Ball: %v\n", err)
-	// 	return false
-	// }
-	//
-	// curr_pos, err := gi.State.GetTeam(m.team)[m.id].GetPosition()
-	// if err != nil {
-	// 	Logger.Errorf("Position retrieval failed - Robot: %v\n", err)
-	// 	return false
-	// }
-	// distance_left := curr_pos.Distance(target_position)
-	// const distance_threshold = 90 // WARN: Magic number
-	// const angle_threshold = 0.1
-	// distance_achieved := distance_left <= distance_threshold
-	//
-	// angleToBall := curr_pos.AngleToPosition(target_position)
-	// angle_diff := curr_pos.AngleDistance(info.Position{ X: 0, Y: 0, Z: 0, Angle: angleToBall })
-	// angle_achieved := angle_diff <= angle_threshold
-
-	// return distance_achieved && angle_achieved
 	return gi.State.GetBall().GetPossessor() == gi.State.GetRobot(m.id, m.team)
 }
 

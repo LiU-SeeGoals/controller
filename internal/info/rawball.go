@@ -3,6 +3,7 @@ package info
 import (
 	"container/list"
 	"errors"
+	"time"
 )
 
 type rawBallPos struct {
@@ -14,7 +15,6 @@ type rawBall struct {
 	history         *list.List
 	historyCapacity int
 }
-
 
 func (b *rawBall) SetPositionTime(x, y, z float64, time int64) {
 	if b.history.Len() >= b.historyCapacity {
@@ -42,6 +42,16 @@ func (b *rawBall) GetPositionTime() (Position, int64, error) {
 	ball := b.history.Front().Value.(*rawBallPos)
 
 	return ball.pos, ball.time, nil
+}
+
+// get age
+func (b *rawBall) GetAge() int64 {
+	_, ballTime, err := b.GetPositionTime()
+	if err != nil {
+		return 0
+	}
+
+	return time.Now().UnixMilli() - ballTime
 }
 
 func (b *rawBall) GetPosition() (Position, error) {

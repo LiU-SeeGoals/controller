@@ -3,6 +3,7 @@ package info
 import (
 	"container/list"
 	"fmt"
+	"math"
 
 	// . "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/tracker"
@@ -46,10 +47,14 @@ func NewRobot(id ID, team Team, history_capasity int) *Robot {
 	}
 }
 
-// NotImplemented
-// func (r *Robot) HasBall() bool {
-// 	return 
-// }
+func (r *Robot) DribblerPos() Position {
+
+	robotPos, _ := r.GetPosition()
+	robotPos.X += 90 * math.Cos(robotPos.Angle) // WARN: Magic number
+	robotPos.Y += 90 * math.Sin(robotPos.Angle) // WARN: Magic number
+	return robotPos
+}
+
 
 func (r *Robot) Facing(target Position, threshold float64) bool {
 	pos, err := r.GetPosition()

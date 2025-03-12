@@ -11,6 +11,7 @@ import (
 type MoveWithBallToPosition struct {
 	GenericComposition
 	targetPosition info.Position
+	retrievingBall bool
 }
 
 func (m *MoveWithBallToPosition) String() string {
@@ -24,6 +25,7 @@ func NewMoveWithBallToPosition(team info.Team, id info.ID, dest info.Position) *
 			id:   id,
 		},
 		targetPosition: dest,
+		retrievingBall: false,
 	}
 }
 
@@ -41,16 +43,19 @@ func (fb *MoveWithBallToPosition) GetAction(gi *info.GameInfo) action.Action {
 	if !robot.IsActive() {
 		return NewStop(fb.id).GetAction(gi)
 	}
+	if !fb.retrievingBall { // Check if it lost the ball
+		fb.retrievingBall = gi.State.LostBall(robot)
+	}
 
-	ball := gi.State.GetBall()
+	move := NewMoveToBall(fb.team, fb.id)
+	if fb.retrievingBall && move.Achieved(gi) { // We have achivied in retrieving the ball
+		Logger.Debug("MoveWithBallToPosition: Ball retrieved")
+		fb.retrievingBall = false
 
-	// If we lost the ball, go get it
-	if ball.GetPossessor() != robot { //
-
-		Logger.Debug("MoveWithBallToPosition: Lost possession of ball")
-
-		move := NewMoveToBall(fb.team, fb.id)
+	} else if fb.retrievingBall { // We are still working on getting the ball
+		Logger.Debug("MoveWithBallToPosition: Retrieving ball")
 		return move.GetAction(gi)
+
 	}
 
 	Logger.Debug("MoveWithBallToPosition: Moving with ball to position")
@@ -78,6 +83,7 @@ func (fb *MoveWithBallToPosition) GetAction(gi *info.GameInfo) action.Action {
 		Team:    fb.team,
 		Pos:     robotPosition,
 		Dest:    fb.targetPosition,
+
 		Dribble: true,
 	}
 	return &act
@@ -85,7 +91,7 @@ func (fb *MoveWithBallToPosition) GetAction(gi *info.GameInfo) action.Action {
 }
 
 func (m *MoveWithBallToPosition) Achieved(gi *info.GameInfo) bool {
-	ballPosition, err := gi.State.GetBall().GetPosition()
+	ballPosition, err := gi.State.GetBall().GetEstimatedPosition()
 	if err != nil {
 		Logger.Errorf("Position retrieval failed - Ball: %v\n", err)
 		return false
