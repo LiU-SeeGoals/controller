@@ -12,8 +12,6 @@ import (
 type KickToPlayer struct {
 	GenericComposition
 	// MovementComposition
-	team     info.Team
-	id       info.ID
 	other_id info.ID
 }
 

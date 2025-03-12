@@ -57,7 +57,6 @@ func (m *MoveToBall) GetAction(gi *info.GameInfo) action.Action {
 
 		Dribble: dribble,
 	}
-	fmt.Println("possessor: ", gi.State.GetBall().GetPossessor())
 
 	return &act
 }

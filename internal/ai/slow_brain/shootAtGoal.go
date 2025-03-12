@@ -1,7 +1,6 @@
 package ai
 
 import (
-	"fmt"
 	"sync"
 	"time"
 
@@ -9,22 +8,22 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
-type SlowBrain1 struct {
+type ShootAtGoal struct {
 	SlowBrainComposition
 	at_state int
 	start    time.Time
 	max_time time.Duration
 }
 
-func NewSlowBrain1(team info.Team) *SlowBrain1 {
-	return &SlowBrain1{
+func NewShootAtGoal(team info.Team) *ShootAtGoal {
+	return &ShootAtGoal{
 		SlowBrainComposition: SlowBrainComposition{
 			team: team,
 		},
 	}
 }
 
-func (m *SlowBrain1) Init(
+func (m *ShootAtGoal) Init(
 	incoming <-chan info.GameInfo,
 	activities *[info.TEAM_SIZE]ai.Activity,
 	lock *sync.Mutex,
@@ -40,26 +39,21 @@ func (m *SlowBrain1) Init(
 }
 
 // This is the main loop of the AI in this slow brain
-func (m *SlowBrain1) run() {
-
-	way_points := []info.Position{
-		{X: 0, Y: 0, Z: 0, Angle: 0},
-		{X: 0, Y: 1000, Z: 0, Angle: 0},
-		{X: 1000, Y: 0, Z: 0, Angle: 0},
-	}
-	index := 0
-
+func (m *ShootAtGoal) run() {
 	for {
-		// No need for slow brain to be fast
 		time.Sleep(100 * time.Millisecond)
 
-		//fmt.Println("slow, number of activities:", len(*m.activities))
-
 		if m.activities[2] == nil {
-			fmt.Println("done with action: ", m.team)
-			// time.Sleep(10000 * time.Millisecond)
-			m.AddActivity(ai.NewMoveToPosition(m.team, 2, way_points[index]))
-			index = (index + 1) % len(way_points)
+
+			activityLoop := []ai.Activity{
+				ai.NewMoveToBall(m.team, 2),
+				ai.NewKickAtPosition(m.team, 2, info.Position{X: 2000, Y: 2000, Z: 0, Angle: 0}),
+				// ai.NewKickToPlayer(m.team, 2, 1),
+			}
+			loop := ai.NewActivityLoop(2, activityLoop)
+			m.AddActivity(loop)
 		}
+
 	}
+
 }
