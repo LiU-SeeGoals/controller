@@ -37,6 +37,8 @@ const (
 	TIMEOUT_YELLOW
 	// The blue team is currently in a timeout.
 	TIMEOUT_BLUE
+	GOAL_YELLOW // DEPRICATED
+	GOAL_BLUE // DEPRICATED
 	// Equivalent to STOP, but the yellow team must pick up the ball and
 	// drop it in the Designated Position.
 	BALL_PLACEMENT_YELLOW
@@ -45,7 +47,53 @@ const (
 	BALL_PLACEMENT_BLUE
 )
 
+// // MatchEvent is an enum that represents the current match event.
+// type MatchState int
+//
+// const (
+// 	// The match has been halted, robots must stop moving.
+// 	HALTED MatchState = iota
+// 	// The match is stopped, robots may move
+// 	STOPPED
+//
+// 	// The match is preparing for a kickoff by the yellow team.
+// 	PREPARING_KICKOFF_YELLOW
+// 	// The match is preparing for a kickoff by the blue team.
+// 	PREPARING_KICKOFF_BLUE
+// 	// Yellow team is making a kickoff
+// 	KICKOFF_YELLOW
+// 	// Blue team is making a kickoff
+// 	KICKOFF_BLUE
+//
+// 	// The match is preparing for a penalty kick by the yellow team.
+// 	PREPARING_PENALTY_YELLOW
+// 	// The match is preparing for a penalty kick by the blue team.
+// 	PREPARING_PENALTY_BLUE
+// 	// Yellow team is making a penalty kick
+// 	PENALTY_KICK_YELLOW
+// 	// Blue team is making a penalty kick
+// 	PENALTY_KICK_BLUE
+//
+// 	// Yellow team is placing ball
+// 	PLACING_BALL_YELLOW
+// 	// Blue team is placing ball
+// 	PLACING_BALL_BLUE
+// 	// Yellow team is taking a free kick
+// 	TAKING_FREE_KICK_YELLOW
+// 	// Blue team is taking a free kick
+// 	TAKING_FREE_KICK_BLUE
+//
+// 	// Yellow team is taking a timeout.
+// 	TAKING_TIMEOUT_YELLOW
+// 	// Blue team is taking a timeout.
+// 	TAKING_TIMEOUT_BLUE
+//
+// 	// The match is running.
+// 	RUNNING
+// )
+
 type GameEvent struct {
+
 
 	// Command issued by the referee.
 	RefCommand RefCommand
@@ -81,6 +129,7 @@ func NewGameEvent() *GameEvent {
 		DesignatedPosition: mat.NewVecDense(2, nil),
 	}
 }
+
 
 // String method for RefCommand to convert the enum to a human-readable string
 func (rc RefCommand) String() string {

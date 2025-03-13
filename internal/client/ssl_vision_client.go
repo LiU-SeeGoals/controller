@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"net"
 
-	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/helper"
 	"github.com/LiU-SeeGoals/controller/internal/info"
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/proto_go/ssl_vision"
 	"google.golang.org/protobuf/proto"
 )
@@ -107,13 +107,15 @@ func unpack(packet *ssl_vision.SSL_WrapperPacket, gi *info.GameInfo, play_time i
 
 	}
 
-	for _, ball := range detect.GetBalls() {
-		//fmt.Println("Ball", ball.GetX(), ball.GetY(), ball.GetZ())
-		x := float64(ball.GetX())
-		y := float64(ball.GetY())
-		z := float64(ball.GetZ())
+	if detect.GetBalls() != nil {
+		for _, ball := range detect.GetBalls() {
+			//fmt.Println("Ball", ball.GetX(), ball.GetY(), ball.GetZ())
+			x := float64(ball.GetX())
+			y := float64(ball.GetY())
+			z := float64(ball.GetZ())
 
-		gi.State.SetBall(x, y, z, play_time)
+			gi.State.SetBall(x, y, z, play_time)
+		}
 	}
 
 	gi.State.SetValid(true)
@@ -130,11 +132,13 @@ func unpack(packet *ssl_vision.SSL_WrapperPacket, gi *info.GameInfo, play_time i
 		field.GetPenaltyAreaDepth(),
 		field.GetPenaltyAreaWidth(),
 	)
-	for _, line := range field.GetFieldLines() {
-		gi.Field.AddFieldLine(line.GetName(), float64(line.GetP1().GetX()), float64(line.GetP1().GetY()), float64(line.GetP2().GetX()), float64(line.GetP2().GetY()), float64(line.GetThickness()), int(line.GetType()))
-	}
-	for _, arc := range field.GetFieldArcs() {
-		gi.Field.AddFieldArc(arc.GetName(), float64(arc.GetCenter().GetX()), float64(arc.GetCenter().GetY()), float64(arc.GetRadius()), float64(arc.GetA1()), float64(arc.GetA2()), float64(arc.GetThickness()), int(arc.GetType()))
+	if gi.Field.FieldLines == nil {
+		for _, line := range field.GetFieldLines() {
+			gi.Field.AddFieldLine(line.GetName(), float64(line.GetP1().GetX()), float64(line.GetP1().GetY()), float64(line.GetP2().GetX()), float64(line.GetP2().GetY()), float64(line.GetThickness()), int(line.GetType()))
+		}
+		for _, arc := range field.GetFieldArcs() {
+			gi.Field.AddFieldArc(arc.GetName(), float64(arc.GetCenter().GetX()), float64(arc.GetCenter().GetY()), float64(arc.GetRadius()), float64(arc.GetA1()), float64(arc.GetA2()), float64(arc.GetThickness()), int(arc.GetType()))
+		}
 	}
 
 }
