@@ -73,26 +73,21 @@ func (m *SlowBrainCompetition) run() {
 
 		}
 
-		referee_activities := m.GetRefereeActivities(&gameInfo)
+		fmt.Println(gameInfo.Status.GetGameEvent().RefCommand)
 
-		for _, act := range referee_activities {
-			if act != nil { // Check for a non-nil activity
-				fmt.Println("adding referee activity")
-				m.ReplaceActivities(referee_activities)
-				m.at_state = REFEREE
-				continue
-			}
+		if gameInfo.Status.GetGameEvent().RefCommand != info.FORCE_START {
+			m.AddActivity(ai.NewStop(0))
+			m.AddActivity(ai.NewStop(1))
+			continue
 		}
 
-		// If we are EXITING the REFEREE state, we need to clear the activities
-		if m.at_state == REFEREE {
-			fmt.Println("clearing activities")
-			m.ClearActivities()
-			m.at_state = RUNNING
-		}
-
+		// fmt.Println("SlowBrainCompetition: running")
 		// Set robot to goalie
+
+		m.activities[0] = nil
+		m.activities[1] = nil
 		if m.activities[0] == nil {
+			fmt.Println("done with action:-------------------------------------------")
 			fmt.Println("done with action: ", m.team)
 			m.AddActivity(ai.NewGoalie(m.team, 0))
 		}
@@ -120,5 +115,6 @@ func (m *SlowBrainCompetition) run() {
 			}
 
 		}
+		fmt.Println(m.activities)
 	}
 }
