@@ -55,7 +55,7 @@ func NewMoveToPosition(team info.Team, id info.ID, dest info.Position) *MoveToPo
 		waypointThreshold:  50.0,    // mm to consider waypoint reached
 		fieldWidth:         13400.0, // Standard SSL field width in mm
 		fieldHeight:        10400.0, // Standard SSL field height in mm
-		completionDistance: 50.0,    // mm to consider the goal reached
+		completionDistance: 500.0,    // mm to consider the goal reached
 	}
 
 	return &MoveToPosition{
@@ -74,6 +74,9 @@ func NewMoveToPosition(team info.Team, id info.ID, dest info.Position) *MoveToPo
 // GetAction returns an action for the robot with RRT-based collision avoidance
 func (m *MoveToPosition) GetAction(gi *info.GameInfo) action.Action {
 	moveToAction := m.GetMoveToAction(gi)
+    //pos, _ := gi.State.GetRobot(m.id, m.team).GetPosition()
+    //fmt.Println("current pos: ", pos)
+    //fmt.Println("distance left: ", distanceBetween(pos, m.final_destination))
 	m.gi = gi
 	return &moveToAction
 }
@@ -463,9 +466,8 @@ func (m *MoveToPosition) SimplifyPath(path []info.Position, obstacles []info.Pos
 func (m *MoveToPosition) Achieved(gi *info.GameInfo) bool {
 	currPos, _ := gi.State.GetTeam(m.team)[m.id].GetPosition()
 	distanceLeft := distanceBetween(currPos, m.final_destination)
-	robot := gi.State.GetRobot(m.id, m.team)
 
-	return distanceLeft <= m.rrtConfig.completionDistance && robot.Facing(m.final_destination, 0.1)
+	return distanceLeft <= m.rrtConfig.completionDistance
 }
 
 // Helper function to calculate distance between two positions
