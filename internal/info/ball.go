@@ -2,23 +2,23 @@ package info
 
 import (
 	"container/list"
-	"github.com/LiU-SeeGoals/controller/internal/tracker"
+	//"github.com/LiU-SeeGoals/controller/internal/tracker"
 )
 
 type Ball struct {
 	rawBall
 	possessor *Robot
-	tracker	 *tracker.BallTracker
+	//tracker	 *tracker.BallTracker
 }
 
 func NewBall(historyCapacity int) *Ball {
-	tracker := tracker.NewBallTracker()
+	//tracker := tracker.NewBallTracker()
 	return &Ball{
 		rawBall: rawBall{
 			history:         list.New(),
 			historyCapacity: historyCapacity,
 		},
-		tracker: tracker,
+		//tracker: tracker,
 		possessor: nil,
 	}
 }

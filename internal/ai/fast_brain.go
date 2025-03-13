@@ -74,6 +74,11 @@ func (fb *FastBrainGO) Run() {
 		}
 
 		// Send actions
+        for _, action := range actions {
+	        if action != nil {
+	        	//fmt.Println(fmt.Sprintf("Action: %v", action))
+	        }
+        }
 		fb.outgoingActions <- actions
 	}
 }

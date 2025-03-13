@@ -24,6 +24,7 @@ type MoveToPosition struct {
 	planningInterval  time.Duration    // How often to replan the path
 	previousObstacles []info.Position  // Previous obstacle positions for change detection
 	significantChange bool             // Flag to indicate if obstacles have moved significantly
+    gi                *info.GameInfo
 }
 
 // rrtConfiguration holds parameters for the RRT algorithm
@@ -54,7 +55,7 @@ func NewMoveToPosition(team info.Team, id info.ID, dest info.Position) *MoveToPo
 		waypointThreshold:  50.0,   // mm to consider waypoint reached
 		fieldWidth:         6000.0, // Standard SSL field width in mm
 		fieldHeight:        4000.0, // Standard SSL field height in mm
-		completionDistance: 50.0,   // mm to consider the goal reached
+		completionDistance: 500.0,   // mm to consider the goal reached
 	}
 
 	return &MoveToPosition{
@@ -74,6 +75,7 @@ func NewMoveToPosition(team info.Team, id info.ID, dest info.Position) *MoveToPo
 func (m *MoveToPosition) GetAction(gi *info.GameInfo) action.Action {
 	myRobot := gi.State.GetTeam(m.team)[m.id]
 	myPos, _ := myRobot.GetPosition()
+    m.gi = gi
 
 	// Check for significant obstacle changes
 	currentObstacles := m.GetObstaclePositions(gi)
@@ -467,7 +469,8 @@ func distanceBetween(pos1, pos2 info.Position) float64 {
 }
 
 func (m *MoveToPosition) String() string {
-	return fmt.Sprintf("MoveToPosition: dest%s", m.final_destination)
+	currPos, _ := m.gi.State.GetTeam(m.team)[m.id].GetPosition()
+    return fmt.Sprintf("MoveToPosition: dist%f", distanceBetween(currPos, m.final_destination))
 }
 
 func (m *MoveToPosition) GetID() info.ID {

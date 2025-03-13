@@ -75,10 +75,10 @@ func (b *BaseStationClient) SendActions(actions []action.Action) {
 	if !b.hasBeenInited {
 		fmt.Println("\033[0m Base station client has not been inited\033[33m")
 	}
-	fmt.Println("sending!")
+	//fmt.Println("sending!")
 	for _, action := range actions {
 		b.queueMutex.Lock()
-		fmt.Println()
+		//fmt.Println()
 		b.queue = append(b.queue, action.TranslateReal())
 		b.queueMutex.Unlock()
 	}

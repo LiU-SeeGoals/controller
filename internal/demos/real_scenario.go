@@ -64,22 +64,22 @@ func RealScenario() {
 	simClientYellow.Init()
 
 	start_time := time.Now().UnixMilli()
-	start := time.Now()
+	//start := time.Now()
 	for {
 		playTime := time.Now().UnixMilli() - start_time
 
 		ssl_receiver.UpdateState(gameInfo, playTime)
 		yellow_actions := aiYellow.GetActions(gameInfo)
-		if time.Since(start) > 1000 * time.Millisecond {
+		//if time.Since(start) > 1000 * time.Millisecond {
 			
-			fmt.Println(start)
-			fmt.Println(time.Since(start))
+			//fmt.Println(start)
+			//fmt.Println(time.Since(start))
 
 			
 			simClientYellow.SendActions(yellow_actions)
 
-			start = time.Now()
-		}
+			//start = time.Now()
+		//}
 
 	}
 }

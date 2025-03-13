@@ -43,6 +43,7 @@ func (m *MoveToBall) GetAction(gi *info.GameInfo) action.Action {
 
 	target := info.Position{X: ballPos.X, Y: ballPos.Y, Z: 0, Angle: angleToBall}
 	move := NewMoveToPosition(m.team, m.id, target)
+    fmt.Println("ball: ", target)
 	return move.GetAction(gi)
 }
 

@@ -43,9 +43,15 @@ func (m *SlowBrain1) Init(
 func (m *SlowBrain1) run() {
 
 	way_points := []info.Position{
-		{X: 0, Y: 0, Z: 0, Angle: 0},
-		{X: 0, Y: 1000, Z: 0, Angle: 0},
-		{X: 1000, Y: 0, Z: 0, Angle: 0},
+        // Go between line
+		//{X: -3575, Y: -4128, Z: 0, Angle: 0},
+		//{X: -5558, Y: -4096, Z: 0, Angle: 0},
+        // Go to pos
+		//{X: -4195, Y: -3544, Z: 0, Angle: 0},
+        // Triangle
+		{X: -5500, Y: -4100, Z: 0, Angle: 0},
+		{X: -5600, Y: -2600, Z: 0, Angle: 0},
+		{X: -4200, Y: -3400, Z: 0, Angle: 0},
 	}
 	index := 0
 
@@ -55,10 +61,14 @@ func (m *SlowBrain1) run() {
 
 		//fmt.Println("slow, number of activities:", len(*m.activities))
 
-		if m.activities[2] == nil {
+		if m.activities[1] == nil {
 			fmt.Println("done with action: ", m.team)
-			time.Sleep(10000 * time.Millisecond)
-			m.AddActivity(ai.NewMoveToPosition(m.team, 2, way_points[index]))
+            //fmt.Println("Next move action: ", way_points[index])
+			//time.Sleep(10000 * time.Millisecond)
+			//m.AddActivity(ai.NewMoveToPosition(m.team, 1, way_points[index]))
+            action := ai.NewMoveToBall(m.team, 1)
+            //fmt.Println("Move to ball: ", action.GetAction())
+			m.AddActivity(action)
 			index = (index + 1) % len(way_points)
 		}
 	}
