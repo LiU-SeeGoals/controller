@@ -17,7 +17,7 @@ type FastBrainGO struct {
 	incomingGameInfo <-chan info.GameInfo
 	outgoingActions  chan<- []action.Action
 	activities       *[info.TEAM_SIZE]ai.Activity // <-- pointer to a slice
-	activity_lock    *sync.Mutex    // shared mutex for synchronization
+	activity_lock    *sync.Mutex                  // shared mutex for synchronization
 }
 
 func NewFastBrainGO() *FastBrainGO {
@@ -58,7 +58,9 @@ func (fb *FastBrainGO) Run() {
 		var actions []action.Action
 		var i info.ID
 		for i = 0; i < info.TEAM_SIZE; i++ { // Loop through all activities
-			if activitiesCopy[i] == nil { continue } // Skip nil activities
+			if activitiesCopy[i] == nil {
+				continue
+			} // Skip nil activities
 
 			if activitiesCopy[i].Achieved(&gameInfo) { // If achieved, remove it
 
@@ -70,6 +72,12 @@ func (fb *FastBrainGO) Run() {
 
 				Logger.Info(fmt.Sprintf("Activity running: %v", activitiesCopy[i]))
 				actions = append(actions, activitiesCopy[i].GetAction(&gameInfo))
+			}
+		}
+
+		for _, action := range actions {
+			if action != nil {
+				//fmt.Println(fmt.Sprintf("Action: %v", action))
 			}
 		}
 

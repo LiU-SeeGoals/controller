@@ -87,14 +87,14 @@ func (mt *MoveTo) TranslateReal() *robot_action.Command {
 		CommandId: robot_action.ActionType_MOVE_TO_ACTION,
 		RobotId:   int32(mt.Id),
 		Pos: &robot_action.Vector3D{
-			X: int32(mt.Pos.X),
-			Y: int32(mt.Pos.Y),
-			W: float32(mt.Pos.Angle),
+			X: int32(mt.Pos.X + 10000),
+			Y: int32(mt.Pos.Y + 10000),
+			W: float32(mt.Pos.Angle * 1000),
 		},
 		Dest: &robot_action.Vector3D{
-			X: int32(mt.Dest.X),
-			Y: int32(mt.Dest.Y),
-			W: float32(mt.Dest.Angle),
+			X: int32(mt.Dest.X + 10000),
+			Y: int32(mt.Dest.Y + 10000),
+			W: float32(mt.Dest.Angle * 1000),
 		},
 	}
 	return command_move
