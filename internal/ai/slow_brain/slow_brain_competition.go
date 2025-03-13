@@ -53,8 +53,8 @@ func (m *SlowBrainCompetition) Init(
 // This is the main loop of the AI in this slow brain
 func (m *SlowBrainCompetition) run() {
 	way_points := []info.Position{
-		{X: 0, Y: 4400, Z: 0, Angle: 0},
-		{X: 0, Y: -4400, Z: 0, Angle: 0},
+		{X: 4600, Y: 0, Z: 0, Angle: 0},
+		{X: -4600, Y: 0, Z: 0, Angle: 0},
 	}
 
 	enemy_goal := 0
@@ -67,9 +67,9 @@ func (m *SlowBrainCompetition) run() {
 		gameInfo := <-m.incomingGameInfo
 
 		if gameInfo.Status.GetBlueTeamOnPositiveHalf() && m.team == info.Blue {
-			enemy_goal = 1
-		} else {
 			enemy_goal = 0
+		} else {
+			enemy_goal = 1
 
 		}
 
@@ -104,12 +104,15 @@ func (m *SlowBrainCompetition) run() {
 		// 2. If get the ball, dribble to a position in front of thier goal
 		// 3. Kick the ball to the goal
 		// 4. Repeat
+		// fmt.Println(way_points[enemy_goal])
 
 		if m.activities[1] == nil {
 			fmt.Println("done with action: ", m.team)
 
 			// If we have the ball, then dribble to the enemy goal
-			if gameInfo.State.GetBall().GetPossessor().GetID() == 1 {
+			possessor := gameInfo.State.GetBall().GetPossessor()
+
+			if possessor != nil && possessor.GetID() == 1 {
 				m.AddActivity(ai.NewMoveWithBallToPosition(m.team, 1, way_points[enemy_goal]))
 
 			} else {
