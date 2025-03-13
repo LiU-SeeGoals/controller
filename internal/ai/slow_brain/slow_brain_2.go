@@ -65,18 +65,22 @@ func (m *SlowBrain2) run() {
 		time.Sleep(100 * time.Millisecond)
 
 		gameInfo := <-m.incomingGameInfo
-		fmt.Println("slow brain 2: ")
+		// fmt.Println("slow brain 2: ")
 
-		referee_activities := m.GetRefereeActivities(&gameInfo)
-		fmt.Println("referee action: ", gameInfo.Status.GetGameEvent().RefCommand)
+		fmt.Println(gameInfo.Status.GetGameEvent().RefCommand)
 
-		for _, act := range referee_activities {
-			if act != nil { // Check for a non-nil activity
-				fmt.Println("adding referee activity")
-				m.ReplaceActivities(referee_activities)
-				m.at_state = REFEREE
-			}
+		if gameInfo.Status.GetGameEvent().RefCommand != info.FORCE_START {
+			m.AddActivity(ai.NewStop(0))
+			// m.AddActivity(ai.NewStop(1))
+			m.at_state = REFEREE
+			continue
 		}
+
+		// fmt.Println("SlowBrainCompetition: running")
+		// Set robot to goalie
+
+		// m.activities[0] = nil
+		// m.activities[1] = nil
 
 		// If we are EXITING the REFEREE state, we need to clear the activities
 		if m.at_state == REFEREE {
@@ -85,6 +89,7 @@ func (m *SlowBrain2) run() {
 			m.at_state = RUNNING
 		}
 
+		fmt.Println(m.activities[0])
 		if m.activities[0] == nil {
 			fmt.Println("done with action: ", m.team)
 			m.AddActivity(ai.NewMoveToPosition(m.team, 0, way_points[index]))
