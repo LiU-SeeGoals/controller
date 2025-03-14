@@ -67,9 +67,9 @@ func (m *SlowBrain2) run() {
 		gameInfo := <-m.incomingGameInfo
 		// fmt.Println("slow brain 2: ")
 
-		fmt.Println(gameInfo.Status.GetGameEvent().RefCommand)
+		fmt.Println(gameInfo.Status.GetGameEvent())
 
-		if gameInfo.Status.GetGameEvent().RefCommand != info.FORCE_START {
+		if gameInfo.Status.GetGameEvent().GetCurrentState() != info.STATE_PLAYING {
 			m.AddActivity(ai.NewStop(0))
 			// m.AddActivity(ai.NewStop(1))
 			m.at_state = REFEREE
