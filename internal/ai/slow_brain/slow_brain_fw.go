@@ -57,16 +57,17 @@ func (m *SlowBrainFw) run() {
 	}
 	index := 0
     succesfull_commands := 0
-    robots := []int{1, 3}
+    //robots := []int{0}
+    robot := 0
+
+    gameInfo := <-m.incomingGameInfo
+    fmt.Println(gameInfo.Status)
 
 	for {
-        //sgameInfo := <-m.incomingGameInfo
-        //sfmt.Println(gameInfo.Status)
-
 		// No need for slow brain to be fast
 		time.Sleep(100 * time.Millisecond)
 
-        for _, robot := range robots {
+        //for _, robot := range robots {
             if m.activities[robot] == nil {
                 fmt.Println(fmt.Sprintf("done with (%d) action (%s)", robot, m.team))
                 fmt.Println("next action: ", way_points[index])
@@ -75,6 +76,6 @@ func (m *SlowBrainFw) run() {
                 index = (index + 1) % len(way_points)
                 succesfull_commands++
             }
-        }
+        //}
 	}
 }
