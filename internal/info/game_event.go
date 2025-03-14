@@ -323,7 +323,11 @@ func (ge *GameEvent) GetCurrentState() RefState {
 	return ge.CurrentState
 }
 
-// ShouldKeepDistanceFromBall returns true if robots of the given team should keep distance from the ball
+func (ge *GameEvent) GetTeamWithPossession() Team {
+	return ge.TeamWithPossession
+}
+
+// If we should keep distance from ball it is 500 mm
 func (ge *GameEvent) ShouldKeepDistanceFromBall(robotTeam Team) bool {
 	if ge.CurrentState == STATE_HALTED {
 		return true
@@ -364,30 +368,6 @@ func (ge *GameEvent) ShouldKeepDistanceFromBall(robotTeam Team) bool {
 	return false
 }
 
-// GetRequiredBallDistance returns the required distance from the ball in meters
-func (ge *GameEvent) GetRequiredBallDistance() float64 {
-	if ge.CurrentState == STATE_HALTED {
-		return 0.0 // Any distance is fine during HALT
-	}
-
-	if ge.CurrentState == STATE_STOPPED || ge.CurrentState == STATE_BALL_PLACEMENT {
-		return 500 // 50 cm for STOP and ball placement
-	}
-
-	if ge.CurrentState == STATE_FREE_KICK && !ge.BallInPlay {
-		return 500 // 50 cm for free kick preparation
-	}
-
-	if (ge.CurrentState == STATE_KICKOFF_PREPARATION ||
-		ge.CurrentState == STATE_PENALTY_PREPARATION) &&
-		!ge.BallInPlay {
-		return 500
-	}
-
-	// During normal play, no specific distance required
-	return 0.0
-}
-
 // GetMaxRobotSpeed returns the maximum allowed robot speed in m/s
 func (ge *GameEvent) GetMaxRobotSpeed() float64 {
 	if ge.CurrentState == STATE_HALTED {
@@ -426,15 +406,10 @@ func (ge *GameEvent) CanManipulateBall(robotTeam Team) bool {
 	return ge.BallInPlay
 }
 
-// CheckBallMovedForPlay checks if the ball has moved enough (0.05m) to be considered in play
-func (ge *GameEvent) CheckBallMovedForPlay(ballMoved bool, ballMovedDistance float64) bool {
-	if !ge.BallInPlay && ballMoved && ballMovedDistance >= 5 {
-		// Only update if we're in a state where ball movement puts the ball in play
-		switch ge.CurrentState {
-		case STATE_KICKOFF_PREPARATION, STATE_PENALTY_PREPARATION, STATE_FREE_KICK:
-			ge.BallInPlay = true
-			return true
-		}
+func (ge *GameEvent) SetBallMoved() {
+	switch ge.CurrentState {
+	case STATE_KICKOFF_PREPARATION, STATE_PENALTY_PREPARATION, STATE_FREE_KICK:
+		ge.BallInPlay = true
+		ge.CurrentState = STATE_PLAYING
 	}
-	return false
 }
