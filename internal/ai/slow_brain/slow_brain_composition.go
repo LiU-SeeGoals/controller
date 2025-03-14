@@ -1,10 +1,9 @@
 package ai
 
 import (
-	"fmt"
+	"math"
 	"reflect"
 	"strings"
-	"math"
 	"sync"
 	"time"
 
@@ -56,7 +55,7 @@ func (m *SlowBrainComposition) ReplaceActivities(activities *[info.TEAM_SIZE]ai.
 
 func (m *SlowBrainComposition) HandleRef(gi *info.GameInfo, active_robots []int) bool {
 
-	fmt.Println(gi.Status.GetGameEvent().GetCurrentState())
+	// fmt.Println(gi.Status.GetGameEvent().GetCurrentState())
 
 	switch gi.Status.GetGameEvent().GetCurrentState() {
 	case info.STATE_HALTED, info.STATE_STOPPED, info.STATE_PENALTY_PREPARATION, info.STATE_FREE_KICK, info.STATE_TIMEOUT, info.STATE_BALL_PLACEMENT:
@@ -67,9 +66,23 @@ func (m *SlowBrainComposition) HandleRef(gi *info.GameInfo, active_robots []int)
 		return true
 
 	case info.STATE_KICKOFF_PREPARATION:
+
+		// if m.waiting_for_kick {
+		// 	if gi.State.Ball.GetVelocity().Norm() > 0.4 {
+		// 		fmt.Println("yooyoyooy")
+
+		// 		gi.Status.GetGameEvent().RefCommand = info.RefCommand(info.STATE_PLAYING)
+		// 		m.waiting_for_kick = false
+		// 		m.prev_ref = false
+		// 		return false
+		// 	} else {
+		// 		m.prev_ref = true
+		// 		return true
+		// 	}
+		// }
+
 		kicker := info.ID(1)
 		if gi.Status.GetGameEvent().GetTeamWithPossession() == m.team { // We are kicker
-			fmt.Println(m.activities[kicker])
 			if gi.Status.GetGameEvent().RefCommand != info.NORMAL_START {
 				m.AddActivity(ai.NewPrepareKicker(m.team, kicker))
 
@@ -91,16 +104,7 @@ func (m *SlowBrainComposition) HandleRef(gi *info.GameInfo, active_robots []int)
 		return true
 
 	default:
-		if m.waiting_for_kick {
-			if gi.State.Ball.GetVelocity().Norm() > 10 {
-				m.waiting_for_kick = false
-				m.prev_ref = false
-				return false
-			} else {
-				m.prev_ref = true
-				return true
-			}
-		}
+
 		// If we are exiting ref activity
 		if m.prev_ref == true {
 			m.ClearActivities()
