@@ -51,12 +51,22 @@ func (m *SlowBrainComposition) ReplaceActivities(activities *[info.TEAM_SIZE]ai.
 
 func (m *SlowBrainComposition) HandleRef(gi *info.GameInfo, active_robots []int) bool {
 	switch gi.Status.GetGameEvent().GetCurrentState() {
-	case info.STATE_HALTED, info.STATE_STOPPED, info.STATE_KICKOFF_PREPARATION, info.STATE_PENALTY_PREPARATION, info.STATE_FREE_KICK, info.STATE_TIMEOUT, info.STATE_BALL_PLACEMENT:
+	case info.STATE_HALTED, info.STATE_STOPPED, info.STATE_PENALTY_PREPARATION, info.STATE_FREE_KICK, info.STATE_TIMEOUT, info.STATE_BALL_PLACEMENT:
 		for _, value := range active_robots {
 			m.AddActivity(ai.NewStop(info.ID(value)))
 		}
 		m.prev_ref = true
 		return true
+	case info.STATE_KICKOFF_PREPARATION:
+		if gi.Status.GetGameEvent().GetTeamWithPossession() == m.team { // We are kicker
+			m.AddActivity(ai.NewRefKicker(info.ID(0), m.team))
+			// m.AddActivity(ai.NewRefKickoff(info.ID(0), m.team))
+		} else { // We are not kicker
+			m.AddActivity(ai.NewRefKickoff(info.ID(0), m.team))
+		}
+		m.prev_ref = true
+		return true
+
 	default:
 		// If we are exiting ref activity
 		if m.prev_ref == true {

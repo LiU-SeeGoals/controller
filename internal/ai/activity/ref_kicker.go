@@ -17,7 +17,7 @@ func (m *RefKicker) String() string {
 	return fmt.Sprintf("RefKicker(%d)", m.id)
 }
 
-func NewRefKicker(id info.ID, team info.Team, refState info.RefState) *RefKicker {
+func NewRefKicker(id info.ID, team info.Team) *RefKicker {
 	return &RefKicker{
 		GenericComposition: GenericComposition{
 			id:   id,
@@ -29,8 +29,6 @@ func NewRefKicker(id info.ID, team info.Team, refState info.RefState) *RefKicker
 
 func (m *RefKicker) GetAction(gi *info.GameInfo) action.Action {
 	var act action.Action
-	robotPos, _ := gi.State.GetRobot(m.id, m.team).GetPosition()
-	ballPos, _ := gi.State.Ball.GetPosition()
 
 	// Prepare kickoff, get in position
 	if gi.Status.GetGameEvent().GetCurrentState() != info.STATE_KICKOFF_PREPARATION {

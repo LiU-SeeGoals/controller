@@ -3,6 +3,7 @@ package ai
 import (
 	"fmt"
 	"math"
+	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/info"
@@ -12,6 +13,8 @@ import (
 type RamAtPosition struct {
 	GenericComposition
 	targetPosition info.Position
+	startWait      int64
+	bumpedBall     bool
 }
 
 func (k *RamAtPosition) String() string {
@@ -25,10 +28,15 @@ func NewRamAtPosition(team info.Team, id info.ID, targetPosition info.Position) 
 			id:   id,
 		},
 		targetPosition: targetPosition,
+		bumpedBall:     false,
 	}
 }
 
 func (kp *RamAtPosition) GetAction(gi *info.GameInfo) action.Action {
+	if kp.bumpedBall {
+		return NewStop(kp.id).GetAction(gi)
+	}
+
 	robot := gi.State.GetRobot(kp.id, kp.team)
 	robotPos, err := robot.GetPosition()
 	if err != nil {
@@ -47,13 +55,12 @@ func (kp *RamAtPosition) GetAction(gi *info.GameInfo) action.Action {
 		return NewStop(kp.id).GetAction(gi)
 	}
 
-
 	angleBallToStartPos := ballPos.AngleToPosition(kp.targetPosition) + math.Pi
 	startPos := ballPos.OnRadius(500, angleBallToStartPos)
 
 	move := NewMoveToPosition(kp.team, kp.id, startPos)
 	move.AvoidBall(true)
-	
+
 	// In start position, RAM THE BALL
 	if move.Achieved(gi) {
 		angleBallToTargetPos := ballPos.AngleToPosition(kp.targetPosition)
@@ -75,7 +82,16 @@ func (k *RamAtPosition) Achieved(gi *info.GameInfo) bool {
 		Logger.Errorf("Position retrieval failed - Kicker: %v\n", err)
 		return false
 	}
-	return robotPos.Distance(ballPos) < 50
+
+	if robotPos.Distance(ballPos) < 91 {
+		k.bumpedBall = true
+		k.startWait = time.Now().UnixMilli()
+	}
+	
+	waited := time.Now().UnixMilli() - k.startWait
+
+	return waited > 5000 && k.bumpedBall
+
 }
 
 func (k *RamAtPosition) GetID() info.ID {
