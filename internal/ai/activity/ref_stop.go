@@ -16,7 +16,7 @@ func (m *RefStop) String() string {
 	return fmt.Sprintf("RefStop(%d)", m.id)
 }
 
-func NewRefStop(id info.ID, team info.Team) *RefStop {
+func NewRefStop(team info.Team, id info.ID) *RefStop {
 	return &RefStop{
 		GenericComposition: GenericComposition{
 			id:   id,

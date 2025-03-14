@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
+	"math"
 	"sync"
 	"time"
 
@@ -66,11 +67,24 @@ func (m *SlowBrainComposition) HandleRef(gi *info.GameInfo, active_robots []int)
 		return true
 
 	case info.STATE_KICKOFF_PREPARATION:
+		kicker := info.ID(1)
 		if gi.Status.GetGameEvent().GetTeamWithPossession() == m.team { // We are kicker
-			m.AddActivity(ai.NewRefKicker(info.ID(1), m.team))
+			fmt.Println(m.activities[kicker])
+			if gi.Status.GetGameEvent().RefCommand != info.NORMAL_START {
+				m.AddActivity(ai.NewPrepareKicker(m.team, kicker))
+
+			} else if m.activities[kicker] == nil { // We are preparing for kickoff but arent allowed to kick ball yet
+				targetPos := info.Position{X: 300, Y: 0, Z: 0, Angle: 0} // Position for negative half
+				if m.team == info.Blue && gi.Status.GetBlueTeamOnPositiveHalf() || m.team == info.Yellow && !gi.Status.GetBlueTeamOnPositiveHalf() {
+					// We have the positive half
+					targetPos = info.Position{X: -300, Y: 0, Z: 0, Angle: math.Pi}
+				}
+				m.AddActivity(ai.NewRamAtPosition(m.team, kicker, targetPos))
+
+			}
 			// m.AddActivity(ai.NewRefKickoff(info.ID(0), m.team))
 		} else { // We are not kicker
-			m.AddActivity(ai.NewRefKickoff(info.ID(1), m.team))
+			m.AddActivity(ai.NewRefKickoff(kicker, m.team))
 		}
 		m.waiting_for_kick = true
 		m.prev_ref = true

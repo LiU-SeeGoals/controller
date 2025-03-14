@@ -104,6 +104,5 @@ func (m *SlowBrainCompetition) run() {
 			}
 
 		}
-		fmt.Println(m.activities)
 	}
 }

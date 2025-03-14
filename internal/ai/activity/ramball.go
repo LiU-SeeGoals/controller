@@ -12,9 +12,10 @@ import (
 
 type RamAtPosition struct {
 	GenericComposition
-	targetPosition info.Position
-	startWait      int64
-	bumpedBall     bool
+	targetPosition  info.Position
+	startWait       int64
+	bumpedBall      bool
+	reachedStartPos bool
 }
 
 func (k *RamAtPosition) String() string {
@@ -37,13 +38,6 @@ func (kp *RamAtPosition) GetAction(gi *info.GameInfo) action.Action {
 		return NewStop(kp.id).GetAction(gi)
 	}
 
-	robot := gi.State.GetRobot(kp.id, kp.team)
-	robotPos, err := robot.GetPosition()
-	if err != nil {
-		Logger.Errorf("Position retrieval failed - Kicker: %v\n", err)
-		return NewStop(kp.id).GetAction(gi)
-	}
-
 	ballPos, err := gi.State.Ball.GetPosition()
 	if err != nil {
 		Logger.Errorf("Position retrieval failed - Kicker: %v\n", err)
@@ -51,10 +45,11 @@ func (kp *RamAtPosition) GetAction(gi *info.GameInfo) action.Action {
 	}
 
 	// Stop at ball
-	if robotPos.Distance(ballPos) < 50 {
+	if kp.bumpedBall {
 		return NewStop(kp.id).GetAction(gi)
 	}
 
+	// Get in start position
 	angleBallToStartPos := ballPos.AngleToPosition(kp.targetPosition) + math.Pi
 	startPos := ballPos.OnRadius(500, angleBallToStartPos)
 
@@ -62,11 +57,14 @@ func (kp *RamAtPosition) GetAction(gi *info.GameInfo) action.Action {
 	move.AvoidBall(true)
 
 	// In start position, RAM THE BALL
-	if move.Achieved(gi) {
+	if move.Achieved(gi) || kp.reachedStartPos {
+		kp.reachedStartPos = true
 		angleBallToTargetPos := ballPos.AngleToPosition(kp.targetPosition)
 		targetPos := ballPos.OnRadius(500, angleBallToTargetPos)
-		return NewMoveToPosition(kp.team, kp.id, targetPos).GetAction(gi)
+		move = NewMoveToPosition(kp.team, kp.id, targetPos)
+		fmt.Println("RamAtPosition: ", targetPos)
 	}
+	fmt.Println("startPos: ", startPos)
 	return move.GetAction(gi)
 }
 
@@ -87,7 +85,7 @@ func (k *RamAtPosition) Achieved(gi *info.GameInfo) bool {
 		k.bumpedBall = true
 		k.startWait = time.Now().UnixMilli()
 	}
-	
+
 	waited := time.Now().UnixMilli() - k.startWait
 
 	return waited > 5000 && k.bumpedBall
