@@ -108,11 +108,12 @@ func (receiver *SSLRefereeClient) handlePacket(packet *gc.Referee, ok bool, gi *
 	// 	return
 	// }
 
-	gi.Status.SetGameEvent(info.RefCommand(packet.GetCommand().Number()),
+	gi.Status.SetGameEvent(
+		info.RefCommand(packet.GetCommand().Number()),
 		packet.GetCommandTimestamp(),
 		float64(packet.GetDesignatedPosition().GetX()),
 		float64(packet.GetDesignatedPosition().GetY()),
-		info.RefCommand(packet.GetCommand().Number()),
+		info.RefCommand(packet.GetNextCommand().Number()),
 		packet.GetCurrentActionTimeRemaining())
 
 	gi.Status.SetGameStatus(info.GameStage(packet.GetStage().Number()),

@@ -135,11 +135,13 @@ func (gs *GameStatus) SetGameEvent(refCommand RefCommand,
 	nextCommand RefCommand,
 	currentActionTimeRemaining int64) {
 
-	gs.gameEvent.SetRefCommand(refCommand)
-	gs.gameEvent.SetCommandTimestamp(commandTimestamp)
-	gs.gameEvent.SetDesignatedPosition(desPosX, desPosY)
-	gs.gameEvent.SetNextCommand(nextCommand)
-	gs.gameEvent.SetCurrentActionTimeRemaining(currentActionTimeRemaining)
+	gs.gameEvent.UpdateFromRefCommand(
+		refCommand,
+		commandTimestamp,
+		desPosX,
+		desPosY,
+		nextCommand,
+		currentActionTimeRemaining)
 }
 
 func (gs *GameStatus) SetGameStatus(

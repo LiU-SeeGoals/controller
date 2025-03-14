@@ -2,10 +2,12 @@ package info
 
 import (
 	"fmt"
+	"time"
 
 	"gonum.org/v1/gonum/mat"
 )
 
+// RefCommand represents commands issued by the referee
 type RefCommand int
 
 const (
@@ -37,6 +39,8 @@ const (
 	TIMEOUT_YELLOW
 	// The blue team is currently in a timeout.
 	TIMEOUT_BLUE
+	GOAL_YELLOW // DEPRICATED
+	GOAL_BLUE   // DEPRICATED
 	// Equivalent to STOP, but the yellow team must pick up the ball and
 	// drop it in the Designated Position.
 	BALL_PLACEMENT_YELLOW
@@ -45,40 +49,51 @@ const (
 	BALL_PLACEMENT_BLUE
 )
 
-type GameEvent struct {
+// RefState represents the current state of the game based on referee commands
+type RefState int
 
+const (
+	STATE_HALTED RefState = iota
+	STATE_STOPPED
+	STATE_PLAYING
+	STATE_KICKOFF_PREPARATION
+	STATE_PENALTY_PREPARATION
+	STATE_FREE_KICK
+	STATE_TIMEOUT
+	STATE_BALL_PLACEMENT
+)
+
+// Import your existing info package for Team type
+// This is already imported as we're in the same package
+
+// GameEvent contains information about the current game state and referee commands
+type GameEvent struct {
 	// Command issued by the referee.
 	RefCommand RefCommand
+	// Current game state based on referee commands
+	CurrentState RefState
+	// Team with possession/advantage in the current state
+	TeamWithPossession Team
 	// The UNIX timestamp when the command was issued, in microseconds.
-	// This value changes only when a new command is issued, not on each packet.
-	Command_timestamp uint64
-	// The coordinates of the Designated Position. These are measured in
-	// millimetres and correspond to SSL-Vision coordinates. These are
-	// present (in the case of a ball placement command) or
-	// absent (in the case of any other command).
+	CommandTimestamp uint64
+	// The coordinates of the Designated Position for ball placement
 	DesignatedPosition *mat.VecDense
-	// The command that will be issued after the current stoppage and ball placement to continue the game.
-	next_command RefCommand
-	// The time in microseconds that is remaining until the current action times out
-	// The time will not be reset. It can get negative.
-	// An autoRef would raise an appropriate event, if the time gets negative.
-	// Possible actions where this time is relevant:
-	//  * free kicks
-	//  * kickoff, penalty kick, force start
-	//  * ball placement
-	current_action_time_remaining int64
-
-	// All game events that were detected since the last RUNNING info.
-	// Will be cleared as soon as the game is continued.
-	// game_events GameEvent
-	// All proposed game events that were detected since the last RUNNING info.
-	// game_event_proposals GameEventProposalGroup
-
+	// The command that will be issued after the current stoppage
+	NextCommand RefCommand
+	// The time in microseconds remaining until the current action times out
+	CurrentActionTimeRemaining int64
+	// Indicates if the ball is currently in play
+	BallInPlay bool
 }
 
+// NewGameEvent creates a new GameEvent with default values
 func NewGameEvent() *GameEvent {
 	return &GameEvent{
+		RefCommand:   HALT,
+		CurrentState: STATE_HALTED,
+		// TeamWithPossession will have its zero value
 		DesignatedPosition: mat.NewVecDense(2, nil),
+		BallInPlay:         false,
 	}
 }
 
@@ -122,72 +137,300 @@ func (rc RefCommand) String() string {
 	}
 }
 
+// String method for RefState
+func (rs RefState) String() string {
+	switch rs {
+	case STATE_HALTED:
+		return "Halted"
+	case STATE_STOPPED:
+		return "Stopped"
+	case STATE_PLAYING:
+		return "Playing"
+	case STATE_KICKOFF_PREPARATION:
+		return "Kickoff Preparation"
+	case STATE_PENALTY_PREPARATION:
+		return "Penalty Preparation"
+	case STATE_FREE_KICK:
+		return "Free Kick"
+	case STATE_TIMEOUT:
+		return "Timeout"
+	case STATE_BALL_PLACEMENT:
+		return "Ball Placement"
+	default:
+		return fmt.Sprintf("Unknown RefState (%d)", rs)
+	}
+}
+
+// No need for TeamColor String method as we're using the existing Team type
+
 // String method for GameEvent
 func (ge *GameEvent) String() string {
-	// Format DesignatedPosition if it's not nil
 	position := "N/A"
 	if ge.DesignatedPosition != nil {
 		position = fmt.Sprintf("(x: %.2f, y: %.2f)", ge.DesignatedPosition.At(0, 0), ge.DesignatedPosition.At(1, 0))
 	}
 
-	// Create a formatted string for the GameEvent
+	teamPossession := "None"
+	// Assuming the Team type has a String() method or similar for formatting
+	if ge.CurrentState != STATE_HALTED && ge.CurrentState != STATE_PLAYING {
+		teamPossession = fmt.Sprintf("%v", ge.TeamWithPossession)
+	}
+
 	return fmt.Sprintf(
 		"Game Event:\n"+
 			"  Ref Command: %s\n"+
+			"  Game State: %s\n"+
+			"  Team with Possession: %s\n"+
 			"  Command Timestamp: %d microseconds\n"+
 			"  Designated Position: %s\n"+
 			"  Next Command: %s\n"+
+			"  Ball In Play: %v\n"+
 			"  Current Action Time Remaining: %d microseconds",
 		ge.RefCommand.String(),
-		ge.Command_timestamp,
+		ge.CurrentState.String(),
+		teamPossession,
+		ge.CommandTimestamp,
 		position,
-		ge.next_command.String(),
-		ge.current_action_time_remaining,
+		ge.NextCommand.String(),
+		ge.BallInPlay,
+		ge.CurrentActionTimeRemaining,
 	)
 }
 
-// Getter and Setter for RefCommand
-func (ge *GameEvent) GetRefCommand() RefCommand {
-	return ge.RefCommand
+// UpdateFromRefCommand updates the game state based on a new referee command
+func (ge *GameEvent) UpdateFromRefCommand(
+	refCommand RefCommand,
+	commandTimestamp uint64,
+	desPosX float64,
+	desPosY float64,
+	nextCommand RefCommand,
+	currentActionTimeRemaining int64) {
+
+	// Update basic fields
+	ge.RefCommand = refCommand
+	ge.CommandTimestamp = commandTimestamp
+	ge.NextCommand = nextCommand
+	ge.CurrentActionTimeRemaining = currentActionTimeRemaining
+
+	// Update designated position if needed
+	if ge.DesignatedPosition == nil {
+		ge.DesignatedPosition = mat.NewVecDense(2, nil)
+	}
+	ge.DesignatedPosition.SetVec(0, desPosX)
+	ge.DesignatedPosition.SetVec(1, desPosY)
+
+	// Update game state based on command
+	switch refCommand {
+	case HALT:
+		ge.CurrentState = STATE_HALTED
+		// TeamWithPossession will remain as is
+		ge.BallInPlay = false
+
+	case STOP:
+		ge.CurrentState = STATE_STOPPED
+		// Keep the previous team possession when going to STOP
+		ge.BallInPlay = false
+
+	case NORMAL_START:
+		if ge.CurrentState == STATE_KICKOFF_PREPARATION || ge.CurrentState == STATE_PENALTY_PREPARATION {
+			// Keep the current state but mark the ball as in play
+			ge.BallInPlay = true
+		}
+
+	case FORCE_START:
+		ge.CurrentState = STATE_PLAYING
+		// TeamWithPossession will be ignored in PLAYING state
+		ge.BallInPlay = true
+
+	case PREPARE_KICKOFF_YELLOW:
+		ge.CurrentState = STATE_KICKOFF_PREPARATION
+		ge.TeamWithPossession = Yellow
+		ge.BallInPlay = false
+
+	case PREPARE_KICKOFF_BLUE:
+		ge.CurrentState = STATE_KICKOFF_PREPARATION
+		ge.TeamWithPossession = Blue
+		ge.BallInPlay = false
+
+	case PREPARE_PENALTY_YELLOW:
+		ge.CurrentState = STATE_PENALTY_PREPARATION
+		ge.TeamWithPossession = Yellow
+		ge.BallInPlay = false
+
+	case PREPARE_PENALTY_BLUE:
+		ge.CurrentState = STATE_PENALTY_PREPARATION
+		ge.TeamWithPossession = Blue
+		ge.BallInPlay = false
+
+	case DIRECT_FREE_YELLOW, INDIRECT_FREE_YELLOW:
+		ge.CurrentState = STATE_FREE_KICK
+		ge.TeamWithPossession = Yellow
+		ge.BallInPlay = false
+
+	case DIRECT_FREE_BLUE, INDIRECT_FREE_BLUE:
+		ge.CurrentState = STATE_FREE_KICK
+		ge.TeamWithPossession = Blue
+		ge.BallInPlay = false
+
+	case TIMEOUT_YELLOW, TIMEOUT_BLUE:
+		ge.CurrentState = STATE_TIMEOUT
+		if refCommand == TIMEOUT_YELLOW {
+			ge.TeamWithPossession = Yellow
+		} else {
+			ge.TeamWithPossession = Blue
+		}
+		ge.BallInPlay = false
+
+	case BALL_PLACEMENT_YELLOW:
+		ge.CurrentState = STATE_BALL_PLACEMENT
+		ge.TeamWithPossession = Yellow
+		ge.BallInPlay = false
+
+	case BALL_PLACEMENT_BLUE:
+		ge.CurrentState = STATE_BALL_PLACEMENT
+		ge.TeamWithPossession = Blue
+		ge.BallInPlay = false
+	}
 }
 
-func (ge *GameEvent) SetRefCommand(command RefCommand) {
-	ge.RefCommand = command
+// CheckBallMovedForPlay checks if the ball has moved enough (0.05m) to be considered in play
+func (ge *GameEvent) CheckBallMovedForPlay(ballMoved bool, ballMovedDistance float64) bool {
+	if !ge.BallInPlay && ballMoved && ballMovedDistance >= 0.05 {
+		// Only update if we're in a state where ball movement puts the ball in play
+		switch ge.CurrentState {
+		case STATE_KICKOFF_PREPARATION, STATE_PENALTY_PREPARATION, STATE_FREE_KICK:
+			ge.BallInPlay = true
+			return true
+		}
+	}
+	return false
 }
 
-// Getter and Setter for CommandTimestamp
-func (ge *GameEvent) GetCommandTimestamp() uint64 {
-	return ge.Command_timestamp
+// CheckTimeoutForPlay handles timeouts for different play states
+func (ge *GameEvent) CheckTimeoutForPlay() bool {
+	if !ge.BallInPlay {
+		currentTime := time.Now().UnixMicro()
+		commandTime := int64(ge.CommandTimestamp)
+
+		// Check if we've timed out based on the rules
+		switch ge.CurrentState {
+		case STATE_KICKOFF_PREPARATION:
+			// Ball is in play after 10 seconds
+			if currentTime-commandTime >= 10*1000000 {
+				ge.BallInPlay = true
+				return true
+			}
+		case STATE_FREE_KICK:
+			// Ball is in play after 5 seconds for Division A or 10 seconds for Division B
+			// Using 5 seconds as default
+			if currentTime-commandTime >= 5*1000000 {
+				ge.BallInPlay = true
+				return true
+			}
+		}
+	}
+	return false
 }
 
-func (ge *GameEvent) SetCommandTimestamp(timestamp uint64) {
-	ge.Command_timestamp = timestamp
+// ShouldKeepDistanceFromBall returns true if robots of the given team should keep distance from the ball
+func (ge *GameEvent) ShouldKeepDistanceFromBall(robotTeam Team) bool {
+	if ge.CurrentState == STATE_HALTED {
+		return true
+	}
+
+	if ge.CurrentState == STATE_STOPPED {
+		return true
+	}
+
+	// For free kicks, only the non-possessing team needs to keep distance
+	if ge.CurrentState == STATE_FREE_KICK {
+		return ge.TeamWithPossession != robotTeam
+	}
+
+	// For kickoff preparations
+	if ge.CurrentState == STATE_KICKOFF_PREPARATION && !ge.BallInPlay {
+		// If we don't have possession, all robots need to keep distance
+		if ge.TeamWithPossession != robotTeam {
+			return true
+		}
+		// If we have possession, all robots except one kicker need to keep distance
+		// Note: The actual kicker robot should be determined by the strategy code
+		return true
+	}
+
+	// For penalty preparations
+	if ge.CurrentState == STATE_PENALTY_PREPARATION && !ge.BallInPlay {
+		// If we don't have possession, all robots except goalkeeper need to keep distance
+		if ge.TeamWithPossession != robotTeam {
+			// Note: The goalkeeper determination should be handled by strategy code
+			return true
+		}
+		// If we have possession, all robots except one kicker need to keep distance
+		// Note: The actual kicker robot should be determined by the strategy code
+		return true
+	}
+
+	return false
 }
 
-// Getter and Setter for DesignatedPosition
-func (ge *GameEvent) GetDesignatedPosition() *mat.VecDense {
-	return ge.DesignatedPosition
+// GetRequiredBallDistance returns the required distance from the ball in meters
+func (ge *GameEvent) GetRequiredBallDistance() float64 {
+	if ge.CurrentState == STATE_HALTED {
+		return 0.0 // Any distance is fine during HALT
+	}
+
+	if ge.CurrentState == STATE_STOPPED || ge.CurrentState == STATE_BALL_PLACEMENT {
+		return 0.5 // 50 cm for STOP and ball placement
+	}
+
+	if ge.CurrentState == STATE_FREE_KICK && !ge.BallInPlay {
+		return 0.5 // 50 cm for free kick preparation
+	}
+
+	if (ge.CurrentState == STATE_KICKOFF_PREPARATION ||
+		ge.CurrentState == STATE_PENALTY_PREPARATION) &&
+		!ge.BallInPlay {
+		return 0.5
+	}
+
+	// During normal play, no specific distance required
+	return 0.0
 }
 
-func (ge *GameEvent) SetDesignatedPosition(x float64, y float64) {
-	ge.DesignatedPosition.SetVec(0, x)
-	ge.DesignatedPosition.SetVec(1, y)
+// GetMaxRobotSpeed returns the maximum allowed robot speed in m/s
+func (ge *GameEvent) GetMaxRobotSpeed() float64 {
+	if ge.CurrentState == STATE_HALTED {
+		return 0.0 // No movement allowed during HALT (with 2 second grace period)
+	}
+
+	if ge.CurrentState == STATE_STOPPED || ge.CurrentState == STATE_BALL_PLACEMENT {
+		return 1.5 // Limited to 1.5 m/s during STOP
+	}
+
+	// No speed limit during normal play
+	return 999.0
 }
 
-// Getter and Setter for NextCommand
-func (ge *GameEvent) GetNextCommand() RefCommand {
-	return ge.next_command
-}
+// CanManipulateBall returns true if robots of the given team are allowed to manipulate the ball
+func (ge *GameEvent) CanManipulateBall(robotTeam Team) bool {
+	if ge.CurrentState == STATE_HALTED || ge.CurrentState == STATE_STOPPED {
+		return false
+	}
 
-func (ge *GameEvent) SetNextCommand(command RefCommand) {
-	ge.next_command = command
-}
+	if ge.CurrentState == STATE_PLAYING {
+		return true
+	}
 
-// Getter and Setter for CurrentActionTimeRemaining
-func (ge *GameEvent) GetCurrentActionTimeRemaining() int64 {
-	return ge.current_action_time_remaining
-}
+	// For states where only one team can manipulate the ball
+	if !ge.BallInPlay {
+		// Only the team with possession can manipulate the ball
+		if ge.TeamWithPossession == robotTeam {
+			// Note: The kicker decision should be made by the strategy code
+			return true
+		}
 
-func (ge *GameEvent) SetCurrentActionTimeRemaining(timeRemaining int64) {
-	ge.current_action_time_remaining = timeRemaining
+		return false
+	}
+
+	return ge.BallInPlay
 }
