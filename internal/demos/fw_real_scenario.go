@@ -9,18 +9,11 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/info"
-	"github.com/LiU-SeeGoals/controller/internal/simulator"
 )
 
-func FwSimScenario() {
-	presentYellow := []int{0, 1}
-	presentBlue := []int{}
-
-	simController := simulator.NewSimControl()
-	simController.SetPresentRobots(presentYellow, presentBlue)
-
+func FwRealScenario() {
 	gameInfo := info.NewGameInfo(10)
-	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddress())
+	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddressReal())
 
 	// Yellow team
 	slowBrainYellow := slow_brain.NewSlowBrainFw(info.Yellow)
@@ -29,8 +22,7 @@ func FwSimScenario() {
 	aiYellow := ai.NewAi(info.Yellow, slowBrainYellow, fastBrainYellow)
 
 	basestationClient := client.NewBaseStationClient(config.GetBasestationAddress())
-	simClient := client.NewSimClient(config.GetSimYellowTeamAddress(), gameInfo)
-    fmt.Println("Basedstation: ", config.GetBasestationAddress())
+    fmt.Println("Base(d)station: ", config.GetBasestationAddress())
 
 	basestationClient.Init()
 
@@ -41,6 +33,5 @@ func FwSimScenario() {
 		yellow_actions := aiYellow.GetActions(gameInfo)
 
 		basestationClient.SendActions(yellow_actions)
-        simClient.SendActions(yellow_actions)
 	}
 }

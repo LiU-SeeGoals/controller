@@ -15,8 +15,8 @@ type SlowBrainFw struct {
 	max_time time.Duration
 }
 
-func NewSlowBrainFw(team info.Team) *SlowBrain1 {
-	return &SlowBrain1{
+func NewSlowBrainFw(team info.Team) *SlowBrainFw {
+	return &SlowBrainFw{
 		SlowBrainComposition: SlowBrainComposition{
 			team: team,
 		},
@@ -56,7 +56,8 @@ func (m *SlowBrainFw) run() {
 		{X: -4250, Y: -1950, Z: 0, Angle: 0},
 	}
 	index := 0
-    robot := 0
+    succesfull_commands := 0
+    robots := []int{1, 3}
 
 	for {
         //sgameInfo := <-m.incomingGameInfo
@@ -65,11 +66,15 @@ func (m *SlowBrainFw) run() {
 		// No need for slow brain to be fast
 		time.Sleep(100 * time.Millisecond)
 
-		if m.activities[robot] == nil {
-			fmt.Println("done with action: ", m.team)
-			fmt.Println("next action: ", way_points[index])
-			m.AddActivity(ai.NewMoveToPosition(m.team, info.ID(robot), way_points[index]))
-			index = (index + 1) % len(way_points)
-		}
+        for _, robot := range robots {
+            if m.activities[robot] == nil {
+                fmt.Println(fmt.Sprintf("done with (%d) action (%s)", robot, m.team))
+                fmt.Println("next action: ", way_points[index])
+                fmt.Println("sent commands: ", succesfull_commands)
+                m.AddActivity(ai.NewMoveToPosition(m.team, info.ID(robot), way_points[index]))
+                index = (index + 1) % len(way_points)
+                succesfull_commands++
+            }
+        }
 	}
 }
