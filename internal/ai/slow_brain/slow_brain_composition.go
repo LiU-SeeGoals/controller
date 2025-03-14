@@ -2,6 +2,8 @@ package ai
 
 import (
 	"fmt"
+	"reflect"
+	"strings"
 	"sync"
 	"time"
 
@@ -92,4 +94,26 @@ func (m *SlowBrainComposition) HandleRef(gi *info.GameInfo, active_robots []int)
 		m.prev_ref = false
 		return false
 	}
+}
+
+// GetActionTypeName returns the name of the concrete type that implements the Action interface
+func (m *SlowBrainComposition) GetActionTypeName(activity ai.Activity) string {
+	// Check if activity is nil
+	if activity == nil {
+		return ""
+	}
+
+	// Get the type using reflection
+	t := reflect.TypeOf(activity)
+
+	if t.Kind() == reflect.Ptr {
+		t = t.Elem()
+	}
+
+	// Get the full name (including package)
+	fullName := t.String()
+
+	// just the type name without the package
+	parts := strings.Split(fullName, ".")
+	return parts[len(parts)-1]
 }
