@@ -1,15 +1,21 @@
 package demos
 
 import (
+	"fmt"
 	"time"
 
+	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/ai"
 	slow_brain "github.com/LiU-SeeGoals/controller/internal/ai/slow_brain"
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/info"
 	"github.com/LiU-SeeGoals/controller/internal/simulator"
+	"github.com/LiU-SeeGoals/proto_go/robot_action"
+	"google.golang.org/protobuf/proto"
 )
+
+const MAX_SEND_SIZE = 2048
 
 func Scenario() {
 	// This avoid the "No position in history" error for robots
@@ -24,17 +30,13 @@ func Scenario() {
 	// Yellow team
 	slowBrainYellow := slow_brain.NewSlowBrainCompetition(info.Yellow)
 	fastBrainYellow := ai.NewFastBrainGO()
-
 	aiYellow := ai.NewAi(info.Yellow, slowBrainYellow, fastBrainYellow)
-
 	simClientYellow := client.NewSimClient(config.GetSimYellowTeamAddress(), gameInfo)
 
 	// Blue team
-	// slowBrainBlue := slow_brain.NewSlowBrain1(info.Blue)
+	// slowBrainBlue := slow_brain.NewRefCommands(info.Blue, simController)
 	// fastBrainBlue := ai.NewFastBrainGO()
-
 	// aiBlue := ai.NewAi(info.Blue, slowBrainBlue, fastBrainBlue)
-
 	// simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress(), gameInfo)
 
 	// Some sim setup for debugging ai behaviour
@@ -52,13 +54,32 @@ func Scenario() {
 		yellow_actions := aiYellow.GetActions(gameInfo)
 		simClientYellow.SendActions(yellow_actions)
 
-		//blue_actions := aiBlue.GetActions(gameInfo)
-		//simClientBlue.SendActions(blue_actions)
+		// blue_actions := aiBlue.GetActions(gameInfo)
+		// simClientBlue.SendActions(blue_actions)
 
 		// terminal_messages := []string{"Scenario"}
 
 		// if len(blue_actions) > 0 {
 		// 	client.UpdateWebGUI(gameInfo, blue_actions, terminal_messages)
 		// }
+	}
+}
+
+func testPacketSize(actions []action.Action) {
+	var queue []*robot_action.Command
+
+	for _, action := range actions {
+		queue = append(queue, action.TranslateReal())
+	}
+
+	for _, cmd := range queue {
+
+		serializedCmd, _ := proto.Marshal(cmd) // Add error handling
+		if len(serializedCmd) > MAX_SEND_SIZE {
+			fmt.Print("to big to send (if sent = Rasmus mad 😡)")
+		} else {
+			fmt.Println("Packet size: ", len(serializedCmd))
+		}
+
 	}
 }
