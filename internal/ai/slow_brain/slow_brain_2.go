@@ -15,7 +15,6 @@ import (
 
 type SlowBrain2 struct {
 	SlowBrainComposition
-	HandleReferee
 
 	at_state int
 	start    time.Time
@@ -27,9 +26,6 @@ type SlowBrain2 struct {
 func NewSlowBrain2(team info.Team) *SlowBrain2 {
 	return &SlowBrain2{
 		SlowBrainComposition: SlowBrainComposition{
-			team: team,
-		},
-		HandleReferee: HandleReferee{
 			team: team,
 		},
 		team: team,
@@ -60,6 +56,8 @@ func (m *SlowBrain2) run() {
 	index := 0
 	fmt.Println("slow brain 2: starting")
 
+	active_id := []int{0, 1}
+
 	for {
 		// No need for slow brain to be fast
 		time.Sleep(100 * time.Millisecond)
@@ -69,24 +67,8 @@ func (m *SlowBrain2) run() {
 
 		fmt.Println(gameInfo.Status.GetGameEvent())
 
-		if gameInfo.Status.GetGameEvent().GetCurrentState() != info.STATE_PLAYING {
-			m.AddActivity(ai.NewStop(0))
-			// m.AddActivity(ai.NewStop(1))
-			m.at_state = REFEREE
+		if m.HandleRef(&gameInfo, active_id) {
 			continue
-		}
-
-		// fmt.Println("SlowBrainCompetition: running")
-		// Set robot to goalie
-
-		// m.activities[0] = nil
-		// m.activities[1] = nil
-
-		// If we are EXITING the REFEREE state, we need to clear the activities
-		if m.at_state == REFEREE {
-			fmt.Println("clearing activities")
-			m.ClearActivities()
-			m.at_state = RUNNING
 		}
 
 		fmt.Println(m.activities[0])
@@ -95,5 +77,6 @@ func (m *SlowBrain2) run() {
 			m.AddActivity(ai.NewMoveToPosition(m.team, 0, way_points[index]))
 			index = (index + 1) % len(way_points)
 		}
+
 	}
 }

@@ -15,7 +15,6 @@ import (
 
 type SlowBrainCompetition struct {
 	SlowBrainComposition
-	HandleReferee
 
 	at_state int
 	start    time.Time
@@ -27,9 +26,6 @@ type SlowBrainCompetition struct {
 func NewSlowBrainCompetition(team info.Team) *SlowBrainCompetition {
 	return &SlowBrainCompetition{
 		SlowBrainComposition: SlowBrainComposition{
-			team: team,
-		},
-		HandleReferee: HandleReferee{
 			team: team,
 		},
 		team: team,
@@ -59,6 +55,7 @@ func (m *SlowBrainCompetition) run() {
 
 	enemy_goal := 0
 	fmt.Println("SlowBrainCompetition: starting")
+	active_id := []int{0, 1}
 
 	for {
 		// No need for slow brain to be fast
@@ -75,20 +72,12 @@ func (m *SlowBrainCompetition) run() {
 
 		fmt.Println(gameInfo.Status.GetGameEvent().RefCommand)
 
-		if gameInfo.Status.GetGameEvent().RefCommand != info.FORCE_START {
-			m.AddActivity(ai.NewStop(0))
-			m.AddActivity(ai.NewStop(1))
+		if m.HandleRef(&gameInfo, active_id) {
 			continue
 		}
 
-		// fmt.Println("SlowBrainCompetition: running")
-		// Set robot to goalie
-
-		m.activities[0] = nil
-		m.activities[1] = nil
 		if m.activities[0] == nil {
-			fmt.Println("done with action:-------------------------------------------")
-			fmt.Println("done with action: ", m.team)
+			fmt.Println("done with action goalie: ", m.team)
 			m.AddActivity(ai.NewGoalie(m.team, 0))
 		}
 
