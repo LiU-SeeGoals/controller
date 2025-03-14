@@ -39,8 +39,6 @@ const (
 	TIMEOUT_YELLOW
 	// The blue team is currently in a timeout.
 	TIMEOUT_BLUE
-	GOAL_YELLOW // DEPRICATED
-	GOAL_BLUE   // DEPRICATED
 	// Equivalent to STOP, but the yellow team must pick up the ball and
 	// drop it in the Designated Position.
 	BALL_PLACEMENT_YELLOW
@@ -76,6 +74,10 @@ type GameEvent struct {
 	TeamWithPossession Team
 	// The UNIX timestamp when the command was issued, in microseconds.
 	CommandTimestamp uint64
+	// The UNIX timestamp when the last unique command was issued, for timeout tracking
+	LastUniqueCommandTimestamp uint64
+	// The last unique command received, for detecting command changes
+	LastUniqueCommand RefCommand
 	// The coordinates of the Designated Position for ball placement
 	DesignatedPosition *mat.VecDense
 	// The command that will be issued after the current stoppage
@@ -176,12 +178,18 @@ func (ge *GameEvent) String() string {
 		teamPossession = fmt.Sprintf("%v", ge.TeamWithPossession)
 	}
 
+	// Calculate elapsed time since last unique command
+	currentTime := uint64(time.Now().UnixMicro())
+	elapsedTime := (currentTime - ge.LastUniqueCommandTimestamp) / 1000 // Convert to milliseconds
+
 	return fmt.Sprintf(
 		"Game Event:\n"+
 			"  Ref Command: %s\n"+
 			"  Game State: %s\n"+
 			"  Team with Possession: %s\n"+
 			"  Command Timestamp: %d microseconds\n"+
+			"  Last Unique Command: %s\n"+
+			"  Last Unique Command Time: %d ms ago\n"+
 			"  Designated Position: %s\n"+
 			"  Next Command: %s\n"+
 			"  Ball In Play: %v\n"+
@@ -190,6 +198,8 @@ func (ge *GameEvent) String() string {
 		ge.CurrentState.String(),
 		teamPossession,
 		ge.CommandTimestamp,
+		ge.LastUniqueCommand.String(),
+		elapsedTime,
 		position,
 		ge.NextCommand.String(),
 		ge.BallInPlay,
@@ -211,6 +221,12 @@ func (ge *GameEvent) UpdateFromRefCommand(
 	ge.CommandTimestamp = commandTimestamp
 	ge.NextCommand = nextCommand
 	ge.CurrentActionTimeRemaining = currentActionTimeRemaining
+
+	// Check if this is a new unique command
+	if refCommand != ge.LastUniqueCommand {
+		ge.LastUniqueCommand = refCommand
+		ge.LastUniqueCommandTimestamp = commandTimestamp
+	}
 
 	// Update designated position if needed
 	if ge.DesignatedPosition == nil {
@@ -291,45 +307,20 @@ func (ge *GameEvent) UpdateFromRefCommand(
 		ge.TeamWithPossession = Blue
 		ge.BallInPlay = false
 	}
+
+	if ge.CurrentActionTimeRemaining < 0 {
+		ge.CurrentState = STATE_PLAYING
+	}
+
+	// Check for timeouts and automatically update state if needed
 }
 
-// CheckBallMovedForPlay checks if the ball has moved enough (0.05m) to be considered in play
-func (ge *GameEvent) CheckBallMovedForPlay(ballMoved bool, ballMovedDistance float64) bool {
-	if !ge.BallInPlay && ballMoved && ballMovedDistance >= 0.05 {
-		// Only update if we're in a state where ball movement puts the ball in play
-		switch ge.CurrentState {
-		case STATE_KICKOFF_PREPARATION, STATE_PENALTY_PREPARATION, STATE_FREE_KICK:
-			ge.BallInPlay = true
-			return true
-		}
-	}
-	return false
-}
+// GetCurrentState returns the current state after checking for any timeouts
+// This ensures we always get the most up-to-date state
+func (ge *GameEvent) GetCurrentState() RefState {
+	// Check for timeouts and update state if needed
 
-// CheckTimeoutForPlay handles timeouts for different play states
-func (ge *GameEvent) CheckTimeoutForPlay() bool {
-	if !ge.BallInPlay {
-		currentTime := time.Now().UnixMicro()
-		commandTime := int64(ge.CommandTimestamp)
-
-		// Check if we've timed out based on the rules
-		switch ge.CurrentState {
-		case STATE_KICKOFF_PREPARATION:
-			// Ball is in play after 10 seconds
-			if currentTime-commandTime >= 10*1000000 {
-				ge.BallInPlay = true
-				return true
-			}
-		case STATE_FREE_KICK:
-			// Ball is in play after 5 seconds for Division A or 10 seconds for Division B
-			// Using 5 seconds as default
-			if currentTime-commandTime >= 5*1000000 {
-				ge.BallInPlay = true
-				return true
-			}
-		}
-	}
-	return false
+	return ge.CurrentState
 }
 
 // ShouldKeepDistanceFromBall returns true if robots of the given team should keep distance from the ball
@@ -380,17 +371,17 @@ func (ge *GameEvent) GetRequiredBallDistance() float64 {
 	}
 
 	if ge.CurrentState == STATE_STOPPED || ge.CurrentState == STATE_BALL_PLACEMENT {
-		return 0.5 // 50 cm for STOP and ball placement
+		return 500 // 50 cm for STOP and ball placement
 	}
 
 	if ge.CurrentState == STATE_FREE_KICK && !ge.BallInPlay {
-		return 0.5 // 50 cm for free kick preparation
+		return 500 // 50 cm for free kick preparation
 	}
 
 	if (ge.CurrentState == STATE_KICKOFF_PREPARATION ||
 		ge.CurrentState == STATE_PENALTY_PREPARATION) &&
 		!ge.BallInPlay {
-		return 0.5
+		return 500
 	}
 
 	// During normal play, no specific distance required
@@ -433,4 +424,17 @@ func (ge *GameEvent) CanManipulateBall(robotTeam Team) bool {
 	}
 
 	return ge.BallInPlay
+}
+
+// CheckBallMovedForPlay checks if the ball has moved enough (0.05m) to be considered in play
+func (ge *GameEvent) CheckBallMovedForPlay(ballMoved bool, ballMovedDistance float64) bool {
+	if !ge.BallInPlay && ballMoved && ballMovedDistance >= 5 {
+		// Only update if we're in a state where ball movement puts the ball in play
+		switch ge.CurrentState {
+		case STATE_KICKOFF_PREPARATION, STATE_PENALTY_PREPARATION, STATE_FREE_KICK:
+			ge.BallInPlay = true
+			return true
+		}
+	}
+	return false
 }
