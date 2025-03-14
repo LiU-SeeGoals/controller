@@ -25,6 +25,7 @@ type MoveToPosition struct {
 	previousObstacles []info.Position  // Previous obstacle positions for change detection
 	significantChange bool             // Flag to indicate if obstacles have moved significantly
 	gi                *info.GameInfo
+	avoidBall         bool
 }
 
 // rrtConfiguration holds parameters for the RRT algorithm
@@ -55,7 +56,7 @@ func NewMoveToPosition(team info.Team, id info.ID, dest info.Position) *MoveToPo
 		waypointThreshold:  50.0,    // mm to consider waypoint reached
 		fieldWidth:         13400.0, // Standard SSL field width in mm
 		fieldHeight:        10400.0, // Standard SSL field height in mm
-		completionDistance: 500.0,    // mm to consider the goal reached
+		completionDistance: 500.0,   // mm to consider the goal reached
 	}
 
 	return &MoveToPosition{
@@ -71,12 +72,16 @@ func NewMoveToPosition(team info.Team, id info.ID, dest info.Position) *MoveToPo
 	}
 }
 
+func (m *MoveToPosition) AvoidBall(avoid bool) {
+	m.avoidBall = avoid
+}
+
 // GetAction returns an action for the robot with RRT-based collision avoidance
 func (m *MoveToPosition) GetAction(gi *info.GameInfo) action.Action {
 	moveToAction := m.GetMoveToAction(gi)
-    //pos, _ := gi.State.GetRobot(m.id, m.team).GetPosition()
-    //fmt.Println("current pos: ", pos)
-    //fmt.Println("distance left: ", distanceBetween(pos, m.final_destination))
+	//pos, _ := gi.State.GetRobot(m.id, m.team).GetPosition()
+	//fmt.Println("current pos: ", pos)
+	//fmt.Println("distance left: ", distanceBetween(pos, m.final_destination))
 	m.gi = gi
 	return &moveToAction
 }
@@ -382,6 +387,11 @@ func (m *MoveToPosition) GetObstaclePositions(gi *info.GameInfo) []info.Position
 
 	// Get all robots
 	allRobots := append(gi.State.GetTeam(info.Blue)[:], gi.State.GetTeam(info.Yellow)[:]...)
+	
+	if m.avoidBall {
+		ballPos, _ := gi.State.Ball.GetPosition()
+		obstacles = append(obstacles, ballPos)
+	}
 
 	for _, robot := range allRobots {
 		// Skip self
@@ -389,12 +399,14 @@ func (m *MoveToPosition) GetObstaclePositions(gi *info.GameInfo) []info.Position
 			continue
 		}
 
-		pos, _ := robot.GetPosition()
+		pos, err := robot.GetPosition()
+		if err != nil { continue }
+
 
 		// Skip robots at exactly (0,0) as they are likely removed from the field
-		if pos.X == 0 && pos.Y == 0 {
-			continue
-		}
+		// if pos.X == 0 && pos.Y == 0 {
+		// 	continue
+		// }
 
 		obstacles = append(obstacles, pos)
 	}
