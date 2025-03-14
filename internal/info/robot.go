@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"math"
 
-	// . "github.com/LiU-SeeGoals/controller/internal/logger"
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/tracker"
 )
 
@@ -46,6 +46,17 @@ func NewRobot(id ID, team Team, history_capasity int) *Robot {
 		},
 	}
 }
+
+func (r *Robot) At(pos Position, threshold float64) bool {
+	robotPos, err := r.GetPosition()
+	if err != nil {
+		Logger.Errorf("Position retrieval failed - Robot: %v\n", err)
+		return false
+	}
+
+	return robotPos.Distance(pos) < threshold
+}
+
 
 func (r *Robot) DribblerPos() Position {
 

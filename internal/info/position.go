@@ -25,6 +25,16 @@ func (p *Position) FacingPosition(target Position, threshold float64) bool {
 	}
 }
 
+// TranslatePolar moves a point by a given distance in a given direction
+func (p Position) OnRadius(distance float64, angle float64) Position {
+	return Position{
+		X: p.X + distance*math.Cos(angle),
+		Y: p.Y + distance*math.Sin(angle),
+		Z: p.Z,
+		Angle: p.Angle,
+	}
+}
+
 func (p Position) AngleToPosition(p2 Position) float64 {
 	dx := p2.X - p.X
 	dy := p2.Y - p.Y

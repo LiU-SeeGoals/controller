@@ -15,24 +15,24 @@ import (
 
 // The simulator have a lot of things that can be configured.
 // This configuration is done with proto messages on port 10300 (not the port for teams).
-type simControl struct {
+type SimControl struct {
 	client *client.SimClient
 }
 
-func NewSimControl() *simControl {
+func NewSimControl() *SimControl {
 	simClient := client.NewSimClient(config.GetSimControlAddress())
 	simClient.Init()
-	return &simControl{
+	return &SimControl{
 		client: simClient,
 	}
 }
 
-func (sc *simControl) TurnOffCameraRealism() {
+func (sc *SimControl) TurnOffCameraRealism() {
 	// fmt.Println("Not yet implemented")
 	Logger.Error("TurnOffCameraRealism not yet implemented")
 }
 
-func (sc *simControl) TurnOnCameraRealism() {
+func (sc *SimControl) TurnOnCameraRealism() {
 	// fmt.Println("Not yet implemented")
 	Logger.Error("TurnOnCameraRealism not yet implemented")
 }
@@ -47,7 +47,7 @@ func centerCircle(number int, radius float32) (float32, float32) {
 	return x, y
 }
 
-func (sc *simControl) SetPresentRobots(presentYellow []int, presentBlue []int) {
+func (sc *SimControl) SetPresentRobots(presentYellow []int, presentBlue []int) {
 	TOTAL_ROBOTS := 11
 	orientation := float32(0.0) // Approx. 45 degrees in radians
 	vx := float32(0.0)          // Velocity towards x-axis
@@ -123,26 +123,26 @@ func (sc *simControl) SetPresentRobots(presentYellow []int, presentBlue []int) {
 		Vz: &zero,
 	}
 
-	simControl := &simulation.SimulatorControl{
+	SimControl := &simulation.SimulatorControl{
 		TeleportRobot:   robotList,
 		TeleportBall:    ball,
 		SimulationSpeed: nil,
 	}
 
 	simCommand := &simulation.SimulatorCommand{
-		Control: simControl,
+		Control: SimControl,
 		Config:  nil,
 	}
 
 	sc.client.Send(simCommand)
 }
 
-func (sc *simControl) SetRobotDimentions() {
+func (sc *SimControl) SetRobotDimentions() {
 	// fmt.Println("Not yet implemented")
 	Logger.Error("SetRobotDimentions not yet implemented")
 }
 
-func (sc *simControl) RobotStartPositionConfig1(numberOfRobots int) {
+func (sc *SimControl) RobotStartPositionConfig1(numberOfRobots int) {
 	generateCoordinates := func(x, min_y, max_y float32) [][2]float32 {
 		coords := make([][2]float32, numberOfRobots)
 		step := (max_y - min_y) / float32(numberOfRobots-1)
@@ -170,12 +170,12 @@ func (sc *simControl) RobotStartPositionConfig1(numberOfRobots int) {
 
 }
 
-func (sc *simControl) RobotStartPositionConfig2(numberOfRobots int) {
+func (sc *SimControl) RobotStartPositionConfig2(numberOfRobots int) {
 	// fmt.Println("Not yet implemented")
 	Logger.Error("RobotStartPositionConfig2 not yet implemented")
 }
 
-func (sc *simControl) TeleportRobot(x float32, y float32, id uint32, team info.Team) {
+func (sc *SimControl) TeleportRobot(x float32, y float32, id uint32, team info.Team) {
 	// We take in x and y as milimeters in float64, simulator need float32 in meters
 
 	// fmt.Println(x, y)
@@ -213,14 +213,14 @@ func (sc *simControl) TeleportRobot(x float32, y float32, id uint32, team info.T
 	}
 
 	// Prepare the command with the single robot teleportation
-	simControl := &simulation.SimulatorControl{
+	SimControl := &simulation.SimulatorControl{
 		TeleportRobot:   []*simulation.TeleportRobot{teleportRobot},
 		TeleportBall:    nil,
 		SimulationSpeed: nil,
 	}
 
 	simCommand := &simulation.SimulatorCommand{
-		Control: simControl,
+		Control: SimControl,
 		Config:  nil,
 	}
 
@@ -228,9 +228,11 @@ func (sc *simControl) TeleportRobot(x float32, y float32, id uint32, team info.T
 	sc.client.Send(simCommand)
 }
 
-func (sc *simControl) TeleportBall(x float32, y float32) {
+func (sc *SimControl) TeleportBall(x float32, y float32) {
 	// Set default values for orientation and velocities
 	zero := float32(0.0)
+	x = x / 1000.0
+	y = y / 1000.0
 	teleball := &simulation.TeleportBall{
 		X:  &x,
 		Y:  &y,
@@ -241,14 +243,14 @@ func (sc *simControl) TeleportBall(x float32, y float32) {
 	}
 
 	// Prepare the command with the single robot teleportation
-	simControl := &simulation.SimulatorControl{
+	SimControl := &simulation.SimulatorControl{
 		TeleportRobot:   nil,
 		TeleportBall:    teleball,
 		SimulationSpeed: nil,
 	}
 
 	simCommand := &simulation.SimulatorCommand{
-		Control: simControl,
+		Control: SimControl,
 		Config:  nil,
 	}
 
