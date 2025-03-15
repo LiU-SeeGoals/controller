@@ -83,15 +83,14 @@ func (mv *MoveTo) TranslateSim() *simulation.RobotCommand {
 }
 
 func (mt *MoveTo) TranslateReal() *robot_action.Command {
-	var dribble int32
-	if mt.Dribble {
-		dribble = 1
-	} else {
-		dribble = 0
-	}
+	// var dribble int32
+	// if mt.Dribble {
+	// 	dribble = 1
+	// } else {
+	// 	dribble = 0
+	// }
 
 	command_move := &robot_action.Command{
-		AngularVel:     dribble,
 		CommandId: robot_action.ActionType_MOVE_TO_ACTION,
 		RobotId:   int32(mt.Id),
 		Pos: &robot_action.Vector3D{
