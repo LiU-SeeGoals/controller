@@ -26,6 +26,9 @@ type MoveToPosition struct {
 	significantChange bool             // Flag to indicate if obstacles have moved significantly
 	gi                *info.GameInfo
 	avoidBall         bool
+	stuckCounter      int           // Counter to detect when robot is stuck
+	lastPosition      info.Position // Last position to detect lack of movement
+	stuckThreshold    int           // Number of cycles to consider robot as stuck
 }
 
 // rrtConfiguration holds parameters for the RRT algorithm
@@ -69,6 +72,8 @@ func NewMoveToPosition(team info.Team, id info.ID, dest info.Position) *MoveToPo
 		planningInterval:  50 * time.Millisecond, // Replan more frequently (50ms instead of 100ms)
 		previousObstacles: []info.Position{},
 		significantChange: true, // Force initial planning
+		stuckCounter:      0,
+		stuckThreshold:    10, // Consider robot stuck after 10 cycles without movement
 	}
 }
 
@@ -79,9 +84,6 @@ func (m *MoveToPosition) AvoidBall(avoid bool) {
 // GetAction returns an action for the robot with RRT-based collision avoidance
 func (m *MoveToPosition) GetAction(gi *info.GameInfo) action.Action {
 	moveToAction := m.GetMoveToAction(gi)
-	//pos, _ := gi.State.GetRobot(m.id, m.team).GetPosition()
-	//fmt.Println("current pos: ", pos)
-	//fmt.Println("distance left: ", distanceBetween(pos, m.final_destination))
 	m.gi = gi
 	return &moveToAction
 }
@@ -90,8 +92,87 @@ func (m *MoveToPosition) GetMoveToAction(gi *info.GameInfo) action.MoveTo {
 	myRobot := gi.State.GetTeam(m.team)[m.id]
 	myPos, _ := myRobot.GetPosition()
 
+	// Check if robot is stuck by comparing current position with last position
+	if m.lastPosition.X != 0 || m.lastPosition.Y != 0 { // Skip first cycle
+		moveDistance := distanceBetween(myPos, m.lastPosition)
+		if moveDistance < 5.0 { // If robot has moved less than 5mm, increment stuck counter
+			m.stuckCounter++
+			if m.stuckCounter > m.stuckThreshold {
+				// Robot is stuck, force immediate replanning with shorter interval
+				m.planningInterval = 20 * time.Millisecond
+				m.significantChange = true
+			}
+		} else {
+			// Robot is moving, reset stuck counter
+			m.stuckCounter = 0
+			m.planningInterval = 50 * time.Millisecond
+		}
+	}
+	m.lastPosition = myPos
+
+	// Check for immediate collisions - Emergency avoidance
+	obstacles := m.GetObstaclePositions(gi)
+	inCollision := false
+
+	// Calculate repulsive vector if we're too close to obstacles
+	repulsiveX, repulsiveY := 0.0, 0.0
+
+	for _, obstacle := range obstacles {
+		dist := distanceBetween(myPos, obstacle)
+		if dist <= RobotSafetyRadius {
+			inCollision = true
+
+			// Calculate unit vector away from obstacle
+			dx := myPos.X - obstacle.X
+			dy := myPos.Y - obstacle.Y
+
+			// Normalize (avoid division by zero)
+			if dist > 0.001 {
+				dx /= dist
+				dy /= dist
+			} else {
+				// If almost exactly overlapping, move in random direction
+				angle := rand.Float64() * 2 * math.Pi
+				dx = math.Cos(angle)
+				dy = math.Sin(angle)
+			}
+
+			// Stronger repulsion for closer obstacles (inverse square law)
+			force := 1.0 / math.Max(0.001, dist*dist) * 10000.0
+
+			repulsiveX += dx * force
+			repulsiveY += dy * force
+		}
+	}
+
+	// If in collision, use emergency evasion movement
+	if inCollision {
+		// Normalize the repulsive vector
+		magnitude := math.Sqrt(repulsiveX*repulsiveX + repulsiveY*repulsiveY)
+		if magnitude > 0 {
+			repulsiveX /= magnitude
+			repulsiveY /= magnitude
+		}
+
+		// Create an emergency target position in the direction of the repulsive force
+		emergencyTarget := info.Position{
+			X:     myPos.X + repulsiveX*300.0, // Move 300mm in the repulsive direction
+			Y:     myPos.Y + repulsiveY*300.0,
+			Angle: myPos.Angle,
+		}
+
+		// Create move action to the emergency target
+		act := action.MoveTo{}
+		act.Id = int(m.id)
+		act.Team = m.team
+		act.Pos = myPos
+		act.Dest = emergencyTarget
+		act.Dribble = false
+		return act
+	}
+
 	// Check for significant obstacle changes
-	currentObstacles := m.GetObstaclePositions(gi)
+	currentObstacles := obstacles
 	m.CheckForSignificantChanges(currentObstacles)
 
 	// Check if we need to replan due to time, path emptiness, or significant obstacle changes
@@ -190,6 +271,53 @@ func (m *MoveToPosition) PlanPath(gi *info.GameInfo, startPos info.Position) {
 	// Create a list of obstacle positions (other robots)
 	obstacles := m.GetObstaclePositions(gi)
 
+	// Check if we're already in collision
+	robotsNearby := false
+	var nearestObstacle info.Position
+	shortestDist := math.MaxFloat64
+
+	for _, obstacle := range obstacles {
+		dist := distanceBetween(startPos, obstacle)
+		if dist <= RobotSafetyRadius {
+			robotsNearby = true
+			if dist < shortestDist {
+				shortestDist = dist
+				nearestObstacle = obstacle
+			}
+		}
+	}
+
+	// If we're stuck in collision, generate a temporary escape path
+	if robotsNearby {
+		// Calculate direction away from nearest obstacle
+		dx := startPos.X - nearestObstacle.X
+		dy := startPos.Y - nearestObstacle.Y
+		dist := math.Sqrt(dx*dx + dy*dy)
+
+		// Normalize and scale to get a point outside the safety radius
+		safeDistance := RobotSafetyRadius + 100.0 // Add extra margin
+		if dist > 0 {
+			dx = dx / dist * safeDistance
+			dy = dy / dist * safeDistance
+		} else {
+			// If exactly overlapping, move in random direction
+			angle := rand.Float64() * 2 * math.Pi
+			dx = math.Cos(angle) * safeDistance
+			dy = math.Sin(angle) * safeDistance
+		}
+
+		// Create escape position
+		escapePos := info.Position{
+			X:     nearestObstacle.X + dx,
+			Y:     nearestObstacle.Y + dy,
+			Angle: startPos.Angle,
+		}
+
+		// Set this as our immediate path
+		m.path = []info.Position{escapePos}
+		return
+	}
+
 	// Check if direct path to goal is clear
 	if m.IsPathClear(startPos, m.final_destination, obstacles) {
 		m.path = []info.Position{m.final_destination}
@@ -257,7 +385,7 @@ func (m *MoveToPosition) RunRRT(nodes []*RRTNode, obstacles []info.Position) *RR
 		newNode := m.ExtendTree(nearestNode, randomPoint, m.rrtConfig.stepSize)
 
 		// Check if the new node would collide with any obstacle
-		if !m.IsNodeValid(newNode.position, obstacles) {
+		if !m.IsNodeValid(newNode.position, obstacles, false) {
 			continue
 		}
 
@@ -351,7 +479,13 @@ func (m *MoveToPosition) ExtendTree(nearest *RRTNode, random info.Position, step
 }
 
 // IsNodeValid checks if a node is valid (not too close to obstacles)
-func (m *MoveToPosition) IsNodeValid(position info.Position, obstacles []info.Position) bool {
+// Added isStartPosition parameter to allow the starting position even if it's near obstacles
+func (m *MoveToPosition) IsNodeValid(position info.Position, obstacles []info.Position, isStartPosition bool) bool {
+	// Skip obstacle check for the starting position if specified
+	if isStartPosition {
+		return true
+	}
+
 	for _, obstacle := range obstacles {
 		if distanceBetween(position, obstacle) <= RobotSafetyRadius {
 			return false
@@ -373,7 +507,12 @@ func (m *MoveToPosition) IsPathClear(start, end info.Position, obstacles []info.
 			Angle: start.Angle, // Angle doesn't matter here
 		}
 
-		if !m.IsNodeValid(checkPos, obstacles) {
+		// Skip the first point (which is the start position)
+		if i == 0 {
+			continue
+		}
+
+		if !m.IsNodeValid(checkPos, obstacles, false) {
 			return false
 		}
 	}
