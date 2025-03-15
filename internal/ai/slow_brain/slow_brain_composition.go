@@ -121,7 +121,7 @@ func (m *SlowBrainComposition) HandleRef(gi *info.GameInfo, active_robots []int)
 			// m.AddActivity(ai.NewRefKickoff(info.ID(0), m.team))
 		} else { // We are not kicker
 			m.AddActivity(ai.NewRefKickoff(kicker, m.team))
-			m.AddActivity(ai.NewRefKickoff(2, m.team))
+			m.AddActivity(ai.NewRefKickoff(3, m.team))
 		}
 		m.waiting_for_kick = true
 		m.prev_ref = true
