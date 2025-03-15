@@ -129,8 +129,8 @@ func (m *SlowBrainCompetition) run() {
 			}
 
 			activityLoop := []ai.Activity{
-				ai.NewMoveToPosition(m.team, 2, info.Position{X: multiplier*3000, Y: 1500, Z: 0, Angle: 0}),
-				ai.NewMoveToPosition(m.team, 2, info.Position{X: multiplier*3000, Y: -1500, Z: 0, Angle: 0}),
+				ai.NewMoveToPosition(m.team, 2, info.Position{X: multiplier * 3000, Y: 1500, Z: 0, Angle: 0}),
+				ai.NewMoveToPosition(m.team, 2, info.Position{X: multiplier * 3000, Y: -1500, Z: 0, Angle: 0}),
 			}
 			loop := ai.NewActivityLoop(2, activityLoop)
 			m.AddActivity(loop)
