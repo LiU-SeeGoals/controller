@@ -63,12 +63,14 @@ func (m *SlowBrainCompetition) run() {
 
 		gameInfo := <-m.incomingGameInfo
 
-		if gameInfo.Status.GetBlueTeamOnPositiveHalf() && m.team == info.Blue {
-			enemy_goal = 0
-		} else {
+		if gameInfo.Status.GetBlueTeamOnPositiveHalf() && m.team == info.Blue || !gameInfo.Status.GetBlueTeamOnPositiveHalf() && m.team == info.Yellow {
 			enemy_goal = 1
+		} else {
+			enemy_goal = 0
 
 		}
+
+		fmt.Println("blue on positive", gameInfo.Status.GetBlueTeamOnPositiveHalf())
 
 		fmt.Println(gameInfo.Status.GetGameEvent().RefCommand)
 
@@ -102,6 +104,36 @@ func (m *SlowBrainCompetition) run() {
 			} else {
 				m.AddActivity(ai.NewMoveToBall(m.team, 1))
 			}
+			// m.AddActivity(ai.NewRamAtPosition(m.team, 1, way_points[enemy_goal]))
+
+		}
+
+		if m.activities[2] == nil {
+			fmt.Println("done with action: ", m.team)
+
+			// // If we have the ball, then dribble to the enemy goal
+			// possessor := gameInfo.State.GetBall().GetPossessor()
+			//
+			// if possessor != nil && possessor.GetID() == 2 {
+			// 	m.AddActivity(ai.NewMoveWithBallToPosition(m.team, 2, way_points[enemy_goal]))
+			//
+			// } else {
+			// 	m.AddActivity(ai.NewMoveToBall(m.team, 2))
+			// }
+			// m.AddActivity(ai.NewRamAtPosition(m.team, 2, way_points[enemy_goal]))
+
+			// We are on positive half
+			multiplier := float64(-1)
+			if gameInfo.Status.GetBlueTeamOnPositiveHalf() && m.team == info.Blue || !gameInfo.Status.GetBlueTeamOnPositiveHalf() && m.team == info.Yellow {
+				multiplier = float64(1)
+			}
+
+			activityLoop := []ai.Activity{
+				ai.NewMoveToPosition(m.team, 2, info.Position{X: multiplier*3000, Y: 1500, Z: 0, Angle: 0}),
+				ai.NewMoveToPosition(m.team, 2, info.Position{X: multiplier*3000, Y: -1500, Z: 0, Angle: 0}),
+			}
+			loop := ai.NewActivityLoop(2, activityLoop)
+			m.AddActivity(loop)
 
 		}
 	}

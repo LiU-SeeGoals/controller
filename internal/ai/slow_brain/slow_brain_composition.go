@@ -58,7 +58,22 @@ func (m *SlowBrainComposition) HandleRef(gi *info.GameInfo, active_robots []int)
 	// fmt.Println(gi.Status.GetGameEvent().GetCurrentState())
 
 	switch gi.Status.GetGameEvent().GetCurrentState() {
-	case info.STATE_HALTED, info.STATE_STOPPED, info.STATE_PENALTY_PREPARATION, info.STATE_FREE_KICK, info.STATE_TIMEOUT, info.STATE_BALL_PLACEMENT:
+	case info.STATE_FREE_KICK:
+		targetPos := info.Position{X: 300, Y: 0, Z: 0, Angle: 0} // Position for negative half
+		if m.team == info.Blue && gi.Status.GetBlueTeamOnPositiveHalf() || m.team == info.Yellow && !gi.Status.GetBlueTeamOnPositiveHalf() {
+			// We have the positive half
+			targetPos = info.Position{X: -300, Y: 0, Z: 0, Angle: math.Pi}
+		}
+		m.AddActivity(ai.NewRefStop(m.team, 2))
+		m.AddActivity(ai.NewRamAtPosition(m.team, 1, targetPos))
+
+		m.prev_ref = true
+		return true
+	case info.STATE_STOPPED, info.STATE_BALL_PLACEMENT:
+		m.AddActivity(ai.NewRefStop(m.team, info.ID(1)))
+		m.prev_ref = true
+		return true
+	case info.STATE_HALTED, info.STATE_PENALTY_PREPARATION, info.STATE_TIMEOUT:
 		for _, value := range active_robots {
 			m.AddActivity(ai.NewStop(info.ID(value)))
 		}
@@ -81,6 +96,7 @@ func (m *SlowBrainComposition) HandleRef(gi *info.GameInfo, active_robots []int)
 		// 	}
 		// }
 
+		m.AddActivity(ai.NewRefKickoff(2, m.team))
 		kicker := info.ID(1)
 		if gi.Status.GetGameEvent().GetTeamWithPossession() == m.team { // We are kicker
 			if gi.Status.GetGameEvent().RefCommand != info.NORMAL_START {
@@ -98,6 +114,7 @@ func (m *SlowBrainComposition) HandleRef(gi *info.GameInfo, active_robots []int)
 			// m.AddActivity(ai.NewRefKickoff(info.ID(0), m.team))
 		} else { // We are not kicker
 			m.AddActivity(ai.NewRefKickoff(kicker, m.team))
+			m.AddActivity(ai.NewRefKickoff(2, m.team))
 		}
 		m.waiting_for_kick = true
 		m.prev_ref = true
