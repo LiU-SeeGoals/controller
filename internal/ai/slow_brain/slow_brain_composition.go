@@ -1,6 +1,7 @@
 package ai
 
 import (
+	"fmt"
 	"math"
 	"reflect"
 	"strings"
@@ -55,22 +56,29 @@ func (m *SlowBrainComposition) ReplaceActivities(activities *[info.TEAM_SIZE]ai.
 
 func (m *SlowBrainComposition) HandleRef(gi *info.GameInfo, active_robots []int) bool {
 
-	// fmt.Println(gi.Status.GetGameEvent().GetCurrentState())
+	fmt.Println(gi.Status.GetGameEvent().GetCurrentState())
+	kicker := info.ID(1)
+	m.AddActivity(ai.NewGoalie(m.team, 0))
 
 	switch gi.Status.GetGameEvent().GetCurrentState() {
 	case info.STATE_FREE_KICK:
-		targetPos := info.Position{X: 300, Y: 0, Z: 0, Angle: 0} // Position for negative half
-		if m.team == info.Blue && gi.Status.GetBlueTeamOnPositiveHalf() || m.team == info.Yellow && !gi.Status.GetBlueTeamOnPositiveHalf() {
-			// We have the positive half
-			targetPos = info.Position{X: -300, Y: 0, Z: 0, Angle: math.Pi}
+		if gi.Status.GetGameEvent().GetTeamWithPossession() == m.team { // We are kicker
+			targetPos := info.Position{X: 300, Y: 0, Z: 0, Angle: 0} // Position for negative half
+			if m.team == info.Blue && gi.Status.GetBlueTeamOnPositiveHalf() || m.team == info.Yellow && !gi.Status.GetBlueTeamOnPositiveHalf() {
+				// We have the positive half
+				targetPos = info.Position{X: -300, Y: 0, Z: 0, Angle: math.Pi}
+			}
+			m.AddActivity(ai.NewRefStop(m.team, 3))
+			m.AddActivity(ai.NewRamAtPosition(m.team, 1, targetPos))
 		}
-		m.AddActivity(ai.NewRefStop(m.team, 2))
-		m.AddActivity(ai.NewRamAtPosition(m.team, 1, targetPos))
+
+		m.AddActivity(ai.NewRefStop(m.team, 3))
 
 		m.prev_ref = true
 		return true
 	case info.STATE_STOPPED, info.STATE_BALL_PLACEMENT:
 		m.AddActivity(ai.NewRefStop(m.team, info.ID(1)))
+		m.AddActivity(ai.NewRefStop(m.team, 3))
 		m.prev_ref = true
 		return true
 	case info.STATE_HALTED, info.STATE_PENALTY_PREPARATION, info.STATE_TIMEOUT:
@@ -96,8 +104,7 @@ func (m *SlowBrainComposition) HandleRef(gi *info.GameInfo, active_robots []int)
 		// 	}
 		// }
 
-		m.AddActivity(ai.NewRefKickoff(2, m.team))
-		kicker := info.ID(1)
+		m.AddActivity(ai.NewRefKickoff(3, m.team))
 		if gi.Status.GetGameEvent().GetTeamWithPossession() == m.team { // We are kicker
 			if gi.Status.GetGameEvent().RefCommand != info.NORMAL_START {
 				m.AddActivity(ai.NewPrepareKicker(m.team, kicker))

@@ -11,8 +11,9 @@ import (
 const (
 	// Goalie position constraints - these will be adjusted based on team half
 	GOALIE_LINE_WIDTH       = 1000 // Width of the goalie's movement range (500 to each side)
-	GOALIE_DIST_FROM_CENTER = 4300 // Distance from center to goalie line
-	GOAL_BEHIND_DIST        = 5500 // Distance from center to position behind the goal
+	GOALIE_DIST_FROM_CENTER = 5500 // Distance from center to goalie line
+	// GOALIE_DIST_FROM_CENTER = 4300 // Distance from center to goalie line
+	GOAL_BEHIND_DIST        = GOALIE_DIST_FROM_CENTER+1200 // Distance from center to position behind the goal
 )
 
 type Goalie struct {

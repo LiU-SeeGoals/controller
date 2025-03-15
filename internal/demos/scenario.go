@@ -40,7 +40,7 @@ func Scenario() {
 	// simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress(), gameInfo)
 
 	// Some sim setup for debugging ai behaviour
-	presentYellow = []int{0, 1}
+	presentYellow = []int{0, 1, 3}
 	presentBlue = []int{}
 	simController.SetPresentRobots(presentYellow, presentBlue)
 

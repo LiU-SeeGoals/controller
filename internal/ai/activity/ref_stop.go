@@ -22,7 +22,7 @@ func NewRefStop(team info.Team, id info.ID) *RefStop {
 			id:   id,
 			team: team,
 		},
-		keepDistance: 500,
+		keepDistance: 700,
 	}
 
 }
@@ -66,7 +66,8 @@ func (m *RefStop) Achieved(gi *info.GameInfo) bool {
 	}
 
 	ballDist := robotPos.Distance(ballPos)
-	return ballDist < m.keepDistance
+
+	return ballDist > m.keepDistance
 }
 
 func (m *RefStop) GetID() info.ID {

@@ -55,7 +55,7 @@ func (m *SlowBrainCompetition) run() {
 
 	enemy_goal := 0
 	fmt.Println("SlowBrainCompetition: starting")
-	active_id := []int{0, 1}
+	active_id := []int{0, 1, 3}
 
 	for {
 		// No need for slow brain to be fast
@@ -108,7 +108,7 @@ func (m *SlowBrainCompetition) run() {
 
 		}
 
-		if m.activities[2] == nil {
+		if m.activities[3] == nil {
 			fmt.Println("done with action: ", m.team)
 
 			// // If we have the ball, then dribble to the enemy goal
@@ -129,10 +129,10 @@ func (m *SlowBrainCompetition) run() {
 			}
 
 			activityLoop := []ai.Activity{
-				ai.NewMoveToPosition(m.team, 2, info.Position{X: multiplier * 3000, Y: 1500, Z: 0, Angle: 0}),
-				ai.NewMoveToPosition(m.team, 2, info.Position{X: multiplier * 3000, Y: -1500, Z: 0, Angle: 0}),
+				ai.NewMoveToPosition(m.team, 3, info.Position{X: multiplier * 3000, Y: 1500, Z: 0, Angle: 0}),
+				ai.NewMoveToPosition(m.team, 3, info.Position{X: multiplier * 3000, Y: -1500, Z: 0, Angle: 0}),
 			}
-			loop := ai.NewActivityLoop(2, activityLoop)
+			loop := ai.NewActivityLoop(3, activityLoop)
 			m.AddActivity(loop)
 
 		}

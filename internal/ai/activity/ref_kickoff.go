@@ -28,13 +28,19 @@ func NewRefKickoff(id info.ID, team info.Team) *RefKickoff {
 }
 
 func (m *RefKickoff) GetAction(gi *info.GameInfo) action.Action {
+	yMultiplier := float64(1)
+	if m.id == 1 {
+		yMultiplier = float64(-1)
+	
+	}
 
-	targetPos := info.Position{X: -2000, Y: 0, Z: 0, Angle: 0}
+	targetPos := info.Position{X: -2000, Y: 500, Z: 0, Angle: 0}
 	if m.team == info.Blue && gi.Status.GetBlueTeamOnPositiveHalf() || m.team == info.Yellow && !gi.Status.GetBlueTeamOnPositiveHalf() {
 		// We have the positive half
-		targetPos = info.Position{X: 2000, Y: 0, Z: 0, Angle: math.Pi}
+		targetPos = info.Position{X: 2000, Y: 500, Z: 0, Angle: math.Pi}
 	} 	
 	m.targetPos = targetPos
+	m.targetPos.Y = yMultiplier * m.targetPos.Y
 
 	return NewMoveToPosition(m.team, m.id, targetPos).GetAction(gi)
 }
