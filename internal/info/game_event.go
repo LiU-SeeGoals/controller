@@ -32,13 +32,17 @@ const (
 	// The blue team may take a direct free kick.
 	DIRECT_FREE_BLUE
 	// The yellow team may take an indirect free kick.
-	INDIRECT_FREE_YELLOW
+	INDIRECT_FREE_YELLOW // Deprecated, do not remove
 	// The blue team may take an indirect free kick.
-	INDIRECT_FREE_BLUE
+	INDIRECT_FREE_BLUE // Deprecated, do not remove
 	// The yellow team is currently in a timeout.
 	TIMEOUT_YELLOW
 	// The blue team is currently in a timeout.
 	TIMEOUT_BLUE
+	// The yellow team is currently in a timeout.
+	GOAL_YELLOW // Deprecated, do not remove
+	// The blue team is currently in a timeout.
+	GOAL_BLUE // Deprecated, do not remove
 	// Equivalent to STOP, but the yellow team must pick up the ball and
 	// drop it in the Designated Position.
 	BALL_PLACEMENT_YELLOW

@@ -55,7 +55,7 @@ func (m *SlowBrainComposition) ReplaceActivities(activities *[info.TEAM_SIZE]ai.
 }
 
 func (m *SlowBrainComposition) HandleRef(gi *info.GameInfo, active_robots []int) bool {
-
+	fmt.Println("next", gi.Status.GetGameEvent().NextCommand)
 	fmt.Println(gi.Status.GetGameEvent().GetCurrentState())
 	kicker := info.ID(1)
 	m.AddActivity(ai.NewGoalie(m.team, 0))
@@ -77,10 +77,27 @@ func (m *SlowBrainComposition) HandleRef(gi *info.GameInfo, active_robots []int)
 		m.prev_ref = true
 		return true
 	case info.STATE_STOPPED, info.STATE_BALL_PLACEMENT:
-		m.AddActivity(ai.NewRefStop(m.team, info.ID(1)))
-		m.AddActivity(ai.NewRefStop(m.team, 3))
-		m.prev_ref = true
-		return true
+		if gi.Status.GetGameEvent().NextCommand == info.PREPARE_KICKOFF_YELLOW {
+
+			m.AddActivity(ai.NewPrepareKicker(m.team, kicker))
+
+			m.AddActivity(ai.NewRefKickoff(3, m.team))
+			m.prev_ref = true
+			return true
+
+		} else if gi.Status.GetGameEvent().NextCommand == info.PREPARE_KICKOFF_BLUE {
+			m.AddActivity(ai.NewRefKickoff(kicker, m.team))
+			m.AddActivity(ai.NewRefKickoff(3, m.team))
+
+			m.prev_ref = true
+			return true
+		} else {
+			
+			m.AddActivity(ai.NewStop(3))
+			m.AddActivity(ai.NewStop(1))
+			m.prev_ref = true
+			return true
+		}
 	case info.STATE_HALTED, info.STATE_PENALTY_PREPARATION, info.STATE_TIMEOUT:
 		for _, value := range active_robots {
 			m.AddActivity(ai.NewStop(info.ID(value)))
