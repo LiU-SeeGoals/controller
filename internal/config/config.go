@@ -42,8 +42,8 @@ type ConfigSSLVision struct {
 	Address string `env:"SSL_VISION_MULTICAST_ADDR,required"`
 
 	// Tracker, detection, and geometry packets.
-	Port      string `env:"SSL_SIM_VISION_MAIN_PORT,required"`
-	Port_real string `env:"SSL_REAL_VISION_MAIN_PORT,required"`
+	Port      string `env:"SSL_VISION_SIM_MAIN_PORT,required"`
+	Port_real string `env:"SSL_VISION_REAL_MAIN_PORT,required"`
 
 	// Visualization packets.
 	VizPort string `env:"SSL_VISION_VIZ_PORT,required"`
@@ -95,10 +95,10 @@ type ConfigSim struct {
 // shouldn't need to use this directly.
 type ConfigGameController struct {
 	// GC multicast publish address
-	Address string `env:"GC_PUBLISH_ADDR,required"`
+	Address string `env:"SSL_GAME_CONTROLLER_PUBLISH_ADDR,required"`
 
 	// GC publish port
-	Port string `env:"GC_PUBLISH_PORT,required"`
+	Port string `env:"SSL_GAME_CONTROLLER_PUBLISH_PORT,required"`
 }
 
 var (
