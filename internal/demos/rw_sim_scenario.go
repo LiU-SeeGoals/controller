@@ -1,0 +1,59 @@
+package demos
+
+import (
+	"fmt"
+	"time"
+
+	"github.com/LiU-SeeGoals/controller/internal/ai"
+	slow_brain "github.com/LiU-SeeGoals/controller/internal/ai/slow_brain"
+	"github.com/LiU-SeeGoals/controller/internal/client"
+	"github.com/LiU-SeeGoals/controller/internal/config"
+	"github.com/LiU-SeeGoals/controller/internal/info"
+	"github.com/LiU-SeeGoals/controller/internal/simulator"
+)
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *                                                                                       *
+ *                                                                                       *
+ * This is Rasmus Wallin's file, touch it without asking and you shall meet your demise! *
+ *                                                                                       *
+ *                                                                                       *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+func RwSimScenario() {
+	presentYellow := []int{0, 1, 3}
+	presentBlue := []int{0, 1, 3}
+
+	simController := simulator.NewSimControl()
+	simController.SetPresentRobots(presentYellow, presentBlue)
+
+	gameInfo := info.NewGameInfo(10)
+	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddress())
+
+    logBytes := []byte("AI connected...")
+    client.UpdateWebLog(logBytes)
+
+    fmt.Printf("GameViewer socket: %s\n", config.GetGameViewerAdress())
+
+	// Yellow team
+	slowBrainYellow := slow_brain.NewSlowBrainRw(info.Yellow)
+	fastBrainYellow := ai.NewFastBrainGO()
+
+	aiYellow := ai.NewAi(info.Yellow, slowBrainYellow, fastBrainYellow)
+
+	basestationClient := client.NewBaseStationClient(config.GetBasestationAddress())
+	simClient := client.NewSimClient(config.GetSimYellowTeamAddress(), gameInfo)
+    fmt.Println("Basedstation: ", config.GetBasestationAddress())
+
+	basestationClient.Init()
+
+	for {
+		playTime := time.Now().UnixMilli()
+
+		ssl_receiver.UpdateState(gameInfo, playTime)
+		yellow_actions := aiYellow.GetActions(gameInfo)
+
+		basestationClient.SendActions(yellow_actions)
+        simClient.SendActions(yellow_actions)
+	}
+}
