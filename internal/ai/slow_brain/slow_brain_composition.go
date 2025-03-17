@@ -1,7 +1,6 @@
 package ai
 
 import (
-	"fmt"
 	"math"
 	"reflect"
 	"strings"
@@ -55,8 +54,6 @@ func (m *SlowBrainComposition) ReplaceActivities(activities *[info.TEAM_SIZE]ai.
 }
 
 func (m *SlowBrainComposition) HandleRef(gi *info.GameInfo, active_robots []int) bool {
-	fmt.Println("next", gi.Status.GetGameEvent().NextCommand)
-	fmt.Println(gi.Status.GetGameEvent().GetCurrentState())
 	kicker := info.ID(1)
 	m.AddActivity(ai.NewGoalie(m.team, 0))
 

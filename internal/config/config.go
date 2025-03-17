@@ -30,6 +30,8 @@ type Config struct {
 
 	// Game controller config
 	GC ConfigGameController
+
+    GW ConfigGameViewer
 }
 
 // Config struct for SSL Vision.
@@ -52,6 +54,11 @@ type ConfigSSLVision struct {
 type ConfigReal struct {
 	BASESTATION_ADDR string `env:"BASESTATION_ADDR,required"`
 	BASESTATION_PORT string `env:"BASESTATION_PORT,required"`
+}
+
+type ConfigGameViewer struct {
+    Address string `env:"VITE_AI_GAME_VIEWER_SOCKET_ADDR,required"`
+    Port string `env:"VITE_AI_GAME_VIEWER_SOCKET_PORT,required"`
 }
 
 // Config struct for sim
@@ -178,4 +185,9 @@ func GetBasestationAddress() string {
 func GetSSLClientAddressReal() string {
 	cfg := GetInstance()
 	return fmt.Sprintf("%s:%s", cfg.SSLVision.Address, cfg.SSLVision.Port_real)
+}
+
+func GetGameViewerAdress() string {
+    cfg := GetInstance()
+	return fmt.Sprintf("%s:%s", cfg.GW.Address, cfg.GW.Port)
 }

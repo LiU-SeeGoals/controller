@@ -9,6 +9,7 @@ import (
 
 	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/action"
+	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/info"
 	"github.com/gorilla/websocket"
 )
@@ -54,11 +55,10 @@ func startWebServer() {
 	webserverInstance.websocketupgrader = webserverInstance.getUpgrader()
 
 	http.HandleFunc("/ws", webserverInstance.handleGameStateRequest)
-	go http.ListenAndServe(":8080", nil)
+	go http.ListenAndServe(config.GetGameViewerAdress(), nil)
 	go webserverInstance.sendGameState()
 	go webserverInstance.sendLog()
 	go webserverInstance.receiveData()
-	// fmt.Println("server online")
 	Logger.Info("Webserver online")
 }
 
