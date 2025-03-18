@@ -17,7 +17,6 @@ import (
 // Unless you have a good reason, you shouldn't need to use this directly.
 // It's better to use the helper methods in this file instead.
 type Config struct {
-	// Environment - e.g. "docker"
 	Env string `env:"ENVIRONMENT,required"`
 
 	// SSL vision config
@@ -32,6 +31,8 @@ type Config struct {
 	GC ConfigGameController
 
     GW ConfigGameViewer
+
+    DN DockerNames
 }
 
 // Config struct for SSL Vision.
@@ -106,6 +107,10 @@ type ConfigGameController struct {
 
 	// GC publish port
 	Port string `env:"SSL_GAME_CONTROLLER_PUBLISH_PORT,required"`
+}
+
+type DockerNames struct {
+    AI string `env:"DOCKER_NAME_AI"`
 }
 
 var (
@@ -189,5 +194,9 @@ func GetSSLClientAddressReal() string {
 
 func GetGameViewerAdress() string {
     cfg := GetInstance()
+    if cfg.Env == "simulation" {
+	    return fmt.Sprintf("%s:%s", "0.0.0.0", cfg.GW.Port)
+    }
+
 	return fmt.Sprintf("%s:%s", cfg.GW.Address, cfg.GW.Port)
 }
