@@ -7,10 +7,10 @@ import (
 	"sync"
 	"time"
 
-	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/info"
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/gorilla/websocket"
 )
 
@@ -110,7 +110,6 @@ func (server *WebServer) sendLog() {
 		for _, ws := range connectionsCopy {
 			ws.WriteMessage(websocket.TextMessage, logJSON)
 			// fmt.Println("written msg")
-
 		}
 	}
 }
@@ -138,7 +137,6 @@ func (server *WebServer) sendGameState() {
 		for _, ws := range connectionsCopy {
 			ws.WriteMessage(websocket.TextMessage, gameStateJSON)
 			// fmt.Println("written msg")
-
 		}
 	}
 }
