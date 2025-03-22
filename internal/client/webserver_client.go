@@ -2,6 +2,7 @@ package client
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"sync"
@@ -59,7 +60,8 @@ func startWebServer() {
 	go webserverInstance.sendGameState()
 	go webserverInstance.sendLog()
 	go webserverInstance.receiveData()
-	Logger.Info("Webserver online")
+	fmt.Println("Webserver online at", config.GetGameViewerAdress())
+	Logger.Info("Webserver online at", config.GetGameViewerAdress())
 }
 
 func (server *WebServer) getUpgrader() *websocket.Upgrader {
@@ -84,6 +86,7 @@ func (server *WebServer) handleGameStateRequest(w http.ResponseWriter, r *http.R
 	// fmt.Println("making a connection")
 	// fmt.Println(len(server.websocketConnections))
 	// fmt.Print("done serving client")
+    fmt.Println("Client connected")
 	Logger.Info("Client connected")
 }
 
@@ -131,6 +134,33 @@ func (server *WebServer) sendGameState() {
 		// Creating a copy of the connections. This prevents locking other threads if the connection takes too long
 		server.websocketConnectionsMutex.Lock()
 		connectionsCopy := make([]*websocket.Conn, len(server.websocketConnections))
+		copy(connectionsCopy, server.websocketConnections)
+		server.websocketConnectionsMutex.Unlock()
+
+		for _, ws := range connectionsCopy {
+			ws.WriteMessage(websocket.TextMessage, gameStateJSON)
+			// fmt.Println("written msg")
+		}
+	}
+}
+
+func (server *WebServer) sendActions() {
+	var gameStateJSON []byte
+	for {
+        fmt.Println("Went into sendActions")
+		if len(server.gameStatePacketQueue) == 0 {
+			time.Sleep(time.Millisecond * 10) // Sleep for a short period
+            break
+		}
+		server.gameStateQueueMutex.Lock()
+		gameStateJSON = server.gameStatePacketQueue[0]
+		server.gameStatePacketQueue = server.gameStatePacketQueue[1:]
+		server.gameStateQueueMutex.Unlock()
+
+		// Creating a copy of the connections. This prevents locking other threads if the connection takes too long
+		server.websocketConnectionsMutex.Lock()
+		connectionsCopy := make([]*websocket.Conn, len(server.websocketConnections))
+        fmt.Println("websockets", len(server.websocketConnections))
 		copy(connectionsCopy, server.websocketConnections)
 		server.websocketConnectionsMutex.Unlock()
 
@@ -206,6 +236,15 @@ func toJson(input WebsiteDTO) []byte {
 	return output
 }
 
+func actionsToJson(actions []action.Action) []byte {
+	output, err := json.Marshal(actions)
+	if err != nil {
+		// fmt.Println("The WebsiteDTO packet could not be marshalled to JSON.")
+		Logger.Error("The WebsiteDTO packet could not be marshalled to JSON.")
+	}
+	return output
+}
+
 // Returns a list of all new incoming actions
 func GetIncoming() []action.ActionDTO {
 	webserver := getInstance()
@@ -234,6 +273,14 @@ func BroadcastGameState(message WebsiteDTO) {
 	webserver := getInstance()
 	webserver.gameStateQueueMutex.Lock()
 	webserver.gameStatePacketQueue = append(webserver.gameStatePacketQueue, gameStateJson)
+	webserver.gameStateQueueMutex.Unlock()
+}
+
+func BroadcastActions(actions []action.Action) {
+    actionsJson := actionsToJson(actions)
+    webserver := getInstance()
+	webserver.gameStateQueueMutex.Lock()
+	webserver.gameStatePacketQueue = append(webserver.gameStatePacketQueue, actionsJson)
 	webserver.gameStateQueueMutex.Unlock()
 }
 

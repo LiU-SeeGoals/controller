@@ -30,11 +30,6 @@ func RwSimScenario() {
 	gameInfo := info.NewGameInfo(10)
 	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddress())
 
-    logBytes := []byte("AI connected...")
-    client.UpdateWebLog(logBytes)
-
-    fmt.Printf("GameViewer socket: %s\n", config.GetGameViewerAdress())
-
 	// Yellow team
 	slowBrainYellow := slow_brain.NewSlowBrainRw(info.Yellow)
 	fastBrainYellow := ai.NewFastBrainGO()
@@ -53,7 +48,8 @@ func RwSimScenario() {
 		ssl_receiver.UpdateState(gameInfo, playTime)
 		yellow_actions := aiYellow.GetActions(gameInfo)
 
-		basestationClient.SendActions(yellow_actions)
+        client.BroadcastActions(yellow_actions) // We broadcast actions for the GV to print 'em
+	    basestationClient.SendActions(yellow_actions)
         simClient.SendActions(yellow_actions)
 	}
 }
