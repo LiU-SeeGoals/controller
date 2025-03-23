@@ -206,5 +206,6 @@ func UpdateWebGUI(gs *info.GameState, actions []action.Action, terminal_messages
 		RobotActions:   actionTDO,
 		TerminalLog:    terminal_messages,
 	}
+	fmt.Println(websiteMessage.RobotActions)
 	BroadcastGameState(websiteMessage)
 }

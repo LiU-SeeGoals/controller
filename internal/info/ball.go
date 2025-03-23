@@ -77,12 +77,8 @@ func (b *Ball) GetVelocity() Position {
 }
 
 func (b *Ball) ToDTO() BallDTO {
-	pos := b.GetPosition()
 	vel := b.GetVelocity()
 	return BallDTO{
-		PosX: pos.X,
-		PosY: pos.Y,
-		PosZ: pos.Z,
 		VelX: vel.X,
 		VelY: vel.Y,
 		VelZ: vel.Z,
@@ -90,9 +86,6 @@ func (b *Ball) ToDTO() BallDTO {
 }
 
 type BallDTO struct {
-	PosX float32
-	PosY float32
-	PosZ float32
 	VelX float32
 	VelY float32
 	VelZ float32

@@ -155,15 +155,11 @@ func (r *Robot) ToDTO() RobotDTO {
 	if !r.active {
 		return RobotDTO{}
 	}
-	pos := r.GetPosition()
 	vel := r.GetVelocity()
 
 	return RobotDTO{
 		Id:       r.id,
 		Team:     r.team,
-		X:        pos.X,
-		Y:        pos.Y,
-		Angle:    pos.Angle,
 		VelX:     vel.X,
 		VelY:     vel.Y,
 		VelAngle: vel.Angle,
@@ -177,9 +173,6 @@ func (r *Robot) GetID() ID {
 type RobotDTO struct {
 	Id       ID
 	Team     Team
-	X        float32
-	Y        float32
-	Angle    float32
 	VelX     float32
 	VelY     float32
 	VelAngle float32
