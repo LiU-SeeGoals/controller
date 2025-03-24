@@ -10,6 +10,7 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/info"
+	"github.com/LiU-SeeGoals/controller/internal/receiver"
 	"github.com/LiU-SeeGoals/controller/internal/simulator"
 	"github.com/LiU-SeeGoals/proto_go/robot_action"
 	"google.golang.org/protobuf/proto"
@@ -19,16 +20,13 @@ const MAX_SEND_SIZE = 2048
 
 func Scenario() {
 	// This avoid the "No position in history" error for robots
-	presentYellow := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-	presentBlue := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-	simController := simulator.NewSimControl()
-	simController.SetPresentRobots(presentYellow, presentBlue)
 
 	gameInfo := info.NewGameInfo(10)
-	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddress())
+	// ssl_receiver := client.NewSSLClient(config.GetSSLClientAddress())
+	ssl_receiver := receiver.NewSSLReceiver()
 
 	// Yellow team
-	slowBrainYellow := slow_brain.NewSlowBrain1(info.Yellow)
+	slowBrainYellow := slow_brain.NewSlowBrainContainer(info.Yellow)
 	fastBrainYellow := ai.NewFastBrainGO()
 	aiYellow := ai.NewAi(info.Yellow, slowBrainYellow, fastBrainYellow)
 	simClientYellow := client.NewSimClient(config.GetSimYellowTeamAddress(), gameInfo)
@@ -40,15 +38,17 @@ func Scenario() {
 	// simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress(), gameInfo)
 
 	// Some sim setup for debugging ai behaviour
-	presentYellow = []int{2, 3}
-	presentBlue = []int{0}
+	simController := simulator.NewSimControl()
+	presentYellow := []int{1}
+	presentBlue := []int{0}
 	simController.SetPresentRobots(presentYellow, presentBlue)
 
 	// start_time := time.Now().UnixMilli()
 	for {
 		// playTime := time.Now().UnixMilli() - start_time
 		// fmt.Println("playTime: ", playTime)
-		ssl_receiver.UpdateState(gameInfo, time.Now().UnixMilli())
+		// ssl_receiver.UpdateState(gameInfo, time.Now().UnixMilli())
+		ssl_receiver.Update(gameInfo, time.Now().UnixMilli())
 		//fmt.Println(gameInfo)
 
 		yellow_actions := aiYellow.GetActions(gameInfo)

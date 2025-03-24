@@ -55,10 +55,10 @@ func (m *SlowBrain1) run() {
 
 		//fmt.Println("slow, number of activities:", len(*m.activities))
 
-		if m.activities[2] == nil {
+		if m.activities[1] == nil {
 			fmt.Println("done with action: ", m.team)
 			// time.Sleep(10000 * time.Millisecond)
-			m.AddActivity(ai.NewMoveToPosition(m.team, 2, way_points[index]))
+			m.AddActivity(ai.NewMoveToPosition(m.team, 1, way_points[index]))
 			index = (index + 1) % len(way_points)
 		}
 	}

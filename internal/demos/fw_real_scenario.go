@@ -9,11 +9,12 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/info"
+	"github.com/LiU-SeeGoals/controller/internal/receiver"
 )
 
 func FwRealScenario() {
 	gameInfo := info.NewGameInfo(10)
-	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddressReal())
+	ssl_receiver := receiver.NewSSLReceiver()
 
 	// Yellow team
 	slowBrainYellow := slow_brain.NewSlowBrainFw(info.Yellow)
@@ -29,7 +30,7 @@ func FwRealScenario() {
 	for {
 		playTime := time.Now().UnixMilli()
 
-		ssl_receiver.UpdateState(gameInfo, playTime)
+		ssl_receiver.Update(gameInfo, playTime)
 		yellow_actions := aiYellow.GetActions(gameInfo)
 
 		basestationClient.SendActions(yellow_actions)

@@ -8,8 +8,9 @@ import (
 
 	"gonum.org/v1/gonum/mat"
 
-	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/action"
+	"github.com/LiU-SeeGoals/controller/internal/info"
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/proto_go/robot_action"
 	"google.golang.org/protobuf/proto"
 )
@@ -36,8 +37,8 @@ func TestSocketCommunication(t *testing.T) {
 	// Define move action
 	moveToAction := &action.MoveTo{
 		Id:   1,
-		Pos:  mat.NewVecDense(3, []float64{100, 200, math.Pi}),
-		Dest: mat.NewVecDense(3, []float64{300, 400, -math.Pi}),
+			Pos:  info.Position{X: 100, Y: 200, Z: 0, Angle: math.Pi}, // Example values for Pos
+			Dest: info.Position{X: 200, Y: 300, Z: 0, Angle: -math.Pi}, // Example values for Dest
 	}
 	moveToCommand := &robot_action.Command{
 		CommandId: robot_action.ActionType_MOVE_TO_ACTION,

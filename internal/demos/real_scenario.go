@@ -42,13 +42,14 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/info"
+	"github.com/LiU-SeeGoals/controller/internal/receiver"
 )
 
 func RealScenario() {
 	// This avoid the "No position in history" error for robots
 
 	gameInfo := info.NewGameInfo(10)
-	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddressReal())
+	gameInfoUpdater := receiver.NewSSLReceiver()
 
 	// Yellow team
 	//slowBrainYellow := slow_brain.NewSlowBrain1(info.Yellow)
@@ -68,7 +69,7 @@ func RealScenario() {
 	for {
 		playTime := time.Now().UnixMilli()
 
-		ssl_receiver.UpdateState(gameInfo, playTime)
+		gameInfoUpdater.Update(gameInfo, playTime)
 		yellow_actions := aiYellow.GetActions(gameInfo)
 		// if time.Since(start) > 1000 * time.Millisecond {
 

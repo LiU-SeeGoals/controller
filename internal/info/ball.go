@@ -1,68 +1,104 @@
 package info
 
 import (
-	"container/list"
-	"github.com/LiU-SeeGoals/controller/internal/tracker"
+	"fmt"
+	"time"
+
 )
 
-type Ball struct {
-	rawBall
-	possessor         *Robot
-	tracker           *tracker.BallTracker
-	estimatedPosition Position
-}
-
 func NewBall(historyCapacity int) *Ball {
-	tracker := tracker.NewBallTracker()
 	return &Ball{
-		rawBall: rawBall{
-			history:         list.New(),
-			historyCapacity: historyCapacity,
-		},
-		tracker:   tracker,
-		possessor: nil,
+		history:         make([]BallState, historyCapacity),
+		historyCapacity: historyCapacity,
 	}
 }
 
-// get position
-func (b *Ball) GetEstimatedPosition() (Position, error) {
-	return b.estimatedPosition, nil
+type BallPos struct {
+	pos  Position
+	time int64
 }
 
-// set position
-func (b *Ball) SetEstimatedPosition(pos Position) {
-	b.estimatedPosition = pos
+type BallState struct {
+	Valid      bool
+	Velocity   Position
+	Position   Position
+	Visibility float64
+	Timestamp  int64
+	Source     string
 }
 
-func (b *Ball) SetPossessor(robot *Robot) {
-	b.possessor = robot
+func NewBallState(position, velocity Position, visibility float64, timestamp int64, source string) BallState {
+	return BallState{
+		Valid:      true,
+		Position:   position,
+		Velocity:   velocity,
+		Visibility: visibility,
+		Timestamp:  timestamp,
+		Source:     source,
+	}
 }
 
-func (b *Ball) GetPossessor() *Robot {
-	return b.possessor
+func (b *BallState) String() string {
+	return fmt.Sprintf("Position: %v, Velocity: %v, Visibility: %v, Timestamp: %v", b.Position, b.Velocity, b.Visibility, b.Timestamp)
+}
+
+type Ball struct {
+	history         []BallState
+	historyCapacity int
+	writeIndex      int
+}
+
+// ############# Setters #############
+func (b *Ball) SetState(state BallState) {
+	b.history[b.writeIndex] = state
+	b.writeIndex = (b.writeIndex + 1) % b.historyCapacity
+}
+
+
+// ############# Getters #############
+
+func (b *Ball) getCurrentState() BallState {
+	readIndex := (b.writeIndex - 1 + b.historyCapacity) % b.historyCapacity
+	return b.history[readIndex]
+}
+
+func (b *Ball) GetPositionTime() (Position, int64, error) {
+	currentState := b.getCurrentState()
+	if !currentState.Valid {
+		return Position{}, 0, fmt.Errorf("No position in history for ball")
+	}
+
+	return currentState.Position, currentState.Timestamp, nil
+}
+
+
+func (b *Ball) GetVisibility() float64 {
+	state := b.getCurrentState()
+	return state.Visibility
+}
+
+// get age
+func (b *Ball) GetAge() int64 {
+	_, ballTime, err := b.GetPositionTime()
+	if err != nil {
+		return 0
+	}
+
+	return time.Now().UnixMilli() - ballTime
+}
+
+func (b *Ball) GetPosition() (Position, error) {
+	pos, _, err := b.GetPositionTime()
+
+	return pos, err
 }
 
 func (b *Ball) GetVelocity() Position {
-
-	if b.history.Len() < 2 {
-		return Position{0, 0, 0, 0}
-	}
-
-	element := b.history.Front()
-	ball := element.Value.(*rawBallPos)
-
-	sum_deltas := Position{}
-
-	for e := b.history.Front().Next(); e != nil; e = e.Next() {
-		ball2 := e.Value.(*rawBallPos)
-		dPos := ball2.pos.Sub(&ball.pos)
-		dt := float64(ball2.time - ball.time)
-		scaled := dPos.Scale(1 / dt)
-		sum_deltas = sum_deltas.Add(&scaled)
-	}
-	return sum_deltas.Scale(1 / float64(b.history.Len()-1))
-
+	state := b.getCurrentState()
+	return state.Velocity
 }
+
+// ############# DTO #############
 
 type BallDTO struct {
 	PosX float64

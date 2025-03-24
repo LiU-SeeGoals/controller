@@ -12,7 +12,14 @@ type GameInfo struct {
 	State  *GameState
 	Status *GameStatus
 	field  *ssl_vision.SSL_GeometryFieldSize
+
+	// RawState *RawGameState
 }
+
+// type RawGameState struct {
+// 	GameState *GameState
+// }
+
 
 func NewGameInfo(capacity int) *GameInfo {
 	return &GameInfo{

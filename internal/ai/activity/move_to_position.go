@@ -83,6 +83,7 @@ func (m *MoveToPosition) AvoidBall(avoid bool) {
 
 // GetAction returns an action for the robot with RRT-based collision avoidance
 func (m *MoveToPosition) GetAction(gi *info.GameInfo) action.Action {
+	// fmt.Println(gi.State.GetRobot(m.id, m.team).GetPosition())
 	moveToAction := m.GetMoveToAction(gi)
 	m.gi = gi
 	return &moveToAction

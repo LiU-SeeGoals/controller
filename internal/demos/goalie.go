@@ -9,6 +9,7 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/info"
 	"github.com/LiU-SeeGoals/controller/internal/simulator"
+	"github.com/LiU-SeeGoals/controller/internal/receiver"
 )
 
 func Goalie() {
@@ -19,7 +20,7 @@ func Goalie() {
 	simController.SetPresentRobots(presentYellow, presentBlue)
 
 	gameInfo := info.NewGameInfo(10)
-	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddress())
+	gameInfoUpdater := receiver.NewSSLReceiver()
 
 	// Yellow team
 	slowBrainYellow := slow_brain.NewSlowBrain1(info.Yellow)
@@ -46,7 +47,7 @@ func Goalie() {
 	for {
 		playTime := time.Now().UnixMilli() - start_time
 		// fmt.Println("playTime: ", playTime)
-		ssl_receiver.UpdateState(gameInfo, playTime)
+		gameInfoUpdater.Update(gameInfo, playTime)
 		//fmt.Println(gameInfo)
 
 		yellow_actions := aiYellow.GetActions(gameInfo)

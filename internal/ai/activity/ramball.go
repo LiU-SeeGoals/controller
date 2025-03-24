@@ -19,7 +19,7 @@ type RamAtPosition struct {
 }
 
 func (k *RamAtPosition) String() string {
-	return fmt.Sprintf("(Robot %d, RamAtPosition(%d))", k.id, k.targetPosition)
+	return fmt.Sprintf("(Robot %d, RamAtPosition(%v))", k.id, k.targetPosition)
 }
 
 func NewRamAtPosition(team info.Team, id info.ID, targetPosition info.Position) *RamAtPosition {

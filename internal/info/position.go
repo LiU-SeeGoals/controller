@@ -65,8 +65,7 @@ func (p Position) AngleDistance(p2 Position) float64 {
 func (p Position) Distance(p2 Position) float64 {
 	dx := p.X - p2.X
 	dy := p.Y - p2.Y
-	dz := p.Z - p2.Z
-	return float64(math.Sqrt(float64(dx*dx + dy*dy + dz*dz)))
+	return float64(math.Sqrt(float64(dx*dx + dy*dy)))
 }
 
 func (p Position) String() string {
@@ -95,7 +94,7 @@ func (p Position) Dot(other Position) float64 {
 	return p.X*other.X + p.Y*other.Y + p.Z*other.Z
 }
 
-func (p Position) Norm() float64 {
+func (p Position) Length() float64 {
 	return float64(math.Sqrt(float64(p.X*p.X + p.Y*p.Y + p.Z*p.Z)))
 }
 
@@ -109,7 +108,7 @@ func (p Position) Scale(scalar float64) Position {
 }
 
 func (p Position) Normalize() Position {
-	norm := p.Norm()
+	norm := p.Length()
 	return Position{
 		X:     p.X / norm,
 		Y:     p.Y / norm,

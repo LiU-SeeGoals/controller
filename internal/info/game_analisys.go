@@ -101,7 +101,7 @@ type GameAnalysis struct {
 
 func calMoveSpeed(robot *Robot) float64 {
 	velocity := robot.GetVelocity()
-	return velocity.Norm()
+	return velocity.Length()
 }
 
 func calRotationSpeed(robot *Robot) float64 {
@@ -110,8 +110,9 @@ func calRotationSpeed(robot *Robot) float64 {
 }
 
 func calAcceleration(robot *Robot) float64 {
-	acceleration := robot.GetAcceleration()
-	return acceleration
+	// acceleration := robot.GetAcceleration()
+	// return acceleration
+	return 0
 }
 
 func calDeceleration(robot *Robot) float64 {

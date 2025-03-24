@@ -96,7 +96,7 @@ func (m *SlowBrainCompetition) run() {
 			fmt.Println("done with action: ", m.team)
 
 			// If we have the ball, then dribble to the enemy goal
-			possessor := gameInfo.State.GetBall().GetPossessor()
+			possessor := gameInfo.State.GetPossessor()
 
 			if possessor != nil && possessor.GetID() == 1 {
 				m.AddActivity(ai.NewMoveWithBallToPosition(m.team, 1, way_points[enemy_goal]))

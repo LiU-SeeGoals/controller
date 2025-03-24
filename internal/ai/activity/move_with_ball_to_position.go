@@ -33,32 +33,32 @@ func NewMoveWithBallToPosition(team info.Team, id info.ID, dest info.Position) *
 // When robot is at the target position, it rotates to face the target angle.
 // If the robot is not the possessor of the ball, it moves to the ball.
 func (fb *MoveWithBallToPosition) GetAction(gi *info.GameInfo) action.Action {
-
 	robot := gi.State.GetRobot(fb.id, fb.team)
 	robotPosition, err := robot.GetPosition()
 	if err != nil {
 		Logger.Errorf("Position retrieval failed - Robot: %v\n", err)
 		return NewStop(fb.id).GetAction(gi)
 	}
+
 	if !robot.IsActive() {
 		return NewStop(fb.id).GetAction(gi)
 	}
+
 	if !fb.retrievingBall { // Check if it lost the ball
-		fb.retrievingBall = gi.State.LostBall(robot)
+		fb.retrievingBall = !gi.State.HasBall(robot)
 	}
 
 	move := NewMoveToBall(fb.team, fb.id)
-	if fb.retrievingBall && move.Achieved(gi) { // We have achivied in retrieving the ball
-		Logger.Debug("MoveWithBallToPosition: Ball retrieved")
+	if fb.retrievingBall && move.Achieved(gi) { // We have achivied retrieving the ball
+		Logger.Infof("Robot %d: MoveWithBallToPosition: Ball retrieved", fb.id)
 		fb.retrievingBall = false
 
 	} else if fb.retrievingBall { // We are still working on getting the ball
-		Logger.Debug("MoveWithBallToPosition: Retrieving ball")
+		Logger.Infof("Robot %d: MoveWithBallToPosition: Retrieving ball", fb.id)
 		return move.GetAction(gi)
-
 	}
 
-	Logger.Debug("MoveWithBallToPosition: Moving with ball to position")
+	Logger.Infof("Robot %d: MoveWithBallToPosition: Moving to target", fb.id)
 
 	// Move to target and keep the ball facing the direction in which
 	// we are moving to avoid dropping it.
@@ -95,7 +95,7 @@ func (fb *MoveWithBallToPosition) GetAction(gi *info.GameInfo) action.Action {
 }
 
 func (m *MoveWithBallToPosition) Achieved(gi *info.GameInfo) bool {
-	ballPosition, err := gi.State.GetBall().GetEstimatedPosition()
+	ballPosition, err := gi.State.GetBall().GetPosition()
 	if err != nil {
 		Logger.Errorf("Position retrieval failed - Ball: %v\n", err)
 		return false
@@ -107,11 +107,13 @@ func (m *MoveWithBallToPosition) Achieved(gi *info.GameInfo) bool {
 	}
 
 	distanceLeft := ballPosition.Distance(m.targetPosition)
-	const distance_threshold = 100
+	const distance_threshold = 200
 	const angle_threshold = 0.1
 	distance_achieved := distanceLeft <= distance_threshold
 
 	angle_diff := robotPosition.AngleDistance(m.targetPosition)
+	// fmt.Println("Angle diff: ", angle_diff)
+	// fmt.Println(distanceLeft)
 	angle_achieved := angle_diff <= angle_threshold
 	return distance_achieved && angle_achieved
 }

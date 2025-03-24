@@ -15,7 +15,7 @@ type KickAtPosition struct {
 }
 
 func (k *KickAtPosition) String() string {
-	return fmt.Sprintf("(Robot %d, KickAtPosition(%d))", k.id, k.targetPosition)
+	return fmt.Sprintf("(Robot %d, KickAtPosition(%v))", k.id, k.targetPosition)
 }
 
 func NewKickAtPosition(team info.Team, id info.ID, targetPosition info.Position) *KickAtPosition {
@@ -38,7 +38,7 @@ func (kp *KickAtPosition) GetAction(gi *info.GameInfo) action.Action {
 	angleToTarget := robotPos.AngleToPosition(kp.targetPosition)
 
 	if !kp.retrievingBall { // Check if it lost the ball
-		kp.retrievingBall = gi.State.LostBall(robot)
+		kp.retrievingBall = !gi.State.HasBall(robot)
 	}
 
 	move := NewMoveToBall(kp.team, kp.id)
@@ -77,7 +77,20 @@ func (kp *KickAtPosition) GetAction(gi *info.GameInfo) action.Action {
 
 func (k *KickAtPosition) Achieved(gi *info.GameInfo) bool {
 	robot := gi.State.GetRobot(k.id, k.team)
-	return gi.State.LostBall(robot)
+	robotPos, err := robot.GetPosition()
+	if err != nil {
+		Logger.Errorf("Position retrieval failed - Kicker: %v\n", err)
+		return false
+	}
+
+	ball := gi.State.GetBall()
+	ballPos, err := ball.GetPosition()
+	if err != nil {
+		Logger.Errorf("Position retrieval failed - Ball: %v\n", err)
+		return false
+	}
+
+	return robotPos.Distance(ballPos) > 500
 }
 
 func (k *KickAtPosition) GetID() info.ID {

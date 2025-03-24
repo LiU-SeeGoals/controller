@@ -100,7 +100,7 @@ func (g *Goalie) calculateInterceptionPoint(ballPos info.Position, isPositiveHal
 // GetAction decides what the goalie should do each tick (frame), returning a single Action.
 func (g *Goalie) GetAction(gi *info.GameInfo) action.Action {
 	// Get ball position
-	ballPos, err := gi.State.GetBall().GetEstimatedPosition()
+	ballPos, err := gi.State.GetBall().GetPosition()
 	if err != nil {
 		fmt.Println("Error getting ball position:")
 		// If there's an error getting ball position, stay at center

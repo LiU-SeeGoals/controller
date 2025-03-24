@@ -10,6 +10,7 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/info"
 	"github.com/LiU-SeeGoals/controller/internal/simulator"
+	"github.com/LiU-SeeGoals/controller/internal/receiver"
 )
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -28,7 +29,8 @@ func RwSimScenario() {
 	simController.SetPresentRobots(presentYellow, presentBlue)
 
 	gameInfo := info.NewGameInfo(10)
-	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddress())
+	// ssl_receiver := client.NewSSLClient(config.GetSSLClientAddress())
+	ssl_receiver := receiver.NewSSLReceiver()
 
 	// Yellow team
 	slowBrainYellow := slow_brain.NewSlowBrainRw(info.Yellow)
@@ -45,7 +47,8 @@ func RwSimScenario() {
 	for {
 		playTime := time.Now().UnixMilli()
 
-		ssl_receiver.UpdateState(gameInfo, playTime)
+		// ssl_receiver.UpdateState(gameInfo, playTime)
+		ssl_receiver.Update(gameInfo, playTime)
 		yellow_actions := aiYellow.GetActions(gameInfo)
 
         client.BroadcastActions(yellow_actions) // We broadcast actions for the GV to print 'em

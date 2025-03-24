@@ -32,7 +32,7 @@ func (kp *KickTheBall) GetAction(gi *info.GameInfo) action.Action {
 	robot := gi.State.GetRobot(kp.id, kp.team)
 
 	if !kp.retrievingBall { // Check if it lost the ball
-		kp.retrievingBall = gi.State.LostBall(robot)
+		kp.retrievingBall = gi.State.GetPossessor() == robot
 	}
 
 	move := NewMoveToBall(kp.team, kp.id)
@@ -55,7 +55,7 @@ func (kp *KickTheBall) GetAction(gi *info.GameInfo) action.Action {
 
 func (k *KickTheBall) Achieved(gi *info.GameInfo) bool {
 	robot := gi.State.GetRobot(k.id, k.team)
-	return gi.State.LostBall(robot)
+	return gi.State.GetPossessor() != robot
 }
 
 func (k *KickTheBall) GetID() info.ID {

@@ -25,6 +25,9 @@ type Config struct {
 
 	Real ConfigReal
 
+	// SSL tracker config
+	SSLTracker ConfigSSLTracker
+
 	// Sim config
 	Sim ConfigSim
 
@@ -51,6 +54,19 @@ type ConfigSSLVision struct {
 
 	// Visualization packets.
 	VizPort string `env:"SSL_VISION_VIZ_PORT,required"`
+}
+
+// Config struct for SSL Tracker.
+//
+// Check the .env file to make changes.
+// Unless you have a good reason, you
+// shouldn't need to use this directly.
+type ConfigSSLTracker struct {
+	// Multicast address.
+	Address string `env:"SSL_TRACKER_ADDR,required"`
+
+	// Tracker, detection, and geometry packets.
+	Port string `env:"SSL_TRACKER_PORT,required"`
 }
 
 type ConfigReal struct {
@@ -163,8 +179,19 @@ func GetGCClientAddress() string {
 // GetSSLClientAddress returns the SSL client address from the config.
 func GetSSLClientAddress() string {
 	cfg := GetInstance()
-	return fmt.Sprintf("%s:%s", cfg.SSLVision.Address, cfg.SSLVision.Port)
+
+	if cfg.Env == "sim" {
+		return fmt.Sprintf("%s:%s", cfg.SSLVision.Address, cfg.SSLVision.Port)
+	} else {
+		return fmt.Sprintf("%s:%s", cfg.SSLVision.Address, cfg.SSLVision.Port_real)
+	}
 }
+
+// // GetSSLClientAddress returns the SSL client address from the config.
+// func GetSSLClientAddressReal() string {
+// 	cfg := GetInstance()
+// 	return fmt.Sprintf("%s:%s", cfg.SSLVision.Address, cfg.SSLVision.Port_real)
+// }
 
 // Get SimAddress returns the Sim address from the config.
 func GetSimControlAddress() string {
@@ -199,10 +226,10 @@ func GetBasestationAddress() string {
 	return fmt.Sprintf("%s:%s", cfg.Real.BASESTATION_ADDR, cfg.Real.BASESTATION_PORT)
 }
 
-// GetSSLClientAddress returns the SSL client address from the config.
-func GetSSLClientAddressReal() string {
+// GetSSLTrackerAddress returns the SSL tracker address from the config.
+func GetSSLTrackerAddress() string {
 	cfg := GetInstance()
-	return fmt.Sprintf("%s:%s", cfg.SSLVision.Address, cfg.SSLVision.Port_real)
+	return fmt.Sprintf("%s:%s", cfg.SSLTracker.Address, cfg.SSLTracker.Port)
 }
 
 func GetGameViewerAdress() string {
