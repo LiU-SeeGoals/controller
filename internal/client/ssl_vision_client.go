@@ -128,8 +128,6 @@ func unpack(packet *ssl_vision.SSL_WrapperPacket, gi *info.GameInfo, play_time i
 	if gi.Field == nil {
 		gi.Field = field
 	}
-
-	fmt.Printf("%v\n", field)
 }
 
 func (receiver *SSLVisionClient) handlePacket(packet *ssl_vision.SSL_WrapperPacket, ok bool, gi *info.GameInfo, play_time int64) {
