@@ -107,6 +107,8 @@ func unpack(packet *ssl_vision.SSL_WrapperPacket, gi *info.GameInfo, play_time i
 
 	}
 
+	// TOOD: Here we loop over all balls, setting the one last in the list
+	// meaning error balls have 100% chance of fing it up!
 	if detect.GetBalls() != nil {
 		for _, ball := range detect.GetBalls() {
 			//fmt.Println("Ball", ball.GetX(), ball.GetY(), ball.GetZ())
@@ -121,26 +123,13 @@ func unpack(packet *ssl_vision.SSL_WrapperPacket, gi *info.GameInfo, play_time i
 	gi.State.SetValid(true)
 	gi.State.Update()
 
-	geometry := packet.GetGeometry()
-	field := geometry.GetField()
+	field := packet.GetGeometry().GetField()
 
-	gi.Field.SetField(field.GetFieldLength(),
-		field.GetFieldWidth(),
-		field.GetGoalWidth(),
-		field.GetGoalDepth(),
-		field.GetBoundaryWidth(),
-		field.GetPenaltyAreaDepth(),
-		field.GetPenaltyAreaWidth(),
-	)
-	if gi.Field.FieldLines == nil {
-		for _, line := range field.GetFieldLines() {
-			gi.Field.AddFieldLine(line.GetName(), float64(line.GetP1().GetX()), float64(line.GetP1().GetY()), float64(line.GetP2().GetX()), float64(line.GetP2().GetY()), float64(line.GetThickness()), int(line.GetType()))
-		}
-		for _, arc := range field.GetFieldArcs() {
-			gi.Field.AddFieldArc(arc.GetName(), float64(arc.GetCenter().GetX()), float64(arc.GetCenter().GetY()), float64(arc.GetRadius()), float64(arc.GetA1()), float64(arc.GetA2()), float64(arc.GetThickness()), int(arc.GetType()))
-		}
+	if gi.Field == nil {
+		gi.Field = field
 	}
 
+	fmt.Printf("%v\n", field)
 }
 
 func (receiver *SSLVisionClient) handlePacket(packet *ssl_vision.SSL_WrapperPacket, ok bool, gi *info.GameInfo, play_time int64) {

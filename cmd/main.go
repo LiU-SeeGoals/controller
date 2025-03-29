@@ -16,5 +16,5 @@ func main() {
 		}
 	}
 
-	demos.FwRealScenario()
+	demos.AoSimScenario()
 }
