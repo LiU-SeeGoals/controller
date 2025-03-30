@@ -53,11 +53,12 @@ func (m *SlowBrainAo) run() {
 
 	for {
 		// No need for slow brain to be fast
-		time.Sleep(100 * time.Millisecond)
+		time.Sleep(1 * time.Millisecond)
 
-		//if m.HandleRef(&gameInfo, robots) {
-		//	continue
-		//}
+		robots := []int{0,1,3}
+		if m.HandleRef(&gameInfo, robots) {
+			continue
+		}
 
         // robot := robots[0]
 		defenders := []info.ID{0,1}
@@ -124,7 +125,7 @@ func (m *SlowBrainAo) attack(robots []info.ID){
 		// if m.activities[robots[i]] == nil {
 			activityLoop := []ai.Activity{
 				ai.NewMoveToBall(m.team, robots[i]),
-				ai.NewKickAtPosition(m.team, robots[i], info.Position{X: 2000, Y: 2000, Z: 0, Angle: 0}),
+				ai.NewKickTheBall(m.team, robots[i], info.Position{X: 2000, Y: 2000, Z: 0, Angle: 0}),
 				// ai.NewKickToPlayer(m.team, 0, 1),
 			}
 			loop := ai.NewActivityLoop(robots[i], activityLoop)
