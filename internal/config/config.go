@@ -64,7 +64,7 @@ type ConfigGameViewer struct {
 }
 
 type ConfigDockerNames struct {
-    ERSim string `env:"DOCKER_NAME_ER_SIM,required"`
+    Sim string `env:"DOCKER_NAME_SIM,required"`
 }
 
 // Config struct for sim
@@ -170,7 +170,7 @@ func GetSSLClientAddress() string {
 func GetSimControlAddress() string {
 	cfg := GetInstance()
     if (cfg.Env == "simulation") {
-	    return fmt.Sprintf("%s:%s", cfg.DockerNames.ERSim, cfg.Sim.SimControllerPort)
+	    return fmt.Sprintf("%s:%s", cfg.DockerNames.Sim, cfg.Sim.SimControllerPort)
     } else {
 	    return fmt.Sprintf("%s:%s", cfg.Sim.Address, cfg.Sim.SimControllerPort)
     }
@@ -179,7 +179,7 @@ func GetSimControlAddress() string {
 func GetSimBlueTeamAddress() string {
 	cfg := GetInstance()
     if (cfg.Env == "simulation") {
-	    return fmt.Sprintf("%s:%s", cfg.DockerNames.ERSim, cfg.Sim.BlueControllerPort)
+	    return fmt.Sprintf("%s:%s", cfg.DockerNames.Sim, cfg.Sim.BlueControllerPort)
     } else {
 	    return fmt.Sprintf("%s:%s", cfg.Sim.Address, cfg.Sim.BlueControllerPort)
     }
@@ -188,7 +188,7 @@ func GetSimBlueTeamAddress() string {
 func GetSimYellowTeamAddress() string {
 	cfg := GetInstance()
     if (cfg.Env == "simulation") {
-	    return fmt.Sprintf("%s:%s", cfg.DockerNames.ERSim, cfg.Sim.YellowControllerPort)
+	    return fmt.Sprintf("%s:%s", cfg.DockerNames.Sim, cfg.Sim.YellowControllerPort)
     } else {
 	    return fmt.Sprintf("%s:%s", cfg.Sim.Address, cfg.Sim.YellowControllerPort)
     }

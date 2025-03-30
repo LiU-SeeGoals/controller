@@ -2,6 +2,7 @@ package ai
 
 import (
 	"fmt"
+	"math"
 	"sync"
 	"time"
 
@@ -39,36 +40,11 @@ func (m *SlowBrainAo) Init(
 	go m.run()
 }
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *                                                                                       *
- *                                                                                       *
- * This is Rasmus Wallin's file, touch it without asking and you shall meet your demise! *
- *                                                                                       *
- *                                                                                       *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
 func (m *SlowBrainAo) run() {
-	way_points := []info.Position{
-		// Go between line
-		//{X: -3575, Y: -4128, Z: 0, Angle: 0},
-		//{X: -5558, Y: -4096, Z: 0, Angle: 0},
-		// Go to pos
-		//{X: -4195, Y: -3544, Z: 0, Angle: 0},
-		// Triangle
-		//{X: -5500, Y: -4100, Z: 0, Angle: 0},
-		//{X: -5600, Y: -2600, Z: 0, Angle: 0},
-		//{X: -4200, Y: -3400, Z: 0, Angle: 0},
-		// Triangle 2
-		{X: -2000, Y: 0, Z: 0, Angle: 0},
-		{X: 500, Y: 2000, Z: 0, Angle: 150},
-		{X: 2000, Y: 1000, Z: 0, Angle: 100},
-	}
-	index := 0
-	succesfull_commands := 0
-	robots := []int{0, 1, 3}
 
 	gameInfo := <-m.incomingGameInfo
 	fmt.Println(gameInfo.Status)
+
 	// Basic idea
 	// Defender: Get some dudes to guard the goal, stand in "line" formation towards ball
 	//	- Function that returns indices for robots that should perform defense
@@ -83,46 +59,76 @@ func (m *SlowBrainAo) run() {
 		//	continue
 		//}
 
-        robot := robots[0]
-        if m.activities[robot] == nil {
+        // robot := robots[0]
+		defenders := []info.ID{0,1}
+		attackers := []info.ID{3}
 
-			posx := float64(gameInfo.Field.GetFieldLength()/2 - gameInfo.Field.GetGoalWidth())
+		m.defense(defenders)
+		m.attack(attackers)
 
-			pos := info.Position{X: posx, Y: 0, Z: 0, Angle: 3.14}
+			//      if m.activities[robot] == nil {
+			//
+			//          fmt.Println(fmt.Sprintf("done with (%d) action (%s)", robot, m.team))
+			//          fmt.Println("next action: ", way_points[index])
+			//          fmt.Println("sent commands: ", succesfull_commands)
+			//
+			// activityLoop := []ai.Activity{
+			// 	ai.NewMoveToBall(m.team, 0),
+			// 	ai.NewKickAtPosition(m.team, 0, info.Position{X: 2000, Y: 2000, Z: 0, Angle: 0}),
+			// 	// ai.NewKickToPlayer(m.team, 0, 1),
+			// }
+			// loop := ai.NewActivityLoop(0, activityLoop)
+			// m.AddActivity(loop)
+			//
+			//          index = (index + 1) % len(way_points)
+			//          succesfull_commands++
+			//      }
+	}
+}
 
-			ball, err := gameInfo.State.Ball.GetEstimatedPosition()
+func (m *SlowBrainAo) defense(robots []info.ID){
 
-			if err != nil {
-				fmt.Println("failed ball")
-				ball = pos
+	gi := <-m.incomingGameInfo
+
+	var formation = map[info.ID][2]float64{
+		robots[0]: {0, 0},
+		robots[1]: {0, -200},
+		// robots[2]: {0, 200},
+	}
+
+	def := gi.HomeGoalLine(m.team)
+	ballpos, err := gi.State.GetBall().GetPosition()
+	defY := ballpos.Y
+
+	if err != nil {
+		fmt.Println("Ball position is undefined")
+	}
+
+	defensePos := info.Position{X: def.X, Y: defY, Z: 0, Angle: def.Angle + math.Pi}
+
+	for i := range robots {
+		id := robots[i]
+		offset := formation[id]
+		// fmt.Printf("robots %v i %v id %v offest %v", robots, i, id, offset)
+		formationPosx := defensePos.X + offset[0]
+		formationPosy := defensePos.Y + offset[1]
+		pos := info.Position{X: formationPosx, Y: formationPosy, Z: 0, Angle: defensePos.Angle}
+		// fmt.Printf("Moving %v to %v\n", id, pos)
+		m.AddActivity(ai.NewMoveToPosition(m.team, id, pos))
+	}
+}
+
+func (m *SlowBrainAo) attack(robots []info.ID){
+
+	for i := range robots{
+		// if m.activities[robots[i]] == nil {
+			activityLoop := []ai.Activity{
+				ai.NewMoveToBall(m.team, robots[i]),
+				ai.NewKickAtPosition(m.team, robots[i], info.Position{X: 2000, Y: 2000, Z: 0, Angle: 0}),
+				// ai.NewKickToPlayer(m.team, 0, 1),
 			}
-
-            fmt.Println(fmt.Sprintf("done with (%d) action (%s)", robot, m.team))
-            fmt.Println("next action: ", way_points[index])
-            fmt.Println("sent commands: ", succesfull_commands)
-            m.AddActivity(ai.NewMoveToPosition(m.team, info.ID(robot), ball))
-            index = (index + 1) % len(way_points)
-            succesfull_commands++
-        }
-
-        robot = robots[1]
-        if m.activities[robot] == nil {
-            fmt.Println(fmt.Sprintf("done with (%d) action (%s)", robot, m.team))
-            fmt.Println("next action: ", way_points[index])
-            fmt.Println("sent commands: ", succesfull_commands)
-            m.AddActivity(ai.NewMoveToPosition(m.team, info.ID(robot), way_points[index]))
-            index = (index + 1) % len(way_points)
-            succesfull_commands++
-        }
-
-        robot = robots[2]
-        if m.activities[robot] == nil {
-            fmt.Println(fmt.Sprintf("done with (%d) action (%s)", robot, m.team))
-            fmt.Println("next action: ", way_points[index])
-            fmt.Println("sent commands: ", succesfull_commands)
-            m.AddActivity(ai.NewMoveToPosition(m.team, info.ID(robot), way_points[index]))
-            index = (index + 1) % len(way_points)
-            succesfull_commands++
-        }
+			loop := ai.NewActivityLoop(robots[i], activityLoop)
+			m.AddActivity(loop)
+		// }
 	}
 }

@@ -20,9 +20,88 @@ type MoveTo struct {
 	Dribble bool
 	// We need to know ID AND team to know how to update the pos
 	Team info.Team
+
+	KickSpeed int
+}
+
+func convAngle(angle float64) float64{
+
+	if angle > math.Pi{
+		return angle - 2 * math.Pi
+	}else if angle < -math.Pi {
+		return angle + 2 * math.Pi
+	}
+
+	return angle
+}
+
+func (mv *MoveTo) simulateRealMovement() *simulation.RobotCommand {
+	id := uint32(mv.Id)
+
+	const distKp = 0.0000005
+	const angleKp = 1.0
+	mv.Dest.Angle = convAngle(mv.Dest.Angle)
+	mv.Pos.Angle = convAngle(mv.Pos.Angle)
+
+	// Angular velocity counter-clockwise [rad/s]
+	// dx := mv.Pos.X - mv.Dest.X
+	// dy := mv.Pos.Y - mv.Dest.Y
+	dx := mv.Dest.X - mv.Pos.X
+	dy := mv.Dest.Y - mv.Pos.Y
+	angleDiff := mv.Dest.Angle - mv.Pos.Angle
+
+	distance := math.Sqrt(dx*dx + dy*dy)
+	maxSpeed := float64(0.5)
+
+	speedCtrl := math.Max(math.Min(maxSpeed, distKp * distance), 0.002)
+
+	maxAngleSpeed := 3.0
+	angleCtrl := float32(math.Min(maxAngleSpeed, angleKp * float64(angleDiff)))
+
+	// Invert robot angle to move in global coordinate
+	// I.e. Rotation matrix around the z axis
+
+	forward := float32(speedCtrl * (dx * math.Cos(-mv.Pos.Angle) - dy * math.Sin(-mv.Pos.Angle)))
+	left := float32(speedCtrl *    (dx * math.Sin(-mv.Pos.Angle) + dy * math.Cos(-mv.Pos.Angle)))
+
+	dribblerSpeed := float32(0)
+	if mv.Dribble {
+		dribblerSpeed = 100 // in rpm, adjust as needed
+	}
+
+	localVel := &simulation.MoveLocalVelocity{
+		Forward: &forward,
+		Left:    &left,
+		Angular: &angleCtrl,
+	}
+
+	// Create the move command and assign the local velocity to the oneof field
+	moveCommand := &simulation.RobotMoveCommand{
+		Command: &simulation.RobotMoveCommand_LocalVelocity{
+			LocalVelocity: localVel,
+		},
+	}
+	if mv.KickSpeed != 0 {
+		kickSpeed := float32(mv.KickSpeed)
+		return &simulation.RobotCommand{
+			Id:            &id,
+			MoveCommand:   moveCommand,
+			DribblerSpeed: &dribblerSpeed,
+			KickSpeed: &kickSpeed,
+		}
+	}
+
+	// Create the robot command with the move command
+	return &simulation.RobotCommand{
+		Id:            &id,
+		MoveCommand:   moveCommand,
+		DribblerSpeed: &dribblerSpeed,
+	}
 }
 
 func (mv *MoveTo) TranslateSim() *simulation.RobotCommand {
+	return mv.simulateRealMovement()
+
 	id := uint32(mv.Id)
 
 	// Angular velocity counter-clockwise [rad/s]

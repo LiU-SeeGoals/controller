@@ -140,7 +140,7 @@ func (gs *GameState) FindBallPossessor() *Robot {
 	// fmt.Println("Ball pos: ", ballPos)
 	// est, _ := gs.Ball.GetEstimatedPosition()
 	// fmt.Println("Est. Ball pos:", est)
-	if ballDistance <= 100 && facingBall { // WARN: Magic number, mm
+	if ballDistance <= 150 && facingBall { // WARN: Magic number, mm
 		return closestToBall
 	}
 	return nil

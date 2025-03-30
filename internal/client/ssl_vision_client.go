@@ -125,8 +125,8 @@ func unpack(packet *ssl_vision.SSL_WrapperPacket, gi *info.GameInfo, play_time i
 
 	field := packet.GetGeometry().GetField()
 
-	if gi.Field == nil {
-		gi.Field = field
+	if gi.HasField() == false {
+		gi.SetField(field)
 	}
 }
 

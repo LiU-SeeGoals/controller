@@ -40,8 +40,8 @@ func (m *SlowBrainComposition) ClearActivities() {
 }
 
 func (m *SlowBrainComposition) AddActivity(activity ai.Activity) {
-	m.activity_lock.Lock()
-	defer m.activity_lock.Unlock()
+	// m.activity_lock.Lock()
+	// defer m.activity_lock.Unlock()
 	idx := activity.GetID()
 	Logger.Infof("Adding activity %v", activity)
 	m.activities[idx] = activity

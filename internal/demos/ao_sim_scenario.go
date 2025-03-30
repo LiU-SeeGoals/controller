@@ -12,14 +12,6 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/simulator"
 )
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *                                                                                       *
- *                                                                                       *
- * This is Rasmus Wallin's file, touch it without asking and you shall meet your demise! *
- *                                                                                       *
- *                                                                                       *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
 func AoSimScenario() {
 	presentYellow := []int{0, 1, 3}
 	presentBlue := []int{0, 1, 3}
@@ -34,22 +26,30 @@ func AoSimScenario() {
 	slowBrainYellow := slow_brain.NewSlowBrainAo(info.Yellow)
 	fastBrainYellow := ai.NewFastBrainGO()
 
+	// Blue team
+	slowBrainBlue := slow_brain.NewSlowBrainAo(info.Blue)
+	fastBrainBlue := ai.NewFastBrainGO()
+
 	aiYellow := ai.NewAi(info.Yellow, slowBrainYellow, fastBrainYellow)
 
-	basestationClient := client.NewBaseStationClient(config.GetBasestationAddress())
-	simClient := client.NewSimClient(config.GetSimYellowTeamAddress(), gameInfo)
+	aiBlue := ai.NewAi(info.Blue, slowBrainBlue, fastBrainBlue)
+
+	// basestationClient := client.NewBaseStationClient(config.GetBasestationAddress())
+	simClientYellow := client.NewSimClient(config.GetSimYellowTeamAddress(), gameInfo)
+	simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress(), gameInfo)
     fmt.Println("Basedstation: ", config.GetBasestationAddress())
 
-	basestationClient.Init()
+	// basestationClient.Init()
 
 	for {
 		playTime := time.Now().UnixMilli()
 
 		ssl_receiver.UpdateState(gameInfo, playTime)
-		yellow_actions := aiYellow.GetActions(gameInfo)
 
-        client.BroadcastActions(yellow_actions) // We broadcast actions for the GV to print 'em
-	    basestationClient.SendActions(yellow_actions)
-        simClient.SendActions(yellow_actions)
+		yellow_actions := aiYellow.GetActions(gameInfo)
+        simClientYellow.SendActions(yellow_actions)
+
+		blue_actions := aiBlue.GetActions(gameInfo)
+        simClientBlue.SendActions(blue_actions)
 	}
 }

@@ -52,6 +52,9 @@ func (kp *KickAtPosition) GetAction(gi *info.GameInfo) action.Action {
 
 	}
 
+
+	// return &action
+
 	// Face target
 	if !robot.Facing(kp.targetPosition, 0.1) {
 		Logger.Debug("Rotating to target")
@@ -62,6 +65,7 @@ func (kp *KickAtPosition) GetAction(gi *info.GameInfo) action.Action {
 	}
 
 	Logger.Debug("Kicking")
+
 	// Kick
 	action := action.Kick{
 		Id:        int(kp.id),
