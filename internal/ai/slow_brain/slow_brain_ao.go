@@ -8,6 +8,9 @@ import (
 
 	ai "github.com/LiU-SeeGoals/controller/internal/ai/activity"
 	"github.com/LiU-SeeGoals/controller/internal/info"
+	"github.com/LiU-SeeGoals/controller/internal/logger"
+	vis "github.com/LiU-SeeGoals/controller/internal/visualisation"
+	"gonum.org/v1/plot/plotter"
 )
 
 type SlowBrainAo struct {
@@ -50,7 +53,9 @@ func (m *SlowBrainAo) run() {
 	//	- Function that returns indices for robots that should perform defense
 	// Attacker: Chase ball, kick toward goal, turn to support when away from ball;
 	// Support: Stand a bit away from attack so he can pass, turn into attacker when get ball
+	robotPos := plotter.XYs{}
 
+	fig := vis.GetVisualiser().CreateEmptyPlotWindow()
 	for {
 		// No need for slow brain to be fast
 		time.Sleep(1 * time.Millisecond)
@@ -63,6 +68,16 @@ func (m *SlowBrainAo) run() {
         // robot := robots[0]
 		defenders := []info.ID{0,1}
 		attackers := []info.ID{3}
+
+		myRobotPos, err := gameInfo.State.GetTeam(m.team)[0].GetPosition()
+		if err != nil {
+			logger.Logger.Debugln("Big err")
+		}
+
+		robotPos = append(robotPos, plotter.XY{X: myRobotPos.X, Y: myRobotPos.Y})
+		p := vis.ScatterPlt(robotPos)
+		p.Title.Text = fmt.Sprintf("Robot %v team %v", 0, m.team)
+		fig.UpdatePlotWindow(p)
 
 		m.defense(defenders)
 		m.attack(attackers)

@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/LiU-SeeGoals/controller/internal/demos"
+	"github.com/LiU-SeeGoals/controller/internal/visualisation"
 )
 
 func main() {
@@ -16,5 +17,8 @@ func main() {
 		}
 	}
 
-	demos.AoSimScenario()
+	go demos.AoSimScenario()
+	// Visualiser NEEDS to run in main thread
+	vis := visualisation.GetVisualiser()
+	vis.Run()
 }
