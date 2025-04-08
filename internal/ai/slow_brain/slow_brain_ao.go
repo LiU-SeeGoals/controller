@@ -10,6 +10,7 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/info"
 	"github.com/LiU-SeeGoals/controller/internal/logger"
 	vis "github.com/LiU-SeeGoals/controller/internal/visualisation"
+	"gonum.org/v1/gonum/mat"
 	"gonum.org/v1/plot/plotter"
 )
 
@@ -57,6 +58,7 @@ func (m *SlowBrainAo) run() {
 
 	fig := vis.GetVisualiser().CreateEmptyPlotWindow()
 	for {
+		gameInfo.PrintField()
 		// No need for slow brain to be fast
 		time.Sleep(1 * time.Millisecond)
 
@@ -81,24 +83,6 @@ func (m *SlowBrainAo) run() {
 
 		m.defense(defenders)
 		m.attack(attackers)
-
-			//      if m.activities[robot] == nil {
-			//
-			//          fmt.Println(fmt.Sprintf("done with (%d) action (%s)", robot, m.team))
-			//          fmt.Println("next action: ", way_points[index])
-			//          fmt.Println("sent commands: ", succesfull_commands)
-			//
-			// activityLoop := []ai.Activity{
-			// 	ai.NewMoveToBall(m.team, 0),
-			// 	ai.NewKickAtPosition(m.team, 0, info.Position{X: 2000, Y: 2000, Z: 0, Angle: 0}),
-			// 	// ai.NewKickToPlayer(m.team, 0, 1),
-			// }
-			// loop := ai.NewActivityLoop(0, activityLoop)
-			// m.AddActivity(loop)
-			//
-			//          index = (index + 1) % len(way_points)
-			//          succesfull_commands++
-			//      }
 	}
 }
 
@@ -112,7 +96,7 @@ func (m *SlowBrainAo) defense(robots []info.ID){
 		// robots[2]: {0, 200},
 	}
 
-	def := gi.HomeGoalLine(m.team)
+	def := gi.HomeGoalDefPos(m.team)
 	ballpos, err := gi.State.GetBall().GetPosition()
 	defY := ballpos.Y
 
@@ -147,4 +131,54 @@ func (m *SlowBrainAo) attack(robots []info.ID){
 			m.AddActivity(loop)
 		// }
 	}
+}
+
+
+func RadToDeg(rad float64) float64 {
+    return rad * (180.0 / math.Pi)
+}
+
+func DegToRad(deg float64) float64 {
+    return deg * (math.Pi / 180.0)
+}
+
+func (m *SlowBrainAo) rayMarch(robot info.ID, gi info.GameInfo){
+
+	pos, err := gi.State.GetTeam(m.team)[robot].GetPosition()
+	enemy := gi.EnemyGoalLine(m.team)
+
+	// Step size of i is the resolution of the rays
+	step := 1
+	var rays []*mat.VecDense
+	plotRays := plotter.XYs{}
+
+	// TODO: Plot rays by creating line from robot pos to length of ray
+	for i := 0; i < 360; i+=step {
+
+		r := 100.0
+
+		rad := DegToRad(float64(i))
+
+		dx := r * math.Cos(rad)
+		dy := r * math.Cos(rad)
+
+		rayx := dx
+		rayy := dy
+
+		rays = append(rays, mat.NewVecDense(2, []float64{rayx, rayy}))
+		plotRays = append(plotRays, plotter.XY{X: dx, Y: dy})
+	}
+
+	// for i := range rays{
+	// 	ray := rays[i]
+	//
+	// }
+
+
+
+	if err != nil {
+		logger.Logger.Debugln("Robot pos not found")
+		return
+	}
+
 }
