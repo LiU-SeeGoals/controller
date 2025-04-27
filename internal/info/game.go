@@ -3,7 +3,6 @@ package info
 import (
 	"fmt"
 	"math"
-	"gonum.org/v1/gonum/mat"
 	"github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/proto_go/ssl_vision"
 )
@@ -91,6 +90,11 @@ func (gi GameInfo) EnemyGoalLine(team Team) []Position {
 	// lower := mat.NewVecDense(2, []float64{x, -y})
 
 	return []Position{correctedPosition(team, upper), correctedPosition(team, lower)}
+}
+func (gi GameInfo) FieldSize() Position {
+	x := float64(gi.field.GetFieldLength())
+	y := float64(gi.field.GetFieldWidth())
+	return Position{X: x, Y: y, Z: 0, Angle: 0}
 }
 
 func (gi GameInfo) HomeGoalDefPos(team Team) Position {

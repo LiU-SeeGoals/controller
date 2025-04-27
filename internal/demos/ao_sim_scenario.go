@@ -1,7 +1,7 @@
 package demos
 
 import (
-	"fmt"
+	// "fmt"
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/ai"
@@ -37,7 +37,7 @@ func AoSimScenario() {
 	// basestationClient := client.NewBaseStationClient(config.GetBasestationAddress())
 	simClientYellow := client.NewSimClient(config.GetSimYellowTeamAddress(), gameInfo)
 	simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress(), gameInfo)
-    fmt.Println("Basedstation: ", config.GetBasestationAddress())
+    // fmt.Println("Basedstation: ", config.GetBasestationAddress())
 
 	// basestationClient.Init()
 

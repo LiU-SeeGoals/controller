@@ -56,16 +56,16 @@ func (m *SlowBrainAo) run() {
 	// Support: Stand a bit away from attack so he can pass, turn into attacker when get ball
 	robotPos := plotter.XYs{}
 
-	fig := vis.GetVisualiser().CreateEmptyPlotWindow()
+	vis.GetVisualiser().CreateEmptyNamedPlotWindow("raycast")
 	for {
-		gameInfo.PrintField()
+		// gameInfo.PrintField()
 		// No need for slow brain to be fast
 		time.Sleep(1 * time.Millisecond)
 
-		robots := []int{0,1,3}
-		if m.HandleRef(&gameInfo, robots) {
-			continue
-		}
+		// robots := []int{0,1,3}
+		// if m.HandleRef(&gameInfo, robots) {
+		// 	continue
+		// }
 
         // robot := robots[0]
 		defenders := []info.ID{0,1}
@@ -79,10 +79,13 @@ func (m *SlowBrainAo) run() {
 		robotPos = append(robotPos, plotter.XY{X: myRobotPos.X, Y: myRobotPos.Y})
 		p := vis.ScatterPlt(robotPos)
 		p.Title.Text = fmt.Sprintf("Robot %v team %v", 0, m.team)
-		fig.UpdatePlotWindow(p)
+		// fig.UpdatePlotWindow(p)
 
 		m.defense(defenders)
 		m.attack(attackers)
+		m.rayMarch(attackers[0], gameInfo)
+		// p := vis.LinePlt(plotRays)
+		// fig.UpdatePlotWindow(p)
 	}
 }
 
@@ -142,25 +145,33 @@ func DegToRad(deg float64) float64 {
     return deg * (math.Pi / 180.0)
 }
 
-func (m *SlowBrainAo) rayMarch(robot info.ID, gi info.GameInfo){
+func (m *SlowBrainAo) rayMarch(robot info.ID, gi info.GameInfo) {
 
 	pos, err := gi.State.GetTeam(m.team)[robot].GetPosition()
-	enemy := gi.EnemyGoalLine(m.team)
+	if err != nil {
+		logger.Logger.Debugln("Robot pos not found")
+		return
+	}
+	// enemy := gi.EnemyGoalLine(m.team)
 
 	// Step size of i is the resolution of the rays
-	step := 1
+
+	angularRes := 10
 	var rays []*mat.VecDense
 	plotRays := plotter.XYs{}
 
 	// TODO: Plot rays by creating line from robot pos to length of ray
-	for i := 0; i < 360; i+=step {
 
-		r := 100.0
+	// Ray length in mm
+	rayLen := 2000.0
 
-		rad := DegToRad(float64(i))
+	for angle := 0; angle < 360; angle+=angularRes {
 
-		dx := r * math.Cos(rad)
-		dy := r * math.Cos(rad)
+
+		rad := DegToRad(float64(angle))
+
+		dx := pos.X + rayLen * math.Cos(rad)
+		dy := pos.Y + rayLen * math.Sin(rad)
 
 		rayx := dx
 		rayy := dy
@@ -169,16 +180,27 @@ func (m *SlowBrainAo) rayMarch(robot info.ID, gi info.GameInfo){
 		plotRays = append(plotRays, plotter.XY{X: dx, Y: dy})
 	}
 
-	// for i := range rays{
-	// 	ray := rays[i]
+	// Stepsize along ray in millimeter
+
+	// stepSize := 20
 	//
+	// for i := 0; i < len(rays); i += 1{
+	// 	for step := 0; step < int(rayLen) / stepSize; step += stepSize{
+	// 		x := 
+	// 		y :=
+	// 	}
 	// }
 
 
+	p := vis.RayPlt(plotter.XY{X: pos.X, Y: pos.Y}, plotRays)
+	fieldSize := gi.FieldSize()
+	p.X.Min = -fieldSize.X/2
+	p.X.Max = fieldSize.X/2
 
-	if err != nil {
-		logger.Logger.Debugln("Robot pos not found")
-		return
-	}
+	p.Y.Min = -fieldSize.Y/2
+	p.Y.Max = fieldSize.Y/2
 
+	// p := vis.LinePlt(plotRays)
+	vis.GetVisualiser().GetPlot("raycast").UpdatePlotWindow(p)
+	// return plotRays
 }

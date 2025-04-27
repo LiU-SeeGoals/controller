@@ -18,7 +18,10 @@ func main() {
 	}
 
 	go demos.AoSimScenario()
-	// Visualiser NEEDS to run in main thread
-	vis := visualisation.GetVisualiser()
+
+	// Visualiser (plotting) NEEDS to run in main thread
+	// Choose backend, none gives no GUI fayne creates GUI
+	// Use none if there are display issues, and you dont wanna debug
+	vis := visualisation.NewVisualiser("none")
 	vis.Run()
 }
