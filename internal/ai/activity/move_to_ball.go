@@ -62,7 +62,6 @@ func (m *MoveToBall) GetAction(gi *info.GameInfo) action.Action {
 }
 
 func (m *MoveToBall) Achieved(gi *info.GameInfo) bool {
-	fmt.Println(gi.State.GetBall().GetPossessor())
 	return gi.State.GetBall().GetPossessor() == gi.State.GetRobot(m.id, m.team)
 }
 
