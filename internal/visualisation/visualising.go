@@ -68,38 +68,38 @@ var (
 )
 
 func NewVisualiser(backend string) Visualiser {
-	if backend == "fayne"{
-		globalVisOnce.Do(func() {
-			visApp := fyneapp.New()
-			FayneVis := &fayneVisualiser{app: visApp}
-			FayneVis.figs = make(map[string]Figure)
+	globalVisOnce.Do(func() {
+		if backend == "fayne"{
+				visApp := fyneapp.New()
+				FayneVis := &fayneVisualiser{app: visApp}
+				FayneVis.figs = make(map[string]Figure)
+				globalVis = FayneVis
 
-			// Create a persistent invisible window
-			// One window needs to be open or main thread will die
-			FayneVis.mainWindow = visApp.NewWindow("Persistent Window")
-			FayneVis.mainWindow.Resize(fyne.NewSize(0, 0))
-			FayneVis.mainWindow.SetFixedSize(true)
-			FayneVis.mainWindow.SetCloseIntercept(func() {
-				FayneVis.mainWindow.Hide()
-			})
-			FayneVis.mainWindow.Show() // Keep this window always open
+				// Create a persistent invisible window
+				// One window needs to be open or main thread will die
+				FayneVis.mainWindow = visApp.NewWindow("Persistent Window")
+				FayneVis.mainWindow.Resize(fyne.NewSize(0, 0))
+				FayneVis.mainWindow.SetFixedSize(true)
+				FayneVis.mainWindow.SetCloseIntercept(func() {
+					FayneVis.mainWindow.Hide()
+				})
+				FayneVis.mainWindow.Show() // Keep this window always open
 
-			hide := func(){
-				// Hack to hide the main window on startup to keep app running....
-				// time.Sleep(100 * time.Millisecond)
-				FayneVis.mainWindow.Hide()
-			}
-			visApp.Lifecycle().SetOnStarted(hide)
-			visApp.Lifecycle().SetOnEnteredForeground(hide)
-			visApp.Lifecycle().SetOnExitedForeground(hide)
-			globalVis = FayneVis
-		})
-	} else if backend == "none"{
-		// Keep name "none" for clarity, but return same as else statement
-		globalVis = &emptyVisualiser{}
-	} else {
-		globalVis = &emptyVisualiser{}
-	}
+				hide := func(){
+					// Hack to hide the main window on startup to keep app running....
+					// time.Sleep(100 * time.Millisecond)
+					FayneVis.mainWindow.Hide()
+				}
+				visApp.Lifecycle().SetOnStarted(hide)
+				visApp.Lifecycle().SetOnEnteredForeground(hide)
+				visApp.Lifecycle().SetOnExitedForeground(hide)
+		} else if backend == "none"{
+			// Keep name "none" for clarity, but return same as else statement
+			globalVis = &emptyVisualiser{}
+		} else {
+			globalVis = &emptyVisualiser{}
+		}
+	})
 	return globalVis
 }
 
