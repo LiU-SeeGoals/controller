@@ -28,7 +28,7 @@ func Scenario() {
 	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddress())
 
 	// Yellow team
-	slowBrainYellow := slow_brain.NewSlowBrainCompetition(info.Yellow)
+	slowBrainYellow := slow_brain.NewSlowBrain1(info.Yellow)
 	fastBrainYellow := ai.NewFastBrainGO()
 	aiYellow := ai.NewAi(info.Yellow, slowBrainYellow, fastBrainYellow)
 	simClientYellow := client.NewSimClient(config.GetSimYellowTeamAddress(), gameInfo)
@@ -40,8 +40,8 @@ func Scenario() {
 	// simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress(), gameInfo)
 
 	// Some sim setup for debugging ai behaviour
-	presentYellow = []int{0, 1, 3}
-	presentBlue = []int{}
+	presentYellow = []int{2, 3}
+	presentBlue = []int{0}
 	simController.SetPresentRobots(presentYellow, presentBlue)
 
 	// start_time := time.Now().UnixMilli()
