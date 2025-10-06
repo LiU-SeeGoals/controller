@@ -1,7 +1,0 @@
-Flask
-flask_cors
-torch
-numpy
-matplotlib
-ipywidgets
-ipympl
