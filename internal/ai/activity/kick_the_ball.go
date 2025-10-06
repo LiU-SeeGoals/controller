@@ -45,6 +45,27 @@ func (kp *KickTheBall) GetAction(gi *info.GameInfo) action.Action {
 		return move.GetAction(gi)
 
 	}
+
+	// Ensure we are close enough to the ball before attempting a kick
+	robotPos, errR := robot.GetPosition()
+	ballPos, errB := gi.State.GetBall().GetEstimatedPosition()
+	if errR != nil || errB != nil {
+		Logger.Errorf("Position retrieval failed - Robot/Ball: %v %v\n", errR, errB)
+		return NewStop(kp.id).GetAction(gi)
+	}
+
+	distanceToBall := robotPos.Distance(ballPos)
+	if distanceToBall > 90 { // WARN: Magic number, must be close to control the ball for a proper kick
+		return move.GetAction(gi)
+	}
+
+	// Aim at target before kicking
+	if !robot.Facing(kp.targetPosition, 0.1) {
+		Logger.Debug("KickTheBall: Aiming at target before kick")
+		angleToTarget := robotPos.AngleToPosition(kp.targetPosition)
+		robotPos.Angle = angleToTarget
+		return NewMoveWithBallToPosition(kp.team, kp.id, robotPos).GetAction(gi)
+	}
 	action := action.Kick{
 		Id:        int(kp.id),
 		KickSpeed: 4,
@@ -55,6 +76,7 @@ func (kp *KickTheBall) GetAction(gi *info.GameInfo) action.Action {
 
 func (k *KickTheBall) Achieved(gi *info.GameInfo) bool {
 	robot := gi.State.GetRobot(k.id, k.team)
+	fmt.Println("Kicked away the ball: ", gi.State.LostBall(robot))
 	return gi.State.LostBall(robot)
 }
 

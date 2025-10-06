@@ -41,24 +41,31 @@ func (m *SlowBrainGoalie) Init(
 
 // This is the main loop of the AI in this slow brain
 func (m *SlowBrainGoalie) run() {
-
-	way_points := []info.Position{
-		{X: 0, Y: 0, Z: 0, Angle: 0},
-		{X: -3000, Y: 0, Z: 0, Angle: 0},
-		{X: 1000, Y: 0, Z: 0, Angle: 0},
-	}
-	index := 0
-
+	var step = 0
 	for {
 		// No need for slow brain to be fast
 		time.Sleep(100 * time.Millisecond)
 
 		//fmt.Println("slow, number of activities:", len(*m.activities))
 
-		if m.activities[2] == nil {
+		if m.activities[0] == nil {
 			fmt.Println("done with action: ", m.team)
 			m.AddActivity(ai.NewGoalie(m.team, 0))
-			index = (index + 1) % len(way_points)
+		}
+		if m.activities[1] == nil {
+			if step == 0 {
+				fmt.Println("Adding move to ball for team: ", m.team)
+				m.AddActivity(ai.NewMoveToBall(m.team, 1))
+				step += 1
+			} else if step == 1 {
+				fmt.Println("Adding move with ball: ", m.team)
+				m.AddActivity(ai.NewMoveWithBallToPosition(m.team, 1, info.Position{X: 250, Y: 0, Z: 0, Angle: 0}))
+				step += 1
+			} else if step == 2 {
+				fmt.Println("Adding kick action to 1 for team: ", m.team)
+				m.AddActivity(ai.NewKickTheBall(m.team, 1, info.Position{X: 2000, Y: 0}))
+				step += 1
+			}
 		}
 	}
 }

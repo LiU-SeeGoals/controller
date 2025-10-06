@@ -13,8 +13,8 @@ import (
 
 func Goalie() {
 	// This avoid the "No position in history" error for robots
-	presentYellow := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-	presentBlue := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	presentYellow := []int{0}
+	presentBlue := []int{0, 1}
 	simController := simulator.NewSimControl()
 	simController.SetPresentRobots(presentYellow, presentBlue)
 
@@ -22,7 +22,7 @@ func Goalie() {
 	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddress())
 
 	// Yellow team
-	slowBrainYellow := slow_brain.NewSlowBrain1(info.Yellow)
+	slowBrainYellow := slow_brain.NewSlowBrainGoalie(info.Yellow)
 	fastBrainYellow := ai.NewFastBrainGO()
 
 	aiYellow := ai.NewAi(info.Yellow, slowBrainYellow, fastBrainYellow)
@@ -30,17 +30,12 @@ func Goalie() {
 	simClientYellow := client.NewSimClient(config.GetSimYellowTeamAddress(), gameInfo)
 
 	// Blue team
-	// slowBrainBlue := slow_brain.NewSlowBrain1(info.Blue)
-	// fastBrainBlue := ai.NewFastBrainGO()
+	slowBrainBlue := slow_brain.NewSlowBrainGoalie(info.Blue)
+	fastBrainBlue := ai.NewFastBrainGO()
 
-	// aiBlue := ai.NewAi(info.Blue, slowBrainBlue, fastBrainBlue)
+	aiBlue := ai.NewAi(info.Blue, slowBrainBlue, fastBrainBlue)
 
-	// simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress(), gameInfo)
-
-	// Some sim setup for debugging ai behaviour
-	presentYellow = []int{0, 1, 2, 3, 4, 5,6 , 7 , 8, 9 ,10}
-	presentBlue = []int{0, 1, 2, 3, 4, 5, 6 ,7, 8, 9 ,10}
-	simController.SetPresentRobots(presentYellow, presentBlue)
+	simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress(), gameInfo)
 
 	start_time := time.Now().UnixMilli()
 	for {
@@ -52,10 +47,8 @@ func Goalie() {
 		yellow_actions := aiYellow.GetActions(gameInfo)
 		simClientYellow.SendActions(yellow_actions)
 
-		//blue_actions := aiBlue.GetActions(gameInfo)
-		//simClientBlue.SendActions(blue_actions)
-
-		// terminal_messages := []string{"Scenario"}
+		blue_actions := aiBlue.GetActions(gameInfo)
+		simClientBlue.SendActions(blue_actions)
 
 		// if len(blue_actions) > 0 {
 		// 	client.UpdateWebGUI(gameInfo, blue_actions, terminal_messages)

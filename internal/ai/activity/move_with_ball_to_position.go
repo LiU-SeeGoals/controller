@@ -68,17 +68,18 @@ func (fb *MoveWithBallToPosition) GetAction(gi *info.GameInfo) action.Action {
 
 		angleToTarget := robotPosition.AngleToPosition(moveAction.Dest)
 		moveAction.Dest.Angle = angleToTarget
+		moveAction.Dribble = true
 
-		act := action.MoveTo{
-			Id:   int(fb.id),
-			Team: fb.team,
-			Pos:  robotPosition,
-			Dest: moveAction.Dest,
+		// act := action.MoveTo{
+		// 	Id:   int(fb.id),
+		// 	Team: fb.team,
+		// 	Pos:  robotPosition,
+		// 	Dest: moveAction.Dest,
 
-			Dribble: true,
-		}
+		// 	Dribble: true,
+		// }
 		// return &act
-		return &act
+		return &moveAction
 	}
 
 	// We are at target position, now rotate to target angle

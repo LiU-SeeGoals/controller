@@ -14,10 +14,10 @@ func init() {
 	// Log rotation for JSON logs (structured)
 	jsonLogFile := zapcore.AddSync(&lumberjack.Logger{
 		Filename:   "../logs/structured.log", // Structured logs in JSON format
-		MaxSize:    100,  // Max size in MB before rotation
-		MaxBackups: 1,   // Max number of old log files to keep
-		MaxAge:     30,  // Max number of days to retain old logs
-		Compress:   false, // Compress old logs (gzip)
+		MaxSize:    100,                      // Max size in MB before rotation
+		MaxBackups: 1,                        // Max number of old log files to keep
+		MaxAge:     30,                       // Max number of days to retain old logs
+		Compress:   false,                    // Compress old logs (gzip)
 	})
 
 	// Log rotation for human-readable logs
@@ -41,12 +41,12 @@ func init() {
 	humanEncoder := zapcore.NewConsoleEncoder(humanEncoderConfig) // Pretty-print logs
 
 	// Set up cores for logging
-	jsonCore := zapcore.NewCore(jsonEncoder, jsonLogFile, zapcore.DebugLevel) // JSON logs
+	jsonCore := zapcore.NewCore(jsonEncoder, jsonLogFile, zapcore.DebugLevel)    // JSON logs
 	humanCore := zapcore.NewCore(humanEncoder, humanLogFile, zapcore.DebugLevel) // Readable logs
 	// consoleCore := zapcore.NewCore(humanEncoder, zapcore.AddSync(os.Stdout), zapcore.DebugLevel) // Console logs
 
 	// Combine all cores
-	logCore := zapcore.NewTee(jsonCore, humanCore)//, consoleCore)
+	logCore := zapcore.NewTee(jsonCore, humanCore) //, consoleCore)
 
 	// Create the logger
 	logger := zap.New(logCore, zap.AddCaller(), zap.AddStacktrace(zapcore.ErrorLevel))
@@ -58,7 +58,7 @@ func init() {
 /*
 	// Example: Custom Log Level (e.g., "NOTICE")
 	const NoticeLevel zapcore.Level = 1  // Between Debug (-1) and Info (0)
-	
+
 	// Define a custom level enabler
 	func CustomLevelEnabler(level zapcore.Level) bool {
 		return level == NoticeLevel || level >= zapcore.InfoLevel
@@ -71,5 +71,3 @@ func init() {
 	// Log a message with the custom level (if supported in your logger setup)
 	LoggerS.Desugar().Check(NoticeLevel, "This is a NOTICE level log").Write()
 */
-
-

@@ -19,8 +19,8 @@ const MAX_SEND_SIZE = 2048
 
 func Scenario() {
 	// This avoid the "No position in history" error for robots
-	presentYellow := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-	presentBlue := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	presentYellow := []int{0, 1, 2, 3, 4, 5, 6, 7, 8}
+	presentBlue := []int{0, 1, 2, 3, 4, 5, 6, 7, 8}
 	simController := simulator.NewSimControl()
 	simController.SetPresentRobots(presentYellow, presentBlue)
 
@@ -28,20 +28,17 @@ func Scenario() {
 	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddress())
 
 	// Yellow team
-	slowBrainYellow := slow_brain.NewSlowBrain1(info.Yellow)
+	slowBrainYellow := slow_brain.NewSlowBrainChaos(info.Yellow)
 	fastBrainYellow := ai.NewFastBrainGO()
 	aiYellow := ai.NewAi(info.Yellow, slowBrainYellow, fastBrainYellow)
 	simClientYellow := client.NewSimClient(config.GetSimYellowTeamAddress(), gameInfo)
 
 	// Blue team
-	// slowBrainBlue := slow_brain.NewRefCommands(info.Blue, simController)
-	// fastBrainBlue := ai.NewFastBrainGO()
-	// aiBlue := ai.NewAi(info.Blue, slowBrainBlue, fastBrainBlue)
-	// simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress(), gameInfo)
+	slowBrainBlue := slow_brain.NewSlowBrainChaos(info.Blue)
+	fastBrainBlue := ai.NewFastBrainGO()
+	aiBlue := ai.NewAi(info.Blue, slowBrainBlue, fastBrainBlue)
+	simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress(), gameInfo)
 
-	// Some sim setup for debugging ai behaviour
-	presentYellow = []int{2, 3}
-	presentBlue = []int{0}
 	simController.SetPresentRobots(presentYellow, presentBlue)
 
 	// start_time := time.Now().UnixMilli()
@@ -54,8 +51,8 @@ func Scenario() {
 		yellow_actions := aiYellow.GetActions(gameInfo)
 		simClientYellow.SendActions(yellow_actions)
 
-		// blue_actions := aiBlue.GetActions(gameInfo)
-		// simClientBlue.SendActions(blue_actions)
+		blue_actions := aiBlue.GetActions(gameInfo)
+		simClientBlue.SendActions(blue_actions)
 
 		// terminal_messages := []string{"Scenario"}
 

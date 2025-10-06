@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"math"
 
-	. "github.com/LiU-SeeGoals/controller/internal/logger"
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/info"
+	. "github.com/LiU-SeeGoals/controller/internal/logger"
 )
 
 type KickToPlayer struct {
@@ -44,7 +44,6 @@ func (fb *KickToPlayer) GetAction(gi *info.GameInfo) action.Action {
 		Logger.Errorf("Position retrieval failed - Kicker: %v, Receiver: %v\n", err1, err2)
 		return NewStop(fb.id).GetAction(gi)
 	}
-	
 
 	dx := float64(kickerPos.X - recieverPos.X)
 	dy := float64(kickerPos.Y - recieverPos.Y)
@@ -113,4 +112,3 @@ func (k *KickToPlayer) Achieved(gi *info.GameInfo) bool {
 func (k *KickToPlayer) GetID() info.ID {
 	return k.id
 }
-
