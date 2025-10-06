@@ -9,22 +9,22 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
-type SlowBrainGoalie struct {
-	SlowBrainComposition
+type plannerGoalie struct {
+	plannerCore
 	at_state int
 	start    time.Time
 	max_time time.Duration
 }
 
-func NewSlowBrainGoalie(team info.Team) *SlowBrainGoalie {
-	return &SlowBrainGoalie{
-		SlowBrainComposition: SlowBrainComposition{
+func NewPlannerGoalie(team info.Team) *plannerGoalie {
+	return &plannerGoalie{
+		plannerCore: plannerCore{
 			team: team,
 		},
 	}
 }
 
-func (m *SlowBrainGoalie) Init(
+func (m *plannerGoalie) Init(
 	incoming <-chan info.GameInfo,
 	activities *[info.TEAM_SIZE]ai.Activity,
 	lock *sync.Mutex,
@@ -40,7 +40,7 @@ func (m *SlowBrainGoalie) Init(
 }
 
 // This is the main loop of the AI in this slow brain
-func (m *SlowBrainGoalie) run() {
+func (m *plannerGoalie) run() {
 
 	way_points := []info.Position{
 		{X: 0, Y: 0, Z: 0, Angle: 0},

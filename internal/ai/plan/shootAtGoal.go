@@ -9,7 +9,7 @@ import (
 )
 
 type ShootAtGoal struct {
-	SlowBrainComposition
+	plannerCore
 	at_state int
 	start    time.Time
 	max_time time.Duration
@@ -17,7 +17,7 @@ type ShootAtGoal struct {
 
 func NewShootAtGoal(team info.Team) *ShootAtGoal {
 	return &ShootAtGoal{
-		SlowBrainComposition: SlowBrainComposition{
+		plannerCore: plannerCore{
 			team: team,
 		},
 	}

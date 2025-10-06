@@ -10,7 +10,7 @@ import (
 )
 
 type TestGoalie struct {
-	SlowBrainComposition
+	plannerCore
 	at_state int
 	start    time.Time
 	max_time time.Duration
@@ -18,7 +18,7 @@ type TestGoalie struct {
 
 func NewTestGoalie(team info.Team) *TestGoalie {
 	return &TestGoalie{
-		SlowBrainComposition: SlowBrainComposition{
+		plannerCore: plannerCore{
 			team: team,
 		},
 	}

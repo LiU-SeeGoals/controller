@@ -10,11 +10,11 @@ import (
 )
 
 // ========================================================
-// SlowBrainCompetition is a slow brain used for competition
+// plannerCompetition is a slow brain used for competition
 // ========================================================
 
-type SlowBrainCompetition struct {
-	SlowBrainComposition
+type plannerCompetition struct {
+	plannerCore
 
 	at_state int
 	start    time.Time
@@ -23,16 +23,16 @@ type SlowBrainCompetition struct {
 	prev_ref info.RefCommand
 }
 
-func NewSlowBrainCompetition(team info.Team) *SlowBrainCompetition {
-	return &SlowBrainCompetition{
-		SlowBrainComposition: SlowBrainComposition{
+func NewPlannerCompetition(team info.Team) *plannerCompetition {
+	return &plannerCompetition{
+		plannerCore: plannerCore{
 			team: team,
 		},
 		team: team,
 	}
 }
 
-func (m *SlowBrainCompetition) Init(
+func (m *plannerCompetition) Init(
 	incoming <-chan info.GameInfo,
 	activities *[info.TEAM_SIZE]ai.Activity,
 	lock *sync.Mutex,
@@ -47,14 +47,14 @@ func (m *SlowBrainCompetition) Init(
 }
 
 // This is the main loop of the AI in this slow brain
-func (m *SlowBrainCompetition) run() {
+func (m *plannerCompetition) run() {
 	way_points := []info.Position{
 		{X: 4600, Y: 0, Z: 0, Angle: 0},
 		{X: -4600, Y: 0, Z: 0, Angle: 0},
 	}
 
 	enemy_goal := 0
-	fmt.Println("SlowBrainCompetition: starting")
+	fmt.Println("plannerCompetition: starting")
 	active_id := []int{0, 1, 3}
 
 	for {
