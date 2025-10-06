@@ -31,7 +31,7 @@ func RwSimScenario() {
 	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddress())
 
 	// Yellow team
-	slowBrainYellow := plan.NewplanRw(info.Yellow)
+	slowBrainYellow := plan.NewPlannerRw(info.Yellow)
 	fastBrainYellow := ai.NewActivityExecutor()
 
 	aiYellow := ai.NewAi(info.Yellow, slowBrainYellow, fastBrainYellow)

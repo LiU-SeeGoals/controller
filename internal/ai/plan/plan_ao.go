@@ -14,22 +14,22 @@ package ai
 // 	"gonum.org/v1/plot/plotter"
 // )
 
-// type planAo struct {
-// 	planCore
+// type plannerAo struct {
+// 	plannerCore
 // 	at_state int
 // 	start    time.Time
 // 	max_time time.Duration
 // }
 
-// func NewplanAo(team info.Team) *planAo {
-// 	return &planAo{
-// 		planCore: planCore{
+// func NewPlannerAo(team info.Team) *plannerAo {
+// 	return &plannerAo{
+// 		plannerCore: plannerCore{
 // 			team: team,
 // 		},
 // 	}
 // }
 
-// func (m *planAo) Init(
+// func (m *plannerAo) Init(
 // 	incoming <-chan info.GameInfo,
 // 	activities *[info.TEAM_SIZE]ai.Activity,
 // 	lock *sync.Mutex,
@@ -44,7 +44,7 @@ package ai
 // 	go m.run()
 // }
 
-// func (m *planAo) run() {
+// func (m *plannerAo) run() {
 
 // 	gameInfo := <-m.incomingGameInfo
 // 	fmt.Println(gameInfo.Status)
@@ -89,7 +89,7 @@ package ai
 // 	}
 // }
 
-// func (m *planAo) defense(robots []info.ID){
+// func (m *plannerAo) defense(robots []info.ID){
 
 // 	gi := <-m.incomingGameInfo
 
@@ -121,7 +121,7 @@ package ai
 // 	}
 // }
 
-// func (m *planAo) attack(robots []info.ID){
+// func (m *plannerAo) attack(robots []info.ID){
 
 // 	for i := range robots{
 // 		// if m.activities[robots[i]] == nil {
@@ -144,7 +144,7 @@ package ai
 //     return deg * (math.Pi / 180.0)
 // }
 
-// func (m *planAo) rayMarch(robot info.ID, gi info.GameInfo) {
+// func (m *plannerAo) rayMarch(robot info.ID, gi info.GameInfo) {
 
 // 	pos, err := gi.State.GetTeam(m.team)[robot].GetPosition()
 // 	if err != nil {

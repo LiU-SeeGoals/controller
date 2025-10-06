@@ -9,22 +9,22 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
-type planRw struct {
-	planCore
+type plannerRw struct {
+	plannerCore
 	at_state int
 	start    time.Time
 	max_time time.Duration
 }
 
-func NewplanRw(team info.Team) *planRw {
-	return &planRw{
-		planCore: planCore{
+func NewPlannerRw(team info.Team) *plannerRw {
+	return &plannerRw{
+		plannerCore: plannerCore{
 			team: team,
 		},
 	}
 }
 
-func (m *planRw) Init(
+func (m *plannerRw) Init(
 	incoming <-chan info.GameInfo,
 	activities *[info.TEAM_SIZE]ai.Activity,
 	lock *sync.Mutex,
@@ -47,7 +47,7 @@ func (m *planRw) Init(
  *                                                                                       *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-func (m *planRw) run() {
+func (m *plannerRw) run() {
 	way_points := []info.Position{
 		// Go between line
 		//{X: -3575, Y: -4128, Z: 0, Angle: 0},

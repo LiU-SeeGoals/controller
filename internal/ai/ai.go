@@ -9,7 +9,7 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
-type plan interface {
+type planner interface {
 	Init(incoming <-chan info.GameInfo, activities *[info.TEAM_SIZE]ai.Activity, lock *sync.Mutex, team info.Team)
 }
 
@@ -24,7 +24,7 @@ type executor interface {
 
 type Ai struct {
 	team             info.Team
-	plan             plan
+	planner             planner
 	executor         executor
 	gameInfoSenderSB chan<- info.GameInfo
 	gameInfoSenderFB chan<- info.GameInfo
@@ -34,7 +34,7 @@ type Ai struct {
 }
 
 // Constructor for the AI
-func NewAi(team info.Team, plan plan, executor executor) *Ai {
+func NewAi(team info.Team, planner planner, executor executor) *Ai {
 	// Create a shared slice of Activity and a mutex
 	activities := &[info.TEAM_SIZE]ai.Activity{}
 	lock := &sync.Mutex{}
@@ -44,13 +44,13 @@ func NewAi(team info.Team, plan plan, executor executor) *Ai {
 	actionReceiver := make(chan []action.Action)
 
 	// Initialize plan and executor with the shared resources
-	plan.Init(gameInfoReceiverSB, activities, lock, team)
+	planner.Init(gameInfoReceiverSB, activities, lock, team)
 	executor.Init(gameInfoReceiverFB, activities, lock, actionReceiver, team)
 
 	// Construct the AI object
 	ai := &Ai{
 		team:             team,
-		plan:             plan,
+		planner:             planner,
 		executor:         executor,
 		activities:       activities,
 		gameInfoSenderSB: gameInfoSenderSB,

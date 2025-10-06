@@ -23,11 +23,11 @@ package demos
 // 	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddress())
 
 // 	// Yellow team
-// 	slowBrainYellow := slow_brain.NewplanAo(info.Yellow)
+// 	slowBrainYellow := slow_brain.NewPlannerAo(info.Yellow)
 // 	fastBrainYellow := ai.NewFastBrainGO()
 
 // 	// Blue team
-// 	slowBrainBlue := slow_brain.NewplanAo(info.Blue)
+// 	slowBrainBlue := slow_brain.NewPlannerAo(info.Blue)
 // 	fastBrainBlue := ai.NewFastBrainGO()
 
 // 	aiYellow := ai.NewAi(info.Yellow, slowBrainYellow, fastBrainYellow)

@@ -51,8 +51,8 @@ func RealScenario() {
 	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddressReal())
 
 	// Yellow team
-	//slowBrainYellow := plan.Newplan1(info.Yellow)
-	slowBrainYellow := plan.NewplanCompetition(info.Yellow)
+	//slowBrainYellow := plan.NewPlanner1(info.Yellow)
+	slowBrainYellow := plan.NewPlannerCompetition(info.Yellow)
 	fastBrainYellow := ai.NewActivityExecutor()
 
 	aiYellow := ai.NewAi(info.Yellow, slowBrainYellow, fastBrainYellow)

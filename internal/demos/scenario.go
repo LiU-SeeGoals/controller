@@ -28,7 +28,7 @@ func Scenario() {
 	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddress())
 
 	// Yellow team
-	slowBrainYellow := plan.Newplan1(info.Yellow)
+	slowBrainYellow := plan.NewPlanner1(info.Yellow)
 	fastBrainYellow := ai.NewActivityExecutor()
 	aiYellow := ai.NewAi(info.Yellow, slowBrainYellow, fastBrainYellow)
 	simClientYellow := client.NewSimClient(config.GetSimYellowTeamAddress(), gameInfo)

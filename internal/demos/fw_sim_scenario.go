@@ -23,7 +23,7 @@ func FwSimScenario() {
 	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddress())
 
 	// Yellow team
-	slowBrainYellow := plan.NewplanFw(info.Yellow)
+	slowBrainYellow := plan.NewPlannerFw(info.Yellow)
 	fastBrainYellow := ai.NewActivityExecutor()
 
 	aiYellow := ai.NewAi(info.Yellow, slowBrainYellow, fastBrainYellow)

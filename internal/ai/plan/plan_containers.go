@@ -9,22 +9,22 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
-type planContainer struct {
-	planCore
+type plannerContainer struct {
+	plannerCore
 	at_state int
 	start    time.Time
 	max_time time.Duration
 }
 
-func NewplanContainer(team info.Team) *planContainer {
-	return &planContainer{
-		planCore: planCore{
+func NewPlannerContainer(team info.Team) *plannerContainer {
+	return &plannerContainer{
+		plannerCore: plannerCore{
 			team: team,
 		},
 	}
 }
 
-func (m *planContainer) Init(
+func (m *plannerContainer) Init(
 	incoming <-chan info.GameInfo,
 	activities *[info.TEAM_SIZE]ai.Activity,
 	lock *sync.Mutex,
@@ -40,7 +40,7 @@ func (m *planContainer) Init(
 }
 
 // This is the main loop of the AI in this slow brain
-func (m *planContainer) run() {
+func (m *plannerContainer) run() {
 	for {
 		time.Sleep(100 * time.Millisecond)
 

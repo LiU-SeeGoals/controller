@@ -22,7 +22,7 @@ func Goalie() {
 	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddress())
 
 	// Yellow team
-	slowBrainYellow := plan.Newplan1(info.Yellow)
+	slowBrainYellow := plan.NewPlanner1(info.Yellow)
 	fastBrainYellow := ai.NewActivityExecutor()
 
 	aiYellow := ai.NewAi(info.Yellow, slowBrainYellow, fastBrainYellow)
@@ -30,7 +30,7 @@ func Goalie() {
 	simClientYellow := client.NewSimClient(config.GetSimYellowTeamAddress(), gameInfo)
 
 	// Blue team
-	// slowBrainBlue := slow_brain.Newplan1(info.Blue)
+	// slowBrainBlue := slow_brain.NewPlanner1(info.Blue)
 	// fastBrainBlue := ai.NewFastBrainGO()
 
 	// aiBlue := ai.NewAi(info.Blue, slowBrainBlue, fastBrainBlue)

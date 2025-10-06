@@ -10,11 +10,11 @@ import (
 )
 
 // ========================================================
-// plan2 is a demo slow brain with referee handling
+// planner2 is a demo slow brain with referee handling
 // ========================================================
 
-type plan2 struct {
-	planCore
+type planner2 struct {
+	plannerCore
 
 	at_state int
 	start    time.Time
@@ -23,16 +23,16 @@ type plan2 struct {
 	prev_ref info.RefCommand
 }
 
-func Newplan2(team info.Team) *plan2 {
-	return &plan2{
-		planCore: planCore{
+func NewPlanner2(team info.Team) *planner2 {
+	return &planner2{
+		plannerCore: plannerCore{
 			team: team,
 		},
 		team: team,
 	}
 }
 
-func (m *plan2) Init(
+func (m *planner2) Init(
 	incoming <-chan info.GameInfo,
 	activities *[info.TEAM_SIZE]ai.Activity,
 	lock *sync.Mutex,
@@ -47,7 +47,7 @@ func (m *plan2) Init(
 }
 
 // This is the main loop of the AI in this slow brain
-func (m *plan2) run() {
+func (m *planner2) run() {
 	way_points := []info.Position{
 		{X: 0, Y: 0, Z: 0, Angle: 0},
 		{X: 0, Y: 1000, Z: 0, Angle: 0},

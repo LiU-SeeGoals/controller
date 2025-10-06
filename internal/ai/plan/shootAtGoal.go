@@ -9,7 +9,7 @@ import (
 )
 
 type ShootAtGoal struct {
-	planCore
+	plannerCore
 	at_state int
 	start    time.Time
 	max_time time.Duration
@@ -17,7 +17,7 @@ type ShootAtGoal struct {
 
 func NewShootAtGoal(team info.Team) *ShootAtGoal {
 	return &ShootAtGoal{
-		planCore: planCore{
+		plannerCore: plannerCore{
 			team: team,
 		},
 	}

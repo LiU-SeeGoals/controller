@@ -10,7 +10,7 @@ import (
 )
 
 type RefCommands struct {
-	planCore
+	plannerCore
 	at_state int
 	start    time.Time
 	max_time time.Duration
@@ -19,7 +19,7 @@ type RefCommands struct {
 
 func NewRefCommands(team info.Team, simControl *simulator.SimControl) *RefCommands {
 	return &RefCommands{
-		planCore: planCore{
+		plannerCore: plannerCore{
 			team: team,
 		},
 		simControl: simControl,
