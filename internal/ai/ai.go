@@ -9,11 +9,11 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
-type SlowBrain interface {
+type plan interface {
 	Init(incoming <-chan info.GameInfo, activities *[info.TEAM_SIZE]ai.Activity, lock *sync.Mutex, team info.Team)
 }
 
-type FastBrain interface {
+type executor interface {
 	Init(incoming <-chan info.GameInfo,
 		activities *[info.TEAM_SIZE]ai.Activity,
 		lock *sync.Mutex,
@@ -24,17 +24,17 @@ type FastBrain interface {
 
 type Ai struct {
 	team             info.Team
-	slow_brain       SlowBrain
-	fast_brain       FastBrain
+	plan             plan
+	executor         executor
 	gameInfoSenderSB chan<- info.GameInfo
 	gameInfoSenderFB chan<- info.GameInfo
 	actionReceiver   chan []action.Action
 	activities       *[info.TEAM_SIZE]ai.Activity // Shared slice of Activity
-	activity_lock    *sync.Mutex    // Shared mutex for synchronization
+	activity_lock    *sync.Mutex                  // Shared mutex for synchronization
 }
 
 // Constructor for the AI
-func NewAi(team info.Team, slowBrain SlowBrain, fastBrain FastBrain) *Ai {
+func NewAi(team info.Team, plan plan, executor executor) *Ai {
 	// Create a shared slice of Activity and a mutex
 	activities := &[info.TEAM_SIZE]ai.Activity{}
 	lock := &sync.Mutex{}
@@ -43,15 +43,15 @@ func NewAi(team info.Team, slowBrain SlowBrain, fastBrain FastBrain) *Ai {
 	gameInfoSenderFB, gameInfoReceiverFB := helper.NB_KeepLatestChan[info.GameInfo]()
 	actionReceiver := make(chan []action.Action)
 
-	// Initialize SlowBrain and FastBrain with the shared resources
-	slowBrain.Init(gameInfoReceiverSB, activities, lock, team)
-	fastBrain.Init(gameInfoReceiverFB, activities, lock, actionReceiver, team)
+	// Initialize plan and executor with the shared resources
+	plan.Init(gameInfoReceiverSB, activities, lock, team)
+	executor.Init(gameInfoReceiverFB, activities, lock, actionReceiver, team)
 
 	// Construct the AI object
 	ai := &Ai{
 		team:             team,
-		slow_brain:       slowBrain,
-		fast_brain:       fastBrain,
+		plan:             plan,
+		executor:         executor,
 		activities:       activities,
 		gameInfoSenderSB: gameInfoSenderSB,
 		gameInfoSenderFB: gameInfoSenderFB,
@@ -64,17 +64,15 @@ func NewAi(team info.Team, slowBrain SlowBrain, fastBrain FastBrain) *Ai {
 // Decides on new actions for the robots
 func (ai *Ai) GetActions(gi *info.GameInfo) []action.Action {
 
-	// Send the game state copy to the slow brain
+	// Send the game state copy to the plan so its aware of the environment
 	ai.gameInfoSenderSB <- *gi
 
-	// Send the game state to the fast brain
+	// Send the game state to the executor so it can execute gamestate aware activities (e.g. avoid obstacles)	
 	ai.gameInfoSenderFB <- *gi
 
-	// Get the actions from the fast brain, this will block until the fast brain has decided on actions
+	// Get the actions from the executor, this will block until it has decided on actions
 	actions := <-ai.actionReceiver
 	if len(actions) > 0 {
-		//fmt.Println(actions[0])
 	}
-	//fmt.Println(actions[0])
 	return actions
 }

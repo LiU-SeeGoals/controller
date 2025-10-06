@@ -7,12 +7,12 @@ import (
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
-	ai "github.com/LiU-SeeGoals/controller/internal/ai/activity"
+	"github.com/LiU-SeeGoals/controller/internal/ai/activity"
 	"github.com/LiU-SeeGoals/controller/internal/info"
 	. "github.com/LiU-SeeGoals/controller/internal/logger"
 )
 
-type FastBrainGO struct {
+type activityExecutor struct {
 	team             info.Team
 	incomingGameInfo <-chan info.GameInfo
 	outgoingActions  chan<- []action.Action
@@ -20,11 +20,11 @@ type FastBrainGO struct {
 	activity_lock    *sync.Mutex                  // shared mutex for synchronization
 }
 
-func NewFastBrainGO() *FastBrainGO {
-	return &FastBrainGO{}
+func NewActivityExecutor() *activityExecutor {
+	return &activityExecutor{}
 }
 
-func (fb *FastBrainGO) Init(
+func (fb *activityExecutor) Init(
 	incoming <-chan info.GameInfo,
 	activities *[info.TEAM_SIZE]ai.Activity,
 	lock *sync.Mutex,
@@ -42,7 +42,7 @@ func (fb *FastBrainGO) Init(
 	go fb.Run()
 }
 
-func (fb *FastBrainGO) Run() {
+func (fb *activityExecutor) Run() {
 	for {
 		// For example, throttle the loop slightly to avoid busy-loop:
 		time.Sleep(1 * time.Millisecond) // or read from fb.incomingGameInfo if event-driven

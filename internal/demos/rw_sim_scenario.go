@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/ai"
-	slow_brain "github.com/LiU-SeeGoals/controller/internal/ai/slow_brain"
+	plan "github.com/LiU-SeeGoals/controller/internal/ai/plan"
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/info"
@@ -31,8 +31,8 @@ func RwSimScenario() {
 	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddress())
 
 	// Yellow team
-	slowBrainYellow := slow_brain.NewSlowBrainRw(info.Yellow)
-	fastBrainYellow := ai.NewFastBrainGO()
+	slowBrainYellow := plan.NewplanRw(info.Yellow)
+	fastBrainYellow := ai.NewActivityExecutor()
 
 	aiYellow := ai.NewAi(info.Yellow, slowBrainYellow, fastBrainYellow)
 

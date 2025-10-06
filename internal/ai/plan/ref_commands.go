@@ -4,13 +4,13 @@ import (
 	"sync"
 	"time"
 
-	ai "github.com/LiU-SeeGoals/controller/internal/ai/activity"
+	"github.com/LiU-SeeGoals/controller/internal/ai/activity"
 	"github.com/LiU-SeeGoals/controller/internal/info"
 	"github.com/LiU-SeeGoals/controller/internal/simulator"
 )
 
 type RefCommands struct {
-	SlowBrainComposition
+	planCore
 	at_state int
 	start    time.Time
 	max_time time.Duration
@@ -19,7 +19,7 @@ type RefCommands struct {
 
 func NewRefCommands(team info.Team, simControl *simulator.SimControl) *RefCommands {
 	return &RefCommands{
-		SlowBrainComposition: SlowBrainComposition{
+		planCore: planCore{
 			team: team,
 		},
 		simControl: simControl,

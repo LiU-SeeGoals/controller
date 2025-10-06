@@ -14,7 +14,7 @@ package demos
 // 	ssl_receiver := client.NewSSLClient()
 
 // 	// Yellow team
-// 	slowBrainYellow := ai.NewScenarioSlowBrain(1, 2)
+// 	slowBrainYellow := ai.NewScenarioplan(1, 2)
 // 	fastBrainYellow := ai.NewFastBrainGO()
 
 // 	aiYellow := ai.NewAi(info.Yellow, slowBrainYellow, fastBrainYellow)
@@ -38,7 +38,7 @@ import (
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/ai"
-	slow_brain "github.com/LiU-SeeGoals/controller/internal/ai/slow_brain"
+	plan "github.com/LiU-SeeGoals/controller/internal/ai/plan"
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/info"
@@ -51,9 +51,9 @@ func RealScenario() {
 	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddressReal())
 
 	// Yellow team
-	//slowBrainYellow := slow_brain.NewSlowBrain1(info.Yellow)
-	slowBrainYellow := slow_brain.NewSlowBrainCompetition(info.Yellow)
-	fastBrainYellow := ai.NewFastBrainGO()
+	//slowBrainYellow := plan.Newplan1(info.Yellow)
+	slowBrainYellow := plan.NewplanCompetition(info.Yellow)
+	fastBrainYellow := ai.NewActivityExecutor()
 
 	aiYellow := ai.NewAi(info.Yellow, slowBrainYellow, fastBrainYellow)
 	//simClientYellow := client.Ne(config.GetSimYellowTeamAddress(), gameInfo)

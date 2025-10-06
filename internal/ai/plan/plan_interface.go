@@ -7,7 +7,7 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
-type SlowBrain interface {
+type plan interface {
 	run()
 	Init(incoming <-chan info.GameInfo,
 		activities *[info.TEAM_SIZE]ai.Activity,

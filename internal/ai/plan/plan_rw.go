@@ -9,22 +9,22 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
-type SlowBrainRw struct {
-	SlowBrainComposition
+type planRw struct {
+	planCore
 	at_state int
 	start    time.Time
 	max_time time.Duration
 }
 
-func NewSlowBrainRw(team info.Team) *SlowBrainRw {
-	return &SlowBrainRw{
-		SlowBrainComposition: SlowBrainComposition{
+func NewplanRw(team info.Team) *planRw {
+	return &planRw{
+		planCore: planCore{
 			team: team,
 		},
 	}
 }
 
-func (m *SlowBrainRw) Init(
+func (m *planRw) Init(
 	incoming <-chan info.GameInfo,
 	activities *[info.TEAM_SIZE]ai.Activity,
 	lock *sync.Mutex,
@@ -47,7 +47,7 @@ func (m *SlowBrainRw) Init(
  *                                                                                       *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-func (m *SlowBrainRw) run() {
+func (m *planRw) run() {
 	way_points := []info.Position{
 		// Go between line
 		//{X: -3575, Y: -4128, Z: 0, Angle: 0},

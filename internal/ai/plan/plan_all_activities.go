@@ -9,22 +9,22 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
-type SlowBrainTest struct {
-	SlowBrainComposition
+type planTest struct {
+	planCore
 	at_state int
 	start    time.Time
 	max_time time.Duration
 }
 
-func NewSlowBrainTest(team info.Team) *SlowBrainTest {
-	return &SlowBrainTest{
-		SlowBrainComposition: SlowBrainComposition{
+func NewplanTest(team info.Team) *planTest {
+	return &planTest{
+		planCore: planCore{
 			team: team,
 		},
 	}
 }
 
-func (m *SlowBrainTest) Init(
+func (m *planTest) Init(
 	incoming <-chan info.GameInfo,
 	activities *[info.TEAM_SIZE]ai.Activity,
 	lock *sync.Mutex,
@@ -40,7 +40,7 @@ func (m *SlowBrainTest) Init(
 }
 
 // This is the main loop of the AI in this slow brain
-func (m *SlowBrainTest) run() {
+func (m *planTest) run() {
 
 	var id info.ID	
 	activityList := []ai.Activity{

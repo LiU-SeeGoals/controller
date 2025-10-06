@@ -9,22 +9,22 @@ import (
 	"github.com/LiU-SeeGoals/controller/internal/info"
 )
 
-type SlowBrainCollide struct {
-	SlowBrainComposition
+type planCollide struct {
+	planCore
 	at_state int
 	start    time.Time
 	max_time time.Duration
 }
 
-func NewSlowBrainCollide(team info.Team) *SlowBrainCollide {
-	return &SlowBrainCollide{
-		SlowBrainComposition: SlowBrainComposition{
+func NewplanCollide(team info.Team) *planCollide {
+	return &planCollide{
+		planCore: planCore{
 			team: team,
 		},
 	}
 }
 
-func (m *SlowBrainCollide) Init(
+func (m *planCollide) Init(
 	incoming <-chan info.GameInfo,
 	activities *[info.TEAM_SIZE]ai.Activity,
 	lock *sync.Mutex,
@@ -40,7 +40,7 @@ func (m *SlowBrainCollide) Init(
 }
 
 // // This is the main loop of the AI in this slow brain
-func (m *SlowBrainCollide) run() {
+func (m *planCollide) run() {
 	fmt.Println("slow brain started")
 
 	way_points := []info.Position{
@@ -91,7 +91,7 @@ func (m *SlowBrainCollide) run() {
 	}
 }
 
-// func (m *SlowBrainCollide) run() {
+// func (m *planCollide) run() {
 // 	fmt.Println("slow brain started")
 
 // 	// Seed the random number generator once
@@ -182,7 +182,7 @@ func (m *SlowBrainCollide) run() {
 // 	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddress())
 
 // 	// Yellow team
-// 	slowBrainYellow := slow_brain.NewSlowBrainCollide(info.Yellow)
+// 	slowBrainYellow := slow_brain.NewplanCollide(info.Yellow)
 // 	fastBrainYellow := ai.NewFastBrainGO()
 
 // 	aiYellow := ai.NewAi(info.Yellow, slowBrainYellow, fastBrainYellow)
@@ -190,7 +190,7 @@ func (m *SlowBrainCollide) run() {
 // 	simClientYellow := client.NewSimClient(config.GetSimYellowTeamAddress(), gameInfo)
 
 // 	// Blue team
-// 	// slowBrainBlue := slow_brain.NewSlowBrain1(info.Blue)
+// 	// slowBrainBlue := slow_brain.Newplan1(info.Blue)
 // 	// fastBrainBlue := ai.NewFastBrainGO()
 
 // 	// aiBlue := ai.NewAi(info.Blue, slowBrainBlue, fastBrainBlue)

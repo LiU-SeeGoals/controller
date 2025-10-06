@@ -14,22 +14,22 @@ package ai
 // 	"gonum.org/v1/plot/plotter"
 // )
 
-// type SlowBrainAo struct {
-// 	SlowBrainComposition
+// type planAo struct {
+// 	planCore
 // 	at_state int
 // 	start    time.Time
 // 	max_time time.Duration
 // }
 
-// func NewSlowBrainAo(team info.Team) *SlowBrainAo {
-// 	return &SlowBrainAo{
-// 		SlowBrainComposition: SlowBrainComposition{
+// func NewplanAo(team info.Team) *planAo {
+// 	return &planAo{
+// 		planCore: planCore{
 // 			team: team,
 // 		},
 // 	}
 // }
 
-// func (m *SlowBrainAo) Init(
+// func (m *planAo) Init(
 // 	incoming <-chan info.GameInfo,
 // 	activities *[info.TEAM_SIZE]ai.Activity,
 // 	lock *sync.Mutex,
@@ -44,7 +44,7 @@ package ai
 // 	go m.run()
 // }
 
-// func (m *SlowBrainAo) run() {
+// func (m *planAo) run() {
 
 // 	gameInfo := <-m.incomingGameInfo
 // 	fmt.Println(gameInfo.Status)
@@ -89,7 +89,7 @@ package ai
 // 	}
 // }
 
-// func (m *SlowBrainAo) defense(robots []info.ID){
+// func (m *planAo) defense(robots []info.ID){
 
 // 	gi := <-m.incomingGameInfo
 
@@ -121,7 +121,7 @@ package ai
 // 	}
 // }
 
-// func (m *SlowBrainAo) attack(robots []info.ID){
+// func (m *planAo) attack(robots []info.ID){
 
 // 	for i := range robots{
 // 		// if m.activities[robots[i]] == nil {
@@ -144,7 +144,7 @@ package ai
 //     return deg * (math.Pi / 180.0)
 // }
 
-// func (m *SlowBrainAo) rayMarch(robot info.ID, gi info.GameInfo) {
+// func (m *planAo) rayMarch(robot info.ID, gi info.GameInfo) {
 
 // 	pos, err := gi.State.GetTeam(m.team)[robot].GetPosition()
 // 	if err != nil {

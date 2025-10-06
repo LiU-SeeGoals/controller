@@ -21,7 +21,7 @@ const (
 	REFEREE
 )
 
-type SlowBrainComposition struct {
+type planCore struct {
 	team             info.Team
 	incomingGameInfo <-chan info.GameInfo
 	scale            float64
@@ -33,13 +33,13 @@ type SlowBrainComposition struct {
 	waiting_for_kick bool
 }
 
-func (m *SlowBrainComposition) ClearActivities() {
+func (m *planCore) ClearActivities() {
 	m.activity_lock.Lock()
 	defer m.activity_lock.Unlock()
 	*m.activities = [info.TEAM_SIZE]ai.Activity{}
 }
 
-func (m *SlowBrainComposition) AddActivity(activity ai.Activity) {
+func (m *planCore) AddActivity(activity ai.Activity) {
 	// m.activity_lock.Lock()
 	// defer m.activity_lock.Unlock()
 	idx := activity.GetID()
@@ -47,13 +47,13 @@ func (m *SlowBrainComposition) AddActivity(activity ai.Activity) {
 	m.activities[idx] = activity
 }
 
-func (m *SlowBrainComposition) ReplaceActivities(activities *[info.TEAM_SIZE]ai.Activity) {
+func (m *planCore) ReplaceActivities(activities *[info.TEAM_SIZE]ai.Activity) {
 	m.activity_lock.Lock()
 	defer m.activity_lock.Unlock()
 	m.activities = activities
 }
 
-func (m *SlowBrainComposition) HandleRef(gi *info.GameInfo, active_robots []int) bool {
+func (m *planCore) HandleRef(gi *info.GameInfo, active_robots []int) bool {
 	kicker := info.ID(1)
 	m.AddActivity(ai.NewGoalie(m.team, 0))
 
@@ -153,7 +153,7 @@ func (m *SlowBrainComposition) HandleRef(gi *info.GameInfo, active_robots []int)
 }
 
 // GetActionTypeName returns the name of the concrete type that implements the Action interface
-func (m *SlowBrainComposition) GetActionTypeName(activity ai.Activity) string {
+func (m *planCore) GetActionTypeName(activity ai.Activity) string {
 	// Check if activity is nil
 	if activity == nil {
 		return ""
