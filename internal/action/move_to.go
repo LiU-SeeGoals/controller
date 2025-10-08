@@ -24,12 +24,12 @@ type MoveTo struct {
 	KickSpeed int
 }
 
-func convAngle(angle float64) float64{
+func convAngle(angle float64) float64 {
 
-	if angle > math.Pi{
-		return angle - 2 * math.Pi
-	}else if angle < -math.Pi {
-		return angle + 2 * math.Pi
+	if angle > math.Pi {
+		return angle - 2*math.Pi
+	} else if angle < -math.Pi {
+		return angle + 2*math.Pi
 	}
 
 	return angle
@@ -53,16 +53,16 @@ func (mv *MoveTo) simulateRealMovement() *simulation.RobotCommand {
 	distance := math.Sqrt(dx*dx + dy*dy)
 	maxSpeed := float64(0.5)
 
-	speedCtrl := math.Max(math.Min(maxSpeed, distKp * distance), 0.002)
+	speedCtrl := math.Max(math.Min(maxSpeed, distKp*distance), 0.002)
 
 	maxAngleSpeed := 3.0
-	angleCtrl := float32(math.Min(maxAngleSpeed, angleKp * float64(angleDiff)))
+	angleCtrl := float32(math.Min(maxAngleSpeed, angleKp*float64(angleDiff)))
 
 	// Invert robot angle to move in global coordinate
 	// I.e. Rotation matrix around the z axis
 
-	forward := float32(speedCtrl * (dx * math.Cos(-mv.Pos.Angle) - dy * math.Sin(-mv.Pos.Angle)))
-	left := float32(speedCtrl *    (dx * math.Sin(-mv.Pos.Angle) + dy * math.Cos(-mv.Pos.Angle)))
+	forward := float32(speedCtrl * (dx*math.Cos(-mv.Pos.Angle) - dy*math.Sin(-mv.Pos.Angle)))
+	left := float32(speedCtrl * (dx*math.Sin(-mv.Pos.Angle) + dy*math.Cos(-mv.Pos.Angle)))
 
 	dribblerSpeed := float32(0)
 	if mv.Dribble {
@@ -87,7 +87,7 @@ func (mv *MoveTo) simulateRealMovement() *simulation.RobotCommand {
 			Id:            &id,
 			MoveCommand:   moveCommand,
 			DribblerSpeed: &dribblerSpeed,
-			KickSpeed: &kickSpeed,
+			KickSpeed:     &kickSpeed,
 		}
 	}
 
@@ -140,6 +140,8 @@ func (mv *MoveTo) TranslateSim() *simulation.RobotCommand {
 		dribblerSpeed = 100 // in rpm, adjust as needed
 	}
 
+	kickSpeed := float32(mv.KickSpeed)
+
 	localVel := &simulation.MoveLocalVelocity{
 		Forward: &forward,
 		Left:    &left,
@@ -158,6 +160,7 @@ func (mv *MoveTo) TranslateSim() *simulation.RobotCommand {
 		Id:            &id,
 		MoveCommand:   moveCommand,
 		DribblerSpeed: &dribblerSpeed,
+		KickSpeed:     &kickSpeed,
 	}
 }
 
