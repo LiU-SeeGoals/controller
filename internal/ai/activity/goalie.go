@@ -10,10 +10,10 @@ import (
 // Constants for goalie positioning
 const (
 	// Goalie position constraints - these will be adjusted based on team half
-	GOALIE_LINE_WIDTH       = 1000 // Width of the goalie's movement range (500 to each side)
-	GOALIE_DIST_FROM_CENTER = 5500 // Distance from center to goalie line
-	// GOALIE_DIST_FROM_CENTER = 4300 // Distance from center to goalie line
-	GOAL_BEHIND_DIST        = GOALIE_DIST_FROM_CENTER+1200 // Distance from center to position behind the goal
+	GOALIE_LINE_WIDTH = 1000 // Width of the goalie's movement range (500 to each side)
+	// GOALIE_DIST_FROM_CENTER = 5500 // Distance from center to goalie line
+	GOALIE_DIST_FROM_CENTER = 4300                           // Distance from center to goalie line
+	GOAL_BEHIND_DIST        = GOALIE_DIST_FROM_CENTER + 1200 // Distance from center to position behind the goal
 )
 
 type Goalie struct {
@@ -97,32 +97,58 @@ func (g *Goalie) calculateInterceptionPoint(ballPos info.Position, isPositiveHal
 	return info.Position{X: goalieX, Y: -interceptY, Z: 0, Angle: 0}
 }
 
-// GetAction decides what the goalie should do each tick (frame), returning a single Action.
 func (g *Goalie) GetAction(gi *info.GameInfo) action.Action {
-	// Get ball position
-	ballPos, err := gi.State.GetBall().GetEstimatedPosition()
+	ball := gi.State.GetBall()
+
+	// Current ball position
+	ballPos, err := ball.GetEstimatedPosition()
 	if err != nil {
-		fmt.Println("Error getting ball position:")
-		// If there's an error getting ball position, stay at center
-		return NewMoveToPosition(g.team, g.id, info.Position{X: 0, Y: 0, Z: 0, Angle: 0}).GetAction(gi)
+		fmt.Println("Error getting ball position:", err)
+		return NewMoveToPosition(g.team, g.id, info.Position{X: 0, Y: 0}).GetAction(gi)
 	}
 
 	// Determine which half we're defending
-	// If we're the blue team and blue is on positive half, we defend positive half
-	// If we're the blue team and blue is not on positive half, we defend negative half
-	// If we're the yellow team and blue is on positive half, we defend negative half
-	// If we're the yellow team and blue is not on positive half, we defend positive half
 	isBlueTeam := g.team == info.Blue
 	isBlueOnPositiveHalf := gi.Status.GetBlueTeamOnPositiveHalf()
 	isDefendingPositiveHalf := (isBlueTeam && isBlueOnPositiveHalf) || (!isBlueTeam && !isBlueOnPositiveHalf)
 
-	// Calculate where goalie should be
+	// Goalie line X position
+	xMultiplier := 1.0
+	if !isDefendingPositiveHalf {
+		xMultiplier = -1.0
+	}
+	goalieX := xMultiplier * GOALIE_DIST_FROM_CENTER
+
+	// Default: follow standard positioning
 	goaliePos := g.calculateInterceptionPoint(ballPos, isDefendingPositiveHalf)
 
-	// Create move action to the calculated position
+	// If ball is free and moving toward our goal — try to intercept its path
+
+	ballVel := ball.GetVelocity()
+
+	// Check if moving toward our goal
+	movingTowardGoal := (xMultiplier > 0 && ballVel.X > 0) || (xMultiplier < 0 && ballVel.X < 0)
+	if movingTowardGoal && ballVel.X != 0 {
+		// Predict where the ball will cross the goalie's X line
+		tHit := (goalieX - ballPos.X) / ballVel.X
+		if tHit > 0 { // only if in the future
+			predictedY := ballPos.Y + ballVel.Y*tHit
+
+			// Clamp within goalie range
+			if predictedY < -GOALIE_LINE_WIDTH/2 {
+				predictedY = -GOALIE_LINE_WIDTH / 2
+			} else if predictedY > GOALIE_LINE_WIDTH/2 {
+				predictedY = GOALIE_LINE_WIDTH / 2
+			}
+
+			// Set predicted interception point
+			goaliePos = info.Position{X: goalieX, Y: predictedY, Z: 0, Angle: 0}
+		}
+	}
+
+	// Move to calculated position
 	move := NewMoveToPosition(g.team, g.id, goaliePos)
-	act := move.GetAction(gi)
-	return act
+	return move.GetAction(gi)
 }
 
 // Achieved returns whether this action is "complete".

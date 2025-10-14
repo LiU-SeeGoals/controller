@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/LiU-SeeGoals/controller/internal/ai"
-	slow_brain "github.com/LiU-SeeGoals/controller/internal/ai/slow_brain"
+	plan "github.com/LiU-SeeGoals/controller/internal/ai/plan"
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/info"
@@ -30,14 +30,9 @@ func RwSimScenario() {
 	gameInfo := info.NewGameInfo(10)
 	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddress())
 
-    logBytes := []byte("AI connected...")
-    client.UpdateWebLog(logBytes)
-
-    fmt.Printf("GameViewer socket: %s\n", config.GetGameViewerAdress())
-
 	// Yellow team
-	slowBrainYellow := slow_brain.NewSlowBrainRw(info.Yellow)
-	fastBrainYellow := ai.NewFastBrainGO()
+	slowBrainYellow := plan.NewPlannerRw(info.Yellow)
+	fastBrainYellow := ai.NewActivityExecutor()
 
 	aiYellow := ai.NewAi(info.Yellow, slowBrainYellow, fastBrainYellow)
 
@@ -53,7 +48,8 @@ func RwSimScenario() {
 		ssl_receiver.UpdateState(gameInfo, playTime)
 		yellow_actions := aiYellow.GetActions(gameInfo)
 
-		basestationClient.SendActions(yellow_actions)
+        client.BroadcastActions(yellow_actions) // We broadcast actions for the GV to print 'em
+	    basestationClient.SendActions(yellow_actions)
         simClient.SendActions(yellow_actions)
 	}
 }

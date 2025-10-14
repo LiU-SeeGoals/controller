@@ -30,11 +30,10 @@ type SimClient struct {
 // Address should be <ip>:<port>
 // gameState is optionaly provided
 func NewSimClient(addr string, gameInfo ...*info.GameInfo) *SimClient {
-	// fmt.Println("Creating new SimClient with address: ", addr)
+	fmt.Println("Creating new SimClient with address: ", addr)
 	Logger.Info("Creating new SimClient with address: ", addr)
 	udpAddr, err := net.ResolveUDPAddr("udp", addr)
 	if err != nil {
-		// panic(err)
 		Logger.Panicf("Unable to resolve UDP address: %v", err)
 	}
 

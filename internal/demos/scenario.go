@@ -6,7 +6,7 @@ import (
 
 	"github.com/LiU-SeeGoals/controller/internal/action"
 	"github.com/LiU-SeeGoals/controller/internal/ai"
-	slow_brain "github.com/LiU-SeeGoals/controller/internal/ai/slow_brain"
+	plan "github.com/LiU-SeeGoals/controller/internal/ai/plan"
 	"github.com/LiU-SeeGoals/controller/internal/client"
 	"github.com/LiU-SeeGoals/controller/internal/config"
 	"github.com/LiU-SeeGoals/controller/internal/info"
@@ -28,20 +28,20 @@ func Scenario() {
 	ssl_receiver := client.NewSSLClient(config.GetSSLClientAddress())
 
 	// Yellow team
-	slowBrainYellow := slow_brain.NewSlowBrainCompetition(info.Yellow)
-	fastBrainYellow := ai.NewFastBrainGO()
+	slowBrainYellow := plan.NewPlanner1(info.Yellow)
+	fastBrainYellow := ai.NewActivityExecutor()
 	aiYellow := ai.NewAi(info.Yellow, slowBrainYellow, fastBrainYellow)
 	simClientYellow := client.NewSimClient(config.GetSimYellowTeamAddress(), gameInfo)
 
 	// Blue team
-	// slowBrainBlue := slow_brain.NewRefCommands(info.Blue, simController)
+	// slowBrainBlue := plan.NewRefCommands(info.Blue, simController)
 	// fastBrainBlue := ai.NewFastBrainGO()
 	// aiBlue := ai.NewAi(info.Blue, slowBrainBlue, fastBrainBlue)
 	// simClientBlue := client.NewSimClient(config.GetSimBlueTeamAddress(), gameInfo)
 
 	// Some sim setup for debugging ai behaviour
-	presentYellow = []int{0, 1, 3}
-	presentBlue = []int{}
+	presentYellow = []int{2, 3}
+	presentBlue = []int{0}
 	simController.SetPresentRobots(presentYellow, presentBlue)
 
 	// start_time := time.Now().UnixMilli()

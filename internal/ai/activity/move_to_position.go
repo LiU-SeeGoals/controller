@@ -11,7 +11,7 @@ import (
 )
 
 // RobotSafetyRadius defines the no-movement zone around each robot
-const RobotSafetyRadius = 200.0 // mm - increased for better safety margin
+const RobotSafetyRadius = 90.0 // mm - increased for better safety margin
 
 // MoveToPositionWithCollisionAvoidance handles collision avoidance using RRT
 type MoveToPosition struct {
@@ -59,7 +59,7 @@ func NewMoveToPosition(team info.Team, id info.ID, dest info.Position) *MoveToPo
 		waypointThreshold:  50.0,    // mm to consider waypoint reached
 		fieldWidth:         13400.0, // Standard SSL field width in mm
 		fieldHeight:        10400.0, // Standard SSL field height in mm
-		completionDistance: 500.0,   // mm to consider the goal reached
+		completionDistance: 50.0,    // mm to consider the goal reached
 	}
 
 	return &MoveToPosition{
